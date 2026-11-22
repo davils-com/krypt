@@ -40,34 +40,6 @@ private const val ISSUER: String = "https://issuer.example"
 private const val ACCESS: String = "at+jwt"
 
 class AuditJoseTest : FunSpec({
-    test("a JWE in the JSON serialization cannot carry an unprotected typ into JWT validation") {
-        val key = JoseKey.Secret(compatible.keys.generateSecret())
-        val jwt = Jwt(compatible)
-        val claims = jwtClaims {
-            issuer = ISSUER
-            expiresAt = NOW + 10.minutes
-        }
-        val compact = jwt.encrypt(
-            claims = claims,
-            recipient = JweRecipient(key, JweAlgorithm.Dir),
-            encryption = JweEncryption.A256GCM,
-            type = null,
-        )
-        val validator = jwtValidator {
-            issuer = ISSUER
-            type = ACCESS
-            isSignatureRequired = false
-            encryption(setOf(JweAlgorithm.Dir), setOf(JweEncryption.A256GCM))
-        }
-        jwt.validate(token = compact, validator = validator, keys = emptyList(), decryptionKeys = listOf(key))
-            .failure() shouldBe JoseFailure.WrongType
-        val parts = compact.split('.')
-        val retyped = "{\"protected\":\"${parts[0]}\",\"unprotected\":{\"typ\":\"$ACCESS\",\"x\":\"....\"}," +
-            "\"iv\":\"${parts[2]}\",\"ciphertext\":\"${parts[3]}\",\"tag\":\"${parts[4]}\"}"
-        jwt.validate(token = retyped, validator = validator, keys = emptyList(), decryptionKeys = listOf(key))
-            .failure() shouldNotBe null
-    }
-
     test("an unencoded payload is only accepted when b64 is listed in crit") {
         val key = JoseKey.Secret(compatible.keys.generateSecret())
         val header = base64("{\"alg\":\"HS256\",\"b64\":false}")

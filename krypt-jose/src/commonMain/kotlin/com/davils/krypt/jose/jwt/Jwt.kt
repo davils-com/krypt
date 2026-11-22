@@ -42,6 +42,7 @@ import kotlinx.io.bytestring.ByteString
 
 private const val SIGNED_DOTS: Int = 2
 private const val ENCRYPTED_DOTS: Int = 4
+private val COMPACT_ALPHABET: Set<Char> = (('A'..'Z') + ('a'..'z') + ('0'..'9') + listOf('-', '_', '.')).toSet()
 
 /**
  * JSON Web Tokens of RFC 7519, signed, encrypted or both (nested), and validated by the best current practice of
@@ -149,6 +150,11 @@ public class Jwt(public val crypto: Crypto, public val limits: JoseLimits = Jose
     /**
      * Validates [token] with [validator].
      *
+     * A JWT is always in the compact serialization (RFC 7519 section 1): a token with any character outside the
+     * Base64url alphabet and the dots, or with other than two or four dots, is refused with [JoseFailure.Malformed]
+     * before anything is decoded, so a JWE in the JSON serialization never reaches validation with headers that no
+     * tag covers. `typ` and `cty` are read from the protected header only.
+     *
      * @param token the token in the compact serialization, possibly from an attacker.
      * @param validator the checks.
      * @param keys the keys that may verify the signature.
@@ -163,10 +169,13 @@ public class Jwt(public val crypto: Crypto, public val limits: JoseLimits = Jose
         decryptionKeys: List<JoseKey> = emptyList(),
     ): Outcome<ValidatedJwt, JoseFailure> {
         val dots = token.count { char -> char == '.' }
-        if (dots == ENCRYPTED_DOTS) {
-            return encrypted(token = token, validator = validator, keys = keys, decryptionKeys = decryptionKeys)
+        val isShaped = dots == SIGNED_DOTS || dots == ENCRYPTED_DOTS
+        val isCompact = isShaped && token.all { char -> char in COMPACT_ALPHABET }
+        if (!isCompact) return Outcome.Failure(JoseFailure.Malformed)
+        return when (dots == ENCRYPTED_DOTS) {
+            true -> encrypted(token = token, validator = validator, keys = keys, decryptionKeys = decryptionKeys)
+            false -> signed(token = token, validator = validator, keys = keys, isEncrypted = false)
         }
-        return signed(token = token, validator = validator, keys = keys, isEncrypted = false)
     }
 
     /**
@@ -182,20 +191,20 @@ public class Jwt(public val crypto: Crypto, public val limits: JoseLimits = Jose
         validator: JwtValidator,
         keys: List<JoseKey>,
         decryptionKeys: List<JoseKey>,
-    ): Outcome<ValidatedJwt, JoseFailure> {
+    ): Outcome<ValidatedJwt, JoseFailure> = jwe.decode(token).flatMap { message ->
         val decryption = jwe.decrypt(
-            text = token,
+            message = message,
             keys = decryptionKeys,
             algorithms = validator.keyAlgorithms,
             encryptions = validator.encryptions,
             critical = validator.critical,
         )
-        return decryption.flatMap { decrypted ->
-            val contentType = decrypted.header.contentType
-            val isNested = contentType.equals(DEFAULT_TYPE, ignoreCase = true)
+        val protectedHeader = JoseHeader(message.protectedHeader)
+        decryption.flatMap { decrypted ->
+            val isNested = protectedHeader.contentType.equals(DEFAULT_TYPE, ignoreCase = true)
             when (isNested) {
                 true -> nested(decrypted = decrypted, validator = validator, keys = keys)
-                false -> unsigned(decrypted = decrypted, validator = validator)
+                false -> unsigned(decrypted = decrypted, header = protectedHeader, validator = validator)
             }
         }
     }
@@ -211,11 +220,15 @@ public class Jwt(public val crypto: Crypto, public val limits: JoseLimits = Jose
         return signed(token = token, validator = validator, keys = keys, isEncrypted = true)
     }
 
-    private fun unsigned(decrypted: DecryptedJwe, validator: JwtValidator): Outcome<ValidatedJwt, JoseFailure> {
+    private fun unsigned(
+        decrypted: DecryptedJwe,
+        header: JoseHeader,
+        validator: JwtValidator,
+    ): Outcome<ValidatedJwt, JoseFailure> {
         if (validator.isSignatureRequired) return Outcome.Failure(JoseFailure.SignatureRequired)
         return finish(
             payload = decrypted.plaintext,
-            header = decrypted.header,
+            header = header,
             algorithm = null,
             key = decrypted.key,
             validator = validator,
