@@ -1,0 +1,381 @@
+// Klib ABI Dump
+// Targets: [wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.davils:krypt-keyset>
+final enum class com.davils.krypt.keyset/KeyStatus : kotlin/Enum<com.davils.krypt.keyset/KeyStatus> { // com.davils.krypt.keyset/KeyStatus|null[0]
+    enum entry Destroyed // com.davils.krypt.keyset/KeyStatus.Destroyed|null[0]
+    enum entry Disabled // com.davils.krypt.keyset/KeyStatus.Disabled|null[0]
+    enum entry Enabled // com.davils.krypt.keyset/KeyStatus.Enabled|null[0]
+
+    final val entries // com.davils.krypt.keyset/KeyStatus.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.keyset/KeyStatus> // com.davils.krypt.keyset/KeyStatus.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.keyset/KeyStatus // com.davils.krypt.keyset/KeyStatus.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.keyset/KeyStatus> // com.davils.krypt.keyset/KeyStatus.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.keyset/KeysetAction : kotlin/Enum<com.davils.krypt.keyset/KeysetAction> { // com.davils.krypt.keyset/KeysetAction|null[0]
+    enum entry Added // com.davils.krypt.keyset/KeysetAction.Added|null[0]
+    enum entry Destroyed // com.davils.krypt.keyset/KeysetAction.Destroyed|null[0]
+    enum entry Disabled // com.davils.krypt.keyset/KeysetAction.Disabled|null[0]
+    enum entry Enabled // com.davils.krypt.keyset/KeysetAction.Enabled|null[0]
+    enum entry Generated // com.davils.krypt.keyset/KeysetAction.Generated|null[0]
+    enum entry Promoted // com.davils.krypt.keyset/KeysetAction.Promoted|null[0]
+    enum entry Rotated // com.davils.krypt.keyset/KeysetAction.Rotated|null[0]
+
+    final val audit // com.davils.krypt.keyset/KeysetAction.audit|{}audit[0]
+        final fun <get-audit>(): com.davils.krypt.core.audit/AuditAction // com.davils.krypt.keyset/KeysetAction.audit.<get-audit>|<get-audit>(){}[0]
+    final val entries // com.davils.krypt.keyset/KeysetAction.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.keyset/KeysetAction> // com.davils.krypt.keyset/KeysetAction.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.keyset/KeysetAction // com.davils.krypt.keyset/KeysetAction.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.keyset/KeysetAction> // com.davils.krypt.keyset/KeysetAction.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.keyset/KeysetFailure : kotlin/Enum<com.davils.krypt.keyset/KeysetFailure> { // com.davils.krypt.keyset/KeysetFailure|null[0]
+    enum entry Conflict // com.davils.krypt.keyset/KeysetFailure.Conflict|null[0]
+    enum entry DecryptionFailed // com.davils.krypt.keyset/KeysetFailure.DecryptionFailed|null[0]
+    enum entry Malformed // com.davils.krypt.keyset/KeysetFailure.Malformed|null[0]
+    enum entry Missing // com.davils.krypt.keyset/KeysetFailure.Missing|null[0]
+    enum entry Refused // com.davils.krypt.keyset/KeysetFailure.Refused|null[0]
+    enum entry Unsupported // com.davils.krypt.keyset/KeysetFailure.Unsupported|null[0]
+    enum entry WrongKeyManagementService // com.davils.krypt.keyset/KeysetFailure.WrongKeyManagementService|null[0]
+
+    final val entries // com.davils.krypt.keyset/KeysetFailure.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.keyset/KeysetFailure> // com.davils.krypt.keyset/KeysetFailure.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.keyset/KeysetFailure // com.davils.krypt.keyset/KeysetFailure.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.keyset/KeysetFailure> // com.davils.krypt.keyset/KeysetFailure.values|values#static(){}[0]
+}
+
+abstract interface com.davils.krypt.keyset.kms/KeyManagementService { // com.davils.krypt.keyset.kms/KeyManagementService|null[0]
+    abstract val keyUri // com.davils.krypt.keyset.kms/KeyManagementService.keyUri|{}keyUri[0]
+        abstract fun <get-keyUri>(): kotlin/String // com.davils.krypt.keyset.kms/KeyManagementService.keyUri.<get-keyUri>|<get-keyUri>(){}[0]
+
+    abstract suspend fun decrypt(kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString): com.davils.krypt.core/SecretBytes? // com.davils.krypt.keyset.kms/KeyManagementService.decrypt|decrypt(kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString){}[0]
+    abstract suspend fun encrypt(com.davils.krypt.core/SecretBytes, kotlinx.io.bytestring/ByteString): kotlinx.io.bytestring/ByteString // com.davils.krypt.keyset.kms/KeyManagementService.encrypt|encrypt(com.davils.krypt.core.SecretBytes;kotlinx.io.bytestring.ByteString){}[0]
+}
+
+abstract interface com.davils.krypt.keyset.store/KeysetRepository { // com.davils.krypt.keyset.store/KeysetRepository|null[0]
+    abstract suspend fun load(kotlin/String): com.davils.krypt.keyset.store/StoredKeyset? // com.davils.krypt.keyset.store/KeysetRepository.load|load(kotlin.String){}[0]
+    abstract suspend fun store(kotlin/String, com.davils.krypt.keyset.store/StoredKeyset, kotlin/Long?): kotlin/Boolean // com.davils.krypt.keyset.store/KeysetRepository.store|store(kotlin.String;com.davils.krypt.keyset.store.StoredKeyset;kotlin.Long?){}[0]
+}
+
+final class com.davils.krypt.keyset.kms/Envelopes { // com.davils.krypt.keyset.kms/Envelopes|null[0]
+    constructor <init>(com.davils.krypt.primitive/Crypto, com.davils.krypt.keyset.kms/KeyManagementService, com.davils.krypt.core.algorithm/AeadAlgorithm = ...) // com.davils.krypt.keyset.kms/Envelopes.<init>|<init>(com.davils.krypt.primitive.Crypto;com.davils.krypt.keyset.kms.KeyManagementService;com.davils.krypt.core.algorithm.AeadAlgorithm){}[0]
+
+    final val algorithm // com.davils.krypt.keyset.kms/Envelopes.algorithm|{}algorithm[0]
+        final fun <get-algorithm>(): com.davils.krypt.core.algorithm/AeadAlgorithm // com.davils.krypt.keyset.kms/Envelopes.algorithm.<get-algorithm>|<get-algorithm>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.keyset.kms/Envelopes.toString|toString(){}[0]
+    final suspend fun open(kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString = ...): kotlinx.io.bytestring/ByteString? // com.davils.krypt.keyset.kms/Envelopes.open|open(kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString){}[0]
+    final suspend fun seal(kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString = ...): kotlinx.io.bytestring/ByteString // com.davils.krypt.keyset.kms/Envelopes.seal|seal(kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString){}[0]
+}
+
+final class com.davils.krypt.keyset.kms/KeysetKms : com.davils.krypt.keyset.kms/KeyManagementService { // com.davils.krypt.keyset.kms/KeysetKms|null[0]
+    constructor <init>(com.davils.krypt.keyset/KeysetAead, kotlin/String) // com.davils.krypt.keyset.kms/KeysetKms.<init>|<init>(com.davils.krypt.keyset.KeysetAead;kotlin.String){}[0]
+
+    final val keyUri // com.davils.krypt.keyset.kms/KeysetKms.keyUri|{}keyUri[0]
+        final fun <get-keyUri>(): kotlin/String // com.davils.krypt.keyset.kms/KeysetKms.keyUri.<get-keyUri>|<get-keyUri>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.keyset.kms/KeysetKms.toString|toString(){}[0]
+    final suspend fun decrypt(kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString): com.davils.krypt.core/SecretBytes? // com.davils.krypt.keyset.kms/KeysetKms.decrypt|decrypt(kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString){}[0]
+    final suspend fun encrypt(com.davils.krypt.core/SecretBytes, kotlinx.io.bytestring/ByteString): kotlinx.io.bytestring/ByteString // com.davils.krypt.keyset.kms/KeysetKms.encrypt|encrypt(com.davils.krypt.core.SecretBytes;kotlinx.io.bytestring.ByteString){}[0]
+}
+
+final class com.davils.krypt.keyset.kms/LocalKms : com.davils.krypt.keyset.kms/KeyManagementService { // com.davils.krypt.keyset.kms/LocalKms|null[0]
+    constructor <init>(com.davils.krypt.primitive/Crypto, com.davils.krypt.primitive.key/SecretKey, kotlin/String = ..., com.davils.krypt.core.algorithm/AeadAlgorithm = ...) // com.davils.krypt.keyset.kms/LocalKms.<init>|<init>(com.davils.krypt.primitive.Crypto;com.davils.krypt.primitive.key.SecretKey;kotlin.String;com.davils.krypt.core.algorithm.AeadAlgorithm){}[0]
+
+    final val algorithm // com.davils.krypt.keyset.kms/LocalKms.algorithm|{}algorithm[0]
+        final fun <get-algorithm>(): com.davils.krypt.core.algorithm/AeadAlgorithm // com.davils.krypt.keyset.kms/LocalKms.algorithm.<get-algorithm>|<get-algorithm>(){}[0]
+    final val keyUri // com.davils.krypt.keyset.kms/LocalKms.keyUri|{}keyUri[0]
+        final fun <get-keyUri>(): kotlin/String // com.davils.krypt.keyset.kms/LocalKms.keyUri.<get-keyUri>|<get-keyUri>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.keyset.kms/LocalKms.toString|toString(){}[0]
+    final suspend fun decrypt(kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString): com.davils.krypt.core/SecretBytes? // com.davils.krypt.keyset.kms/LocalKms.decrypt|decrypt(kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString){}[0]
+    final suspend fun encrypt(com.davils.krypt.core/SecretBytes, kotlinx.io.bytestring/ByteString): kotlinx.io.bytestring/ByteString // com.davils.krypt.keyset.kms/LocalKms.encrypt|encrypt(com.davils.krypt.core.SecretBytes;kotlinx.io.bytestring.ByteString){}[0]
+}
+
+final class com.davils.krypt.keyset.store/KeysetVault { // com.davils.krypt.keyset.store/KeysetVault|null[0]
+    constructor <init>(com.davils.krypt.keyset/Keysets, com.davils.krypt.keyset.store/KeysetRepository, com.davils.krypt.keyset.kms/KeyManagementService, kotlin/Int = ...) // com.davils.krypt.keyset.store/KeysetVault.<init>|<init>(com.davils.krypt.keyset.Keysets;com.davils.krypt.keyset.store.KeysetRepository;com.davils.krypt.keyset.kms.KeyManagementService;kotlin.Int){}[0]
+
+    final val attempts // com.davils.krypt.keyset.store/KeysetVault.attempts|{}attempts[0]
+        final fun <get-attempts>(): kotlin/Int // com.davils.krypt.keyset.store/KeysetVault.attempts.<get-attempts>|<get-attempts>(){}[0]
+    final val keysets // com.davils.krypt.keyset.store/KeysetVault.keysets|{}keysets[0]
+        final fun <get-keysets>(): com.davils.krypt.keyset/Keysets // com.davils.krypt.keyset.store/KeysetVault.keysets.<get-keysets>|<get-keysets>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.keyset.store/KeysetVault.toString|toString(){}[0]
+    final suspend fun create(kotlin/String, com.davils.krypt.keyset/KeyPurpose): com.davils.kore.core.outcome/Outcome<com.davils.krypt.keyset/Keyset, com.davils.krypt.keyset/KeysetFailure> // com.davils.krypt.keyset.store/KeysetVault.create|create(kotlin.String;com.davils.krypt.keyset.KeyPurpose){}[0]
+    final suspend fun load(kotlin/String): com.davils.kore.core.outcome/Outcome<com.davils.krypt.keyset/Keyset, com.davils.krypt.keyset/KeysetFailure> // com.davils.krypt.keyset.store/KeysetVault.load|load(kotlin.String){}[0]
+    final suspend fun update(kotlin/String, kotlin.coroutines/SuspendFunction1<com.davils.krypt.keyset/Keyset, com.davils.krypt.keyset/Keyset>): com.davils.kore.core.outcome/Outcome<com.davils.krypt.keyset/Keyset, com.davils.krypt.keyset/KeysetFailure> // com.davils.krypt.keyset.store/KeysetVault.update|update(kotlin.String;kotlin.coroutines.SuspendFunction1<com.davils.krypt.keyset.Keyset,com.davils.krypt.keyset.Keyset>){}[0]
+}
+
+final class com.davils.krypt.keyset.store/StoredKeyset { // com.davils.krypt.keyset.store/StoredKeyset|null[0]
+    constructor <init>(kotlin/Long, kotlinx.io.bytestring/ByteString) // com.davils.krypt.keyset.store/StoredKeyset.<init>|<init>(kotlin.Long;kotlinx.io.bytestring.ByteString){}[0]
+
+    final val encrypted // com.davils.krypt.keyset.store/StoredKeyset.encrypted|{}encrypted[0]
+        final fun <get-encrypted>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.keyset.store/StoredKeyset.encrypted.<get-encrypted>|<get-encrypted>(){}[0]
+    final val revision // com.davils.krypt.keyset.store/StoredKeyset.revision|{}revision[0]
+        final fun <get-revision>(): kotlin/Long // com.davils.krypt.keyset.store/StoredKeyset.revision.<get-revision>|<get-revision>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.keyset.store/StoredKeyset.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.keyset.store/StoredKeyset.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.keyset.store/StoredKeyset.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.keyset/HybridDecrypter { // com.davils.krypt.keyset/HybridDecrypter|null[0]
+    final val keyset // com.davils.krypt.keyset/HybridDecrypter.keyset|{}keyset[0]
+        final fun <get-keyset>(): com.davils.krypt.keyset/Keyset // com.davils.krypt.keyset/HybridDecrypter.keyset.<get-keyset>|<get-keyset>(){}[0]
+    final val suite // com.davils.krypt.keyset/HybridDecrypter.suite|{}suite[0]
+        final fun <get-suite>(): com.davils.krypt.primitive.exchange/HpkeSuite // com.davils.krypt.keyset/HybridDecrypter.suite.<get-suite>|<get-suite>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.keyset/HybridDecrypter.toString|toString(){}[0]
+    final suspend fun decrypt(kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString = ..., kotlinx.io.bytestring/ByteString = ...): kotlinx.io.bytestring/ByteString? // com.davils.krypt.keyset/HybridDecrypter.decrypt|decrypt(kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString){}[0]
+}
+
+final class com.davils.krypt.keyset/HybridEncrypter { // com.davils.krypt.keyset/HybridEncrypter|null[0]
+    final val keyset // com.davils.krypt.keyset/HybridEncrypter.keyset|{}keyset[0]
+        final fun <get-keyset>(): com.davils.krypt.keyset/Keyset // com.davils.krypt.keyset/HybridEncrypter.keyset.<get-keyset>|<get-keyset>(){}[0]
+    final val suite // com.davils.krypt.keyset/HybridEncrypter.suite|{}suite[0]
+        final fun <get-suite>(): com.davils.krypt.primitive.exchange/HpkeSuite // com.davils.krypt.keyset/HybridEncrypter.suite.<get-suite>|<get-suite>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.keyset/HybridEncrypter.toString|toString(){}[0]
+    final suspend fun encrypt(kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString = ..., kotlinx.io.bytestring/ByteString = ...): kotlinx.io.bytestring/ByteString // com.davils.krypt.keyset/HybridEncrypter.encrypt|encrypt(kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString){}[0]
+}
+
+final class com.davils.krypt.keyset/KeyId : kotlin/Comparable<com.davils.krypt.keyset/KeyId> { // com.davils.krypt.keyset/KeyId|null[0]
+    final val bytes // com.davils.krypt.keyset/KeyId.bytes|{}bytes[0]
+        final fun <get-bytes>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.keyset/KeyId.bytes.<get-bytes>|<get-bytes>(){}[0]
+    final val hex // com.davils.krypt.keyset/KeyId.hex|{}hex[0]
+        final fun <get-hex>(): kotlin/String // com.davils.krypt.keyset/KeyId.hex.<get-hex>|<get-hex>(){}[0]
+
+    final fun compareTo(com.davils.krypt.keyset/KeyId): kotlin/Int // com.davils.krypt.keyset/KeyId.compareTo|compareTo(com.davils.krypt.keyset.KeyId){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.keyset/KeyId.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.keyset/KeyId.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.keyset/KeyId.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.keyset/KeyId.Companion|null[0]
+        final const val SIZE // com.davils.krypt.keyset/KeyId.Companion.SIZE|{}SIZE[0]
+            final fun <get-SIZE>(): kotlin/Int // com.davils.krypt.keyset/KeyId.Companion.SIZE.<get-SIZE>|<get-SIZE>(){}[0]
+
+        final fun of(kotlinx.io.bytestring/ByteString): com.davils.krypt.keyset/KeyId // com.davils.krypt.keyset/KeyId.Companion.of|of(kotlinx.io.bytestring.ByteString){}[0]
+        final fun parseOrNull(kotlin/String): com.davils.krypt.keyset/KeyId? // com.davils.krypt.keyset/KeyId.Companion.parseOrNull|parseOrNull(kotlin.String){}[0]
+    }
+}
+
+final class com.davils.krypt.keyset/Keyset { // com.davils.krypt.keyset/Keyset|null[0]
+    final val isPublic // com.davils.krypt.keyset/Keyset.isPublic|{}isPublic[0]
+        final fun <get-isPublic>(): kotlin/Boolean // com.davils.krypt.keyset/Keyset.isPublic.<get-isPublic>|<get-isPublic>(){}[0]
+    final val keys // com.davils.krypt.keyset/Keyset.keys|{}keys[0]
+        final fun <get-keys>(): kotlin.collections/List<com.davils.krypt.keyset/KeysetKey> // com.davils.krypt.keyset/Keyset.keys.<get-keys>|<get-keys>(){}[0]
+    final val primary // com.davils.krypt.keyset/Keyset.primary|{}primary[0]
+        final fun <get-primary>(): com.davils.krypt.keyset/KeysetKey // com.davils.krypt.keyset/Keyset.primary.<get-primary>|<get-primary>(){}[0]
+    final val primaryId // com.davils.krypt.keyset/Keyset.primaryId|{}primaryId[0]
+        final fun <get-primaryId>(): com.davils.krypt.keyset/KeyId // com.davils.krypt.keyset/Keyset.primaryId.<get-primaryId>|<get-primaryId>(){}[0]
+    final val purpose // com.davils.krypt.keyset/Keyset.purpose|{}purpose[0]
+        final fun <get-purpose>(): com.davils.krypt.keyset/KeyPurpose // com.davils.krypt.keyset/Keyset.purpose.<get-purpose>|<get-purpose>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.keyset/Keyset.equals|equals(kotlin.Any?){}[0]
+    final fun get(com.davils.krypt.keyset/KeyId): com.davils.krypt.keyset/KeysetKey? // com.davils.krypt.keyset/Keyset.get|get(com.davils.krypt.keyset.KeyId){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.keyset/Keyset.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.keyset/Keyset.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.keyset/KeysetAead { // com.davils.krypt.keyset/KeysetAead|null[0]
+    final val algorithm // com.davils.krypt.keyset/KeysetAead.algorithm|{}algorithm[0]
+        final fun <get-algorithm>(): com.davils.krypt.core.algorithm/AeadAlgorithm // com.davils.krypt.keyset/KeysetAead.algorithm.<get-algorithm>|<get-algorithm>(){}[0]
+    final val keyset // com.davils.krypt.keyset/KeysetAead.keyset|{}keyset[0]
+        final fun <get-keyset>(): com.davils.krypt.keyset/Keyset // com.davils.krypt.keyset/KeysetAead.keyset.<get-keyset>|<get-keyset>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.keyset/KeysetAead.toString|toString(){}[0]
+    final suspend fun decrypt(kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString = ...): kotlinx.io.bytestring/ByteString? // com.davils.krypt.keyset/KeysetAead.decrypt|decrypt(kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString){}[0]
+    final suspend fun encrypt(kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString = ...): kotlinx.io.bytestring/ByteString // com.davils.krypt.keyset/KeysetAead.encrypt|encrypt(kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString){}[0]
+}
+
+final class com.davils.krypt.keyset/KeysetEvent : com.davils.krypt.core/CryptoEvent { // com.davils.krypt.keyset/KeysetEvent|null[0]
+    final val action // com.davils.krypt.keyset/KeysetEvent.action|{}action[0]
+        final fun <get-action>(): com.davils.krypt.keyset/KeysetAction // com.davils.krypt.keyset/KeysetEvent.action.<get-action>|<get-action>(){}[0]
+    final val component // com.davils.krypt.keyset/KeysetEvent.component|{}component[0]
+        final fun <get-component>(): kotlin/String // com.davils.krypt.keyset/KeysetEvent.component.<get-component>|<get-component>(){}[0]
+    final val keyId // com.davils.krypt.keyset/KeysetEvent.keyId|{}keyId[0]
+        final fun <get-keyId>(): com.davils.krypt.keyset/KeyId // com.davils.krypt.keyset/KeysetEvent.keyId.<get-keyId>|<get-keyId>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.keyset/KeysetEvent.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.keyset/KeysetEvent.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.keyset/KeysetEvent.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.keyset/KeysetEvent.Companion|null[0]
+        final val TOPIC // com.davils.krypt.keyset/KeysetEvent.Companion.TOPIC|{}TOPIC[0]
+            final fun <get-TOPIC>(): com.davils.konfetti.core/TopicKey<com.davils.krypt.keyset/KeysetEvent> // com.davils.krypt.keyset/KeysetEvent.Companion.TOPIC.<get-TOPIC>|<get-TOPIC>(){}[0]
+    }
+}
+
+final class com.davils.krypt.keyset/KeysetKey { // com.davils.krypt.keyset/KeysetKey|null[0]
+    final val createdAt // com.davils.krypt.keyset/KeysetKey.createdAt|{}createdAt[0]
+        final fun <get-createdAt>(): kotlin.time/Instant // com.davils.krypt.keyset/KeysetKey.createdAt.<get-createdAt>|<get-createdAt>(){}[0]
+    final val id // com.davils.krypt.keyset/KeysetKey.id|{}id[0]
+        final fun <get-id>(): com.davils.krypt.keyset/KeyId // com.davils.krypt.keyset/KeysetKey.id.<get-id>|<get-id>(){}[0]
+    final val isUsable // com.davils.krypt.keyset/KeysetKey.isUsable|{}isUsable[0]
+        final fun <get-isUsable>(): kotlin/Boolean // com.davils.krypt.keyset/KeysetKey.isUsable.<get-isUsable>|<get-isUsable>(){}[0]
+    final val privateKey // com.davils.krypt.keyset/KeysetKey.privateKey|{}privateKey[0]
+        final fun <get-privateKey>(): com.davils.krypt.primitive.key/PrivateKey? // com.davils.krypt.keyset/KeysetKey.privateKey.<get-privateKey>|<get-privateKey>(){}[0]
+    final val publicKey // com.davils.krypt.keyset/KeysetKey.publicKey|{}publicKey[0]
+        final fun <get-publicKey>(): com.davils.krypt.primitive.key/PublicKey? // com.davils.krypt.keyset/KeysetKey.publicKey.<get-publicKey>|<get-publicKey>(){}[0]
+    final val secret // com.davils.krypt.keyset/KeysetKey.secret|{}secret[0]
+        final fun <get-secret>(): com.davils.krypt.primitive.key/SecretKey? // com.davils.krypt.keyset/KeysetKey.secret.<get-secret>|<get-secret>(){}[0]
+    final val status // com.davils.krypt.keyset/KeysetKey.status|{}status[0]
+        final fun <get-status>(): com.davils.krypt.keyset/KeyStatus // com.davils.krypt.keyset/KeysetKey.status.<get-status>|<get-status>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.keyset/KeysetKey.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.keyset/KeysetKey.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.keyset/KeysetKey.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.keyset/KeysetLimits { // com.davils.krypt.keyset/KeysetLimits|null[0]
+    constructor <init>(kotlin/Int = ..., kotlin/Int = ...) // com.davils.krypt.keyset/KeysetLimits.<init>|<init>(kotlin.Int;kotlin.Int){}[0]
+
+    final val maximumEncodedBytes // com.davils.krypt.keyset/KeysetLimits.maximumEncodedBytes|{}maximumEncodedBytes[0]
+        final fun <get-maximumEncodedBytes>(): kotlin/Int // com.davils.krypt.keyset/KeysetLimits.maximumEncodedBytes.<get-maximumEncodedBytes>|<get-maximumEncodedBytes>(){}[0]
+    final val maximumKeys // com.davils.krypt.keyset/KeysetLimits.maximumKeys|{}maximumKeys[0]
+        final fun <get-maximumKeys>(): kotlin/Int // com.davils.krypt.keyset/KeysetLimits.maximumKeys.<get-maximumKeys>|<get-maximumKeys>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.keyset/KeysetLimits.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.keyset/KeysetLimits.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.keyset/KeysetLimits.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.keyset/KeysetLimits.Companion|null[0]
+        final const val DEFAULT_MAXIMUM_ENCODED_BYTES // com.davils.krypt.keyset/KeysetLimits.Companion.DEFAULT_MAXIMUM_ENCODED_BYTES|{}DEFAULT_MAXIMUM_ENCODED_BYTES[0]
+            final fun <get-DEFAULT_MAXIMUM_ENCODED_BYTES>(): kotlin/Int // com.davils.krypt.keyset/KeysetLimits.Companion.DEFAULT_MAXIMUM_ENCODED_BYTES.<get-DEFAULT_MAXIMUM_ENCODED_BYTES>|<get-DEFAULT_MAXIMUM_ENCODED_BYTES>(){}[0]
+        final const val DEFAULT_MAXIMUM_KEYS // com.davils.krypt.keyset/KeysetLimits.Companion.DEFAULT_MAXIMUM_KEYS|{}DEFAULT_MAXIMUM_KEYS[0]
+            final fun <get-DEFAULT_MAXIMUM_KEYS>(): kotlin/Int // com.davils.krypt.keyset/KeysetLimits.Companion.DEFAULT_MAXIMUM_KEYS.<get-DEFAULT_MAXIMUM_KEYS>|<get-DEFAULT_MAXIMUM_KEYS>(){}[0]
+        final const val HARD_MAXIMUM_ENCODED_BYTES // com.davils.krypt.keyset/KeysetLimits.Companion.HARD_MAXIMUM_ENCODED_BYTES|{}HARD_MAXIMUM_ENCODED_BYTES[0]
+            final fun <get-HARD_MAXIMUM_ENCODED_BYTES>(): kotlin/Int // com.davils.krypt.keyset/KeysetLimits.Companion.HARD_MAXIMUM_ENCODED_BYTES.<get-HARD_MAXIMUM_ENCODED_BYTES>|<get-HARD_MAXIMUM_ENCODED_BYTES>(){}[0]
+        final const val HARD_MAXIMUM_KEYS // com.davils.krypt.keyset/KeysetLimits.Companion.HARD_MAXIMUM_KEYS|{}HARD_MAXIMUM_KEYS[0]
+            final fun <get-HARD_MAXIMUM_KEYS>(): kotlin/Int // com.davils.krypt.keyset/KeysetLimits.Companion.HARD_MAXIMUM_KEYS.<get-HARD_MAXIMUM_KEYS>|<get-HARD_MAXIMUM_KEYS>(){}[0]
+
+        final val Default // com.davils.krypt.keyset/KeysetLimits.Companion.Default|{}Default[0]
+            final fun <get-Default>(): com.davils.krypt.keyset/KeysetLimits // com.davils.krypt.keyset/KeysetLimits.Companion.Default.<get-Default>|<get-Default>(){}[0]
+    }
+}
+
+final class com.davils.krypt.keyset/KeysetMac { // com.davils.krypt.keyset/KeysetMac|null[0]
+    final val algorithm // com.davils.krypt.keyset/KeysetMac.algorithm|{}algorithm[0]
+        final fun <get-algorithm>(): com.davils.krypt.core.algorithm/MacAlgorithm // com.davils.krypt.keyset/KeysetMac.algorithm.<get-algorithm>|<get-algorithm>(){}[0]
+    final val keyset // com.davils.krypt.keyset/KeysetMac.keyset|{}keyset[0]
+        final fun <get-keyset>(): com.davils.krypt.keyset/Keyset // com.davils.krypt.keyset/KeysetMac.keyset.<get-keyset>|<get-keyset>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.keyset/KeysetMac.toString|toString(){}[0]
+    final suspend fun compute(kotlinx.io.bytestring/ByteString): kotlinx.io.bytestring/ByteString // com.davils.krypt.keyset/KeysetMac.compute|compute(kotlinx.io.bytestring.ByteString){}[0]
+    final suspend fun computeAll(kotlinx.io.bytestring/ByteString): kotlin.collections/List<kotlinx.io.bytestring/ByteString> // com.davils.krypt.keyset/KeysetMac.computeAll|computeAll(kotlinx.io.bytestring.ByteString){}[0]
+    final suspend fun verify(kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString): com.davils.krypt.primitive/Verification // com.davils.krypt.keyset/KeysetMac.verify|verify(kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString){}[0]
+}
+
+final class com.davils.krypt.keyset/KeysetSigner { // com.davils.krypt.keyset/KeysetSigner|null[0]
+    final val keyset // com.davils.krypt.keyset/KeysetSigner.keyset|{}keyset[0]
+        final fun <get-keyset>(): com.davils.krypt.keyset/Keyset // com.davils.krypt.keyset/KeysetSigner.keyset.<get-keyset>|<get-keyset>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.keyset/KeysetSigner.toString|toString(){}[0]
+    final suspend fun sign(kotlinx.io.bytestring/ByteString): kotlinx.io.bytestring/ByteString // com.davils.krypt.keyset/KeysetSigner.sign|sign(kotlinx.io.bytestring.ByteString){}[0]
+}
+
+final class com.davils.krypt.keyset/KeysetVerifier { // com.davils.krypt.keyset/KeysetVerifier|null[0]
+    final val keyset // com.davils.krypt.keyset/KeysetVerifier.keyset|{}keyset[0]
+        final fun <get-keyset>(): com.davils.krypt.keyset/Keyset // com.davils.krypt.keyset/KeysetVerifier.keyset.<get-keyset>|<get-keyset>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.keyset/KeysetVerifier.toString|toString(){}[0]
+    final suspend fun verify(kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString): com.davils.krypt.primitive/Verification // com.davils.krypt.keyset/KeysetVerifier.verify|verify(kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString){}[0]
+}
+
+final class com.davils.krypt.keyset/Keysets { // com.davils.krypt.keyset/Keysets|null[0]
+    constructor <init>(com.davils.krypt.primitive/Crypto, com.davils.krypt.keyset/KeysetLimits = ...) // com.davils.krypt.keyset/Keysets.<init>|<init>(com.davils.krypt.primitive.Crypto;com.davils.krypt.keyset.KeysetLimits){}[0]
+
+    final val crypto // com.davils.krypt.keyset/Keysets.crypto|{}crypto[0]
+        final fun <get-crypto>(): com.davils.krypt.primitive/Crypto // com.davils.krypt.keyset/Keysets.crypto.<get-crypto>|<get-crypto>(){}[0]
+    final val events // com.davils.krypt.keyset/Keysets.events|{}events[0]
+        final fun <get-events>(): kotlinx.coroutines.flow/Flow<com.davils.krypt.keyset/KeysetEvent> // com.davils.krypt.keyset/Keysets.events.<get-events>|<get-events>(){}[0]
+    final val limits // com.davils.krypt.keyset/Keysets.limits|{}limits[0]
+        final fun <get-limits>(): com.davils.krypt.keyset/KeysetLimits // com.davils.krypt.keyset/Keysets.limits.<get-limits>|<get-limits>(){}[0]
+
+    final fun aead(com.davils.krypt.keyset/Keyset): com.davils.krypt.keyset/KeysetAead // com.davils.krypt.keyset/Keysets.aead|aead(com.davils.krypt.keyset.Keyset){}[0]
+    final fun decrypter(com.davils.krypt.keyset/Keyset): com.davils.krypt.keyset/HybridDecrypter // com.davils.krypt.keyset/Keysets.decrypter|decrypter(com.davils.krypt.keyset.Keyset){}[0]
+    final fun encodePublic(com.davils.krypt.keyset/Keyset): kotlinx.io.bytestring/ByteString // com.davils.krypt.keyset/Keysets.encodePublic|encodePublic(com.davils.krypt.keyset.Keyset){}[0]
+    final fun encrypter(com.davils.krypt.keyset/Keyset): com.davils.krypt.keyset/HybridEncrypter // com.davils.krypt.keyset/Keysets.encrypter|encrypter(com.davils.krypt.keyset.Keyset){}[0]
+    final fun mac(com.davils.krypt.keyset/Keyset): com.davils.krypt.keyset/KeysetMac // com.davils.krypt.keyset/Keysets.mac|mac(com.davils.krypt.keyset.Keyset){}[0]
+    final fun prune(com.davils.krypt.keyset/Keyset): com.davils.krypt.keyset/Keyset // com.davils.krypt.keyset/Keysets.prune|prune(com.davils.krypt.keyset.Keyset){}[0]
+    final fun publicKeyset(com.davils.krypt.keyset/Keyset): com.davils.krypt.keyset/Keyset // com.davils.krypt.keyset/Keysets.publicKeyset|publicKeyset(com.davils.krypt.keyset.Keyset){}[0]
+    final fun signer(com.davils.krypt.keyset/Keyset): com.davils.krypt.keyset/KeysetSigner // com.davils.krypt.keyset/Keysets.signer|signer(com.davils.krypt.keyset.Keyset){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.keyset/Keysets.toString|toString(){}[0]
+    final fun verifier(com.davils.krypt.keyset/Keyset): com.davils.krypt.keyset/KeysetVerifier // com.davils.krypt.keyset/Keysets.verifier|verifier(com.davils.krypt.keyset.Keyset){}[0]
+    final suspend fun add(com.davils.krypt.keyset/Keyset): com.davils.krypt.keyset/Keyset // com.davils.krypt.keyset/Keysets.add|add(com.davils.krypt.keyset.Keyset){}[0]
+    final suspend fun decodePublic(kotlinx.io.bytestring/ByteString): com.davils.kore.core.outcome/Outcome<com.davils.krypt.keyset/Keyset, com.davils.krypt.keyset/KeysetFailure> // com.davils.krypt.keyset/Keysets.decodePublic|decodePublic(kotlinx.io.bytestring.ByteString){}[0]
+    final suspend fun decrypt(kotlinx.io.bytestring/ByteString, com.davils.krypt.keyset.kms/KeyManagementService, kotlinx.io.bytestring/ByteString = ...): com.davils.kore.core.outcome/Outcome<com.davils.krypt.keyset/Keyset, com.davils.krypt.keyset/KeysetFailure> // com.davils.krypt.keyset/Keysets.decrypt|decrypt(kotlinx.io.bytestring.ByteString;com.davils.krypt.keyset.kms.KeyManagementService;kotlinx.io.bytestring.ByteString){}[0]
+    final suspend fun derive(com.davils.krypt.keyset/Keyset, kotlinx.io.bytestring/ByteString, kotlin/Int = ..., com.davils.krypt.keyset/KeyId = ...): com.davils.krypt.primitive.key/SecretKey // com.davils.krypt.keyset/Keysets.derive|derive(com.davils.krypt.keyset.Keyset;kotlinx.io.bytestring.ByteString;kotlin.Int;com.davils.krypt.keyset.KeyId){}[0]
+    final suspend fun destroy(com.davils.krypt.keyset/Keyset, com.davils.krypt.keyset/KeyId): com.davils.krypt.keyset/Keyset // com.davils.krypt.keyset/Keysets.destroy|destroy(com.davils.krypt.keyset.Keyset;com.davils.krypt.keyset.KeyId){}[0]
+    final suspend fun disable(com.davils.krypt.keyset/Keyset, com.davils.krypt.keyset/KeyId): com.davils.krypt.keyset/Keyset // com.davils.krypt.keyset/Keysets.disable|disable(com.davils.krypt.keyset.Keyset;com.davils.krypt.keyset.KeyId){}[0]
+    final suspend fun enable(com.davils.krypt.keyset/Keyset, com.davils.krypt.keyset/KeyId): com.davils.krypt.keyset/Keyset // com.davils.krypt.keyset/Keysets.enable|enable(com.davils.krypt.keyset.Keyset;com.davils.krypt.keyset.KeyId){}[0]
+    final suspend fun encrypt(com.davils.krypt.keyset/Keyset, com.davils.krypt.keyset.kms/KeyManagementService, kotlinx.io.bytestring/ByteString = ...): kotlinx.io.bytestring/ByteString // com.davils.krypt.keyset/Keysets.encrypt|encrypt(com.davils.krypt.keyset.Keyset;com.davils.krypt.keyset.kms.KeyManagementService;kotlinx.io.bytestring.ByteString){}[0]
+    final suspend fun generate(com.davils.krypt.keyset/KeyPurpose): com.davils.krypt.keyset/Keyset // com.davils.krypt.keyset/Keysets.generate|generate(com.davils.krypt.keyset.KeyPurpose){}[0]
+    final suspend fun promote(com.davils.krypt.keyset/Keyset, com.davils.krypt.keyset/KeyId): com.davils.krypt.keyset/Keyset // com.davils.krypt.keyset/Keysets.promote|promote(com.davils.krypt.keyset.Keyset;com.davils.krypt.keyset.KeyId){}[0]
+    final suspend fun rotate(com.davils.krypt.keyset/Keyset): com.davils.krypt.keyset/Keyset // com.davils.krypt.keyset/Keysets.rotate|rotate(com.davils.krypt.keyset.Keyset){}[0]
+}
+
+sealed class com.davils.krypt.keyset/KeyPurpose { // com.davils.krypt.keyset/KeyPurpose|null[0]
+    abstract val keyType // com.davils.krypt.keyset/KeyPurpose.keyType|{}keyType[0]
+        abstract fun <get-keyType>(): com.davils.krypt.core.algorithm/KeyType? // com.davils.krypt.keyset/KeyPurpose.keyType.<get-keyType>|<get-keyType>(){}[0]
+
+    final class Aead : com.davils.krypt.keyset/KeyPurpose { // com.davils.krypt.keyset/KeyPurpose.Aead|null[0]
+        constructor <init>(com.davils.krypt.core.algorithm/AeadAlgorithm = ...) // com.davils.krypt.keyset/KeyPurpose.Aead.<init>|<init>(com.davils.krypt.core.algorithm.AeadAlgorithm){}[0]
+
+        final val algorithm // com.davils.krypt.keyset/KeyPurpose.Aead.algorithm|{}algorithm[0]
+            final fun <get-algorithm>(): com.davils.krypt.core.algorithm/AeadAlgorithm // com.davils.krypt.keyset/KeyPurpose.Aead.algorithm.<get-algorithm>|<get-algorithm>(){}[0]
+        final val keyType // com.davils.krypt.keyset/KeyPurpose.Aead.keyType|{}keyType[0]
+            final fun <get-keyType>(): com.davils.krypt.core.algorithm/KeyType? // com.davils.krypt.keyset/KeyPurpose.Aead.keyType.<get-keyType>|<get-keyType>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.keyset/KeyPurpose.Aead.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.keyset/KeyPurpose.Aead.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.keyset/KeyPurpose.Aead.toString|toString(){}[0]
+    }
+
+    final class Hybrid : com.davils.krypt.keyset/KeyPurpose { // com.davils.krypt.keyset/KeyPurpose.Hybrid|null[0]
+        constructor <init>(com.davils.krypt.primitive.exchange/HpkeSuite = ...) // com.davils.krypt.keyset/KeyPurpose.Hybrid.<init>|<init>(com.davils.krypt.primitive.exchange.HpkeSuite){}[0]
+
+        final val keyType // com.davils.krypt.keyset/KeyPurpose.Hybrid.keyType|{}keyType[0]
+            final fun <get-keyType>(): com.davils.krypt.core.algorithm/KeyType // com.davils.krypt.keyset/KeyPurpose.Hybrid.keyType.<get-keyType>|<get-keyType>(){}[0]
+        final val suite // com.davils.krypt.keyset/KeyPurpose.Hybrid.suite|{}suite[0]
+            final fun <get-suite>(): com.davils.krypt.primitive.exchange/HpkeSuite // com.davils.krypt.keyset/KeyPurpose.Hybrid.suite.<get-suite>|<get-suite>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.keyset/KeyPurpose.Hybrid.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.keyset/KeyPurpose.Hybrid.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.keyset/KeyPurpose.Hybrid.toString|toString(){}[0]
+    }
+
+    final class Mac : com.davils.krypt.keyset/KeyPurpose { // com.davils.krypt.keyset/KeyPurpose.Mac|null[0]
+        constructor <init>(com.davils.krypt.core.algorithm/MacAlgorithm = ...) // com.davils.krypt.keyset/KeyPurpose.Mac.<init>|<init>(com.davils.krypt.core.algorithm.MacAlgorithm){}[0]
+
+        final val algorithm // com.davils.krypt.keyset/KeyPurpose.Mac.algorithm|{}algorithm[0]
+            final fun <get-algorithm>(): com.davils.krypt.core.algorithm/MacAlgorithm // com.davils.krypt.keyset/KeyPurpose.Mac.algorithm.<get-algorithm>|<get-algorithm>(){}[0]
+        final val keyType // com.davils.krypt.keyset/KeyPurpose.Mac.keyType|{}keyType[0]
+            final fun <get-keyType>(): com.davils.krypt.core.algorithm/KeyType? // com.davils.krypt.keyset/KeyPurpose.Mac.keyType.<get-keyType>|<get-keyType>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.keyset/KeyPurpose.Mac.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.keyset/KeyPurpose.Mac.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.keyset/KeyPurpose.Mac.toString|toString(){}[0]
+    }
+
+    final class Signing : com.davils.krypt.keyset/KeyPurpose { // com.davils.krypt.keyset/KeyPurpose.Signing|null[0]
+        constructor <init>(com.davils.krypt.core.algorithm/KeyType = ...) // com.davils.krypt.keyset/KeyPurpose.Signing.<init>|<init>(com.davils.krypt.core.algorithm.KeyType){}[0]
+
+        final val keyType // com.davils.krypt.keyset/KeyPurpose.Signing.keyType|{}keyType[0]
+            final fun <get-keyType>(): com.davils.krypt.core.algorithm/KeyType // com.davils.krypt.keyset/KeyPurpose.Signing.keyType.<get-keyType>|<get-keyType>(){}[0]
+        final val type // com.davils.krypt.keyset/KeyPurpose.Signing.type|{}type[0]
+            final fun <get-type>(): com.davils.krypt.core.algorithm/KeyType // com.davils.krypt.keyset/KeyPurpose.Signing.type.<get-type>|<get-type>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.keyset/KeyPurpose.Signing.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.keyset/KeyPurpose.Signing.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.keyset/KeyPurpose.Signing.toString|toString(){}[0]
+    }
+}

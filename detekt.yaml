@@ -102,6 +102,8 @@ libraries:
       - '**/exchange/Encapsulation.kt'
       - '**/exchange/HpkeSender.kt'
       - '**/exchange/HpkeSuite.kt'
+      - '**/keyset/KeyPurpose.kt'
+      - '**/store/StoredKeyset.kt'
   # The compiler rejects an explicit Unit return type as redundant under warnings as errors.
   LibraryCodeMustSpecifyReturnType:
     active: true
@@ -161,6 +163,8 @@ style:
       - '**/exchange/Encapsulation.kt'
       - '**/exchange/HpkeSender.kt'
       - '**/exchange/HpkeSuite.kt'
+      - '**/keyset/KeyPurpose.kt'
+      - '**/store/StoredKeyset.kt'
   # The compiler rejects an explicit Unit return type as redundant under warnings as errors.
   OptionalUnit:
     active: false

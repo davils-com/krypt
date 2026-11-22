@@ -29,6 +29,7 @@ dependencies {
         api(project(":krypt-core"))
         api(project(":krypt-asn1"))
         api(project(":krypt-primitive"))
+        api(project(":krypt-keyset"))
         api(project(":krypt-testing"))
     }
 }

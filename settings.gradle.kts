@@ -128,5 +128,6 @@ rootProject.name = "krypt"
 include(":krypt-core")
 include(":krypt-asn1")
 include(":krypt-primitive")
+include(":krypt-keyset")
 include(":krypt-testing")
 include(":krypt-bom")

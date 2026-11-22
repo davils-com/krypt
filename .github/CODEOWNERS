@@ -10,6 +10,8 @@
 /krypt-asn1/src/jvmMain/java/         @davils-com/maintainers
 /krypt-primitive/api/                 @davils-com/maintainers
 /krypt-primitive/src/jvmMain/java/    @davils-com/maintainers
+/krypt-keyset/api/                    @davils-com/maintainers
+/krypt-keyset/src/jvmMain/java/       @davils-com/maintainers
 
 # Anything that decides what CI trusts or what leaves the build.
 /.github/workflows/                   @davils-com/maintainers

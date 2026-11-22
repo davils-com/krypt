@@ -1,0 +1,307 @@
+public final class com/davils/krypt/keyset/HybridDecrypter {
+	public final fun decrypt (Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun decrypt$default (Lcom/davils/krypt/keyset/HybridDecrypter;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun getKeyset ()Lcom/davils/krypt/keyset/Keyset;
+	public final fun getSuite ()Lcom/davils/krypt/primitive/exchange/HpkeSuite;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/keyset/HybridEncrypter {
+	public final fun encrypt (Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun encrypt$default (Lcom/davils/krypt/keyset/HybridEncrypter;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun getKeyset ()Lcom/davils/krypt/keyset/Keyset;
+	public final fun getSuite ()Lcom/davils/krypt/primitive/exchange/HpkeSuite;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/keyset/KeyId : java/lang/Comparable {
+	public static final field Companion Lcom/davils/krypt/keyset/KeyId$Companion;
+	public static final field SIZE I
+	public fun compareTo (Lcom/davils/krypt/keyset/KeyId;)I
+	public synthetic fun compareTo (Ljava/lang/Object;)I
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBytes ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getHex ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/keyset/KeyId$Companion {
+	public final fun of (Lkotlinx/io/bytestring/ByteString;)Lcom/davils/krypt/keyset/KeyId;
+	public final fun parseOrNull (Ljava/lang/String;)Lcom/davils/krypt/keyset/KeyId;
+}
+
+public abstract class com/davils/krypt/keyset/KeyPurpose {
+	public abstract fun getKeyType ()Lcom/davils/krypt/core/algorithm/KeyType;
+}
+
+public final class com/davils/krypt/keyset/KeyPurpose$Aead : com/davils/krypt/keyset/KeyPurpose {
+	public fun <init> ()V
+	public fun <init> (Lcom/davils/krypt/core/algorithm/AeadAlgorithm;)V
+	public synthetic fun <init> (Lcom/davils/krypt/core/algorithm/AeadAlgorithm;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAlgorithm ()Lcom/davils/krypt/core/algorithm/AeadAlgorithm;
+	public fun getKeyType ()Lcom/davils/krypt/core/algorithm/KeyType;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/keyset/KeyPurpose$Hybrid : com/davils/krypt/keyset/KeyPurpose {
+	public fun <init> ()V
+	public fun <init> (Lcom/davils/krypt/primitive/exchange/HpkeSuite;)V
+	public synthetic fun <init> (Lcom/davils/krypt/primitive/exchange/HpkeSuite;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getKeyType ()Lcom/davils/krypt/core/algorithm/KeyType;
+	public final fun getSuite ()Lcom/davils/krypt/primitive/exchange/HpkeSuite;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/keyset/KeyPurpose$Mac : com/davils/krypt/keyset/KeyPurpose {
+	public fun <init> ()V
+	public fun <init> (Lcom/davils/krypt/core/algorithm/MacAlgorithm;)V
+	public synthetic fun <init> (Lcom/davils/krypt/core/algorithm/MacAlgorithm;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAlgorithm ()Lcom/davils/krypt/core/algorithm/MacAlgorithm;
+	public fun getKeyType ()Lcom/davils/krypt/core/algorithm/KeyType;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/keyset/KeyPurpose$Signing : com/davils/krypt/keyset/KeyPurpose {
+	public fun <init> ()V
+	public fun <init> (Lcom/davils/krypt/core/algorithm/KeyType;)V
+	public synthetic fun <init> (Lcom/davils/krypt/core/algorithm/KeyType;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getKeyType ()Lcom/davils/krypt/core/algorithm/KeyType;
+	public final fun getType ()Lcom/davils/krypt/core/algorithm/KeyType;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/keyset/KeyStatus : java/lang/Enum {
+	public static final field Destroyed Lcom/davils/krypt/keyset/KeyStatus;
+	public static final field Disabled Lcom/davils/krypt/keyset/KeyStatus;
+	public static final field Enabled Lcom/davils/krypt/keyset/KeyStatus;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/keyset/KeyStatus;
+	public static fun values ()[Lcom/davils/krypt/keyset/KeyStatus;
+}
+
+public final class com/davils/krypt/keyset/Keyset {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun get (Lcom/davils/krypt/keyset/KeyId;)Lcom/davils/krypt/keyset/KeysetKey;
+	public final fun getKeys ()Ljava/util/List;
+	public final fun getPrimary ()Lcom/davils/krypt/keyset/KeysetKey;
+	public final fun getPrimaryId ()Lcom/davils/krypt/keyset/KeyId;
+	public final fun getPurpose ()Lcom/davils/krypt/keyset/KeyPurpose;
+	public fun hashCode ()I
+	public final fun isPublic ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/keyset/KeysetAction : java/lang/Enum {
+	public static final field Added Lcom/davils/krypt/keyset/KeysetAction;
+	public static final field Destroyed Lcom/davils/krypt/keyset/KeysetAction;
+	public static final field Disabled Lcom/davils/krypt/keyset/KeysetAction;
+	public static final field Enabled Lcom/davils/krypt/keyset/KeysetAction;
+	public static final field Generated Lcom/davils/krypt/keyset/KeysetAction;
+	public static final field Promoted Lcom/davils/krypt/keyset/KeysetAction;
+	public static final field Rotated Lcom/davils/krypt/keyset/KeysetAction;
+	public final fun getAudit ()Lcom/davils/krypt/core/audit/AuditAction;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/keyset/KeysetAction;
+	public static fun values ()[Lcom/davils/krypt/keyset/KeysetAction;
+}
+
+public final class com/davils/krypt/keyset/KeysetAead {
+	public final fun decrypt (Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun decrypt$default (Lcom/davils/krypt/keyset/KeysetAead;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun encrypt (Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun encrypt$default (Lcom/davils/krypt/keyset/KeysetAead;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun getAlgorithm ()Lcom/davils/krypt/core/algorithm/AeadAlgorithm;
+	public final fun getKeyset ()Lcom/davils/krypt/keyset/Keyset;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/keyset/KeysetEvent : com/davils/krypt/core/CryptoEvent {
+	public static final field Companion Lcom/davils/krypt/keyset/KeysetEvent$Companion;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAction ()Lcom/davils/krypt/keyset/KeysetAction;
+	public fun getComponent ()Ljava/lang/String;
+	public final fun getKeyId ()Lcom/davils/krypt/keyset/KeyId;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/keyset/KeysetEvent$Companion {
+	public final fun getTOPIC ()Lcom/davils/konfetti/core/TopicKey;
+}
+
+public final class com/davils/krypt/keyset/KeysetFailure : java/lang/Enum {
+	public static final field Conflict Lcom/davils/krypt/keyset/KeysetFailure;
+	public static final field DecryptionFailed Lcom/davils/krypt/keyset/KeysetFailure;
+	public static final field Malformed Lcom/davils/krypt/keyset/KeysetFailure;
+	public static final field Missing Lcom/davils/krypt/keyset/KeysetFailure;
+	public static final field Refused Lcom/davils/krypt/keyset/KeysetFailure;
+	public static final field Unsupported Lcom/davils/krypt/keyset/KeysetFailure;
+	public static final field WrongKeyManagementService Lcom/davils/krypt/keyset/KeysetFailure;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/keyset/KeysetFailure;
+	public static fun values ()[Lcom/davils/krypt/keyset/KeysetFailure;
+}
+
+public final class com/davils/krypt/keyset/KeysetKey {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCreatedAt ()Lkotlin/time/Instant;
+	public final fun getId ()Lcom/davils/krypt/keyset/KeyId;
+	public final fun getPrivateKey ()Lcom/davils/krypt/primitive/key/PrivateKey;
+	public final fun getPublicKey ()Lcom/davils/krypt/primitive/key/PublicKey;
+	public final fun getSecret ()Lcom/davils/krypt/primitive/key/SecretKey;
+	public final fun getStatus ()Lcom/davils/krypt/keyset/KeyStatus;
+	public fun hashCode ()I
+	public final fun isUsable ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/keyset/KeysetLimits {
+	public static final field Companion Lcom/davils/krypt/keyset/KeysetLimits$Companion;
+	public static final field DEFAULT_MAXIMUM_ENCODED_BYTES I
+	public static final field DEFAULT_MAXIMUM_KEYS I
+	public static final field HARD_MAXIMUM_ENCODED_BYTES I
+	public static final field HARD_MAXIMUM_KEYS I
+	public fun <init> ()V
+	public fun <init> (II)V
+	public synthetic fun <init> (IIILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMaximumEncodedBytes ()I
+	public final fun getMaximumKeys ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/keyset/KeysetLimits$Companion {
+	public final fun getDefault ()Lcom/davils/krypt/keyset/KeysetLimits;
+}
+
+public final class com/davils/krypt/keyset/KeysetMac {
+	public final fun compute (Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun computeAll (Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getAlgorithm ()Lcom/davils/krypt/core/algorithm/MacAlgorithm;
+	public final fun getKeyset ()Lcom/davils/krypt/keyset/Keyset;
+	public fun toString ()Ljava/lang/String;
+	public final fun verify (Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/keyset/KeysetSigner {
+	public final fun getKeyset ()Lcom/davils/krypt/keyset/Keyset;
+	public final fun sign (Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/keyset/KeysetVerifier {
+	public final fun getKeyset ()Lcom/davils/krypt/keyset/Keyset;
+	public fun toString ()Ljava/lang/String;
+	public final fun verify (Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/keyset/Keysets {
+	public fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/keyset/KeysetLimits;)V
+	public synthetic fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/keyset/KeysetLimits;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun add (Lcom/davils/krypt/keyset/Keyset;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun aead (Lcom/davils/krypt/keyset/Keyset;)Lcom/davils/krypt/keyset/KeysetAead;
+	public final fun decodePublic (Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun decrypt (Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/keyset/kms/KeyManagementService;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun decrypt$default (Lcom/davils/krypt/keyset/Keysets;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/keyset/kms/KeyManagementService;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun decrypter (Lcom/davils/krypt/keyset/Keyset;)Lcom/davils/krypt/keyset/HybridDecrypter;
+	public final fun derive (Lcom/davils/krypt/keyset/Keyset;Lkotlinx/io/bytestring/ByteString;ILcom/davils/krypt/keyset/KeyId;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun derive$default (Lcom/davils/krypt/keyset/Keysets;Lcom/davils/krypt/keyset/Keyset;Lkotlinx/io/bytestring/ByteString;ILcom/davils/krypt/keyset/KeyId;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun destroy (Lcom/davils/krypt/keyset/Keyset;Lcom/davils/krypt/keyset/KeyId;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun disable (Lcom/davils/krypt/keyset/Keyset;Lcom/davils/krypt/keyset/KeyId;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun enable (Lcom/davils/krypt/keyset/Keyset;Lcom/davils/krypt/keyset/KeyId;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun encodePublic (Lcom/davils/krypt/keyset/Keyset;)Lkotlinx/io/bytestring/ByteString;
+	public final fun encrypt (Lcom/davils/krypt/keyset/Keyset;Lcom/davils/krypt/keyset/kms/KeyManagementService;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun encrypt$default (Lcom/davils/krypt/keyset/Keysets;Lcom/davils/krypt/keyset/Keyset;Lcom/davils/krypt/keyset/kms/KeyManagementService;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun encrypter (Lcom/davils/krypt/keyset/Keyset;)Lcom/davils/krypt/keyset/HybridEncrypter;
+	public final fun generate (Lcom/davils/krypt/keyset/KeyPurpose;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getCrypto ()Lcom/davils/krypt/primitive/Crypto;
+	public final fun getEvents ()Lkotlinx/coroutines/flow/Flow;
+	public final fun getLimits ()Lcom/davils/krypt/keyset/KeysetLimits;
+	public final fun mac (Lcom/davils/krypt/keyset/Keyset;)Lcom/davils/krypt/keyset/KeysetMac;
+	public final fun promote (Lcom/davils/krypt/keyset/Keyset;Lcom/davils/krypt/keyset/KeyId;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun prune (Lcom/davils/krypt/keyset/Keyset;)Lcom/davils/krypt/keyset/Keyset;
+	public final fun publicKeyset (Lcom/davils/krypt/keyset/Keyset;)Lcom/davils/krypt/keyset/Keyset;
+	public final fun rotate (Lcom/davils/krypt/keyset/Keyset;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun signer (Lcom/davils/krypt/keyset/Keyset;)Lcom/davils/krypt/keyset/KeysetSigner;
+	public fun toString ()Ljava/lang/String;
+	public final fun verifier (Lcom/davils/krypt/keyset/Keyset;)Lcom/davils/krypt/keyset/KeysetVerifier;
+}
+
+public final class com/davils/krypt/keyset/kms/Envelopes {
+	public fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/keyset/kms/KeyManagementService;Lcom/davils/krypt/core/algorithm/AeadAlgorithm;)V
+	public synthetic fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/keyset/kms/KeyManagementService;Lcom/davils/krypt/core/algorithm/AeadAlgorithm;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getAlgorithm ()Lcom/davils/krypt/core/algorithm/AeadAlgorithm;
+	public final fun open (Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun open$default (Lcom/davils/krypt/keyset/kms/Envelopes;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun seal (Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun seal$default (Lcom/davils/krypt/keyset/kms/Envelopes;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/davils/krypt/keyset/kms/KeyManagementService {
+	public abstract fun decrypt (Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun encrypt (Lcom/davils/krypt/core/SecretBytes;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun getKeyUri ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/keyset/kms/KeysetKms : com/davils/krypt/keyset/kms/KeyManagementService {
+	public fun <init> (Lcom/davils/krypt/keyset/KeysetAead;Ljava/lang/String;)V
+	public fun decrypt (Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun encrypt (Lcom/davils/krypt/core/SecretBytes;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getKeyUri ()Ljava/lang/String;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/keyset/kms/LocalKms : com/davils/krypt/keyset/kms/KeyManagementService {
+	public fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/primitive/key/SecretKey;Ljava/lang/String;Lcom/davils/krypt/core/algorithm/AeadAlgorithm;)V
+	public synthetic fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/primitive/key/SecretKey;Ljava/lang/String;Lcom/davils/krypt/core/algorithm/AeadAlgorithm;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun decrypt (Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun encrypt (Lcom/davils/krypt/core/SecretBytes;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getAlgorithm ()Lcom/davils/krypt/core/algorithm/AeadAlgorithm;
+	public fun getKeyUri ()Ljava/lang/String;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/keyset/kms/ProviderKms : com/davils/krypt/keyset/kms/KeyManagementService {
+	public fun <init> (Lcom/davils/krypt/primitive/Crypto;Ljavax/crypto/SecretKey;Ljava/lang/String;)V
+	public fun decrypt (Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun encrypt (Lcom/davils/krypt/core/SecretBytes;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun getKeyUri ()Ljava/lang/String;
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/davils/krypt/keyset/store/KeysetRepository {
+	public abstract fun load (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun store (Ljava/lang/String;Lcom/davils/krypt/keyset/store/StoredKeyset;Ljava/lang/Long;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/keyset/store/KeysetVault {
+	public fun <init> (Lcom/davils/krypt/keyset/Keysets;Lcom/davils/krypt/keyset/store/KeysetRepository;Lcom/davils/krypt/keyset/kms/KeyManagementService;I)V
+	public synthetic fun <init> (Lcom/davils/krypt/keyset/Keysets;Lcom/davils/krypt/keyset/store/KeysetRepository;Lcom/davils/krypt/keyset/kms/KeyManagementService;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun create (Ljava/lang/String;Lcom/davils/krypt/keyset/KeyPurpose;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getAttempts ()I
+	public final fun getKeysets ()Lcom/davils/krypt/keyset/Keysets;
+	public final fun load (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun toString ()Ljava/lang/String;
+	public final fun update (Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/keyset/store/StoredKeyset {
+	public fun <init> (JLkotlinx/io/bytestring/ByteString;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEncrypted ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getRevision ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
