@@ -1,0 +1,357 @@
+{
+    "schemaVersion": 1,
+    "standards": [
+        {
+            "id": "rfc:1421",
+            "reviewedOn": "2026-11-22",
+            "note": "PEM with the Proc-Type and DEK-Info headers of OpenSSL: krypt recognises the legacy encryption and refuses it.",
+            "snapshot": {
+                "title": "Privacy Enhancement for Internet Electronic Mail: Part I: Message Encryption and Authentication Procedures",
+                "status": "HISTORIC",
+                "published": "February 1993",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
+            }
+        },
+        {
+            "id": "rfc:2104",
+            "reviewedOn": "2026-11-22",
+            "note": "HMAC: the MACs of krypt-primitive and the base of HKDF, computed by JCA or WebCrypto.",
+            "snapshot": {
+                "title": "HMAC: Keyed-Hashing for Message Authentication",
+                "status": "INFORMATIONAL",
+                "published": "February 1997",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [
+                    "RFC6151"
+                ],
+                "errata": {
+                    "2794": "HELD",
+                    "3694": "HELD",
+                    "4459": "REJECTED",
+                    "4809": "HELD",
+                    "501": "VERIFIED",
+                    "8185": "REJECTED",
+                    "8296": "REJECTED"
+                }
+            }
+        },
+        {
+            "id": "rfc:3394",
+            "reviewedOn": "2026-11-22",
+            "note": "AES key wrap: the key wraps of krypt-primitive.",
+            "snapshot": {
+                "title": "Advanced Encryption Standard (AES) Key Wrap Algorithm",
+                "status": "INFORMATIONAL",
+                "published": "October 2002",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "284": "HELD",
+                    "3358": "REJECTED",
+                    "3361": "REJECTED",
+                    "3671": "VERIFIED",
+                    "5777": "VERIFIED",
+                    "6942": "VERIFIED",
+                    "8468": "HELD"
+                }
+            }
+        },
+        {
+            "id": "rfc:4231",
+            "reviewedOn": "2026-11-22",
+            "note": "The HMAC-SHA-2 test vectors the MAC tests check against.",
+            "snapshot": {
+                "title": "Identifiers and Test Vectors for HMAC-SHA-224, HMAC-SHA-256, HMAC-SHA-384, and HMAC-SHA-512",
+                "status": "PROPOSED STANDARD",
+                "published": "December 2005",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "3853": "HELD"
+                }
+            }
+        },
+        {
+            "id": "rfc:4648",
+            "reviewedOn": "2026-11-22",
+            "note": "Base64 and base64url: strict, constant-time codecs of krypt-core that refuse every non-canonical input.",
+            "snapshot": {
+                "title": "The Base16, Base32, and Base64 Data Encodings",
+                "status": "PROPOSED STANDARD",
+                "published": "October 2006",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "2837": "VERIFIED",
+                    "4889": "REPORTED",
+                    "5855": "VERIFIED",
+                    "7514": "VERIFIED",
+                    "8669": "REPORTED",
+                    "9030": "VERIFIED"
+                }
+            }
+        },
+        {
+            "id": "rfc:5280",
+            "reviewedOn": "2026-11-22",
+            "note": "X.509: the encoding of times in DER and the profile the certificates of krypt follow.",
+            "snapshot": {
+                "title": "Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile",
+                "status": "PROPOSED STANDARD",
+                "published": "May 2008",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [
+                    "RFC10007",
+                    "RFC6818",
+                    "RFC8398",
+                    "RFC8399",
+                    "RFC9549",
+                    "RFC9598",
+                    "RFC9608",
+                    "RFC9618",
+                    "RFC9925"
+                ],
+                "errata": {
+                    "1774": "REJECTED",
+                    "3085": "REJECTED",
+                    "3200": "HELD",
+                    "3466": "HELD",
+                    "3579": "VERIFIED",
+                    "3674": "HELD",
+                    "3693": "REJECTED",
+                    "3754": "HELD",
+                    "3986": "HELD",
+                    "4274": "HELD",
+                    "4847": "HELD",
+                    "5802": "VERIFIED",
+                    "5876": "HELD",
+                    "5938": "VERIFIED",
+                    "5967": "REJECTED",
+                    "5997": "HELD",
+                    "6414": "VERIFIED",
+                    "6830": "REJECTED",
+                    "7164": "REJECTED",
+                    "7634": "HELD",
+                    "7658": "VERIFIED",
+                    "7661": "VERIFIED",
+                    "8561": "HELD",
+                    "9259": "REPORTED"
+                }
+            }
+        },
+        {
+            "id": "rfc:5869",
+            "reviewedOn": "2026-11-22",
+            "note": "HKDF: implemented over HMAC in common code, so both targets derive alike.",
+            "snapshot": {
+                "title": "HMAC-based Extract-and-Expand Key Derivation Function (HKDF)",
+                "status": "INFORMATIONAL",
+                "published": "May 2010",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "5161": "REPORTED"
+                }
+            }
+        },
+        {
+            "id": "rfc:7468",
+            "reviewedOn": "2026-11-22",
+            "note": "The textual encoding of PEM: strict reading and writing in krypt-asn1.",
+            "snapshot": {
+                "title": "Textual Encodings of PKIX, PKCS, and CMS Structures",
+                "status": "PROPOSED STANDARD",
+                "published": "April 2015",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "4508": "VERIFIED",
+                    "7697": "REPORTED"
+                }
+            }
+        },
+        {
+            "id": "rfc:7748",
+            "reviewedOn": "2026-11-22",
+            "note": "X25519 and X448: key agreement and the DHKEM of HPKE.",
+            "snapshot": {
+                "title": "Elliptic Curves for Security",
+                "status": "INFORMATIONAL",
+                "published": "January 2016",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "4730": "VERIFIED",
+                    "5028": "VERIFIED",
+                    "5568": "REJECTED",
+                    "5651": "REJECTED",
+                    "7095": "VERIFIED",
+                    "7096": "HELD",
+                    "7625": "VERIFIED",
+                    "7824": "REJECTED",
+                    "7879": "REJECTED"
+                }
+            }
+        },
+        {
+            "id": "rfc:7914",
+            "reviewedOn": "2026-11-22",
+            "note": "scrypt: named as an encryption of private keys krypt refuses.",
+            "snapshot": {
+                "title": "The scrypt Password-Based Key Derivation Function",
+                "status": "INFORMATIONAL",
+                "published": "August 2016",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "5871": "VERIFIED",
+                    "5971": "REPORTED",
+                    "5972": "REPORTED",
+                    "5973": "REPORTED",
+                    "6452": "REPORTED",
+                    "6972": "VERIFIED"
+                }
+            }
+        },
+        {
+            "id": "rfc:8017",
+            "reviewedOn": "2026-11-22",
+            "note": "PKCS #1: RSA-PSS and RSA PKCS #1 signatures, RSA-OAEP and the PKCS #1 key formats.",
+            "snapshot": {
+                "title": "PKCS #1: RSA Cryptography Specifications Version 2.2",
+                "status": "INFORMATIONAL",
+                "published": "November 2016",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "5111": "VERIFIED",
+                    "5154": "VERIFIED",
+                    "5235": "VERIFIED",
+                    "5576": "HELD",
+                    "5577": "VERIFIED",
+                    "7405": "VERIFIED"
+                }
+            }
+        },
+        {
+            "id": "rfc:8018",
+            "reviewedOn": "2026-11-22",
+            "note": "PKCS #5: PBKDF2 and PBES2, with iteration bounds from the crypto policy.",
+            "snapshot": {
+                "title": "PKCS #5: Password-Based Cryptography Specification Version 2.1",
+                "status": "INFORMATIONAL",
+                "published": "January 2017",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [
+                    "RFC9579",
+                    "RFC9879"
+                ],
+                "errata": {
+                    "5808": "VERIFIED",
+                    "5809": "VERIFIED",
+                    "6156": "VERIFIED",
+                    "8318": "VERIFIED"
+                }
+            }
+        },
+        {
+            "id": "rfc:8032",
+            "reviewedOn": "2026-11-22",
+            "note": "EdDSA: Ed25519 and Ed448 signatures.",
+            "snapshot": {
+                "title": "Edwards-Curve Digital Signature Algorithm (EdDSA)",
+                "status": "INFORMATIONAL",
+                "published": "January 2017",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "5519": "VERIFIED",
+                    "5757": "REJECTED",
+                    "5758": "HELD",
+                    "5759": "HELD",
+                    "5930": "VERIFIED",
+                    "5968": "VERIFIED",
+                    "6306": "HELD",
+                    "6348": "VERIFIED",
+                    "6851": "VERIFIED",
+                    "7031": "HELD",
+                    "8197": "VERIFIED"
+                }
+            }
+        },
+        {
+            "id": "rfc:8439",
+            "reviewedOn": "2026-11-22",
+            "note": "ChaCha20-Poly1305: an AEAD of krypt-primitive where the platform has it.",
+            "snapshot": {
+                "title": "ChaCha20 and Poly1305 for IETF Protocols",
+                "status": "INFORMATIONAL",
+                "published": "June 2018",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "5675": "REJECTED",
+                    "5689": "VERIFIED",
+                    "5989": "VERIFIED",
+                    "6025": "VERIFIED",
+                    "6257": "VERIFIED",
+                    "6569": "HELD",
+                    "6989": "REJECTED",
+                    "7880": "VERIFIED"
+                }
+            }
+        },
+        {
+            "id": "rfc:9180",
+            "reviewedOn": "2026-11-22",
+            "note": "HPKE: every mode in common code over the DHKEMs, HKDF and the AEADs, checked against its test vectors.",
+            "snapshot": {
+                "title": "Hybrid Public Key Encryption",
+                "status": "INFORMATIONAL",
+                "published": "February 2022",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "6941": "VERIFIED",
+                    "7121": "VERIFIED",
+                    "7251": "HELD",
+                    "7790": "VERIFIED",
+                    "7932": "VERIFIED",
+                    "7933": "HELD",
+                    "7934": "VERIFIED",
+                    "7937": "VERIFIED"
+                }
+            }
+        },
+        {
+            "id": "unicode:ucd",
+            "reviewedOn": "2026-11-22",
+            "note": "Untrusted names, subjects and texts are shown through SafeText of Kore.",
+            "snapshot": {
+                "title": "Unicode Character Database",
+                "revision": "18.0.0",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
+            }
+        }
+    ]
+}

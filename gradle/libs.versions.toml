@@ -1,0 +1,30 @@
+[versions]
+kotlin = "2.4.21"
+kreate = "5.4.1"
+kore = "2.3.2"
+konfetti = "1.0.0"
+kollect = "1.0.0"
+coroutines = "1.11.0"
+kotlinx-io = "0.9.2"
+serialization = "1.13.0"
+# Floors for the classpaths of build tools, raised past known vulnerabilities.
+tooling-jackson = "2.22.3"
+tooling-bouncycastle = "1.85"
+
+[libraries]
+kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+kreate-gradle-plugin = { module = "com.davils.kreate:com.davils.kreate.gradle.plugin", version.ref = "kreate" }
+kore-core = { module = "com.davils:kore-core", version.ref = "kore" }
+kore-testing = { module = "com.davils:kore-testing", version.ref = "kore" }
+konfetti-core = { module = "com.davils:konfetti-core", version.ref = "konfetti" }
+konfetti-testing = { module = "com.davils:konfetti-testing", version.ref = "konfetti" }
+kollect-core = { module = "com.davils:kollect-core", version.ref = "kollect" }
+kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
+kotlinx-io-bytestring = { module = "org.jetbrains.kotlinx:kotlinx-io-bytestring", version.ref = "kotlinx-io" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
+
+[bundles]
+build-logic = [
+    "kotlin-gradle-plugin",
+    "kreate-gradle-plugin"
+]
