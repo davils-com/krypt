@@ -118,6 +118,7 @@ public final class com/davils/krypt/core/SecretText$Companion {
 
 public final class com/davils/krypt/core/algorithm/AeadAlgorithm : java/lang/Enum, com/davils/krypt/core/algorithm/Algorithm {
 	public static final field Aes128Gcm Lcom/davils/krypt/core/algorithm/AeadAlgorithm;
+	public static final field Aes192Gcm Lcom/davils/krypt/core/algorithm/AeadAlgorithm;
 	public static final field Aes256Gcm Lcom/davils/krypt/core/algorithm/AeadAlgorithm;
 	public static final field ChaCha20Poly1305 Lcom/davils/krypt/core/algorithm/AeadAlgorithm;
 	public fun getAlgorithmName ()Ljava/lang/String;
@@ -288,6 +289,7 @@ public final class com/davils/krypt/core/algorithm/KeyType : java/lang/Enum {
 
 public final class com/davils/krypt/core/algorithm/KeyWrapAlgorithm : java/lang/Enum, com/davils/krypt/core/algorithm/Algorithm {
 	public static final field Aes128Kw Lcom/davils/krypt/core/algorithm/KeyWrapAlgorithm;
+	public static final field Aes192Kw Lcom/davils/krypt/core/algorithm/KeyWrapAlgorithm;
 	public static final field Aes256Kw Lcom/davils/krypt/core/algorithm/KeyWrapAlgorithm;
 	public fun getAlgorithmName ()Ljava/lang/String;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;

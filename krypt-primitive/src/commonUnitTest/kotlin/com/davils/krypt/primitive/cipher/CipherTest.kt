@@ -19,6 +19,7 @@ package com.davils.krypt.primitive.cipher
 import com.davils.krypt.core.algorithm.AeadAlgorithm
 import com.davils.krypt.core.algorithm.AsymmetricEncryptionAlgorithm
 import com.davils.krypt.core.algorithm.KeyType
+import com.davils.krypt.core.algorithm.KeyWrapAlgorithm
 import com.davils.krypt.primitive.fixture.crypto
 import com.davils.krypt.primitive.fixture.hex
 import com.davils.krypt.primitive.fixture.hexOf
@@ -43,6 +44,9 @@ private const val GCM_SEALED: String =
 private const val KEK: String = "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f"
 private const val WRAPPED_DATA: String = "00112233445566778899aabbccddeeff000102030405060708090a0b0c0d0e0f"
 private const val WRAPPED: String = "28c9f404c4b810f4cbccb35cfb87f8263f5786e2d80ed326cbc7f0e71a99f43bfb988b9b7a02dd21"
+private const val KEK_192: String = "000102030405060708090a0b0c0d0e0f1011121314151617"
+private const val WRAPPED_128: String = "00112233445566778899aabbccddeeff"
+private const val WRAPPED_BY_192: String = "96778b25ae6ca435f92b5b97c050aed2468ab8a17ad84e5d"
 private const val CHACHA_KEY: String = "808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9f"
 private const val CHACHA_NONCE: String = "070000004041424344454647"
 private const val CHACHA_AAD: String = "50515253c0c1c2c3c4c5c6c7"
@@ -151,6 +155,23 @@ class CipherTest : FunSpec({
                 wrapped = hex(WRAPPED),
             )
         }
+    }
+
+    test("AES-192 wraps by RFC 3394 section 4.2 and seals with GCM where the platform has it") {
+        val kek = SecretKey(secret(KEK_192))
+        val isWrapping = crypto.capabilities.supports(KeyWrapAlgorithm.Aes192Kw)
+        val wrapped = kek.takeIf { isWrapping }?.let { found ->
+            crypto.keyWraps.wrap(kek = found, key = secret(WRAPPED_128), algorithm = KeyWrapAlgorithm.Aes192Kw)
+        }
+        wrapped?.let { found -> hexOf(found) shouldBe WRAPPED_BY_192 }
+        val isSealing = crypto.capabilities.supports(AeadAlgorithm.Aes192Gcm)
+        val box = kek.takeIf { isSealing }?.let { found ->
+            crypto.aead.seal(key = found, plaintext = utf8(MESSAGE), algorithm = AeadAlgorithm.Aes192Gcm)
+        }
+        val opened = box?.let { found ->
+            crypto.aead.open(key = kek, box = found, algorithm = AeadAlgorithm.Aes192Gcm)
+        }
+        opened?.let { plain -> hexOf(plain) } shouldBe box?.let { hexOf(utf8(MESSAGE)) }
     }
 
     test("RSA-OAEP encrypts a key for the holder of the private key") {

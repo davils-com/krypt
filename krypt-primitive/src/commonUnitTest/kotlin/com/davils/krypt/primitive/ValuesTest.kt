@@ -63,6 +63,9 @@ class ValuesTest : FunSpec({
         suite shouldNotBe HpkeSuite(KemAlgorithm.DhkemP256, KdfAlgorithm.HkdfSha256, AeadAlgorithm.Aes256Gcm)
         suite shouldNotBe HpkeSuite(KemAlgorithm.DhkemX25519, KdfAlgorithm.HkdfSha256, AeadAlgorithm.Aes128Gcm)
         suite.toString() shouldBe "HpkeSuite(DHKEM(X25519, HKDF-SHA256), HKDF-SHA-256, AES-256-GCM)"
+        shouldThrow<IllegalArgumentException> {
+            HpkeSuite(KemAlgorithm.DhkemX25519, KdfAlgorithm.HkdfSha256, AeadAlgorithm.Aes192Gcm)
+        }
     }
 
     test("agreements, derivations and digests refuse what does not fit") {

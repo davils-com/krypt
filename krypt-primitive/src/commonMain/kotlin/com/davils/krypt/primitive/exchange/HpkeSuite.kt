@@ -29,12 +29,13 @@ import com.davils.krypt.core.algorithm.KemAlgorithm
  * @property kem the KEM.
  * @property kdf the KDF, an HKDF.
  * @property aead the AEAD, or null for a context that only exports secrets.
- * @throws IllegalArgumentException if [kdf] is not an HKDF.
+ * @throws IllegalArgumentException if [kdf] is not an HKDF or [aead] is AES-192-GCM, which HPKE does not name.
  * @since 1.0.0
  */
 public class HpkeSuite(public val kem: KemAlgorithm, public val kdf: KdfAlgorithm, public val aead: AeadAlgorithm?) {
     init {
         require(!kdf.isPasswordBased) { "HPKE derives keys with HKDF, not ${kdf.algorithmName}" }
+        require(aead != AeadAlgorithm.Aes192Gcm) { "HPKE of RFC 9180 has no identifier for AES-192-GCM" }
     }
 
     /**

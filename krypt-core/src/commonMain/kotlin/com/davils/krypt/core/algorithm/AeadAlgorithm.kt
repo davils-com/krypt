@@ -78,4 +78,18 @@ public enum class AeadAlgorithm(
         tagBytes = 16,
         isFipsApproved = false,
     ),
+
+    /**
+     * AES-192 in GCM of NIST SP 800-38D, for formats such as COSE and JOSE that name it; WebCrypto of a browser may
+     * lack it, which the capabilities tell.
+     *
+     * @since 1.0.0
+     */
+    Aes192Gcm(
+        algorithmName = "AES-192-GCM",
+        securityBits = 192,
+        keyBytes = 24,
+        nonceBytes = 12,
+        tagBytes = 16,
+    ),
 }

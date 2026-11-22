@@ -61,6 +61,7 @@ internal object WebCryptoParameters {
     fun aead(algorithm: AeadAlgorithm): String = when (algorithm) {
         AeadAlgorithm.Aes128Gcm -> WebCryptoNames.AES_GCM
         AeadAlgorithm.Aes256Gcm -> WebCryptoNames.AES_GCM
+        AeadAlgorithm.Aes192Gcm -> WebCryptoNames.AES_GCM
         AeadAlgorithm.ChaCha20Poly1305 -> WebCryptoNames.CHACHA
     }
 }
