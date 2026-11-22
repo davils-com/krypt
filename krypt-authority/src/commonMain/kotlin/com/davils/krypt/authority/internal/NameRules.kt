@@ -22,6 +22,9 @@ import com.davils.krypt.x509.name.GeneralName
 import kotlin.reflect.KClass
 
 private const val WILDCARD: String = "*."
+private const val MAXIMUM_NAME: Int = 253
+private const val MAXIMUM_LABEL: Int = 63
+private const val MINIMUM_WILDCARD_LABELS: Int = 2
 
 internal object NameRules {
     private val KINDS: Map<KClass<out GeneralName>, NameKind> = mapOf(
@@ -44,8 +47,17 @@ internal object NameRules {
     private fun isDnsPermitted(name: String, policy: IssuancePolicy): Boolean {
         val isWildcard = name.startsWith(WILDCARD)
         val base = name.removePrefix(WILDCARD)
+        val labels = base.split('.')
+        val isWildcardValid = !isWildcard || (policy.isWildcardAllowed && labels.size >= MINIMUM_WILDCARD_LABELS)
+        val isSyntaxValid = name.length <= MAXIMUM_NAME && labels.all { label -> isLabel(label) }
         val isInDomain = policy.dnsDomains.isEmpty() || policy.dnsDomains.any { domain -> isWithin(base, domain) }
-        return isInDomain && (!isWildcard || policy.isWildcardAllowed)
+        return isSyntaxValid && isWildcardValid && isInDomain
+    }
+
+    private fun isLabel(label: String): Boolean {
+        val isLength = label.length in 1..MAXIMUM_LABEL
+        val isLdh = label.all { char -> char in 'a'..'z' || char in '0'..'9' || char == '-' }
+        return isLength && isLdh && !label.startsWith('-') && !label.endsWith('-')
     }
 
     private fun isEmailPermitted(address: String, policy: IssuancePolicy): Boolean {
@@ -54,7 +66,12 @@ internal object NameRules {
     }
 
     private fun isUriPermitted(uri: String, policy: IssuancePolicy): Boolean =
-        policy.uriPrefixes.isEmpty() || policy.uriPrefixes.any { prefix -> uri.startsWith(prefix) }
+        policy.uriPrefixes.isEmpty() || policy.uriPrefixes.any { prefix -> isBelow(uri = uri, prefix = prefix) }
+
+    private fun isBelow(uri: String, prefix: String): Boolean {
+        val isBoundary = prefix.endsWith('/') || uri.getOrNull(prefix.length) == '/'
+        return uri == prefix || (uri.startsWith(prefix) && isBoundary)
+    }
 
     private fun isWithin(name: String, domain: String): Boolean = name == domain || name.endsWith(".$domain")
 }
