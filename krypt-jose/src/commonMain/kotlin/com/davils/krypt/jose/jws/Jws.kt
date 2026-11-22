@@ -134,8 +134,9 @@ public class Jws(public val crypto: Crypto, public val limits: JoseLimits = Jose
      * Reads a JWS in the compact or the JSON serialization, without verifying it.
      *
      * The headers must be JSON objects within [limits], every member of a known name must have its type, protected
-     * and unprotected headers share no member, `b64` must be protected and the same for every signature, and a JSON
-     * serialization carries at most [JoseLimits.maximumRecipients] signatures.
+     * and unprotected headers share no member, `b64` must be protected and the same for every signature, a `b64` of
+     * false must be listed in `crit` as RFC 7797 section 6 asks, and a JSON serialization carries at most
+     * [JoseLimits.maximumRecipients] signatures.
      *
      * @param text the serialization, possibly from an attacker.
      * @return the message, or why it was refused.

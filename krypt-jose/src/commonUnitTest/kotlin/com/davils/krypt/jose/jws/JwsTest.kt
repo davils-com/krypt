@@ -387,6 +387,8 @@ class JwsTest : FunSpec({
             token("""{"alg":"HS256","crit":[1]}"""),
             token("""{"alg":"HS256","x5c":[]}"""),
             token("""{"alg":"HS256","b64":"no"}"""),
+            token("""{"alg":"HS256","b64":false}"""),
+            token("""{"alg":"HS256","b64":false,"crit":["exp"],"exp":1}"""),
             token("""{"alg":"HS256","p2c":"1"}"""),
             token("""{"alg":"HS256","epk":1}"""),
             token("""{"alg":"HS256","jwk":[]}"""),
