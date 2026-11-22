@@ -17,6 +17,7 @@
 package com.davils.krypt.x509.internal
 
 import com.davils.krypt.asn1.DerInteger
+import com.davils.krypt.asn1.ObjectIdentifier
 import com.davils.krypt.core.algorithm.SignatureAlgorithm
 import com.davils.krypt.x509.crl.IssuingDistributionPoint
 import com.davils.krypt.x509.crl.RevokedCertificate
@@ -35,6 +36,7 @@ internal data class CrlParts(
     val deltaOf: DerInteger?,
     val issuingDistributionPoint: IssuingDistributionPoint?,
     val extensions: Extensions,
+    val unknownCritical: List<ObjectIdentifier>,
     val entries: List<RevokedCertificate>,
     val tbs: ByteString,
 )
