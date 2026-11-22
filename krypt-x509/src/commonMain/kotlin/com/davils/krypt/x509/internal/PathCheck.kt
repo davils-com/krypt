@@ -16,6 +16,8 @@
 
 package com.davils.krypt.x509.internal
 
+import com.davils.kore.core.failure.attempted
+import com.davils.krypt.asn1.ObjectIdentifier
 import com.davils.krypt.core.policy.AlgorithmUse
 import com.davils.krypt.primitive.Crypto
 import com.davils.krypt.primitive.key.PublicKey
@@ -38,11 +40,21 @@ internal class PathCheck(
     private val revocation: RevocationChecker?,
     private val parameters: ValidationParameters,
     private val at: Instant,
+    private val budget: PathBudget,
+    private val maximumPolicyNodes: Int,
 ) {
     suspend fun check(path: List<Certificate>, anchor: TrustAnchor): PathValidation = try {
         run(path, anchor)
     } catch (refusal: PathRefusal) {
-        PathValidation.Invalid(refusal.failure, refusal.certificate)
+        PathValidation.Invalid(refusal)
+    }
+
+    fun checkAnchored(leaf: Certificate, anchor: TrustAnchor): PathValidation = try {
+        ensure(leaf.isValidAt(at), PathFailure.Expired, leaf)
+        checkLeaf(leaf)
+        PathValidation.Valid(ValidPath(path = listOf(leaf), anchor = anchor, policies = emptySet()))
+    } catch (refusal: PathRefusal) {
+        PathValidation.Invalid(refusal)
     }
 
     private suspend fun run(path: List<Certificate>, anchor: TrustAnchor): PathValidation.Valid {
@@ -53,7 +65,7 @@ internal class PathCheck(
             issuer = anchor.certificate,
             remaining = ordered.size,
             constraints = listOfNotNull(anchor.nameConstraints).toMutableList(),
-            policies = PolicyState(parameters, ordered.size),
+            policies = PolicyState(parameters = parameters, length = ordered.size, maximumNodes = maximumPolicyNodes),
         )
         ordered.forEachIndexed { index, certificate ->
             val isLast = index == ordered.size - 1
@@ -64,13 +76,14 @@ internal class PathCheck(
             }
         }
         val policies = state.policies.finish(ordered.last()) ?: throw PathRefusal(PathFailure.Policy, ordered.last())
-        return PathValidation.Valid(path = path, anchor = anchor, policies = policies)
+        return PathValidation.Valid(ValidPath(path = path, anchor = anchor, policies = policies))
     }
 
     private suspend fun checkBasics(certificate: Certificate, state: State, anchor: TrustAnchor, isLast: Boolean) {
         val algorithm = certificate.signatureAlgorithm
         val isPermitted = algorithm != null && crypto.environment.policy.permits(algorithm, AlgorithmUse.Verify)
         ensure(isPermitted, PathFailure.AlgorithmNotPermitted, certificate)
+        ensure(budget.spend(), PathFailure.NoTrustedPath, certificate)
         val verification = SignatureChecks.verify(
             crypto = crypto,
             algorithm = algorithm,
@@ -93,7 +106,10 @@ internal class PathCheck(
     }
 
     private suspend fun checkRevocation(certificate: Certificate, issuer: Certificate?, anchor: TrustAnchor) {
-        val status = revocation?.check(certificate = certificate, issuer = issuer, anchor = anchor, at = at)
+        val checker = revocation ?: return
+        ensure(budget.spend(), PathFailure.NoTrustedPath, certificate)
+        val outcome = attempted { checker.check(certificate = certificate, issuer = issuer, anchor = anchor, at = at) }
+        val status = outcome.getOrNull() ?: RevocationStatus.Unknown
         ensure(status != RevocationStatus.Revoked, PathFailure.Revoked, certificate)
         val isKnown = status != RevocationStatus.Unknown || !parameters.isRevocationRequired
         ensure(isKnown, PathFailure.RevocationUnknown, certificate)
@@ -105,6 +121,10 @@ internal class PathCheck(
         val purpose = parameters.purpose
         val isAllowed = purpose == null || purposes == null || purpose in purposes
         ensure(isAllowed, PathFailure.Purpose, certificate)
+        val usages = certificate.extensions.keyUsage
+        val required = LEAF_USAGES[purpose].orEmpty()
+        val isUsable = usages == null || required.isEmpty() || usages.any { usage -> usage in required }
+        ensure(isUsable, PathFailure.KeyUsage, certificate)
     }
 
     private fun prepareNext(certificate: Certificate, state: State) {
@@ -135,4 +155,11 @@ internal class PathCheck(
         val constraints: MutableList<NameConstraints>,
         val policies: PolicyState,
     )
+
+    private companion object {
+        val LEAF_USAGES: Map<ObjectIdentifier, Set<KeyUsage>> = mapOf(
+            KeyPurposes.ServerAuth to setOf(KeyUsage.DigitalSignature, KeyUsage.KeyEncipherment, KeyUsage.KeyAgreement),
+            KeyPurposes.ClientAuth to setOf(KeyUsage.DigitalSignature, KeyUsage.KeyAgreement),
+        )
+    }
 }

@@ -21,76 +21,69 @@ import com.davils.krypt.x509.X509Limits
 import com.davils.krypt.x509.path.PathFailure
 import com.davils.krypt.x509.path.PathValidation
 import com.davils.krypt.x509.path.TrustAnchor
+import kotlinx.io.bytestring.ByteString
 
 internal class PathSearch(
     private val anchors: List<TrustAnchor>,
     private val pool: List<Certificate>,
     private val limits: X509Limits,
+    private val budget: PathBudget,
 ) {
-    private var attempts = 0
     private var closest: PathValidation.Invalid? = null
     private var closestLength = 0
 
-    suspend fun search(
-        leaf: Certificate,
-        check: suspend (List<Certificate>, TrustAnchor) -> PathValidation,
-    ): PathValidation {
+    suspend fun search(leaf: Certificate, check: PathCheck): PathValidation {
         val trusted = anchors.firstOrNull { anchor -> anchor.certificate == leaf }
-        val direct = trusted?.let { anchor ->
-            PathValidation.Valid(
-                path = listOf(leaf),
-                anchor = anchor,
-                policies = emptySet(),
-            )
-        }
-        return direct ?: extend(
-            listOf(leaf),
-            check,
-        ) ?: closest ?: PathValidation.Invalid(PathFailure.NoTrustedPath, leaf)
+        val direct = trusted?.let { anchor -> check.checkAnchored(leaf, anchor) }
+        record(result = direct, length = 1)
+        return direct as? PathValidation.Valid
+            ?: extend(listOf(leaf), check)
+            ?: closest
+            ?: PathValidation.Invalid(PathRefusal(PathFailure.NoTrustedPath, leaf))
     }
 
-    private suspend fun extend(
-        path: List<Certificate>,
-        check: suspend (List<Certificate>, TrustAnchor) -> PathValidation,
-    ): PathValidation.Valid? {
+    private suspend fun extend(path: List<Certificate>, check: PathCheck): PathValidation.Valid? {
         val last = path.last()
         val issuing = anchors.filter { anchor -> anchor.name == last.issuer }
-        val direct = issuing.firstNotNullOfOrNull { anchor -> attempt(path, anchor, check) }
+        val direct = issuing.firstNotNullOfOrNull { anchor -> attempt(path = path, anchor = anchor, check = check) }
         val isGrowable = direct == null && path.size < limits.maximumPathLength
-        val issuers = pool.filter { candidate -> isIssuerOf(candidate, last) && candidate !in path }
-        val candidates = issuers.takeIf { isGrowable }
-        return direct ?: candidates?.firstNotNullOfOrNull { issuer -> grown(path + issuer, check) }
+        val issuers = candidatesOf(last).filter { candidate -> candidate !in path }
+        val candidates = issuers.takeIf { isGrowable }.orEmpty()
+        return direct ?: candidates.firstNotNullOfOrNull { issuer -> grown(path = path + issuer, check = check) }
     }
 
-    private suspend fun grown(
-        path: List<Certificate>,
-        check: suspend (List<Certificate>, TrustAnchor) -> PathValidation,
-    ): PathValidation.Valid? {
-        val found = extend(path, check)
-        return found.takeIf { hasBudget() }
-    }
-
-    private suspend fun attempt(
-        path: List<Certificate>,
-        anchor: TrustAnchor,
-        check: suspend (List<Certificate>, TrustAnchor) -> PathValidation,
-    ): PathValidation.Valid? {
-        attempts++
-        val result = check(path, anchor).takeIf { hasBudget() }
-        val invalid = result as? PathValidation.Invalid
-        if (invalid != null && path.size >= closestLength) {
-            closest = invalid
-            closestLength = path.size
+    private suspend fun grown(path: List<Certificate>, check: PathCheck): PathValidation.Valid? =
+        when (budget.spend()) {
+            true -> extend(path, check)
+            false -> null
         }
+
+    private suspend fun attempt(path: List<Certificate>, anchor: TrustAnchor, check: PathCheck): PathValidation.Valid? {
+        val result = check.check(path, anchor)
+        val counted = result.takeUnless { budget.isSpent }
+        record(result = counted, length = path.size)
         return result as? PathValidation.Valid
     }
 
-    private fun hasBudget(): Boolean = attempts <= limits.maximumPathAttempts
+    private fun record(result: PathValidation?, length: Int) {
+        val invalid = result as? PathValidation.Invalid
+        if (invalid != null && length >= closestLength) {
+            closest = invalid
+            closestLength = length
+        }
+    }
 
-    private fun isIssuerOf(candidate: Certificate, child: Certificate): Boolean {
+    private fun candidatesOf(child: Certificate): List<Certificate> {
         val authorityKey = child.extensions.authorityKeyIdentifier?.keyIdentifier
+        val issuers = pool.filter { candidate -> isIssuerOf(candidate = candidate, child = child, key = authorityKey) }
+        val matching = issuers.filter { candidate -> candidate.extensions.subjectKeyIdentifier == authorityKey }
+        val named = matching.takeIf { authorityKey != null }.orEmpty()
+        return named + issuers.filter { candidate -> candidate !in named }
+    }
+
+    private fun isIssuerOf(candidate: Certificate, child: Certificate, key: ByteString?): Boolean {
         val subjectKey = candidate.extensions.subjectKeyIdentifier
-        val isKeyMatching = authorityKey == null || subjectKey == null || authorityKey == subjectKey
+        val isKeyMatching = key == null || subjectKey == null || key == subjectKey
         return candidate.subject == child.issuer && isKeyMatching
     }
 }
