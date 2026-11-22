@@ -12,6 +12,7 @@ open annotation class com.davils.krypt.core/LegacyCryptography : kotlin/Annotati
 
 final enum class com.davils.krypt.core.algorithm/AeadAlgorithm : com.davils.krypt.core.algorithm/Algorithm, kotlin/Enum<com.davils.krypt.core.algorithm/AeadAlgorithm> { // com.davils.krypt.core.algorithm/AeadAlgorithm|null[0]
     enum entry Aes128Gcm // com.davils.krypt.core.algorithm/AeadAlgorithm.Aes128Gcm|null[0]
+    enum entry Aes192Gcm // com.davils.krypt.core.algorithm/AeadAlgorithm.Aes192Gcm|null[0]
     enum entry Aes256Gcm // com.davils.krypt.core.algorithm/AeadAlgorithm.Aes256Gcm|null[0]
     enum entry ChaCha20Poly1305 // com.davils.krypt.core.algorithm/AeadAlgorithm.ChaCha20Poly1305|null[0]
 
@@ -252,6 +253,7 @@ final enum class com.davils.krypt.core.algorithm/KeyType : kotlin/Enum<com.davil
 
 final enum class com.davils.krypt.core.algorithm/KeyWrapAlgorithm : com.davils.krypt.core.algorithm/Algorithm, kotlin/Enum<com.davils.krypt.core.algorithm/KeyWrapAlgorithm> { // com.davils.krypt.core.algorithm/KeyWrapAlgorithm|null[0]
     enum entry Aes128Kw // com.davils.krypt.core.algorithm/KeyWrapAlgorithm.Aes128Kw|null[0]
+    enum entry Aes192Kw // com.davils.krypt.core.algorithm/KeyWrapAlgorithm.Aes192Kw|null[0]
     enum entry Aes256Kw // com.davils.krypt.core.algorithm/KeyWrapAlgorithm.Aes256Kw|null[0]
 
     final val algorithmName // com.davils.krypt.core.algorithm/KeyWrapAlgorithm.algorithmName|{}algorithmName[0]

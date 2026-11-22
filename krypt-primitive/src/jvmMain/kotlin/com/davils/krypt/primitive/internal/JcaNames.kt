@@ -42,6 +42,8 @@ internal object JcaNames {
     private const val RSA_PSS: String = "RSASSA-PSS"
     private const val EC: String = "EC"
     private const val RSA_OAEP: String = "RSA/ECB/OAEPPadding"
+    private const val AES_GCM: String = "AES/GCM/NoPadding"
+    private const val AES: String = "AES"
 
     private val PAIR_GENERATORS: Map<KeyFamily, String> = mapOf(KeyFamily.Ec to EC, KeyFamily.Rsa to "RSA")
 
@@ -123,20 +125,23 @@ internal object JcaNames {
     }
 
     fun aead(algorithm: AeadAlgorithm): String = when (algorithm) {
-        AeadAlgorithm.Aes128Gcm -> "AES/GCM/NoPadding"
-        AeadAlgorithm.Aes256Gcm -> "AES/GCM/NoPadding"
+        AeadAlgorithm.Aes128Gcm -> AES_GCM
+        AeadAlgorithm.Aes256Gcm -> AES_GCM
+        AeadAlgorithm.Aes192Gcm -> AES_GCM
         AeadAlgorithm.ChaCha20Poly1305 -> "ChaCha20-Poly1305"
     }
 
     fun aeadKey(algorithm: AeadAlgorithm): String = when (algorithm) {
-        AeadAlgorithm.Aes128Gcm -> "AES"
-        AeadAlgorithm.Aes256Gcm -> "AES"
+        AeadAlgorithm.Aes128Gcm -> AES
+        AeadAlgorithm.Aes256Gcm -> AES
+        AeadAlgorithm.Aes192Gcm -> AES
         AeadAlgorithm.ChaCha20Poly1305 -> "ChaCha20"
     }
 
     fun aeadSpec(algorithm: AeadAlgorithm, nonce: ByteArray): AlgorithmParameterSpec = when (algorithm) {
         AeadAlgorithm.Aes128Gcm -> GCMParameterSpec(TAG_BITS, nonce)
         AeadAlgorithm.Aes256Gcm -> GCMParameterSpec(TAG_BITS, nonce)
+        AeadAlgorithm.Aes192Gcm -> GCMParameterSpec(TAG_BITS, nonce)
         AeadAlgorithm.ChaCha20Poly1305 -> IvParameterSpec(nonce)
     }
 

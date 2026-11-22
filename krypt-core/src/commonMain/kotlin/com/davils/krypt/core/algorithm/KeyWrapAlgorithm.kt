@@ -56,4 +56,16 @@ public enum class KeyWrapAlgorithm(
         securityBits = 256,
         keyBytes = 32,
     ),
+
+    /**
+     * AES-192 key wrap of RFC 3394, for formats such as COSE and JOSE that name it; WebCrypto of a browser may lack
+     * it, which the capabilities tell.
+     *
+     * @since 1.0.0
+     */
+    Aes192Kw(
+        algorithmName = "AES-192-KW",
+        securityBits = 192,
+        keyBytes = 24,
+    ),
 }

@@ -27,9 +27,10 @@ kollect 1.0.0. The code comes from the security library of an internal Davils pr
 - **The primitives** behind one `Crypto` facade over JCA with a selectable provider and over WebCrypto: key generation
   and SPKI, PKCS #8, PKCS #1 and SEC 1 keys, encrypted PKCS #8 with PBES2 and bounded iterations, keys of a JCA
   provider such as an HSM, fingerprints and a proof that two keys form a pair; SHA-2 and SHA-3 digests, HMAC, HKDF and
-  PBKDF2; AES-GCM and ChaCha20-Poly1305 with sealed boxes, AES key wrap and RSA-OAEP; Ed25519, Ed448, ECDSA, RSA-PSS,
-  RSA PKCS #1 and ML-DSA signatures in DER and raw form; X25519, X448 and ECDH key agreement, ML-KEM and DHKEM, HPKE of
-  RFC 9180 in every mode; password hashing with PBKDF2 in the PHC format; and the capabilities of the platform.
+  PBKDF2; AES-GCM and ChaCha20-Poly1305 with sealed boxes, AES key wrap and RSA-OAEP, AES-192 included; Ed25519,
+  Ed448, ECDSA, RSA-PSS, RSA PKCS #1 and ML-DSA signatures in DER and raw form; X25519, X448 and ECDH key agreement,
+  ML-KEM and DHKEM, HPKE of RFC 9180 in every mode; password hashing with PBKDF2 in the PHC format; and the
+  capabilities of the platform.
 - **Key sets**: keys with ids, a primary key and the lifecycle enabled, disabled and destroyed; rotation, staged keys
   and promotion; authenticated encryption, MACs, signatures and HPKE that name their key in every output; keys derived
   per purpose with HKDF; envelope encryption; key management services over a master key, a key set or, on the JVM, a
@@ -84,4 +85,11 @@ kollect 1.0.0. The code comes from the security library of an internal Davils pr
   with one failure for every wrong key; encrypted data; and RFC 3161 time stamps with requests, verified responses,
   the logic of an authority and signature time stamps. Every message is read as strict DER within limits. PBKDF2 with
   HMAC-SHA-1 of krypt-primitive reads the password recipients OpenSSL writes, behind `@LegacyCryptography`.
+- **COSE**: a strict, bounded CBOR codec that writes the deterministic encoding of RFC 8949 and refuses every other
+  encoding by default; COSE_Sign1, COSE_Sign, COSE_Mac0, COSE_Mac, COSE_Encrypt0 and COSE_Encrypt by RFC 9052, tagged
+  or untagged, with detached content, external data, crit and the certificates of RFC 9360; ECDSA, EdDSA and the fully
+  specified algorithms of RFC 9864, RSA-PSS, HMAC, AES-GCM and ChaCha20-Poly1305, and recipients by direct keys, AES
+  key wrap and ECDH-ES with HKDF; verification and decryption with an explicit allowlist of algorithms and one failure
+  for every wrong key or tag; COSE_Key and COSE_KeySet with thumbprints by RFC 9679; and CBOR Web Tokens by RFC 8392,
+  validated by a DSL of algorithms, issuer, audience, required claims and clock skew.
 - **Test support**: deterministic and replayed randomness, an audit log and test environments.

@@ -194,8 +194,15 @@ kreate {
                 note = "Octet key pairs in JOSE: Ed25519, Ed448, X25519 and X448 keys, EdDSA signatures and ECDH-ES " +
                     "in krypt-jose."
             }
+            rfc(8230) {
+                note = "RSA in COSE: the PS256, PS384 and PS512 signatures and the RSA key type of krypt-cose."
+            }
             rfc(8259) {
                 note = "JSON: the bounded and strict parser and writer of krypt-jose."
+            }
+            rfc(8392) {
+                note = "CBOR Web Tokens: claims signed, MACed or encrypted by krypt-cose and validated with an " +
+                    "allowlist of algorithms, the issuer, the audience, required claims and a clock skew."
             }
             rfc(8418) {
                 note = "X25519 and X448 key agreement in CMS with HKDF: recipients of krypt-cms where the platform " +
@@ -214,12 +221,27 @@ kreate {
                 note = "The JWT best current practice: allowlists, explicit typing and the claim checks of the token " +
                     "validator of krypt-jose."
             }
+            rfc(8949) {
+                note = "CBOR: the strict, bounded codec of krypt-cose writes the core deterministic encoding and " +
+                    "refuses every other encoding by default."
+            }
+            rfc(9052) {
+                note = "COSE structures: Sign1, Sign, Mac0, Mac, Encrypt0 and Encrypt with recipients, headers, crit " +
+                    "and COSE_Key, checked against the examples of the COSE working group."
+            }
+            rfc(9053) {
+                note = "COSE algorithms: ECDSA, EdDSA, HMAC, AES-GCM, ChaCha20-Poly1305, direct, AES key wrap and " +
+                    "ECDH-ES with HKDF and the COSE_KDF_Context in krypt-cose."
+            }
             rfc(9180) {
                 note = "HPKE: every mode in common code over the DHKEMs, HKDF and the AEADs, checked against its " +
                     "test vectors."
             }
             rfc(9278) {
                 note = "JWK thumbprint URIs, computed by krypt-jose."
+            }
+            rfc(9360) {
+                note = "X.509 in COSE: the x5chain and x5t header parameters of krypt-cose."
             }
             rfc(9525) {
                 note = "Service identity in TLS: the host name and IP address checks of krypt-x509, applied by " +
@@ -234,6 +256,9 @@ kreate {
             rfc(9654) {
                 note = "The OCSP nonce: 32 to 128 random bytes in a request, 1 to 128 bytes read, echoed by the " +
                     "responder."
+            }
+            rfc(9679) {
+                note = "COSE Key Thumbprints: the deterministic hash of the required parameters of a COSE_Key."
             }
             rfc(9864) {
                 note = "Fully specified algorithms for JOSE: the Ed25519 and Ed448 signature algorithms of " +

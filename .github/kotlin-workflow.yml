@@ -38,6 +38,7 @@ check:
       - ":krypt-jose:clean"
       - ":krypt-tls:clean"
       - ":krypt-cms:clean"
+      - ":krypt-cose:clean"
       - ":krypt-testing:clean"
     tasks:
       - ":krypt-core:jvmJar"
@@ -54,6 +55,7 @@ check:
       - ":krypt-jose:jvmJar"
       - ":krypt-tls:jar"
       - ":krypt-cms:jvmJar"
+      - ":krypt-cose:jvmJar"
       - ":krypt-testing:jvmJar"
     artifacts:
       - "krypt-core/build/libs/*.jar"
@@ -70,6 +72,7 @@ check:
       - "krypt-jose/build/libs/*.jar"
       - "krypt-tls/build/libs/*.jar"
       - "krypt-cms/build/libs/*.jar"
+      - "krypt-cose/build/libs/*.jar"
       - "krypt-testing/build/libs/*.jar"
 
 policy:
@@ -113,6 +116,7 @@ publish:
     - ":krypt-jose:publishAllPublicationsToDavilsRepository"
     - ":krypt-tls:publishAllPublicationsToDavilsRepository"
     - ":krypt-cms:publishAllPublicationsToDavilsRepository"
+    - ":krypt-cose:publishAllPublicationsToDavilsRepository"
     - ":krypt-testing:publishAllPublicationsToDavilsRepository"
     - ":krypt-bom:publishAllPublicationsToDavilsRepository"
 
@@ -245,6 +249,15 @@ release:
       - path: com/davils/krypt-cms
         artifact: krypt-cms
         task: ":krypt-cms:publishKotlinMultiplatformPublicationToDavilsRepository"
+      - path: com/davils/krypt-cose-jvm
+        artifact: krypt-cose-jvm
+        task: ":krypt-cose:publishJvmPublicationToDavilsRepository"
+      - path: com/davils/krypt-cose-wasm-js
+        artifact: krypt-cose-wasm-js
+        task: ":krypt-cose:publishWasmJsPublicationToDavilsRepository"
+      - path: com/davils/krypt-cose
+        artifact: krypt-cose
+        task: ":krypt-cose:publishKotlinMultiplatformPublicationToDavilsRepository"
       - path: com/davils/krypt-testing-jvm
         artifact: krypt-testing-jvm
         task: ":krypt-testing:publishJvmPublicationToDavilsRepository"
@@ -286,6 +299,8 @@ release:
       - "krypt-tls/build/libs/*.jar"
       - "krypt-cms/build/libs/*.jar"
       - "krypt-cms/build/libs/*.klib"
+      - "krypt-cose/build/libs/*.jar"
+      - "krypt-cose/build/libs/*.klib"
       - "krypt-testing/build/libs/*.jar"
       - "krypt-testing/build/libs/*.klib"
   github-release:

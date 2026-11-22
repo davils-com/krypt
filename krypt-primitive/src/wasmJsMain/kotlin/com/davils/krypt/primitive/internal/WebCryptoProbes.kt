@@ -33,14 +33,17 @@ import com.davils.krypt.core.algorithm.MacAlgorithm
 import com.davils.krypt.core.algorithm.SignatureAlgorithm
 
 private const val PROBE_KEY: Int = 32
+private const val AES_192_KEY: Int = 24
+private const val ENCRYPT: String = "encrypt"
+private const val WRAP: String = "wrapKey"
 
 @OptIn(LegacyCryptography::class)
 internal object WebCryptoProbes {
     suspend fun supports(algorithm: Algorithm): Boolean = when (algorithm) {
         is DigestAlgorithm -> digest(algorithm)
         is MacAlgorithm -> true
-        is AeadAlgorithm -> algorithm != AeadAlgorithm.ChaCha20Poly1305 || chaCha()
-        is KeyWrapAlgorithm -> true
+        is AeadAlgorithm -> aead(algorithm)
+        is KeyWrapAlgorithm -> keyWrap(algorithm)
         is KdfAlgorithm -> true
         is SignatureAlgorithm -> signature(algorithm)
         is KeyAgreementAlgorithm -> agreement(algorithm.family, needsProbe = algorithm.curve == null)
@@ -65,15 +68,28 @@ internal object WebCryptoProbes {
         return attempt { digest(name, newBytes(0)).settled() } != null
     }
 
-    private suspend fun chaCha(): Boolean {
-        val algorithm = named(WebCryptoNames.CHACHA)
+    private suspend fun aead(algorithm: AeadAlgorithm): Boolean = when (algorithm) {
+        AeadAlgorithm.Aes128Gcm -> true
+        AeadAlgorithm.Aes256Gcm -> true
+        AeadAlgorithm.Aes192Gcm -> imports(WebCryptoNames.AES_GCM, AES_192_KEY, ENCRYPT)
+        AeadAlgorithm.ChaCha20Poly1305 -> imports(WebCryptoNames.CHACHA, PROBE_KEY, ENCRYPT)
+    }
+
+    private suspend fun keyWrap(algorithm: KeyWrapAlgorithm): Boolean = when (algorithm) {
+        KeyWrapAlgorithm.Aes128Kw -> true
+        KeyWrapAlgorithm.Aes256Kw -> true
+        KeyWrapAlgorithm.Aes192Kw -> imports(WebCryptoNames.AES_KW, AES_192_KEY, WRAP)
+    }
+
+    private suspend fun imports(name: String, size: Int, usage: String): Boolean {
+        val algorithm = named(name)
         return attempt {
             importKey(
                 f = "raw",
-                d = newBytes(PROBE_KEY),
+                d = newBytes(size),
                 a = algorithm,
                 e = false,
-                u = usages("encrypt"),
+                u = usages(usage),
             ).settled()
         } != null
     }

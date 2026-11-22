@@ -1012,6 +1012,20 @@
             }
         },
         {
+            "id": "rfc:8230",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-cose.",
+            "snapshot": {
+                "title": "Using RSA Algorithms with CBOR Object Signing and Encryption (COSE) Messages",
+                "status": "PROPOSED STANDARD",
+                "published": "September 2017",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
+            }
+        },
+        {
             "id": "rfc:8259",
             "reviewedOn": "2026-11-22",
             "note": "Reviewed for krypt-jose.",
@@ -1039,6 +1053,26 @@
                     "8622": "REJECTED",
                     "8874": "REJECTED",
                     "9095": "REPORTED"
+                }
+            }
+        },
+        {
+            "id": "rfc:8392",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-cose.",
+            "snapshot": {
+                "title": "CBOR Web Token (CWT)",
+                "status": "PROPOSED STANDARD",
+                "published": "May 2018",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "5710": "HELD",
+                    "5852": "HELD",
+                    "7982": "REPORTED",
+                    "8617": "REPORTED",
+                    "8655": "REPORTED"
                 }
             }
         },
@@ -1176,6 +1210,60 @@
             }
         },
         {
+            "id": "rfc:8949",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-cose.",
+            "snapshot": {
+                "title": "Concise Binary Object Representation (CBOR)",
+                "status": "INTERNET STANDARD",
+                "published": "December 2020",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "8589": "VERIFIED"
+                }
+            }
+        },
+        {
+            "id": "rfc:9052",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-cose.",
+            "snapshot": {
+                "title": "CBOR Object Signing and Encryption (COSE): Structures and Process",
+                "status": "INTERNET STANDARD",
+                "published": "August 2022",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [
+                    "RFC9338"
+                ],
+                "errata": {
+                    "8623": "REPORTED",
+                    "9219": "REPORTED",
+                    "9225": "VERIFIED"
+                }
+            }
+        },
+        {
+            "id": "rfc:9053",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-cose.",
+            "snapshot": {
+                "title": "CBOR Object Signing and Encryption (COSE): Initial Algorithms",
+                "status": "INFORMATIONAL",
+                "published": "August 2022",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [
+                    "RFC9864"
+                ],
+                "errata": {
+                    "8061": "REPORTED"
+                }
+            }
+        },
+        {
             "id": "rfc:9180",
             "reviewedOn": "2026-11-22",
             "note": "HPKE: every mode in common code over the DHKEMs, HKDF and the AEADs, checked against its test vectors.",
@@ -1206,6 +1294,20 @@
                 "title": "JWK Thumbprint URI",
                 "status": "PROPOSED STANDARD",
                 "published": "August 2022",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
+            }
+        },
+        {
+            "id": "rfc:9360",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-cose.",
+            "snapshot": {
+                "title": "CBOR Object Signing and Encryption (COSE): Header Parameters for Carrying and Referencing X.509 Certificates",
+                "status": "PROPOSED STANDARD",
+                "published": "February 2023",
                 "withdrawn": false,
                 "replacedBy": [],
                 "updatedBy": [],
@@ -1272,6 +1374,22 @@
                 "replacedBy": [],
                 "updatedBy": [],
                 "errata": {}
+            }
+        },
+        {
+            "id": "rfc:9679",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-cose.",
+            "snapshot": {
+                "title": "CBOR Object Signing and Encryption (COSE) Key Thumbprint",
+                "status": "PROPOSED STANDARD",
+                "published": "December 2024",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "8390": "REPORTED"
+                }
             }
         },
         {
