@@ -112,3 +112,17 @@ kollect 1.0.0. The code comes from the security library of an internal Davils pr
   against limits, and test support gains an in-memory ACME server.
 - **Test support**: deterministic and replayed randomness, an audit log, test environments and an in-memory ACME
   server.
+
+### Security
+
+- **Core, ASN.1 and primitives hardened after an audit**: a refusal of JCA or WebCrypto for a key or an input, such as
+  an HPKE encapsulation of small order or an RSA key JCA does not take, is the documented failure (null,
+  `Verification.Invalid` or a `CryptoException` without the message of the platform), never an exception of the
+  platform; RSA keys with a negative or even modulus, an exponent outside 3 to 2^256 or other than NULL parameters are
+  malformed; `Keys.decodePrivate` is suspending and refuses a PKCS #8 whose embedded public key does not belong to it,
+  and derives the public key of X25519 and X448, so `CoseKeys.decode` and `decodeSet` are suspending too; the key types
+  have private constructors only; `Cnsa2` permits exactly the CNSA 2.0 suite, with RSA for verification only; a policy
+  that demands a FIPS provider refuses to run without one; a key is generated only if the policy permits an algorithm
+  that uses it; the DER reader refuses an unsorted SET OF, with `readSetInAnyOrder` and `readListInAnyOrder` for the
+  SETs the JDK writes unsorted, and object identifiers padded with 0x80; passwords with an unpaired surrogate are
+  refused and PHC parameters must be canonical.
