@@ -92,4 +92,12 @@ kollect 1.0.0. The code comes from the security library of an internal Davils pr
   key wrap and ECDH-ES with HKDF; verification and decryption with an explicit allowlist of algorithms and one failure
   for every wrong key or tag; COSE_Key and COSE_KeySet with thumbprints by RFC 9679; and CBOR Web Tokens by RFC 8392,
   validated by a DSL of algorithms, issuer, audience, required claims and clock skew.
+- **SPIFFE**: SPIFFE ids and trust domains by a strict hand-written parser of the SPIFFE ID specification;
+  X.509-SVIDs checked by the rules of the X509-SVID specification and validated by RFC 5280 against the X.509
+  authorities of the bundle of their own trust domain only; JWT-SVIDs over krypt-jose, compact JWS with RSA, RSA-PSS
+  and ECDSA only, a required `kid` looked up in the bundle of the trust domain of `sub`, `aud`, `exp` and a bounded
+  clock skew, and their signing; SPIFFE bundles and bundle maps as JWK sets of RFC 7517 with `x509-svid` and
+  `jwt-svid` keys, `spiffe_sequence` and `spiffe_refresh_hint`, a bounded `BundleSet` per trust domain for
+  federation, `SvidSource` and `BundleSource` the application implements and an `X509Source` that swaps the SVIDs and
+  bundles it is pushed atomically and refuses rollbacks; and a `SpiffeAuthorizer` for mutual TLS in krypt-tls.
 - **Test support**: deterministic and replayed randomness, an audit log and test environments.
