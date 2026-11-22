@@ -19,14 +19,21 @@ correctness first.
 | `krypt-keyset` | `com.davils:krypt-keyset` | Key sets with ids, a primary key, rotation and a lifecycle; their primitives; envelope encryption; key management services; encrypted key sets in a vault |
 | `krypt-stream` | `com.davils:krypt-stream` | The `KRYPT/1` container for bulk data: segmented streaming encryption, random access, several recipients, key commitment, rewrapping, Merkle trees and signed manifests |
 | `krypt-storage` | `com.davils:krypt-storage` | The encrypted blob store with blinded names and rollback detection, field encryption, blind indexes and per-subject keys for shredding by crypto |
+| `krypt-x509` | `com.davils:krypt-x509` | X.509 certificates, names and extensions, certification requests, revocation lists, path validation by RFC 5280, service identity by RFC 9525 and pins |
+| `krypt-keystore` | `com.davils:krypt-keystore` | PKCS #12 and PEM bundles, identities of a key and its chain, and the loading and writing of material through sources and sinks of the application |
+| `krypt-ocsp` | `com.davils:krypt-ocsp` | OCSP requests and responses, their verification, a revocation checker for path validation and the logic of a responder |
+| `krypt-ct` | `com.davils:krypt-ct` | Signed certificate timestamps from certificates, TLS and OCSP, log lists and a CT policy |
+| `krypt-authority` | `com.davils:krypt-authority` | A stateless certificate authority: roots and intermediates behind a signer, profiles, an issuance policy, revocation lists and the status of an OCSP responder |
 | `krypt-testing` | `com.davils:krypt-testing` | Test support: deterministic and replayed randomness, audit logs and test environments |
 | `krypt-bom` | `com.davils:krypt-bom` | The bill of materials of every module |
 | `build-logic` | - | One convention plugin per concern, composed by `krypt.kotlin-library` for a library module, `krypt.bom` for the BOM and `krypt.root` for the root project; they hold nothing but `plugins { }` and `kreate { }` |
 
 `krypt-core` builds on `com.davils:kore-core`, `com.davils:konfetti-core`, `com.davils:kollect-core`,
 `kotlinx-coroutines-core` and `kotlinx-io-bytestring`; `krypt-asn1` builds on `krypt-core`, `krypt-primitive` on
-both, and `krypt-keyset`, `krypt-stream` and `krypt-storage` each on the one before. The code is ported from the
-security library of an internal Davils project and hardened on the way.
+both, and `krypt-keyset`, `krypt-stream` and `krypt-storage` each on the one before. `krypt-x509` builds on
+`krypt-primitive`; `krypt-keystore`, `krypt-ocsp` and `krypt-ct` on `krypt-x509`; and `krypt-authority` on
+`krypt-ocsp` and `krypt-keystore`. The code is ported from the security library of an internal Davils project and
+hardened on the way.
 
 The package of a module is `com.davils.krypt.<module>` without dashes, and its Java module has the same name. It is
 declared in `src/jvmMain/java/module-info.java` of the module, which exports only packages with public API, never an

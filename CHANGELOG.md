@@ -44,4 +44,22 @@ kollect 1.0.0. The code comes from the security library of an internal Davils pr
   metadata, objects bound to their name and version, rollback detection with a version ledger and rewrapping after a
   rotation; field encryption bound to table, column and row; blind indexes per column; and one key set per subject
   for shredding by crypto.
+- **X.509**: a strict parser and builder of certificates with every common extension, distinguished names by RFC 4514
+  compared by RFC 5280, every general name, certification requests of PKCS #10, revocation lists with delta lists
+  and issuing distribution points, path building and validation by RFC 5280 with policies, name constraints,
+  purposes and a revocation checker, revocation by CRL, service identity by RFC 9525, pins and key identifiers by
+  RFC 7093.
+- **Key stores**: PKCS #12 read and written strictly with PBES2, a classic MAC or PBMAC1 by RFC 9579, the legacy
+  protection refused; PEM bundles; identities of a key and its chain, proven to belong together; and the loading and
+  writing of material through sources and sinks of the application, so krypt never opens a file.
+- **OCSP**: requests with nonces by RFC 9654, strict responses, their verification against the issuer or a delegated
+  responder, a revocation checker for path validation with stapled responses, the encodings for GET and POST and the
+  logic of a responder with a bounded cache.
+- **Certificate Transparency**: signed certificate timestamps from the certificate, TLS and OCSP, their verification
+  against log lists with a rebuilt precertificate, and a CT policy by the number of logs and operators.
+- **A certificate authority** without state of its own: roots and intermediates whose keys stay behind a signer,
+  profiles for TLS servers and clients, mutual TLS, code signing, OCSP responders, time stamping, email and SPIFFE,
+  an issuance policy for names, keys and validity, enrollment by request, 159-bit random serial numbers, revocation
+  with full and delta lists, the status source of an OCSP responder, a repository of the application and an audit
+  of every issuance and revocation.
 - **Test support**: deterministic and replayed randomness, an audit log and test environments.

@@ -16,6 +16,11 @@ network, reports through events on [konfetti](https://github.com/davils-com/konf
 | `krypt-keyset` | `com.davils:krypt-keyset` | Key sets with rotation and a lifecycle, envelope encryption, key management services and a vault of encrypted key sets |
 | `krypt-stream` | `com.davils:krypt-stream` | The `KRYPT/1` container for bulk data with random access, several recipients and key commitment, and signed manifests |
 | `krypt-storage` | `com.davils:krypt-storage` | The encrypted blob store, field encryption, blind indexes and per-subject keys for shredding by crypto |
+| `krypt-x509` | `com.davils:krypt-x509` | Certificates, names, extensions, requests, revocation lists, path validation, service identity and pins |
+| `krypt-keystore` | `com.davils:krypt-keystore` | PKCS #12, PEM bundles, identities and the loading of material through sources of the application |
+| `krypt-ocsp` | `com.davils:krypt-ocsp` | OCSP requests, responses, verification, a revocation checker and a responder |
+| `krypt-ct` | `com.davils:krypt-ct` | Signed certificate timestamps, log lists and a CT policy |
+| `krypt-authority` | `com.davils:krypt-authority` | A certificate authority with profiles, an issuance policy, revocation lists and OCSP status |
 | `krypt-testing` | `com.davils:krypt-testing` | Deterministic and replayed randomness, audit logs and test environments |
 | `krypt-bom` | `com.davils:krypt-bom` | The bill of materials of every module |
 
@@ -91,6 +96,31 @@ blobs.put("invoices/2026/42.pdf", source, contentType = "application/pdf")
 val stored = blobs.open("invoices/2026/42.pdf").getOrNull() ?: error("unreadable")
 val page = stored.reader.read(offset = 4_096, length = 4_096)
 stored.close()
+```
+
+The PKI modules run an authority whose key stays behind a signer, validate paths by RFC 5280 with revocation by CRL
+or OCSP, and load identities from PKCS #12 or PEM through a source the application implements:
+
+```kotlin
+val rootName = distinguishedName { commonName("Example Root") }
+val root = CertificateAuthority.createRoot(crypto, rootSigner, rootName, validity = 3_650.days)
+val authority = CertificateAuthority(crypto, root, rootSigner, repository, issuancePolicy {
+    dnsDomains("example.com")
+    crlUrls("http://crl.example.com/root.crl")
+})
+val server = crypto.keys.generate(KeyType.P256)
+val certificate = authority.issue(
+    IssuanceRequest(
+        subject = distinguishedName { commonName("api.example.com") },
+        publicKey = server.publicKey,
+        profile = CertificateProfile.TlsServer,
+        names = listOf(GeneralName.Dns("api.example.com")),
+    ),
+).getOrNull() ?: error("refused")
+
+val validator = PathValidator(crypto, listOf(TrustAnchor.of(root)), OcspRevocationChecker(Ocsp(crypto), responses))
+val validation = validator.validate(certificate, parameters = ValidationParameters(purpose = KeyPurposes.ServerAuth))
+val identity = MaterialLoader(crypto, secrets).identity(IdentitySpec.KeyStore(MaterialRef("server.p12"), password))
 ```
 
 Every operation is `suspend`, because WebCrypto answers asynchronously; on the JVM it runs on the caller's thread.
