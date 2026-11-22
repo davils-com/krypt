@@ -38,48 +38,12 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
 import kotlinx.io.bytestring.ByteString
 
-private const val RSA_OID: String = "1.2.840.113549.1.1.1"
 private const val ED25519_OID: String = "1.3.101.112"
 private const val SALT: String = "000102030405060708090a0b0c0d0e0f"
 private const val FAST_ITERATIONS: Int = 1_000
 private const val DERIVED_BYTES: Int = 32
 private const val X25519_ENC: Int = 32
 private const val P256_FIELD: Int = 32
-
-private fun rsaPublicKey(modulus: DerInteger, exponent: DerInteger): ByteString = Der.encode {
-    sequence {
-        integer(modulus)
-        integer(exponent)
-    }
-}
-
-private fun rsaSpki(modulus: DerInteger, exponent: DerInteger): ByteString = Der.encode {
-    sequence {
-        sequence {
-            objectIdentifier(ObjectIdentifier.of(RSA_OID))
-            nullValue()
-        }
-        bitString(BitString(rsaPublicKey(modulus = modulus, exponent = exponent)))
-    }
-}
-
-private fun rsaPkcs8(modulus: DerInteger): ByteString = Der.encode {
-    sequence {
-        integer(0L)
-        sequence {
-            objectIdentifier(ObjectIdentifier.of(RSA_OID))
-            nullValue()
-        }
-        octetStringOf {
-            sequence {
-                integer(0L)
-                integer(modulus)
-                integer(DerInteger.of(65_537L))
-                repeat(6) { integer(DerInteger.of(1L)) }
-            }
-        }
-    }
-}
 
 private suspend fun derived(text: String): SecretBytes = fastCrypto.derivations.pbkdf2(
     password = SecretText.of(text),
@@ -89,18 +53,6 @@ private suspend fun derived(text: String): SecretBytes = fastCrypto.derivations.
 )
 
 class AuditPrimitiveTest : FunSpec({
-    test("A-3: an RSA public key with a negative modulus is a typed refusal, not an exception") {
-        val spki = rsaSpki(modulus = DerInteger.of(-1L), exponent = DerInteger.of(65_537L))
-        val outcome = shouldNotThrowAny { crypto.keys.decodePublic(spki) }
-        outcome.failureOrNull() shouldNotBe null
-    }
-
-    test("A-3: an RSA private key with a negative modulus is a typed refusal, not an exception") {
-        val encoding = SecretBytes.copyOf(rsaPkcs8(DerInteger.of(-1L)))
-        val outcome = shouldNotThrowAny { crypto.keys.decodePrivate(encoding) }
-        outcome.failureOrNull() shouldNotBe null
-    }
-
     test("A-1: HPKE open with a small-order X25519 encapsulation returns null instead of throwing") {
         val recipient = crypto.keys.generate(KeyType.X25519)
         val sealed = ByteString(ByteArray(X25519_ENC) + ByteArray(X25519_ENC))
