@@ -16,6 +16,7 @@
 
 package com.davils.krypt.ocsp
 
+import com.davils.kore.core.failure.attempted
 import com.davils.kore.core.outcome.getOrNull
 import com.davils.krypt.asn1.DerInteger
 import com.davils.krypt.core.algorithm.DigestAlgorithm
@@ -37,6 +38,9 @@ import kotlin.time.Instant
  * id-kp-OCSPSigning. The responder names itself by the name of its certificate. Every answer is valid from the time
  * it is signed for [validity]; a nonce of the request is echoed. Answers about one certificate without a nonce are
  * kept in [cache] and served from it until they expire.
+ *
+ * The [source] is foreign code: if it throws, the request is answered with [OcspResponseStatus.InternalError],
+ * which is neither signed nor cached, and only the cancellation of the calling coroutine passes through.
  *
  * @param ocsp the reading of requests and the identifiers of certificates.
  * @param issuer the issuer whose certificates the responder answers for.
@@ -90,7 +94,7 @@ public class OcspResponder(
      * Every certificate of [issuer] is answered with the status from the source, or as unknown if the source does not
      * know it. A certificate of another issuer, or one identified with a digest the policy does not accept, is
      * answered as unknown. If the request names no certificate of [issuer], the answer is
-     * [OcspResponseStatus.Unauthorized].
+     * [OcspResponseStatus.Unauthorized]; if the source fails, it is [OcspResponseStatus.InternalError].
      *
      * @param request the request.
      * @return the DER encoding of the response.
@@ -110,7 +114,7 @@ public class OcspResponder(
      *
      * @param serialNumber the serial number of a certificate of [issuer].
      * @param algorithm the digest of its identifier, which clients must use to hit the cache.
-     * @return the DER encoding of the response.
+     * @return the DER encoding of the response, or of an [OcspResponseStatus.InternalError] if the source failed.
      * @throws IllegalArgumentException if [algorithm] is neither SHA-1 nor SHA-2.
      * @throws com.davils.krypt.primitive.PolicyViolationException if the policy does not accept [algorithm] for
      *   verification.
@@ -181,11 +185,14 @@ public class OcspResponder(
     private suspend fun answer(request: OcspRequest, known: List<CertId>): ByteString {
         val thisUpdate = now()
         val nextUpdate = thisUpdate + validity
-        val responses = request.certIds.map { certId ->
-            val status = source.takeIf { certId in known }?.status(certId.serialNumber)
+        val statuses = request.certIds.map { certId ->
+            attempted { source.takeIf { certId in known }?.status(certId.serialNumber) }
+        }
+        if (statuses.any { status -> status.isFailure }) return errorResponse(OcspResponseStatus.InternalError)
+        val responses = request.certIds.zip(statuses) { certId, status ->
             SingleResponse(
                 certId = certId,
-                status = status ?: CertificateStatus.Unknown,
+                status = status.getOrNull() ?: CertificateStatus.Unknown,
                 thisUpdate = thisUpdate,
                 nextUpdate = nextUpdate,
             )
