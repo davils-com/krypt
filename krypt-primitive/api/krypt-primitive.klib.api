@@ -1,0 +1,368 @@
+// Klib ABI Dump
+// Targets: [wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.davils:krypt-primitive>
+final enum class com.davils.krypt.primitive.key/KeyFailure : kotlin/Enum<com.davils.krypt.primitive.key/KeyFailure> { // com.davils.krypt.primitive.key/KeyFailure|null[0]
+    enum entry Malformed // com.davils.krypt.primitive.key/KeyFailure.Malformed|null[0]
+    enum entry PasswordRequired // com.davils.krypt.primitive.key/KeyFailure.PasswordRequired|null[0]
+    enum entry Refused // com.davils.krypt.primitive.key/KeyFailure.Refused|null[0]
+    enum entry UnsupportedAlgorithm // com.davils.krypt.primitive.key/KeyFailure.UnsupportedAlgorithm|null[0]
+    enum entry UnsupportedEncryption // com.davils.krypt.primitive.key/KeyFailure.UnsupportedEncryption|null[0]
+    enum entry WrongPassword // com.davils.krypt.primitive.key/KeyFailure.WrongPassword|null[0]
+
+    final val entries // com.davils.krypt.primitive.key/KeyFailure.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.primitive.key/KeyFailure> // com.davils.krypt.primitive.key/KeyFailure.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.primitive.key/KeyFailure // com.davils.krypt.primitive.key/KeyFailure.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.primitive.key/KeyFailure> // com.davils.krypt.primitive.key/KeyFailure.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.primitive.password/PasswordVerification : kotlin/Enum<com.davils.krypt.primitive.password/PasswordVerification> { // com.davils.krypt.primitive.password/PasswordVerification|null[0]
+    enum entry Invalid // com.davils.krypt.primitive.password/PasswordVerification.Invalid|null[0]
+    enum entry Malformed // com.davils.krypt.primitive.password/PasswordVerification.Malformed|null[0]
+    enum entry Valid // com.davils.krypt.primitive.password/PasswordVerification.Valid|null[0]
+    enum entry ValidButOutdated // com.davils.krypt.primitive.password/PasswordVerification.ValidButOutdated|null[0]
+
+    final val entries // com.davils.krypt.primitive.password/PasswordVerification.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.primitive.password/PasswordVerification> // com.davils.krypt.primitive.password/PasswordVerification.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val isValid // com.davils.krypt.primitive.password/PasswordVerification.isValid|{}isValid[0]
+        final fun <get-isValid>(): kotlin/Boolean // com.davils.krypt.primitive.password/PasswordVerification.isValid.<get-isValid>|<get-isValid>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.primitive.password/PasswordVerification // com.davils.krypt.primitive.password/PasswordVerification.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.primitive.password/PasswordVerification> // com.davils.krypt.primitive.password/PasswordVerification.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.primitive.signature/SignatureFormat : kotlin/Enum<com.davils.krypt.primitive.signature/SignatureFormat> { // com.davils.krypt.primitive.signature/SignatureFormat|null[0]
+    enum entry Der // com.davils.krypt.primitive.signature/SignatureFormat.Der|null[0]
+    enum entry Raw // com.davils.krypt.primitive.signature/SignatureFormat.Raw|null[0]
+
+    final val entries // com.davils.krypt.primitive.signature/SignatureFormat.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.primitive.signature/SignatureFormat> // com.davils.krypt.primitive.signature/SignatureFormat.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.primitive.signature/SignatureFormat // com.davils.krypt.primitive.signature/SignatureFormat.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.primitive.signature/SignatureFormat> // com.davils.krypt.primitive.signature/SignatureFormat.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.primitive/Verification : kotlin/Enum<com.davils.krypt.primitive/Verification> { // com.davils.krypt.primitive/Verification|null[0]
+    enum entry Invalid // com.davils.krypt.primitive/Verification.Invalid|null[0]
+    enum entry Valid // com.davils.krypt.primitive/Verification.Valid|null[0]
+
+    final val entries // com.davils.krypt.primitive/Verification.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.primitive/Verification> // com.davils.krypt.primitive/Verification.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val isValid // com.davils.krypt.primitive/Verification.isValid|{}isValid[0]
+        final fun <get-isValid>(): kotlin/Boolean // com.davils.krypt.primitive/Verification.isValid.<get-isValid>|<get-isValid>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.primitive/Verification // com.davils.krypt.primitive/Verification.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.primitive/Verification> // com.davils.krypt.primitive/Verification.values|values#static(){}[0]
+
+    final object Companion { // com.davils.krypt.primitive/Verification.Companion|null[0]
+        final fun of(kotlin/Boolean): com.davils.krypt.primitive/Verification // com.davils.krypt.primitive/Verification.Companion.of|of(kotlin.Boolean){}[0]
+    }
+}
+
+abstract interface com.davils.krypt.primitive.signature/Signer { // com.davils.krypt.primitive.signature/Signer|null[0]
+    abstract val algorithm // com.davils.krypt.primitive.signature/Signer.algorithm|{}algorithm[0]
+        abstract fun <get-algorithm>(): com.davils.krypt.core.algorithm/SignatureAlgorithm // com.davils.krypt.primitive.signature/Signer.algorithm.<get-algorithm>|<get-algorithm>(){}[0]
+    abstract val publicKey // com.davils.krypt.primitive.signature/Signer.publicKey|{}publicKey[0]
+        abstract fun <get-publicKey>(): com.davils.krypt.primitive.key/PublicKey // com.davils.krypt.primitive.signature/Signer.publicKey.<get-publicKey>|<get-publicKey>(){}[0]
+
+    abstract suspend fun sign(kotlinx.io.bytestring/ByteString): kotlinx.io.bytestring/ByteString // com.davils.krypt.primitive.signature/Signer.sign|sign(kotlinx.io.bytestring.ByteString){}[0]
+}
+
+final class com.davils.krypt.primitive.cipher/Aeads { // com.davils.krypt.primitive.cipher/Aeads|null[0]
+    final suspend fun decrypt(com.davils.krypt.primitive.key/SecretKey, kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString, com.davils.krypt.core.algorithm/AeadAlgorithm): kotlinx.io.bytestring/ByteString? // com.davils.krypt.primitive.cipher/Aeads.decrypt|decrypt(com.davils.krypt.primitive.key.SecretKey;kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString;com.davils.krypt.core.algorithm.AeadAlgorithm){}[0]
+    final suspend fun encrypt(com.davils.krypt.primitive.key/SecretKey, kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString, com.davils.krypt.core.algorithm/AeadAlgorithm): kotlinx.io.bytestring/ByteString // com.davils.krypt.primitive.cipher/Aeads.encrypt|encrypt(com.davils.krypt.primitive.key.SecretKey;kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString;com.davils.krypt.core.algorithm.AeadAlgorithm){}[0]
+    final suspend fun open(com.davils.krypt.primitive.key/SecretKey, com.davils.krypt.primitive.cipher/SealedBox, kotlinx.io.bytestring/ByteString = ..., com.davils.krypt.core.algorithm/AeadAlgorithm = ...): kotlinx.io.bytestring/ByteString? // com.davils.krypt.primitive.cipher/Aeads.open|open(com.davils.krypt.primitive.key.SecretKey;com.davils.krypt.primitive.cipher.SealedBox;kotlinx.io.bytestring.ByteString;com.davils.krypt.core.algorithm.AeadAlgorithm){}[0]
+    final suspend fun seal(com.davils.krypt.primitive.key/SecretKey, kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString = ..., com.davils.krypt.core.algorithm/AeadAlgorithm = ...): com.davils.krypt.primitive.cipher/SealedBox // com.davils.krypt.primitive.cipher/Aeads.seal|seal(com.davils.krypt.primitive.key.SecretKey;kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString;com.davils.krypt.core.algorithm.AeadAlgorithm){}[0]
+}
+
+final class com.davils.krypt.primitive.cipher/AsymmetricEncryptions { // com.davils.krypt.primitive.cipher/AsymmetricEncryptions|null[0]
+    final suspend fun decrypt(com.davils.krypt.primitive.key/PrivateKey, kotlinx.io.bytestring/ByteString, com.davils.krypt.core.algorithm/AsymmetricEncryptionAlgorithm = ...): com.davils.krypt.core/SecretBytes? // com.davils.krypt.primitive.cipher/AsymmetricEncryptions.decrypt|decrypt(com.davils.krypt.primitive.key.PrivateKey;kotlinx.io.bytestring.ByteString;com.davils.krypt.core.algorithm.AsymmetricEncryptionAlgorithm){}[0]
+    final suspend fun encrypt(com.davils.krypt.primitive.key/PublicKey, kotlinx.io.bytestring/ByteString, com.davils.krypt.core.algorithm/AsymmetricEncryptionAlgorithm = ...): kotlinx.io.bytestring/ByteString // com.davils.krypt.primitive.cipher/AsymmetricEncryptions.encrypt|encrypt(com.davils.krypt.primitive.key.PublicKey;kotlinx.io.bytestring.ByteString;com.davils.krypt.core.algorithm.AsymmetricEncryptionAlgorithm){}[0]
+}
+
+final class com.davils.krypt.primitive.cipher/KeyWraps { // com.davils.krypt.primitive.cipher/KeyWraps|null[0]
+    final suspend fun unwrap(com.davils.krypt.primitive.key/SecretKey, kotlinx.io.bytestring/ByteString, com.davils.krypt.core.algorithm/KeyWrapAlgorithm = ...): com.davils.krypt.core/SecretBytes? // com.davils.krypt.primitive.cipher/KeyWraps.unwrap|unwrap(com.davils.krypt.primitive.key.SecretKey;kotlinx.io.bytestring.ByteString;com.davils.krypt.core.algorithm.KeyWrapAlgorithm){}[0]
+    final suspend fun wrap(com.davils.krypt.primitive.key/SecretKey, com.davils.krypt.core/SecretBytes, com.davils.krypt.core.algorithm/KeyWrapAlgorithm = ...): kotlinx.io.bytestring/ByteString // com.davils.krypt.primitive.cipher/KeyWraps.wrap|wrap(com.davils.krypt.primitive.key.SecretKey;com.davils.krypt.core.SecretBytes;com.davils.krypt.core.algorithm.KeyWrapAlgorithm){}[0]
+}
+
+final class com.davils.krypt.primitive.cipher/SealedBox { // com.davils.krypt.primitive.cipher/SealedBox|null[0]
+    constructor <init>(kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString) // com.davils.krypt.primitive.cipher/SealedBox.<init>|<init>(kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString){}[0]
+
+    final val ciphertext // com.davils.krypt.primitive.cipher/SealedBox.ciphertext|{}ciphertext[0]
+        final fun <get-ciphertext>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.primitive.cipher/SealedBox.ciphertext.<get-ciphertext>|<get-ciphertext>(){}[0]
+    final val encoded // com.davils.krypt.primitive.cipher/SealedBox.encoded|{}encoded[0]
+        final fun <get-encoded>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.primitive.cipher/SealedBox.encoded.<get-encoded>|<get-encoded>(){}[0]
+    final val nonce // com.davils.krypt.primitive.cipher/SealedBox.nonce|{}nonce[0]
+        final fun <get-nonce>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.primitive.cipher/SealedBox.nonce.<get-nonce>|<get-nonce>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.primitive.cipher/SealedBox.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.primitive.cipher/SealedBox.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.primitive.cipher/SealedBox.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.primitive.cipher/SealedBox.Companion|null[0]
+        final fun decodeOrNull(kotlinx.io.bytestring/ByteString, com.davils.krypt.core.algorithm/AeadAlgorithm): com.davils.krypt.primitive.cipher/SealedBox? // com.davils.krypt.primitive.cipher/SealedBox.Companion.decodeOrNull|decodeOrNull(kotlinx.io.bytestring.ByteString;com.davils.krypt.core.algorithm.AeadAlgorithm){}[0]
+    }
+}
+
+final class com.davils.krypt.primitive.exchange/Encapsulation { // com.davils.krypt.primitive.exchange/Encapsulation|null[0]
+    constructor <init>(com.davils.krypt.core/SecretBytes, kotlinx.io.bytestring/ByteString) // com.davils.krypt.primitive.exchange/Encapsulation.<init>|<init>(com.davils.krypt.core.SecretBytes;kotlinx.io.bytestring.ByteString){}[0]
+
+    final val encapsulated // com.davils.krypt.primitive.exchange/Encapsulation.encapsulated|{}encapsulated[0]
+        final fun <get-encapsulated>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.primitive.exchange/Encapsulation.encapsulated.<get-encapsulated>|<get-encapsulated>(){}[0]
+    final val sharedSecret // com.davils.krypt.primitive.exchange/Encapsulation.sharedSecret|{}sharedSecret[0]
+        final fun <get-sharedSecret>(): com.davils.krypt.core/SecretBytes // com.davils.krypt.primitive.exchange/Encapsulation.sharedSecret.<get-sharedSecret>|<get-sharedSecret>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.primitive.exchange/Encapsulation.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.primitive.exchange/Hpke { // com.davils.krypt.primitive.exchange/Hpke|null[0]
+    final suspend fun open(com.davils.krypt.primitive.exchange/HpkeSuite, com.davils.krypt.primitive.key/PrivateKey, kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString = ..., kotlinx.io.bytestring/ByteString = ...): kotlinx.io.bytestring/ByteString? // com.davils.krypt.primitive.exchange/Hpke.open|open(com.davils.krypt.primitive.exchange.HpkeSuite;com.davils.krypt.primitive.key.PrivateKey;kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString){}[0]
+    final suspend fun recipient(com.davils.krypt.primitive.exchange/HpkeSuite, com.davils.krypt.primitive.key/PrivateKey, kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString = ..., com.davils.krypt.primitive.key/PublicKey? = ..., com.davils.krypt.core/SecretBytes? = ..., kotlinx.io.bytestring/ByteString = ...): com.davils.krypt.primitive.exchange/HpkeContext? // com.davils.krypt.primitive.exchange/Hpke.recipient|recipient(com.davils.krypt.primitive.exchange.HpkeSuite;com.davils.krypt.primitive.key.PrivateKey;kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString;com.davils.krypt.primitive.key.PublicKey?;com.davils.krypt.core.SecretBytes?;kotlinx.io.bytestring.ByteString){}[0]
+    final suspend fun seal(com.davils.krypt.primitive.exchange/HpkeSuite, com.davils.krypt.primitive.key/PublicKey, kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString = ..., kotlinx.io.bytestring/ByteString = ...): kotlinx.io.bytestring/ByteString // com.davils.krypt.primitive.exchange/Hpke.seal|seal(com.davils.krypt.primitive.exchange.HpkeSuite;com.davils.krypt.primitive.key.PublicKey;kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString){}[0]
+    final suspend fun sender(com.davils.krypt.primitive.exchange/HpkeSuite, com.davils.krypt.primitive.key/PublicKey, kotlinx.io.bytestring/ByteString = ..., com.davils.krypt.primitive.key/PrivateKey? = ..., com.davils.krypt.core/SecretBytes? = ..., kotlinx.io.bytestring/ByteString = ...): com.davils.krypt.primitive.exchange/HpkeSender // com.davils.krypt.primitive.exchange/Hpke.sender|sender(com.davils.krypt.primitive.exchange.HpkeSuite;com.davils.krypt.primitive.key.PublicKey;kotlinx.io.bytestring.ByteString;com.davils.krypt.primitive.key.PrivateKey?;com.davils.krypt.core.SecretBytes?;kotlinx.io.bytestring.ByteString){}[0]
+}
+
+final class com.davils.krypt.primitive.exchange/HpkeContext { // com.davils.krypt.primitive.exchange/HpkeContext|null[0]
+    final val suite // com.davils.krypt.primitive.exchange/HpkeContext.suite|{}suite[0]
+        final fun <get-suite>(): com.davils.krypt.primitive.exchange/HpkeSuite // com.davils.krypt.primitive.exchange/HpkeContext.suite.<get-suite>|<get-suite>(){}[0]
+
+    final fun destroy() // com.davils.krypt.primitive.exchange/HpkeContext.destroy|destroy(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.primitive.exchange/HpkeContext.toString|toString(){}[0]
+    final suspend fun export(kotlinx.io.bytestring/ByteString, kotlin/Int): com.davils.krypt.core/SecretBytes // com.davils.krypt.primitive.exchange/HpkeContext.export|export(kotlinx.io.bytestring.ByteString;kotlin.Int){}[0]
+    final suspend fun open(kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString = ...): kotlinx.io.bytestring/ByteString? // com.davils.krypt.primitive.exchange/HpkeContext.open|open(kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString){}[0]
+    final suspend fun seal(kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString = ...): kotlinx.io.bytestring/ByteString // com.davils.krypt.primitive.exchange/HpkeContext.seal|seal(kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString){}[0]
+}
+
+final class com.davils.krypt.primitive.exchange/HpkeSender { // com.davils.krypt.primitive.exchange/HpkeSender|null[0]
+    constructor <init>(kotlinx.io.bytestring/ByteString, com.davils.krypt.primitive.exchange/HpkeContext) // com.davils.krypt.primitive.exchange/HpkeSender.<init>|<init>(kotlinx.io.bytestring.ByteString;com.davils.krypt.primitive.exchange.HpkeContext){}[0]
+
+    final val context // com.davils.krypt.primitive.exchange/HpkeSender.context|{}context[0]
+        final fun <get-context>(): com.davils.krypt.primitive.exchange/HpkeContext // com.davils.krypt.primitive.exchange/HpkeSender.context.<get-context>|<get-context>(){}[0]
+    final val encapsulated // com.davils.krypt.primitive.exchange/HpkeSender.encapsulated|{}encapsulated[0]
+        final fun <get-encapsulated>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.primitive.exchange/HpkeSender.encapsulated.<get-encapsulated>|<get-encapsulated>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.primitive.exchange/HpkeSender.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.primitive.exchange/HpkeSuite { // com.davils.krypt.primitive.exchange/HpkeSuite|null[0]
+    constructor <init>(com.davils.krypt.core.algorithm/KemAlgorithm, com.davils.krypt.core.algorithm/KdfAlgorithm, com.davils.krypt.core.algorithm/AeadAlgorithm?) // com.davils.krypt.primitive.exchange/HpkeSuite.<init>|<init>(com.davils.krypt.core.algorithm.KemAlgorithm;com.davils.krypt.core.algorithm.KdfAlgorithm;com.davils.krypt.core.algorithm.AeadAlgorithm?){}[0]
+
+    final val aead // com.davils.krypt.primitive.exchange/HpkeSuite.aead|{}aead[0]
+        final fun <get-aead>(): com.davils.krypt.core.algorithm/AeadAlgorithm? // com.davils.krypt.primitive.exchange/HpkeSuite.aead.<get-aead>|<get-aead>(){}[0]
+    final val kdf // com.davils.krypt.primitive.exchange/HpkeSuite.kdf|{}kdf[0]
+        final fun <get-kdf>(): com.davils.krypt.core.algorithm/KdfAlgorithm // com.davils.krypt.primitive.exchange/HpkeSuite.kdf.<get-kdf>|<get-kdf>(){}[0]
+    final val kem // com.davils.krypt.primitive.exchange/HpkeSuite.kem|{}kem[0]
+        final fun <get-kem>(): com.davils.krypt.core.algorithm/KemAlgorithm // com.davils.krypt.primitive.exchange/HpkeSuite.kem.<get-kem>|<get-kem>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.primitive.exchange/HpkeSuite.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.primitive.exchange/HpkeSuite.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.primitive.exchange/HpkeSuite.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.primitive.exchange/HpkeSuite.Companion|null[0]
+        final val MlKem768Aes256Gcm // com.davils.krypt.primitive.exchange/HpkeSuite.Companion.MlKem768Aes256Gcm|{}MlKem768Aes256Gcm[0]
+            final fun <get-MlKem768Aes256Gcm>(): com.davils.krypt.primitive.exchange/HpkeSuite // com.davils.krypt.primitive.exchange/HpkeSuite.Companion.MlKem768Aes256Gcm.<get-MlKem768Aes256Gcm>|<get-MlKem768Aes256Gcm>(){}[0]
+        final val P384Aes256Gcm // com.davils.krypt.primitive.exchange/HpkeSuite.Companion.P384Aes256Gcm|{}P384Aes256Gcm[0]
+            final fun <get-P384Aes256Gcm>(): com.davils.krypt.primitive.exchange/HpkeSuite // com.davils.krypt.primitive.exchange/HpkeSuite.Companion.P384Aes256Gcm.<get-P384Aes256Gcm>|<get-P384Aes256Gcm>(){}[0]
+        final val X25519Aes256Gcm // com.davils.krypt.primitive.exchange/HpkeSuite.Companion.X25519Aes256Gcm|{}X25519Aes256Gcm[0]
+            final fun <get-X25519Aes256Gcm>(): com.davils.krypt.primitive.exchange/HpkeSuite // com.davils.krypt.primitive.exchange/HpkeSuite.Companion.X25519Aes256Gcm.<get-X25519Aes256Gcm>|<get-X25519Aes256Gcm>(){}[0]
+    }
+}
+
+final class com.davils.krypt.primitive.exchange/Kems { // com.davils.krypt.primitive.exchange/Kems|null[0]
+    final fun defaultFor(com.davils.krypt.primitive.key/PublicKey): com.davils.krypt.core.algorithm/KemAlgorithm // com.davils.krypt.primitive.exchange/Kems.defaultFor|defaultFor(com.davils.krypt.primitive.key.PublicKey){}[0]
+    final suspend fun decapsulate(com.davils.krypt.primitive.key/PrivateKey, kotlinx.io.bytestring/ByteString, com.davils.krypt.core.algorithm/KemAlgorithm): com.davils.krypt.core/SecretBytes? // com.davils.krypt.primitive.exchange/Kems.decapsulate|decapsulate(com.davils.krypt.primitive.key.PrivateKey;kotlinx.io.bytestring.ByteString;com.davils.krypt.core.algorithm.KemAlgorithm){}[0]
+    final suspend fun encapsulate(com.davils.krypt.primitive.key/PublicKey, com.davils.krypt.core.algorithm/KemAlgorithm = ...): com.davils.krypt.primitive.exchange/Encapsulation // com.davils.krypt.primitive.exchange/Kems.encapsulate|encapsulate(com.davils.krypt.primitive.key.PublicKey;com.davils.krypt.core.algorithm.KemAlgorithm){}[0]
+}
+
+final class com.davils.krypt.primitive.exchange/KeyAgreements { // com.davils.krypt.primitive.exchange/KeyAgreements|null[0]
+    final fun algorithmFor(com.davils.krypt.core.algorithm/KeyFamily, com.davils.krypt.core.algorithm/EllipticCurve?): com.davils.krypt.core.algorithm/KeyAgreementAlgorithm // com.davils.krypt.primitive.exchange/KeyAgreements.algorithmFor|algorithmFor(com.davils.krypt.core.algorithm.KeyFamily;com.davils.krypt.core.algorithm.EllipticCurve?){}[0]
+    final suspend fun agree(com.davils.krypt.primitive.key/PrivateKey, com.davils.krypt.primitive.key/PublicKey): com.davils.krypt.core/SecretBytes // com.davils.krypt.primitive.exchange/KeyAgreements.agree|agree(com.davils.krypt.primitive.key.PrivateKey;com.davils.krypt.primitive.key.PublicKey){}[0]
+}
+
+final class com.davils.krypt.primitive.hash/Digester { // com.davils.krypt.primitive.hash/Digester|null[0]
+    final val algorithm // com.davils.krypt.primitive.hash/Digester.algorithm|{}algorithm[0]
+        final fun <get-algorithm>(): com.davils.krypt.core.algorithm/DigestAlgorithm // com.davils.krypt.primitive.hash/Digester.algorithm.<get-algorithm>|<get-algorithm>(){}[0]
+
+    final fun finish(): kotlinx.io.bytestring/ByteString // com.davils.krypt.primitive.hash/Digester.finish|finish(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.primitive.hash/Digester.toString|toString(){}[0]
+    final fun update(kotlin/ByteArray, kotlin/Int = ..., kotlin/Int = ...) // com.davils.krypt.primitive.hash/Digester.update|update(kotlin.ByteArray;kotlin.Int;kotlin.Int){}[0]
+    final fun update(kotlinx.io.bytestring/ByteString) // com.davils.krypt.primitive.hash/Digester.update|update(kotlinx.io.bytestring.ByteString){}[0]
+}
+
+final class com.davils.krypt.primitive.hash/Digests { // com.davils.krypt.primitive.hash/Digests|null[0]
+    final fun digester(com.davils.krypt.core.algorithm/DigestAlgorithm = ..., com.davils.krypt.core.policy/AlgorithmUse = ...): com.davils.krypt.primitive.hash/Digester? // com.davils.krypt.primitive.hash/Digests.digester|digester(com.davils.krypt.core.algorithm.DigestAlgorithm;com.davils.krypt.core.policy.AlgorithmUse){}[0]
+    final suspend fun digest(kotlinx.io.bytestring/ByteString, com.davils.krypt.core.algorithm/DigestAlgorithm = ..., com.davils.krypt.core.policy/AlgorithmUse = ...): kotlinx.io.bytestring/ByteString // com.davils.krypt.primitive.hash/Digests.digest|digest(kotlinx.io.bytestring.ByteString;com.davils.krypt.core.algorithm.DigestAlgorithm;com.davils.krypt.core.policy.AlgorithmUse){}[0]
+}
+
+final class com.davils.krypt.primitive.hash/KeyDerivations { // com.davils.krypt.primitive.hash/KeyDerivations|null[0]
+    final suspend fun expand(com.davils.krypt.core/SecretBytes, kotlinx.io.bytestring/ByteString, kotlin/Int, com.davils.krypt.core.algorithm/KdfAlgorithm = ...): com.davils.krypt.core/SecretBytes // com.davils.krypt.primitive.hash/KeyDerivations.expand|expand(com.davils.krypt.core.SecretBytes;kotlinx.io.bytestring.ByteString;kotlin.Int;com.davils.krypt.core.algorithm.KdfAlgorithm){}[0]
+    final suspend fun extract(kotlinx.io.bytestring/ByteString, com.davils.krypt.core/SecretBytes, com.davils.krypt.core.algorithm/KdfAlgorithm = ...): com.davils.krypt.core/SecretBytes // com.davils.krypt.primitive.hash/KeyDerivations.extract|extract(kotlinx.io.bytestring.ByteString;com.davils.krypt.core.SecretBytes;com.davils.krypt.core.algorithm.KdfAlgorithm){}[0]
+    final suspend fun hkdf(com.davils.krypt.core/SecretBytes, kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString, kotlin/Int, com.davils.krypt.core.algorithm/KdfAlgorithm = ...): com.davils.krypt.core/SecretBytes // com.davils.krypt.primitive.hash/KeyDerivations.hkdf|hkdf(com.davils.krypt.core.SecretBytes;kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString;kotlin.Int;com.davils.krypt.core.algorithm.KdfAlgorithm){}[0]
+    final suspend fun pbkdf2(com.davils.krypt.core/SecretText, kotlinx.io.bytestring/ByteString, kotlin/Int, kotlin/Int, com.davils.krypt.core.algorithm/KdfAlgorithm = ..., com.davils.krypt.core.policy/AlgorithmUse = ...): com.davils.krypt.core/SecretBytes // com.davils.krypt.primitive.hash/KeyDerivations.pbkdf2|pbkdf2(com.davils.krypt.core.SecretText;kotlinx.io.bytestring.ByteString;kotlin.Int;kotlin.Int;com.davils.krypt.core.algorithm.KdfAlgorithm;com.davils.krypt.core.policy.AlgorithmUse){}[0]
+}
+
+final class com.davils.krypt.primitive.hash/Macs { // com.davils.krypt.primitive.hash/Macs|null[0]
+    final suspend fun mac(com.davils.krypt.primitive.key/SecretKey, kotlinx.io.bytestring/ByteString, com.davils.krypt.core.algorithm/MacAlgorithm = ...): kotlinx.io.bytestring/ByteString // com.davils.krypt.primitive.hash/Macs.mac|mac(com.davils.krypt.primitive.key.SecretKey;kotlinx.io.bytestring.ByteString;com.davils.krypt.core.algorithm.MacAlgorithm){}[0]
+    final suspend fun verify(com.davils.krypt.primitive.key/SecretKey, kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString, com.davils.krypt.core.algorithm/MacAlgorithm = ...): com.davils.krypt.primitive/Verification // com.davils.krypt.primitive.hash/Macs.verify|verify(com.davils.krypt.primitive.key.SecretKey;kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString;com.davils.krypt.core.algorithm.MacAlgorithm){}[0]
+}
+
+final class com.davils.krypt.primitive.key/KeyPair { // com.davils.krypt.primitive.key/KeyPair|null[0]
+    constructor <init>(com.davils.krypt.primitive.key/PublicKey, com.davils.krypt.primitive.key/PrivateKey) // com.davils.krypt.primitive.key/KeyPair.<init>|<init>(com.davils.krypt.primitive.key.PublicKey;com.davils.krypt.primitive.key.PrivateKey){}[0]
+
+    final val privateKey // com.davils.krypt.primitive.key/KeyPair.privateKey|{}privateKey[0]
+        final fun <get-privateKey>(): com.davils.krypt.primitive.key/PrivateKey // com.davils.krypt.primitive.key/KeyPair.privateKey.<get-privateKey>|<get-privateKey>(){}[0]
+    final val publicKey // com.davils.krypt.primitive.key/KeyPair.publicKey|{}publicKey[0]
+        final fun <get-publicKey>(): com.davils.krypt.primitive.key/PublicKey // com.davils.krypt.primitive.key/KeyPair.publicKey.<get-publicKey>|<get-publicKey>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.primitive.key/KeyPair.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.primitive.key/KeyPair.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.primitive.key/KeyPair.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.primitive.key/Keys { // com.davils.krypt.primitive.key/Keys|null[0]
+    final fun decodePrivate(com.davils.krypt.core/SecretBytes): com.davils.kore.core.outcome/Outcome<com.davils.krypt.primitive.key/PrivateKey, com.davils.krypt.primitive.key/KeyFailure> // com.davils.krypt.primitive.key/Keys.decodePrivate|decodePrivate(com.davils.krypt.core.SecretBytes){}[0]
+    final fun decodePublic(kotlinx.io.bytestring/ByteString): com.davils.kore.core.outcome/Outcome<com.davils.krypt.primitive.key/PublicKey, com.davils.krypt.primitive.key/KeyFailure> // com.davils.krypt.primitive.key/Keys.decodePublic|decodePublic(kotlinx.io.bytestring.ByteString){}[0]
+    final fun decodePublicPem(kotlin/String): com.davils.kore.core.outcome/Outcome<com.davils.krypt.primitive.key/PublicKey, com.davils.krypt.primitive.key/KeyFailure> // com.davils.krypt.primitive.key/Keys.decodePublicPem|decodePublicPem(kotlin.String){}[0]
+    final fun encodePem(com.davils.krypt.primitive.key/PrivateKey): kotlin/String // com.davils.krypt.primitive.key/Keys.encodePem|encodePem(com.davils.krypt.primitive.key.PrivateKey){}[0]
+    final fun encodePem(com.davils.krypt.primitive.key/PublicKey): kotlin/String // com.davils.krypt.primitive.key/Keys.encodePem|encodePem(com.davils.krypt.primitive.key.PublicKey){}[0]
+    final fun encodePrivate(com.davils.krypt.primitive.key/PrivateKey): com.davils.krypt.core/SecretBytes // com.davils.krypt.primitive.key/Keys.encodePrivate|encodePrivate(com.davils.krypt.primitive.key.PrivateKey){}[0]
+    final fun generateSecret(kotlin/Int = ...): com.davils.krypt.primitive.key/SecretKey // com.davils.krypt.primitive.key/Keys.generateSecret|generateSecret(kotlin.Int){}[0]
+    final suspend fun decodePrivatePem(kotlin/String, com.davils.krypt.core/SecretText? = ...): com.davils.kore.core.outcome/Outcome<com.davils.krypt.primitive.key/PrivateKey, com.davils.krypt.primitive.key/KeyFailure> // com.davils.krypt.primitive.key/Keys.decodePrivatePem|decodePrivatePem(kotlin.String;com.davils.krypt.core.SecretText?){}[0]
+    final suspend fun decrypt(kotlinx.io.bytestring/ByteString, com.davils.krypt.core/SecretText): com.davils.kore.core.outcome/Outcome<com.davils.krypt.primitive.key/PrivateKey, com.davils.krypt.primitive.key/KeyFailure> // com.davils.krypt.primitive.key/Keys.decrypt|decrypt(kotlinx.io.bytestring.ByteString;com.davils.krypt.core.SecretText){}[0]
+    final suspend fun encrypt(com.davils.krypt.primitive.key/PrivateKey, com.davils.krypt.core/SecretText, kotlin/Int = ...): kotlinx.io.bytestring/ByteString // com.davils.krypt.primitive.key/Keys.encrypt|encrypt(com.davils.krypt.primitive.key.PrivateKey;com.davils.krypt.core.SecretText;kotlin.Int){}[0]
+    final suspend fun encryptPem(com.davils.krypt.primitive.key/PrivateKey, com.davils.krypt.core/SecretText, kotlin/Int = ...): kotlin/String // com.davils.krypt.primitive.key/Keys.encryptPem|encryptPem(com.davils.krypt.primitive.key.PrivateKey;com.davils.krypt.core.SecretText;kotlin.Int){}[0]
+    final suspend fun fingerprint(com.davils.krypt.primitive.key/PublicKey, com.davils.krypt.core.algorithm/DigestAlgorithm = ...): kotlinx.io.bytestring/ByteString // com.davils.krypt.primitive.key/Keys.fingerprint|fingerprint(com.davils.krypt.primitive.key.PublicKey;com.davils.krypt.core.algorithm.DigestAlgorithm){}[0]
+    final suspend fun generate(com.davils.krypt.core.algorithm/KeyType): com.davils.krypt.primitive.key/KeyPair // com.davils.krypt.primitive.key/Keys.generate|generate(com.davils.krypt.core.algorithm.KeyType){}[0]
+    final suspend fun pair(com.davils.krypt.primitive.key/PrivateKey, com.davils.krypt.primitive.key/PublicKey): com.davils.krypt.primitive.key/KeyPair? // com.davils.krypt.primitive.key/Keys.pair|pair(com.davils.krypt.primitive.key.PrivateKey;com.davils.krypt.primitive.key.PublicKey){}[0]
+}
+
+final class com.davils.krypt.primitive.key/PrivateKey { // com.davils.krypt.primitive.key/PrivateKey|null[0]
+    final val bits // com.davils.krypt.primitive.key/PrivateKey.bits|{}bits[0]
+        final fun <get-bits>(): kotlin/Int // com.davils.krypt.primitive.key/PrivateKey.bits.<get-bits>|<get-bits>(){}[0]
+    final val curve // com.davils.krypt.primitive.key/PrivateKey.curve|{}curve[0]
+        final fun <get-curve>(): com.davils.krypt.core.algorithm/EllipticCurve? // com.davils.krypt.primitive.key/PrivateKey.curve.<get-curve>|<get-curve>(){}[0]
+    final val family // com.davils.krypt.primitive.key/PrivateKey.family|{}family[0]
+        final fun <get-family>(): com.davils.krypt.core.algorithm/KeyFamily // com.davils.krypt.primitive.key/PrivateKey.family.<get-family>|<get-family>(){}[0]
+    final val isExtractable // com.davils.krypt.primitive.key/PrivateKey.isExtractable|{}isExtractable[0]
+        final fun <get-isExtractable>(): kotlin/Boolean // com.davils.krypt.primitive.key/PrivateKey.isExtractable.<get-isExtractable>|<get-isExtractable>(){}[0]
+    final val publicKey // com.davils.krypt.primitive.key/PrivateKey.publicKey|{}publicKey[0]
+        final fun <get-publicKey>(): com.davils.krypt.primitive.key/PublicKey? // com.davils.krypt.primitive.key/PrivateKey.publicKey.<get-publicKey>|<get-publicKey>(){}[0]
+
+    final var isDestroyed // com.davils.krypt.primitive.key/PrivateKey.isDestroyed|{}isDestroyed[0]
+        final fun <get-isDestroyed>(): kotlin/Boolean // com.davils.krypt.primitive.key/PrivateKey.isDestroyed.<get-isDestroyed>|<get-isDestroyed>(){}[0]
+
+    final fun destroy() // com.davils.krypt.primitive.key/PrivateKey.destroy|destroy(){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.primitive.key/PrivateKey.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.primitive.key/PrivateKey.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.primitive.key/PrivateKey.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.primitive.key/PublicKey { // com.davils.krypt.primitive.key/PublicKey|null[0]
+    final val bits // com.davils.krypt.primitive.key/PublicKey.bits|{}bits[0]
+        final fun <get-bits>(): kotlin/Int // com.davils.krypt.primitive.key/PublicKey.bits.<get-bits>|<get-bits>(){}[0]
+    final val curve // com.davils.krypt.primitive.key/PublicKey.curve|{}curve[0]
+        final fun <get-curve>(): com.davils.krypt.core.algorithm/EllipticCurve? // com.davils.krypt.primitive.key/PublicKey.curve.<get-curve>|<get-curve>(){}[0]
+    final val encoded // com.davils.krypt.primitive.key/PublicKey.encoded|{}encoded[0]
+        final fun <get-encoded>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.primitive.key/PublicKey.encoded.<get-encoded>|<get-encoded>(){}[0]
+    final val family // com.davils.krypt.primitive.key/PublicKey.family|{}family[0]
+        final fun <get-family>(): com.davils.krypt.core.algorithm/KeyFamily // com.davils.krypt.primitive.key/PublicKey.family.<get-family>|<get-family>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.primitive.key/PublicKey.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.primitive.key/PublicKey.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.primitive.key/PublicKey.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.primitive.key/SecretKey { // com.davils.krypt.primitive.key/SecretKey|null[0]
+    final val bits // com.davils.krypt.primitive.key/SecretKey.bits|{}bits[0]
+        final fun <get-bits>(): kotlin/Int // com.davils.krypt.primitive.key/SecretKey.bits.<get-bits>|<get-bits>(){}[0]
+    final val isDestroyed // com.davils.krypt.primitive.key/SecretKey.isDestroyed|{}isDestroyed[0]
+        final fun <get-isDestroyed>(): kotlin/Boolean // com.davils.krypt.primitive.key/SecretKey.isDestroyed.<get-isDestroyed>|<get-isDestroyed>(){}[0]
+
+    final fun destroy() // com.davils.krypt.primitive.key/SecretKey.destroy|destroy(){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.primitive.key/SecretKey.equals|equals(kotlin.Any?){}[0]
+    final fun export(): com.davils.krypt.core/SecretBytes // com.davils.krypt.primitive.key/SecretKey.export|export(){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.primitive.key/SecretKey.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.primitive.key/SecretKey.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.primitive.key/SecretKey.Companion|null[0]
+        final const val MINIMUM_BYTES // com.davils.krypt.primitive.key/SecretKey.Companion.MINIMUM_BYTES|{}MINIMUM_BYTES[0]
+            final fun <get-MINIMUM_BYTES>(): kotlin/Int // com.davils.krypt.primitive.key/SecretKey.Companion.MINIMUM_BYTES.<get-MINIMUM_BYTES>|<get-MINIMUM_BYTES>(){}[0]
+
+        final fun of(com.davils.krypt.core/SecretBytes): com.davils.krypt.primitive.key/SecretKey // com.davils.krypt.primitive.key/SecretKey.Companion.of|of(com.davils.krypt.core.SecretBytes){}[0]
+    }
+}
+
+final class com.davils.krypt.primitive.password/PasswordHasher { // com.davils.krypt.primitive.password/PasswordHasher|null[0]
+    final suspend fun hash(com.davils.krypt.core/SecretText, com.davils.krypt.core.algorithm/KdfAlgorithm = ...): kotlin/String // com.davils.krypt.primitive.password/PasswordHasher.hash|hash(com.davils.krypt.core.SecretText;com.davils.krypt.core.algorithm.KdfAlgorithm){}[0]
+    final suspend fun verify(com.davils.krypt.core/SecretText, kotlin/String): com.davils.krypt.primitive.password/PasswordVerification // com.davils.krypt.primitive.password/PasswordHasher.verify|verify(com.davils.krypt.core.SecretText;kotlin.String){}[0]
+}
+
+final class com.davils.krypt.primitive.signature/Signatures { // com.davils.krypt.primitive.signature/Signatures|null[0]
+    final fun defaultFor(com.davils.krypt.core.algorithm/KeyFamily, com.davils.krypt.core.algorithm/EllipticCurve?, kotlin/Int): com.davils.krypt.core.algorithm/SignatureAlgorithm // com.davils.krypt.primitive.signature/Signatures.defaultFor|defaultFor(com.davils.krypt.core.algorithm.KeyFamily;com.davils.krypt.core.algorithm.EllipticCurve?;kotlin.Int){}[0]
+    final fun signer(com.davils.krypt.primitive.key/PrivateKey, com.davils.krypt.core.algorithm/SignatureAlgorithm = ...): com.davils.krypt.primitive.signature/Signer // com.davils.krypt.primitive.signature/Signatures.signer|signer(com.davils.krypt.primitive.key.PrivateKey;com.davils.krypt.core.algorithm.SignatureAlgorithm){}[0]
+    final suspend fun sign(com.davils.krypt.primitive.key/PrivateKey, kotlinx.io.bytestring/ByteString, com.davils.krypt.core.algorithm/SignatureAlgorithm = ..., com.davils.krypt.primitive.signature/SignatureFormat = ...): kotlinx.io.bytestring/ByteString // com.davils.krypt.primitive.signature/Signatures.sign|sign(com.davils.krypt.primitive.key.PrivateKey;kotlinx.io.bytestring.ByteString;com.davils.krypt.core.algorithm.SignatureAlgorithm;com.davils.krypt.primitive.signature.SignatureFormat){}[0]
+    final suspend fun verify(com.davils.krypt.primitive.key/PublicKey, kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString, com.davils.krypt.core.algorithm/SignatureAlgorithm = ..., com.davils.krypt.primitive.signature/SignatureFormat = ...): com.davils.krypt.primitive/Verification // com.davils.krypt.primitive.signature/Signatures.verify|verify(com.davils.krypt.primitive.key.PublicKey;kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString;com.davils.krypt.core.algorithm.SignatureAlgorithm;com.davils.krypt.primitive.signature.SignatureFormat){}[0]
+}
+
+final class com.davils.krypt.primitive/Capabilities { // com.davils.krypt.primitive/Capabilities|null[0]
+    final val hasIncrementalDigest // com.davils.krypt.primitive/Capabilities.hasIncrementalDigest|{}hasIncrementalDigest[0]
+        final fun <get-hasIncrementalDigest>(): kotlin/Boolean // com.davils.krypt.primitive/Capabilities.hasIncrementalDigest.<get-hasIncrementalDigest>|<get-hasIncrementalDigest>(){}[0]
+
+    final suspend fun supports(com.davils.krypt.core.algorithm/Algorithm): kotlin/Boolean // com.davils.krypt.primitive/Capabilities.supports|supports(com.davils.krypt.core.algorithm.Algorithm){}[0]
+    final suspend fun supports(com.davils.krypt.core.algorithm/KeyType): kotlin/Boolean // com.davils.krypt.primitive/Capabilities.supports|supports(com.davils.krypt.core.algorithm.KeyType){}[0]
+}
+
+final class com.davils.krypt.primitive/Crypto { // com.davils.krypt.primitive/Crypto|null[0]
+    constructor <init>(com.davils.krypt.core/Environment = ...) // com.davils.krypt.primitive/Crypto.<init>|<init>(com.davils.krypt.core.Environment){}[0]
+
+    final val aead // com.davils.krypt.primitive/Crypto.aead|{}aead[0]
+        final fun <get-aead>(): com.davils.krypt.primitive.cipher/Aeads // com.davils.krypt.primitive/Crypto.aead.<get-aead>|<get-aead>(){}[0]
+    final val agreements // com.davils.krypt.primitive/Crypto.agreements|{}agreements[0]
+        final fun <get-agreements>(): com.davils.krypt.primitive.exchange/KeyAgreements // com.davils.krypt.primitive/Crypto.agreements.<get-agreements>|<get-agreements>(){}[0]
+    final val capabilities // com.davils.krypt.primitive/Crypto.capabilities|{}capabilities[0]
+        final fun <get-capabilities>(): com.davils.krypt.primitive/Capabilities // com.davils.krypt.primitive/Crypto.capabilities.<get-capabilities>|<get-capabilities>(){}[0]
+    final val derivations // com.davils.krypt.primitive/Crypto.derivations|{}derivations[0]
+        final fun <get-derivations>(): com.davils.krypt.primitive.hash/KeyDerivations // com.davils.krypt.primitive/Crypto.derivations.<get-derivations>|<get-derivations>(){}[0]
+    final val digests // com.davils.krypt.primitive/Crypto.digests|{}digests[0]
+        final fun <get-digests>(): com.davils.krypt.primitive.hash/Digests // com.davils.krypt.primitive/Crypto.digests.<get-digests>|<get-digests>(){}[0]
+    final val encryptions // com.davils.krypt.primitive/Crypto.encryptions|{}encryptions[0]
+        final fun <get-encryptions>(): com.davils.krypt.primitive.cipher/AsymmetricEncryptions // com.davils.krypt.primitive/Crypto.encryptions.<get-encryptions>|<get-encryptions>(){}[0]
+    final val environment // com.davils.krypt.primitive/Crypto.environment|{}environment[0]
+        final fun <get-environment>(): com.davils.krypt.core/Environment // com.davils.krypt.primitive/Crypto.environment.<get-environment>|<get-environment>(){}[0]
+    final val hpke // com.davils.krypt.primitive/Crypto.hpke|{}hpke[0]
+        final fun <get-hpke>(): com.davils.krypt.primitive.exchange/Hpke // com.davils.krypt.primitive/Crypto.hpke.<get-hpke>|<get-hpke>(){}[0]
+    final val kems // com.davils.krypt.primitive/Crypto.kems|{}kems[0]
+        final fun <get-kems>(): com.davils.krypt.primitive.exchange/Kems // com.davils.krypt.primitive/Crypto.kems.<get-kems>|<get-kems>(){}[0]
+    final val keyWraps // com.davils.krypt.primitive/Crypto.keyWraps|{}keyWraps[0]
+        final fun <get-keyWraps>(): com.davils.krypt.primitive.cipher/KeyWraps // com.davils.krypt.primitive/Crypto.keyWraps.<get-keyWraps>|<get-keyWraps>(){}[0]
+    final val keys // com.davils.krypt.primitive/Crypto.keys|{}keys[0]
+        final fun <get-keys>(): com.davils.krypt.primitive.key/Keys // com.davils.krypt.primitive/Crypto.keys.<get-keys>|<get-keys>(){}[0]
+    final val macs // com.davils.krypt.primitive/Crypto.macs|{}macs[0]
+        final fun <get-macs>(): com.davils.krypt.primitive.hash/Macs // com.davils.krypt.primitive/Crypto.macs.<get-macs>|<get-macs>(){}[0]
+    final val passwords // com.davils.krypt.primitive/Crypto.passwords|{}passwords[0]
+        final fun <get-passwords>(): com.davils.krypt.primitive.password/PasswordHasher // com.davils.krypt.primitive/Crypto.passwords.<get-passwords>|<get-passwords>(){}[0]
+    final val signatures // com.davils.krypt.primitive/Crypto.signatures|{}signatures[0]
+        final fun <get-signatures>(): com.davils.krypt.primitive.signature/Signatures // com.davils.krypt.primitive/Crypto.signatures.<get-signatures>|<get-signatures>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.primitive/Crypto.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.primitive/PolicyViolationException : com.davils.krypt.primitive/CryptoException { // com.davils.krypt.primitive/PolicyViolationException|null[0]
+    constructor <init>(kotlin/String) // com.davils.krypt.primitive/PolicyViolationException.<init>|<init>(kotlin.String){}[0]
+}
+
+final class com.davils.krypt.primitive/UnsupportedAlgorithmException : com.davils.krypt.primitive/CryptoException { // com.davils.krypt.primitive/UnsupportedAlgorithmException|null[0]
+    constructor <init>(kotlin/String, kotlin/Throwable? = ...) // com.davils.krypt.primitive/UnsupportedAlgorithmException.<init>|<init>(kotlin.String;kotlin.Throwable?){}[0]
+
+    final val algorithmName // com.davils.krypt.primitive/UnsupportedAlgorithmException.algorithmName|{}algorithmName[0]
+        final fun <get-algorithmName>(): kotlin/String // com.davils.krypt.primitive/UnsupportedAlgorithmException.algorithmName.<get-algorithmName>|<get-algorithmName>(){}[0]
+}
+
+open class com.davils.krypt.primitive/CryptoException : kotlin/RuntimeException { // com.davils.krypt.primitive/CryptoException|null[0]
+    constructor <init>(kotlin/String, kotlin/Throwable? = ...) // com.davils.krypt.primitive/CryptoException.<init>|<init>(kotlin.String;kotlin.Throwable?){}[0]
+}

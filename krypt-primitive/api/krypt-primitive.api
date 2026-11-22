@@ -1,0 +1,320 @@
+public final class com/davils/krypt/primitive/Capabilities {
+	public final fun getHasIncrementalDigest ()Z
+	public final fun supports (Lcom/davils/krypt/core/algorithm/Algorithm;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun supports (Lcom/davils/krypt/core/algorithm/KeyType;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/primitive/Crypto {
+	public fun <init> ()V
+	public fun <init> (Lcom/davils/krypt/core/Environment;)V
+	public synthetic fun <init> (Lcom/davils/krypt/core/Environment;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getAead ()Lcom/davils/krypt/primitive/cipher/Aeads;
+	public final fun getAgreements ()Lcom/davils/krypt/primitive/exchange/KeyAgreements;
+	public final fun getCapabilities ()Lcom/davils/krypt/primitive/Capabilities;
+	public final fun getDerivations ()Lcom/davils/krypt/primitive/hash/KeyDerivations;
+	public final fun getDigests ()Lcom/davils/krypt/primitive/hash/Digests;
+	public final fun getEncryptions ()Lcom/davils/krypt/primitive/cipher/AsymmetricEncryptions;
+	public final fun getEnvironment ()Lcom/davils/krypt/core/Environment;
+	public final fun getHpke ()Lcom/davils/krypt/primitive/exchange/Hpke;
+	public final fun getKems ()Lcom/davils/krypt/primitive/exchange/Kems;
+	public final fun getKeyWraps ()Lcom/davils/krypt/primitive/cipher/KeyWraps;
+	public final fun getKeys ()Lcom/davils/krypt/primitive/key/Keys;
+	public final fun getMacs ()Lcom/davils/krypt/primitive/hash/Macs;
+	public final fun getPasswords ()Lcom/davils/krypt/primitive/password/PasswordHasher;
+	public final fun getSignatures ()Lcom/davils/krypt/primitive/signature/Signatures;
+	public fun toString ()Ljava/lang/String;
+}
+
+public class com/davils/krypt/primitive/CryptoException : java/lang/RuntimeException {
+	public fun <init> (Ljava/lang/String;Ljava/lang/Throwable;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+}
+
+public final class com/davils/krypt/primitive/PolicyViolationException : com/davils/krypt/primitive/CryptoException {
+	public fun <init> (Ljava/lang/String;)V
+}
+
+public final class com/davils/krypt/primitive/UnsupportedAlgorithmException : com/davils/krypt/primitive/CryptoException {
+	public fun <init> (Ljava/lang/String;Ljava/lang/Throwable;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Throwable;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getAlgorithmName ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/primitive/Verification : java/lang/Enum {
+	public static final field Companion Lcom/davils/krypt/primitive/Verification$Companion;
+	public static final field Invalid Lcom/davils/krypt/primitive/Verification;
+	public static final field Valid Lcom/davils/krypt/primitive/Verification;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun isValid ()Z
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/primitive/Verification;
+	public static fun values ()[Lcom/davils/krypt/primitive/Verification;
+}
+
+public final class com/davils/krypt/primitive/Verification$Companion {
+	public final fun of (Z)Lcom/davils/krypt/primitive/Verification;
+}
+
+public final class com/davils/krypt/primitive/cipher/Aeads {
+	public final fun decrypt (Lcom/davils/krypt/primitive/key/SecretKey;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/algorithm/AeadAlgorithm;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun encrypt (Lcom/davils/krypt/primitive/key/SecretKey;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/algorithm/AeadAlgorithm;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun open (Lcom/davils/krypt/primitive/key/SecretKey;Lcom/davils/krypt/primitive/cipher/SealedBox;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/algorithm/AeadAlgorithm;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun open$default (Lcom/davils/krypt/primitive/cipher/Aeads;Lcom/davils/krypt/primitive/key/SecretKey;Lcom/davils/krypt/primitive/cipher/SealedBox;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/algorithm/AeadAlgorithm;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun seal (Lcom/davils/krypt/primitive/key/SecretKey;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/algorithm/AeadAlgorithm;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun seal$default (Lcom/davils/krypt/primitive/cipher/Aeads;Lcom/davils/krypt/primitive/key/SecretKey;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/algorithm/AeadAlgorithm;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/primitive/cipher/AsymmetricEncryptions {
+	public final fun decrypt (Lcom/davils/krypt/primitive/key/PrivateKey;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/algorithm/AsymmetricEncryptionAlgorithm;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun decrypt$default (Lcom/davils/krypt/primitive/cipher/AsymmetricEncryptions;Lcom/davils/krypt/primitive/key/PrivateKey;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/algorithm/AsymmetricEncryptionAlgorithm;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun encrypt (Lcom/davils/krypt/primitive/key/PublicKey;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/algorithm/AsymmetricEncryptionAlgorithm;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun encrypt$default (Lcom/davils/krypt/primitive/cipher/AsymmetricEncryptions;Lcom/davils/krypt/primitive/key/PublicKey;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/algorithm/AsymmetricEncryptionAlgorithm;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/primitive/cipher/KeyWraps {
+	public final fun unwrap (Lcom/davils/krypt/primitive/key/SecretKey;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/algorithm/KeyWrapAlgorithm;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun unwrap$default (Lcom/davils/krypt/primitive/cipher/KeyWraps;Lcom/davils/krypt/primitive/key/SecretKey;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/algorithm/KeyWrapAlgorithm;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun wrap (Lcom/davils/krypt/primitive/key/SecretKey;Lcom/davils/krypt/core/SecretBytes;Lcom/davils/krypt/core/algorithm/KeyWrapAlgorithm;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun wrap$default (Lcom/davils/krypt/primitive/cipher/KeyWraps;Lcom/davils/krypt/primitive/key/SecretKey;Lcom/davils/krypt/core/SecretBytes;Lcom/davils/krypt/core/algorithm/KeyWrapAlgorithm;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/primitive/cipher/SealedBox {
+	public static final field Companion Lcom/davils/krypt/primitive/cipher/SealedBox$Companion;
+	public fun <init> (Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCiphertext ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getEncoded ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getNonce ()Lkotlinx/io/bytestring/ByteString;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/primitive/cipher/SealedBox$Companion {
+	public final fun decodeOrNull (Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/algorithm/AeadAlgorithm;)Lcom/davils/krypt/primitive/cipher/SealedBox;
+}
+
+public final class com/davils/krypt/primitive/exchange/Encapsulation {
+	public fun <init> (Lcom/davils/krypt/core/SecretBytes;Lkotlinx/io/bytestring/ByteString;)V
+	public final fun getEncapsulated ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getSharedSecret ()Lcom/davils/krypt/core/SecretBytes;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/primitive/exchange/Hpke {
+	public final fun open (Lcom/davils/krypt/primitive/exchange/HpkeSuite;Lcom/davils/krypt/primitive/key/PrivateKey;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun open$default (Lcom/davils/krypt/primitive/exchange/Hpke;Lcom/davils/krypt/primitive/exchange/HpkeSuite;Lcom/davils/krypt/primitive/key/PrivateKey;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun recipient (Lcom/davils/krypt/primitive/exchange/HpkeSuite;Lcom/davils/krypt/primitive/key/PrivateKey;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/primitive/key/PublicKey;Lcom/davils/krypt/core/SecretBytes;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun recipient$default (Lcom/davils/krypt/primitive/exchange/Hpke;Lcom/davils/krypt/primitive/exchange/HpkeSuite;Lcom/davils/krypt/primitive/key/PrivateKey;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/primitive/key/PublicKey;Lcom/davils/krypt/core/SecretBytes;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun seal (Lcom/davils/krypt/primitive/exchange/HpkeSuite;Lcom/davils/krypt/primitive/key/PublicKey;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun seal$default (Lcom/davils/krypt/primitive/exchange/Hpke;Lcom/davils/krypt/primitive/exchange/HpkeSuite;Lcom/davils/krypt/primitive/key/PublicKey;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun sender (Lcom/davils/krypt/primitive/exchange/HpkeSuite;Lcom/davils/krypt/primitive/key/PublicKey;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/primitive/key/PrivateKey;Lcom/davils/krypt/core/SecretBytes;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun sender$default (Lcom/davils/krypt/primitive/exchange/Hpke;Lcom/davils/krypt/primitive/exchange/HpkeSuite;Lcom/davils/krypt/primitive/key/PublicKey;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/primitive/key/PrivateKey;Lcom/davils/krypt/core/SecretBytes;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/primitive/exchange/HpkeContext {
+	public final fun destroy ()V
+	public final fun export (Lkotlinx/io/bytestring/ByteString;ILkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getSuite ()Lcom/davils/krypt/primitive/exchange/HpkeSuite;
+	public final fun open (Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun open$default (Lcom/davils/krypt/primitive/exchange/HpkeContext;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun seal (Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun seal$default (Lcom/davils/krypt/primitive/exchange/HpkeContext;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/primitive/exchange/HpkeSender {
+	public fun <init> (Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/primitive/exchange/HpkeContext;)V
+	public final fun getContext ()Lcom/davils/krypt/primitive/exchange/HpkeContext;
+	public final fun getEncapsulated ()Lkotlinx/io/bytestring/ByteString;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/primitive/exchange/HpkeSuite {
+	public static final field Companion Lcom/davils/krypt/primitive/exchange/HpkeSuite$Companion;
+	public fun <init> (Lcom/davils/krypt/core/algorithm/KemAlgorithm;Lcom/davils/krypt/core/algorithm/KdfAlgorithm;Lcom/davils/krypt/core/algorithm/AeadAlgorithm;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAead ()Lcom/davils/krypt/core/algorithm/AeadAlgorithm;
+	public final fun getKdf ()Lcom/davils/krypt/core/algorithm/KdfAlgorithm;
+	public final fun getKem ()Lcom/davils/krypt/core/algorithm/KemAlgorithm;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/primitive/exchange/HpkeSuite$Companion {
+	public final fun getMlKem768Aes256Gcm ()Lcom/davils/krypt/primitive/exchange/HpkeSuite;
+	public final fun getP384Aes256Gcm ()Lcom/davils/krypt/primitive/exchange/HpkeSuite;
+	public final fun getX25519Aes256Gcm ()Lcom/davils/krypt/primitive/exchange/HpkeSuite;
+}
+
+public final class com/davils/krypt/primitive/exchange/Kems {
+	public final fun decapsulate (Lcom/davils/krypt/primitive/key/PrivateKey;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/algorithm/KemAlgorithm;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun defaultFor (Lcom/davils/krypt/primitive/key/PublicKey;)Lcom/davils/krypt/core/algorithm/KemAlgorithm;
+	public final fun encapsulate (Lcom/davils/krypt/primitive/key/PublicKey;Lcom/davils/krypt/core/algorithm/KemAlgorithm;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun encapsulate$default (Lcom/davils/krypt/primitive/exchange/Kems;Lcom/davils/krypt/primitive/key/PublicKey;Lcom/davils/krypt/core/algorithm/KemAlgorithm;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/primitive/exchange/KeyAgreements {
+	public final fun agree (Lcom/davils/krypt/primitive/key/PrivateKey;Lcom/davils/krypt/primitive/key/PublicKey;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun algorithmFor (Lcom/davils/krypt/core/algorithm/KeyFamily;Lcom/davils/krypt/core/algorithm/EllipticCurve;)Lcom/davils/krypt/core/algorithm/KeyAgreementAlgorithm;
+}
+
+public final class com/davils/krypt/primitive/hash/Digester {
+	public final fun finish ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getAlgorithm ()Lcom/davils/krypt/core/algorithm/DigestAlgorithm;
+	public fun toString ()Ljava/lang/String;
+	public final fun update (Lkotlinx/io/bytestring/ByteString;)V
+	public final fun update ([BII)V
+	public static synthetic fun update$default (Lcom/davils/krypt/primitive/hash/Digester;[BIIILjava/lang/Object;)V
+}
+
+public final class com/davils/krypt/primitive/hash/Digests {
+	public final fun digest (Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/algorithm/DigestAlgorithm;Lcom/davils/krypt/core/policy/AlgorithmUse;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun digest$default (Lcom/davils/krypt/primitive/hash/Digests;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/algorithm/DigestAlgorithm;Lcom/davils/krypt/core/policy/AlgorithmUse;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun digester (Lcom/davils/krypt/core/algorithm/DigestAlgorithm;Lcom/davils/krypt/core/policy/AlgorithmUse;)Lcom/davils/krypt/primitive/hash/Digester;
+	public static synthetic fun digester$default (Lcom/davils/krypt/primitive/hash/Digests;Lcom/davils/krypt/core/algorithm/DigestAlgorithm;Lcom/davils/krypt/core/policy/AlgorithmUse;ILjava/lang/Object;)Lcom/davils/krypt/primitive/hash/Digester;
+}
+
+public final class com/davils/krypt/primitive/hash/KeyDerivations {
+	public final fun expand (Lcom/davils/krypt/core/SecretBytes;Lkotlinx/io/bytestring/ByteString;ILcom/davils/krypt/core/algorithm/KdfAlgorithm;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun expand$default (Lcom/davils/krypt/primitive/hash/KeyDerivations;Lcom/davils/krypt/core/SecretBytes;Lkotlinx/io/bytestring/ByteString;ILcom/davils/krypt/core/algorithm/KdfAlgorithm;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun extract (Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/SecretBytes;Lcom/davils/krypt/core/algorithm/KdfAlgorithm;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun extract$default (Lcom/davils/krypt/primitive/hash/KeyDerivations;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/SecretBytes;Lcom/davils/krypt/core/algorithm/KdfAlgorithm;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun hkdf (Lcom/davils/krypt/core/SecretBytes;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;ILcom/davils/krypt/core/algorithm/KdfAlgorithm;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun hkdf$default (Lcom/davils/krypt/primitive/hash/KeyDerivations;Lcom/davils/krypt/core/SecretBytes;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;ILcom/davils/krypt/core/algorithm/KdfAlgorithm;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun pbkdf2 (Lcom/davils/krypt/core/SecretText;Lkotlinx/io/bytestring/ByteString;IILcom/davils/krypt/core/algorithm/KdfAlgorithm;Lcom/davils/krypt/core/policy/AlgorithmUse;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun pbkdf2$default (Lcom/davils/krypt/primitive/hash/KeyDerivations;Lcom/davils/krypt/core/SecretText;Lkotlinx/io/bytestring/ByteString;IILcom/davils/krypt/core/algorithm/KdfAlgorithm;Lcom/davils/krypt/core/policy/AlgorithmUse;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/primitive/hash/Macs {
+	public final fun mac (Lcom/davils/krypt/primitive/key/SecretKey;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/algorithm/MacAlgorithm;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun mac$default (Lcom/davils/krypt/primitive/hash/Macs;Lcom/davils/krypt/primitive/key/SecretKey;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/algorithm/MacAlgorithm;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun verify (Lcom/davils/krypt/primitive/key/SecretKey;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/algorithm/MacAlgorithm;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun verify$default (Lcom/davils/krypt/primitive/hash/Macs;Lcom/davils/krypt/primitive/key/SecretKey;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/algorithm/MacAlgorithm;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/primitive/key/JcaKeyBridge {
+	public static final fun fromJca (Lcom/davils/krypt/primitive/key/Keys;Ljava/security/PublicKey;Ljava/security/PrivateKey;)Lcom/davils/krypt/primitive/key/KeyPair;
+}
+
+public final class com/davils/krypt/primitive/key/KeyFailure : java/lang/Enum {
+	public static final field Malformed Lcom/davils/krypt/primitive/key/KeyFailure;
+	public static final field PasswordRequired Lcom/davils/krypt/primitive/key/KeyFailure;
+	public static final field Refused Lcom/davils/krypt/primitive/key/KeyFailure;
+	public static final field UnsupportedAlgorithm Lcom/davils/krypt/primitive/key/KeyFailure;
+	public static final field UnsupportedEncryption Lcom/davils/krypt/primitive/key/KeyFailure;
+	public static final field WrongPassword Lcom/davils/krypt/primitive/key/KeyFailure;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/primitive/key/KeyFailure;
+	public static fun values ()[Lcom/davils/krypt/primitive/key/KeyFailure;
+}
+
+public final class com/davils/krypt/primitive/key/KeyPair {
+	public fun <init> (Lcom/davils/krypt/primitive/key/PublicKey;Lcom/davils/krypt/primitive/key/PrivateKey;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getPrivateKey ()Lcom/davils/krypt/primitive/key/PrivateKey;
+	public final fun getPublicKey ()Lcom/davils/krypt/primitive/key/PublicKey;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/primitive/key/Keys {
+	public final fun decodePrivate (Lcom/davils/krypt/core/SecretBytes;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun decodePrivatePem (Ljava/lang/String;Lcom/davils/krypt/core/SecretText;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun decodePrivatePem$default (Lcom/davils/krypt/primitive/key/Keys;Ljava/lang/String;Lcom/davils/krypt/core/SecretText;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun decodePublic (Lkotlinx/io/bytestring/ByteString;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun decodePublicPem (Ljava/lang/String;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun decrypt (Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/SecretText;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun encodePem (Lcom/davils/krypt/primitive/key/PrivateKey;)Ljava/lang/String;
+	public final fun encodePem (Lcom/davils/krypt/primitive/key/PublicKey;)Ljava/lang/String;
+	public final fun encodePrivate (Lcom/davils/krypt/primitive/key/PrivateKey;)Lcom/davils/krypt/core/SecretBytes;
+	public final fun encrypt (Lcom/davils/krypt/primitive/key/PrivateKey;Lcom/davils/krypt/core/SecretText;ILkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun encrypt$default (Lcom/davils/krypt/primitive/key/Keys;Lcom/davils/krypt/primitive/key/PrivateKey;Lcom/davils/krypt/core/SecretText;ILkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun encryptPem (Lcom/davils/krypt/primitive/key/PrivateKey;Lcom/davils/krypt/core/SecretText;ILkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun encryptPem$default (Lcom/davils/krypt/primitive/key/Keys;Lcom/davils/krypt/primitive/key/PrivateKey;Lcom/davils/krypt/core/SecretText;ILkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun fingerprint (Lcom/davils/krypt/primitive/key/PublicKey;Lcom/davils/krypt/core/algorithm/DigestAlgorithm;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun fingerprint$default (Lcom/davils/krypt/primitive/key/Keys;Lcom/davils/krypt/primitive/key/PublicKey;Lcom/davils/krypt/core/algorithm/DigestAlgorithm;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun generate (Lcom/davils/krypt/core/algorithm/KeyType;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun generateSecret (I)Lcom/davils/krypt/primitive/key/SecretKey;
+	public static synthetic fun generateSecret$default (Lcom/davils/krypt/primitive/key/Keys;IILjava/lang/Object;)Lcom/davils/krypt/primitive/key/SecretKey;
+	public final fun pair (Lcom/davils/krypt/primitive/key/PrivateKey;Lcom/davils/krypt/primitive/key/PublicKey;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/primitive/key/PrivateKey {
+	public final fun destroy ()V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBits ()I
+	public final fun getCurve ()Lcom/davils/krypt/core/algorithm/EllipticCurve;
+	public final fun getFamily ()Lcom/davils/krypt/core/algorithm/KeyFamily;
+	public final fun getPublicKey ()Lcom/davils/krypt/primitive/key/PublicKey;
+	public fun hashCode ()I
+	public final fun isDestroyed ()Z
+	public final fun isExtractable ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/primitive/key/PublicKey {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBits ()I
+	public final fun getCurve ()Lcom/davils/krypt/core/algorithm/EllipticCurve;
+	public final fun getEncoded ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getFamily ()Lcom/davils/krypt/core/algorithm/KeyFamily;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/primitive/key/SecretKey {
+	public static final field Companion Lcom/davils/krypt/primitive/key/SecretKey$Companion;
+	public static final field MINIMUM_BYTES I
+	public final fun destroy ()V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun export ()Lcom/davils/krypt/core/SecretBytes;
+	public final fun getBits ()I
+	public fun hashCode ()I
+	public final fun isDestroyed ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/primitive/key/SecretKey$Companion {
+	public final fun of (Lcom/davils/krypt/core/SecretBytes;)Lcom/davils/krypt/primitive/key/SecretKey;
+}
+
+public final class com/davils/krypt/primitive/password/PasswordHasher {
+	public final fun hash (Lcom/davils/krypt/core/SecretText;Lcom/davils/krypt/core/algorithm/KdfAlgorithm;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun hash$default (Lcom/davils/krypt/primitive/password/PasswordHasher;Lcom/davils/krypt/core/SecretText;Lcom/davils/krypt/core/algorithm/KdfAlgorithm;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun verify (Lcom/davils/krypt/core/SecretText;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/primitive/password/PasswordVerification : java/lang/Enum {
+	public static final field Invalid Lcom/davils/krypt/primitive/password/PasswordVerification;
+	public static final field Malformed Lcom/davils/krypt/primitive/password/PasswordVerification;
+	public static final field Valid Lcom/davils/krypt/primitive/password/PasswordVerification;
+	public static final field ValidButOutdated Lcom/davils/krypt/primitive/password/PasswordVerification;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun isValid ()Z
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/primitive/password/PasswordVerification;
+	public static fun values ()[Lcom/davils/krypt/primitive/password/PasswordVerification;
+}
+
+public final class com/davils/krypt/primitive/signature/SignatureFormat : java/lang/Enum {
+	public static final field Der Lcom/davils/krypt/primitive/signature/SignatureFormat;
+	public static final field Raw Lcom/davils/krypt/primitive/signature/SignatureFormat;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/primitive/signature/SignatureFormat;
+	public static fun values ()[Lcom/davils/krypt/primitive/signature/SignatureFormat;
+}
+
+public final class com/davils/krypt/primitive/signature/Signatures {
+	public final fun defaultFor (Lcom/davils/krypt/core/algorithm/KeyFamily;Lcom/davils/krypt/core/algorithm/EllipticCurve;I)Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;
+	public final fun sign (Lcom/davils/krypt/primitive/key/PrivateKey;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;Lcom/davils/krypt/primitive/signature/SignatureFormat;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun sign$default (Lcom/davils/krypt/primitive/signature/Signatures;Lcom/davils/krypt/primitive/key/PrivateKey;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;Lcom/davils/krypt/primitive/signature/SignatureFormat;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun signer (Lcom/davils/krypt/primitive/key/PrivateKey;Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;)Lcom/davils/krypt/primitive/signature/Signer;
+	public static synthetic fun signer$default (Lcom/davils/krypt/primitive/signature/Signatures;Lcom/davils/krypt/primitive/key/PrivateKey;Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;ILjava/lang/Object;)Lcom/davils/krypt/primitive/signature/Signer;
+	public final fun verify (Lcom/davils/krypt/primitive/key/PublicKey;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;Lcom/davils/krypt/primitive/signature/SignatureFormat;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun verify$default (Lcom/davils/krypt/primitive/signature/Signatures;Lcom/davils/krypt/primitive/key/PublicKey;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;Lcom/davils/krypt/primitive/signature/SignatureFormat;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public abstract interface class com/davils/krypt/primitive/signature/Signer {
+	public abstract fun getAlgorithm ()Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;
+	public abstract fun getPublicKey ()Lcom/davils/krypt/primitive/key/PublicKey;
+	public abstract fun sign (Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
