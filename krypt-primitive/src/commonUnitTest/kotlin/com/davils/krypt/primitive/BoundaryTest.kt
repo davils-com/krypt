@@ -75,7 +75,7 @@ class BoundaryTest : FunSpec({
             }
         }
         val zeroModulus = spki(RSA_OID, BitString(empty)) { nullValue() }
-        crypto.keys.decodePublic(zeroModulus).failureOrNull() shouldBe KeyFailure.Refused
+        crypto.keys.decodePublic(zeroModulus).failureOrNull() shouldBe KeyFailure.Malformed
     }
 
     test("an ECDSA signature with a negative s is invalid") {

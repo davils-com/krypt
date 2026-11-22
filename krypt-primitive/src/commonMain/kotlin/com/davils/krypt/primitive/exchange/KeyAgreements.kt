@@ -22,6 +22,9 @@ import com.davils.krypt.core.algorithm.KeyAgreementAlgorithm
 import com.davils.krypt.core.algorithm.KeyFamily
 import com.davils.krypt.core.policy.AlgorithmUse
 import com.davils.krypt.primitive.Crypto
+import com.davils.krypt.primitive.CryptoException
+import com.davils.krypt.primitive.internal.platformRefusal
+import com.davils.krypt.primitive.internal.requireSupported
 import com.davils.krypt.primitive.key.PrivateKey
 import com.davils.krypt.primitive.key.PublicKey
 
@@ -40,17 +43,26 @@ public class KeyAgreements internal constructor(private val crypto: Crypto) {
      * @param publicKey the public key of the peer, of the same family and curve.
      * @return the raw shared secret: the x-coordinate for ECDH, the u-coordinate for X25519 and X448.
      * @throws IllegalArgumentException if the keys do not agree or do not belong to a key agreement family.
+     * @throws IllegalStateException if [privateKey] was destroyed.
      * @throws com.davils.krypt.primitive.PolicyViolationException if the policy forbids the agreement or the keys.
+     * @throws com.davils.krypt.primitive.UnsupportedAlgorithmException if the platform lacks the agreement.
+     * @throws CryptoException if the platform refuses one of the keys, such as a peer key of small order or a point
+     *   off the curve; the exception carries nothing of the failure of the platform.
      * @since 1.0.0
      */
-    public suspend fun agree(privateKey: PrivateKey, publicKey: PublicKey): SecretBytes {
+    public suspend fun agree(privateKey: PrivateKey, publicKey: PublicKey): SecretBytes =
+        agreeOrNull(privateKey = privateKey, publicKey = publicKey) ?: throw platformRefusal()
+
+    internal suspend fun agreeOrNull(privateKey: PrivateKey, publicKey: PublicKey): SecretBytes? {
         require(privateKey.family == publicKey.family && privateKey.curve == publicKey.curve) {
             "Both keys of an agreement have the same family and curve"
         }
         val algorithm = algorithmFor(privateKey.family, privateKey.curve)
         crypto.permit(algorithm, AlgorithmUse.Protect)
         crypto.permitKey(publicKey, AlgorithmUse.Protect)
-        return SecretBytes.adopt(crypto.backend.agree(algorithm, privateKey, publicKey))
+        crypto.requireSupported(algorithm)
+        val secret = crypto.backend.agree(algorithm, privateKey, publicKey)
+        return secret?.let { bytes -> SecretBytes.adopt(bytes) }
     }
 
     /**

@@ -110,6 +110,11 @@ internal class JcaInstances(private val provider: Provider?) {
         return decoded
     }
 
+    fun requireUsable(key: PrivateKey) {
+        key.checkAlive()
+        check(key.handle != null || key.encodingOrNull() != null) { NO_KEY }
+    }
+
     fun privateKey(key: PrivateKey): JcaPrivateKey {
         key.checkAlive()
         val cached = key.handle as? JcaPrivateKey
@@ -169,9 +174,7 @@ internal class JcaInstances(private val provider: Provider?) {
     }
 
     private fun decodePrivate(key: PrivateKey): JcaPrivateKey {
-        val encoding: SecretBytes = checkNotNull(
-            key.encodingOrNull(),
-        ) { "The private key has neither an encoding nor a handle" }
+        val encoding: SecretBytes = checkNotNull(key.encodingOrNull()) { NO_KEY }
         val factory = keyFactory(JcaNames.keyFactory(key.family))
         return encoding.reveal { bytes ->
             val spec = PKCS8EncodedKeySpec(bytes)
@@ -181,6 +184,7 @@ internal class JcaInstances(private val provider: Provider?) {
 
     private companion object {
         const val ML_KEM: String = "ML-KEM"
+        const val NO_KEY: String = "The private key has neither an encoding nor a handle"
         const val KEY_WRAP: String = "AES/KW/NoPadding"
     }
 }

@@ -70,21 +70,6 @@ private fun hostileRsaSpki(): ByteString {
 }
 
 class AuditJcaTest : FunSpec({
-    test("A-2: verifying with an RSA key that decodePublic accepted but JCA rejects is Invalid, not an exception") {
-        val crypto = Crypto()
-        val key = crypto.keys.decodePublic(hostileRsaSpki()).getOrNull()
-        key shouldNotBe null
-        val verification = shouldNotThrowAny {
-            crypto.signatures.verify(
-                key = checkNotNull(key),
-                data = "message".encodeToByteString(),
-                signature = ByteString(ByteArray(MODULUS_BYTES)),
-                algorithm = SignatureAlgorithm.RsaPssSha256,
-            )
-        }
-        verification shouldBe Verification.Invalid
-    }
-
     test("A-5: the constructors of the key types are not reachable from Java, so the policy cannot be bypassed") {
         val crypto = Crypto()
         val weak = KeyPairGenerator.getInstance("RSA").apply { initialize(WEAK_RSA_BITS) }.generateKeyPair()

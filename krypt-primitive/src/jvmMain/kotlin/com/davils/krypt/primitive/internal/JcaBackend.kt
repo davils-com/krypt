@@ -38,12 +38,12 @@ import com.davils.krypt.primitive.key.PrivateKey
 import com.davils.krypt.primitive.key.PublicKey
 import com.davils.krypt.primitive.key.SecretKey
 import java.security.GeneralSecurityException
+import java.security.ProviderException
 import java.security.SecureRandom
 import java.security.spec.AlgorithmParameterSpec
 import java.security.spec.ECGenParameterSpec
 import java.security.spec.NamedParameterSpec
 import java.security.spec.RSAKeyGenParameterSpec
-import javax.crypto.AEADBadTagException
 import javax.crypto.Cipher
 import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.PBEKeySpec
@@ -106,8 +106,10 @@ internal class JcaBackend(environment: Environment) : Backend {
         ciphertext: ByteArray,
     ): ByteArray? {
         val cipher = aeadCipher(algorithm = algorithm, mode = Cipher.DECRYPT_MODE, key = key, nonce = nonce)
-        cipher.updateAAD(aad)
-        return failing<AEADBadTagException, ByteArray> { cipher.doFinal(ciphertext) }
+        return refusing {
+            cipher.updateAAD(aad)
+            cipher.doFinal(ciphertext)
+        }
     }
 
     override suspend fun aesCbcEncrypt(key: SecretBytes, iv: ByteArray, data: ByteArray): ByteArray =
@@ -115,7 +117,7 @@ internal class JcaBackend(environment: Environment) : Backend {
 
     override suspend fun aesCbcDecrypt(key: SecretBytes, iv: ByteArray, data: ByteArray): ByteArray? {
         val cipher = cbc(mode = Cipher.DECRYPT_MODE, key = key, iv = iv)
-        return failing<GeneralSecurityException, ByteArray> { cipher.doFinal(data) }
+        return refusing { cipher.doFinal(data) }
     }
 
     private fun cbc(mode: Int, key: SecretBytes, iv: ByteArray): Cipher {
@@ -133,7 +135,7 @@ internal class JcaBackend(environment: Environment) : Backend {
     override suspend fun unwrap(algorithm: KeyWrapAlgorithm, kek: SecretKey, wrapped: ByteArray): ByteArray? {
         val cipher = jca.cipher("AES/KW/NoPadding")
         kek.reveal { bytes -> cipher.init(Cipher.DECRYPT_MODE, SecretKeySpec(bytes, AES), random) }
-        return failing<GeneralSecurityException, ByteArray> { cipher.doFinal(wrapped) }
+        return refusing { cipher.doFinal(wrapped) }
     }
 
     override suspend fun pbkdf2(
@@ -163,9 +165,13 @@ internal class JcaBackend(environment: Environment) : Backend {
 
     override suspend fun sign(algorithm: SignatureAlgorithm, key: PrivateKey, data: ByteArray): ByteArray {
         val signature = jca.signature(algorithm)
-        signature.initSign(jca.privateKey(key), random)
-        signature.update(data)
-        return signature.sign()
+        jca.requireUsable(key)
+        val signed = refusing {
+            signature.initSign(jca.privateKey(key), random)
+            signature.update(data)
+            signature.sign()
+        }
+        return signed ?: throw platformRefusal()
     }
 
     override suspend fun verify(
@@ -175,25 +181,32 @@ internal class JcaBackend(environment: Environment) : Backend {
         signature: ByteArray,
     ): Boolean {
         val verifier = jca.signature(algorithm)
-        verifier.initVerify(jca.publicKey(key))
-        verifier.update(data)
-        return failing<GeneralSecurityException, Boolean> { verifier.verify(signature) } == true
+        val isValid = refusing {
+            verifier.initVerify(jca.publicKey(key))
+            verifier.update(data)
+            verifier.verify(signature)
+        }
+        return isValid == true
     }
 
     override suspend fun agree(
         algorithm: KeyAgreementAlgorithm,
         privateKey: PrivateKey,
         publicKey: PublicKey,
-    ): ByteArray {
+    ): ByteArray? {
         val agreement = jca.keyAgreement(JcaNames.agreement(algorithm))
-        agreement.init(jca.privateKey(privateKey), random)
-        agreement.doPhase(jca.publicKey(publicKey), true)
-        return agreement.generateSecret()
+        jca.requireUsable(privateKey)
+        return refusing {
+            agreement.init(jca.privateKey(privateKey), random)
+            agreement.doPhase(jca.publicKey(publicKey), true)
+            agreement.generateSecret()
+        }
     }
 
     override suspend fun encapsulate(algorithm: KemAlgorithm, publicKey: PublicKey): Pair<ByteArray, ByteArray> {
-        val encapsulator = jca.kem().newEncapsulator(jca.publicKey(publicKey), random)
-        val encapsulated = encapsulator.encapsulate()
+        val kem = jca.kem()
+        val encapsulated = refusing { kem.newEncapsulator(jca.publicKey(publicKey), random).encapsulate() }
+            ?: throw platformRefusal()
         return encapsulated.key().encoded to encapsulated.encapsulation()
     }
 
@@ -202,10 +215,14 @@ internal class JcaBackend(environment: Environment) : Backend {
         privateKey: PrivateKey,
         encapsulated: ByteArray,
     ): ByteArray? {
-        val decapsulator = jca.kem().newDecapsulator(jca.privateKey(privateKey))
-        val isSized = encapsulated.size == decapsulator.encapsulationSize()
-        val key = encapsulated.takeIf { isSized }?.let { bytes -> decapsulator.decapsulate(bytes) }
-        return key?.encoded
+        val kem = jca.kem()
+        jca.requireUsable(privateKey)
+        return refusing {
+            val decapsulator = kem.newDecapsulator(jca.privateKey(privateKey))
+            val isSized = encapsulated.size == decapsulator.encapsulationSize()
+            val key = encapsulated.takeIf { isSized }?.let { bytes -> decapsulator.decapsulate(bytes) }
+            key?.encoded
+        }
     }
 
     override suspend fun encrypt(
@@ -214,8 +231,11 @@ internal class JcaBackend(environment: Environment) : Backend {
         data: ByteArray,
     ): ByteArray {
         val cipher = jca.rsaCipher(algorithm)
-        cipher.init(Cipher.ENCRYPT_MODE, jca.publicKey(publicKey), JcaNames.oaep(algorithm), random)
-        return cipher.doFinal(data)
+        val encrypted = refusing {
+            cipher.init(Cipher.ENCRYPT_MODE, jca.publicKey(publicKey), JcaNames.oaep(algorithm), random)
+            cipher.doFinal(data)
+        }
+        return encrypted ?: throw platformRefusal()
     }
 
     override suspend fun decrypt(
@@ -224,8 +244,11 @@ internal class JcaBackend(environment: Environment) : Backend {
         data: ByteArray,
     ): ByteArray? {
         val cipher = jca.rsaCipher(algorithm)
-        cipher.init(Cipher.DECRYPT_MODE, jca.privateKey(privateKey), JcaNames.oaep(algorithm), random)
-        return failing<GeneralSecurityException, ByteArray> { cipher.doFinal(data) }
+        jca.requireUsable(privateKey)
+        return refusing {
+            cipher.init(Cipher.DECRYPT_MODE, jca.privateKey(privateKey), JcaNames.oaep(algorithm), random)
+            cipher.doFinal(data)
+        }
     }
 
     private fun aeadCipher(algorithm: AeadAlgorithm, mode: Int, key: SecretKey, nonce: ByteArray): Cipher {
@@ -251,9 +274,17 @@ internal class JcaBackend(environment: Environment) : Backend {
         return SecureRandom().takeIf { isPlatform } ?: RandomSourceAdapter(environment.random)
     }
 
-    private inline fun <reified E : Exception, R> failing(block: () -> R): R? = try {
+    private inline fun <R> refusing(block: () -> R): R? = try {
         block()
-    } catch (_: E) {
+    } catch (_: GeneralSecurityException) {
+        null
+    } catch (_: IllegalArgumentException) {
+        null
+    } catch (_: IllegalStateException) {
+        null
+    } catch (_: ProviderException) {
+        null
+    } catch (_: ArithmeticException) {
         null
     }
 }

@@ -22,6 +22,7 @@ import com.davils.krypt.core.algorithm.KeyFamily
 import com.davils.krypt.core.policy.AlgorithmUse
 import com.davils.krypt.primitive.Crypto
 import com.davils.krypt.primitive.internal.Dhkem
+import com.davils.krypt.primitive.internal.requireSupported
 import com.davils.krypt.primitive.key.PrivateKey
 import com.davils.krypt.primitive.key.PublicKey
 import kotlinx.io.bytestring.ByteString
@@ -46,6 +47,9 @@ public class Kems internal constructor(private val crypto: Crypto) {
      * @return the shared secret and the encapsulation.
      * @throws IllegalArgumentException if [algorithm] does not fit the key.
      * @throws com.davils.krypt.primitive.PolicyViolationException if the policy forbids [algorithm].
+     * @throws com.davils.krypt.primitive.UnsupportedAlgorithmException if the platform lacks [algorithm].
+     * @throws com.davils.krypt.primitive.CryptoException if the platform refuses [recipient]; the exception carries
+     *   nothing of the failure of the platform.
      * @since 1.0.0
      */
     public suspend fun encapsulate(
@@ -58,6 +62,7 @@ public class Kems internal constructor(private val crypto: Crypto) {
             algorithm == defaultFor(recipient),
         ) { "${algorithm.algorithmName} does not encapsulate to a ${recipient.family} key" }
         crypto.permit(algorithm, AlgorithmUse.Protect)
+        crypto.requireSupported(algorithm)
         return when (algorithm.family == KeyFamily.MlKem) {
             true -> mlKemEncapsulate(algorithm, recipient)
             false -> Dhkem(crypto, algorithm).encapsulate(recipient = recipient, sender = null)
@@ -70,9 +75,11 @@ public class Kems internal constructor(private val crypto: Crypto) {
      * @param recipient the private key of the recipient, whose public key must be known for a DHKEM.
      * @param encapsulated the encapsulation.
      * @param algorithm the KEM.
-     * @return the shared secret, or null if the encapsulation is malformed.
+     * @return the shared secret, or null if the encapsulation is malformed or the platform refuses it, such as a
+     *   DHKEM point of small order or off the curve.
      * @throws IllegalArgumentException if [algorithm] does not fit the key.
      * @throws com.davils.krypt.primitive.PolicyViolationException if the policy forbids [algorithm].
+     * @throws com.davils.krypt.primitive.UnsupportedAlgorithmException if the platform lacks [algorithm].
      * @since 1.0.0
      */
     public suspend fun decapsulate(
@@ -84,6 +91,7 @@ public class Kems internal constructor(private val crypto: Crypto) {
             algorithm.family == recipient.family,
         ) { "${algorithm.algorithmName} does not decapsulate with a ${recipient.family} key" }
         crypto.permit(algorithm, AlgorithmUse.Verify)
+        crypto.requireSupported(algorithm)
         return when (algorithm.family == KeyFamily.MlKem) {
             true -> mlKemDecapsulate(algorithm = algorithm, recipient = recipient, encapsulated = encapsulated)
 

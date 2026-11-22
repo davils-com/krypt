@@ -47,12 +47,12 @@ internal object KeyProbes {
     private suspend fun agrees(crypto: Crypto, privateKey: PrivateKey, publicKey: PublicKey): Boolean {
         val type = KeyType.entries.first { candidate -> candidate.family == publicKey.family }
         val ephemeral = crypto.keys.generate(type)
-        val mine = crypto.agreements.agree(privateKey, ephemeral.publicKey)
-        val theirs = crypto.agreements.agree(ephemeral.privateKey, publicKey)
+        val mine = crypto.agreements.agreeOrNull(privateKey, ephemeral.publicKey)
+        val theirs = crypto.agreements.agreeOrNull(ephemeral.privateKey, publicKey)
         ephemeral.privateKey.destroy()
-        val isEqual = mine == theirs
-        mine.destroy()
-        theirs.destroy()
+        val isEqual = mine != null && mine == theirs
+        mine?.destroy()
+        theirs?.destroy()
         return isEqual
     }
 

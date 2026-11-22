@@ -56,10 +56,10 @@ internal class Dhkem(private val crypto: Crypto, private val algorithm: KemAlgor
     suspend fun decapsulate(recipient: PrivateKey, encapsulated: ByteString, sender: PublicKey?): SecretBytes? {
         val ephemeral = deserialize(encapsulated) ?: return null
         val recipientPublic = checkNotNull(recipient.publicKey) { "The recipient key needs its public key" }
-        val first = crypto.agreements.agree(recipient, ephemeral)
-        val dh = withPeer(first = first, recipient = recipient, sender = sender)
+        val first = crypto.agreements.agreeOrNull(recipient, ephemeral)
+        val dh = first?.let { secret -> withPeer(first = secret, recipient = recipient, sender = sender) }
         val context = encapsulated + serialize(recipientPublic) + serializeOrEmpty(sender)
-        return extractAndExpand(dh = dh, context = context)
+        return dh?.let { secret -> extractAndExpand(dh = secret, context = context) }
     }
 
     fun deserialize(encoded: ByteString): PublicKey? {
@@ -77,9 +77,11 @@ internal class Dhkem(private val crypto: Crypto, private val algorithm: KemAlgor
         return concat(first = first, second = crypto.agreements.agree(own, peer))
     }
 
-    private suspend fun withPeer(first: SecretBytes, recipient: PrivateKey, sender: PublicKey?): SecretBytes {
+    private suspend fun withPeer(first: SecretBytes, recipient: PrivateKey, sender: PublicKey?): SecretBytes? {
         val peer = sender ?: return first
-        return concat(first = first, second = crypto.agreements.agree(recipient, peer))
+        val second = crypto.agreements.agreeOrNull(recipient, peer)
+        if (second == null) first.destroy()
+        return second?.let { found -> concat(first = first, second = found) }
     }
 
     private fun senderBytes(sender: PrivateKey?): ByteString {

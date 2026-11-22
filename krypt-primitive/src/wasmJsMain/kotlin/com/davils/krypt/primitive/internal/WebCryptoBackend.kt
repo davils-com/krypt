@@ -194,10 +194,12 @@ internal class WebCryptoBackend : Backend {
             algorithm = WebCryptoParameters.signatureImport(algorithm, key.curve),
             usages = "sign",
         )
-        val cryptoKey = WebCryptoKeys.private(key, import)
-        return JsBytes.withJs(
-            data,
-        ) { input -> JsBytes.fromJs(sign(WebCryptoParameters.signature(algorithm), cryptoKey, input).settled()) }
+        key.checkAlive()
+        val signed = attempt {
+            val cryptoKey = WebCryptoKeys.private(key, import)
+            JsBytes.withJs(data) { input -> sign(WebCryptoParameters.signature(algorithm), cryptoKey, input).settled() }
+        }
+        return JsBytes.fromJs(signed ?: throw platformRefusal())
     }
 
     override suspend fun verify(
@@ -211,11 +213,11 @@ internal class WebCryptoBackend : Backend {
             algorithm = WebCryptoParameters.signatureImport(algorithm, key.curve),
             usages = "verify",
         )
-        val cryptoKey = WebCryptoKeys.public(key, import)
         val parameters = WebCryptoParameters.signature(algorithm)
-        val result = JsBytes.withJs(
-            data,
-        ) { input -> attempt { verify(parameters, cryptoKey, JsBytes.toJs(signature), input).settled() } }
+        val result = attempt {
+            val cryptoKey = WebCryptoKeys.public(key, import)
+            JsBytes.withJs(data) { input -> verify(parameters, cryptoKey, JsBytes.toJs(signature), input).settled() }
+        }
         return result?.toBoolean() == true
     }
 
@@ -223,19 +225,21 @@ internal class WebCryptoBackend : Backend {
         algorithm: KeyAgreementAlgorithm,
         privateKey: PrivateKey,
         publicKey: PublicKey,
-    ): ByteArray {
+    ): ByteArray? {
         val (name, importAlgorithm) = WebCryptoParameters.agreement(algorithm)
-        val own = WebCryptoKeys.private(
-            privateKey,
-            KeyImport(name = "agree:${algorithm.name}", algorithm = importAlgorithm, usages = WebCryptoNames.DERIVE),
+        privateKey.checkAlive()
+        val ownImport = KeyImport(
+            name = "agree:${algorithm.name}",
+            algorithm = importAlgorithm,
+            usages = WebCryptoNames.DERIVE,
         )
-        val peer = WebCryptoKeys.public(
-            publicKey,
-            KeyImport(name = "agree:${algorithm.name}", algorithm = importAlgorithm, usages = ""),
-        )
-        return JsBytes.fromJs(
-            deriveBits(agreementParameters(name, peer), own, algorithm.secretBytes * BYTE_BITS).settled(),
-        )
+        val peerImport = KeyImport(name = "agree:${algorithm.name}", algorithm = importAlgorithm, usages = "")
+        val derived = attempt {
+            val own = WebCryptoKeys.private(privateKey, ownImport)
+            val peer = WebCryptoKeys.public(publicKey, peerImport)
+            deriveBits(agreementParameters(name, peer), own, algorithm.secretBytes * BYTE_BITS).settled()
+        }
+        return derived?.let { bits -> JsBytes.fromJs(bits) }
     }
 
     override suspend fun encapsulate(algorithm: KemAlgorithm, publicKey: PublicKey): Pair<ByteArray, ByteArray> =
@@ -252,10 +256,12 @@ internal class WebCryptoBackend : Backend {
         publicKey: PublicKey,
         data: ByteArray,
     ): ByteArray {
-        val cryptoKey = WebCryptoKeys.public(publicKey, oaepImport(algorithm, usage = "encrypt"))
-        return JsBytes.withJs(
-            data,
-        ) { input -> JsBytes.fromJs(encrypt(named(WebCryptoNames.RSA_OAEP), cryptoKey, input).settled()) }
+        val import = oaepImport(algorithm, usage = "encrypt")
+        val encrypted = attempt {
+            val cryptoKey = WebCryptoKeys.public(publicKey, import)
+            JsBytes.withJs(data) { input -> encrypt(named(WebCryptoNames.RSA_OAEP), cryptoKey, input).settled() }
+        }
+        return JsBytes.fromJs(encrypted ?: throw platformRefusal())
     }
 
     override suspend fun decrypt(
@@ -263,10 +269,12 @@ internal class WebCryptoBackend : Backend {
         privateKey: PrivateKey,
         data: ByteArray,
     ): ByteArray? {
-        val cryptoKey = WebCryptoKeys.private(privateKey, oaepImport(algorithm, usage = "decrypt"))
-        val result = JsBytes.withJs(
-            data,
-        ) { input -> attempt { decrypt(named(WebCryptoNames.RSA_OAEP), cryptoKey, input).settled() } }
+        val import = oaepImport(algorithm, usage = "decrypt")
+        privateKey.checkAlive()
+        val result = attempt {
+            val cryptoKey = WebCryptoKeys.private(privateKey, import)
+            JsBytes.withJs(data) { input -> decrypt(named(WebCryptoNames.RSA_OAEP), cryptoKey, input).settled() }
+        }
         return result?.let { buffer -> JsBytes.fromJs(buffer) }
     }
 

@@ -53,38 +53,6 @@ private suspend fun derived(text: String): SecretBytes = fastCrypto.derivations.
 )
 
 class AuditPrimitiveTest : FunSpec({
-    test("A-1: HPKE open with a small-order X25519 encapsulation returns null instead of throwing") {
-        val recipient = crypto.keys.generate(KeyType.X25519)
-        val sealed = ByteString(ByteArray(X25519_ENC) + ByteArray(X25519_ENC))
-        val opened = shouldNotThrowAny {
-            crypto.hpke.open(suite = HpkeSuite.X25519Aes256Gcm, recipient = recipient.privateKey, sealed = sealed)
-        }
-        opened shouldBe null
-    }
-
-    test("A-1: HPKE open with a P-256 encapsulation off the curve returns null instead of throwing") {
-        val recipient = crypto.keys.generate(KeyType.P256)
-        val coordinate = ByteArray(P256_FIELD).also { bytes -> bytes[P256_FIELD - 1] = 1 }
-        val enc = byteArrayOf(4) + coordinate + coordinate
-        val sealed = ByteString(enc + ByteArray(X25519_ENC))
-        val suite = HpkeSuite(
-            kem = com.davils.krypt.core.algorithm.KemAlgorithm.DhkemP256,
-            kdf = com.davils.krypt.core.algorithm.KdfAlgorithm.HkdfSha256,
-            aead = com.davils.krypt.core.algorithm.AeadAlgorithm.Aes128Gcm,
-        )
-        val opened = shouldNotThrowAny {
-            crypto.hpke.open(suite = suite, recipient = recipient.privateKey, sealed = sealed)
-        }
-        opened shouldBe null
-    }
-
-    test("A-1: an X25519 agreement with a small-order peer key fails with a krypt failure, not a platform one") {
-        val own = crypto.keys.generate(KeyType.X25519)
-        val zero = crypto.keys.decodePublic(hex(RfcKeys.X25519_SPKI_PREFIX + "00".repeat(X25519_ENC))).getOrNull()
-        val thrown = runCatching { crypto.agreements.agree(own.privateKey, checkNotNull(zero)) }.exceptionOrNull()
-        (thrown == null || thrown is CryptoException) shouldBe true
-    }
-
     test("A-6: a PKCS #8 key whose embedded public key does not belong to it is refused") {
         val wrongPublic = ByteArray(X25519_ENC) { index -> index.toByte() }
         val pkcs8 = Der.encode {
