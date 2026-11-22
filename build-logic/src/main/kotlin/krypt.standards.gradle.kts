@@ -67,6 +67,9 @@ kreate {
                 note = "Base64 and base64url: strict, constant-time codecs of krypt-core that refuse every " +
                     "non-canonical input."
             }
+            rfc(5246) {
+                note = "TLS 1.2: offered by krypt-tls only by opt-in and only with forward secret AEAD suites."
+            }
             rfc(5280) {
                 note = "X.509: the certificates, requests, CRLs and path validation of krypt-x509 and the times of DER."
             }
@@ -75,6 +78,9 @@ kreate {
             }
             rfc(5952) {
                 note = "The canonical text of IPv6 addresses in the IP address names of krypt-x509."
+            }
+            rfc(6066) {
+                note = "TLS extensions: krypt-tls sends server name indication and chooses identities by it."
             }
             rfc(6960) {
                 note = "OCSP: requests, strict responses, their verification against the issuer or a delegated " +
@@ -91,11 +97,15 @@ kreate {
                 note = "PKCS #12: read and written by krypt-keystore with PBES2 and a MAC, the legacy protection " +
                     "refused."
             }
+            rfc(7301) {
+                note = "ALPN: the application protocols krypt-tls configures on JSSE."
+            }
             rfc(7468) {
                 note = "The textual encoding of PEM: strict reading and writing in krypt-asn1."
             }
             rfc(7633) {
-                note = "The TLS feature extension of X.509, such as OCSP must-staple, read by krypt-x509."
+                note = "The TLS feature extension of X.509, such as OCSP must-staple, read by krypt-x509 and " +
+                    "enforced by krypt-tls."
             }
             rfc(7748) {
                 note = "X25519 and X448: key agreement and the DHKEM of HPKE."
@@ -115,12 +125,16 @@ kreate {
             rfc(8439) {
                 note = "ChaCha20-Poly1305: an AEAD of krypt-primitive where the platform has it."
             }
+            rfc(8446) {
+                note = "TLS 1.3: the default and only version of krypt-tls unless TLS 1.2 is enabled, over JSSE."
+            }
             rfc(9180) {
                 note = "HPKE: every mode in common code over the DHKEMs, HKDF and the AEADs, checked against its " +
                     "test vectors."
             }
             rfc(9525) {
-                note = "Service identity in TLS: the host name and IP address checks of krypt-x509."
+                note = "Service identity in TLS: the host name and IP address checks of krypt-x509, applied by " +
+                    "krypt-tls."
             }
             rfc(9579) {
                 note = "PBMAC1 for PKCS #12: the MAC krypt-keystore writes and one of those it reads."
@@ -132,6 +146,9 @@ kreate {
             rfc(9919) {
                 note = "The lightweight OCSP profile: SHA-256 identifiers by default and SHA-1 behind an opt-in, " +
                     "GET requests of at most 255 bytes and responders that answer from a cache."
+            }
+            rfc(10024) {
+                note = "The hybrid group X25519MLKEM768 of TLS 1.3, which krypt-tls offers first where the JDK has it."
             }
             unicode {
                 note = "Untrusted names, subjects and texts are shown through SafeText of Kore."

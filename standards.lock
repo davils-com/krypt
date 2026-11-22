@@ -2,6 +2,20 @@
     "schemaVersion": 1,
     "standards": [
         {
+            "id": "rfc:10024",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-tls.",
+            "snapshot": {
+                "title": "Post-Quantum Traditional (PQ/T) Hybrid Key Agreement Mechanisms for TLS 1.3",
+                "status": "PROPOSED STANDARD",
+                "published": "August 2026",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
+            }
+        },
+        {
             "id": "rfc:1421",
             "reviewedOn": "2026-11-22",
             "note": "PEM with the Proc-Type and DEK-Info headers of OpenSSL: krypt recognises the legacy encryption and refuses it.",
@@ -203,6 +217,60 @@
             }
         },
         {
+            "id": "rfc:5246",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-tls.",
+            "snapshot": {
+                "title": "The Transport Layer Security (TLS) Protocol Version 1.2",
+                "status": "PROPOSED STANDARD",
+                "published": "August 2008",
+                "withdrawn": true,
+                "replacedBy": [
+                    "RFC8446",
+                    "RFC9846"
+                ],
+                "updatedBy": [
+                    "RFC10015",
+                    "RFC5746",
+                    "RFC5878",
+                    "RFC6176",
+                    "RFC7465",
+                    "RFC7507",
+                    "RFC7568",
+                    "RFC7627",
+                    "RFC7685",
+                    "RFC7905",
+                    "RFC7919",
+                    "RFC8447",
+                    "RFC9155"
+                ],
+                "errata": {
+                    "1585": "VERIFIED",
+                    "2165": "HELD",
+                    "2390": "HELD",
+                    "2643": "VERIFIED",
+                    "2864": "VERIFIED",
+                    "2865": "VERIFIED",
+                    "3122": "VERIFIED",
+                    "3123": "VERIFIED",
+                    "3191": "REJECTED",
+                    "4007": "HELD",
+                    "4109": "VERIFIED",
+                    "4382": "REJECTED",
+                    "4507": "VERIFIED",
+                    "4750": "VERIFIED",
+                    "4885": "HELD",
+                    "4912": "VERIFIED",
+                    "5036": "REJECTED",
+                    "5352": "REJECTED",
+                    "5409": "REJECTED",
+                    "5535": "REJECTED",
+                    "6244": "HELD",
+                    "6572": "REJECTED"
+                }
+            }
+        },
+        {
             "id": "rfc:5280",
             "reviewedOn": "2026-11-22",
             "note": "Reviewed for the PKI modules: krypt-x509, krypt-keystore and krypt-ct.",
@@ -295,6 +363,29 @@
             }
         },
         {
+            "id": "rfc:6066",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-tls.",
+            "snapshot": {
+                "title": "Transport Layer Security (TLS) Extensions: Extension Definitions",
+                "status": "PROPOSED STANDARD",
+                "published": "January 2011",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [
+                    "RFC8446",
+                    "RFC8449",
+                    "RFC9325",
+                    "RFC9846"
+                ],
+                "errata": {
+                    "3283": "VERIFIED",
+                    "4817": "VERIFIED",
+                    "5658": "REPORTED"
+                }
+            }
+        },
+        {
             "id": "rfc:6960",
             "reviewedOn": "2026-11-22",
             "note": "Reviewed for krypt-ocsp: requests, responses, verification and the responder.",
@@ -377,6 +468,24 @@
             }
         },
         {
+            "id": "rfc:7301",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-tls.",
+            "snapshot": {
+                "title": "Transport Layer Security (TLS) Application-Layer Protocol Negotiation Extension",
+                "status": "PROPOSED STANDARD",
+                "published": "July 2014",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [
+                    "RFC8447"
+                ],
+                "errata": {
+                    "5176": "REJECTED"
+                }
+            }
+        },
+        {
             "id": "rfc:7468",
             "reviewedOn": "2026-11-22",
             "note": "The textual encoding of PEM: strict reading and writing in krypt-asn1.",
@@ -396,7 +505,7 @@
         {
             "id": "rfc:7633",
             "reviewedOn": "2026-11-22",
-            "note": "Reviewed for the PKI modules: krypt-x509, krypt-keystore and krypt-ct.",
+            "note": "Reviewed for krypt-tls.",
             "snapshot": {
                 "title": "X.509v3 Transport Layer Security (TLS) Feature Extension",
                 "status": "PROPOSED STANDARD",
@@ -575,6 +684,72 @@
             }
         },
         {
+            "id": "rfc:8446",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-tls.",
+            "snapshot": {
+                "title": "The Transport Layer Security (TLS) Protocol Version 1.3",
+                "status": "PROPOSED STANDARD",
+                "published": "August 2018",
+                "withdrawn": true,
+                "replacedBy": [
+                    "RFC9846"
+                ],
+                "updatedBy": [],
+                "errata": {
+                    "5483": "VERIFIED",
+                    "5627": "HELD",
+                    "5682": "HELD",
+                    "5717": "HELD",
+                    "5868": "VERIFIED",
+                    "5874": "HELD",
+                    "5976": "VERIFIED",
+                    "6120": "REJECTED",
+                    "6121": "REJECTED",
+                    "6122": "VERIFIED",
+                    "6123": "VERIFIED",
+                    "6124": "REJECTED",
+                    "6125": "HELD",
+                    "6126": "REJECTED",
+                    "6127": "REJECTED",
+                    "6128": "HELD",
+                    "6135": "HELD",
+                    "6136": "HELD",
+                    "6137": "REJECTED",
+                    "6138": "HELD",
+                    "6139": "VERIFIED",
+                    "6140": "HELD",
+                    "6141": "VERIFIED",
+                    "6142": "VERIFIED",
+                    "6143": "REJECTED",
+                    "6144": "REJECTED",
+                    "6145": "REJECTED",
+                    "6146": "VERIFIED",
+                    "6147": "HELD",
+                    "6148": "REJECTED",
+                    "6150": "REJECTED",
+                    "6151": "HELD",
+                    "6152": "REJECTED",
+                    "6204": "HELD",
+                    "6205": "HELD",
+                    "6401": "HELD",
+                    "6820": "HELD",
+                    "7003": "HELD",
+                    "7073": "HELD",
+                    "7250": "VERIFIED",
+                    "7303": "VERIFIED",
+                    "7620": "REJECTED",
+                    "7774": "VERIFIED",
+                    "8411": "REJECTED",
+                    "8423": "VERIFIED",
+                    "8794": "HELD",
+                    "8795": "VERIFIED",
+                    "8799": "VERIFIED",
+                    "8803": "VERIFIED"
+                }
+            }
+        },
+        {
             "id": "rfc:9180",
             "reviewedOn": "2026-11-22",
             "note": "HPKE: every mode in common code over the DHKEMs, HKDF and the AEADs, checked against its test vectors.",
@@ -600,7 +775,7 @@
         {
             "id": "rfc:9525",
             "reviewedOn": "2026-11-22",
-            "note": "Reviewed for the PKI modules: krypt-x509, krypt-keystore and krypt-ct.",
+            "note": "Reviewed for krypt-tls.",
             "snapshot": {
                 "title": "Service Identity in TLS",
                 "status": "PROPOSED STANDARD",
