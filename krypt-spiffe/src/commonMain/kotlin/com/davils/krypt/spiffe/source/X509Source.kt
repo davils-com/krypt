@@ -23,6 +23,7 @@ import com.davils.krypt.spiffe.SpiffeLimits
 import com.davils.krypt.spiffe.TrustDomain
 import com.davils.krypt.spiffe.bundle.BundleSet
 import com.davils.krypt.spiffe.bundle.TrustBundle
+import com.davils.krypt.spiffe.internal.SequenceMarks
 import com.davils.krypt.spiffe.internal.SourceState
 import com.davils.krypt.spiffe.x509.X509Svid
 import kotlin.concurrent.atomics.AtomicReference
@@ -36,9 +37,16 @@ import kotlin.concurrent.atomics.update
  * Every update is complete, as section 4.4 of the Workload API specification demands: what it lacks is dropped. An
  * update replaces the SVIDs and the bundles together in one atomic swap, so a reader sees either the old or the new
  * material and never a mix. An update is refused, and the current material kept, if it holds no SVID, exceeds the
- * [limits], lacks the bundle of the trust domain of an SVID, or carries a bundle whose `spiffe_sequence` is lower than
- * the one held for its trust domain. The source neither validates the SVIDs against the bundles, which the Workload
- * API vouches for, nor destroys the private keys of replaced SVIDs, which readers may still use.
+ * [limits], lacks the bundle of the trust domain of an SVID, or carries a bundle that rolls its trust domain back.
+ *
+ * Against rollback the source keeps the highest `spiffe_sequence` it accepted for each trust domain, its high-water
+ * mark, and keeps it while updates omit the trust domain. A bundle whose sequence is lower than the mark of its trust
+ * domain, or that has no sequence once its trust domain had one, is refused as [SourceFailure.Rollback]. The source
+ * remembers the marks of up to [SpiffeLimits.HARD_MAXIMUM_TRUST_DOMAINS] trust domains and forgets the mark of the
+ * one absent longest beyond that.
+ *
+ * The source neither validates the SVIDs against the bundles, which the Workload API vouches for, nor destroys the
+ * private keys of replaced SVIDs, which readers may still use.
  *
  * Safe to share between threads; no update blocks a reader.
  *
@@ -46,7 +54,9 @@ import kotlin.concurrent.atomics.update
  * @since 1.0.0
  */
 public class X509Source(public val limits: SpiffeLimits = SpiffeLimits.Default) : SvidSource, BundleSource {
-    private val state = AtomicReference(SourceState(svids = emptyList(), bundles = BundleSet.Empty))
+    private val state = AtomicReference(
+        SourceState(svids = emptyList(), bundles = BundleSet.Empty, marks = emptyList()),
+    )
 
     /**
      * The current SVIDs, the default one first, empty before the first update.
@@ -97,8 +107,8 @@ public class X509Source(public val limits: SpiffeLimits = SpiffeLimits.Default) 
      * @since 1.0.0
      */
     public fun update(svids: List<X509Svid>, bundles: BundleSet): Outcome<Unit, SourceFailure> {
-        val next = SourceState(svids = svids.toList(), bundles = bundles)
-        return swap(isSvidRequired = true) { _ -> next }
+        val copied = svids.toList()
+        return swap(isSvidRequired = true) { current -> current.copy(svids = copied, bundles = bundles) }
     }
 
     /**
@@ -110,7 +120,7 @@ public class X509Source(public val limits: SpiffeLimits = SpiffeLimits.Default) 
      * @since 1.0.0
      */
     public fun updateBundles(bundles: BundleSet): Outcome<Unit, SourceFailure> =
-        swap(isSvidRequired = false) { current -> SourceState(svids = current.svids, bundles = bundles) }
+        swap(isSvidRequired = false) { current -> current.copy(bundles = bundles) }
 
     /**
      * Shows the number of SVIDs and the trust domains.
@@ -126,7 +136,9 @@ public class X509Source(public val limits: SpiffeLimits = SpiffeLimits.Default) 
             val candidate = next(current)
             val found = failureOf(current = current, next = candidate, isSvidRequired = isSvidRequired)
             failure = found
-            candidate.takeIf { found == null } ?: current
+            val marks = SequenceMarks.advanced(marks = current.marks, bundles = candidate.bundles)
+            val accepted = candidate.copy(marks = marks)
+            accepted.takeIf { found == null } ?: current
         }
         val refused = failure
         if (refused != null) return Outcome.Failure(refused)
@@ -141,12 +153,6 @@ public class X509Source(public val limits: SpiffeLimits = SpiffeLimits.Default) 
         return SourceFailure.NoSvid.takeIf { isSvidRequired && svids.isEmpty() }
             ?: SourceFailure.LimitExceeded.takeUnless { isBounded }
             ?: SourceFailure.MissingBundle.takeUnless { isCovered }
-            ?: SourceFailure.Rollback.takeIf { bundles.bundles.any { bundle -> isRollback(bundle, current.bundles) } }
-    }
-
-    private fun isRollback(bundle: TrustBundle, held: BundleSet): Boolean {
-        val sequence = bundle.sequence
-        val heldSequence = held[bundle.trustDomain]?.sequence
-        return sequence != null && heldSequence != null && sequence < heldSequence
+            ?: SourceFailure.Rollback.takeIf { SequenceMarks.isRollback(bundles = bundles, marks = current.marks) }
     }
 }

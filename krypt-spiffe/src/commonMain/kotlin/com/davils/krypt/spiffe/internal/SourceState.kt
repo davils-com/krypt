@@ -19,4 +19,4 @@ package com.davils.krypt.spiffe.internal
 import com.davils.krypt.spiffe.bundle.BundleSet
 import com.davils.krypt.spiffe.x509.X509Svid
 
-internal data class SourceState(val svids: List<X509Svid>, val bundles: BundleSet)
+internal data class SourceState(val svids: List<X509Svid>, val bundles: BundleSet, val marks: List<SequenceMark>)
