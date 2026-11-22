@@ -56,7 +56,11 @@ internal class TrustCheck(
         listSource = settings.revocationListSource?.let { source -> contained(source) },
     )
 
-    suspend fun check(handshake: Handshake, anchors: List<TrustAnchor>): PeerIdentity {
+    suspend fun check(
+        handshake: Handshake,
+        anchors: List<TrustAnchor>,
+        isAnchorConfirmed: (TrustAnchor) -> Boolean,
+    ): PeerIdentity {
         val chain = handshake.chain
         val revocation = HandshakeRevocation(
             ocsp = ocsp,
@@ -79,6 +83,7 @@ internal class TrustCheck(
             is PathValidation.Valid -> validation
             is PathValidation.Invalid -> throw TrustRefusedException(TrustFailure.of(validation.failure))
         }
+        refuse(!isAnchorConfirmed(valid.anchor), TrustFailure.NoTrustedPath)
         val leaf = valid.path.first()
         refuse(handshake.isHostVerified && !matches(leaf, handshake.host), TrustFailure.HostMismatch)
         refuse(settings.pins?.matches(crypto, valid) == false, TrustFailure.PinMismatch)

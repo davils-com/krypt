@@ -32,7 +32,8 @@ public enum class TrustFailure {
     Malformed,
 
     /**
-     * No path leads from the certificate of the peer to a trust anchor.
+     * No path leads from the certificate of the peer to a trust anchor, or the JDK refused a path that ends in one of
+     * its own anchors.
      *
      * @since 1.0.0
      */

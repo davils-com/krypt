@@ -25,7 +25,7 @@ import com.davils.krypt.tls.internal.ConfiguredServerSocketFactory
 import com.davils.krypt.tls.internal.ConfiguredSocketFactory
 import com.davils.krypt.tls.internal.HostNames
 import com.davils.krypt.tls.internal.Jsse
-import com.davils.krypt.tls.internal.SystemAnchors
+import com.davils.krypt.tls.internal.SystemTrust
 import com.davils.krypt.tls.trust.RotatingTrustManager
 import com.davils.krypt.x509.Certificates
 import com.davils.krypt.x509.path.TrustAnchor
@@ -82,7 +82,7 @@ public class TlsContext(public val configuration: TlsConfiguration) {
         serverName = configuration.serverName,
         isHostnameVerified = configuration.isHostnameVerified,
         authorizer = configuration.authorizer,
-        systemAnchors = SystemAnchors.load(codec = certificates, isIncluded = configuration.trust.isSystemIncluded),
+        system = SystemTrust.load(codec = certificates, isIncluded = configuration.trust.isSystemIncluded),
     )
 
     /**

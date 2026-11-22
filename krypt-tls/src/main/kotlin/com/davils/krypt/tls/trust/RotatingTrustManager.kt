@@ -23,6 +23,7 @@ import com.davils.krypt.tls.TlsRole
 import com.davils.krypt.tls.internal.Handshake
 import com.davils.krypt.tls.internal.JcaCertificates
 import com.davils.krypt.tls.internal.Sessions
+import com.davils.krypt.tls.internal.SystemTrust
 import com.davils.krypt.tls.internal.TrustCheck
 import com.davils.krypt.tls.internal.TrustRing
 import com.davils.krypt.tls.peer.PeerAuthorizer
@@ -43,8 +44,15 @@ import kotlin.concurrent.atomics.ExperimentalAtomicApi
 
 /**
  * The trust manager of krypt: it validates the certificates of a TLS peer with the path validation of krypt-x509 by
- * RFC 5280, never with the PKIX of the JDK, against anchors it reads atomically, so [rotate] changes the trust of
- * every later handshake without a new SSLContext.
+ * RFC 5280 against anchors it reads atomically, so [rotate] changes the trust of every later handshake without a new
+ * SSLContext.
+ *
+ * A path that ends in an anchor of the JDK, included by [TrustSettings.isSystemIncluded], must in addition be accepted
+ * by the default PKIX trust manager of the JDK over its own trust store, for the same side, so that the restrictions
+ * the JDK places on its roots still apply: the distrust of authorities by `jdk.security.caDistrustPolicies`, the
+ * algorithms of `jdk.certpath.disabledAlgorithms` and the constraints of the anchors. Both must accept such a path; a
+ * refusal of the JDK ends the handshake with [TrustFailure.NoTrustedPath]. A path to an anchor of the application,
+ * even one the JDK also holds, is validated by krypt alone.
  *
  * A manager checks one side, the [peer]: a server with the purpose serverAuth, a client with clientAuth, each
  * required in the extended key usage of the peer and of every authority on the path that has one. After the path it
@@ -74,7 +82,7 @@ public class RotatingTrustManager internal constructor(
     private val serverName: String?,
     private val isHostnameVerified: Boolean,
     authorizer: PeerAuthorizer?,
-    private val systemAnchors: List<TrustAnchor>,
+    private val system: SystemTrust,
 ) : X509ExtendedTrustManager() {
     private val certificates: Certificates = Certificates(crypto, settings.limits)
 
@@ -87,7 +95,7 @@ public class RotatingTrustManager internal constructor(
         authorizer = authorizer,
     )
 
-    private val ring = AtomicReference(TrustRing.of(settings.anchors + systemAnchors))
+    private val ring = AtomicReference(TrustRing.of(application = settings.anchors, system = system.anchors))
 
     /**
      * The anchors every new handshake is checked against: those of the application and, if included, those of the
@@ -109,37 +117,37 @@ public class RotatingTrustManager internal constructor(
         require(anchors.size <= TrustSettings.HARD_MAXIMUM_ANCHORS) {
             "At most ${TrustSettings.HARD_MAXIMUM_ANCHORS} anchors are trusted"
         }
-        ring.store(TrustRing.of(anchors + systemAnchors))
+        ring.store(TrustRing.of(application = anchors, system = system.anchors))
     }
 
     @Throws(CertificateException::class)
     override fun checkClientTrusted(chain: Array<out X509Certificate>?, authType: String?) {
-        verify(side = TlsRole.Client, chain = chain, session = null)
+        verify(side = TlsRole.Client, chain = chain, authType = authType, session = null)
     }
 
     @Throws(CertificateException::class)
     override fun checkClientTrusted(chain: Array<out X509Certificate>?, authType: String?, socket: Socket?) {
-        verify(side = TlsRole.Client, chain = chain, session = Sessions.of(socket))
+        verify(side = TlsRole.Client, chain = chain, authType = authType, session = Sessions.of(socket))
     }
 
     @Throws(CertificateException::class)
     override fun checkClientTrusted(chain: Array<out X509Certificate>?, authType: String?, engine: SSLEngine?) {
-        verify(side = TlsRole.Client, chain = chain, session = Sessions.of(engine))
+        verify(side = TlsRole.Client, chain = chain, authType = authType, session = Sessions.of(engine))
     }
 
     @Throws(CertificateException::class)
     override fun checkServerTrusted(chain: Array<out X509Certificate>?, authType: String?) {
-        verify(side = TlsRole.Server, chain = chain, session = null)
+        verify(side = TlsRole.Server, chain = chain, authType = authType, session = null)
     }
 
     @Throws(CertificateException::class)
     override fun checkServerTrusted(chain: Array<out X509Certificate>?, authType: String?, socket: Socket?) {
-        verify(side = TlsRole.Server, chain = chain, session = Sessions.of(socket))
+        verify(side = TlsRole.Server, chain = chain, authType = authType, session = Sessions.of(socket))
     }
 
     @Throws(CertificateException::class)
     override fun checkServerTrusted(chain: Array<out X509Certificate>?, authType: String?, engine: SSLEngine?) {
-        verify(side = TlsRole.Server, chain = chain, session = Sessions.of(engine))
+        verify(side = TlsRole.Server, chain = chain, authType = authType, session = Sessions.of(engine))
     }
 
     override fun getAcceptedIssuers(): Array<X509Certificate> = ring.load().issuers.toTypedArray()
@@ -152,18 +160,24 @@ public class RotatingTrustManager internal constructor(
      */
     override fun toString(): String = "RotatingTrustManager(peer=$peer, anchors=${anchors.size})"
 
-    private fun verify(side: TlsRole, chain: Array<out X509Certificate>?, session: SSLSession?) {
+    private fun verify(side: TlsRole, chain: Array<out X509Certificate>?, authType: String?, session: SSLSession?) {
         if (side != peer) throw TrustRefusedException(TrustFailure.WrongSide)
         val decoded = JcaCertificates.fromJca(certificates, chain)
         val presented = decoded ?: throw TrustRefusedException(TrustFailure.Malformed)
+        val jca = chain.orEmpty()
         val handshake = Handshake(
             chain = presented,
             staples = Sessions.staples(session).map { response -> ByteString(response) },
             host = serverName ?: Sessions.requestedHost(session) ?: session?.peerHost,
             isHostVerified = isHostnameVerified && peer == TlsRole.Server,
         )
-        val current = ring.load().anchors
-        val identity = runBlocking { trustCheck.check(handshake, current) }
+        val current = ring.load()
+        val identity = runBlocking {
+            trustCheck.check(handshake = handshake, anchors = current.anchors) { anchor ->
+                val isSystemOnly = anchor in system.anchors && anchor !in current.application
+                !isSystemOnly || system.isAccepted(chain = jca, authType = authType, side = side)
+            }
+        }
         session?.putValue(PeerIdentity.SESSION_KEY, identity)
     }
 }

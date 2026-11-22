@@ -17,6 +17,7 @@
 package com.davils.krypt.tls
 
 import com.davils.krypt.tls.peer.PeerIdentity
+import com.davils.krypt.tls.trust.RotatingTrustManager
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.collections.shouldNotBeEmpty
@@ -27,7 +28,7 @@ import java.lang.reflect.Modifier
 
 private const val INTERNAL_PACKAGE: String = "com.davils.krypt.tls.internal"
 
-private val GUARDED: List<Class<*>> = listOf(PeerIdentity::class.java)
+private val GUARDED: List<Class<*>> = listOf(PeerIdentity::class.java, RotatingTrustManager::class.java)
 
 private fun publicConstructorsOf(type: Class<*>): List<Constructor<*>> =
     type.declaredConstructors.filter { constructor -> Modifier.isPublic(constructor.modifiers) }
