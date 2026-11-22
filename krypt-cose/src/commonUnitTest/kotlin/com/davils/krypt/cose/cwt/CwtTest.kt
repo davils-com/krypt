@@ -63,6 +63,7 @@ private const val SUBJECT_NAME: String = "erikw"
 private const val EXPIRES: Long = 1_444_064_944L
 private const val ISSUED: Long = 1_443_944_944L
 private const val HALF_SECOND: Int = 500
+private const val HMAC_512_KEY_BYTES: Int = 64
 private val EXAMPLE_TIME: Instant = Instant.fromEpochSeconds(1_444_000_000L)
 private val cwt: Cwt = Cwt(cose)
 
@@ -113,7 +114,14 @@ class CwtTest : FunSpec({
             validation = validation,
         )
         outcome2.value() shouldBe signed
-        val floating = cwt.validate(hex(CWT_A_7), listOf(key(CWT_A_4_KEY_0)), everything { at = EXAMPLE_TIME })
+        val floating = cwt.validate(
+            encoded = hex(CWT_A_7),
+            keys = listOf(key(CWT_A_4_KEY_0)),
+            validation = everything {
+                at = EXAMPLE_TIME
+                isExpirationRequired = false
+            },
+        )
         floating.value().issuedAt shouldBe Instant.fromEpochSeconds(ISSUED) + HALF_SECOND.milliseconds
     }
 
@@ -122,6 +130,7 @@ class CwtTest : FunSpec({
         val signer = CoseSigner(key = CoseKey.of(pair.privateKey), algorithm = CoseAlgorithm.Ed25519)
         val verifier = CoseKey.of(pair.publicKey)
         val secret = CoseKey.of(crypto.keys.generateSecret())
+        val long = CoseKey.of(crypto.keys.generateSecret(HMAC_512_KEY_BYTES))
         listOf(
             Triple(cwt.sign(claims = claims, signer = signer, isCwtTagged = true), verifier, CwtFailure.KeyNotFound),
             Triple(cwt.sign(claims = claims, signer = signer), verifier, CwtFailure.KeyNotFound),
@@ -131,8 +140,8 @@ class CwtTest : FunSpec({
                 CwtFailure.KeyNotFound,
             ),
             Triple(
-                cwt.mac(claims = claims, key = secret, algorithm = CoseAlgorithm.Hmac512),
-                secret,
+                cwt.mac(claims = claims, key = long, algorithm = CoseAlgorithm.Hmac512),
+                long,
                 CwtFailure.KeyNotFound,
             ),
             Triple(
@@ -215,15 +224,26 @@ class CwtTest : FunSpec({
             CwtFailure.IssuedInFuture
         val future = CwtClaims.of(issuedAt = NOW + 1.hours)
         val fresh = cwt.mac(claims = future, key = secret, algorithm = CoseAlgorithm.Hmac256)
+        val lasting = everything { isExpirationRequired = false }
         val outcome8 = cwt.validate(
             encoded = fresh,
             keys = keys,
-            validation = everything(),
+            validation = lasting,
         )
         outcome8.failure() shouldBe CwtFailure.IssuedInFuture
         val bare = cwt.mac(claims = CwtClaims.of(), key = secret, algorithm = CoseAlgorithm.Hmac256)
-        cwt.validate(encoded = bare, keys = keys, validation = everything()).value() shouldBe CwtClaims.of()
-        cwt.validate(bare, keys, everything { audience = AUDIENCE }).failure() shouldBe CwtFailure.WrongAudience
+        cwt.validate(encoded = bare, keys = keys, validation = everything()).failure() shouldBe CwtFailure.MissingClaim
+        cwt.validate(encoded = bare, keys = keys, validation = lasting).value() shouldBe CwtClaims.of()
+        cwt.validate(bare, keys, everything { audience = AUDIENCE }).failure() shouldBe CwtFailure.MissingClaim
+        val anywhere = everything {
+            audience = AUDIENCE
+            isExpirationRequired = false
+        }
+        cwt.validate(bare, keys, anywhere).failure() shouldBe CwtFailure.WrongAudience
+        everything().isExpirationRequired shouldBe true
+        lasting.isExpirationRequired shouldBe false
+        (lasting == everything()) shouldBe false
+        lasting.toString() shouldContain "expirationRequired=false"
         cwt.validate(encoded, keys, cwtValidation { algorithms(CoseAlgorithm.Hmac384) }).failure() shouldBe
             CwtFailure.AlgorithmNotPermitted
     }

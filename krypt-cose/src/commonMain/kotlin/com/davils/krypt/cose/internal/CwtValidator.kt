@@ -134,7 +134,7 @@ internal class CwtValidator(private val cose: Cose) {
         val expiration = claims.expiration
         val checks = listOf(
             CwtFailure.Unauthenticated to (validation.isAuthenticationRequired && !opened.isAuthenticated),
-            CwtFailure.MissingClaim to validation.requiredClaims.any { key -> claims[key] == null },
+            CwtFailure.MissingClaim to isMissing(claims, validation),
             CwtFailure.WrongIssuer to (issuer != null && claims.issuer != issuer),
             CwtFailure.WrongAudience to (audience != null && audience !in claims.audience),
             CwtFailure.Expired to (expiration != null && expiration <= now - skew),
@@ -142,6 +142,11 @@ internal class CwtValidator(private val cose: Cose) {
             CwtFailure.IssuedInFuture to isBefore(first = now + skew, second = claims.issuedAt),
         )
         return checks.firstOrNull { check -> check.second }?.first
+    }
+
+    private fun isMissing(claims: CwtClaims, validation: CwtValidation): Boolean {
+        val isExpirationMissing = validation.isExpirationRequired && claims.expiration == null
+        return isExpirationMissing || validation.requiredClaims.any { key -> claims[key] == null }
     }
 
     private fun isBefore(first: Instant, second: Instant?): Boolean = second != null && first < second

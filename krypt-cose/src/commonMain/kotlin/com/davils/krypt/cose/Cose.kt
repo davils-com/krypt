@@ -289,7 +289,7 @@ public class Cose(
      * MACs [payload] as a COSE_Mac0 with the symmetric [key].
      *
      * @param payload the content.
-     * @param key the MAC key.
+     * @param key the MAC key, at least as long as the output of the hash of [algorithm].
      * @param algorithm the MAC algorithm.
      * @param protectedHeaders the protected header parameters; the algorithm is added.
      * @param unprotectedHeaders the unprotected header parameters; the key id of [key] is added.
@@ -359,7 +359,7 @@ public class Cose(
      * Verifies the MAC of [message] with one of the symmetric [keys].
      *
      * @param message the message.
-     * @param keys the keys to try.
+     * @param keys the keys to try; a key shorter than the output of the hash of the MAC is never used.
      * @param algorithms the MAC algorithms accepted.
      * @param externalAad the data the MAC covers that travels apart; none by default.
      * @param detachedPayload the payload if the message carries none.

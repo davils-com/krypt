@@ -42,7 +42,7 @@ internal class Macing(
     suspend fun mac0(payload: ByteString, key: CoseKey, algorithm: CoseAlgorithm, layer: Layer): CoseMac0 {
         require(algorithm.kind == CoseAlgorithmKind.Mac) { "${algorithm.algorithmName} is no MAC" }
         val operation = CoseKeyOperation.MacCreate
-        val fitting = KeyFit.secretOf(key = key, algorithm = algorithm, operation = operation, bytes = null)
+        val fitting = KeyFit.macKeyOf(key = key, algorithm = algorithm, operation = operation)
         val secret = requireNotNull(fitting) { "The key cannot MAC with ${algorithm.algorithmName}" }
         val buckets = layer.buckets(algorithm, key.keyId)
         val data = Structures.mac(
@@ -100,7 +100,7 @@ internal class Macing(
             unprotectedHeaders = message.unprotectedHeaders,
         )
         val secrets = request.keys.filter { key -> KeyFit.isKeyIdFit(key, keyId) }.mapNotNull { key ->
-            KeyFit.secretOf(key = key, algorithm = algorithm, operation = CoseKeyOperation.MacVerify, bytes = null)
+            KeyFit.macKeyOf(key = key, algorithm = algorithm, operation = CoseKeyOperation.MacVerify)
         }
         ensure(secrets.isNotEmpty(), CoseFailure.KeyNotFound)
         val data = Structures.mac(
