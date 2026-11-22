@@ -24,6 +24,7 @@ kreate {
             enabled = true
             apacheLicense("Copyright 2026 Davils")
             excludes.add(".port/**")
+            excludes.add(".claude/**")
         }
     }
 }
