@@ -670,6 +670,8 @@ final class com.davils.krypt.cms/CmsLimits { // com.davils.krypt.cms/CmsLimits|n
             final fun <get-HARD_MAXIMUM_REVOCATION_LISTS>(): kotlin/Int // com.davils.krypt.cms/CmsLimits.Companion.HARD_MAXIMUM_REVOCATION_LISTS.<get-HARD_MAXIMUM_REVOCATION_LISTS>|<get-HARD_MAXIMUM_REVOCATION_LISTS>(){}[0]
         final const val HARD_MAXIMUM_SIGNERS // com.davils.krypt.cms/CmsLimits.Companion.HARD_MAXIMUM_SIGNERS|{}HARD_MAXIMUM_SIGNERS[0]
             final fun <get-HARD_MAXIMUM_SIGNERS>(): kotlin/Int // com.davils.krypt.cms/CmsLimits.Companion.HARD_MAXIMUM_SIGNERS.<get-HARD_MAXIMUM_SIGNERS>|<get-HARD_MAXIMUM_SIGNERS>(){}[0]
+        final const val MAXIMUM_PASSWORD_RECIPIENTS // com.davils.krypt.cms/CmsLimits.Companion.MAXIMUM_PASSWORD_RECIPIENTS|{}MAXIMUM_PASSWORD_RECIPIENTS[0]
+            final fun <get-MAXIMUM_PASSWORD_RECIPIENTS>(): kotlin/Int // com.davils.krypt.cms/CmsLimits.Companion.MAXIMUM_PASSWORD_RECIPIENTS.<get-MAXIMUM_PASSWORD_RECIPIENTS>|<get-MAXIMUM_PASSWORD_RECIPIENTS>(){}[0]
 
         final val Default // com.davils.krypt.cms/CmsLimits.Companion.Default|{}Default[0]
             final fun <get-Default>(): com.davils.krypt.cms/CmsLimits // com.davils.krypt.cms/CmsLimits.Companion.Default.<get-Default>|<get-Default>(){}[0]

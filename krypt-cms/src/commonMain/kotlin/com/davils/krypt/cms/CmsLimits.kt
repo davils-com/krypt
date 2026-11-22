@@ -215,6 +215,15 @@ public class CmsLimits(
         public const val HARD_MAXIMUM_NESTING: Int = 8
 
         /**
+         * The most password recipients one enveloped message may name, written or decrypted: 4. Decryption with a
+         * password derives a key with PBKDF2 for the first password recipient only, so a message costs at most one
+         * derivation, within the iterations the policy accepts, whatever the number of its password recipients.
+         *
+         * @since 1.0.0
+         */
+        public const val MAXIMUM_PASSWORD_RECIPIENTS: Int = 4
+
+        /**
          * The default limits.
          *
          * @since 1.0.0

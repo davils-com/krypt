@@ -103,6 +103,7 @@ public final class com/davils/krypt/cms/CmsLimits {
 	public static final field HARD_MAXIMUM_RECIPIENTS I
 	public static final field HARD_MAXIMUM_REVOCATION_LISTS I
 	public static final field HARD_MAXIMUM_SIGNERS I
+	public static final field MAXIMUM_PASSWORD_RECIPIENTS I
 	public fun <init> ()V
 	public fun <init> (IIIIIIII)V
 	public synthetic fun <init> (IIIIIIIIILkotlin/jvm/internal/DefaultConstructorMarker;)V

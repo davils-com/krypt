@@ -31,6 +31,7 @@ import com.davils.krypt.cms.enveloped.Credential
 import com.davils.krypt.cms.enveloped.EncryptedData
 import com.davils.krypt.cms.enveloped.EnvelopedData
 import com.davils.krypt.cms.enveloped.Recipient
+import com.davils.krypt.cms.enveloped.RecipientType
 import com.davils.krypt.core.SecretBytes
 import com.davils.krypt.core.algorithm.AeadAlgorithm
 import com.davils.krypt.primitive.Crypto
@@ -43,6 +44,7 @@ import kotlinx.io.bytestring.ByteString
 private const val TAG_BYTES: Int = 16
 private const val VERSION_PASSWORD_OR_OTHER: Int = 3
 private const val VERSION_EXTENDED: Int = 2
+private const val MAXIMUM_PASSWORDS: Int = CmsLimits.MAXIMUM_PASSWORD_RECIPIENTS
 
 private val AEADS: Map<ContentEncryption, AeadAlgorithm> = mapOf(
     ContentEncryption.Aes128Gcm to AeadAlgorithm.Aes128Gcm,
@@ -73,6 +75,9 @@ internal class EnvelopedEngine(private val crypto: Crypto, private val limits: C
         ) { "The content exceeds ${limits.maximumContentBytes} bytes" }
         require(recipients.size in 1..limits.maximumRecipients) {
             "Enveloped data has 1 to ${limits.maximumRecipients} recipients"
+        }
+        require(recipients.count { recipient -> recipient is Recipient.Password } <= MAXIMUM_PASSWORDS) {
+            "Enveloped data has at most $MAXIMUM_PASSWORDS password recipients"
         }
         val random = crypto.environment.random
         val iv = ByteString(random.bytes(Algorithms.ivBytes(encryption)))
@@ -145,12 +150,16 @@ internal class EnvelopedEngine(private val crypto: Crypto, private val limits: C
         credential: Credential,
     ): Outcome<ByteString, CmsFailure> {
         val ciphertext = data.encryptedContent ?: return Outcome.Failure(CmsFailure.ContentMissing)
+        val passwords = data.recipients.count { recipient -> recipient.type == RecipientType.Password }
         val candidates = data.recipients.mapNotNull { recipient -> recovery.candidate(recipient.parsed, credential) }
         val usable = candidates.filterIsInstance<Candidate.Usable>()
-        val failure = CmsFailure.RecipientNotFound.takeIf { candidates.isEmpty() }
+        val firstPassword = usable.firstOrNull { candidate -> candidate is Candidate.Password }
+        val bounded = usable.filter { candidate -> candidate !is Candidate.Password || candidate === firstPassword }
+        val failure = CmsFailure.Malformed.takeIf { passwords > MAXIMUM_PASSWORDS }
+            ?: CmsFailure.RecipientNotFound.takeIf { candidates.isEmpty() }
             ?: CmsFailure.AlgorithmNotPermitted.takeIf { usable.isEmpty() }
         val opening = Opening(data = data, algorithm = algorithm, ciphertext = ciphertext)
-        return failure?.let { found -> Outcome.Failure(found) } ?: guarded { opened(opening, usable) }
+        return failure?.let { found -> Outcome.Failure(found) } ?: guarded { opened(opening, bounded) }
     }
 
     private suspend fun opened(opening: Opening, candidates: List<Candidate.Usable>): Outcome<ByteString, CmsFailure> {

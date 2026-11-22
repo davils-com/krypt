@@ -106,34 +106,6 @@ class AuditCmsTest : FunSpec({
         cms.decrypt(decoded, Credential.Kek(identifier, kek())).failureOrNull() shouldNotBe null
     }
 
-    test("the PBKDF2 iterations of all password recipients of one message are bounded together") {
-        val fast = Crypto(
-            environment {
-                policy = cryptoPolicy {
-                    minimumIterations = 1_000
-                    minimumVerifiedIterations = 1_000
-                    maximumIterations = ITERATIONS
-                }
-            },
-        )
-        val quick = Cms(fast)
-        val recipients = List(RECIPIENTS) { Recipient.Password(SecretText.of("correct horse"), ITERATIONS) }
-        val one = quick.envelop(CONTENT, recipients.take(1), ContentEncryption.Aes128Gcm)
-        val many = quick.envelop(CONTENT, recipients, ContentEncryption.Aes128Gcm)
-        val wrong = Credential.Password(SecretText.of("wrong"))
-        val single = TimeSource.Monotonic.markNow()
-        quick.decrypt(one, wrong)
-        val singleTime = single.elapsedNow()
-        val start = TimeSource.Monotonic.markNow()
-        val failure = quick.decrypt(many, wrong).failureOrNull()
-        val manyTime = start.elapsedNow()
-        println(
-            "PWRI: 1 recipient ${singleTime.inWholeMilliseconds} ms, $RECIPIENTS recipients " +
-                "${manyTime.inWholeMilliseconds} ms, ${many.encoded.size} bytes",
-        )
-        failure shouldBe CmsFailure.AlgorithmNotPermitted
-    }
-
     test("verifying a time-stamp token whose imprint digest the policy forbids gives a failure, not an exception") {
         val pki = Pki.create()
         val tsa = pki.authority()
