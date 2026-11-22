@@ -26,6 +26,8 @@ import com.davils.krypt.ct.fixture.U64
 import com.davils.krypt.ct.fixture.bytes
 import com.davils.krypt.ct.fixture.number
 import com.davils.krypt.ct.fixture.transparency
+import com.davils.krypt.ct.internal.LogParts
+import com.davils.krypt.ct.internal.ResultParts
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
@@ -58,6 +60,9 @@ private fun timestamp(
     signatureAlgorithm = signature,
     signature = signatureBytes,
 )
+
+private fun resultOf(origin: SctOrigin, log: CtLog?, status: SctStatus): SctResult =
+    SctResult(ResultParts(timestamp = timestamp(), origin = origin, log = log, status = status))
 
 class ValuesTest : FunSpec({
     test("a timestamp checks its fields and names its algorithm") {
@@ -118,13 +123,14 @@ class ValuesTest : FunSpec({
         list.toString() shouldBe "LogList(2 logs)"
         shouldThrow<IllegalArgumentException> { LogList(listOf(first, first)) }
         val many = (0..MAXIMUM_LOGS).map { index ->
-            CtLog(
+            val parts = LogParts(
                 logId = number(index.toLong(), SignedCertificateTimestamp.LOG_ID_BYTES),
                 publicKey = first.publicKey,
                 operator = FIRST_OPERATOR,
                 usableFrom = null,
                 usableUntil = null,
             )
+            CtLog(parts)
         }
         shouldThrow<IllegalArgumentException> { LogList(many) }
         LogList(many.drop(1)).logs.size shouldBe MAXIMUM_LOGS
@@ -177,26 +183,11 @@ class ValuesTest : FunSpec({
 
     test("results compare every field") {
         val log = TestLog.create(FIRST_OPERATOR).log
-        val result = SctResult(timestamp = timestamp(), origin = SctOrigin.Tls, log = log, status = SctStatus.Valid)
-        result shouldBe SctResult(timestamp = timestamp(), origin = SctOrigin.Tls, log = log, status = SctStatus.Valid)
-        result shouldNotBe SctResult(
-            timestamp = timestamp(),
-            origin = SctOrigin.Ocsp,
-            log = log,
-            status = SctStatus.Valid,
-        )
-        result shouldNotBe SctResult(
-            timestamp = timestamp(),
-            origin = SctOrigin.Tls,
-            log = null,
-            status = SctStatus.Valid,
-        )
-        result shouldNotBe SctResult(
-            timestamp = timestamp(),
-            origin = SctOrigin.Tls,
-            log = log,
-            status = SctStatus.InvalidSignature,
-        )
+        val result = resultOf(origin = SctOrigin.Tls, log = log, status = SctStatus.Valid)
+        result shouldBe resultOf(origin = SctOrigin.Tls, log = log, status = SctStatus.Valid)
+        result shouldNotBe resultOf(origin = SctOrigin.Ocsp, log = log, status = SctStatus.Valid)
+        result shouldNotBe resultOf(origin = SctOrigin.Tls, log = null, status = SctStatus.Valid)
+        result shouldNotBe resultOf(origin = SctOrigin.Tls, log = log, status = SctStatus.InvalidSignature)
         result shouldNotBe Any()
         result.hashCode() shouldBe timestamp().hashCode()
         result.toString() shouldBe "SctResult(Tls, Valid)"

@@ -16,6 +16,8 @@
 
 package com.davils.krypt.ct
 
+import com.davils.krypt.ct.internal.ResultParts
+
 /**
  * The verification of one signed certificate timestamp.
  *
@@ -25,12 +27,19 @@ package com.davils.krypt.ct
  * @property status the outcome.
  * @since 1.0.0
  */
-public class SctResult internal constructor(
+public class SctResult private constructor(
     public val timestamp: SignedCertificateTimestamp,
     public val origin: SctOrigin,
     public val log: CtLog?,
     public val status: SctStatus,
 ) {
+    internal constructor(parts: ResultParts) : this(
+        timestamp = parts.timestamp,
+        origin = parts.origin,
+        log = parts.log,
+        status = parts.status,
+    )
+
     /**
      * Compares every property.
      *

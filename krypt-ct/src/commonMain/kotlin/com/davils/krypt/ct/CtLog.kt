@@ -19,6 +19,7 @@ package com.davils.krypt.ct
 import com.davils.kore.core.annotation.DavilsInternal
 import com.davils.kore.core.text.SafeText
 import com.davils.krypt.core.encoding.Hex
+import com.davils.krypt.ct.internal.LogParts
 import com.davils.krypt.primitive.key.PublicKey
 import kotlinx.io.bytestring.ByteString
 import kotlin.time.Instant
@@ -36,13 +37,21 @@ import kotlin.time.Instant
  * @since 1.0.0
  */
 @OptIn(DavilsInternal::class)
-public class CtLog internal constructor(
+public class CtLog private constructor(
     public val logId: ByteString,
     public val publicKey: PublicKey,
     public val operator: String,
     public val usableFrom: Instant?,
     public val usableUntil: Instant?,
 ) {
+    internal constructor(parts: LogParts) : this(
+        logId = parts.logId,
+        publicKey = parts.publicKey,
+        operator = parts.operator,
+        usableFrom = parts.usableFrom,
+        usableUntil = parts.usableUntil,
+    )
+
     /**
      * Tells whether a timestamp of [at] counts.
      *

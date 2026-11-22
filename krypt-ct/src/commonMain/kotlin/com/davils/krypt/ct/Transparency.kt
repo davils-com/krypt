@@ -26,8 +26,11 @@ import com.davils.krypt.asn1.Der
 import com.davils.krypt.core.algorithm.DigestAlgorithm
 import com.davils.krypt.core.policy.AlgorithmUse
 import com.davils.krypt.ct.internal.LogChecks
+import com.davils.krypt.ct.internal.LogParts
+import com.davils.krypt.ct.internal.ResultParts
 import com.davils.krypt.ct.internal.SctCodec
 import com.davils.krypt.ct.internal.SignedData
+import com.davils.krypt.ct.internal.VerdictParts
 import com.davils.krypt.primitive.Crypto
 import com.davils.krypt.primitive.key.PublicKey
 import com.davils.krypt.x509.Certificate
@@ -81,13 +84,14 @@ public class Transparency(private val crypto: Crypto, public val limits: CtLimit
             algorithm = DigestAlgorithm.Sha256,
             use = AlgorithmUse.Verify,
         )
-        return CtLog(
+        val parts = LogParts(
             logId = logId,
             publicKey = publicKey,
             operator = operator,
             usableFrom = usableFrom,
             usableUntil = usableUntil,
         )
+        return CtLog(parts)
     }
 
     /**
@@ -185,7 +189,13 @@ public class Transparency(private val crypto: Crypto, public val limits: CtLimit
                 at = time,
             )
         }
-        return SctResult(timestamp = timestamp, origin = origin, log = log, status = status ?: SctStatus.UnknownLog)
+        val parts = ResultParts(
+            timestamp = timestamp,
+            origin = origin,
+            log = log,
+            status = status ?: SctStatus.UnknownLog,
+        )
+        return SctResult(parts)
     }
 
     /**
@@ -245,13 +255,14 @@ public class Transparency(private val crypto: Crypto, public val limits: CtLimit
             operators = operators,
             policy = policy,
         )
-        val verdict = CtVerdict(
+        val parts = VerdictParts(
             compliance = compliance,
             results = results,
             required = required,
             logs = valid.size,
             operators = operators,
         )
+        val verdict = CtVerdict(parts)
         return Outcome.Success(verdict)
     }
 

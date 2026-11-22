@@ -16,6 +16,8 @@
 
 package com.davils.krypt.ct
 
+import com.davils.krypt.ct.internal.VerdictParts
+
 /**
  * Whether a certificate complies with a [CtPolicy], and why.
  *
@@ -26,7 +28,7 @@ package com.davils.krypt.ct
  * @property operators how many distinct operators run those logs.
  * @since 1.0.0
  */
-public class CtVerdict internal constructor(
+public class CtVerdict private constructor(
     public val compliance: CtCompliance,
     public val results: List<SctResult>,
     public val required: Int,
@@ -39,6 +41,14 @@ public class CtVerdict internal constructor(
      * @since 1.0.0
      */
     public val isCompliant: Boolean get() = compliance == CtCompliance.Compliant
+
+    internal constructor(parts: VerdictParts) : this(
+        compliance = parts.compliance,
+        results = parts.results,
+        required = parts.required,
+        logs = parts.logs,
+        operators = parts.operators,
+    )
 
     /**
      * Shows the verdict and the counts.
