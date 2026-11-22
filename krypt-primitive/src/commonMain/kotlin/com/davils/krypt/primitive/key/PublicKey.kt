@@ -31,7 +31,9 @@ import kotlinx.io.bytestring.ByteString
  * the policy checks the key that is used; there is no constructor a caller could hand other values. A public key is
  * immutable and thread safe. Two public keys are equal when their encodings are.
  *
+ * @param info the family, the curve and the size the encoding holds.
  * @property encoded the DER encoding of the SubjectPublicKeyInfo.
+ * @property raw the subjectPublicKey bits of the encoding, such as the point of an elliptic curve key.
  * @since 1.0.0
  */
 public class PublicKey private constructor(

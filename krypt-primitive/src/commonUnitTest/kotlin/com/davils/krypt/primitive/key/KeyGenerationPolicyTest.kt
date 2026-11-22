@@ -39,9 +39,11 @@ class KeyGenerationPolicyTest : FunSpec({
             },
         )
         shouldThrow<PolicyViolationException> { noX25519.keys.generate(KeyType.X25519) }
-        noX25519.keys.generate(KeyType.Ed25519).publicKey.family shouldBe KeyFamily.Ed25519
+        val ed25519 = noX25519.keys.generate(KeyType.Ed25519)
+        ed25519.publicKey.family shouldBe KeyFamily.Ed25519
         val dhkemOnly = Crypto(environment { policy = cryptoPolicy { forbid(KeyAgreementAlgorithm.X25519) } })
-        dhkemOnly.keys.generate(KeyType.X25519).publicKey.family shouldBe KeyFamily.X25519
+        val x25519 = dhkemOnly.keys.generate(KeyType.X25519)
+        x25519.publicKey.family shouldBe KeyFamily.X25519
         val noRsa = Crypto(
             environment {
                 policy = cryptoPolicy {

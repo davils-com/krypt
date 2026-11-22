@@ -36,7 +36,8 @@ private const val SHORT_KEY: Int = 8
 class KeyConstructorsTest : FunSpec({
     test("the key types have no constructor Java can call, only private ones") {
         val types = listOf(PublicKey::class.java, PrivateKey::class.java, SecretKey::class.java)
-        val callable = types.flatMap { type -> type.declaredConstructors.toList() }.filter { constructor ->
+        val constructors = types.flatMap { type -> type.declaredConstructors.toList() }
+        val callable = constructors.filter { constructor ->
             !constructor.isSynthetic && !Modifier.isPrivate(constructor.modifiers)
         }
         callable shouldBe emptyList()
@@ -44,7 +45,8 @@ class KeyConstructorsTest : FunSpec({
 
     test("the policy sees the size of the encoding a key was made of") {
         val crypto = Crypto()
-        val weak = KeyPairGenerator.getInstance("RSA").apply { initialize(WEAK_RSA_BITS) }.generateKeyPair()
+        val generator = KeyPairGenerator.getInstance("RSA").apply { initialize(WEAK_RSA_BITS) }
+        val weak = generator.generateKeyPair()
         val key = checkNotNull(KeyCodec.publicKeyOf(ByteString(weak.public.encoded)).getOrNull())
         key.bits shouldBe WEAK_RSA_BITS
         crypto.keys.decodePublic(ByteString(weak.public.encoded)) shouldBe Outcome.Failure(KeyFailure.Refused)

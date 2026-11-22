@@ -25,8 +25,8 @@ import com.davils.krypt.core.SecretText
 import com.davils.krypt.core.algorithm.DigestAlgorithm
 import com.davils.krypt.core.policy.AlgorithmUse
 import com.davils.krypt.primitive.Crypto
-import com.davils.krypt.primitive.internal.requireWellFormed
 import com.davils.krypt.primitive.PolicyViolationException
+import com.davils.krypt.primitive.internal.requireWellFormed
 import kotlinx.io.bytestring.ByteString
 
 private const val MINIMUM_SALT: Int = 8

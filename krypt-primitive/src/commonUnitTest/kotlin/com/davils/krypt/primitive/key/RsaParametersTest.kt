@@ -34,8 +34,7 @@ private const val MODULUS_BYTES: Int = 384
 private const val FERMAT_EXPONENT: Long = 65_537
 private const val PRIVATE_FIELDS: Int = 6
 private const val HUGE_EXPONENT_BYTES: Int = 33
-
-private enum class Parameters { Null, Absent, Integer }
+private const val SMALLEST_EXPONENT: Long = 3
 
 private fun magnitude(size: Int, last: Int): DerInteger {
     val bytes = ByteArray(size) { 0x5A }.also { array ->
@@ -49,18 +48,24 @@ private val strongModulus: DerInteger = magnitude(size = MODULUS_BYTES, last = 0
 
 private val fermat: DerInteger = DerInteger.of(FERMAT_EXPONENT)
 
-private fun DerWriter.rsaAlgorithm(parameters: Parameters) {
+private val nullParameters: DerWriter.() -> Unit = { nullValue() }
+
+private val absentParameters: DerWriter.() -> Unit = {}
+
+private val integerParameters: DerWriter.() -> Unit = { integer(0L) }
+
+private fun DerWriter.rsaAlgorithm(parameters: DerWriter.() -> Unit) {
     sequence {
         objectIdentifier(ObjectIdentifier.of(RSA_OID))
-        when (parameters) {
-            Parameters.Null -> nullValue()
-            Parameters.Absent -> Unit
-            Parameters.Integer -> integer(0L)
-        }
+        parameters()
     }
 }
 
-private fun spki(modulus: DerInteger, exponent: DerInteger, parameters: Parameters = Parameters.Null): ByteString {
+private fun spki(
+    modulus: DerInteger,
+    exponent: DerInteger,
+    parameters: DerWriter.() -> Unit = nullParameters,
+): ByteString {
     val publicKey = Der.encode {
         sequence {
             integer(modulus)
@@ -75,7 +80,11 @@ private fun spki(modulus: DerInteger, exponent: DerInteger, parameters: Paramete
     }
 }
 
-private fun pkcs8(modulus: DerInteger, exponent: DerInteger, parameters: Parameters = Parameters.Null): SecretBytes {
+private fun pkcs8(
+    modulus: DerInteger,
+    exponent: DerInteger,
+    parameters: DerWriter.() -> Unit = nullParameters,
+): SecretBytes {
     val encoded = Der.encode {
         sequence {
             integer(0L)
@@ -116,17 +125,18 @@ class RsaParametersTest : FunSpec({
     }
 
     test("the AlgorithmIdentifier of rsaEncryption must carry NULL parameters") {
-        val absent = spki(modulus = strongModulus, exponent = fermat, parameters = Parameters.Absent)
+        val absent = spki(modulus = strongModulus, exponent = fermat, parameters = absentParameters)
         crypto.keys.decodePublic(absent) shouldBe Outcome.Failure(KeyFailure.Malformed)
-        val integer = spki(modulus = strongModulus, exponent = fermat, parameters = Parameters.Integer)
+        val integer = spki(modulus = strongModulus, exponent = fermat, parameters = integerParameters)
         crypto.keys.decodePublic(integer) shouldBe Outcome.Failure(KeyFailure.Malformed)
-        val privateAbsent = pkcs8(modulus = strongModulus, exponent = fermat, parameters = Parameters.Absent)
+        val privateAbsent = pkcs8(modulus = strongModulus, exponent = fermat, parameters = absentParameters)
         crypto.keys.decodePrivate(privateAbsent) shouldBe Outcome.Failure(KeyFailure.Malformed)
     }
 
     test("an RSA key with an odd modulus and a sane exponent is read") {
         val largest = magnitude(size = HUGE_EXPONENT_BYTES - 1, last = 1)
+        val smallest = DerInteger.of(SMALLEST_EXPONENT)
         crypto.keys.decodePublic(spki(modulus = strongModulus, exponent = largest)).isSuccess shouldBe true
-        crypto.keys.decodePublic(spki(modulus = strongModulus, exponent = DerInteger.of(3L))).isSuccess shouldBe true
+        crypto.keys.decodePublic(spki(modulus = strongModulus, exponent = smallest)).isSuccess shouldBe true
     }
 })

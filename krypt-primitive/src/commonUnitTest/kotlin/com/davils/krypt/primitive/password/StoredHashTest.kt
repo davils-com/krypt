@@ -47,7 +47,7 @@ class StoredHashTest : FunSpec({
         ) { parameters ->
             val password = SecretText.of(PASSWORD)
             val stored = fastCrypto.passwords.hash(password)
-            val altered = stored.replace(CANONICAL, parameters)
+            val altered = stored.replace(oldValue = CANONICAL, newValue = parameters)
             fastCrypto.passwords.verify(password, altered) shouldBe PasswordVerification.Malformed
         }
     }

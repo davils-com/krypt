@@ -22,8 +22,8 @@ import com.davils.krypt.core.algorithm.KdfAlgorithm
 import com.davils.krypt.core.algorithm.MacAlgorithm
 import com.davils.krypt.core.policy.AlgorithmUse
 import com.davils.krypt.primitive.Crypto
-import com.davils.krypt.primitive.internal.requireWellFormed
 import com.davils.krypt.primitive.PolicyViolationException
+import com.davils.krypt.primitive.internal.requireWellFormed
 import com.davils.krypt.primitive.key.SecretKey
 import kotlinx.io.bytestring.ByteString
 
