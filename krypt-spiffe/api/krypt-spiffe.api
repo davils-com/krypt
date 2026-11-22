@@ -1,0 +1,336 @@
+public final class com/davils/krypt/spiffe/SpiffeId : java/lang/Comparable {
+	public static final field Companion Lcom/davils/krypt/spiffe/SpiffeId$Companion;
+	public static final field MAXIMUM_LENGTH I
+	public fun compareTo (Lcom/davils/krypt/spiffe/SpiffeId;)I
+	public synthetic fun compareTo (Ljava/lang/Object;)I
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getPath ()Ljava/lang/String;
+	public final fun getSegments ()Ljava/util/List;
+	public final fun getText ()Ljava/lang/String;
+	public final fun getTrustDomain ()Lcom/davils/krypt/spiffe/TrustDomain;
+	public fun hashCode ()I
+	public final fun isTrustDomainId ()Z
+	public final fun memberOf (Lcom/davils/krypt/spiffe/TrustDomain;)Z
+	public final fun toGeneralName ()Lcom/davils/krypt/x509/name/GeneralName$Uri;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/spiffe/SpiffeId$Companion {
+	public final fun of (Lcom/davils/krypt/spiffe/TrustDomain;Ljava/util/List;)Lcom/davils/krypt/spiffe/SpiffeId;
+	public final fun of (Lcom/davils/krypt/x509/name/GeneralName;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun parse (Ljava/lang/String;)Lcom/davils/kore/core/outcome/Outcome;
+}
+
+public final class com/davils/krypt/spiffe/SpiffeIdFailure : java/lang/Enum {
+	public static final field BadPathCharacter Lcom/davils/krypt/spiffe/SpiffeIdFailure;
+	public static final field BadTrustDomainCharacter Lcom/davils/krypt/spiffe/SpiffeIdFailure;
+	public static final field DotSegment Lcom/davils/krypt/spiffe/SpiffeIdFailure;
+	public static final field Empty Lcom/davils/krypt/spiffe/SpiffeIdFailure;
+	public static final field EmptySegment Lcom/davils/krypt/spiffe/SpiffeIdFailure;
+	public static final field Fragment Lcom/davils/krypt/spiffe/SpiffeIdFailure;
+	public static final field MissingTrustDomain Lcom/davils/krypt/spiffe/SpiffeIdFailure;
+	public static final field PercentEncoded Lcom/davils/krypt/spiffe/SpiffeIdFailure;
+	public static final field Port Lcom/davils/krypt/spiffe/SpiffeIdFailure;
+	public static final field Query Lcom/davils/krypt/spiffe/SpiffeIdFailure;
+	public static final field TooLong Lcom/davils/krypt/spiffe/SpiffeIdFailure;
+	public static final field TrailingSlash Lcom/davils/krypt/spiffe/SpiffeIdFailure;
+	public static final field TrustDomainTooLong Lcom/davils/krypt/spiffe/SpiffeIdFailure;
+	public static final field UserInfo Lcom/davils/krypt/spiffe/SpiffeIdFailure;
+	public static final field WrongScheme Lcom/davils/krypt/spiffe/SpiffeIdFailure;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/spiffe/SpiffeIdFailure;
+	public static fun values ()[Lcom/davils/krypt/spiffe/SpiffeIdFailure;
+}
+
+public final class com/davils/krypt/spiffe/SpiffeLimits {
+	public static final field Companion Lcom/davils/krypt/spiffe/SpiffeLimits$Companion;
+	public static final field DEFAULT_MAXIMUM_AUTHORITIES I
+	public static final field DEFAULT_MAXIMUM_BYTES I
+	public static final field DEFAULT_MAXIMUM_CHAIN_LENGTH I
+	public static final field DEFAULT_MAXIMUM_SVIDS I
+	public static final field DEFAULT_MAXIMUM_TOKEN_BYTES I
+	public static final field DEFAULT_MAXIMUM_TRUST_DOMAINS I
+	public static final field HARD_MAXIMUM_AUTHORITIES I
+	public static final field HARD_MAXIMUM_BYTES I
+	public static final field HARD_MAXIMUM_CHAIN_LENGTH I
+	public static final field HARD_MAXIMUM_SVIDS I
+	public static final field HARD_MAXIMUM_TOKEN_BYTES I
+	public static final field HARD_MAXIMUM_TRUST_DOMAINS I
+	public fun <init> ()V
+	public fun <init> (IIIIII)V
+	public synthetic fun <init> (IIIIIIILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMaximumAuthorities ()I
+	public final fun getMaximumBytes ()I
+	public final fun getMaximumChainLength ()I
+	public final fun getMaximumSvids ()I
+	public final fun getMaximumTokenBytes ()I
+	public final fun getMaximumTrustDomains ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/spiffe/SpiffeLimits$Companion {
+	public final fun getDefault ()Lcom/davils/krypt/spiffe/SpiffeLimits;
+}
+
+public final class com/davils/krypt/spiffe/TrustDomain : java/lang/Comparable {
+	public static final field Companion Lcom/davils/krypt/spiffe/TrustDomain$Companion;
+	public static final field MAXIMUM_LENGTH I
+	public fun compareTo (Lcom/davils/krypt/spiffe/TrustDomain;)I
+	public synthetic fun compareTo (Ljava/lang/Object;)I
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId ()Lcom/davils/krypt/spiffe/SpiffeId;
+	public final fun getName ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun idOf ([Ljava/lang/String;)Lcom/davils/krypt/spiffe/SpiffeId;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/spiffe/TrustDomain$Companion {
+	public final fun of (Ljava/lang/String;)Lcom/davils/krypt/spiffe/TrustDomain;
+	public final fun parse (Ljava/lang/String;)Lcom/davils/kore/core/outcome/Outcome;
+}
+
+public final class com/davils/krypt/spiffe/bundle/BundleFailure : java/lang/Enum {
+	public static final field DuplicateKeyId Lcom/davils/krypt/spiffe/bundle/BundleFailure;
+	public static final field InvalidKey Lcom/davils/krypt/spiffe/bundle/BundleFailure;
+	public static final field InvalidTrustDomain Lcom/davils/krypt/spiffe/bundle/BundleFailure;
+	public static final field LimitExceeded Lcom/davils/krypt/spiffe/bundle/BundleFailure;
+	public static final field Malformed Lcom/davils/krypt/spiffe/bundle/BundleFailure;
+	public static final field MissingKeyId Lcom/davils/krypt/spiffe/bundle/BundleFailure;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/spiffe/bundle/BundleFailure;
+	public static fun values ()[Lcom/davils/krypt/spiffe/bundle/BundleFailure;
+}
+
+public final class com/davils/krypt/spiffe/bundle/BundleSet : com/davils/krypt/spiffe/source/BundleSource {
+	public static final field Companion Lcom/davils/krypt/spiffe/bundle/BundleSet$Companion;
+	public fun <init> ()V
+	public fun <init> (Ljava/util/List;)V
+	public synthetic fun <init> (Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun bundle (Lcom/davils/krypt/spiffe/TrustDomain;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun contains (Lcom/davils/krypt/spiffe/TrustDomain;)Z
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun get (Lcom/davils/krypt/spiffe/TrustDomain;)Lcom/davils/krypt/spiffe/bundle/TrustBundle;
+	public final fun getBundles ()Ljava/util/List;
+	public final fun getSize ()I
+	public final fun getTrustDomains ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+	public final fun with (Lcom/davils/krypt/spiffe/bundle/TrustBundle;)Lcom/davils/krypt/spiffe/bundle/BundleSet;
+	public final fun without (Lcom/davils/krypt/spiffe/TrustDomain;)Lcom/davils/krypt/spiffe/bundle/BundleSet;
+}
+
+public final class com/davils/krypt/spiffe/bundle/BundleSet$Companion {
+	public final fun getEmpty ()Lcom/davils/krypt/spiffe/bundle/BundleSet;
+}
+
+public final class com/davils/krypt/spiffe/bundle/JwtAuthority {
+	public static final field Companion Lcom/davils/krypt/spiffe/bundle/JwtAuthority$Companion;
+	public static final field MAXIMUM_KEY_ID_LENGTH I
+	public fun <init> (Ljava/lang/String;Lcom/davils/krypt/primitive/key/PublicKey;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getKeyId ()Ljava/lang/String;
+	public final fun getPublicKey ()Lcom/davils/krypt/primitive/key/PublicKey;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/spiffe/bundle/JwtAuthority$Companion {
+}
+
+public final class com/davils/krypt/spiffe/bundle/TrustBundle {
+	public static final field Companion Lcom/davils/krypt/spiffe/bundle/TrustBundle$Companion;
+	public static final field MAXIMUM_REFRESH_HINT_SECONDS J
+	public synthetic fun <init> (Lcom/davils/krypt/spiffe/TrustDomain;Ljava/util/List;Ljava/util/List;Ljava/lang/Long;Lkotlin/time/Duration;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Lcom/davils/krypt/spiffe/TrustDomain;Ljava/util/List;Ljava/util/List;Ljava/lang/Long;Lkotlin/time/Duration;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getJwtAuthorities ()Ljava/util/List;
+	public final fun getRefreshHint-FghU774 ()Lkotlin/time/Duration;
+	public final fun getSequence ()Ljava/lang/Long;
+	public final fun getTrustDomain ()Lcom/davils/krypt/spiffe/TrustDomain;
+	public final fun getX509Authorities ()Ljava/util/List;
+	public fun hashCode ()I
+	public final fun isEmpty ()Z
+	public final fun jwtAuthority (Ljava/lang/String;)Lcom/davils/krypt/spiffe/bundle/JwtAuthority;
+	public fun toString ()Ljava/lang/String;
+	public final fun trustAnchors ()Ljava/util/List;
+}
+
+public final class com/davils/krypt/spiffe/bundle/TrustBundle$Companion {
+}
+
+public final class com/davils/krypt/spiffe/bundle/TrustBundles {
+	public fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/spiffe/SpiffeLimits;)V
+	public synthetic fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/spiffe/SpiffeLimits;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun decode (Lcom/davils/krypt/spiffe/TrustDomain;Ljava/lang/String;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun decodeMap (Ljava/lang/String;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun encode (Lcom/davils/krypt/spiffe/bundle/TrustBundle;)Ljava/lang/String;
+	public final fun encodeMap (Lcom/davils/krypt/spiffe/bundle/BundleSet;)Ljava/lang/String;
+	public final fun getCrypto ()Lcom/davils/krypt/primitive/Crypto;
+	public final fun getLimits ()Lcom/davils/krypt/spiffe/SpiffeLimits;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/spiffe/jwt/JwtSvid {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAudience ()Ljava/util/List;
+	public final fun getClaims ()Lcom/davils/krypt/jose/jwt/JwtClaims;
+	public final fun getExpiresAt ()Lkotlin/time/Instant;
+	public final fun getId ()Lcom/davils/krypt/spiffe/SpiffeId;
+	public final fun getToken ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/spiffe/jwt/JwtSvidFailure : java/lang/Enum {
+	public static final field BadSignature Lcom/davils/krypt/spiffe/jwt/JwtSvidFailure;
+	public static final field Expired Lcom/davils/krypt/spiffe/jwt/JwtSvidFailure;
+	public static final field InvalidSubject Lcom/davils/krypt/spiffe/jwt/JwtSvidFailure;
+	public static final field KeyNotFound Lcom/davils/krypt/spiffe/jwt/JwtSvidFailure;
+	public static final field LimitExceeded Lcom/davils/krypt/spiffe/jwt/JwtSvidFailure;
+	public static final field Malformed Lcom/davils/krypt/spiffe/jwt/JwtSvidFailure;
+	public static final field MissingExpiration Lcom/davils/krypt/spiffe/jwt/JwtSvidFailure;
+	public static final field MissingKeyId Lcom/davils/krypt/spiffe/jwt/JwtSvidFailure;
+	public static final field NoBundle Lcom/davils/krypt/spiffe/jwt/JwtSvidFailure;
+	public static final field NotYetValid Lcom/davils/krypt/spiffe/jwt/JwtSvidFailure;
+	public static final field UnsupportedAlgorithm Lcom/davils/krypt/spiffe/jwt/JwtSvidFailure;
+	public static final field UnsupportedHeader Lcom/davils/krypt/spiffe/jwt/JwtSvidFailure;
+	public static final field WrongAudience Lcom/davils/krypt/spiffe/jwt/JwtSvidFailure;
+	public static final field WrongType Lcom/davils/krypt/spiffe/jwt/JwtSvidFailure;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/spiffe/jwt/JwtSvidFailure;
+	public static fun values ()[Lcom/davils/krypt/spiffe/jwt/JwtSvidFailure;
+}
+
+public final class com/davils/krypt/spiffe/jwt/JwtSvidSigner {
+	public static final field Companion Lcom/davils/krypt/spiffe/jwt/JwtSvidSigner$Companion;
+	public fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/primitive/key/PrivateKey;Ljava/lang/String;Lcom/davils/krypt/jose/jws/JwsAlgorithm;)V
+	public final fun getAlgorithm ()Lcom/davils/krypt/jose/jws/JwsAlgorithm;
+	public final fun getCrypto ()Lcom/davils/krypt/primitive/Crypto;
+	public final fun getKeyId ()Ljava/lang/String;
+	public final fun sign-1Y68eR8 (Lcom/davils/krypt/spiffe/SpiffeId;Ljava/util/List;JLcom/davils/krypt/jose/JsonValue$Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun sign-1Y68eR8$default (Lcom/davils/krypt/spiffe/jwt/JwtSvidSigner;Lcom/davils/krypt/spiffe/SpiffeId;Ljava/util/List;JLcom/davils/krypt/jose/JsonValue$Object;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/spiffe/jwt/JwtSvidSigner$Companion {
+	public final fun getMAXIMUM_LIFETIME-UwyO8pc ()J
+}
+
+public final class com/davils/krypt/spiffe/jwt/JwtSvidValidator {
+	public static final field Companion Lcom/davils/krypt/spiffe/jwt/JwtSvidValidator$Companion;
+	public synthetic fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/spiffe/source/BundleSource;JLjava/util/Set;Lcom/davils/krypt/spiffe/SpiffeLimits;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/spiffe/source/BundleSource;JLjava/util/Set;Lcom/davils/krypt/spiffe/SpiffeLimits;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getAlgorithms ()Ljava/util/Set;
+	public final fun getClockSkew-UwyO8pc ()J
+	public final fun getCrypto ()Lcom/davils/krypt/primitive/Crypto;
+	public final fun getLimits ()Lcom/davils/krypt/spiffe/SpiffeLimits;
+	public fun toString ()Ljava/lang/String;
+	public final fun validate (Ljava/lang/String;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/spiffe/jwt/JwtSvidValidator$Companion {
+	public final fun getALGORITHMS ()Ljava/util/Set;
+	public final fun getDEFAULT_CLOCK_SKEW-UwyO8pc ()J
+	public final fun getMAXIMUM_CLOCK_SKEW-UwyO8pc ()J
+}
+
+public abstract interface class com/davils/krypt/spiffe/source/BundleSource {
+	public abstract fun bundle (Lcom/davils/krypt/spiffe/TrustDomain;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/spiffe/source/SourceFailure : java/lang/Enum {
+	public static final field LimitExceeded Lcom/davils/krypt/spiffe/source/SourceFailure;
+	public static final field MissingBundle Lcom/davils/krypt/spiffe/source/SourceFailure;
+	public static final field NoSvid Lcom/davils/krypt/spiffe/source/SourceFailure;
+	public static final field Rollback Lcom/davils/krypt/spiffe/source/SourceFailure;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/spiffe/source/SourceFailure;
+	public static fun values ()[Lcom/davils/krypt/spiffe/source/SourceFailure;
+}
+
+public abstract interface class com/davils/krypt/spiffe/source/SvidSource {
+	public abstract fun svid (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/spiffe/source/X509Source : com/davils/krypt/spiffe/source/BundleSource, com/davils/krypt/spiffe/source/SvidSource {
+	public fun <init> ()V
+	public fun <init> (Lcom/davils/krypt/spiffe/SpiffeLimits;)V
+	public synthetic fun <init> (Lcom/davils/krypt/spiffe/SpiffeLimits;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun bundle (Lcom/davils/krypt/spiffe/TrustDomain;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getBundles ()Lcom/davils/krypt/spiffe/bundle/BundleSet;
+	public final fun getLimits ()Lcom/davils/krypt/spiffe/SpiffeLimits;
+	public final fun getSvids ()Ljava/util/List;
+	public final fun svid (Ljava/lang/String;)Lcom/davils/krypt/spiffe/x509/X509Svid;
+	public fun svid (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun toString ()Ljava/lang/String;
+	public final fun update (Ljava/util/List;Lcom/davils/krypt/spiffe/bundle/BundleSet;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun updateBundles (Lcom/davils/krypt/spiffe/bundle/BundleSet;)Lcom/davils/kore/core/outcome/Outcome;
+}
+
+public final class com/davils/krypt/spiffe/x509/ValidatedX509Svid {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAnchor ()Lcom/davils/krypt/x509/path/TrustAnchor;
+	public final fun getCertificate ()Lcom/davils/krypt/x509/Certificate;
+	public final fun getId ()Lcom/davils/krypt/spiffe/SpiffeId;
+	public final fun getPath ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/spiffe/x509/X509Svid {
+	public static final field Companion Lcom/davils/krypt/spiffe/x509/X509Svid$Companion;
+	public static final field MAXIMUM_HINT_LENGTH I
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCertificate ()Lcom/davils/krypt/x509/Certificate;
+	public final fun getChain ()Ljava/util/List;
+	public final fun getHint ()Ljava/lang/String;
+	public final fun getId ()Lcom/davils/krypt/spiffe/SpiffeId;
+	public final fun getPrivateKey ()Lcom/davils/krypt/primitive/key/PrivateKey;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/spiffe/x509/X509Svid$Companion {
+	public final fun of (Ljava/util/List;Lcom/davils/krypt/primitive/key/PrivateKey;Ljava/lang/String;Lcom/davils/krypt/spiffe/SpiffeLimits;)Lcom/davils/kore/core/outcome/Outcome;
+	public static synthetic fun of$default (Lcom/davils/krypt/spiffe/x509/X509Svid$Companion;Ljava/util/List;Lcom/davils/krypt/primitive/key/PrivateKey;Ljava/lang/String;Lcom/davils/krypt/spiffe/SpiffeLimits;ILjava/lang/Object;)Lcom/davils/kore/core/outcome/Outcome;
+}
+
+public final class com/davils/krypt/spiffe/x509/X509SvidFailure : java/lang/Enum {
+	public static final field CertificateAuthority Lcom/davils/krypt/spiffe/x509/X509SvidFailure;
+	public static final field EmptyChain Lcom/davils/krypt/spiffe/x509/X509SvidFailure;
+	public static final field Expired Lcom/davils/krypt/spiffe/x509/X509SvidFailure;
+	public static final field InvalidSpiffeId Lcom/davils/krypt/spiffe/x509/X509SvidFailure;
+	public static final field KeyMismatch Lcom/davils/krypt/spiffe/x509/X509SvidFailure;
+	public static final field KeyUsage Lcom/davils/krypt/spiffe/x509/X509SvidFailure;
+	public static final field LimitExceeded Lcom/davils/krypt/spiffe/x509/X509SvidFailure;
+	public static final field NoBundle Lcom/davils/krypt/spiffe/x509/X509SvidFailure;
+	public static final field NoSpiffeId Lcom/davils/krypt/spiffe/x509/X509SvidFailure;
+	public static final field Revoked Lcom/davils/krypt/spiffe/x509/X509SvidFailure;
+	public static final field SeveralUris Lcom/davils/krypt/spiffe/x509/X509SvidFailure;
+	public static final field SigningCertificate Lcom/davils/krypt/spiffe/x509/X509SvidFailure;
+	public static final field TrustDomainId Lcom/davils/krypt/spiffe/x509/X509SvidFailure;
+	public static final field Untrusted Lcom/davils/krypt/spiffe/x509/X509SvidFailure;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/spiffe/x509/X509SvidFailure;
+	public static fun values ()[Lcom/davils/krypt/spiffe/x509/X509SvidFailure;
+}
+
+public final class com/davils/krypt/spiffe/x509/X509SvidRules {
+	public static final field INSTANCE Lcom/davils/krypt/spiffe/x509/X509SvidRules;
+	public final fun leaf (Lcom/davils/krypt/x509/Certificate;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun path (Ljava/util/List;)Lcom/davils/kore/core/outcome/Outcome;
+}
+
+public final class com/davils/krypt/spiffe/x509/X509SvidValidator {
+	public fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/spiffe/source/BundleSource;Lcom/davils/krypt/x509/path/RevocationChecker;Lcom/davils/krypt/spiffe/SpiffeLimits;Lcom/davils/krypt/x509/X509Limits;)V
+	public synthetic fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/spiffe/source/BundleSource;Lcom/davils/krypt/x509/path/RevocationChecker;Lcom/davils/krypt/spiffe/SpiffeLimits;Lcom/davils/krypt/x509/X509Limits;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getCrypto ()Lcom/davils/krypt/primitive/Crypto;
+	public final fun getLimits ()Lcom/davils/krypt/spiffe/SpiffeLimits;
+	public fun toString ()Ljava/lang/String;
+	public final fun validate (Ljava/util/List;Lcom/davils/krypt/x509/path/ValidationParameters;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun validate$default (Lcom/davils/krypt/spiffe/x509/X509SvidValidator;Ljava/util/List;Lcom/davils/krypt/x509/path/ValidationParameters;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
