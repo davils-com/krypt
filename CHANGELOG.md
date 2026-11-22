@@ -62,6 +62,13 @@ kollect 1.0.0. The code comes from the security library of an internal Davils pr
   an issuance policy for names, keys and validity, enrollment by request, 159-bit random serial numbers, revocation
   with full and delta lists, the status source of an OCSP responder, a repository of the application and an audit
   of every issuance and revocation.
+- **JOSE**: a strict and bounded JSON parser by RFC 8259 and I-JSON; JSON Web Keys and key sets of RFC 7517 and RFC
+  8037 converted to and from the keys of krypt, with `x5c` chains, thumbprints by RFC 7638 and thumbprint URIs by RFC
+  9278; JSON Web Signatures in the compact and JSON serializations with detached and unencoded payloads, verified
+  with an algorithm allowlist and optionally with an `x5c` chain; JSON Web Encryption with `dir`, AES key wrap, AES-GCM
+  key wrap, ECDH-ES, RSA-OAEP-256 and, behind an opt-in, PBES2, and AES-GCM and AES-CBC-HMAC content encryption with
+  one failure for every wrong key, tag or padding; and JSON Web Tokens, signed, encrypted or nested, validated by the
+  best current practice of RFC 8725.
 - **TLS** for the JVM over JSSE: a `tls { }` DSL for clients and servers with TLS 1.3 by default and TLS 1.2 by
   opt-in, allowlists of cipher suites, groups and signature schemes from the crypto policy with the hybrid group
   `X25519MLKEM768` first where the JDK offers it, ALPN, server name indication and session settings; rotating key

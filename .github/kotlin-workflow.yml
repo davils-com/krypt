@@ -35,6 +35,7 @@ check:
       - ":krypt-ct:clean"
       - ":krypt-ocsp:clean"
       - ":krypt-authority:clean"
+      - ":krypt-jose:clean"
       - ":krypt-tls:clean"
       - ":krypt-testing:clean"
     tasks:
@@ -49,6 +50,7 @@ check:
       - ":krypt-ct:jvmJar"
       - ":krypt-ocsp:jvmJar"
       - ":krypt-authority:jvmJar"
+      - ":krypt-jose:jvmJar"
       - ":krypt-tls:jar"
       - ":krypt-testing:jvmJar"
     artifacts:
@@ -63,6 +65,7 @@ check:
       - "krypt-ct/build/libs/*.jar"
       - "krypt-ocsp/build/libs/*.jar"
       - "krypt-authority/build/libs/*.jar"
+      - "krypt-jose/build/libs/*.jar"
       - "krypt-tls/build/libs/*.jar"
       - "krypt-testing/build/libs/*.jar"
 
@@ -104,6 +107,7 @@ publish:
     - ":krypt-ct:publishAllPublicationsToDavilsRepository"
     - ":krypt-ocsp:publishAllPublicationsToDavilsRepository"
     - ":krypt-authority:publishAllPublicationsToDavilsRepository"
+    - ":krypt-jose:publishAllPublicationsToDavilsRepository"
     - ":krypt-tls:publishAllPublicationsToDavilsRepository"
     - ":krypt-testing:publishAllPublicationsToDavilsRepository"
     - ":krypt-bom:publishAllPublicationsToDavilsRepository"
@@ -216,6 +220,15 @@ release:
       - path: com/davils/krypt-authority
         artifact: krypt-authority
         task: ":krypt-authority:publishKotlinMultiplatformPublicationToDavilsRepository"
+      - path: com/davils/krypt-jose-jvm
+        artifact: krypt-jose-jvm
+        task: ":krypt-jose:publishJvmPublicationToDavilsRepository"
+      - path: com/davils/krypt-jose-wasm-js
+        artifact: krypt-jose-wasm-js
+        task: ":krypt-jose:publishWasmJsPublicationToDavilsRepository"
+      - path: com/davils/krypt-jose
+        artifact: krypt-jose
+        task: ":krypt-jose:publishKotlinMultiplatformPublicationToDavilsRepository"
       - path: com/davils/krypt-tls
         artifact: krypt-tls
         task: ":krypt-tls:publishMavenPublicationToDavilsRepository"
@@ -255,6 +268,8 @@ release:
       - "krypt-ocsp/build/libs/*.klib"
       - "krypt-authority/build/libs/*.jar"
       - "krypt-authority/build/libs/*.klib"
+      - "krypt-jose/build/libs/*.jar"
+      - "krypt-jose/build/libs/*.klib"
       - "krypt-tls/build/libs/*.jar"
       - "krypt-testing/build/libs/*.jar"
       - "krypt-testing/build/libs/*.klib"

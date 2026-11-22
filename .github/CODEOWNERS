@@ -26,6 +26,8 @@
 /krypt-ocsp/src/jvmMain/java/         @davils-com/maintainers
 /krypt-authority/api/                 @davils-com/maintainers
 /krypt-authority/src/jvmMain/java/    @davils-com/maintainers
+/krypt-jose/api/                      @davils-com/maintainers
+/krypt-jose/src/jvmMain/java/         @davils-com/maintainers
 /krypt-tls/api/                       @davils-com/maintainers
 /krypt-tls/src/main/java/             @davils-com/maintainers
 

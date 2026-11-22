@@ -503,6 +503,140 @@
             }
         },
         {
+            "id": "rfc:7493",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-jose.",
+            "snapshot": {
+                "title": "The I-JSON Message Format",
+                "status": "PROPOSED STANDARD",
+                "published": "March 2015",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "5354": "REPORTED",
+                    "6861": "REPORTED"
+                }
+            }
+        },
+        {
+            "id": "rfc:7515",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-jose.",
+            "snapshot": {
+                "title": "JSON Web Signature (JWS)",
+                "status": "PROPOSED STANDARD",
+                "published": "May 2015",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "6118": "REJECTED",
+                    "7767": "REPORTED",
+                    "8430": "REJECTED",
+                    "8508": "REJECTED"
+                }
+            }
+        },
+        {
+            "id": "rfc:7516",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-jose.",
+            "snapshot": {
+                "title": "JSON Web Encryption (JWE)",
+                "status": "PROPOSED STANDARD",
+                "published": "May 2015",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "6018": "REPORTED",
+                    "7719": "REPORTED",
+                    "8676": "REPORTED"
+                }
+            }
+        },
+        {
+            "id": "rfc:7517",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-jose.",
+            "snapshot": {
+                "title": "JSON Web Key (JWK)",
+                "status": "PROPOSED STANDARD",
+                "published": "May 2015",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "6907": "REPORTED"
+                }
+            }
+        },
+        {
+            "id": "rfc:7518",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-jose.",
+            "snapshot": {
+                "title": "JSON Web Algorithms (JWA)",
+                "status": "PROPOSED STANDARD",
+                "published": "May 2015",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [
+                    "RFC9864"
+                ],
+                "errata": {
+                    "6612": "VERIFIED",
+                    "8526": "VERIFIED",
+                    "8568": "VERIFIED",
+                    "8747": "VERIFIED"
+                }
+            }
+        },
+        {
+            "id": "rfc:7519",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-jose.",
+            "snapshot": {
+                "title": "JSON Web Token (JWT)",
+                "status": "PROPOSED STANDARD",
+                "published": "May 2015",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [
+                    "RFC7797",
+                    "RFC8725"
+                ],
+                "errata": {
+                    "5648": "REJECTED",
+                    "5906": "REPORTED",
+                    "6622": "REJECTED",
+                    "7720": "REPORTED",
+                    "8060": "VERIFIED",
+                    "8225": "REPORTED",
+                    "8388": "VERIFIED",
+                    "9212": "REJECTED"
+                }
+            }
+        },
+        {
+            "id": "rfc:7520",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-jose.",
+            "snapshot": {
+                "title": "Examples of Protecting Content Using JSON Object Signing and Encryption (JOSE)",
+                "status": "INFORMATIONAL",
+                "published": "May 2015",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "4802": "REPORTED",
+                    "7680": "REPORTED"
+                }
+            }
+        },
+        {
             "id": "rfc:7633",
             "reviewedOn": "2026-11-22",
             "note": "Reviewed for krypt-tls.",
@@ -516,6 +650,20 @@
                 "errata": {
                     "4571": "REJECTED"
                 }
+            }
+        },
+        {
+            "id": "rfc:7638",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-jose.",
+            "snapshot": {
+                "title": "JSON Web Key (JWK) Thumbprint",
+                "status": "PROPOSED STANDARD",
+                "published": "September 2015",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
             }
         },
         {
@@ -540,6 +688,20 @@
                     "7824": "REJECTED",
                     "7879": "REJECTED"
                 }
+            }
+        },
+        {
+            "id": "rfc:7797",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-jose.",
+            "snapshot": {
+                "title": "JSON Web Signature (JWS) Unencoded Payload Option",
+                "status": "PROPOSED STANDARD",
+                "published": "February 2016",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
             }
         },
         {
@@ -633,6 +795,24 @@
             }
         },
         {
+            "id": "rfc:8037",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-jose.",
+            "snapshot": {
+                "title": "CFRG Elliptic Curve Diffie-Hellman (ECDH) and Signatures in JSON Object Signing and Encryption (JOSE)",
+                "status": "PROPOSED STANDARD",
+                "published": "January 2017",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [
+                    "RFC9864"
+                ],
+                "errata": {
+                    "5329": "REPORTED"
+                }
+            }
+        },
+        {
             "id": "rfc:822",
             "reviewedOn": "2026-11-22",
             "note": "Reviewed for the PKI modules: krypt-x509, krypt-keystore and krypt-ct.",
@@ -657,6 +837,37 @@
                     "3408": "HELD",
                     "4584": "HELD",
                     "7573": "REJECTED"
+                }
+            }
+        },
+        {
+            "id": "rfc:8259",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-jose.",
+            "snapshot": {
+                "title": "The JavaScript Object Notation (JSON) Data Interchange Format",
+                "status": "INTERNET STANDARD",
+                "published": "December 2017",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "5210": "VERIFIED",
+                    "5218": "REJECTED",
+                    "5318": "VERIFIED",
+                    "5853": "REJECTED",
+                    "6208": "REJECTED",
+                    "7307": "REJECTED",
+                    "7383": "VERIFIED",
+                    "7600": "VERIFIED",
+                    "7603": "VERIFIED",
+                    "7617": "REJECTED",
+                    "7650": "HELD",
+                    "7673": "REJECTED",
+                    "8438": "HELD",
+                    "8622": "REJECTED",
+                    "8874": "REJECTED",
+                    "9095": "REPORTED"
                 }
             }
         },
@@ -750,6 +961,20 @@
             }
         },
         {
+            "id": "rfc:8725",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-jose.",
+            "snapshot": {
+                "title": "JSON Web Token Best Current Practices",
+                "status": "BEST CURRENT PRACTICE",
+                "published": "February 2020",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
+            }
+        },
+        {
             "id": "rfc:9180",
             "reviewedOn": "2026-11-22",
             "note": "HPKE: every mode in common code over the DHKEMs, HKDF and the AEADs, checked against its test vectors.",
@@ -770,6 +995,20 @@
                     "7934": "VERIFIED",
                     "7937": "VERIFIED"
                 }
+            }
+        },
+        {
+            "id": "rfc:9278",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-jose.",
+            "snapshot": {
+                "title": "JWK Thumbprint URI",
+                "status": "PROPOSED STANDARD",
+                "published": "August 2022",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
             }
         },
         {
@@ -814,6 +1053,20 @@
                 "title": "Online Certificate Status Protocol (OCSP) Nonce Extension",
                 "status": "PROPOSED STANDARD",
                 "published": "August 2024",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
+            }
+        },
+        {
+            "id": "rfc:9864",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-jose.",
+            "snapshot": {
+                "title": "Fully-Specified Algorithms for JSON Object Signing and Encryption (JOSE) and CBOR Object Signing and Encryption (COSE)",
+                "status": "PROPOSED STANDARD",
+                "published": "October 2025",
                 "withdrawn": false,
                 "replacedBy": [],
                 "updatedBy": [],

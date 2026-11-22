@@ -99,6 +99,7 @@ kreate {
                 ":krypt-ct",
                 ":krypt-ocsp",
                 ":krypt-authority",
+                ":krypt-jose",
                 ":krypt-tls",
                 ":krypt-testing",
             )
