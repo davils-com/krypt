@@ -22,13 +22,34 @@ import com.davils.krypt.cms.CmsFailure
 import com.davils.krypt.cms.timestamp.TimeStampParameters
 import com.davils.krypt.cms.timestamp.TimeStampToken
 import com.davils.krypt.core.algorithm.DigestAlgorithm
+import com.davils.krypt.core.policy.AlgorithmUse
+import com.davils.krypt.primitive.CryptoException
 import com.davils.krypt.x509.Certificate
 import com.davils.krypt.x509.extension.ExtensionIds
 import com.davils.krypt.x509.extension.KeyPurposes
 import kotlinx.io.bytestring.ByteString
 
 internal class TimeStampVerifier(private val cms: Cms) {
+    suspend fun verifyData(
+        token: TimeStampToken,
+        digest: DigestAlgorithm,
+        data: ByteString,
+        parameters: TimeStampParameters,
+    ): Outcome<TimeStampToken, CmsFailure> = guarded {
+        val hashed = cms.crypto.digests.digest(data = data, algorithm = digest, use = AlgorithmUse.Verify)
+        verified(token = token, digest = digest, hashedMessage = hashed, parameters = parameters)
+    }
+
     suspend fun verify(
+        token: TimeStampToken,
+        digest: DigestAlgorithm,
+        hashedMessage: ByteString,
+        parameters: TimeStampParameters,
+    ): Outcome<TimeStampToken, CmsFailure> = guarded {
+        verified(token = token, digest = digest, hashedMessage = hashedMessage, parameters = parameters)
+    }
+
+    private suspend fun verified(
         token: TimeStampToken,
         digest: DigestAlgorithm,
         hashedMessage: ByteString,
@@ -71,6 +92,13 @@ internal class TimeStampVerifier(private val cms: Cms) {
             ?: CmsFailure.TimeStampMismatch.takeUnless { isImprint && isNonce && isPolicy && isCarried }
         return failure?.let { found -> Outcome.Failure(found) } ?: Outcome.Success(token)
     }
+
+    private inline fun guarded(block: () -> Outcome<TimeStampToken, CmsFailure>): Outcome<TimeStampToken, CmsFailure> =
+        try {
+            block()
+        } catch (ignored: CryptoException) {
+            Outcome.Failure(CmsFailure.AlgorithmNotPermitted)
+        }
 
     private fun hasSigningCertificate(signed: AttributeSet): Boolean {
         val types = signed.attributes.map { attribute -> attribute.type }
