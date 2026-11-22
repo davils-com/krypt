@@ -131,6 +131,11 @@ libraries:
       - '**/ocsp/OcspResponse.kt'
       - '**/ocsp/ResponderId.kt'
       - '**/ocsp/internal/ResponseData.kt'
+      - '**/jose/JsonValue.kt'
+      - '**/jose/JoseKey.kt'
+      - '**/jose/jwe/EncryptedKey.kt'
+      - '**/jose/jws/JwsMessage.kt'
+      - '**/jose/jws/JwsSignature.kt'
   # The compiler rejects an explicit Unit return type as redundant under warnings as errors.
   LibraryCodeMustSpecifyReturnType:
     active: true
@@ -219,6 +224,11 @@ style:
       - '**/ocsp/OcspResponse.kt'
       - '**/ocsp/ResponderId.kt'
       - '**/ocsp/internal/ResponseData.kt'
+      - '**/jose/JsonValue.kt'
+      - '**/jose/JoseKey.kt'
+      - '**/jose/jwe/EncryptedKey.kt'
+      - '**/jose/jws/JwsMessage.kt'
+      - '**/jose/jws/JwsSignature.kt'
   # The compiler rejects an explicit Unit return type as redundant under warnings as errors.
   OptionalUnit:
     active: false

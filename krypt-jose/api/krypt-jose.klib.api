@@ -1,0 +1,815 @@
+// Klib ABI Dump
+// Targets: [wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.davils:krypt-jose>
+final enum class com.davils.krypt.jose.jwe/JweAlgorithm : kotlin/Enum<com.davils.krypt.jose.jwe/JweAlgorithm> { // com.davils.krypt.jose.jwe/JweAlgorithm|null[0]
+    enum entry A128GCMKW // com.davils.krypt.jose.jwe/JweAlgorithm.A128GCMKW|null[0]
+    enum entry A128KW // com.davils.krypt.jose.jwe/JweAlgorithm.A128KW|null[0]
+    enum entry A256GCMKW // com.davils.krypt.jose.jwe/JweAlgorithm.A256GCMKW|null[0]
+    enum entry A256KW // com.davils.krypt.jose.jwe/JweAlgorithm.A256KW|null[0]
+    enum entry Dir // com.davils.krypt.jose.jwe/JweAlgorithm.Dir|null[0]
+    enum entry EcdhEs // com.davils.krypt.jose.jwe/JweAlgorithm.EcdhEs|null[0]
+    enum entry EcdhEsA128KW // com.davils.krypt.jose.jwe/JweAlgorithm.EcdhEsA128KW|null[0]
+    enum entry EcdhEsA256KW // com.davils.krypt.jose.jwe/JweAlgorithm.EcdhEsA256KW|null[0]
+    enum entry Pbes2Hs256A128KW // com.davils.krypt.jose.jwe/JweAlgorithm.Pbes2Hs256A128KW|null[0]
+    enum entry Pbes2Hs512A256KW // com.davils.krypt.jose.jwe/JweAlgorithm.Pbes2Hs512A256KW|null[0]
+    enum entry RsaOaep256 // com.davils.krypt.jose.jwe/JweAlgorithm.RsaOaep256|null[0]
+
+    final val algorithmName // com.davils.krypt.jose.jwe/JweAlgorithm.algorithmName|{}algorithmName[0]
+        final fun <get-algorithmName>(): kotlin/String // com.davils.krypt.jose.jwe/JweAlgorithm.algorithmName.<get-algorithmName>|<get-algorithmName>(){}[0]
+    final val entries // com.davils.krypt.jose.jwe/JweAlgorithm.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.jose.jwe/JweAlgorithm> // com.davils.krypt.jose.jwe/JweAlgorithm.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val isDirect // com.davils.krypt.jose.jwe/JweAlgorithm.isDirect|{}isDirect[0]
+        final fun <get-isDirect>(): kotlin/Boolean // com.davils.krypt.jose.jwe/JweAlgorithm.isDirect.<get-isDirect>|<get-isDirect>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.jose.jwe/JweAlgorithm // com.davils.krypt.jose.jwe/JweAlgorithm.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.jose.jwe/JweAlgorithm> // com.davils.krypt.jose.jwe/JweAlgorithm.values|values#static(){}[0]
+
+    final object Companion { // com.davils.krypt.jose.jwe/JweAlgorithm.Companion|null[0]
+        final fun of(kotlin/String): com.davils.krypt.jose.jwe/JweAlgorithm? // com.davils.krypt.jose.jwe/JweAlgorithm.Companion.of|of(kotlin.String){}[0]
+    }
+}
+
+final enum class com.davils.krypt.jose.jwe/JweEncryption : kotlin/Enum<com.davils.krypt.jose.jwe/JweEncryption> { // com.davils.krypt.jose.jwe/JweEncryption|null[0]
+    enum entry A128CBC_HS256 // com.davils.krypt.jose.jwe/JweEncryption.A128CBC_HS256|null[0]
+    enum entry A128GCM // com.davils.krypt.jose.jwe/JweEncryption.A128GCM|null[0]
+    enum entry A256CBC_HS512 // com.davils.krypt.jose.jwe/JweEncryption.A256CBC_HS512|null[0]
+    enum entry A256GCM // com.davils.krypt.jose.jwe/JweEncryption.A256GCM|null[0]
+
+    final val algorithmName // com.davils.krypt.jose.jwe/JweEncryption.algorithmName|{}algorithmName[0]
+        final fun <get-algorithmName>(): kotlin/String // com.davils.krypt.jose.jwe/JweEncryption.algorithmName.<get-algorithmName>|<get-algorithmName>(){}[0]
+    final val entries // com.davils.krypt.jose.jwe/JweEncryption.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.jose.jwe/JweEncryption> // com.davils.krypt.jose.jwe/JweEncryption.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val ivBytes // com.davils.krypt.jose.jwe/JweEncryption.ivBytes|{}ivBytes[0]
+        final fun <get-ivBytes>(): kotlin/Int // com.davils.krypt.jose.jwe/JweEncryption.ivBytes.<get-ivBytes>|<get-ivBytes>(){}[0]
+    final val keyBytes // com.davils.krypt.jose.jwe/JweEncryption.keyBytes|{}keyBytes[0]
+        final fun <get-keyBytes>(): kotlin/Int // com.davils.krypt.jose.jwe/JweEncryption.keyBytes.<get-keyBytes>|<get-keyBytes>(){}[0]
+    final val tagBytes // com.davils.krypt.jose.jwe/JweEncryption.tagBytes|{}tagBytes[0]
+        final fun <get-tagBytes>(): kotlin/Int // com.davils.krypt.jose.jwe/JweEncryption.tagBytes.<get-tagBytes>|<get-tagBytes>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.jose.jwe/JweEncryption // com.davils.krypt.jose.jwe/JweEncryption.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.jose.jwe/JweEncryption> // com.davils.krypt.jose.jwe/JweEncryption.values|values#static(){}[0]
+
+    final object Companion { // com.davils.krypt.jose.jwe/JweEncryption.Companion|null[0]
+        final fun of(kotlin/String): com.davils.krypt.jose.jwe/JweEncryption? // com.davils.krypt.jose.jwe/JweEncryption.Companion.of|of(kotlin.String){}[0]
+    }
+}
+
+final enum class com.davils.krypt.jose.jwk/JwkCurve : kotlin/Enum<com.davils.krypt.jose.jwk/JwkCurve> { // com.davils.krypt.jose.jwk/JwkCurve|null[0]
+    enum entry Ed25519 // com.davils.krypt.jose.jwk/JwkCurve.Ed25519|null[0]
+    enum entry Ed448 // com.davils.krypt.jose.jwk/JwkCurve.Ed448|null[0]
+    enum entry P256 // com.davils.krypt.jose.jwk/JwkCurve.P256|null[0]
+    enum entry P384 // com.davils.krypt.jose.jwk/JwkCurve.P384|null[0]
+    enum entry P521 // com.davils.krypt.jose.jwk/JwkCurve.P521|null[0]
+    enum entry X25519 // com.davils.krypt.jose.jwk/JwkCurve.X25519|null[0]
+    enum entry X448 // com.davils.krypt.jose.jwk/JwkCurve.X448|null[0]
+
+    final val curveName // com.davils.krypt.jose.jwk/JwkCurve.curveName|{}curveName[0]
+        final fun <get-curveName>(): kotlin/String // com.davils.krypt.jose.jwk/JwkCurve.curveName.<get-curveName>|<get-curveName>(){}[0]
+    final val ellipticCurve // com.davils.krypt.jose.jwk/JwkCurve.ellipticCurve|{}ellipticCurve[0]
+        final fun <get-ellipticCurve>(): com.davils.krypt.core.algorithm/EllipticCurve? // com.davils.krypt.jose.jwk/JwkCurve.ellipticCurve.<get-ellipticCurve>|<get-ellipticCurve>(){}[0]
+    final val entries // com.davils.krypt.jose.jwk/JwkCurve.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.jose.jwk/JwkCurve> // com.davils.krypt.jose.jwk/JwkCurve.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val family // com.davils.krypt.jose.jwk/JwkCurve.family|{}family[0]
+        final fun <get-family>(): com.davils.krypt.core.algorithm/KeyFamily // com.davils.krypt.jose.jwk/JwkCurve.family.<get-family>|<get-family>(){}[0]
+    final val privateBytes // com.davils.krypt.jose.jwk/JwkCurve.privateBytes|{}privateBytes[0]
+        final fun <get-privateBytes>(): kotlin/Int // com.davils.krypt.jose.jwk/JwkCurve.privateBytes.<get-privateBytes>|<get-privateBytes>(){}[0]
+    final val publicBytes // com.davils.krypt.jose.jwk/JwkCurve.publicBytes|{}publicBytes[0]
+        final fun <get-publicBytes>(): kotlin/Int // com.davils.krypt.jose.jwk/JwkCurve.publicBytes.<get-publicBytes>|<get-publicBytes>(){}[0]
+    final val type // com.davils.krypt.jose.jwk/JwkCurve.type|{}type[0]
+        final fun <get-type>(): com.davils.krypt.jose.jwk/JwkType // com.davils.krypt.jose.jwk/JwkCurve.type.<get-type>|<get-type>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.jose.jwk/JwkCurve // com.davils.krypt.jose.jwk/JwkCurve.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.jose.jwk/JwkCurve> // com.davils.krypt.jose.jwk/JwkCurve.values|values#static(){}[0]
+
+    final object Companion { // com.davils.krypt.jose.jwk/JwkCurve.Companion|null[0]
+        final fun of(com.davils.krypt.core.algorithm/KeyFamily, com.davils.krypt.core.algorithm/EllipticCurve?): com.davils.krypt.jose.jwk/JwkCurve? // com.davils.krypt.jose.jwk/JwkCurve.Companion.of|of(com.davils.krypt.core.algorithm.KeyFamily;com.davils.krypt.core.algorithm.EllipticCurve?){}[0]
+        final fun of(kotlin/String): com.davils.krypt.jose.jwk/JwkCurve? // com.davils.krypt.jose.jwk/JwkCurve.Companion.of|of(kotlin.String){}[0]
+    }
+}
+
+final enum class com.davils.krypt.jose.jwk/JwkType : kotlin/Enum<com.davils.krypt.jose.jwk/JwkType> { // com.davils.krypt.jose.jwk/JwkType|null[0]
+    enum entry Ec // com.davils.krypt.jose.jwk/JwkType.Ec|null[0]
+    enum entry Oct // com.davils.krypt.jose.jwk/JwkType.Oct|null[0]
+    enum entry Okp // com.davils.krypt.jose.jwk/JwkType.Okp|null[0]
+    enum entry Rsa // com.davils.krypt.jose.jwk/JwkType.Rsa|null[0]
+
+    final val entries // com.davils.krypt.jose.jwk/JwkType.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.jose.jwk/JwkType> // com.davils.krypt.jose.jwk/JwkType.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val typeName // com.davils.krypt.jose.jwk/JwkType.typeName|{}typeName[0]
+        final fun <get-typeName>(): kotlin/String // com.davils.krypt.jose.jwk/JwkType.typeName.<get-typeName>|<get-typeName>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.jose.jwk/JwkType // com.davils.krypt.jose.jwk/JwkType.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.jose.jwk/JwkType> // com.davils.krypt.jose.jwk/JwkType.values|values#static(){}[0]
+
+    final object Companion { // com.davils.krypt.jose.jwk/JwkType.Companion|null[0]
+        final fun of(kotlin/String): com.davils.krypt.jose.jwk/JwkType? // com.davils.krypt.jose.jwk/JwkType.Companion.of|of(kotlin.String){}[0]
+    }
+}
+
+final enum class com.davils.krypt.jose.jwk/KeyOperation : kotlin/Enum<com.davils.krypt.jose.jwk/KeyOperation> { // com.davils.krypt.jose.jwk/KeyOperation|null[0]
+    enum entry Decrypt // com.davils.krypt.jose.jwk/KeyOperation.Decrypt|null[0]
+    enum entry DeriveBits // com.davils.krypt.jose.jwk/KeyOperation.DeriveBits|null[0]
+    enum entry DeriveKey // com.davils.krypt.jose.jwk/KeyOperation.DeriveKey|null[0]
+    enum entry Encrypt // com.davils.krypt.jose.jwk/KeyOperation.Encrypt|null[0]
+    enum entry Sign // com.davils.krypt.jose.jwk/KeyOperation.Sign|null[0]
+    enum entry UnwrapKey // com.davils.krypt.jose.jwk/KeyOperation.UnwrapKey|null[0]
+    enum entry Verify // com.davils.krypt.jose.jwk/KeyOperation.Verify|null[0]
+    enum entry WrapKey // com.davils.krypt.jose.jwk/KeyOperation.WrapKey|null[0]
+
+    final val entries // com.davils.krypt.jose.jwk/KeyOperation.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.jose.jwk/KeyOperation> // com.davils.krypt.jose.jwk/KeyOperation.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val operationName // com.davils.krypt.jose.jwk/KeyOperation.operationName|{}operationName[0]
+        final fun <get-operationName>(): kotlin/String // com.davils.krypt.jose.jwk/KeyOperation.operationName.<get-operationName>|<get-operationName>(){}[0]
+    final val use // com.davils.krypt.jose.jwk/KeyOperation.use|{}use[0]
+        final fun <get-use>(): com.davils.krypt.jose.jwk/KeyUse // com.davils.krypt.jose.jwk/KeyOperation.use.<get-use>|<get-use>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.jose.jwk/KeyOperation // com.davils.krypt.jose.jwk/KeyOperation.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.jose.jwk/KeyOperation> // com.davils.krypt.jose.jwk/KeyOperation.values|values#static(){}[0]
+
+    final object Companion { // com.davils.krypt.jose.jwk/KeyOperation.Companion|null[0]
+        final fun of(kotlin/String): com.davils.krypt.jose.jwk/KeyOperation? // com.davils.krypt.jose.jwk/KeyOperation.Companion.of|of(kotlin.String){}[0]
+    }
+}
+
+final enum class com.davils.krypt.jose.jwk/KeyUse : kotlin/Enum<com.davils.krypt.jose.jwk/KeyUse> { // com.davils.krypt.jose.jwk/KeyUse|null[0]
+    enum entry Encryption // com.davils.krypt.jose.jwk/KeyUse.Encryption|null[0]
+    enum entry Signature // com.davils.krypt.jose.jwk/KeyUse.Signature|null[0]
+
+    final val entries // com.davils.krypt.jose.jwk/KeyUse.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.jose.jwk/KeyUse> // com.davils.krypt.jose.jwk/KeyUse.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val useName // com.davils.krypt.jose.jwk/KeyUse.useName|{}useName[0]
+        final fun <get-useName>(): kotlin/String // com.davils.krypt.jose.jwk/KeyUse.useName.<get-useName>|<get-useName>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.jose.jwk/KeyUse // com.davils.krypt.jose.jwk/KeyUse.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.jose.jwk/KeyUse> // com.davils.krypt.jose.jwk/KeyUse.values|values#static(){}[0]
+
+    final object Companion { // com.davils.krypt.jose.jwk/KeyUse.Companion|null[0]
+        final fun of(kotlin/String): com.davils.krypt.jose.jwk/KeyUse? // com.davils.krypt.jose.jwk/KeyUse.Companion.of|of(kotlin.String){}[0]
+    }
+}
+
+final enum class com.davils.krypt.jose.jws/JwsAlgorithm : kotlin/Enum<com.davils.krypt.jose.jws/JwsAlgorithm> { // com.davils.krypt.jose.jws/JwsAlgorithm|null[0]
+    enum entry ES256 // com.davils.krypt.jose.jws/JwsAlgorithm.ES256|null[0]
+    enum entry ES384 // com.davils.krypt.jose.jws/JwsAlgorithm.ES384|null[0]
+    enum entry ES512 // com.davils.krypt.jose.jws/JwsAlgorithm.ES512|null[0]
+    enum entry Ed25519 // com.davils.krypt.jose.jws/JwsAlgorithm.Ed25519|null[0]
+    enum entry Ed448 // com.davils.krypt.jose.jws/JwsAlgorithm.Ed448|null[0]
+    enum entry EdDSA // com.davils.krypt.jose.jws/JwsAlgorithm.EdDSA|null[0]
+    enum entry HS256 // com.davils.krypt.jose.jws/JwsAlgorithm.HS256|null[0]
+    enum entry HS384 // com.davils.krypt.jose.jws/JwsAlgorithm.HS384|null[0]
+    enum entry HS512 // com.davils.krypt.jose.jws/JwsAlgorithm.HS512|null[0]
+    enum entry PS256 // com.davils.krypt.jose.jws/JwsAlgorithm.PS256|null[0]
+    enum entry PS384 // com.davils.krypt.jose.jws/JwsAlgorithm.PS384|null[0]
+    enum entry PS512 // com.davils.krypt.jose.jws/JwsAlgorithm.PS512|null[0]
+    enum entry RS256 // com.davils.krypt.jose.jws/JwsAlgorithm.RS256|null[0]
+    enum entry RS384 // com.davils.krypt.jose.jws/JwsAlgorithm.RS384|null[0]
+    enum entry RS512 // com.davils.krypt.jose.jws/JwsAlgorithm.RS512|null[0]
+
+    final val algorithmName // com.davils.krypt.jose.jws/JwsAlgorithm.algorithmName|{}algorithmName[0]
+        final fun <get-algorithmName>(): kotlin/String // com.davils.krypt.jose.jws/JwsAlgorithm.algorithmName.<get-algorithmName>|<get-algorithmName>(){}[0]
+    final val entries // com.davils.krypt.jose.jws/JwsAlgorithm.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.jose.jws/JwsAlgorithm> // com.davils.krypt.jose.jws/JwsAlgorithm.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.jose.jws/JwsAlgorithm // com.davils.krypt.jose.jws/JwsAlgorithm.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.jose.jws/JwsAlgorithm> // com.davils.krypt.jose.jws/JwsAlgorithm.values|values#static(){}[0]
+
+    final object Companion { // com.davils.krypt.jose.jws/JwsAlgorithm.Companion|null[0]
+        final fun of(kotlin/String): com.davils.krypt.jose.jws/JwsAlgorithm? // com.davils.krypt.jose.jws/JwsAlgorithm.Companion.of|of(kotlin.String){}[0]
+    }
+}
+
+final enum class com.davils.krypt.jose/JoseFailure : kotlin/Enum<com.davils.krypt.jose/JoseFailure> { // com.davils.krypt.jose/JoseFailure|null[0]
+    enum entry AlgorithmNotAllowed // com.davils.krypt.jose/JoseFailure.AlgorithmNotAllowed|null[0]
+    enum entry BadSignature // com.davils.krypt.jose/JoseFailure.BadSignature|null[0]
+    enum entry DecryptionFailed // com.davils.krypt.jose/JoseFailure.DecryptionFailed|null[0]
+    enum entry Expired // com.davils.krypt.jose/JoseFailure.Expired|null[0]
+    enum entry InvalidKey // com.davils.krypt.jose/JoseFailure.InvalidKey|null[0]
+    enum entry KeyNotFound // com.davils.krypt.jose/JoseFailure.KeyNotFound|null[0]
+    enum entry LimitExceeded // com.davils.krypt.jose/JoseFailure.LimitExceeded|null[0]
+    enum entry Malformed // com.davils.krypt.jose/JoseFailure.Malformed|null[0]
+    enum entry MissingClaim // com.davils.krypt.jose/JoseFailure.MissingClaim|null[0]
+    enum entry NotYetValid // com.davils.krypt.jose/JoseFailure.NotYetValid|null[0]
+    enum entry SignatureRequired // com.davils.krypt.jose/JoseFailure.SignatureRequired|null[0]
+    enum entry UnknownCritical // com.davils.krypt.jose/JoseFailure.UnknownCritical|null[0]
+    enum entry UnsupportedAlgorithm // com.davils.krypt.jose/JoseFailure.UnsupportedAlgorithm|null[0]
+    enum entry UntrustedCertificate // com.davils.krypt.jose/JoseFailure.UntrustedCertificate|null[0]
+    enum entry WrongAudience // com.davils.krypt.jose/JoseFailure.WrongAudience|null[0]
+    enum entry WrongIssuer // com.davils.krypt.jose/JoseFailure.WrongIssuer|null[0]
+    enum entry WrongType // com.davils.krypt.jose/JoseFailure.WrongType|null[0]
+
+    final val entries // com.davils.krypt.jose/JoseFailure.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.jose/JoseFailure> // com.davils.krypt.jose/JoseFailure.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.jose/JoseFailure // com.davils.krypt.jose/JoseFailure.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.jose/JoseFailure> // com.davils.krypt.jose/JoseFailure.values|values#static(){}[0]
+}
+
+sealed interface com.davils.krypt.jose/JoseKey { // com.davils.krypt.jose/JoseKey|null[0]
+    abstract val keyId // com.davils.krypt.jose/JoseKey.keyId|{}keyId[0]
+        abstract fun <get-keyId>(): kotlin/String? // com.davils.krypt.jose/JoseKey.keyId.<get-keyId>|<get-keyId>(){}[0]
+
+    final class Password : com.davils.krypt.jose/JoseKey { // com.davils.krypt.jose/JoseKey.Password|null[0]
+        constructor <init>(com.davils.krypt.core/SecretText, kotlin/String? = ...) // com.davils.krypt.jose/JoseKey.Password.<init>|<init>(com.davils.krypt.core.SecretText;kotlin.String?){}[0]
+
+        final val keyId // com.davils.krypt.jose/JoseKey.Password.keyId|{}keyId[0]
+            final fun <get-keyId>(): kotlin/String? // com.davils.krypt.jose/JoseKey.Password.keyId.<get-keyId>|<get-keyId>(){}[0]
+        final val password // com.davils.krypt.jose/JoseKey.Password.password|{}password[0]
+            final fun <get-password>(): com.davils.krypt.core/SecretText // com.davils.krypt.jose/JoseKey.Password.password.<get-password>|<get-password>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.jose/JoseKey.Password.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.jose/JoseKey.Password.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.jose/JoseKey.Password.toString|toString(){}[0]
+    }
+
+    final class Private : com.davils.krypt.jose/JoseKey { // com.davils.krypt.jose/JoseKey.Private|null[0]
+        constructor <init>(com.davils.krypt.primitive.key/PrivateKey, kotlin/String? = ...) // com.davils.krypt.jose/JoseKey.Private.<init>|<init>(com.davils.krypt.primitive.key.PrivateKey;kotlin.String?){}[0]
+
+        final val key // com.davils.krypt.jose/JoseKey.Private.key|{}key[0]
+            final fun <get-key>(): com.davils.krypt.primitive.key/PrivateKey // com.davils.krypt.jose/JoseKey.Private.key.<get-key>|<get-key>(){}[0]
+        final val keyId // com.davils.krypt.jose/JoseKey.Private.keyId|{}keyId[0]
+            final fun <get-keyId>(): kotlin/String? // com.davils.krypt.jose/JoseKey.Private.keyId.<get-keyId>|<get-keyId>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.jose/JoseKey.Private.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.jose/JoseKey.Private.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.jose/JoseKey.Private.toString|toString(){}[0]
+    }
+
+    final class Public : com.davils.krypt.jose/JoseKey { // com.davils.krypt.jose/JoseKey.Public|null[0]
+        constructor <init>(com.davils.krypt.primitive.key/PublicKey, kotlin/String? = ...) // com.davils.krypt.jose/JoseKey.Public.<init>|<init>(com.davils.krypt.primitive.key.PublicKey;kotlin.String?){}[0]
+
+        final val key // com.davils.krypt.jose/JoseKey.Public.key|{}key[0]
+            final fun <get-key>(): com.davils.krypt.primitive.key/PublicKey // com.davils.krypt.jose/JoseKey.Public.key.<get-key>|<get-key>(){}[0]
+        final val keyId // com.davils.krypt.jose/JoseKey.Public.keyId|{}keyId[0]
+            final fun <get-keyId>(): kotlin/String? // com.davils.krypt.jose/JoseKey.Public.keyId.<get-keyId>|<get-keyId>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.jose/JoseKey.Public.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.jose/JoseKey.Public.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.jose/JoseKey.Public.toString|toString(){}[0]
+    }
+
+    final class Secret : com.davils.krypt.jose/JoseKey { // com.davils.krypt.jose/JoseKey.Secret|null[0]
+        constructor <init>(com.davils.krypt.primitive.key/SecretKey, kotlin/String? = ...) // com.davils.krypt.jose/JoseKey.Secret.<init>|<init>(com.davils.krypt.primitive.key.SecretKey;kotlin.String?){}[0]
+
+        final val key // com.davils.krypt.jose/JoseKey.Secret.key|{}key[0]
+            final fun <get-key>(): com.davils.krypt.primitive.key/SecretKey // com.davils.krypt.jose/JoseKey.Secret.key.<get-key>|<get-key>(){}[0]
+        final val keyId // com.davils.krypt.jose/JoseKey.Secret.keyId|{}keyId[0]
+            final fun <get-keyId>(): kotlin/String? // com.davils.krypt.jose/JoseKey.Secret.keyId.<get-keyId>|<get-keyId>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.jose/JoseKey.Secret.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.jose/JoseKey.Secret.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.jose/JoseKey.Secret.toString|toString(){}[0]
+    }
+}
+
+sealed interface com.davils.krypt.jose/JsonValue { // com.davils.krypt.jose/JsonValue|null[0]
+    final class Array : com.davils.krypt.jose/JsonValue { // com.davils.krypt.jose/JsonValue.Array|null[0]
+        constructor <init>(kotlin.collections/List<com.davils.krypt.jose/JsonValue>) // com.davils.krypt.jose/JsonValue.Array.<init>|<init>(kotlin.collections.List<com.davils.krypt.jose.JsonValue>){}[0]
+
+        final val items // com.davils.krypt.jose/JsonValue.Array.items|{}items[0]
+            final fun <get-items>(): kotlin.collections/List<com.davils.krypt.jose/JsonValue> // com.davils.krypt.jose/JsonValue.Array.items.<get-items>|<get-items>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.jose/JsonValue.Array.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.jose/JsonValue.Array.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.jose/JsonValue.Array.toString|toString(){}[0]
+    }
+
+    final class Bool : com.davils.krypt.jose/JsonValue { // com.davils.krypt.jose/JsonValue.Bool|null[0]
+        constructor <init>(kotlin/Boolean) // com.davils.krypt.jose/JsonValue.Bool.<init>|<init>(kotlin.Boolean){}[0]
+
+        final val isTrue // com.davils.krypt.jose/JsonValue.Bool.isTrue|{}isTrue[0]
+            final fun <get-isTrue>(): kotlin/Boolean // com.davils.krypt.jose/JsonValue.Bool.isTrue.<get-isTrue>|<get-isTrue>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.jose/JsonValue.Bool.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.jose/JsonValue.Bool.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.jose/JsonValue.Bool.toString|toString(){}[0]
+    }
+
+    final class Integer : com.davils.krypt.jose/JsonValue { // com.davils.krypt.jose/JsonValue.Integer|null[0]
+        constructor <init>(kotlin/Long) // com.davils.krypt.jose/JsonValue.Integer.<init>|<init>(kotlin.Long){}[0]
+
+        final val value // com.davils.krypt.jose/JsonValue.Integer.value|{}value[0]
+            final fun <get-value>(): kotlin/Long // com.davils.krypt.jose/JsonValue.Integer.value.<get-value>|<get-value>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.jose/JsonValue.Integer.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.jose/JsonValue.Integer.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.jose/JsonValue.Integer.toString|toString(){}[0]
+
+        final object Companion { // com.davils.krypt.jose/JsonValue.Integer.Companion|null[0]
+            final const val MAXIMUM // com.davils.krypt.jose/JsonValue.Integer.Companion.MAXIMUM|{}MAXIMUM[0]
+                final fun <get-MAXIMUM>(): kotlin/Long // com.davils.krypt.jose/JsonValue.Integer.Companion.MAXIMUM.<get-MAXIMUM>|<get-MAXIMUM>(){}[0]
+        }
+    }
+
+    final class Object : com.davils.krypt.jose/JsonValue { // com.davils.krypt.jose/JsonValue.Object|null[0]
+        constructor <init>(kotlin.collections/List<kotlin/Pair<kotlin/String, com.davils.krypt.jose/JsonValue>>) // com.davils.krypt.jose/JsonValue.Object.<init>|<init>(kotlin.collections.List<kotlin.Pair<kotlin.String,com.davils.krypt.jose.JsonValue>>){}[0]
+
+        final val members // com.davils.krypt.jose/JsonValue.Object.members|{}members[0]
+            final fun <get-members>(): kotlin.collections/List<kotlin/Pair<kotlin/String, com.davils.krypt.jose/JsonValue>> // com.davils.krypt.jose/JsonValue.Object.members.<get-members>|<get-members>(){}[0]
+        final val names // com.davils.krypt.jose/JsonValue.Object.names|{}names[0]
+            final fun <get-names>(): kotlin.collections/List<kotlin/String> // com.davils.krypt.jose/JsonValue.Object.names.<get-names>|<get-names>(){}[0]
+
+        final fun contains(kotlin/String): kotlin/Boolean // com.davils.krypt.jose/JsonValue.Object.contains|contains(kotlin.String){}[0]
+        final fun encode(): kotlin/String // com.davils.krypt.jose/JsonValue.Object.encode|encode(){}[0]
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.jose/JsonValue.Object.equals|equals(kotlin.Any?){}[0]
+        final fun get(kotlin/String): com.davils.krypt.jose/JsonValue? // com.davils.krypt.jose/JsonValue.Object.get|get(kotlin.String){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.jose/JsonValue.Object.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.jose/JsonValue.Object.toString|toString(){}[0]
+
+        final object Companion { // com.davils.krypt.jose/JsonValue.Object.Companion|null[0]
+            final val Empty // com.davils.krypt.jose/JsonValue.Object.Companion.Empty|{}Empty[0]
+                final fun <get-Empty>(): com.davils.krypt.jose/JsonValue.Object // com.davils.krypt.jose/JsonValue.Object.Companion.Empty.<get-Empty>|<get-Empty>(){}[0]
+
+            final fun of(kotlin/Array<out kotlin/Pair<kotlin/String, com.davils.krypt.jose/JsonValue>>...): com.davils.krypt.jose/JsonValue.Object // com.davils.krypt.jose/JsonValue.Object.Companion.of|of(kotlin.Array<out|kotlin.Pair<kotlin.String,com.davils.krypt.jose.JsonValue>>...){}[0]
+        }
+    }
+
+    final class Text : com.davils.krypt.jose/JsonValue { // com.davils.krypt.jose/JsonValue.Text|null[0]
+        constructor <init>(kotlin/String) // com.davils.krypt.jose/JsonValue.Text.<init>|<init>(kotlin.String){}[0]
+
+        final val value // com.davils.krypt.jose/JsonValue.Text.value|{}value[0]
+            final fun <get-value>(): kotlin/String // com.davils.krypt.jose/JsonValue.Text.value.<get-value>|<get-value>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.jose/JsonValue.Text.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.jose/JsonValue.Text.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.jose/JsonValue.Text.toString|toString(){}[0]
+    }
+
+    final object Null : com.davils.krypt.jose/JsonValue { // com.davils.krypt.jose/JsonValue.Null|null[0]
+        final fun toString(): kotlin/String // com.davils.krypt.jose/JsonValue.Null.toString|toString(){}[0]
+    }
+}
+
+final class com.davils.krypt.jose.jwe/DecryptedJwe { // com.davils.krypt.jose.jwe/DecryptedJwe|null[0]
+    final val algorithm // com.davils.krypt.jose.jwe/DecryptedJwe.algorithm|{}algorithm[0]
+        final fun <get-algorithm>(): com.davils.krypt.jose.jwe/JweAlgorithm // com.davils.krypt.jose.jwe/DecryptedJwe.algorithm.<get-algorithm>|<get-algorithm>(){}[0]
+    final val encryption // com.davils.krypt.jose.jwe/DecryptedJwe.encryption|{}encryption[0]
+        final fun <get-encryption>(): com.davils.krypt.jose.jwe/JweEncryption // com.davils.krypt.jose.jwe/DecryptedJwe.encryption.<get-encryption>|<get-encryption>(){}[0]
+    final val header // com.davils.krypt.jose.jwe/DecryptedJwe.header|{}header[0]
+        final fun <get-header>(): com.davils.krypt.jose/JoseHeader // com.davils.krypt.jose.jwe/DecryptedJwe.header.<get-header>|<get-header>(){}[0]
+    final val key // com.davils.krypt.jose.jwe/DecryptedJwe.key|{}key[0]
+        final fun <get-key>(): com.davils.krypt.jose/JoseKey // com.davils.krypt.jose.jwe/DecryptedJwe.key.<get-key>|<get-key>(){}[0]
+    final val plaintext // com.davils.krypt.jose.jwe/DecryptedJwe.plaintext|{}plaintext[0]
+        final fun <get-plaintext>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.jose.jwe/DecryptedJwe.plaintext.<get-plaintext>|<get-plaintext>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.jose.jwe/DecryptedJwe.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.jose.jwe/DecryptedJwe.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.jose.jwe/DecryptedJwe.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.jose.jwe/EncryptedKey { // com.davils.krypt.jose.jwe/EncryptedKey|null[0]
+    final val encryptedKey // com.davils.krypt.jose.jwe/EncryptedKey.encryptedKey|{}encryptedKey[0]
+        final fun <get-encryptedKey>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.jose.jwe/EncryptedKey.encryptedKey.<get-encryptedKey>|<get-encryptedKey>(){}[0]
+    final val header // com.davils.krypt.jose.jwe/EncryptedKey.header|{}header[0]
+        final fun <get-header>(): com.davils.krypt.jose/JsonValue.Object // com.davils.krypt.jose.jwe/EncryptedKey.header.<get-header>|<get-header>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.jose.jwe/EncryptedKey.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.jose.jwe/EncryptedKey.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.jose.jwe/EncryptedKey.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.jose.jwe/Jwe { // com.davils.krypt.jose.jwe/Jwe|null[0]
+    constructor <init>(com.davils.krypt.primitive/Crypto, com.davils.krypt.jose/JoseLimits = ..., kotlin/Boolean = ...) // com.davils.krypt.jose.jwe/Jwe.<init>|<init>(com.davils.krypt.primitive.Crypto;com.davils.krypt.jose.JoseLimits;kotlin.Boolean){}[0]
+
+    final val crypto // com.davils.krypt.jose.jwe/Jwe.crypto|{}crypto[0]
+        final fun <get-crypto>(): com.davils.krypt.primitive/Crypto // com.davils.krypt.jose.jwe/Jwe.crypto.<get-crypto>|<get-crypto>(){}[0]
+    final val isPasswordAllowed // com.davils.krypt.jose.jwe/Jwe.isPasswordAllowed|{}isPasswordAllowed[0]
+        final fun <get-isPasswordAllowed>(): kotlin/Boolean // com.davils.krypt.jose.jwe/Jwe.isPasswordAllowed.<get-isPasswordAllowed>|<get-isPasswordAllowed>(){}[0]
+    final val limits // com.davils.krypt.jose.jwe/Jwe.limits|{}limits[0]
+        final fun <get-limits>(): com.davils.krypt.jose/JoseLimits // com.davils.krypt.jose.jwe/Jwe.limits.<get-limits>|<get-limits>(){}[0]
+
+    final fun decode(kotlin/String): com.davils.kore.core.outcome/Outcome<com.davils.krypt.jose.jwe/JweMessage, com.davils.krypt.jose/JoseFailure> // com.davils.krypt.jose.jwe/Jwe.decode|decode(kotlin.String){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.jose.jwe/Jwe.toString|toString(){}[0]
+    final suspend fun decrypt(com.davils.krypt.jose.jwe/JweMessage, kotlin.collections/List<com.davils.krypt.jose/JoseKey>, kotlin.collections/Set<com.davils.krypt.jose.jwe/JweAlgorithm>, kotlin.collections/Set<com.davils.krypt.jose.jwe/JweEncryption>, kotlin.collections/Set<kotlin/String> = ...): com.davils.kore.core.outcome/Outcome<com.davils.krypt.jose.jwe/DecryptedJwe, com.davils.krypt.jose/JoseFailure> // com.davils.krypt.jose.jwe/Jwe.decrypt|decrypt(com.davils.krypt.jose.jwe.JweMessage;kotlin.collections.List<com.davils.krypt.jose.JoseKey>;kotlin.collections.Set<com.davils.krypt.jose.jwe.JweAlgorithm>;kotlin.collections.Set<com.davils.krypt.jose.jwe.JweEncryption>;kotlin.collections.Set<kotlin.String>){}[0]
+    final suspend fun decrypt(kotlin/String, kotlin.collections/List<com.davils.krypt.jose/JoseKey>, kotlin.collections/Set<com.davils.krypt.jose.jwe/JweAlgorithm>, kotlin.collections/Set<com.davils.krypt.jose.jwe/JweEncryption>, kotlin.collections/Set<kotlin/String> = ...): com.davils.kore.core.outcome/Outcome<com.davils.krypt.jose.jwe/DecryptedJwe, com.davils.krypt.jose/JoseFailure> // com.davils.krypt.jose.jwe/Jwe.decrypt|decrypt(kotlin.String;kotlin.collections.List<com.davils.krypt.jose.JoseKey>;kotlin.collections.Set<com.davils.krypt.jose.jwe.JweAlgorithm>;kotlin.collections.Set<com.davils.krypt.jose.jwe.JweEncryption>;kotlin.collections.Set<kotlin.String>){}[0]
+    final suspend fun encrypt(kotlinx.io.bytestring/ByteString, com.davils.krypt.jose.jwe/JweRecipient, com.davils.krypt.jose.jwe/JweEncryption, com.davils.krypt.jose/JsonValue.Object = ...): kotlin/String // com.davils.krypt.jose.jwe/Jwe.encrypt|encrypt(kotlinx.io.bytestring.ByteString;com.davils.krypt.jose.jwe.JweRecipient;com.davils.krypt.jose.jwe.JweEncryption;com.davils.krypt.jose.JsonValue.Object){}[0]
+    final suspend fun encryptJson(kotlinx.io.bytestring/ByteString, kotlin.collections/List<com.davils.krypt.jose.jwe/JweRecipient>, com.davils.krypt.jose.jwe/JweEncryption, com.davils.krypt.jose/JsonValue.Object = ..., com.davils.krypt.jose/JsonValue.Object = ..., kotlinx.io.bytestring/ByteString? = ..., kotlin/Boolean = ...): kotlin/String // com.davils.krypt.jose.jwe/Jwe.encryptJson|encryptJson(kotlinx.io.bytestring.ByteString;kotlin.collections.List<com.davils.krypt.jose.jwe.JweRecipient>;com.davils.krypt.jose.jwe.JweEncryption;com.davils.krypt.jose.JsonValue.Object;com.davils.krypt.jose.JsonValue.Object;kotlinx.io.bytestring.ByteString?;kotlin.Boolean){}[0]
+}
+
+final class com.davils.krypt.jose.jwe/JweMessage { // com.davils.krypt.jose.jwe/JweMessage|null[0]
+    final val additionalData // com.davils.krypt.jose.jwe/JweMessage.additionalData|{}additionalData[0]
+        final fun <get-additionalData>(): kotlinx.io.bytestring/ByteString? // com.davils.krypt.jose.jwe/JweMessage.additionalData.<get-additionalData>|<get-additionalData>(){}[0]
+    final val ciphertext // com.davils.krypt.jose.jwe/JweMessage.ciphertext|{}ciphertext[0]
+        final fun <get-ciphertext>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.jose.jwe/JweMessage.ciphertext.<get-ciphertext>|<get-ciphertext>(){}[0]
+    final val isCompact // com.davils.krypt.jose.jwe/JweMessage.isCompact|{}isCompact[0]
+        final fun <get-isCompact>(): kotlin/Boolean // com.davils.krypt.jose.jwe/JweMessage.isCompact.<get-isCompact>|<get-isCompact>(){}[0]
+    final val iv // com.davils.krypt.jose.jwe/JweMessage.iv|{}iv[0]
+        final fun <get-iv>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.jose.jwe/JweMessage.iv.<get-iv>|<get-iv>(){}[0]
+    final val protectedHeader // com.davils.krypt.jose.jwe/JweMessage.protectedHeader|{}protectedHeader[0]
+        final fun <get-protectedHeader>(): com.davils.krypt.jose/JsonValue.Object // com.davils.krypt.jose.jwe/JweMessage.protectedHeader.<get-protectedHeader>|<get-protectedHeader>(){}[0]
+    final val recipients // com.davils.krypt.jose.jwe/JweMessage.recipients|{}recipients[0]
+        final fun <get-recipients>(): kotlin.collections/List<com.davils.krypt.jose.jwe/EncryptedKey> // com.davils.krypt.jose.jwe/JweMessage.recipients.<get-recipients>|<get-recipients>(){}[0]
+    final val sharedHeader // com.davils.krypt.jose.jwe/JweMessage.sharedHeader|{}sharedHeader[0]
+        final fun <get-sharedHeader>(): com.davils.krypt.jose/JsonValue.Object // com.davils.krypt.jose.jwe/JweMessage.sharedHeader.<get-sharedHeader>|<get-sharedHeader>(){}[0]
+    final val tag // com.davils.krypt.jose.jwe/JweMessage.tag|{}tag[0]
+        final fun <get-tag>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.jose.jwe/JweMessage.tag.<get-tag>|<get-tag>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.jose.jwe/JweMessage.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.jose.jwe/JweMessage.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.jose.jwe/JweMessage.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.jose.jwe/JweRecipient { // com.davils.krypt.jose.jwe/JweRecipient|null[0]
+    constructor <init>(com.davils.krypt.jose/JoseKey, com.davils.krypt.jose.jwe/JweAlgorithm, com.davils.krypt.jose/JsonValue.Object = ..., kotlin/Int? = ...) // com.davils.krypt.jose.jwe/JweRecipient.<init>|<init>(com.davils.krypt.jose.JoseKey;com.davils.krypt.jose.jwe.JweAlgorithm;com.davils.krypt.jose.JsonValue.Object;kotlin.Int?){}[0]
+
+    final val algorithm // com.davils.krypt.jose.jwe/JweRecipient.algorithm|{}algorithm[0]
+        final fun <get-algorithm>(): com.davils.krypt.jose.jwe/JweAlgorithm // com.davils.krypt.jose.jwe/JweRecipient.algorithm.<get-algorithm>|<get-algorithm>(){}[0]
+    final val header // com.davils.krypt.jose.jwe/JweRecipient.header|{}header[0]
+        final fun <get-header>(): com.davils.krypt.jose/JsonValue.Object // com.davils.krypt.jose.jwe/JweRecipient.header.<get-header>|<get-header>(){}[0]
+    final val iterations // com.davils.krypt.jose.jwe/JweRecipient.iterations|{}iterations[0]
+        final fun <get-iterations>(): kotlin/Int? // com.davils.krypt.jose.jwe/JweRecipient.iterations.<get-iterations>|<get-iterations>(){}[0]
+    final val key // com.davils.krypt.jose.jwe/JweRecipient.key|{}key[0]
+        final fun <get-key>(): com.davils.krypt.jose/JoseKey // com.davils.krypt.jose.jwe/JweRecipient.key.<get-key>|<get-key>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.jose.jwe/JweRecipient.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.jose.jwe/JweRecipient.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.jose.jwe/JweRecipient.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.jose.jwk/JsonWebKeys { // com.davils.krypt.jose.jwk/JsonWebKeys|null[0]
+    constructor <init>(com.davils.krypt.primitive/Crypto, com.davils.krypt.jose/JoseLimits = ...) // com.davils.krypt.jose.jwk/JsonWebKeys.<init>|<init>(com.davils.krypt.primitive.Crypto;com.davils.krypt.jose.JoseLimits){}[0]
+
+    final val crypto // com.davils.krypt.jose.jwk/JsonWebKeys.crypto|{}crypto[0]
+        final fun <get-crypto>(): com.davils.krypt.primitive/Crypto // com.davils.krypt.jose.jwk/JsonWebKeys.crypto.<get-crypto>|<get-crypto>(){}[0]
+    final val limits // com.davils.krypt.jose.jwk/JsonWebKeys.limits|{}limits[0]
+        final fun <get-limits>(): com.davils.krypt.jose/JoseLimits // com.davils.krypt.jose.jwk/JsonWebKeys.limits.<get-limits>|<get-limits>(){}[0]
+
+    final fun decode(kotlin/String): com.davils.kore.core.outcome/Outcome<com.davils.krypt.jose.jwk/Jwk, com.davils.krypt.jose/JoseFailure> // com.davils.krypt.jose.jwk/JsonWebKeys.decode|decode(kotlin.String){}[0]
+    final fun decodeSet(kotlin/String): com.davils.kore.core.outcome/Outcome<com.davils.krypt.jose.jwk/JwkSet, com.davils.krypt.jose/JoseFailure> // com.davils.krypt.jose.jwk/JsonWebKeys.decodeSet|decodeSet(kotlin.String){}[0]
+    final fun of(com.davils.krypt.primitive.key/PrivateKey, kotlin/String? = ..., com.davils.krypt.jose.jwk/KeyUse? = ..., kotlin/String? = ...): com.davils.krypt.jose.jwk/Jwk // com.davils.krypt.jose.jwk/JsonWebKeys.of|of(com.davils.krypt.primitive.key.PrivateKey;kotlin.String?;com.davils.krypt.jose.jwk.KeyUse?;kotlin.String?){}[0]
+    final fun of(com.davils.krypt.primitive.key/PublicKey, kotlin/String? = ..., com.davils.krypt.jose.jwk/KeyUse? = ..., kotlin/String? = ...): com.davils.krypt.jose.jwk/Jwk // com.davils.krypt.jose.jwk/JsonWebKeys.of|of(com.davils.krypt.primitive.key.PublicKey;kotlin.String?;com.davils.krypt.jose.jwk.KeyUse?;kotlin.String?){}[0]
+    final fun of(com.davils.krypt.primitive.key/SecretKey, kotlin/String? = ..., kotlin/String? = ...): com.davils.krypt.jose.jwk/Jwk // com.davils.krypt.jose.jwk/JsonWebKeys.of|of(com.davils.krypt.primitive.key.SecretKey;kotlin.String?;kotlin.String?){}[0]
+    final fun publicKey(com.davils.krypt.jose.jwk/Jwk): com.davils.kore.core.outcome/Outcome<com.davils.krypt.primitive.key/PublicKey, com.davils.krypt.jose/JoseFailure> // com.davils.krypt.jose.jwk/JsonWebKeys.publicKey|publicKey(com.davils.krypt.jose.jwk.Jwk){}[0]
+    final fun secretKey(com.davils.krypt.jose.jwk/Jwk): com.davils.kore.core.outcome/Outcome<com.davils.krypt.primitive.key/SecretKey, com.davils.krypt.jose/JoseFailure> // com.davils.krypt.jose.jwk/JsonWebKeys.secretKey|secretKey(com.davils.krypt.jose.jwk.Jwk){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.jose.jwk/JsonWebKeys.toString|toString(){}[0]
+    final suspend fun key(com.davils.krypt.jose.jwk/Jwk): com.davils.kore.core.outcome/Outcome<com.davils.krypt.jose/JoseKey, com.davils.krypt.jose/JoseFailure> // com.davils.krypt.jose.jwk/JsonWebKeys.key|key(com.davils.krypt.jose.jwk.Jwk){}[0]
+    final suspend fun privateKey(com.davils.krypt.jose.jwk/Jwk): com.davils.kore.core.outcome/Outcome<com.davils.krypt.primitive.key/PrivateKey, com.davils.krypt.jose/JoseFailure> // com.davils.krypt.jose.jwk/JsonWebKeys.privateKey|privateKey(com.davils.krypt.jose.jwk.Jwk){}[0]
+    final suspend fun thumbprint(com.davils.krypt.jose.jwk/Jwk, com.davils.krypt.core.algorithm/DigestAlgorithm = ...): kotlinx.io.bytestring/ByteString // com.davils.krypt.jose.jwk/JsonWebKeys.thumbprint|thumbprint(com.davils.krypt.jose.jwk.Jwk;com.davils.krypt.core.algorithm.DigestAlgorithm){}[0]
+    final suspend fun thumbprintUri(com.davils.krypt.jose.jwk/Jwk, com.davils.krypt.core.algorithm/DigestAlgorithm = ...): kotlin/String // com.davils.krypt.jose.jwk/JsonWebKeys.thumbprintUri|thumbprintUri(com.davils.krypt.jose.jwk.Jwk;com.davils.krypt.core.algorithm.DigestAlgorithm){}[0]
+}
+
+final class com.davils.krypt.jose.jwk/Jwk { // com.davils.krypt.jose.jwk/Jwk|null[0]
+    final val algorithm // com.davils.krypt.jose.jwk/Jwk.algorithm|{}algorithm[0]
+        final fun <get-algorithm>(): kotlin/String? // com.davils.krypt.jose.jwk/Jwk.algorithm.<get-algorithm>|<get-algorithm>(){}[0]
+    final val certificates // com.davils.krypt.jose.jwk/Jwk.certificates|{}certificates[0]
+        final fun <get-certificates>(): kotlin.collections/List<com.davils.krypt.x509/Certificate> // com.davils.krypt.jose.jwk/Jwk.certificates.<get-certificates>|<get-certificates>(){}[0]
+    final val curve // com.davils.krypt.jose.jwk/Jwk.curve|{}curve[0]
+        final fun <get-curve>(): com.davils.krypt.jose.jwk/JwkCurve? // com.davils.krypt.jose.jwk/Jwk.curve.<get-curve>|<get-curve>(){}[0]
+    final val extra // com.davils.krypt.jose.jwk/Jwk.extra|{}extra[0]
+        final fun <get-extra>(): com.davils.krypt.jose/JsonValue.Object // com.davils.krypt.jose.jwk/Jwk.extra.<get-extra>|<get-extra>(){}[0]
+    final val isDestroyed // com.davils.krypt.jose.jwk/Jwk.isDestroyed|{}isDestroyed[0]
+        final fun <get-isDestroyed>(): kotlin/Boolean // com.davils.krypt.jose.jwk/Jwk.isDestroyed.<get-isDestroyed>|<get-isDestroyed>(){}[0]
+    final val isPrivate // com.davils.krypt.jose.jwk/Jwk.isPrivate|{}isPrivate[0]
+        final fun <get-isPrivate>(): kotlin/Boolean // com.davils.krypt.jose.jwk/Jwk.isPrivate.<get-isPrivate>|<get-isPrivate>(){}[0]
+    final val keyId // com.davils.krypt.jose.jwk/Jwk.keyId|{}keyId[0]
+        final fun <get-keyId>(): kotlin/String? // com.davils.krypt.jose.jwk/Jwk.keyId.<get-keyId>|<get-keyId>(){}[0]
+    final val operations // com.davils.krypt.jose.jwk/Jwk.operations|{}operations[0]
+        final fun <get-operations>(): kotlin.collections/List<com.davils.krypt.jose.jwk/KeyOperation> // com.davils.krypt.jose.jwk/Jwk.operations.<get-operations>|<get-operations>(){}[0]
+    final val type // com.davils.krypt.jose.jwk/Jwk.type|{}type[0]
+        final fun <get-type>(): com.davils.krypt.jose.jwk/JwkType // com.davils.krypt.jose.jwk/Jwk.type.<get-type>|<get-type>(){}[0]
+    final val use // com.davils.krypt.jose.jwk/Jwk.use|{}use[0]
+        final fun <get-use>(): com.davils.krypt.jose.jwk/KeyUse? // com.davils.krypt.jose.jwk/Jwk.use.<get-use>|<get-use>(){}[0]
+
+    final fun destroy() // com.davils.krypt.jose.jwk/Jwk.destroy|destroy(){}[0]
+    final fun encode(): kotlin/String // com.davils.krypt.jose.jwk/Jwk.encode|encode(){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.jose.jwk/Jwk.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.jose.jwk/Jwk.hashCode|hashCode(){}[0]
+    final fun parameter(kotlin/String): kotlinx.io.bytestring/ByteString? // com.davils.krypt.jose.jwk/Jwk.parameter|parameter(kotlin.String){}[0]
+    final fun toPublic(): com.davils.krypt.jose.jwk/Jwk? // com.davils.krypt.jose.jwk/Jwk.toPublic|toPublic(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.jose.jwk/Jwk.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.jose.jwk/JwkSet { // com.davils.krypt.jose.jwk/JwkSet|null[0]
+    constructor <init>(kotlin.collections/List<com.davils.krypt.jose.jwk/Jwk>) // com.davils.krypt.jose.jwk/JwkSet.<init>|<init>(kotlin.collections.List<com.davils.krypt.jose.jwk.Jwk>){}[0]
+
+    final val keys // com.davils.krypt.jose.jwk/JwkSet.keys|{}keys[0]
+        final fun <get-keys>(): kotlin.collections/List<com.davils.krypt.jose.jwk/Jwk> // com.davils.krypt.jose.jwk/JwkSet.keys.<get-keys>|<get-keys>(){}[0]
+
+    final fun encode(): kotlin/String // com.davils.krypt.jose.jwk/JwkSet.encode|encode(){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.jose.jwk/JwkSet.equals|equals(kotlin.Any?){}[0]
+    final fun find(kotlin/String): kotlin.collections/List<com.davils.krypt.jose.jwk/Jwk> // com.davils.krypt.jose.jwk/JwkSet.find|find(kotlin.String){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.jose.jwk/JwkSet.hashCode|hashCode(){}[0]
+    final fun toPublic(): com.davils.krypt.jose.jwk/JwkSet // com.davils.krypt.jose.jwk/JwkSet.toPublic|toPublic(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.jose.jwk/JwkSet.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.jose.jws/Jws { // com.davils.krypt.jose.jws/Jws|null[0]
+    constructor <init>(com.davils.krypt.primitive/Crypto, com.davils.krypt.jose/JoseLimits = ...) // com.davils.krypt.jose.jws/Jws.<init>|<init>(com.davils.krypt.primitive.Crypto;com.davils.krypt.jose.JoseLimits){}[0]
+
+    final val crypto // com.davils.krypt.jose.jws/Jws.crypto|{}crypto[0]
+        final fun <get-crypto>(): com.davils.krypt.primitive/Crypto // com.davils.krypt.jose.jws/Jws.crypto.<get-crypto>|<get-crypto>(){}[0]
+    final val limits // com.davils.krypt.jose.jws/Jws.limits|{}limits[0]
+        final fun <get-limits>(): com.davils.krypt.jose/JoseLimits // com.davils.krypt.jose.jws/Jws.limits.<get-limits>|<get-limits>(){}[0]
+
+    final fun decode(kotlin/String): com.davils.kore.core.outcome/Outcome<com.davils.krypt.jose.jws/JwsMessage, com.davils.krypt.jose/JoseFailure> // com.davils.krypt.jose.jws/Jws.decode|decode(kotlin.String){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.jose.jws/Jws.toString|toString(){}[0]
+    final suspend fun sign(kotlinx.io.bytestring/ByteString, com.davils.krypt.jose.jws/JwsSigner, kotlin/Boolean = ..., kotlin/Boolean = ...): kotlin/String // com.davils.krypt.jose.jws/Jws.sign|sign(kotlinx.io.bytestring.ByteString;com.davils.krypt.jose.jws.JwsSigner;kotlin.Boolean;kotlin.Boolean){}[0]
+    final suspend fun signJson(kotlinx.io.bytestring/ByteString, kotlin.collections/List<com.davils.krypt.jose.jws/JwsSigner>, kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin/Boolean = ...): kotlin/String // com.davils.krypt.jose.jws/Jws.signJson|signJson(kotlinx.io.bytestring.ByteString;kotlin.collections.List<com.davils.krypt.jose.jws.JwsSigner>;kotlin.Boolean;kotlin.Boolean;kotlin.Boolean){}[0]
+    final suspend fun verify(com.davils.krypt.jose.jws/JwsMessage, kotlin.collections/List<com.davils.krypt.jose/JoseKey>, kotlin.collections/Set<com.davils.krypt.jose.jws/JwsAlgorithm>, kotlinx.io.bytestring/ByteString? = ..., kotlin.collections/Set<kotlin/String> = ...): com.davils.kore.core.outcome/Outcome<com.davils.krypt.jose.jws/VerifiedJws, com.davils.krypt.jose/JoseFailure> // com.davils.krypt.jose.jws/Jws.verify|verify(com.davils.krypt.jose.jws.JwsMessage;kotlin.collections.List<com.davils.krypt.jose.JoseKey>;kotlin.collections.Set<com.davils.krypt.jose.jws.JwsAlgorithm>;kotlinx.io.bytestring.ByteString?;kotlin.collections.Set<kotlin.String>){}[0]
+    final suspend fun verify(kotlin/String, kotlin.collections/List<com.davils.krypt.jose/JoseKey>, kotlin.collections/Set<com.davils.krypt.jose.jws/JwsAlgorithm>, kotlinx.io.bytestring/ByteString? = ..., kotlin.collections/Set<kotlin/String> = ...): com.davils.kore.core.outcome/Outcome<com.davils.krypt.jose.jws/VerifiedJws, com.davils.krypt.jose/JoseFailure> // com.davils.krypt.jose.jws/Jws.verify|verify(kotlin.String;kotlin.collections.List<com.davils.krypt.jose.JoseKey>;kotlin.collections.Set<com.davils.krypt.jose.jws.JwsAlgorithm>;kotlinx.io.bytestring.ByteString?;kotlin.collections.Set<kotlin.String>){}[0]
+    final suspend fun verifyWithChain(com.davils.krypt.jose.jws/JwsMessage, com.davils.krypt.x509.path/PathValidator, kotlin.collections/Set<com.davils.krypt.jose.jws/JwsAlgorithm>, com.davils.krypt.x509.path/ValidationParameters = ..., kotlinx.io.bytestring/ByteString? = ..., kotlin.collections/Set<kotlin/String> = ...): com.davils.kore.core.outcome/Outcome<com.davils.krypt.jose.jws/VerifiedJws, com.davils.krypt.jose/JoseFailure> // com.davils.krypt.jose.jws/Jws.verifyWithChain|verifyWithChain(com.davils.krypt.jose.jws.JwsMessage;com.davils.krypt.x509.path.PathValidator;kotlin.collections.Set<com.davils.krypt.jose.jws.JwsAlgorithm>;com.davils.krypt.x509.path.ValidationParameters;kotlinx.io.bytestring.ByteString?;kotlin.collections.Set<kotlin.String>){}[0]
+}
+
+final class com.davils.krypt.jose.jws/JwsMessage { // com.davils.krypt.jose.jws/JwsMessage|null[0]
+    final val isCompact // com.davils.krypt.jose.jws/JwsMessage.isCompact|{}isCompact[0]
+        final fun <get-isCompact>(): kotlin/Boolean // com.davils.krypt.jose.jws/JwsMessage.isCompact.<get-isCompact>|<get-isCompact>(){}[0]
+    final val isPayloadEncoded // com.davils.krypt.jose.jws/JwsMessage.isPayloadEncoded|{}isPayloadEncoded[0]
+        final fun <get-isPayloadEncoded>(): kotlin/Boolean // com.davils.krypt.jose.jws/JwsMessage.isPayloadEncoded.<get-isPayloadEncoded>|<get-isPayloadEncoded>(){}[0]
+    final val payload // com.davils.krypt.jose.jws/JwsMessage.payload|{}payload[0]
+        final fun <get-payload>(): kotlinx.io.bytestring/ByteString? // com.davils.krypt.jose.jws/JwsMessage.payload.<get-payload>|<get-payload>(){}[0]
+    final val signatures // com.davils.krypt.jose.jws/JwsMessage.signatures|{}signatures[0]
+        final fun <get-signatures>(): kotlin.collections/List<com.davils.krypt.jose.jws/JwsSignature> // com.davils.krypt.jose.jws/JwsMessage.signatures.<get-signatures>|<get-signatures>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.jose.jws/JwsMessage.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.jose.jws/JwsMessage.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.jose.jws/JwsMessage.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.jose.jws/JwsSignature { // com.davils.krypt.jose.jws/JwsSignature|null[0]
+    final val header // com.davils.krypt.jose.jws/JwsSignature.header|{}header[0]
+        final fun <get-header>(): com.davils.krypt.jose/JoseHeader // com.davils.krypt.jose.jws/JwsSignature.header.<get-header>|<get-header>(){}[0]
+    final val protectedHeader // com.davils.krypt.jose.jws/JwsSignature.protectedHeader|{}protectedHeader[0]
+        final fun <get-protectedHeader>(): com.davils.krypt.jose/JsonValue.Object // com.davils.krypt.jose.jws/JwsSignature.protectedHeader.<get-protectedHeader>|<get-protectedHeader>(){}[0]
+    final val signature // com.davils.krypt.jose.jws/JwsSignature.signature|{}signature[0]
+        final fun <get-signature>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.jose.jws/JwsSignature.signature.<get-signature>|<get-signature>(){}[0]
+    final val unprotectedHeader // com.davils.krypt.jose.jws/JwsSignature.unprotectedHeader|{}unprotectedHeader[0]
+        final fun <get-unprotectedHeader>(): com.davils.krypt.jose/JsonValue.Object // com.davils.krypt.jose.jws/JwsSignature.unprotectedHeader.<get-unprotectedHeader>|<get-unprotectedHeader>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.jose.jws/JwsSignature.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.jose.jws/JwsSignature.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.jose.jws/JwsSignature.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.jose.jws/JwsSigner { // com.davils.krypt.jose.jws/JwsSigner|null[0]
+    constructor <init>(com.davils.krypt.jose/JoseKey, com.davils.krypt.jose.jws/JwsAlgorithm, com.davils.krypt.jose/JsonValue.Object = ..., com.davils.krypt.jose/JsonValue.Object = ...) // com.davils.krypt.jose.jws/JwsSigner.<init>|<init>(com.davils.krypt.jose.JoseKey;com.davils.krypt.jose.jws.JwsAlgorithm;com.davils.krypt.jose.JsonValue.Object;com.davils.krypt.jose.JsonValue.Object){}[0]
+
+    final val algorithm // com.davils.krypt.jose.jws/JwsSigner.algorithm|{}algorithm[0]
+        final fun <get-algorithm>(): com.davils.krypt.jose.jws/JwsAlgorithm // com.davils.krypt.jose.jws/JwsSigner.algorithm.<get-algorithm>|<get-algorithm>(){}[0]
+    final val header // com.davils.krypt.jose.jws/JwsSigner.header|{}header[0]
+        final fun <get-header>(): com.davils.krypt.jose/JsonValue.Object // com.davils.krypt.jose.jws/JwsSigner.header.<get-header>|<get-header>(){}[0]
+    final val key // com.davils.krypt.jose.jws/JwsSigner.key|{}key[0]
+        final fun <get-key>(): com.davils.krypt.jose/JoseKey // com.davils.krypt.jose.jws/JwsSigner.key.<get-key>|<get-key>(){}[0]
+    final val unprotectedHeader // com.davils.krypt.jose.jws/JwsSigner.unprotectedHeader|{}unprotectedHeader[0]
+        final fun <get-unprotectedHeader>(): com.davils.krypt.jose/JsonValue.Object // com.davils.krypt.jose.jws/JwsSigner.unprotectedHeader.<get-unprotectedHeader>|<get-unprotectedHeader>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.jose.jws/JwsSigner.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.jose.jws/JwsSigner.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.jose.jws/JwsSigner.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.jose.jws/VerifiedJws { // com.davils.krypt.jose.jws/VerifiedJws|null[0]
+    final val algorithm // com.davils.krypt.jose.jws/VerifiedJws.algorithm|{}algorithm[0]
+        final fun <get-algorithm>(): com.davils.krypt.jose.jws/JwsAlgorithm // com.davils.krypt.jose.jws/VerifiedJws.algorithm.<get-algorithm>|<get-algorithm>(){}[0]
+    final val header // com.davils.krypt.jose.jws/VerifiedJws.header|{}header[0]
+        final fun <get-header>(): com.davils.krypt.jose/JoseHeader // com.davils.krypt.jose.jws/VerifiedJws.header.<get-header>|<get-header>(){}[0]
+    final val key // com.davils.krypt.jose.jws/VerifiedJws.key|{}key[0]
+        final fun <get-key>(): com.davils.krypt.jose/JoseKey // com.davils.krypt.jose.jws/VerifiedJws.key.<get-key>|<get-key>(){}[0]
+    final val payload // com.davils.krypt.jose.jws/VerifiedJws.payload|{}payload[0]
+        final fun <get-payload>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.jose.jws/VerifiedJws.payload.<get-payload>|<get-payload>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.jose.jws/VerifiedJws.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.jose.jws/VerifiedJws.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.jose.jws/VerifiedJws.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.jose.jwt/Jwt { // com.davils.krypt.jose.jwt/Jwt|null[0]
+    constructor <init>(com.davils.krypt.primitive/Crypto, com.davils.krypt.jose/JoseLimits = ...) // com.davils.krypt.jose.jwt/Jwt.<init>|<init>(com.davils.krypt.primitive.Crypto;com.davils.krypt.jose.JoseLimits){}[0]
+
+    final val crypto // com.davils.krypt.jose.jwt/Jwt.crypto|{}crypto[0]
+        final fun <get-crypto>(): com.davils.krypt.primitive/Crypto // com.davils.krypt.jose.jwt/Jwt.crypto.<get-crypto>|<get-crypto>(){}[0]
+    final val limits // com.davils.krypt.jose.jwt/Jwt.limits|{}limits[0]
+        final fun <get-limits>(): com.davils.krypt.jose/JoseLimits // com.davils.krypt.jose.jwt/Jwt.limits.<get-limits>|<get-limits>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.jose.jwt/Jwt.toString|toString(){}[0]
+    final suspend fun encrypt(com.davils.krypt.jose.jwt/JwtClaims, com.davils.krypt.jose.jwe/JweRecipient, com.davils.krypt.jose.jwe/JweEncryption, kotlin/String? = ...): kotlin/String // com.davils.krypt.jose.jwt/Jwt.encrypt|encrypt(com.davils.krypt.jose.jwt.JwtClaims;com.davils.krypt.jose.jwe.JweRecipient;com.davils.krypt.jose.jwe.JweEncryption;kotlin.String?){}[0]
+    final suspend fun sign(com.davils.krypt.jose.jwt/JwtClaims, com.davils.krypt.jose/JoseKey, com.davils.krypt.jose.jws/JwsAlgorithm, kotlin/String? = ..., com.davils.krypt.jose/JsonValue.Object = ...): kotlin/String // com.davils.krypt.jose.jwt/Jwt.sign|sign(com.davils.krypt.jose.jwt.JwtClaims;com.davils.krypt.jose.JoseKey;com.davils.krypt.jose.jws.JwsAlgorithm;kotlin.String?;com.davils.krypt.jose.JsonValue.Object){}[0]
+    final suspend fun signAndEncrypt(com.davils.krypt.jose.jwt/JwtClaims, com.davils.krypt.jose/JoseKey, com.davils.krypt.jose.jws/JwsAlgorithm, com.davils.krypt.jose.jwe/JweRecipient, com.davils.krypt.jose.jwe/JweEncryption, kotlin/String? = ...): kotlin/String // com.davils.krypt.jose.jwt/Jwt.signAndEncrypt|signAndEncrypt(com.davils.krypt.jose.jwt.JwtClaims;com.davils.krypt.jose.JoseKey;com.davils.krypt.jose.jws.JwsAlgorithm;com.davils.krypt.jose.jwe.JweRecipient;com.davils.krypt.jose.jwe.JweEncryption;kotlin.String?){}[0]
+    final suspend fun validate(kotlin/String, com.davils.krypt.jose.jwt/JwtValidator, kotlin.collections/List<com.davils.krypt.jose/JoseKey>, kotlin.collections/List<com.davils.krypt.jose/JoseKey> = ...): com.davils.kore.core.outcome/Outcome<com.davils.krypt.jose.jwt/ValidatedJwt, com.davils.krypt.jose/JoseFailure> // com.davils.krypt.jose.jwt/Jwt.validate|validate(kotlin.String;com.davils.krypt.jose.jwt.JwtValidator;kotlin.collections.List<com.davils.krypt.jose.JoseKey>;kotlin.collections.List<com.davils.krypt.jose.JoseKey>){}[0]
+}
+
+final class com.davils.krypt.jose.jwt/JwtClaims : com.davils.kore.core.validation/Validatable { // com.davils.krypt.jose.jwt/JwtClaims|null[0]
+    final val audience // com.davils.krypt.jose.jwt/JwtClaims.audience|{}audience[0]
+        final fun <get-audience>(): kotlin.collections/List<kotlin/String> // com.davils.krypt.jose.jwt/JwtClaims.audience.<get-audience>|<get-audience>(){}[0]
+    final val expiresAt // com.davils.krypt.jose.jwt/JwtClaims.expiresAt|{}expiresAt[0]
+        final fun <get-expiresAt>(): kotlin.time/Instant? // com.davils.krypt.jose.jwt/JwtClaims.expiresAt.<get-expiresAt>|<get-expiresAt>(){}[0]
+    final val issuedAt // com.davils.krypt.jose.jwt/JwtClaims.issuedAt|{}issuedAt[0]
+        final fun <get-issuedAt>(): kotlin.time/Instant? // com.davils.krypt.jose.jwt/JwtClaims.issuedAt.<get-issuedAt>|<get-issuedAt>(){}[0]
+    final val issuer // com.davils.krypt.jose.jwt/JwtClaims.issuer|{}issuer[0]
+        final fun <get-issuer>(): kotlin/String? // com.davils.krypt.jose.jwt/JwtClaims.issuer.<get-issuer>|<get-issuer>(){}[0]
+    final val jwtId // com.davils.krypt.jose.jwt/JwtClaims.jwtId|{}jwtId[0]
+        final fun <get-jwtId>(): kotlin/String? // com.davils.krypt.jose.jwt/JwtClaims.jwtId.<get-jwtId>|<get-jwtId>(){}[0]
+    final val members // com.davils.krypt.jose.jwt/JwtClaims.members|{}members[0]
+        final fun <get-members>(): com.davils.krypt.jose/JsonValue.Object // com.davils.krypt.jose.jwt/JwtClaims.members.<get-members>|<get-members>(){}[0]
+    final val notBefore // com.davils.krypt.jose.jwt/JwtClaims.notBefore|{}notBefore[0]
+        final fun <get-notBefore>(): kotlin.time/Instant? // com.davils.krypt.jose.jwt/JwtClaims.notBefore.<get-notBefore>|<get-notBefore>(){}[0]
+    final val subject // com.davils.krypt.jose.jwt/JwtClaims.subject|{}subject[0]
+        final fun <get-subject>(): kotlin/String? // com.davils.krypt.jose.jwt/JwtClaims.subject.<get-subject>|<get-subject>(){}[0]
+
+    final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.krypt.jose.jwt/JwtClaims.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+    final fun encode(): kotlin/String // com.davils.krypt.jose.jwt/JwtClaims.encode|encode(){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.jose.jwt/JwtClaims.equals|equals(kotlin.Any?){}[0]
+    final fun get(kotlin/String): com.davils.krypt.jose/JsonValue? // com.davils.krypt.jose.jwt/JwtClaims.get|get(kotlin.String){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.jose.jwt/JwtClaims.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.jose.jwt/JwtClaims.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.jose.jwt/JwtClaimsBuilder : com.davils.kore.core.dsl/ValidatingBuilder<com.davils.krypt.jose.jwt/JwtClaims> { // com.davils.krypt.jose.jwt/JwtClaimsBuilder|null[0]
+    final var audience // com.davils.krypt.jose.jwt/JwtClaimsBuilder.audience|{}audience[0]
+        final fun <get-audience>(): kotlin.collections/List<kotlin/String> // com.davils.krypt.jose.jwt/JwtClaimsBuilder.audience.<get-audience>|<get-audience>(){}[0]
+        final fun <set-audience>(kotlin.collections/List<kotlin/String>) // com.davils.krypt.jose.jwt/JwtClaimsBuilder.audience.<set-audience>|<set-audience>(kotlin.collections.List<kotlin.String>){}[0]
+    final var expiresAt // com.davils.krypt.jose.jwt/JwtClaimsBuilder.expiresAt|{}expiresAt[0]
+        final fun <get-expiresAt>(): kotlin.time/Instant? // com.davils.krypt.jose.jwt/JwtClaimsBuilder.expiresAt.<get-expiresAt>|<get-expiresAt>(){}[0]
+        final fun <set-expiresAt>(kotlin.time/Instant?) // com.davils.krypt.jose.jwt/JwtClaimsBuilder.expiresAt.<set-expiresAt>|<set-expiresAt>(kotlin.time.Instant?){}[0]
+    final var issuedAt // com.davils.krypt.jose.jwt/JwtClaimsBuilder.issuedAt|{}issuedAt[0]
+        final fun <get-issuedAt>(): kotlin.time/Instant? // com.davils.krypt.jose.jwt/JwtClaimsBuilder.issuedAt.<get-issuedAt>|<get-issuedAt>(){}[0]
+        final fun <set-issuedAt>(kotlin.time/Instant?) // com.davils.krypt.jose.jwt/JwtClaimsBuilder.issuedAt.<set-issuedAt>|<set-issuedAt>(kotlin.time.Instant?){}[0]
+    final var issuer // com.davils.krypt.jose.jwt/JwtClaimsBuilder.issuer|{}issuer[0]
+        final fun <get-issuer>(): kotlin/String? // com.davils.krypt.jose.jwt/JwtClaimsBuilder.issuer.<get-issuer>|<get-issuer>(){}[0]
+        final fun <set-issuer>(kotlin/String?) // com.davils.krypt.jose.jwt/JwtClaimsBuilder.issuer.<set-issuer>|<set-issuer>(kotlin.String?){}[0]
+    final var jwtId // com.davils.krypt.jose.jwt/JwtClaimsBuilder.jwtId|{}jwtId[0]
+        final fun <get-jwtId>(): kotlin/String? // com.davils.krypt.jose.jwt/JwtClaimsBuilder.jwtId.<get-jwtId>|<get-jwtId>(){}[0]
+        final fun <set-jwtId>(kotlin/String?) // com.davils.krypt.jose.jwt/JwtClaimsBuilder.jwtId.<set-jwtId>|<set-jwtId>(kotlin.String?){}[0]
+    final var notBefore // com.davils.krypt.jose.jwt/JwtClaimsBuilder.notBefore|{}notBefore[0]
+        final fun <get-notBefore>(): kotlin.time/Instant? // com.davils.krypt.jose.jwt/JwtClaimsBuilder.notBefore.<get-notBefore>|<get-notBefore>(){}[0]
+        final fun <set-notBefore>(kotlin.time/Instant?) // com.davils.krypt.jose.jwt/JwtClaimsBuilder.notBefore.<set-notBefore>|<set-notBefore>(kotlin.time.Instant?){}[0]
+    final var tokenSubject // com.davils.krypt.jose.jwt/JwtClaimsBuilder.tokenSubject|{}tokenSubject[0]
+        final fun <get-tokenSubject>(): kotlin/String? // com.davils.krypt.jose.jwt/JwtClaimsBuilder.tokenSubject.<get-tokenSubject>|<get-tokenSubject>(){}[0]
+        final fun <set-tokenSubject>(kotlin/String?) // com.davils.krypt.jose.jwt/JwtClaimsBuilder.tokenSubject.<set-tokenSubject>|<set-tokenSubject>(kotlin.String?){}[0]
+
+    final fun claim(kotlin/String, com.davils.krypt.jose/JsonValue) // com.davils.krypt.jose.jwt/JwtClaimsBuilder.claim|claim(kotlin.String;com.davils.krypt.jose.JsonValue){}[0]
+}
+
+final class com.davils.krypt.jose.jwt/JwtValidator : com.davils.kore.core.validation/Validatable { // com.davils.krypt.jose.jwt/JwtValidator|null[0]
+    final val algorithms // com.davils.krypt.jose.jwt/JwtValidator.algorithms|{}algorithms[0]
+        final fun <get-algorithms>(): kotlin.collections/Set<com.davils.krypt.jose.jws/JwsAlgorithm> // com.davils.krypt.jose.jwt/JwtValidator.algorithms.<get-algorithms>|<get-algorithms>(){}[0]
+    final val audiences // com.davils.krypt.jose.jwt/JwtValidator.audiences|{}audiences[0]
+        final fun <get-audiences>(): kotlin.collections/Set<kotlin/String> // com.davils.krypt.jose.jwt/JwtValidator.audiences.<get-audiences>|<get-audiences>(){}[0]
+    final val clockSkew // com.davils.krypt.jose.jwt/JwtValidator.clockSkew|{}clockSkew[0]
+        final fun <get-clockSkew>(): kotlin.time/Duration // com.davils.krypt.jose.jwt/JwtValidator.clockSkew.<get-clockSkew>|<get-clockSkew>(){}[0]
+    final val critical // com.davils.krypt.jose.jwt/JwtValidator.critical|{}critical[0]
+        final fun <get-critical>(): kotlin.collections/Set<kotlin/String> // com.davils.krypt.jose.jwt/JwtValidator.critical.<get-critical>|<get-critical>(){}[0]
+    final val encryptions // com.davils.krypt.jose.jwt/JwtValidator.encryptions|{}encryptions[0]
+        final fun <get-encryptions>(): kotlin.collections/Set<com.davils.krypt.jose.jwe/JweEncryption> // com.davils.krypt.jose.jwt/JwtValidator.encryptions.<get-encryptions>|<get-encryptions>(){}[0]
+    final val isExpirationRequired // com.davils.krypt.jose.jwt/JwtValidator.isExpirationRequired|{}isExpirationRequired[0]
+        final fun <get-isExpirationRequired>(): kotlin/Boolean // com.davils.krypt.jose.jwt/JwtValidator.isExpirationRequired.<get-isExpirationRequired>|<get-isExpirationRequired>(){}[0]
+    final val isSignatureRequired // com.davils.krypt.jose.jwt/JwtValidator.isSignatureRequired|{}isSignatureRequired[0]
+        final fun <get-isSignatureRequired>(): kotlin/Boolean // com.davils.krypt.jose.jwt/JwtValidator.isSignatureRequired.<get-isSignatureRequired>|<get-isSignatureRequired>(){}[0]
+    final val issuer // com.davils.krypt.jose.jwt/JwtValidator.issuer|{}issuer[0]
+        final fun <get-issuer>(): kotlin/String? // com.davils.krypt.jose.jwt/JwtValidator.issuer.<get-issuer>|<get-issuer>(){}[0]
+    final val keyAlgorithms // com.davils.krypt.jose.jwt/JwtValidator.keyAlgorithms|{}keyAlgorithms[0]
+        final fun <get-keyAlgorithms>(): kotlin.collections/Set<com.davils.krypt.jose.jwe/JweAlgorithm> // com.davils.krypt.jose.jwt/JwtValidator.keyAlgorithms.<get-keyAlgorithms>|<get-keyAlgorithms>(){}[0]
+    final val maximumAge // com.davils.krypt.jose.jwt/JwtValidator.maximumAge|{}maximumAge[0]
+        final fun <get-maximumAge>(): kotlin.time/Duration? // com.davils.krypt.jose.jwt/JwtValidator.maximumAge.<get-maximumAge>|<get-maximumAge>(){}[0]
+    final val requiredClaims // com.davils.krypt.jose.jwt/JwtValidator.requiredClaims|{}requiredClaims[0]
+        final fun <get-requiredClaims>(): kotlin.collections/Set<kotlin/String> // com.davils.krypt.jose.jwt/JwtValidator.requiredClaims.<get-requiredClaims>|<get-requiredClaims>(){}[0]
+    final val type // com.davils.krypt.jose.jwt/JwtValidator.type|{}type[0]
+        final fun <get-type>(): kotlin/String? // com.davils.krypt.jose.jwt/JwtValidator.type.<get-type>|<get-type>(){}[0]
+
+    final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.krypt.jose.jwt/JwtValidator.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.jose.jwt/JwtValidator.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.jose.jwt/JwtValidator.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.jose.jwt/JwtValidator.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.jose.jwt/JwtValidator.Companion|null[0]
+        final val MAXIMUM_SKEW // com.davils.krypt.jose.jwt/JwtValidator.Companion.MAXIMUM_SKEW|{}MAXIMUM_SKEW[0]
+            final fun <get-MAXIMUM_SKEW>(): kotlin.time/Duration // com.davils.krypt.jose.jwt/JwtValidator.Companion.MAXIMUM_SKEW.<get-MAXIMUM_SKEW>|<get-MAXIMUM_SKEW>(){}[0]
+    }
+}
+
+final class com.davils.krypt.jose.jwt/JwtValidatorBuilder : com.davils.kore.core.dsl/ValidatingBuilder<com.davils.krypt.jose.jwt/JwtValidator> { // com.davils.krypt.jose.jwt/JwtValidatorBuilder|null[0]
+    final var clockSkew // com.davils.krypt.jose.jwt/JwtValidatorBuilder.clockSkew|{}clockSkew[0]
+        final fun <get-clockSkew>(): kotlin.time/Duration // com.davils.krypt.jose.jwt/JwtValidatorBuilder.clockSkew.<get-clockSkew>|<get-clockSkew>(){}[0]
+        final fun <set-clockSkew>(kotlin.time/Duration) // com.davils.krypt.jose.jwt/JwtValidatorBuilder.clockSkew.<set-clockSkew>|<set-clockSkew>(kotlin.time.Duration){}[0]
+    final var isExpirationRequired // com.davils.krypt.jose.jwt/JwtValidatorBuilder.isExpirationRequired|{}isExpirationRequired[0]
+        final fun <get-isExpirationRequired>(): kotlin/Boolean // com.davils.krypt.jose.jwt/JwtValidatorBuilder.isExpirationRequired.<get-isExpirationRequired>|<get-isExpirationRequired>(){}[0]
+        final fun <set-isExpirationRequired>(kotlin/Boolean) // com.davils.krypt.jose.jwt/JwtValidatorBuilder.isExpirationRequired.<set-isExpirationRequired>|<set-isExpirationRequired>(kotlin.Boolean){}[0]
+    final var isSignatureRequired // com.davils.krypt.jose.jwt/JwtValidatorBuilder.isSignatureRequired|{}isSignatureRequired[0]
+        final fun <get-isSignatureRequired>(): kotlin/Boolean // com.davils.krypt.jose.jwt/JwtValidatorBuilder.isSignatureRequired.<get-isSignatureRequired>|<get-isSignatureRequired>(){}[0]
+        final fun <set-isSignatureRequired>(kotlin/Boolean) // com.davils.krypt.jose.jwt/JwtValidatorBuilder.isSignatureRequired.<set-isSignatureRequired>|<set-isSignatureRequired>(kotlin.Boolean){}[0]
+    final var issuer // com.davils.krypt.jose.jwt/JwtValidatorBuilder.issuer|{}issuer[0]
+        final fun <get-issuer>(): kotlin/String? // com.davils.krypt.jose.jwt/JwtValidatorBuilder.issuer.<get-issuer>|<get-issuer>(){}[0]
+        final fun <set-issuer>(kotlin/String?) // com.davils.krypt.jose.jwt/JwtValidatorBuilder.issuer.<set-issuer>|<set-issuer>(kotlin.String?){}[0]
+    final var maximumAge // com.davils.krypt.jose.jwt/JwtValidatorBuilder.maximumAge|{}maximumAge[0]
+        final fun <get-maximumAge>(): kotlin.time/Duration? // com.davils.krypt.jose.jwt/JwtValidatorBuilder.maximumAge.<get-maximumAge>|<get-maximumAge>(){}[0]
+        final fun <set-maximumAge>(kotlin.time/Duration?) // com.davils.krypt.jose.jwt/JwtValidatorBuilder.maximumAge.<set-maximumAge>|<set-maximumAge>(kotlin.time.Duration?){}[0]
+    final var type // com.davils.krypt.jose.jwt/JwtValidatorBuilder.type|{}type[0]
+        final fun <get-type>(): kotlin/String? // com.davils.krypt.jose.jwt/JwtValidatorBuilder.type.<get-type>|<get-type>(){}[0]
+        final fun <set-type>(kotlin/String?) // com.davils.krypt.jose.jwt/JwtValidatorBuilder.type.<set-type>|<set-type>(kotlin.String?){}[0]
+
+    final fun algorithms(kotlin/Array<out com.davils.krypt.jose.jws/JwsAlgorithm>...) // com.davils.krypt.jose.jwt/JwtValidatorBuilder.algorithms|algorithms(kotlin.Array<out|com.davils.krypt.jose.jws.JwsAlgorithm>...){}[0]
+    final fun audience(kotlin/Array<out kotlin/String>...) // com.davils.krypt.jose.jwt/JwtValidatorBuilder.audience|audience(kotlin.Array<out|kotlin.String>...){}[0]
+    final fun critical(kotlin/Array<out kotlin/String>...) // com.davils.krypt.jose.jwt/JwtValidatorBuilder.critical|critical(kotlin.Array<out|kotlin.String>...){}[0]
+    final fun encryption(kotlin.collections/Set<com.davils.krypt.jose.jwe/JweAlgorithm>, kotlin.collections/Set<com.davils.krypt.jose.jwe/JweEncryption>) // com.davils.krypt.jose.jwt/JwtValidatorBuilder.encryption|encryption(kotlin.collections.Set<com.davils.krypt.jose.jwe.JweAlgorithm>;kotlin.collections.Set<com.davils.krypt.jose.jwe.JweEncryption>){}[0]
+    final fun require(kotlin/Array<out kotlin/String>...) // com.davils.krypt.jose.jwt/JwtValidatorBuilder.require|require(kotlin.Array<out|kotlin.String>...){}[0]
+}
+
+final class com.davils.krypt.jose.jwt/ValidatedJwt { // com.davils.krypt.jose.jwt/ValidatedJwt|null[0]
+    final val algorithm // com.davils.krypt.jose.jwt/ValidatedJwt.algorithm|{}algorithm[0]
+        final fun <get-algorithm>(): com.davils.krypt.jose.jws/JwsAlgorithm? // com.davils.krypt.jose.jwt/ValidatedJwt.algorithm.<get-algorithm>|<get-algorithm>(){}[0]
+    final val claims // com.davils.krypt.jose.jwt/ValidatedJwt.claims|{}claims[0]
+        final fun <get-claims>(): com.davils.krypt.jose.jwt/JwtClaims // com.davils.krypt.jose.jwt/ValidatedJwt.claims.<get-claims>|<get-claims>(){}[0]
+    final val header // com.davils.krypt.jose.jwt/ValidatedJwt.header|{}header[0]
+        final fun <get-header>(): com.davils.krypt.jose/JoseHeader // com.davils.krypt.jose.jwt/ValidatedJwt.header.<get-header>|<get-header>(){}[0]
+    final val isEncrypted // com.davils.krypt.jose.jwt/ValidatedJwt.isEncrypted|{}isEncrypted[0]
+        final fun <get-isEncrypted>(): kotlin/Boolean // com.davils.krypt.jose.jwt/ValidatedJwt.isEncrypted.<get-isEncrypted>|<get-isEncrypted>(){}[0]
+    final val key // com.davils.krypt.jose.jwt/ValidatedJwt.key|{}key[0]
+        final fun <get-key>(): com.davils.krypt.jose/JoseKey // com.davils.krypt.jose.jwt/ValidatedJwt.key.<get-key>|<get-key>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.jose.jwt/ValidatedJwt.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.jose.jwt/ValidatedJwt.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.jose.jwt/ValidatedJwt.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.jose/JoseHeader { // com.davils.krypt.jose/JoseHeader|null[0]
+    constructor <init>(com.davils.krypt.jose/JsonValue.Object) // com.davils.krypt.jose/JoseHeader.<init>|<init>(com.davils.krypt.jose.JsonValue.Object){}[0]
+
+    final val algorithm // com.davils.krypt.jose/JoseHeader.algorithm|{}algorithm[0]
+        final fun <get-algorithm>(): kotlin/String? // com.davils.krypt.jose/JoseHeader.algorithm.<get-algorithm>|<get-algorithm>(){}[0]
+    final val contentType // com.davils.krypt.jose/JoseHeader.contentType|{}contentType[0]
+        final fun <get-contentType>(): kotlin/String? // com.davils.krypt.jose/JoseHeader.contentType.<get-contentType>|<get-contentType>(){}[0]
+    final val critical // com.davils.krypt.jose/JoseHeader.critical|{}critical[0]
+        final fun <get-critical>(): kotlin.collections/List<kotlin/String> // com.davils.krypt.jose/JoseHeader.critical.<get-critical>|<get-critical>(){}[0]
+    final val encryption // com.davils.krypt.jose/JoseHeader.encryption|{}encryption[0]
+        final fun <get-encryption>(): kotlin/String? // com.davils.krypt.jose/JoseHeader.encryption.<get-encryption>|<get-encryption>(){}[0]
+    final val keyId // com.davils.krypt.jose/JoseHeader.keyId|{}keyId[0]
+        final fun <get-keyId>(): kotlin/String? // com.davils.krypt.jose/JoseHeader.keyId.<get-keyId>|<get-keyId>(){}[0]
+    final val members // com.davils.krypt.jose/JoseHeader.members|{}members[0]
+        final fun <get-members>(): com.davils.krypt.jose/JsonValue.Object // com.davils.krypt.jose/JoseHeader.members.<get-members>|<get-members>(){}[0]
+    final val type // com.davils.krypt.jose/JoseHeader.type|{}type[0]
+        final fun <get-type>(): kotlin/String? // com.davils.krypt.jose/JoseHeader.type.<get-type>|<get-type>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.jose/JoseHeader.equals|equals(kotlin.Any?){}[0]
+    final fun get(kotlin/String): com.davils.krypt.jose/JsonValue? // com.davils.krypt.jose/JoseHeader.get|get(kotlin.String){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.jose/JoseHeader.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.jose/JoseHeader.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.jose/JoseLimits { // com.davils.krypt.jose/JoseLimits|null[0]
+    constructor <init>(kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ...) // com.davils.krypt.jose/JoseLimits.<init>|<init>(kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int){}[0]
+
+    final val maximumBytes // com.davils.krypt.jose/JoseLimits.maximumBytes|{}maximumBytes[0]
+        final fun <get-maximumBytes>(): kotlin/Int // com.davils.krypt.jose/JoseLimits.maximumBytes.<get-maximumBytes>|<get-maximumBytes>(){}[0]
+    final val maximumCertificates // com.davils.krypt.jose/JoseLimits.maximumCertificates|{}maximumCertificates[0]
+        final fun <get-maximumCertificates>(): kotlin/Int // com.davils.krypt.jose/JoseLimits.maximumCertificates.<get-maximumCertificates>|<get-maximumCertificates>(){}[0]
+    final val maximumDepth // com.davils.krypt.jose/JoseLimits.maximumDepth|{}maximumDepth[0]
+        final fun <get-maximumDepth>(): kotlin/Int // com.davils.krypt.jose/JoseLimits.maximumDepth.<get-maximumDepth>|<get-maximumDepth>(){}[0]
+    final val maximumIterations // com.davils.krypt.jose/JoseLimits.maximumIterations|{}maximumIterations[0]
+        final fun <get-maximumIterations>(): kotlin/Int // com.davils.krypt.jose/JoseLimits.maximumIterations.<get-maximumIterations>|<get-maximumIterations>(){}[0]
+    final val maximumKeys // com.davils.krypt.jose/JoseLimits.maximumKeys|{}maximumKeys[0]
+        final fun <get-maximumKeys>(): kotlin/Int // com.davils.krypt.jose/JoseLimits.maximumKeys.<get-maximumKeys>|<get-maximumKeys>(){}[0]
+    final val maximumMembers // com.davils.krypt.jose/JoseLimits.maximumMembers|{}maximumMembers[0]
+        final fun <get-maximumMembers>(): kotlin/Int // com.davils.krypt.jose/JoseLimits.maximumMembers.<get-maximumMembers>|<get-maximumMembers>(){}[0]
+    final val maximumRecipients // com.davils.krypt.jose/JoseLimits.maximumRecipients|{}maximumRecipients[0]
+        final fun <get-maximumRecipients>(): kotlin/Int // com.davils.krypt.jose/JoseLimits.maximumRecipients.<get-maximumRecipients>|<get-maximumRecipients>(){}[0]
+    final val maximumStringLength // com.davils.krypt.jose/JoseLimits.maximumStringLength|{}maximumStringLength[0]
+        final fun <get-maximumStringLength>(): kotlin/Int // com.davils.krypt.jose/JoseLimits.maximumStringLength.<get-maximumStringLength>|<get-maximumStringLength>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.jose/JoseLimits.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.jose/JoseLimits.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.jose/JoseLimits.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.jose/JoseLimits.Companion|null[0]
+        final const val DEFAULT_MAXIMUM_BYTES // com.davils.krypt.jose/JoseLimits.Companion.DEFAULT_MAXIMUM_BYTES|{}DEFAULT_MAXIMUM_BYTES[0]
+            final fun <get-DEFAULT_MAXIMUM_BYTES>(): kotlin/Int // com.davils.krypt.jose/JoseLimits.Companion.DEFAULT_MAXIMUM_BYTES.<get-DEFAULT_MAXIMUM_BYTES>|<get-DEFAULT_MAXIMUM_BYTES>(){}[0]
+        final const val DEFAULT_MAXIMUM_CERTIFICATES // com.davils.krypt.jose/JoseLimits.Companion.DEFAULT_MAXIMUM_CERTIFICATES|{}DEFAULT_MAXIMUM_CERTIFICATES[0]
+            final fun <get-DEFAULT_MAXIMUM_CERTIFICATES>(): kotlin/Int // com.davils.krypt.jose/JoseLimits.Companion.DEFAULT_MAXIMUM_CERTIFICATES.<get-DEFAULT_MAXIMUM_CERTIFICATES>|<get-DEFAULT_MAXIMUM_CERTIFICATES>(){}[0]
+        final const val DEFAULT_MAXIMUM_DEPTH // com.davils.krypt.jose/JoseLimits.Companion.DEFAULT_MAXIMUM_DEPTH|{}DEFAULT_MAXIMUM_DEPTH[0]
+            final fun <get-DEFAULT_MAXIMUM_DEPTH>(): kotlin/Int // com.davils.krypt.jose/JoseLimits.Companion.DEFAULT_MAXIMUM_DEPTH.<get-DEFAULT_MAXIMUM_DEPTH>|<get-DEFAULT_MAXIMUM_DEPTH>(){}[0]
+        final const val DEFAULT_MAXIMUM_ITERATIONS // com.davils.krypt.jose/JoseLimits.Companion.DEFAULT_MAXIMUM_ITERATIONS|{}DEFAULT_MAXIMUM_ITERATIONS[0]
+            final fun <get-DEFAULT_MAXIMUM_ITERATIONS>(): kotlin/Int // com.davils.krypt.jose/JoseLimits.Companion.DEFAULT_MAXIMUM_ITERATIONS.<get-DEFAULT_MAXIMUM_ITERATIONS>|<get-DEFAULT_MAXIMUM_ITERATIONS>(){}[0]
+        final const val DEFAULT_MAXIMUM_KEYS // com.davils.krypt.jose/JoseLimits.Companion.DEFAULT_MAXIMUM_KEYS|{}DEFAULT_MAXIMUM_KEYS[0]
+            final fun <get-DEFAULT_MAXIMUM_KEYS>(): kotlin/Int // com.davils.krypt.jose/JoseLimits.Companion.DEFAULT_MAXIMUM_KEYS.<get-DEFAULT_MAXIMUM_KEYS>|<get-DEFAULT_MAXIMUM_KEYS>(){}[0]
+        final const val DEFAULT_MAXIMUM_MEMBERS // com.davils.krypt.jose/JoseLimits.Companion.DEFAULT_MAXIMUM_MEMBERS|{}DEFAULT_MAXIMUM_MEMBERS[0]
+            final fun <get-DEFAULT_MAXIMUM_MEMBERS>(): kotlin/Int // com.davils.krypt.jose/JoseLimits.Companion.DEFAULT_MAXIMUM_MEMBERS.<get-DEFAULT_MAXIMUM_MEMBERS>|<get-DEFAULT_MAXIMUM_MEMBERS>(){}[0]
+        final const val DEFAULT_MAXIMUM_RECIPIENTS // com.davils.krypt.jose/JoseLimits.Companion.DEFAULT_MAXIMUM_RECIPIENTS|{}DEFAULT_MAXIMUM_RECIPIENTS[0]
+            final fun <get-DEFAULT_MAXIMUM_RECIPIENTS>(): kotlin/Int // com.davils.krypt.jose/JoseLimits.Companion.DEFAULT_MAXIMUM_RECIPIENTS.<get-DEFAULT_MAXIMUM_RECIPIENTS>|<get-DEFAULT_MAXIMUM_RECIPIENTS>(){}[0]
+        final const val DEFAULT_MAXIMUM_STRING_LENGTH // com.davils.krypt.jose/JoseLimits.Companion.DEFAULT_MAXIMUM_STRING_LENGTH|{}DEFAULT_MAXIMUM_STRING_LENGTH[0]
+            final fun <get-DEFAULT_MAXIMUM_STRING_LENGTH>(): kotlin/Int // com.davils.krypt.jose/JoseLimits.Companion.DEFAULT_MAXIMUM_STRING_LENGTH.<get-DEFAULT_MAXIMUM_STRING_LENGTH>|<get-DEFAULT_MAXIMUM_STRING_LENGTH>(){}[0]
+        final const val HARD_MAXIMUM_BYTES // com.davils.krypt.jose/JoseLimits.Companion.HARD_MAXIMUM_BYTES|{}HARD_MAXIMUM_BYTES[0]
+            final fun <get-HARD_MAXIMUM_BYTES>(): kotlin/Int // com.davils.krypt.jose/JoseLimits.Companion.HARD_MAXIMUM_BYTES.<get-HARD_MAXIMUM_BYTES>|<get-HARD_MAXIMUM_BYTES>(){}[0]
+        final const val HARD_MAXIMUM_CERTIFICATES // com.davils.krypt.jose/JoseLimits.Companion.HARD_MAXIMUM_CERTIFICATES|{}HARD_MAXIMUM_CERTIFICATES[0]
+            final fun <get-HARD_MAXIMUM_CERTIFICATES>(): kotlin/Int // com.davils.krypt.jose/JoseLimits.Companion.HARD_MAXIMUM_CERTIFICATES.<get-HARD_MAXIMUM_CERTIFICATES>|<get-HARD_MAXIMUM_CERTIFICATES>(){}[0]
+        final const val HARD_MAXIMUM_DEPTH // com.davils.krypt.jose/JoseLimits.Companion.HARD_MAXIMUM_DEPTH|{}HARD_MAXIMUM_DEPTH[0]
+            final fun <get-HARD_MAXIMUM_DEPTH>(): kotlin/Int // com.davils.krypt.jose/JoseLimits.Companion.HARD_MAXIMUM_DEPTH.<get-HARD_MAXIMUM_DEPTH>|<get-HARD_MAXIMUM_DEPTH>(){}[0]
+        final const val HARD_MAXIMUM_ITERATIONS // com.davils.krypt.jose/JoseLimits.Companion.HARD_MAXIMUM_ITERATIONS|{}HARD_MAXIMUM_ITERATIONS[0]
+            final fun <get-HARD_MAXIMUM_ITERATIONS>(): kotlin/Int // com.davils.krypt.jose/JoseLimits.Companion.HARD_MAXIMUM_ITERATIONS.<get-HARD_MAXIMUM_ITERATIONS>|<get-HARD_MAXIMUM_ITERATIONS>(){}[0]
+        final const val HARD_MAXIMUM_KEYS // com.davils.krypt.jose/JoseLimits.Companion.HARD_MAXIMUM_KEYS|{}HARD_MAXIMUM_KEYS[0]
+            final fun <get-HARD_MAXIMUM_KEYS>(): kotlin/Int // com.davils.krypt.jose/JoseLimits.Companion.HARD_MAXIMUM_KEYS.<get-HARD_MAXIMUM_KEYS>|<get-HARD_MAXIMUM_KEYS>(){}[0]
+        final const val HARD_MAXIMUM_MEMBERS // com.davils.krypt.jose/JoseLimits.Companion.HARD_MAXIMUM_MEMBERS|{}HARD_MAXIMUM_MEMBERS[0]
+            final fun <get-HARD_MAXIMUM_MEMBERS>(): kotlin/Int // com.davils.krypt.jose/JoseLimits.Companion.HARD_MAXIMUM_MEMBERS.<get-HARD_MAXIMUM_MEMBERS>|<get-HARD_MAXIMUM_MEMBERS>(){}[0]
+        final const val HARD_MAXIMUM_RECIPIENTS // com.davils.krypt.jose/JoseLimits.Companion.HARD_MAXIMUM_RECIPIENTS|{}HARD_MAXIMUM_RECIPIENTS[0]
+            final fun <get-HARD_MAXIMUM_RECIPIENTS>(): kotlin/Int // com.davils.krypt.jose/JoseLimits.Companion.HARD_MAXIMUM_RECIPIENTS.<get-HARD_MAXIMUM_RECIPIENTS>|<get-HARD_MAXIMUM_RECIPIENTS>(){}[0]
+        final const val HARD_MAXIMUM_STRING_LENGTH // com.davils.krypt.jose/JoseLimits.Companion.HARD_MAXIMUM_STRING_LENGTH|{}HARD_MAXIMUM_STRING_LENGTH[0]
+            final fun <get-HARD_MAXIMUM_STRING_LENGTH>(): kotlin/Int // com.davils.krypt.jose/JoseLimits.Companion.HARD_MAXIMUM_STRING_LENGTH.<get-HARD_MAXIMUM_STRING_LENGTH>|<get-HARD_MAXIMUM_STRING_LENGTH>(){}[0]
+
+        final val Default // com.davils.krypt.jose/JoseLimits.Companion.Default|{}Default[0]
+            final fun <get-Default>(): com.davils.krypt.jose/JoseLimits // com.davils.krypt.jose/JoseLimits.Companion.Default.<get-Default>|<get-Default>(){}[0]
+    }
+}
+
+final fun com.davils.krypt.jose.jwt/jwtClaims(kotlin/Function1<com.davils.krypt.jose.jwt/JwtClaimsBuilder, kotlin/Unit>): com.davils.krypt.jose.jwt/JwtClaims // com.davils.krypt.jose.jwt/jwtClaims|jwtClaims(kotlin.Function1<com.davils.krypt.jose.jwt.JwtClaimsBuilder,kotlin.Unit>){}[0]
+final fun com.davils.krypt.jose.jwt/jwtValidator(kotlin/Function1<com.davils.krypt.jose.jwt/JwtValidatorBuilder, kotlin/Unit>): com.davils.krypt.jose.jwt/JwtValidator // com.davils.krypt.jose.jwt/jwtValidator|jwtValidator(kotlin.Function1<com.davils.krypt.jose.jwt.JwtValidatorBuilder,kotlin.Unit>){}[0]

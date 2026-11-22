@@ -24,6 +24,7 @@ correctness first.
 | `krypt-ocsp` | `com.davils:krypt-ocsp` | OCSP requests and responses, their verification, a revocation checker for path validation and the logic of a responder |
 | `krypt-ct` | `com.davils:krypt-ct` | Signed certificate timestamps from certificates, TLS and OCSP, log lists and a CT policy |
 | `krypt-authority` | `com.davils:krypt-authority` | A stateless certificate authority: roots and intermediates behind a signer, profiles, an issuance policy, revocation lists and the status of an OCSP responder |
+| `krypt-jose` | `com.davils:krypt-jose` | JSON Web Keys and key sets with thumbprints, JSON Web Signatures, JSON Web Encryption and JSON Web Tokens validated by the best current practice, over a strict and bounded JSON parser |
 | `krypt-testing` | `com.davils:krypt-testing` | Test support: deterministic and replayed randomness, audit logs and test environments |
 | `krypt-bom` | `com.davils:krypt-bom` | The bill of materials of every module |
 | `build-logic` | - | One convention plugin per concern, composed by `krypt.kotlin-library` for a library module, `krypt.bom` for the BOM and `krypt.root` for the root project; they hold nothing but `plugins { }` and `kreate { }` |
@@ -31,7 +32,7 @@ correctness first.
 `krypt-core` builds on `com.davils:kore-core`, `com.davils:konfetti-core`, `com.davils:kollect-core`,
 `kotlinx-coroutines-core` and `kotlinx-io-bytestring`; `krypt-asn1` builds on `krypt-core`, `krypt-primitive` on
 both, and `krypt-keyset`, `krypt-stream` and `krypt-storage` each on the one before. `krypt-x509` builds on
-`krypt-primitive`; `krypt-keystore`, `krypt-ocsp` and `krypt-ct` on `krypt-x509`; and `krypt-authority` on
+`krypt-primitive`; `krypt-keystore`, `krypt-ocsp`, `krypt-ct` and `krypt-jose` on `krypt-x509`; and `krypt-authority` on
 `krypt-ocsp` and `krypt-keystore`. The code is ported from the security library of an internal Davils project and
 hardened on the way.
 
@@ -201,8 +202,8 @@ passwords, names and every field of every protocol message.
 ## Kore internals
 
 krypt opts into these `@DavilsInternal` declarations of Kore; Kore changes them only in a major version:
-`SafeText.text`, `SafeText.REDACTED` and `immutableSet`. A new use is added here and to the table of Kore's
-`AGENTS.md`.
+`SafeText.text`, `SafeText.REDACTED`, `immutableSet`, and `OrderedMap` and `OrderedSet` for the maps and sets keyed
+by input. A new use is added here and to the table of Kore's `AGENTS.md`.
 
 ## Public API
 

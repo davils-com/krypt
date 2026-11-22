@@ -1,0 +1,621 @@
+public final class com/davils/krypt/jose/JoseFailure : java/lang/Enum {
+	public static final field AlgorithmNotAllowed Lcom/davils/krypt/jose/JoseFailure;
+	public static final field BadSignature Lcom/davils/krypt/jose/JoseFailure;
+	public static final field DecryptionFailed Lcom/davils/krypt/jose/JoseFailure;
+	public static final field Expired Lcom/davils/krypt/jose/JoseFailure;
+	public static final field InvalidKey Lcom/davils/krypt/jose/JoseFailure;
+	public static final field KeyNotFound Lcom/davils/krypt/jose/JoseFailure;
+	public static final field LimitExceeded Lcom/davils/krypt/jose/JoseFailure;
+	public static final field Malformed Lcom/davils/krypt/jose/JoseFailure;
+	public static final field MissingClaim Lcom/davils/krypt/jose/JoseFailure;
+	public static final field NotYetValid Lcom/davils/krypt/jose/JoseFailure;
+	public static final field SignatureRequired Lcom/davils/krypt/jose/JoseFailure;
+	public static final field UnknownCritical Lcom/davils/krypt/jose/JoseFailure;
+	public static final field UnsupportedAlgorithm Lcom/davils/krypt/jose/JoseFailure;
+	public static final field UntrustedCertificate Lcom/davils/krypt/jose/JoseFailure;
+	public static final field WrongAudience Lcom/davils/krypt/jose/JoseFailure;
+	public static final field WrongIssuer Lcom/davils/krypt/jose/JoseFailure;
+	public static final field WrongType Lcom/davils/krypt/jose/JoseFailure;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/jose/JoseFailure;
+	public static fun values ()[Lcom/davils/krypt/jose/JoseFailure;
+}
+
+public final class com/davils/krypt/jose/JoseHeader {
+	public fun <init> (Lcom/davils/krypt/jose/JsonValue$Object;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun get (Ljava/lang/String;)Lcom/davils/krypt/jose/JsonValue;
+	public final fun getAlgorithm ()Ljava/lang/String;
+	public final fun getContentType ()Ljava/lang/String;
+	public final fun getCritical ()Ljava/util/List;
+	public final fun getEncryption ()Ljava/lang/String;
+	public final fun getKeyId ()Ljava/lang/String;
+	public final fun getMembers ()Lcom/davils/krypt/jose/JsonValue$Object;
+	public final fun getType ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/davils/krypt/jose/JoseKey {
+	public abstract fun getKeyId ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/jose/JoseKey$Password : com/davils/krypt/jose/JoseKey {
+	public fun <init> (Lcom/davils/krypt/core/SecretText;Ljava/lang/String;)V
+	public synthetic fun <init> (Lcom/davils/krypt/core/SecretText;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getKeyId ()Ljava/lang/String;
+	public final fun getPassword ()Lcom/davils/krypt/core/SecretText;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/jose/JoseKey$Private : com/davils/krypt/jose/JoseKey {
+	public fun <init> (Lcom/davils/krypt/primitive/key/PrivateKey;Ljava/lang/String;)V
+	public synthetic fun <init> (Lcom/davils/krypt/primitive/key/PrivateKey;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getKey ()Lcom/davils/krypt/primitive/key/PrivateKey;
+	public fun getKeyId ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/jose/JoseKey$Public : com/davils/krypt/jose/JoseKey {
+	public fun <init> (Lcom/davils/krypt/primitive/key/PublicKey;Ljava/lang/String;)V
+	public synthetic fun <init> (Lcom/davils/krypt/primitive/key/PublicKey;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getKey ()Lcom/davils/krypt/primitive/key/PublicKey;
+	public fun getKeyId ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/jose/JoseKey$Secret : com/davils/krypt/jose/JoseKey {
+	public fun <init> (Lcom/davils/krypt/primitive/key/SecretKey;Ljava/lang/String;)V
+	public synthetic fun <init> (Lcom/davils/krypt/primitive/key/SecretKey;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getKey ()Lcom/davils/krypt/primitive/key/SecretKey;
+	public fun getKeyId ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/jose/JoseLimits {
+	public static final field Companion Lcom/davils/krypt/jose/JoseLimits$Companion;
+	public static final field DEFAULT_MAXIMUM_BYTES I
+	public static final field DEFAULT_MAXIMUM_CERTIFICATES I
+	public static final field DEFAULT_MAXIMUM_DEPTH I
+	public static final field DEFAULT_MAXIMUM_ITERATIONS I
+	public static final field DEFAULT_MAXIMUM_KEYS I
+	public static final field DEFAULT_MAXIMUM_MEMBERS I
+	public static final field DEFAULT_MAXIMUM_RECIPIENTS I
+	public static final field DEFAULT_MAXIMUM_STRING_LENGTH I
+	public static final field HARD_MAXIMUM_BYTES I
+	public static final field HARD_MAXIMUM_CERTIFICATES I
+	public static final field HARD_MAXIMUM_DEPTH I
+	public static final field HARD_MAXIMUM_ITERATIONS I
+	public static final field HARD_MAXIMUM_KEYS I
+	public static final field HARD_MAXIMUM_MEMBERS I
+	public static final field HARD_MAXIMUM_RECIPIENTS I
+	public static final field HARD_MAXIMUM_STRING_LENGTH I
+	public fun <init> ()V
+	public fun <init> (IIIIIIII)V
+	public synthetic fun <init> (IIIIIIIIILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMaximumBytes ()I
+	public final fun getMaximumCertificates ()I
+	public final fun getMaximumDepth ()I
+	public final fun getMaximumIterations ()I
+	public final fun getMaximumKeys ()I
+	public final fun getMaximumMembers ()I
+	public final fun getMaximumRecipients ()I
+	public final fun getMaximumStringLength ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/jose/JoseLimits$Companion {
+	public final fun getDefault ()Lcom/davils/krypt/jose/JoseLimits;
+}
+
+public abstract interface class com/davils/krypt/jose/JsonValue {
+}
+
+public final class com/davils/krypt/jose/JsonValue$Array : com/davils/krypt/jose/JsonValue {
+	public fun <init> (Ljava/util/List;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getItems ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/jose/JsonValue$Bool : com/davils/krypt/jose/JsonValue {
+	public fun <init> (Z)V
+	public fun equals (Ljava/lang/Object;)Z
+	public fun hashCode ()I
+	public final fun isTrue ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/jose/JsonValue$Integer : com/davils/krypt/jose/JsonValue {
+	public static final field Companion Lcom/davils/krypt/jose/JsonValue$Integer$Companion;
+	public static final field MAXIMUM J
+	public fun <init> (J)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/jose/JsonValue$Integer$Companion {
+}
+
+public final class com/davils/krypt/jose/JsonValue$Null : com/davils/krypt/jose/JsonValue {
+	public static final field INSTANCE Lcom/davils/krypt/jose/JsonValue$Null;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/jose/JsonValue$Object : com/davils/krypt/jose/JsonValue {
+	public static final field Companion Lcom/davils/krypt/jose/JsonValue$Object$Companion;
+	public fun <init> (Ljava/util/List;)V
+	public final fun contains (Ljava/lang/String;)Z
+	public final fun encode ()Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun get (Ljava/lang/String;)Lcom/davils/krypt/jose/JsonValue;
+	public final fun getMembers ()Ljava/util/List;
+	public final fun getNames ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/jose/JsonValue$Object$Companion {
+	public final fun getEmpty ()Lcom/davils/krypt/jose/JsonValue$Object;
+	public final fun of ([Lkotlin/Pair;)Lcom/davils/krypt/jose/JsonValue$Object;
+}
+
+public final class com/davils/krypt/jose/JsonValue$Text : com/davils/krypt/jose/JsonValue {
+	public fun <init> (Ljava/lang/String;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/jose/jwe/DecryptedJwe {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAlgorithm ()Lcom/davils/krypt/jose/jwe/JweAlgorithm;
+	public final fun getEncryption ()Lcom/davils/krypt/jose/jwe/JweEncryption;
+	public final fun getHeader ()Lcom/davils/krypt/jose/JoseHeader;
+	public final fun getKey ()Lcom/davils/krypt/jose/JoseKey;
+	public final fun getPlaintext ()Lkotlinx/io/bytestring/ByteString;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/jose/jwe/EncryptedKey {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEncryptedKey ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getHeader ()Lcom/davils/krypt/jose/JsonValue$Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/jose/jwe/Jwe {
+	public fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/jose/JoseLimits;Z)V
+	public synthetic fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/jose/JoseLimits;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun decode (Ljava/lang/String;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun decrypt (Lcom/davils/krypt/jose/jwe/JweMessage;Ljava/util/List;Ljava/util/Set;Ljava/util/Set;Ljava/util/Set;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun decrypt (Ljava/lang/String;Ljava/util/List;Ljava/util/Set;Ljava/util/Set;Ljava/util/Set;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun decrypt$default (Lcom/davils/krypt/jose/jwe/Jwe;Lcom/davils/krypt/jose/jwe/JweMessage;Ljava/util/List;Ljava/util/Set;Ljava/util/Set;Ljava/util/Set;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun decrypt$default (Lcom/davils/krypt/jose/jwe/Jwe;Ljava/lang/String;Ljava/util/List;Ljava/util/Set;Ljava/util/Set;Ljava/util/Set;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun encrypt (Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/jose/jwe/JweRecipient;Lcom/davils/krypt/jose/jwe/JweEncryption;Lcom/davils/krypt/jose/JsonValue$Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun encrypt$default (Lcom/davils/krypt/jose/jwe/Jwe;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/jose/jwe/JweRecipient;Lcom/davils/krypt/jose/jwe/JweEncryption;Lcom/davils/krypt/jose/JsonValue$Object;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun encryptJson (Lkotlinx/io/bytestring/ByteString;Ljava/util/List;Lcom/davils/krypt/jose/jwe/JweEncryption;Lcom/davils/krypt/jose/JsonValue$Object;Lcom/davils/krypt/jose/JsonValue$Object;Lkotlinx/io/bytestring/ByteString;ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun encryptJson$default (Lcom/davils/krypt/jose/jwe/Jwe;Lkotlinx/io/bytestring/ByteString;Ljava/util/List;Lcom/davils/krypt/jose/jwe/JweEncryption;Lcom/davils/krypt/jose/JsonValue$Object;Lcom/davils/krypt/jose/JsonValue$Object;Lkotlinx/io/bytestring/ByteString;ZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun getCrypto ()Lcom/davils/krypt/primitive/Crypto;
+	public final fun getLimits ()Lcom/davils/krypt/jose/JoseLimits;
+	public final fun isPasswordAllowed ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/jose/jwe/JweAlgorithm : java/lang/Enum {
+	public static final field A128GCMKW Lcom/davils/krypt/jose/jwe/JweAlgorithm;
+	public static final field A128KW Lcom/davils/krypt/jose/jwe/JweAlgorithm;
+	public static final field A256GCMKW Lcom/davils/krypt/jose/jwe/JweAlgorithm;
+	public static final field A256KW Lcom/davils/krypt/jose/jwe/JweAlgorithm;
+	public static final field Companion Lcom/davils/krypt/jose/jwe/JweAlgorithm$Companion;
+	public static final field Dir Lcom/davils/krypt/jose/jwe/JweAlgorithm;
+	public static final field EcdhEs Lcom/davils/krypt/jose/jwe/JweAlgorithm;
+	public static final field EcdhEsA128KW Lcom/davils/krypt/jose/jwe/JweAlgorithm;
+	public static final field EcdhEsA256KW Lcom/davils/krypt/jose/jwe/JweAlgorithm;
+	public static final field Pbes2Hs256A128KW Lcom/davils/krypt/jose/jwe/JweAlgorithm;
+	public static final field Pbes2Hs512A256KW Lcom/davils/krypt/jose/jwe/JweAlgorithm;
+	public static final field RsaOaep256 Lcom/davils/krypt/jose/jwe/JweAlgorithm;
+	public final fun getAlgorithmName ()Ljava/lang/String;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun isDirect ()Z
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/jose/jwe/JweAlgorithm;
+	public static fun values ()[Lcom/davils/krypt/jose/jwe/JweAlgorithm;
+}
+
+public final class com/davils/krypt/jose/jwe/JweAlgorithm$Companion {
+	public final fun of (Ljava/lang/String;)Lcom/davils/krypt/jose/jwe/JweAlgorithm;
+}
+
+public final class com/davils/krypt/jose/jwe/JweEncryption : java/lang/Enum {
+	public static final field A128CBC_HS256 Lcom/davils/krypt/jose/jwe/JweEncryption;
+	public static final field A128GCM Lcom/davils/krypt/jose/jwe/JweEncryption;
+	public static final field A256CBC_HS512 Lcom/davils/krypt/jose/jwe/JweEncryption;
+	public static final field A256GCM Lcom/davils/krypt/jose/jwe/JweEncryption;
+	public static final field Companion Lcom/davils/krypt/jose/jwe/JweEncryption$Companion;
+	public final fun getAlgorithmName ()Ljava/lang/String;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getIvBytes ()I
+	public final fun getKeyBytes ()I
+	public final fun getTagBytes ()I
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/jose/jwe/JweEncryption;
+	public static fun values ()[Lcom/davils/krypt/jose/jwe/JweEncryption;
+}
+
+public final class com/davils/krypt/jose/jwe/JweEncryption$Companion {
+	public final fun of (Ljava/lang/String;)Lcom/davils/krypt/jose/jwe/JweEncryption;
+}
+
+public final class com/davils/krypt/jose/jwe/JweMessage {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAdditionalData ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getCiphertext ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getIv ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getProtectedHeader ()Lcom/davils/krypt/jose/JsonValue$Object;
+	public final fun getRecipients ()Ljava/util/List;
+	public final fun getSharedHeader ()Lcom/davils/krypt/jose/JsonValue$Object;
+	public final fun getTag ()Lkotlinx/io/bytestring/ByteString;
+	public fun hashCode ()I
+	public final fun isCompact ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/jose/jwe/JweRecipient {
+	public fun <init> (Lcom/davils/krypt/jose/JoseKey;Lcom/davils/krypt/jose/jwe/JweAlgorithm;Lcom/davils/krypt/jose/JsonValue$Object;Ljava/lang/Integer;)V
+	public synthetic fun <init> (Lcom/davils/krypt/jose/JoseKey;Lcom/davils/krypt/jose/jwe/JweAlgorithm;Lcom/davils/krypt/jose/JsonValue$Object;Ljava/lang/Integer;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAlgorithm ()Lcom/davils/krypt/jose/jwe/JweAlgorithm;
+	public final fun getHeader ()Lcom/davils/krypt/jose/JsonValue$Object;
+	public final fun getIterations ()Ljava/lang/Integer;
+	public final fun getKey ()Lcom/davils/krypt/jose/JoseKey;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/jose/jwk/JsonWebKeys {
+	public fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/jose/JoseLimits;)V
+	public synthetic fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/jose/JoseLimits;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun decode (Ljava/lang/String;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun decodeSet (Ljava/lang/String;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun getCrypto ()Lcom/davils/krypt/primitive/Crypto;
+	public final fun getLimits ()Lcom/davils/krypt/jose/JoseLimits;
+	public final fun key (Lcom/davils/krypt/jose/jwk/Jwk;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun of (Lcom/davils/krypt/primitive/key/PrivateKey;Ljava/lang/String;Lcom/davils/krypt/jose/jwk/KeyUse;Ljava/lang/String;)Lcom/davils/krypt/jose/jwk/Jwk;
+	public final fun of (Lcom/davils/krypt/primitive/key/PublicKey;Ljava/lang/String;Lcom/davils/krypt/jose/jwk/KeyUse;Ljava/lang/String;)Lcom/davils/krypt/jose/jwk/Jwk;
+	public final fun of (Lcom/davils/krypt/primitive/key/SecretKey;Ljava/lang/String;Ljava/lang/String;)Lcom/davils/krypt/jose/jwk/Jwk;
+	public static synthetic fun of$default (Lcom/davils/krypt/jose/jwk/JsonWebKeys;Lcom/davils/krypt/primitive/key/PrivateKey;Ljava/lang/String;Lcom/davils/krypt/jose/jwk/KeyUse;Ljava/lang/String;ILjava/lang/Object;)Lcom/davils/krypt/jose/jwk/Jwk;
+	public static synthetic fun of$default (Lcom/davils/krypt/jose/jwk/JsonWebKeys;Lcom/davils/krypt/primitive/key/PublicKey;Ljava/lang/String;Lcom/davils/krypt/jose/jwk/KeyUse;Ljava/lang/String;ILjava/lang/Object;)Lcom/davils/krypt/jose/jwk/Jwk;
+	public static synthetic fun of$default (Lcom/davils/krypt/jose/jwk/JsonWebKeys;Lcom/davils/krypt/primitive/key/SecretKey;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lcom/davils/krypt/jose/jwk/Jwk;
+	public final fun privateKey (Lcom/davils/krypt/jose/jwk/Jwk;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun publicKey (Lcom/davils/krypt/jose/jwk/Jwk;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun secretKey (Lcom/davils/krypt/jose/jwk/Jwk;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun thumbprint (Lcom/davils/krypt/jose/jwk/Jwk;Lcom/davils/krypt/core/algorithm/DigestAlgorithm;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun thumbprint$default (Lcom/davils/krypt/jose/jwk/JsonWebKeys;Lcom/davils/krypt/jose/jwk/Jwk;Lcom/davils/krypt/core/algorithm/DigestAlgorithm;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun thumbprintUri (Lcom/davils/krypt/jose/jwk/Jwk;Lcom/davils/krypt/core/algorithm/DigestAlgorithm;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun thumbprintUri$default (Lcom/davils/krypt/jose/jwk/JsonWebKeys;Lcom/davils/krypt/jose/jwk/Jwk;Lcom/davils/krypt/core/algorithm/DigestAlgorithm;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/jose/jwk/Jwk {
+	public final fun destroy ()V
+	public final fun encode ()Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAlgorithm ()Ljava/lang/String;
+	public final fun getCertificates ()Ljava/util/List;
+	public final fun getCurve ()Lcom/davils/krypt/jose/jwk/JwkCurve;
+	public final fun getExtra ()Lcom/davils/krypt/jose/JsonValue$Object;
+	public final fun getKeyId ()Ljava/lang/String;
+	public final fun getOperations ()Ljava/util/List;
+	public final fun getType ()Lcom/davils/krypt/jose/jwk/JwkType;
+	public final fun getUse ()Lcom/davils/krypt/jose/jwk/KeyUse;
+	public fun hashCode ()I
+	public final fun isDestroyed ()Z
+	public final fun isPrivate ()Z
+	public final fun parameter (Ljava/lang/String;)Lkotlinx/io/bytestring/ByteString;
+	public final fun toPublic ()Lcom/davils/krypt/jose/jwk/Jwk;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/jose/jwk/JwkCurve : java/lang/Enum {
+	public static final field Companion Lcom/davils/krypt/jose/jwk/JwkCurve$Companion;
+	public static final field Ed25519 Lcom/davils/krypt/jose/jwk/JwkCurve;
+	public static final field Ed448 Lcom/davils/krypt/jose/jwk/JwkCurve;
+	public static final field P256 Lcom/davils/krypt/jose/jwk/JwkCurve;
+	public static final field P384 Lcom/davils/krypt/jose/jwk/JwkCurve;
+	public static final field P521 Lcom/davils/krypt/jose/jwk/JwkCurve;
+	public static final field X25519 Lcom/davils/krypt/jose/jwk/JwkCurve;
+	public static final field X448 Lcom/davils/krypt/jose/jwk/JwkCurve;
+	public final fun getCurveName ()Ljava/lang/String;
+	public final fun getEllipticCurve ()Lcom/davils/krypt/core/algorithm/EllipticCurve;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getFamily ()Lcom/davils/krypt/core/algorithm/KeyFamily;
+	public final fun getPrivateBytes ()I
+	public final fun getPublicBytes ()I
+	public final fun getType ()Lcom/davils/krypt/jose/jwk/JwkType;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/jose/jwk/JwkCurve;
+	public static fun values ()[Lcom/davils/krypt/jose/jwk/JwkCurve;
+}
+
+public final class com/davils/krypt/jose/jwk/JwkCurve$Companion {
+	public final fun of (Lcom/davils/krypt/core/algorithm/KeyFamily;Lcom/davils/krypt/core/algorithm/EllipticCurve;)Lcom/davils/krypt/jose/jwk/JwkCurve;
+	public final fun of (Ljava/lang/String;)Lcom/davils/krypt/jose/jwk/JwkCurve;
+}
+
+public final class com/davils/krypt/jose/jwk/JwkSet {
+	public fun <init> (Ljava/util/List;)V
+	public final fun encode ()Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun find (Ljava/lang/String;)Ljava/util/List;
+	public final fun getKeys ()Ljava/util/List;
+	public fun hashCode ()I
+	public final fun toPublic ()Lcom/davils/krypt/jose/jwk/JwkSet;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/jose/jwk/JwkType : java/lang/Enum {
+	public static final field Companion Lcom/davils/krypt/jose/jwk/JwkType$Companion;
+	public static final field Ec Lcom/davils/krypt/jose/jwk/JwkType;
+	public static final field Oct Lcom/davils/krypt/jose/jwk/JwkType;
+	public static final field Okp Lcom/davils/krypt/jose/jwk/JwkType;
+	public static final field Rsa Lcom/davils/krypt/jose/jwk/JwkType;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getTypeName ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/jose/jwk/JwkType;
+	public static fun values ()[Lcom/davils/krypt/jose/jwk/JwkType;
+}
+
+public final class com/davils/krypt/jose/jwk/JwkType$Companion {
+	public final fun of (Ljava/lang/String;)Lcom/davils/krypt/jose/jwk/JwkType;
+}
+
+public final class com/davils/krypt/jose/jwk/KeyOperation : java/lang/Enum {
+	public static final field Companion Lcom/davils/krypt/jose/jwk/KeyOperation$Companion;
+	public static final field Decrypt Lcom/davils/krypt/jose/jwk/KeyOperation;
+	public static final field DeriveBits Lcom/davils/krypt/jose/jwk/KeyOperation;
+	public static final field DeriveKey Lcom/davils/krypt/jose/jwk/KeyOperation;
+	public static final field Encrypt Lcom/davils/krypt/jose/jwk/KeyOperation;
+	public static final field Sign Lcom/davils/krypt/jose/jwk/KeyOperation;
+	public static final field UnwrapKey Lcom/davils/krypt/jose/jwk/KeyOperation;
+	public static final field Verify Lcom/davils/krypt/jose/jwk/KeyOperation;
+	public static final field WrapKey Lcom/davils/krypt/jose/jwk/KeyOperation;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getOperationName ()Ljava/lang/String;
+	public final fun getUse ()Lcom/davils/krypt/jose/jwk/KeyUse;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/jose/jwk/KeyOperation;
+	public static fun values ()[Lcom/davils/krypt/jose/jwk/KeyOperation;
+}
+
+public final class com/davils/krypt/jose/jwk/KeyOperation$Companion {
+	public final fun of (Ljava/lang/String;)Lcom/davils/krypt/jose/jwk/KeyOperation;
+}
+
+public final class com/davils/krypt/jose/jwk/KeyUse : java/lang/Enum {
+	public static final field Companion Lcom/davils/krypt/jose/jwk/KeyUse$Companion;
+	public static final field Encryption Lcom/davils/krypt/jose/jwk/KeyUse;
+	public static final field Signature Lcom/davils/krypt/jose/jwk/KeyUse;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getUseName ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/jose/jwk/KeyUse;
+	public static fun values ()[Lcom/davils/krypt/jose/jwk/KeyUse;
+}
+
+public final class com/davils/krypt/jose/jwk/KeyUse$Companion {
+	public final fun of (Ljava/lang/String;)Lcom/davils/krypt/jose/jwk/KeyUse;
+}
+
+public final class com/davils/krypt/jose/jws/Jws {
+	public fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/jose/JoseLimits;)V
+	public synthetic fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/jose/JoseLimits;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun decode (Ljava/lang/String;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun getCrypto ()Lcom/davils/krypt/primitive/Crypto;
+	public final fun getLimits ()Lcom/davils/krypt/jose/JoseLimits;
+	public final fun sign (Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/jose/jws/JwsSigner;ZZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun sign$default (Lcom/davils/krypt/jose/jws/Jws;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/jose/jws/JwsSigner;ZZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun signJson (Lkotlinx/io/bytestring/ByteString;Ljava/util/List;ZZZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun signJson$default (Lcom/davils/krypt/jose/jws/Jws;Lkotlinx/io/bytestring/ByteString;Ljava/util/List;ZZZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public fun toString ()Ljava/lang/String;
+	public final fun verify (Lcom/davils/krypt/jose/jws/JwsMessage;Ljava/util/List;Ljava/util/Set;Lkotlinx/io/bytestring/ByteString;Ljava/util/Set;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun verify (Ljava/lang/String;Ljava/util/List;Ljava/util/Set;Lkotlinx/io/bytestring/ByteString;Ljava/util/Set;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun verify$default (Lcom/davils/krypt/jose/jws/Jws;Lcom/davils/krypt/jose/jws/JwsMessage;Ljava/util/List;Ljava/util/Set;Lkotlinx/io/bytestring/ByteString;Ljava/util/Set;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun verify$default (Lcom/davils/krypt/jose/jws/Jws;Ljava/lang/String;Ljava/util/List;Ljava/util/Set;Lkotlinx/io/bytestring/ByteString;Ljava/util/Set;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun verifyWithChain (Lcom/davils/krypt/jose/jws/JwsMessage;Lcom/davils/krypt/x509/path/PathValidator;Ljava/util/Set;Lcom/davils/krypt/x509/path/ValidationParameters;Lkotlinx/io/bytestring/ByteString;Ljava/util/Set;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun verifyWithChain$default (Lcom/davils/krypt/jose/jws/Jws;Lcom/davils/krypt/jose/jws/JwsMessage;Lcom/davils/krypt/x509/path/PathValidator;Ljava/util/Set;Lcom/davils/krypt/x509/path/ValidationParameters;Lkotlinx/io/bytestring/ByteString;Ljava/util/Set;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/jose/jws/JwsAlgorithm : java/lang/Enum {
+	public static final field Companion Lcom/davils/krypt/jose/jws/JwsAlgorithm$Companion;
+	public static final field ES256 Lcom/davils/krypt/jose/jws/JwsAlgorithm;
+	public static final field ES384 Lcom/davils/krypt/jose/jws/JwsAlgorithm;
+	public static final field ES512 Lcom/davils/krypt/jose/jws/JwsAlgorithm;
+	public static final field Ed25519 Lcom/davils/krypt/jose/jws/JwsAlgorithm;
+	public static final field Ed448 Lcom/davils/krypt/jose/jws/JwsAlgorithm;
+	public static final field EdDSA Lcom/davils/krypt/jose/jws/JwsAlgorithm;
+	public static final field HS256 Lcom/davils/krypt/jose/jws/JwsAlgorithm;
+	public static final field HS384 Lcom/davils/krypt/jose/jws/JwsAlgorithm;
+	public static final field HS512 Lcom/davils/krypt/jose/jws/JwsAlgorithm;
+	public static final field PS256 Lcom/davils/krypt/jose/jws/JwsAlgorithm;
+	public static final field PS384 Lcom/davils/krypt/jose/jws/JwsAlgorithm;
+	public static final field PS512 Lcom/davils/krypt/jose/jws/JwsAlgorithm;
+	public static final field RS256 Lcom/davils/krypt/jose/jws/JwsAlgorithm;
+	public static final field RS384 Lcom/davils/krypt/jose/jws/JwsAlgorithm;
+	public static final field RS512 Lcom/davils/krypt/jose/jws/JwsAlgorithm;
+	public final fun getAlgorithmName ()Ljava/lang/String;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/jose/jws/JwsAlgorithm;
+	public static fun values ()[Lcom/davils/krypt/jose/jws/JwsAlgorithm;
+}
+
+public final class com/davils/krypt/jose/jws/JwsAlgorithm$Companion {
+	public final fun of (Ljava/lang/String;)Lcom/davils/krypt/jose/jws/JwsAlgorithm;
+}
+
+public final class com/davils/krypt/jose/jws/JwsMessage {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getPayload ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getSignatures ()Ljava/util/List;
+	public fun hashCode ()I
+	public final fun isCompact ()Z
+	public final fun isPayloadEncoded ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/jose/jws/JwsSignature {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getHeader ()Lcom/davils/krypt/jose/JoseHeader;
+	public final fun getProtectedHeader ()Lcom/davils/krypt/jose/JsonValue$Object;
+	public final fun getSignature ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getUnprotectedHeader ()Lcom/davils/krypt/jose/JsonValue$Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/jose/jws/JwsSigner {
+	public fun <init> (Lcom/davils/krypt/jose/JoseKey;Lcom/davils/krypt/jose/jws/JwsAlgorithm;Lcom/davils/krypt/jose/JsonValue$Object;Lcom/davils/krypt/jose/JsonValue$Object;)V
+	public synthetic fun <init> (Lcom/davils/krypt/jose/JoseKey;Lcom/davils/krypt/jose/jws/JwsAlgorithm;Lcom/davils/krypt/jose/JsonValue$Object;Lcom/davils/krypt/jose/JsonValue$Object;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAlgorithm ()Lcom/davils/krypt/jose/jws/JwsAlgorithm;
+	public final fun getHeader ()Lcom/davils/krypt/jose/JsonValue$Object;
+	public final fun getKey ()Lcom/davils/krypt/jose/JoseKey;
+	public final fun getUnprotectedHeader ()Lcom/davils/krypt/jose/JsonValue$Object;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/jose/jws/VerifiedJws {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAlgorithm ()Lcom/davils/krypt/jose/jws/JwsAlgorithm;
+	public final fun getHeader ()Lcom/davils/krypt/jose/JoseHeader;
+	public final fun getKey ()Lcom/davils/krypt/jose/JoseKey;
+	public final fun getPayload ()Lkotlinx/io/bytestring/ByteString;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/jose/jwt/BuildersKt {
+	public static final fun jwtClaims (Lkotlin/jvm/functions/Function1;)Lcom/davils/krypt/jose/jwt/JwtClaims;
+	public static final fun jwtValidator (Lkotlin/jvm/functions/Function1;)Lcom/davils/krypt/jose/jwt/JwtValidator;
+}
+
+public final class com/davils/krypt/jose/jwt/Jwt {
+	public fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/jose/JoseLimits;)V
+	public synthetic fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/jose/JoseLimits;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun encrypt (Lcom/davils/krypt/jose/jwt/JwtClaims;Lcom/davils/krypt/jose/jwe/JweRecipient;Lcom/davils/krypt/jose/jwe/JweEncryption;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun encrypt$default (Lcom/davils/krypt/jose/jwt/Jwt;Lcom/davils/krypt/jose/jwt/JwtClaims;Lcom/davils/krypt/jose/jwe/JweRecipient;Lcom/davils/krypt/jose/jwe/JweEncryption;Ljava/lang/String;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun getCrypto ()Lcom/davils/krypt/primitive/Crypto;
+	public final fun getLimits ()Lcom/davils/krypt/jose/JoseLimits;
+	public final fun sign (Lcom/davils/krypt/jose/jwt/JwtClaims;Lcom/davils/krypt/jose/JoseKey;Lcom/davils/krypt/jose/jws/JwsAlgorithm;Ljava/lang/String;Lcom/davils/krypt/jose/JsonValue$Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun sign$default (Lcom/davils/krypt/jose/jwt/Jwt;Lcom/davils/krypt/jose/jwt/JwtClaims;Lcom/davils/krypt/jose/JoseKey;Lcom/davils/krypt/jose/jws/JwsAlgorithm;Ljava/lang/String;Lcom/davils/krypt/jose/JsonValue$Object;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun signAndEncrypt (Lcom/davils/krypt/jose/jwt/JwtClaims;Lcom/davils/krypt/jose/JoseKey;Lcom/davils/krypt/jose/jws/JwsAlgorithm;Lcom/davils/krypt/jose/jwe/JweRecipient;Lcom/davils/krypt/jose/jwe/JweEncryption;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun signAndEncrypt$default (Lcom/davils/krypt/jose/jwt/Jwt;Lcom/davils/krypt/jose/jwt/JwtClaims;Lcom/davils/krypt/jose/JoseKey;Lcom/davils/krypt/jose/jws/JwsAlgorithm;Lcom/davils/krypt/jose/jwe/JweRecipient;Lcom/davils/krypt/jose/jwe/JweEncryption;Ljava/lang/String;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public fun toString ()Ljava/lang/String;
+	public final fun validate (Ljava/lang/String;Lcom/davils/krypt/jose/jwt/JwtValidator;Ljava/util/List;Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun validate$default (Lcom/davils/krypt/jose/jwt/Jwt;Ljava/lang/String;Lcom/davils/krypt/jose/jwt/JwtValidator;Ljava/util/List;Ljava/util/List;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/jose/jwt/JwtClaims : com/davils/kore/core/validation/Validatable {
+	public final fun encode ()Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun get (Ljava/lang/String;)Lcom/davils/krypt/jose/JsonValue;
+	public final fun getAudience ()Ljava/util/List;
+	public final fun getExpiresAt ()Lkotlin/time/Instant;
+	public final fun getIssuedAt ()Lkotlin/time/Instant;
+	public final fun getIssuer ()Ljava/lang/String;
+	public final fun getJwtId ()Ljava/lang/String;
+	public final fun getMembers ()Lcom/davils/krypt/jose/JsonValue$Object;
+	public final fun getNotBefore ()Lkotlin/time/Instant;
+	public final fun getSubject ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public final class com/davils/krypt/jose/jwt/JwtClaimsBuilder : com/davils/kore/core/dsl/ValidatingBuilder {
+	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+	public final fun claim (Ljava/lang/String;Lcom/davils/krypt/jose/JsonValue;)V
+	public final fun getAudience ()Ljava/util/List;
+	public final fun getExpiresAt ()Lkotlin/time/Instant;
+	public final fun getIssuedAt ()Lkotlin/time/Instant;
+	public final fun getIssuer ()Ljava/lang/String;
+	public final fun getJwtId ()Ljava/lang/String;
+	public final fun getNotBefore ()Lkotlin/time/Instant;
+	public final fun getTokenSubject ()Ljava/lang/String;
+	public final fun setAudience (Ljava/util/List;)V
+	public final fun setExpiresAt (Lkotlin/time/Instant;)V
+	public final fun setIssuedAt (Lkotlin/time/Instant;)V
+	public final fun setIssuer (Ljava/lang/String;)V
+	public final fun setJwtId (Ljava/lang/String;)V
+	public final fun setNotBefore (Lkotlin/time/Instant;)V
+	public final fun setTokenSubject (Ljava/lang/String;)V
+}
+
+public final class com/davils/krypt/jose/jwt/JwtValidator : com/davils/kore/core/validation/Validatable {
+	public static final field Companion Lcom/davils/krypt/jose/jwt/JwtValidator$Companion;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAlgorithms ()Ljava/util/Set;
+	public final fun getAudiences ()Ljava/util/Set;
+	public final fun getClockSkew-UwyO8pc ()J
+	public final fun getCritical ()Ljava/util/Set;
+	public final fun getEncryptions ()Ljava/util/Set;
+	public final fun getIssuer ()Ljava/lang/String;
+	public final fun getKeyAlgorithms ()Ljava/util/Set;
+	public final fun getMaximumAge-FghU774 ()Lkotlin/time/Duration;
+	public final fun getRequiredClaims ()Ljava/util/Set;
+	public final fun getType ()Ljava/lang/String;
+	public fun hashCode ()I
+	public final fun isExpirationRequired ()Z
+	public final fun isSignatureRequired ()Z
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public final class com/davils/krypt/jose/jwt/JwtValidator$Companion {
+	public final fun getMAXIMUM_SKEW-UwyO8pc ()J
+}
+
+public final class com/davils/krypt/jose/jwt/JwtValidatorBuilder : com/davils/kore/core/dsl/ValidatingBuilder {
+	public final fun algorithms ([Lcom/davils/krypt/jose/jws/JwsAlgorithm;)V
+	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+	public final fun audience ([Ljava/lang/String;)V
+	public final fun critical ([Ljava/lang/String;)V
+	public final fun encryption (Ljava/util/Set;Ljava/util/Set;)V
+	public final fun getClockSkew-UwyO8pc ()J
+	public final fun getIssuer ()Ljava/lang/String;
+	public final fun getMaximumAge-FghU774 ()Lkotlin/time/Duration;
+	public final fun getType ()Ljava/lang/String;
+	public final fun isExpirationRequired ()Z
+	public final fun isSignatureRequired ()Z
+	public final fun require ([Ljava/lang/String;)V
+	public final fun setClockSkew-LRDsOJo (J)V
+	public final fun setExpirationRequired (Z)V
+	public final fun setIssuer (Ljava/lang/String;)V
+	public final fun setMaximumAge-BwNAW2A (Lkotlin/time/Duration;)V
+	public final fun setSignatureRequired (Z)V
+	public final fun setType (Ljava/lang/String;)V
+}
+
+public final class com/davils/krypt/jose/jwt/ValidatedJwt {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAlgorithm ()Lcom/davils/krypt/jose/jws/JwsAlgorithm;
+	public final fun getClaims ()Lcom/davils/krypt/jose/jwt/JwtClaims;
+	public final fun getHeader ()Lcom/davils/krypt/jose/JoseHeader;
+	public final fun getKey ()Lcom/davils/krypt/jose/JoseKey;
+	public fun hashCode ()I
+	public final fun isEncrypted ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
