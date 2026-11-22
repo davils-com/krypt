@@ -1,0 +1,33 @@
+public final class com/davils/krypt/testing/AuditLog : com/davils/krypt/core/audit/AuditSink {
+	public fun <init> ()V
+	public fun <init> (Z)V
+	public synthetic fun <init> (ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getEntries ()Ljava/util/List;
+	public final fun isFailing ()Z
+	public final fun of (Lcom/davils/krypt/core/audit/AuditAction;)Ljava/util/List;
+	public fun record (Lcom/davils/krypt/core/audit/AuditEntry;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/testing/ReplayedRandom : com/davils/krypt/core/RandomSource {
+	public fun <init> (Lkotlinx/io/bytestring/ByteString;)V
+	public fun fill ([B)V
+	public final fun getBytes ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getRemaining ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/testing/SeededRandom : com/davils/krypt/core/RandomSource {
+	public fun <init> (J)V
+	public fun fill ([B)V
+	public final fun getSeed ()J
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/testing/TestEnvironmentsKt {
+	public static final fun testCrypto (Lkotlin/time/Clock;JLkotlin/jvm/functions/Function1;)Lcom/davils/krypt/primitive/Crypto;
+	public static synthetic fun testCrypto$default (Lkotlin/time/Clock;JLkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/krypt/primitive/Crypto;
+	public static final fun testEnvironment (Lkotlin/time/Clock;JLkotlin/jvm/functions/Function1;)Lcom/davils/krypt/core/Environment;
+	public static synthetic fun testEnvironment$default (Lkotlin/time/Clock;JLkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/krypt/core/Environment;
+}
+

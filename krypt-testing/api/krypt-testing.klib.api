@@ -1,0 +1,45 @@
+// Klib ABI Dump
+// Targets: [wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.davils:krypt-testing>
+final class com.davils.krypt.testing/AuditLog : com.davils.krypt.core.audit/AuditSink { // com.davils.krypt.testing/AuditLog|null[0]
+    constructor <init>(kotlin/Boolean = ...) // com.davils.krypt.testing/AuditLog.<init>|<init>(kotlin.Boolean){}[0]
+
+    final val entries // com.davils.krypt.testing/AuditLog.entries|{}entries[0]
+        final fun <get-entries>(): kotlin.collections/List<com.davils.krypt.core.audit/AuditEntry> // com.davils.krypt.testing/AuditLog.entries.<get-entries>|<get-entries>(){}[0]
+    final val isFailing // com.davils.krypt.testing/AuditLog.isFailing|{}isFailing[0]
+        final fun <get-isFailing>(): kotlin/Boolean // com.davils.krypt.testing/AuditLog.isFailing.<get-isFailing>|<get-isFailing>(){}[0]
+
+    final fun of(com.davils.krypt.core.audit/AuditAction): kotlin.collections/List<com.davils.krypt.core.audit/AuditEntry> // com.davils.krypt.testing/AuditLog.of|of(com.davils.krypt.core.audit.AuditAction){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.testing/AuditLog.toString|toString(){}[0]
+    final suspend fun record(com.davils.krypt.core.audit/AuditEntry) // com.davils.krypt.testing/AuditLog.record|record(com.davils.krypt.core.audit.AuditEntry){}[0]
+}
+
+final class com.davils.krypt.testing/ReplayedRandom : com.davils.krypt.core/RandomSource { // com.davils.krypt.testing/ReplayedRandom|null[0]
+    constructor <init>(kotlinx.io.bytestring/ByteString) // com.davils.krypt.testing/ReplayedRandom.<init>|<init>(kotlinx.io.bytestring.ByteString){}[0]
+
+    final val bytes // com.davils.krypt.testing/ReplayedRandom.bytes|{}bytes[0]
+        final fun <get-bytes>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.testing/ReplayedRandom.bytes.<get-bytes>|<get-bytes>(){}[0]
+    final val remaining // com.davils.krypt.testing/ReplayedRandom.remaining|{}remaining[0]
+        final fun <get-remaining>(): kotlin/Int // com.davils.krypt.testing/ReplayedRandom.remaining.<get-remaining>|<get-remaining>(){}[0]
+
+    final fun fill(kotlin/ByteArray) // com.davils.krypt.testing/ReplayedRandom.fill|fill(kotlin.ByteArray){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.testing/ReplayedRandom.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.testing/SeededRandom : com.davils.krypt.core/RandomSource { // com.davils.krypt.testing/SeededRandom|null[0]
+    constructor <init>(kotlin/Long) // com.davils.krypt.testing/SeededRandom.<init>|<init>(kotlin.Long){}[0]
+
+    final val seed // com.davils.krypt.testing/SeededRandom.seed|{}seed[0]
+        final fun <get-seed>(): kotlin/Long // com.davils.krypt.testing/SeededRandom.seed.<get-seed>|<get-seed>(){}[0]
+
+    final fun fill(kotlin/ByteArray) // com.davils.krypt.testing/SeededRandom.fill|fill(kotlin.ByteArray){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.testing/SeededRandom.toString|toString(){}[0]
+}
+
+final fun com.davils.krypt.testing/testCrypto(kotlin.time/Clock = ..., kotlin/Long = ..., kotlin/Function1<com.davils.krypt.core/EnvironmentBuilder, kotlin/Unit> = ...): com.davils.krypt.primitive/Crypto // com.davils.krypt.testing/testCrypto|testCrypto(kotlin.time.Clock;kotlin.Long;kotlin.Function1<com.davils.krypt.core.EnvironmentBuilder,kotlin.Unit>){}[0]
+final fun com.davils.krypt.testing/testEnvironment(kotlin.time/Clock = ..., kotlin/Long = ..., kotlin/Function1<com.davils.krypt.core/EnvironmentBuilder, kotlin/Unit> = ...): com.davils.krypt.core/Environment // com.davils.krypt.testing/testEnvironment|testEnvironment(kotlin.time.Clock;kotlin.Long;kotlin.Function1<com.davils.krypt.core.EnvironmentBuilder,kotlin.Unit>){}[0]
