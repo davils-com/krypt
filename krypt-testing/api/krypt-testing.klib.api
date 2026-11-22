@@ -6,6 +6,29 @@
 // - Show declarations: true
 
 // Library unique name: <com.davils:krypt-testing>
+final class com.davils.krypt.testing.acme/FakeAcmeServer : com.davils.krypt.acme/AcmeTransport { // com.davils.krypt.testing.acme/FakeAcmeServer|null[0]
+    constructor <init>(com.davils.krypt.primitive/Crypto, kotlin/String = ..., kotlin.collections/Map<kotlin/String, com.davils.krypt.primitive.key/SecretKey> = ..., kotlin/Int = ...) // com.davils.krypt.testing.acme/FakeAcmeServer.<init>|<init>(com.davils.krypt.primitive.Crypto;kotlin.String;kotlin.collections.Map<kotlin.String,com.davils.krypt.primitive.key.SecretKey>;kotlin.Int){}[0]
+
+    final val baseUrl // com.davils.krypt.testing.acme/FakeAcmeServer.baseUrl|{}baseUrl[0]
+        final fun <get-baseUrl>(): kotlin/String // com.davils.krypt.testing.acme/FakeAcmeServer.baseUrl.<get-baseUrl>|<get-baseUrl>(){}[0]
+    final val crypto // com.davils.krypt.testing.acme/FakeAcmeServer.crypto|{}crypto[0]
+        final fun <get-crypto>(): com.davils.krypt.primitive/Crypto // com.davils.krypt.testing.acme/FakeAcmeServer.crypto.<get-crypto>|<get-crypto>(){}[0]
+    final val directoryUrl // com.davils.krypt.testing.acme/FakeAcmeServer.directoryUrl|{}directoryUrl[0]
+        final fun <get-directoryUrl>(): kotlin/String // com.davils.krypt.testing.acme/FakeAcmeServer.directoryUrl.<get-directoryUrl>|<get-directoryUrl>(){}[0]
+    final val isPlainHttpAllowed // com.davils.krypt.testing.acme/FakeAcmeServer.isPlainHttpAllowed|{}isPlainHttpAllowed[0]
+        final fun <get-isPlainHttpAllowed>(): kotlin/Boolean // com.davils.krypt.testing.acme/FakeAcmeServer.isPlainHttpAllowed.<get-isPlainHttpAllowed>|<get-isPlainHttpAllowed>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.testing.acme/FakeAcmeServer.toString|toString(){}[0]
+    final suspend fun exchange(com.davils.krypt.acme/AcmeRequest): com.davils.krypt.acme/AcmeResponse // com.davils.krypt.testing.acme/FakeAcmeServer.exchange|exchange(com.davils.krypt.acme.AcmeRequest){}[0]
+    final suspend fun rejectNextNonces(kotlin/Int) // com.davils.krypt.testing.acme/FakeAcmeServer.rejectNextNonces|rejectNextNonces(kotlin.Int){}[0]
+    final suspend fun requests(): kotlin.collections/List<com.davils.krypt.acme/AcmeRequest> // com.davils.krypt.testing.acme/FakeAcmeServer.requests|requests(){}[0]
+
+    final object Companion { // com.davils.krypt.testing.acme/FakeAcmeServer.Companion|null[0]
+        final const val DEFAULT_BASE_URL // com.davils.krypt.testing.acme/FakeAcmeServer.Companion.DEFAULT_BASE_URL|{}DEFAULT_BASE_URL[0]
+            final fun <get-DEFAULT_BASE_URL>(): kotlin/String // com.davils.krypt.testing.acme/FakeAcmeServer.Companion.DEFAULT_BASE_URL.<get-DEFAULT_BASE_URL>|<get-DEFAULT_BASE_URL>(){}[0]
+    }
+}
+
 final class com.davils.krypt.testing/AuditLog : com.davils.krypt.core.audit/AuditSink { // com.davils.krypt.testing/AuditLog|null[0]
     constructor <init>(kotlin/Boolean = ...) // com.davils.krypt.testing/AuditLog.<init>|<init>(kotlin.Boolean){}[0]
 

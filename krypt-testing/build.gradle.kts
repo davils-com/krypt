@@ -27,6 +27,7 @@ kreate {
 
 dependencies {
     commonMainApi(project(":krypt-primitive"))
+    commonMainApi(project(":krypt-acme"))
     commonMainApi(libs.kore.testing)
     commonMainApi(libs.konfetti.testing)
 }

@@ -31,3 +31,21 @@ public final class com/davils/krypt/testing/TestEnvironmentsKt {
 	public static synthetic fun testEnvironment$default (Lkotlin/time/Clock;JLkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/krypt/core/Environment;
 }
 
+public final class com/davils/krypt/testing/acme/FakeAcmeServer : com/davils/krypt/acme/AcmeTransport {
+	public static final field Companion Lcom/davils/krypt/testing/acme/FakeAcmeServer$Companion;
+	public static final field DEFAULT_BASE_URL Ljava/lang/String;
+	public fun <init> (Lcom/davils/krypt/primitive/Crypto;Ljava/lang/String;Ljava/util/Map;I)V
+	public synthetic fun <init> (Lcom/davils/krypt/primitive/Crypto;Ljava/lang/String;Ljava/util/Map;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun exchange (Lcom/davils/krypt/acme/AcmeRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getBaseUrl ()Ljava/lang/String;
+	public final fun getCrypto ()Lcom/davils/krypt/primitive/Crypto;
+	public final fun getDirectoryUrl ()Ljava/lang/String;
+	public fun isPlainHttpAllowed ()Z
+	public final fun rejectNextNonces (ILkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun requests (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/testing/acme/FakeAcmeServer$Companion {
+}
+
