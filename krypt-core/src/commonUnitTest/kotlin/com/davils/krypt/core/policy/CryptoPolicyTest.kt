@@ -21,10 +21,14 @@ package com.davils.krypt.core.policy
 import com.davils.kore.core.validation.report.ValidationException
 import com.davils.krypt.core.LegacyCryptography
 import com.davils.krypt.core.algorithm.AeadAlgorithm
+import com.davils.krypt.core.algorithm.AsymmetricEncryptionAlgorithm
 import com.davils.krypt.core.algorithm.DigestAlgorithm
 import com.davils.krypt.core.algorithm.EllipticCurve
+import com.davils.krypt.core.algorithm.KdfAlgorithm
 import com.davils.krypt.core.algorithm.KemAlgorithm
 import com.davils.krypt.core.algorithm.KeyAgreementAlgorithm
+import com.davils.krypt.core.algorithm.KeyWrapAlgorithm
+import com.davils.krypt.core.algorithm.MacAlgorithm
 import com.davils.krypt.core.algorithm.SignatureAlgorithm
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
@@ -74,6 +78,39 @@ class CryptoPolicyTest : FunSpec({
         policy.permits(DigestAlgorithm.Sha256, AlgorithmUse.Protect) shouldBe false
         policy.permitsCurve(EllipticCurve.P256) shouldBe false
         policy.permitsRsa(RSA_2048, AlgorithmUse.Verify) shouldBe false
+    }
+
+    test("the CNSA 2.0 profile protects with exactly the suite and verifies RSA signatures only") {
+        val policy = CryptoPolicy.Cnsa2
+        policy.protecting shouldBe setOf(
+            AeadAlgorithm.Aes256Gcm,
+            KeyWrapAlgorithm.Aes256Kw,
+            DigestAlgorithm.Sha384,
+            DigestAlgorithm.Sha512,
+            MacAlgorithm.HmacSha384,
+            MacAlgorithm.HmacSha512,
+            KdfAlgorithm.HkdfSha384,
+            KdfAlgorithm.HkdfSha512,
+            KdfAlgorithm.Pbkdf2Sha512,
+            KemAlgorithm.MlKem1024,
+            KemAlgorithm.DhkemP384,
+            SignatureAlgorithm.MlDsa87,
+            SignatureAlgorithm.EcdsaSha384,
+            KeyAgreementAlgorithm.EcdhP384,
+        )
+        policy.verifying - policy.protecting shouldBe setOf(
+            SignatureAlgorithm.RsaPssSha384,
+            SignatureAlgorithm.RsaPssSha512,
+            SignatureAlgorithm.RsaPkcs1Sha384,
+            SignatureAlgorithm.RsaPkcs1Sha512,
+        )
+        policy.permits(MacAlgorithm.HmacSha256, AlgorithmUse.Verify) shouldBe false
+        policy.permits(KdfAlgorithm.HkdfSha256, AlgorithmUse.Protect) shouldBe false
+        policy.permits(KdfAlgorithm.Pbkdf2Sha256, AlgorithmUse.Protect) shouldBe false
+        policy.permits(DigestAlgorithm.Sha3384, AlgorithmUse.Protect) shouldBe false
+        policy.permits(SignatureAlgorithm.RsaPssSha384, AlgorithmUse.Protect) shouldBe false
+        policy.permits(AsymmetricEncryptionAlgorithm.RsaOaepSha384, AlgorithmUse.Verify) shouldBe false
+        policy.permitsRsa(RSA_3072, AlgorithmUse.Verify) shouldBe true
     }
 
     test("the FIPS profile permits approved algorithms and demands a validated provider") {

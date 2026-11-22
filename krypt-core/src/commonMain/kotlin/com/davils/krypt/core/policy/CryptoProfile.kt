@@ -41,8 +41,14 @@ public enum class CryptoProfile {
 
     /**
      * The Commercial National Security Algorithm Suite 2.0 of the NSA, with the CNSA 1.0 algorithms it permits during
-     * the transition: AES-256, SHA-384 and SHA-512, ML-KEM-1024, ML-DSA-87 and, on P-384 or with RSA of at least
-     * 3072 bits, ECDSA, ECDH and RSA.
+     * the transition, and nothing else.
+     *
+     * For something new it permits exactly: AES-256 in GCM and as key wrap; SHA-384 and SHA-512, HMAC, HKDF and
+     * PBKDF2 over them (PBKDF2 only with SHA-512, the one of the two krypt offers); ML-KEM-1024 and ML-DSA-87; and, on
+     * P-384 only, ECDH, the DHKEM of HPKE and ECDSA with SHA-384. For verification it accepts these and, as CNSA 1.0
+     * does, RSA-PSS and RSA PKCS #1 v1.5 signatures with SHA-384 or SHA-512 under RSA keys of at least 3072 bits; RSA
+     * is never permitted for anything new. SHA-256, SHA-3, AES-128, ChaCha20-Poly1305, X25519, X448, Ed25519, Ed448,
+     * every other curve, ML-KEM-768, ML-DSA-44, ML-DSA-65 and RSA-OAEP are refused for every use.
      *
      * @since 1.0.0
      */
