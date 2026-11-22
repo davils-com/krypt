@@ -32,6 +32,7 @@ import com.davils.krypt.tls.fixture.SPIFFE_ID
 import com.davils.krypt.tls.fixture.clientConfiguration
 import com.davils.krypt.tls.fixture.connect
 import com.davils.krypt.tls.fixture.serverConfiguration
+import com.davils.krypt.tls.internal.CheckedPeer
 import com.davils.krypt.tls.trust.TrustFailure
 import com.davils.krypt.x509.extension.ExtensionsBuilder
 import com.davils.krypt.x509.extension.KeyPurposes
@@ -54,7 +55,7 @@ private suspend fun peer(
     extensions: ExtensionsBuilder.() -> Unit = CLIENT,
 ): PeerIdentity {
     val identity = pki.custom(names.toList(), extensions)
-    return PeerIdentity(chain = identity.chain, path = identity.chain, anchor = pki.anchor)
+    return PeerIdentity(CheckedPeer(chain = identity.chain, path = identity.chain, anchor = pki.anchor))
 }
 
 private fun bundlesOf(pki: Pki): BundleSet =

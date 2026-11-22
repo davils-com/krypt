@@ -87,7 +87,7 @@ internal class TrustCheck(
         refuse(settings.pins?.matches(crypto, valid) == false, TrustFailure.PinMismatch)
         refuse(isStapleMissing(leaf, revocation), TrustFailure.MustStapleMissing)
         refuse(!isTransparent(valid, revocation), TrustFailure.TransparencyNotCompliant)
-        val identity = PeerIdentity(chain = chain, path = valid.path, anchor = valid.anchor)
+        val identity = PeerIdentity(CheckedPeer(chain = chain, path = valid.path, anchor = valid.anchor))
         refuse(!isAuthorized(identity), TrustFailure.Unauthorized)
         return identity
     }
