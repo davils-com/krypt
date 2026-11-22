@@ -34,6 +34,10 @@ import kotlinx.io.bytestring.ByteString
 public class KeysetVerifier internal constructor(private val crypto: Crypto, public val keyset: Keyset) {
     private val publicKeys: List<Pair<KeyId, PublicKey>> = keyset.usable { key -> key.publicKey }
 
+    init {
+        require(keyset.purpose is KeyPurpose.Signing) { "Only a signing key set verifies" }
+    }
+
     /**
      * Verifies [signature] of [data].
      *

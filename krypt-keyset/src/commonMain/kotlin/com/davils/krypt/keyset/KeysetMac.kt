@@ -46,6 +46,13 @@ public class KeysetMac internal constructor(
 ) {
     private val secrets: List<Pair<KeyId, SecretKey>> = keyset.usable { key -> key.secret }
 
+    init {
+        val purpose = keyset.purpose
+        require(purpose is KeyPurpose.Mac && purpose.algorithm == algorithm) {
+            "A key set of $purpose does not authenticate with $algorithm"
+        }
+    }
+
     /**
      * Computes the tag of [data] with the primary key.
      *

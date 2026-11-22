@@ -41,6 +41,13 @@ public class HybridEncrypter internal constructor(
 ) {
     private val primary: PublicKey = keyset.usable { key -> key.publicKey }.primaryOf(keyset.primaryId)
 
+    init {
+        val purpose = keyset.purpose
+        require(purpose is KeyPurpose.Hybrid && purpose.suite == suite) {
+            "A key set of $purpose does not encrypt with $suite"
+        }
+    }
+
     /**
      * Encrypts [plaintext] to the primary key.
      *

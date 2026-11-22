@@ -54,7 +54,7 @@ internal class KeysetAssembly(private val crypto: Crypto, private val isPublic: 
         val status = KeyStatus.entries.getOrNull(raw.status) ?: refuse(KeysetFailure.Malformed)
         val base = KeysetKey(
             id = KeyId.of(raw.id),
-            status = status,
+            status = KeyStatus.Destroyed,
             createdAt = Instant.fromEpochMilliseconds(raw.createdAt),
             secret = null,
             privateKey = null,
@@ -63,23 +63,24 @@ internal class KeysetAssembly(private val crypto: Crypto, private val isPublic: 
         val hasNoMaterial = raw.secret == null && raw.privateKey == null && raw.publicKey == null
         return when (status == KeyStatus.Destroyed) {
             true -> base.also { ensure(hasNoMaterial, KeysetFailure.Malformed) }
-            false -> materialOf(purpose = purpose, base = base, raw = raw)
+            false -> materialOf(purpose = purpose, base = base, raw = raw, status = status)
         }
     }
 
-    private suspend fun materialOf(purpose: KeyPurpose, base: KeysetKey, raw: RawKey): KeysetKey {
-        val type = purpose.keyType ?: return symmetric(base = base, raw = raw, size = purpose.secretBytes)
-        return asymmetric(base = base, raw = raw, type = type)
+    private suspend fun materialOf(purpose: KeyPurpose, base: KeysetKey, raw: RawKey, status: KeyStatus): KeysetKey {
+        val type = purpose.keyType
+            ?: return symmetric(base = base, raw = raw, size = purpose.secretBytes, status = status)
+        return asymmetric(base = base, raw = raw, type = type, status = status)
     }
 
-    private fun symmetric(base: KeysetKey, raw: RawKey, size: Int): KeysetKey {
+    private fun symmetric(base: KeysetKey, raw: RawKey, size: Int, status: KeyStatus): KeysetKey {
         val hasNoPair = raw.privateKey == null && raw.publicKey == null
         val secret = raw.secret?.takeIf { found -> !isPublic && found.size == size && hasNoPair }
             ?: refuse(KeysetFailure.Malformed)
         val key = SecretKey.of(SecretBytes.copyOf(secret))
         return KeysetKey(
             id = base.id,
-            status = base.status,
+            status = status,
             createdAt = base.createdAt,
             secret = key,
             privateKey = null,
@@ -87,14 +88,14 @@ internal class KeysetAssembly(private val crypto: Crypto, private val isPublic: 
         )
     }
 
-    private suspend fun asymmetric(base: KeysetKey, raw: RawKey, type: KeyType): KeysetKey {
+    private suspend fun asymmetric(base: KeysetKey, raw: RawKey, type: KeyType, status: KeyStatus): KeysetKey {
         val hasPrivate = raw.privateKey != null
         ensure(raw.secret == null && hasPrivate != isPublic, KeysetFailure.Malformed)
         val public = publicOf(raw.publicKey ?: refuse(KeysetFailure.Malformed), type)
         val private = raw.privateKey?.let { encoded -> privateOf(encoded = encoded, public = public, type = type) }
         return KeysetKey(
             id = base.id,
-            status = base.status,
+            status = status,
             createdAt = base.createdAt,
             secret = null,
             privateKey = private,
@@ -104,19 +105,18 @@ internal class KeysetAssembly(private val crypto: Crypto, private val isPublic: 
 
     private fun publicOf(encoded: ByteString, type: KeyType): PublicKey {
         val key = valueOf(crypto.keys.decodePublic(encoded))
-        ensure(matches(type = type, family = key.family, bits = key.bits, curve = key.curve), KeysetFailure.Malformed)
+        val isMatching = KeyTypes.matches(type = type, family = key.family, bits = key.bits, curve = key.curve)
+        ensure(isMatching, KeysetFailure.Malformed)
         return key
     }
 
     private suspend fun privateOf(encoded: ByteString, public: PublicKey, type: KeyType): PrivateKey {
         val key = valueOf(crypto.keys.decodePrivate(SecretBytes.copyOf(encoded)))
-        ensure(matches(type = type, family = key.family, bits = key.bits, curve = key.curve), KeysetFailure.Malformed)
+        val isMatching = KeyTypes.matches(type = type, family = key.family, bits = key.bits, curve = key.curve)
+        ensure(isMatching, KeysetFailure.Malformed)
         val pair = crypto.keys.pair(privateKey = key, publicKey = public) ?: refuse(KeysetFailure.Malformed)
         return pair.privateKey
     }
-
-    private fun matches(type: KeyType, family: Any, bits: Int, curve: Any?): Boolean =
-        listOf(type.family, type.bits, type.curve) == listOf(family, bits, curve)
 
     private fun <T> valueOf(outcome: Outcome<T, KeyFailure>): T = when (outcome) {
         is Outcome.Success -> outcome.value
