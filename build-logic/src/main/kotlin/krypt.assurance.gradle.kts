@@ -101,6 +101,7 @@ kreate {
                 ":krypt-authority",
                 ":krypt-jose",
                 ":krypt-tls",
+                ":krypt-cms",
                 ":krypt-testing",
             )
         }

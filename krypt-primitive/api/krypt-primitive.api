@@ -201,6 +201,11 @@ public final class com/davils/krypt/primitive/hash/KeyDerivations {
 	public static synthetic fun pbkdf2$default (Lcom/davils/krypt/primitive/hash/KeyDerivations;Lcom/davils/krypt/core/SecretText;Lkotlinx/io/bytestring/ByteString;IILcom/davils/krypt/core/algorithm/KdfAlgorithm;Lcom/davils/krypt/core/policy/AlgorithmUse;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 }
 
+public final class com/davils/krypt/primitive/hash/LegacyDerivations {
+	public static final field INSTANCE Lcom/davils/krypt/primitive/hash/LegacyDerivations;
+	public final fun pbkdf2Sha1 (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/core/SecretText;Lkotlinx/io/bytestring/ByteString;IILkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
 public final class com/davils/krypt/primitive/hash/Macs {
 	public final fun mac (Lcom/davils/krypt/primitive/key/SecretKey;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/algorithm/MacAlgorithm;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static synthetic fun mac$default (Lcom/davils/krypt/primitive/hash/Macs;Lcom/davils/krypt/primitive/key/SecretKey;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/algorithm/MacAlgorithm;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;

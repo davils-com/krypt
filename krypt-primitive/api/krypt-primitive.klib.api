@@ -376,3 +376,7 @@ final object com.davils.krypt.primitive.cipher/PasswordEncryption { // com.davil
     final suspend fun decrypt(com.davils.krypt.primitive/Crypto, kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString, com.davils.krypt.core/SecretText): com.davils.kore.core.outcome/Outcome<com.davils.krypt.core/SecretBytes, com.davils.krypt.primitive.key/KeyFailure> // com.davils.krypt.primitive.cipher/PasswordEncryption.decrypt|decrypt(com.davils.krypt.primitive.Crypto;kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString;com.davils.krypt.core.SecretText){}[0]
     final suspend fun encrypt(com.davils.krypt.primitive/Crypto, com.davils.krypt.core/SecretBytes, com.davils.krypt.core/SecretText, kotlin/Int): kotlin/Pair<kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString> // com.davils.krypt.primitive.cipher/PasswordEncryption.encrypt|encrypt(com.davils.krypt.primitive.Crypto;com.davils.krypt.core.SecretBytes;com.davils.krypt.core.SecretText;kotlin.Int){}[0]
 }
+
+final object com.davils.krypt.primitive.hash/LegacyDerivations { // com.davils.krypt.primitive.hash/LegacyDerivations|null[0]
+    final suspend fun pbkdf2Sha1(com.davils.krypt.primitive/Crypto, com.davils.krypt.core/SecretText, kotlinx.io.bytestring/ByteString, kotlin/Int, kotlin/Int): com.davils.krypt.core/SecretBytes // com.davils.krypt.primitive.hash/LegacyDerivations.pbkdf2Sha1|pbkdf2Sha1(com.davils.krypt.primitive.Crypto;com.davils.krypt.core.SecretText;kotlinx.io.bytestring.ByteString;kotlin.Int;kotlin.Int){}[0]
+}

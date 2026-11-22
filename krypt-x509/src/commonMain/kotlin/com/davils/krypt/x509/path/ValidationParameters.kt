@@ -30,7 +30,9 @@ import kotlin.time.Instant
  * @property isExplicitPolicyRequired whether the path must be valid for an acceptable policy.
  * @property isPolicyMappingInhibited whether policy mappings are refused.
  * @property isAnyPolicyInhibited whether anyPolicy in a certificate counts for nothing.
- * @property isRevocationRequired whether an unknown revocation status fails the validation; false soft-fails.
+ * @property isRevocationRequired whether an unknown revocation status of the [RevocationChecker] of the
+ *   [PathValidator] fails the validation; false soft-fails. It needs a checker: a validator without one checks no
+ *   revocation at all, whatever this says.
  * @constructor Describes the validation.
  * @throws IllegalArgumentException if [initialPolicies] is empty.
  * @since 1.0.0

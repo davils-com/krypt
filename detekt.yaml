@@ -139,6 +139,16 @@ libraries:
       - '**/tls/reload/CertificateExpiry.kt'
       - '**/tls/reload/ReloadSettings.kt'
       - '**/tls/trust/TransparencyRequirement.kt'
+      - '**/cms/enveloped/Credential.kt'
+      - '**/cms/enveloped/EncryptedData.kt'
+      - '**/cms/enveloped/EnvelopedData.kt'
+      - '**/cms/enveloped/RecipientInfo.kt'
+      - '**/cms/enveloped/Recipient.kt'
+      - '**/cms/signed/SignerInfo.kt'
+      - '**/cms/signed/VerifiedSigner.kt'
+      - '**/cms/timestamp/TimeStampRequest.kt'
+      - '**/cms/timestamp/TimeStampResponse.kt'
+      - '**/cms/timestamp/TstInfo.kt'
   # The compiler rejects an explicit Unit return type as redundant under warnings as errors.
   LibraryCodeMustSpecifyReturnType:
     active: true
@@ -235,6 +245,16 @@ style:
       - '**/tls/reload/CertificateExpiry.kt'
       - '**/tls/reload/ReloadSettings.kt'
       - '**/tls/trust/TransparencyRequirement.kt'
+      - '**/cms/enveloped/Credential.kt'
+      - '**/cms/enveloped/EncryptedData.kt'
+      - '**/cms/enveloped/EnvelopedData.kt'
+      - '**/cms/enveloped/RecipientInfo.kt'
+      - '**/cms/enveloped/Recipient.kt'
+      - '**/cms/signed/SignerInfo.kt'
+      - '**/cms/signed/VerifiedSigner.kt'
+      - '**/cms/timestamp/TimeStampRequest.kt'
+      - '**/cms/timestamp/TimeStampResponse.kt'
+      - '**/cms/timestamp/TstInfo.kt'
   # The compiler rejects an explicit Unit return type as redundant under warnings as errors.
   OptionalUnit:
     active: false

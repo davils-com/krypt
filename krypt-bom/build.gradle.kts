@@ -39,6 +39,7 @@ dependencies {
         api(project(":krypt-authority"))
         api(project(":krypt-jose"))
         api(project(":krypt-tls"))
+        api(project(":krypt-cms"))
         api(project(":krypt-testing"))
     }
 }

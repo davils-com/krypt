@@ -45,14 +45,26 @@ kreate {
                 note = "PKCS #10: certification requests, built and verified by krypt-x509."
             }
             rfc(3161) {
-                note = "Time-stamp tokens: a signed manifest of krypt-stream carries them as opaque attachments."
+                note = "Time-stamp tokens: requests, responses, tokens and the authority of krypt-cms, and " +
+                    "opaque attachments of the signed manifests of krypt-stream."
+            }
+            rfc(3211) {
+                note = "Password recipients of CMS: PBKDF2 within the policy and the PWRI-KEK wrap over AES-CBC in " +
+                    "krypt-cms."
             }
             rfc(3394) {
                 note = "AES key wrap: the key wraps of krypt-primitive."
             }
+            rfc(3560) {
+                note = "RSA-OAEP key transport in CMS: the KeyTransRecipientInfo of krypt-cms with SHA-2 and MGF1."
+            }
             rfc(4055) {
                 note = "RSASSA-PSS and RSAES-OAEP in X.509: the algorithm identifiers and parameters krypt-x509 " +
                     "reads and writes."
+            }
+            rfc(4056) {
+                note = "RSASSA-PSS in CMS: the signature algorithm of signers in krypt-cms, with the parameters of " +
+                    "RFC 4055."
             }
             rfc(4231) {
                 note = "The HMAC-SHA-2 test vectors the MAC tests check against."
@@ -67,11 +79,31 @@ kreate {
                 note = "Base64 and base64url: strict, constant-time codecs of krypt-core that refuse every " +
                     "non-canonical input."
             }
+            rfc(5035) {
+                note = "ESS signing-certificate-v2: written by krypt-cms with SHA-256 and checked against the signer " +
+                    "certificate."
+            }
+            rfc(5083) {
+                note = "AuthEnvelopedData: authenticated enveloped content of krypt-cms with AES-GCM."
+            }
+            rfc(5084) {
+                note = "AES-GCM in CMS: a nonce of 12 bytes and a tag of 16 bytes, through the AEADs of " +
+                    "krypt-primitive."
+            }
             rfc(5246) {
                 note = "TLS 1.2: offered by krypt-tls only by opt-in and only with forward secret AEAD suites."
             }
             rfc(5280) {
                 note = "X.509: the certificates, requests, CRLs and path validation of krypt-x509 and the times of DER."
+            }
+            rfc(5652) {
+                note = "CMS: signed, enveloped and encrypted data of krypt-cms in strict DER, with countersignatures."
+            }
+            rfc(5753) {
+                note = "ECDH in CMS: ephemeral-static key agreement with the X9.63 KDF over SHA-2 in common code."
+            }
+            rfc(5816) {
+                note = "ESSCertIDv2 in time-stamp tokens: the signing-certificate-v2 attribute of krypt-cms tokens."
             }
             rfc(5869) {
                 note = "HKDF: implemented over HMAC in common code, so both targets derive alike."
@@ -81,6 +113,9 @@ kreate {
             }
             rfc(6066) {
                 note = "TLS extensions: krypt-tls sends server name indication and chooses identities by it."
+            }
+            rfc(6070) {
+                note = "The PBKDF2-HMAC-SHA-1 test vectors the legacy derivation of krypt-primitive checks against."
             }
             rfc(6960) {
                 note = "OCSP: requests, strict responses, their verification against the issuer or a delegated " +
@@ -162,6 +197,13 @@ kreate {
             rfc(8259) {
                 note = "JSON: the bounded and strict parser and writer of krypt-jose."
             }
+            rfc(8418) {
+                note = "X25519 and X448 key agreement in CMS with HKDF: recipients of krypt-cms where the platform " +
+                    "has them."
+            }
+            rfc(8419) {
+                note = "EdDSA in CMS: Ed25519 with SHA-512 and Ed448 without signed attributes in krypt-cms."
+            }
             rfc(8439) {
                 note = "ChaCha20-Poly1305: an AEAD of krypt-primitive where the platform has it."
             }
@@ -186,6 +228,9 @@ kreate {
             rfc(9579) {
                 note = "PBMAC1 for PKCS #12: the MAC krypt-keystore writes and one of those it reads."
             }
+            rfc(9629) {
+                note = "KEMRecipientInfo of CMS: KEM recipients of krypt-cms with HKDF and AES key wrap."
+            }
             rfc(9654) {
                 note = "The OCSP nonce: 32 to 128 random bytes in a request, 1 to 128 bytes read, echoed by the " +
                     "responder."
@@ -194,9 +239,15 @@ kreate {
                 note = "Fully specified algorithms for JOSE: the Ed25519 and Ed448 signature algorithms of " +
                     "krypt-jose next to the deprecated EdDSA."
             }
+            rfc(9882) {
+                note = "ML-DSA in CMS: pure ML-DSA signers of krypt-cms with SHA-512 for the signed attributes."
+            }
             rfc(9919) {
                 note = "The lightweight OCSP profile: SHA-256 identifiers by default and SHA-1 behind an opt-in, " +
                     "GET requests of at most 255 bytes and responders that answer from a cache."
+            }
+            rfc(9936) {
+                note = "ML-KEM in CMS: KEM recipients of krypt-cms with ML-KEM-768 and ML-KEM-1024 on the JVM."
             }
             rfc(10024) {
                 note = "The hybrid group X25519MLKEM768 of TLS 1.3, which krypt-tls offers first where the JDK has it."

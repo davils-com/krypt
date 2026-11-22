@@ -1,0 +1,692 @@
+// Klib ABI Dump
+// Targets: [wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.davils:krypt-cms>
+final enum class com.davils.krypt.cms.enveloped/ContentEncryption : kotlin/Enum<com.davils.krypt.cms.enveloped/ContentEncryption> { // com.davils.krypt.cms.enveloped/ContentEncryption|null[0]
+    enum entry Aes128Cbc // com.davils.krypt.cms.enveloped/ContentEncryption.Aes128Cbc|null[0]
+    enum entry Aes128Gcm // com.davils.krypt.cms.enveloped/ContentEncryption.Aes128Gcm|null[0]
+    enum entry Aes256Cbc // com.davils.krypt.cms.enveloped/ContentEncryption.Aes256Cbc|null[0]
+    enum entry Aes256Gcm // com.davils.krypt.cms.enveloped/ContentEncryption.Aes256Gcm|null[0]
+
+    final val entries // com.davils.krypt.cms.enveloped/ContentEncryption.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.cms.enveloped/ContentEncryption> // com.davils.krypt.cms.enveloped/ContentEncryption.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val isAuthenticated // com.davils.krypt.cms.enveloped/ContentEncryption.isAuthenticated|{}isAuthenticated[0]
+        final fun <get-isAuthenticated>(): kotlin/Boolean // com.davils.krypt.cms.enveloped/ContentEncryption.isAuthenticated.<get-isAuthenticated>|<get-isAuthenticated>(){}[0]
+    final val keyBytes // com.davils.krypt.cms.enveloped/ContentEncryption.keyBytes|{}keyBytes[0]
+        final fun <get-keyBytes>(): kotlin/Int // com.davils.krypt.cms.enveloped/ContentEncryption.keyBytes.<get-keyBytes>|<get-keyBytes>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.cms.enveloped/ContentEncryption // com.davils.krypt.cms.enveloped/ContentEncryption.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.cms.enveloped/ContentEncryption> // com.davils.krypt.cms.enveloped/ContentEncryption.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.cms.enveloped/RecipientType : kotlin/Enum<com.davils.krypt.cms.enveloped/RecipientType> { // com.davils.krypt.cms.enveloped/RecipientType|null[0]
+    enum entry Kek // com.davils.krypt.cms.enveloped/RecipientType.Kek|null[0]
+    enum entry Kem // com.davils.krypt.cms.enveloped/RecipientType.Kem|null[0]
+    enum entry KeyAgreement // com.davils.krypt.cms.enveloped/RecipientType.KeyAgreement|null[0]
+    enum entry KeyTransport // com.davils.krypt.cms.enveloped/RecipientType.KeyTransport|null[0]
+    enum entry Other // com.davils.krypt.cms.enveloped/RecipientType.Other|null[0]
+    enum entry Password // com.davils.krypt.cms.enveloped/RecipientType.Password|null[0]
+
+    final val entries // com.davils.krypt.cms.enveloped/RecipientType.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.cms.enveloped/RecipientType> // com.davils.krypt.cms.enveloped/RecipientType.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.cms.enveloped/RecipientType // com.davils.krypt.cms.enveloped/RecipientType.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.cms.enveloped/RecipientType> // com.davils.krypt.cms.enveloped/RecipientType.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.cms.timestamp/TimeStampStatus : kotlin/Enum<com.davils.krypt.cms.timestamp/TimeStampStatus> { // com.davils.krypt.cms.timestamp/TimeStampStatus|null[0]
+    enum entry Granted // com.davils.krypt.cms.timestamp/TimeStampStatus.Granted|null[0]
+    enum entry GrantedWithModifications // com.davils.krypt.cms.timestamp/TimeStampStatus.GrantedWithModifications|null[0]
+    enum entry Rejection // com.davils.krypt.cms.timestamp/TimeStampStatus.Rejection|null[0]
+    enum entry RevocationNotification // com.davils.krypt.cms.timestamp/TimeStampStatus.RevocationNotification|null[0]
+    enum entry RevocationWarning // com.davils.krypt.cms.timestamp/TimeStampStatus.RevocationWarning|null[0]
+    enum entry Waiting // com.davils.krypt.cms.timestamp/TimeStampStatus.Waiting|null[0]
+
+    final val code // com.davils.krypt.cms.timestamp/TimeStampStatus.code|{}code[0]
+        final fun <get-code>(): kotlin/Int // com.davils.krypt.cms.timestamp/TimeStampStatus.code.<get-code>|<get-code>(){}[0]
+    final val entries // com.davils.krypt.cms.timestamp/TimeStampStatus.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.cms.timestamp/TimeStampStatus> // com.davils.krypt.cms.timestamp/TimeStampStatus.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val isGranted // com.davils.krypt.cms.timestamp/TimeStampStatus.isGranted|{}isGranted[0]
+        final fun <get-isGranted>(): kotlin/Boolean // com.davils.krypt.cms.timestamp/TimeStampStatus.isGranted.<get-isGranted>|<get-isGranted>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.cms.timestamp/TimeStampStatus // com.davils.krypt.cms.timestamp/TimeStampStatus.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.cms.timestamp/TimeStampStatus> // com.davils.krypt.cms.timestamp/TimeStampStatus.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.cms/CmsFailure : kotlin/Enum<com.davils.krypt.cms/CmsFailure> { // com.davils.krypt.cms/CmsFailure|null[0]
+    enum entry AlgorithmNotPermitted // com.davils.krypt.cms/CmsFailure.AlgorithmNotPermitted|null[0]
+    enum entry AttributeMismatch // com.davils.krypt.cms/CmsFailure.AttributeMismatch|null[0]
+    enum entry BadSignature // com.davils.krypt.cms/CmsFailure.BadSignature|null[0]
+    enum entry ContentMissing // com.davils.krypt.cms/CmsFailure.ContentMissing|null[0]
+    enum entry DecryptionFailed // com.davils.krypt.cms/CmsFailure.DecryptionFailed|null[0]
+    enum entry DigestMismatch // com.davils.krypt.cms/CmsFailure.DigestMismatch|null[0]
+    enum entry Malformed // com.davils.krypt.cms/CmsFailure.Malformed|null[0]
+    enum entry RecipientNotFound // com.davils.krypt.cms/CmsFailure.RecipientNotFound|null[0]
+    enum entry SignerNotFound // com.davils.krypt.cms/CmsFailure.SignerNotFound|null[0]
+    enum entry TimeStampMismatch // com.davils.krypt.cms/CmsFailure.TimeStampMismatch|null[0]
+    enum entry TimeStampRejected // com.davils.krypt.cms/CmsFailure.TimeStampRejected|null[0]
+    enum entry UnauthorizedTimeStampAuthority // com.davils.krypt.cms/CmsFailure.UnauthorizedTimeStampAuthority|null[0]
+    enum entry UntrustedSigner // com.davils.krypt.cms/CmsFailure.UntrustedSigner|null[0]
+
+    final val entries // com.davils.krypt.cms/CmsFailure.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.cms/CmsFailure> // com.davils.krypt.cms/CmsFailure.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.cms/CmsFailure // com.davils.krypt.cms/CmsFailure.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.cms/CmsFailure> // com.davils.krypt.cms/CmsFailure.values|values#static(){}[0]
+}
+
+sealed interface com.davils.krypt.cms.enveloped/Credential { // com.davils.krypt.cms.enveloped/Credential|null[0]
+    final class Certified : com.davils.krypt.cms.enveloped/Credential { // com.davils.krypt.cms.enveloped/Credential.Certified|null[0]
+        constructor <init>(com.davils.krypt.x509/Certificate, com.davils.krypt.primitive.key/PrivateKey) // com.davils.krypt.cms.enveloped/Credential.Certified.<init>|<init>(com.davils.krypt.x509.Certificate;com.davils.krypt.primitive.key.PrivateKey){}[0]
+
+        final val certificate // com.davils.krypt.cms.enveloped/Credential.Certified.certificate|{}certificate[0]
+            final fun <get-certificate>(): com.davils.krypt.x509/Certificate // com.davils.krypt.cms.enveloped/Credential.Certified.certificate.<get-certificate>|<get-certificate>(){}[0]
+        final val privateKey // com.davils.krypt.cms.enveloped/Credential.Certified.privateKey|{}privateKey[0]
+            final fun <get-privateKey>(): com.davils.krypt.primitive.key/PrivateKey // com.davils.krypt.cms.enveloped/Credential.Certified.privateKey.<get-privateKey>|<get-privateKey>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cms.enveloped/Credential.Certified.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.cms.enveloped/Credential.Certified.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.cms.enveloped/Credential.Certified.toString|toString(){}[0]
+    }
+
+    final class Kek : com.davils.krypt.cms.enveloped/Credential { // com.davils.krypt.cms.enveloped/Credential.Kek|null[0]
+        constructor <init>(kotlinx.io.bytestring/ByteString, com.davils.krypt.primitive.key/SecretKey) // com.davils.krypt.cms.enveloped/Credential.Kek.<init>|<init>(kotlinx.io.bytestring.ByteString;com.davils.krypt.primitive.key.SecretKey){}[0]
+
+        final val key // com.davils.krypt.cms.enveloped/Credential.Kek.key|{}key[0]
+            final fun <get-key>(): com.davils.krypt.primitive.key/SecretKey // com.davils.krypt.cms.enveloped/Credential.Kek.key.<get-key>|<get-key>(){}[0]
+        final val keyIdentifier // com.davils.krypt.cms.enveloped/Credential.Kek.keyIdentifier|{}keyIdentifier[0]
+            final fun <get-keyIdentifier>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cms.enveloped/Credential.Kek.keyIdentifier.<get-keyIdentifier>|<get-keyIdentifier>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cms.enveloped/Credential.Kek.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.cms.enveloped/Credential.Kek.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.cms.enveloped/Credential.Kek.toString|toString(){}[0]
+    }
+
+    final class Password : com.davils.krypt.cms.enveloped/Credential { // com.davils.krypt.cms.enveloped/Credential.Password|null[0]
+        constructor <init>(com.davils.krypt.core/SecretText) // com.davils.krypt.cms.enveloped/Credential.Password.<init>|<init>(com.davils.krypt.core.SecretText){}[0]
+
+        final val password // com.davils.krypt.cms.enveloped/Credential.Password.password|{}password[0]
+            final fun <get-password>(): com.davils.krypt.core/SecretText // com.davils.krypt.cms.enveloped/Credential.Password.password.<get-password>|<get-password>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cms.enveloped/Credential.Password.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.cms.enveloped/Credential.Password.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.cms.enveloped/Credential.Password.toString|toString(){}[0]
+    }
+}
+
+sealed interface com.davils.krypt.cms.enveloped/Recipient { // com.davils.krypt.cms.enveloped/Recipient|null[0]
+    final class Kek : com.davils.krypt.cms.enveloped/Recipient { // com.davils.krypt.cms.enveloped/Recipient.Kek|null[0]
+        constructor <init>(kotlinx.io.bytestring/ByteString, com.davils.krypt.primitive.key/SecretKey) // com.davils.krypt.cms.enveloped/Recipient.Kek.<init>|<init>(kotlinx.io.bytestring.ByteString;com.davils.krypt.primitive.key.SecretKey){}[0]
+
+        final val key // com.davils.krypt.cms.enveloped/Recipient.Kek.key|{}key[0]
+            final fun <get-key>(): com.davils.krypt.primitive.key/SecretKey // com.davils.krypt.cms.enveloped/Recipient.Kek.key.<get-key>|<get-key>(){}[0]
+        final val keyIdentifier // com.davils.krypt.cms.enveloped/Recipient.Kek.keyIdentifier|{}keyIdentifier[0]
+            final fun <get-keyIdentifier>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cms.enveloped/Recipient.Kek.keyIdentifier.<get-keyIdentifier>|<get-keyIdentifier>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cms.enveloped/Recipient.Kek.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.cms.enveloped/Recipient.Kek.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.cms.enveloped/Recipient.Kek.toString|toString(){}[0]
+    }
+
+    final class Kem : com.davils.krypt.cms.enveloped/Recipient { // com.davils.krypt.cms.enveloped/Recipient.Kem|null[0]
+        constructor <init>(com.davils.krypt.x509/Certificate, com.davils.krypt.core.algorithm/KdfAlgorithm = ..., com.davils.krypt.core.algorithm/KeyWrapAlgorithm = ..., kotlin/Boolean = ..., kotlinx.io.bytestring/ByteString? = ...) // com.davils.krypt.cms.enveloped/Recipient.Kem.<init>|<init>(com.davils.krypt.x509.Certificate;com.davils.krypt.core.algorithm.KdfAlgorithm;com.davils.krypt.core.algorithm.KeyWrapAlgorithm;kotlin.Boolean;kotlinx.io.bytestring.ByteString?){}[0]
+
+        final val certificate // com.davils.krypt.cms.enveloped/Recipient.Kem.certificate|{}certificate[0]
+            final fun <get-certificate>(): com.davils.krypt.x509/Certificate // com.davils.krypt.cms.enveloped/Recipient.Kem.certificate.<get-certificate>|<get-certificate>(){}[0]
+        final val isKeyIdentifierUsed // com.davils.krypt.cms.enveloped/Recipient.Kem.isKeyIdentifierUsed|{}isKeyIdentifierUsed[0]
+            final fun <get-isKeyIdentifierUsed>(): kotlin/Boolean // com.davils.krypt.cms.enveloped/Recipient.Kem.isKeyIdentifierUsed.<get-isKeyIdentifierUsed>|<get-isKeyIdentifierUsed>(){}[0]
+        final val kdf // com.davils.krypt.cms.enveloped/Recipient.Kem.kdf|{}kdf[0]
+            final fun <get-kdf>(): com.davils.krypt.core.algorithm/KdfAlgorithm // com.davils.krypt.cms.enveloped/Recipient.Kem.kdf.<get-kdf>|<get-kdf>(){}[0]
+        final val userKeyingMaterial // com.davils.krypt.cms.enveloped/Recipient.Kem.userKeyingMaterial|{}userKeyingMaterial[0]
+            final fun <get-userKeyingMaterial>(): kotlinx.io.bytestring/ByteString? // com.davils.krypt.cms.enveloped/Recipient.Kem.userKeyingMaterial.<get-userKeyingMaterial>|<get-userKeyingMaterial>(){}[0]
+        final val wrap // com.davils.krypt.cms.enveloped/Recipient.Kem.wrap|{}wrap[0]
+            final fun <get-wrap>(): com.davils.krypt.core.algorithm/KeyWrapAlgorithm // com.davils.krypt.cms.enveloped/Recipient.Kem.wrap.<get-wrap>|<get-wrap>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cms.enveloped/Recipient.Kem.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.cms.enveloped/Recipient.Kem.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.cms.enveloped/Recipient.Kem.toString|toString(){}[0]
+    }
+
+    final class KeyAgreement : com.davils.krypt.cms.enveloped/Recipient { // com.davils.krypt.cms.enveloped/Recipient.KeyAgreement|null[0]
+        constructor <init>(com.davils.krypt.x509/Certificate, com.davils.krypt.core.algorithm/DigestAlgorithm = ..., com.davils.krypt.core.algorithm/KeyWrapAlgorithm = ..., kotlin/Boolean = ..., kotlinx.io.bytestring/ByteString? = ...) // com.davils.krypt.cms.enveloped/Recipient.KeyAgreement.<init>|<init>(com.davils.krypt.x509.Certificate;com.davils.krypt.core.algorithm.DigestAlgorithm;com.davils.krypt.core.algorithm.KeyWrapAlgorithm;kotlin.Boolean;kotlinx.io.bytestring.ByteString?){}[0]
+
+        final val certificate // com.davils.krypt.cms.enveloped/Recipient.KeyAgreement.certificate|{}certificate[0]
+            final fun <get-certificate>(): com.davils.krypt.x509/Certificate // com.davils.krypt.cms.enveloped/Recipient.KeyAgreement.certificate.<get-certificate>|<get-certificate>(){}[0]
+        final val digest // com.davils.krypt.cms.enveloped/Recipient.KeyAgreement.digest|{}digest[0]
+            final fun <get-digest>(): com.davils.krypt.core.algorithm/DigestAlgorithm // com.davils.krypt.cms.enveloped/Recipient.KeyAgreement.digest.<get-digest>|<get-digest>(){}[0]
+        final val isKeyIdentifierUsed // com.davils.krypt.cms.enveloped/Recipient.KeyAgreement.isKeyIdentifierUsed|{}isKeyIdentifierUsed[0]
+            final fun <get-isKeyIdentifierUsed>(): kotlin/Boolean // com.davils.krypt.cms.enveloped/Recipient.KeyAgreement.isKeyIdentifierUsed.<get-isKeyIdentifierUsed>|<get-isKeyIdentifierUsed>(){}[0]
+        final val userKeyingMaterial // com.davils.krypt.cms.enveloped/Recipient.KeyAgreement.userKeyingMaterial|{}userKeyingMaterial[0]
+            final fun <get-userKeyingMaterial>(): kotlinx.io.bytestring/ByteString? // com.davils.krypt.cms.enveloped/Recipient.KeyAgreement.userKeyingMaterial.<get-userKeyingMaterial>|<get-userKeyingMaterial>(){}[0]
+        final val wrap // com.davils.krypt.cms.enveloped/Recipient.KeyAgreement.wrap|{}wrap[0]
+            final fun <get-wrap>(): com.davils.krypt.core.algorithm/KeyWrapAlgorithm // com.davils.krypt.cms.enveloped/Recipient.KeyAgreement.wrap.<get-wrap>|<get-wrap>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cms.enveloped/Recipient.KeyAgreement.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.cms.enveloped/Recipient.KeyAgreement.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.cms.enveloped/Recipient.KeyAgreement.toString|toString(){}[0]
+    }
+
+    final class KeyTransport : com.davils.krypt.cms.enveloped/Recipient { // com.davils.krypt.cms.enveloped/Recipient.KeyTransport|null[0]
+        constructor <init>(com.davils.krypt.x509/Certificate, com.davils.krypt.core.algorithm/AsymmetricEncryptionAlgorithm = ..., kotlin/Boolean = ...) // com.davils.krypt.cms.enveloped/Recipient.KeyTransport.<init>|<init>(com.davils.krypt.x509.Certificate;com.davils.krypt.core.algorithm.AsymmetricEncryptionAlgorithm;kotlin.Boolean){}[0]
+
+        final val algorithm // com.davils.krypt.cms.enveloped/Recipient.KeyTransport.algorithm|{}algorithm[0]
+            final fun <get-algorithm>(): com.davils.krypt.core.algorithm/AsymmetricEncryptionAlgorithm // com.davils.krypt.cms.enveloped/Recipient.KeyTransport.algorithm.<get-algorithm>|<get-algorithm>(){}[0]
+        final val certificate // com.davils.krypt.cms.enveloped/Recipient.KeyTransport.certificate|{}certificate[0]
+            final fun <get-certificate>(): com.davils.krypt.x509/Certificate // com.davils.krypt.cms.enveloped/Recipient.KeyTransport.certificate.<get-certificate>|<get-certificate>(){}[0]
+        final val isKeyIdentifierUsed // com.davils.krypt.cms.enveloped/Recipient.KeyTransport.isKeyIdentifierUsed|{}isKeyIdentifierUsed[0]
+            final fun <get-isKeyIdentifierUsed>(): kotlin/Boolean // com.davils.krypt.cms.enveloped/Recipient.KeyTransport.isKeyIdentifierUsed.<get-isKeyIdentifierUsed>|<get-isKeyIdentifierUsed>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cms.enveloped/Recipient.KeyTransport.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.cms.enveloped/Recipient.KeyTransport.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.cms.enveloped/Recipient.KeyTransport.toString|toString(){}[0]
+    }
+
+    final class Password : com.davils.krypt.cms.enveloped/Recipient { // com.davils.krypt.cms.enveloped/Recipient.Password|null[0]
+        constructor <init>(com.davils.krypt.core/SecretText, kotlin/Int, com.davils.krypt.core.algorithm/KdfAlgorithm = ...) // com.davils.krypt.cms.enveloped/Recipient.Password.<init>|<init>(com.davils.krypt.core.SecretText;kotlin.Int;com.davils.krypt.core.algorithm.KdfAlgorithm){}[0]
+
+        final val iterations // com.davils.krypt.cms.enveloped/Recipient.Password.iterations|{}iterations[0]
+            final fun <get-iterations>(): kotlin/Int // com.davils.krypt.cms.enveloped/Recipient.Password.iterations.<get-iterations>|<get-iterations>(){}[0]
+        final val password // com.davils.krypt.cms.enveloped/Recipient.Password.password|{}password[0]
+            final fun <get-password>(): com.davils.krypt.core/SecretText // com.davils.krypt.cms.enveloped/Recipient.Password.password.<get-password>|<get-password>(){}[0]
+        final val prf // com.davils.krypt.cms.enveloped/Recipient.Password.prf|{}prf[0]
+            final fun <get-prf>(): com.davils.krypt.core.algorithm/KdfAlgorithm // com.davils.krypt.cms.enveloped/Recipient.Password.prf.<get-prf>|<get-prf>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cms.enveloped/Recipient.Password.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.cms.enveloped/Recipient.Password.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.cms.enveloped/Recipient.Password.toString|toString(){}[0]
+    }
+}
+
+sealed interface com.davils.krypt.cms/CertificateReference { // com.davils.krypt.cms/CertificateReference|null[0]
+    abstract fun matches(com.davils.krypt.x509/Certificate): kotlin/Boolean // com.davils.krypt.cms/CertificateReference.matches|matches(com.davils.krypt.x509.Certificate){}[0]
+
+    final class IssuerSerial : com.davils.krypt.cms/CertificateReference { // com.davils.krypt.cms/CertificateReference.IssuerSerial|null[0]
+        constructor <init>(kotlinx.io.bytestring/ByteString, com.davils.krypt.asn1/DerInteger) // com.davils.krypt.cms/CertificateReference.IssuerSerial.<init>|<init>(kotlinx.io.bytestring.ByteString;com.davils.krypt.asn1.DerInteger){}[0]
+
+        final val issuer // com.davils.krypt.cms/CertificateReference.IssuerSerial.issuer|{}issuer[0]
+            final fun <get-issuer>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cms/CertificateReference.IssuerSerial.issuer.<get-issuer>|<get-issuer>(){}[0]
+        final val serialNumber // com.davils.krypt.cms/CertificateReference.IssuerSerial.serialNumber|{}serialNumber[0]
+            final fun <get-serialNumber>(): com.davils.krypt.asn1/DerInteger // com.davils.krypt.cms/CertificateReference.IssuerSerial.serialNumber.<get-serialNumber>|<get-serialNumber>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cms/CertificateReference.IssuerSerial.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.cms/CertificateReference.IssuerSerial.hashCode|hashCode(){}[0]
+        final fun matches(com.davils.krypt.x509/Certificate): kotlin/Boolean // com.davils.krypt.cms/CertificateReference.IssuerSerial.matches|matches(com.davils.krypt.x509.Certificate){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.cms/CertificateReference.IssuerSerial.toString|toString(){}[0]
+
+        final object Companion { // com.davils.krypt.cms/CertificateReference.IssuerSerial.Companion|null[0]
+            final fun of(com.davils.krypt.x509/Certificate): com.davils.krypt.cms/CertificateReference.IssuerSerial // com.davils.krypt.cms/CertificateReference.IssuerSerial.Companion.of|of(com.davils.krypt.x509.Certificate){}[0]
+        }
+    }
+
+    final class KeyIdentifier : com.davils.krypt.cms/CertificateReference { // com.davils.krypt.cms/CertificateReference.KeyIdentifier|null[0]
+        constructor <init>(kotlinx.io.bytestring/ByteString) // com.davils.krypt.cms/CertificateReference.KeyIdentifier.<init>|<init>(kotlinx.io.bytestring.ByteString){}[0]
+
+        final val keyIdentifier // com.davils.krypt.cms/CertificateReference.KeyIdentifier.keyIdentifier|{}keyIdentifier[0]
+            final fun <get-keyIdentifier>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cms/CertificateReference.KeyIdentifier.keyIdentifier.<get-keyIdentifier>|<get-keyIdentifier>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cms/CertificateReference.KeyIdentifier.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.cms/CertificateReference.KeyIdentifier.hashCode|hashCode(){}[0]
+        final fun matches(com.davils.krypt.x509/Certificate): kotlin/Boolean // com.davils.krypt.cms/CertificateReference.KeyIdentifier.matches|matches(com.davils.krypt.x509.Certificate){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.cms/CertificateReference.KeyIdentifier.toString|toString(){}[0]
+
+        final object Companion { // com.davils.krypt.cms/CertificateReference.KeyIdentifier.Companion|null[0]
+            final fun of(com.davils.krypt.x509/Certificate): com.davils.krypt.cms/CertificateReference.KeyIdentifier // com.davils.krypt.cms/CertificateReference.KeyIdentifier.Companion.of|of(com.davils.krypt.x509.Certificate){}[0]
+        }
+    }
+}
+
+final class com.davils.krypt.cms.enveloped/EncryptedData { // com.davils.krypt.cms.enveloped/EncryptedData|null[0]
+    final val contentType // com.davils.krypt.cms.enveloped/EncryptedData.contentType|{}contentType[0]
+        final fun <get-contentType>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.cms.enveloped/EncryptedData.contentType.<get-contentType>|<get-contentType>(){}[0]
+    final val encoded // com.davils.krypt.cms.enveloped/EncryptedData.encoded|{}encoded[0]
+        final fun <get-encoded>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cms.enveloped/EncryptedData.encoded.<get-encoded>|<get-encoded>(){}[0]
+    final val encryptedContent // com.davils.krypt.cms.enveloped/EncryptedData.encryptedContent|{}encryptedContent[0]
+        final fun <get-encryptedContent>(): kotlinx.io.bytestring/ByteString? // com.davils.krypt.cms.enveloped/EncryptedData.encryptedContent.<get-encryptedContent>|<get-encryptedContent>(){}[0]
+    final val encryption // com.davils.krypt.cms.enveloped/EncryptedData.encryption|{}encryption[0]
+        final fun <get-encryption>(): com.davils.krypt.cms.enveloped/ContentEncryption? // com.davils.krypt.cms.enveloped/EncryptedData.encryption.<get-encryption>|<get-encryption>(){}[0]
+    final val unprotectedAttributes // com.davils.krypt.cms.enveloped/EncryptedData.unprotectedAttributes|{}unprotectedAttributes[0]
+        final fun <get-unprotectedAttributes>(): kotlin.collections/List<com.davils.krypt.cms/Attribute> // com.davils.krypt.cms.enveloped/EncryptedData.unprotectedAttributes.<get-unprotectedAttributes>|<get-unprotectedAttributes>(){}[0]
+    final val version // com.davils.krypt.cms.enveloped/EncryptedData.version|{}version[0]
+        final fun <get-version>(): kotlin/Int // com.davils.krypt.cms.enveloped/EncryptedData.version.<get-version>|<get-version>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cms.enveloped/EncryptedData.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cms.enveloped/EncryptedData.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cms.enveloped/EncryptedData.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.cms.enveloped/EnvelopedData { // com.davils.krypt.cms.enveloped/EnvelopedData|null[0]
+    final val authenticatedAttributes // com.davils.krypt.cms.enveloped/EnvelopedData.authenticatedAttributes|{}authenticatedAttributes[0]
+        final fun <get-authenticatedAttributes>(): kotlin.collections/List<com.davils.krypt.cms/Attribute>? // com.davils.krypt.cms.enveloped/EnvelopedData.authenticatedAttributes.<get-authenticatedAttributes>|<get-authenticatedAttributes>(){}[0]
+    final val contentType // com.davils.krypt.cms.enveloped/EnvelopedData.contentType|{}contentType[0]
+        final fun <get-contentType>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.cms.enveloped/EnvelopedData.contentType.<get-contentType>|<get-contentType>(){}[0]
+    final val encoded // com.davils.krypt.cms.enveloped/EnvelopedData.encoded|{}encoded[0]
+        final fun <get-encoded>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cms.enveloped/EnvelopedData.encoded.<get-encoded>|<get-encoded>(){}[0]
+    final val encryptedContent // com.davils.krypt.cms.enveloped/EnvelopedData.encryptedContent|{}encryptedContent[0]
+        final fun <get-encryptedContent>(): kotlinx.io.bytestring/ByteString? // com.davils.krypt.cms.enveloped/EnvelopedData.encryptedContent.<get-encryptedContent>|<get-encryptedContent>(){}[0]
+    final val encryption // com.davils.krypt.cms.enveloped/EnvelopedData.encryption|{}encryption[0]
+        final fun <get-encryption>(): com.davils.krypt.cms.enveloped/ContentEncryption? // com.davils.krypt.cms.enveloped/EnvelopedData.encryption.<get-encryption>|<get-encryption>(){}[0]
+    final val isAuthenticated // com.davils.krypt.cms.enveloped/EnvelopedData.isAuthenticated|{}isAuthenticated[0]
+        final fun <get-isAuthenticated>(): kotlin/Boolean // com.davils.krypt.cms.enveloped/EnvelopedData.isAuthenticated.<get-isAuthenticated>|<get-isAuthenticated>(){}[0]
+    final val recipients // com.davils.krypt.cms.enveloped/EnvelopedData.recipients|{}recipients[0]
+        final fun <get-recipients>(): kotlin.collections/List<com.davils.krypt.cms.enveloped/RecipientInfo> // com.davils.krypt.cms.enveloped/EnvelopedData.recipients.<get-recipients>|<get-recipients>(){}[0]
+    final val unprotectedAttributes // com.davils.krypt.cms.enveloped/EnvelopedData.unprotectedAttributes|{}unprotectedAttributes[0]
+        final fun <get-unprotectedAttributes>(): kotlin.collections/List<com.davils.krypt.cms/Attribute> // com.davils.krypt.cms.enveloped/EnvelopedData.unprotectedAttributes.<get-unprotectedAttributes>|<get-unprotectedAttributes>(){}[0]
+    final val version // com.davils.krypt.cms.enveloped/EnvelopedData.version|{}version[0]
+        final fun <get-version>(): kotlin/Int // com.davils.krypt.cms.enveloped/EnvelopedData.version.<get-version>|<get-version>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cms.enveloped/EnvelopedData.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cms.enveloped/EnvelopedData.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cms.enveloped/EnvelopedData.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.cms.enveloped/RecipientInfo { // com.davils.krypt.cms.enveloped/RecipientInfo|null[0]
+    final val encoded // com.davils.krypt.cms.enveloped/RecipientInfo.encoded|{}encoded[0]
+        final fun <get-encoded>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cms.enveloped/RecipientInfo.encoded.<get-encoded>|<get-encoded>(){}[0]
+    final val isSupported // com.davils.krypt.cms.enveloped/RecipientInfo.isSupported|{}isSupported[0]
+        final fun <get-isSupported>(): kotlin/Boolean // com.davils.krypt.cms.enveloped/RecipientInfo.isSupported.<get-isSupported>|<get-isSupported>(){}[0]
+    final val keyIdentifier // com.davils.krypt.cms.enveloped/RecipientInfo.keyIdentifier|{}keyIdentifier[0]
+        final fun <get-keyIdentifier>(): kotlinx.io.bytestring/ByteString? // com.davils.krypt.cms.enveloped/RecipientInfo.keyIdentifier.<get-keyIdentifier>|<get-keyIdentifier>(){}[0]
+    final val references // com.davils.krypt.cms.enveloped/RecipientInfo.references|{}references[0]
+        final fun <get-references>(): kotlin.collections/List<com.davils.krypt.cms/CertificateReference> // com.davils.krypt.cms.enveloped/RecipientInfo.references.<get-references>|<get-references>(){}[0]
+    final val type // com.davils.krypt.cms.enveloped/RecipientInfo.type|{}type[0]
+        final fun <get-type>(): com.davils.krypt.cms.enveloped/RecipientType // com.davils.krypt.cms.enveloped/RecipientInfo.type.<get-type>|<get-type>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cms.enveloped/RecipientInfo.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cms.enveloped/RecipientInfo.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cms.enveloped/RecipientInfo.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.cms.signed/SignatureParameters { // com.davils.krypt.cms.signed/SignatureParameters|null[0]
+    constructor <init>(kotlin.collections/List<com.davils.krypt.x509/Certificate> = ..., com.davils.krypt.x509.path/PathValidator? = ..., com.davils.krypt.x509.path/ValidationParameters = ...) // com.davils.krypt.cms.signed/SignatureParameters.<init>|<init>(kotlin.collections.List<com.davils.krypt.x509.Certificate>;com.davils.krypt.x509.path.PathValidator?;com.davils.krypt.x509.path.ValidationParameters){}[0]
+
+    final val certificates // com.davils.krypt.cms.signed/SignatureParameters.certificates|{}certificates[0]
+        final fun <get-certificates>(): kotlin.collections/List<com.davils.krypt.x509/Certificate> // com.davils.krypt.cms.signed/SignatureParameters.certificates.<get-certificates>|<get-certificates>(){}[0]
+    final val validation // com.davils.krypt.cms.signed/SignatureParameters.validation|{}validation[0]
+        final fun <get-validation>(): com.davils.krypt.x509.path/ValidationParameters // com.davils.krypt.cms.signed/SignatureParameters.validation.<get-validation>|<get-validation>(){}[0]
+    final val validator // com.davils.krypt.cms.signed/SignatureParameters.validator|{}validator[0]
+        final fun <get-validator>(): com.davils.krypt.x509.path/PathValidator? // com.davils.krypt.cms.signed/SignatureParameters.validator.<get-validator>|<get-validator>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cms.signed/SignatureParameters.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cms.signed/SignatureParameters.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cms.signed/SignatureParameters.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.cms.signed/SignedData { // com.davils.krypt.cms.signed/SignedData|null[0]
+    final val certificates // com.davils.krypt.cms.signed/SignedData.certificates|{}certificates[0]
+        final fun <get-certificates>(): kotlin.collections/List<com.davils.krypt.x509/Certificate> // com.davils.krypt.cms.signed/SignedData.certificates.<get-certificates>|<get-certificates>(){}[0]
+    final val content // com.davils.krypt.cms.signed/SignedData.content|{}content[0]
+        final fun <get-content>(): kotlinx.io.bytestring/ByteString? // com.davils.krypt.cms.signed/SignedData.content.<get-content>|<get-content>(){}[0]
+    final val contentType // com.davils.krypt.cms.signed/SignedData.contentType|{}contentType[0]
+        final fun <get-contentType>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.cms.signed/SignedData.contentType.<get-contentType>|<get-contentType>(){}[0]
+    final val encoded // com.davils.krypt.cms.signed/SignedData.encoded|{}encoded[0]
+        final fun <get-encoded>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cms.signed/SignedData.encoded.<get-encoded>|<get-encoded>(){}[0]
+    final val isDetached // com.davils.krypt.cms.signed/SignedData.isDetached|{}isDetached[0]
+        final fun <get-isDetached>(): kotlin/Boolean // com.davils.krypt.cms.signed/SignedData.isDetached.<get-isDetached>|<get-isDetached>(){}[0]
+    final val revocationLists // com.davils.krypt.cms.signed/SignedData.revocationLists|{}revocationLists[0]
+        final fun <get-revocationLists>(): kotlin.collections/List<com.davils.krypt.x509.crl/RevocationList> // com.davils.krypt.cms.signed/SignedData.revocationLists.<get-revocationLists>|<get-revocationLists>(){}[0]
+    final val signers // com.davils.krypt.cms.signed/SignedData.signers|{}signers[0]
+        final fun <get-signers>(): kotlin.collections/List<com.davils.krypt.cms.signed/SignerInfo> // com.davils.krypt.cms.signed/SignedData.signers.<get-signers>|<get-signers>(){}[0]
+    final val version // com.davils.krypt.cms.signed/SignedData.version|{}version[0]
+        final fun <get-version>(): kotlin/Int // com.davils.krypt.cms.signed/SignedData.version.<get-version>|<get-version>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cms.signed/SignedData.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cms.signed/SignedData.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cms.signed/SignedData.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.cms.signed/SignedDataBuilder { // com.davils.krypt.cms.signed/SignedDataBuilder|null[0]
+    final var contentType // com.davils.krypt.cms.signed/SignedDataBuilder.contentType|{}contentType[0]
+        final fun <get-contentType>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.cms.signed/SignedDataBuilder.contentType.<get-contentType>|<get-contentType>(){}[0]
+        final fun <set-contentType>(com.davils.krypt.asn1/ObjectIdentifier) // com.davils.krypt.cms.signed/SignedDataBuilder.contentType.<set-contentType>|<set-contentType>(com.davils.krypt.asn1.ObjectIdentifier){}[0]
+    final var isDetached // com.davils.krypt.cms.signed/SignedDataBuilder.isDetached|{}isDetached[0]
+        final fun <get-isDetached>(): kotlin/Boolean // com.davils.krypt.cms.signed/SignedDataBuilder.isDetached.<get-isDetached>|<get-isDetached>(){}[0]
+        final fun <set-isDetached>(kotlin/Boolean) // com.davils.krypt.cms.signed/SignedDataBuilder.isDetached.<set-isDetached>|<set-isDetached>(kotlin.Boolean){}[0]
+
+    final fun certificates(kotlin.collections/List<com.davils.krypt.x509/Certificate>) // com.davils.krypt.cms.signed/SignedDataBuilder.certificates|certificates(kotlin.collections.List<com.davils.krypt.x509.Certificate>){}[0]
+    final fun revocationLists(kotlin.collections/List<com.davils.krypt.x509.crl/RevocationList>) // com.davils.krypt.cms.signed/SignedDataBuilder.revocationLists|revocationLists(kotlin.collections.List<com.davils.krypt.x509.crl.RevocationList>){}[0]
+    final fun signer(com.davils.krypt.primitive.signature/Signer, com.davils.krypt.x509/Certificate, kotlin/Function1<com.davils.krypt.cms.signed/SignerBuilder, kotlin/Unit> = ...) // com.davils.krypt.cms.signed/SignedDataBuilder.signer|signer(com.davils.krypt.primitive.signature.Signer;com.davils.krypt.x509.Certificate;kotlin.Function1<com.davils.krypt.cms.signed.SignerBuilder,kotlin.Unit>){}[0]
+}
+
+final class com.davils.krypt.cms.signed/SignerBuilder { // com.davils.krypt.cms.signed/SignerBuilder|null[0]
+    final var isCertificateIncluded // com.davils.krypt.cms.signed/SignerBuilder.isCertificateIncluded|{}isCertificateIncluded[0]
+        final fun <get-isCertificateIncluded>(): kotlin/Boolean // com.davils.krypt.cms.signed/SignerBuilder.isCertificateIncluded.<get-isCertificateIncluded>|<get-isCertificateIncluded>(){}[0]
+        final fun <set-isCertificateIncluded>(kotlin/Boolean) // com.davils.krypt.cms.signed/SignerBuilder.isCertificateIncluded.<set-isCertificateIncluded>|<set-isCertificateIncluded>(kotlin.Boolean){}[0]
+    final var isKeyIdentifierUsed // com.davils.krypt.cms.signed/SignerBuilder.isKeyIdentifierUsed|{}isKeyIdentifierUsed[0]
+        final fun <get-isKeyIdentifierUsed>(): kotlin/Boolean // com.davils.krypt.cms.signed/SignerBuilder.isKeyIdentifierUsed.<get-isKeyIdentifierUsed>|<get-isKeyIdentifierUsed>(){}[0]
+        final fun <set-isKeyIdentifierUsed>(kotlin/Boolean) // com.davils.krypt.cms.signed/SignerBuilder.isKeyIdentifierUsed.<set-isKeyIdentifierUsed>|<set-isKeyIdentifierUsed>(kotlin.Boolean){}[0]
+    final var isSignedAttributesUsed // com.davils.krypt.cms.signed/SignerBuilder.isSignedAttributesUsed|{}isSignedAttributesUsed[0]
+        final fun <get-isSignedAttributesUsed>(): kotlin/Boolean // com.davils.krypt.cms.signed/SignerBuilder.isSignedAttributesUsed.<get-isSignedAttributesUsed>|<get-isSignedAttributesUsed>(){}[0]
+        final fun <set-isSignedAttributesUsed>(kotlin/Boolean) // com.davils.krypt.cms.signed/SignerBuilder.isSignedAttributesUsed.<set-isSignedAttributesUsed>|<set-isSignedAttributesUsed>(kotlin.Boolean){}[0]
+    final var isSigningCertificateIncluded // com.davils.krypt.cms.signed/SignerBuilder.isSigningCertificateIncluded|{}isSigningCertificateIncluded[0]
+        final fun <get-isSigningCertificateIncluded>(): kotlin/Boolean // com.davils.krypt.cms.signed/SignerBuilder.isSigningCertificateIncluded.<get-isSigningCertificateIncluded>|<get-isSigningCertificateIncluded>(){}[0]
+        final fun <set-isSigningCertificateIncluded>(kotlin/Boolean) // com.davils.krypt.cms.signed/SignerBuilder.isSigningCertificateIncluded.<set-isSigningCertificateIncluded>|<set-isSigningCertificateIncluded>(kotlin.Boolean){}[0]
+    final var isSigningTimeIncluded // com.davils.krypt.cms.signed/SignerBuilder.isSigningTimeIncluded|{}isSigningTimeIncluded[0]
+        final fun <get-isSigningTimeIncluded>(): kotlin/Boolean // com.davils.krypt.cms.signed/SignerBuilder.isSigningTimeIncluded.<get-isSigningTimeIncluded>|<get-isSigningTimeIncluded>(){}[0]
+        final fun <set-isSigningTimeIncluded>(kotlin/Boolean) // com.davils.krypt.cms.signed/SignerBuilder.isSigningTimeIncluded.<set-isSigningTimeIncluded>|<set-isSigningTimeIncluded>(kotlin.Boolean){}[0]
+    final var signingTime // com.davils.krypt.cms.signed/SignerBuilder.signingTime|{}signingTime[0]
+        final fun <get-signingTime>(): kotlin.time/Instant? // com.davils.krypt.cms.signed/SignerBuilder.signingTime.<get-signingTime>|<get-signingTime>(){}[0]
+        final fun <set-signingTime>(kotlin.time/Instant?) // com.davils.krypt.cms.signed/SignerBuilder.signingTime.<set-signingTime>|<set-signingTime>(kotlin.time.Instant?){}[0]
+
+    final fun signedAttribute(com.davils.krypt.cms/Attribute) // com.davils.krypt.cms.signed/SignerBuilder.signedAttribute|signedAttribute(com.davils.krypt.cms.Attribute){}[0]
+    final fun unsignedAttribute(com.davils.krypt.cms/Attribute) // com.davils.krypt.cms.signed/SignerBuilder.unsignedAttribute|unsignedAttribute(com.davils.krypt.cms.Attribute){}[0]
+}
+
+final class com.davils.krypt.cms.signed/SignerInfo { // com.davils.krypt.cms.signed/SignerInfo|null[0]
+    final val contentType // com.davils.krypt.cms.signed/SignerInfo.contentType|{}contentType[0]
+        final fun <get-contentType>(): com.davils.krypt.asn1/ObjectIdentifier? // com.davils.krypt.cms.signed/SignerInfo.contentType.<get-contentType>|<get-contentType>(){}[0]
+    final val countersignatures // com.davils.krypt.cms.signed/SignerInfo.countersignatures|{}countersignatures[0]
+        final fun <get-countersignatures>(): kotlin.collections/List<com.davils.krypt.cms.signed/SignerInfo> // com.davils.krypt.cms.signed/SignerInfo.countersignatures.<get-countersignatures>|<get-countersignatures>(){}[0]
+    final val digestAlgorithm // com.davils.krypt.cms.signed/SignerInfo.digestAlgorithm|{}digestAlgorithm[0]
+        final fun <get-digestAlgorithm>(): com.davils.krypt.core.algorithm/DigestAlgorithm? // com.davils.krypt.cms.signed/SignerInfo.digestAlgorithm.<get-digestAlgorithm>|<get-digestAlgorithm>(){}[0]
+    final val encoded // com.davils.krypt.cms.signed/SignerInfo.encoded|{}encoded[0]
+        final fun <get-encoded>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cms.signed/SignerInfo.encoded.<get-encoded>|<get-encoded>(){}[0]
+    final val identifier // com.davils.krypt.cms.signed/SignerInfo.identifier|{}identifier[0]
+        final fun <get-identifier>(): com.davils.krypt.cms/CertificateReference // com.davils.krypt.cms.signed/SignerInfo.identifier.<get-identifier>|<get-identifier>(){}[0]
+    final val messageDigest // com.davils.krypt.cms.signed/SignerInfo.messageDigest|{}messageDigest[0]
+        final fun <get-messageDigest>(): kotlinx.io.bytestring/ByteString? // com.davils.krypt.cms.signed/SignerInfo.messageDigest.<get-messageDigest>|<get-messageDigest>(){}[0]
+    final val signature // com.davils.krypt.cms.signed/SignerInfo.signature|{}signature[0]
+        final fun <get-signature>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cms.signed/SignerInfo.signature.<get-signature>|<get-signature>(){}[0]
+    final val signatureAlgorithm // com.davils.krypt.cms.signed/SignerInfo.signatureAlgorithm|{}signatureAlgorithm[0]
+        final fun <get-signatureAlgorithm>(): com.davils.krypt.core.algorithm/SignatureAlgorithm? // com.davils.krypt.cms.signed/SignerInfo.signatureAlgorithm.<get-signatureAlgorithm>|<get-signatureAlgorithm>(){}[0]
+    final val signedAttributes // com.davils.krypt.cms.signed/SignerInfo.signedAttributes|{}signedAttributes[0]
+        final fun <get-signedAttributes>(): kotlin.collections/List<com.davils.krypt.cms/Attribute>? // com.davils.krypt.cms.signed/SignerInfo.signedAttributes.<get-signedAttributes>|<get-signedAttributes>(){}[0]
+    final val signingTime // com.davils.krypt.cms.signed/SignerInfo.signingTime|{}signingTime[0]
+        final fun <get-signingTime>(): kotlin.time/Instant? // com.davils.krypt.cms.signed/SignerInfo.signingTime.<get-signingTime>|<get-signingTime>(){}[0]
+    final val timeStampTokens // com.davils.krypt.cms.signed/SignerInfo.timeStampTokens|{}timeStampTokens[0]
+        final fun <get-timeStampTokens>(): kotlin.collections/List<kotlinx.io.bytestring/ByteString> // com.davils.krypt.cms.signed/SignerInfo.timeStampTokens.<get-timeStampTokens>|<get-timeStampTokens>(){}[0]
+    final val unsignedAttributes // com.davils.krypt.cms.signed/SignerInfo.unsignedAttributes|{}unsignedAttributes[0]
+        final fun <get-unsignedAttributes>(): kotlin.collections/List<com.davils.krypt.cms/Attribute> // com.davils.krypt.cms.signed/SignerInfo.unsignedAttributes.<get-unsignedAttributes>|<get-unsignedAttributes>(){}[0]
+    final val version // com.davils.krypt.cms.signed/SignerInfo.version|{}version[0]
+        final fun <get-version>(): kotlin/Int // com.davils.krypt.cms.signed/SignerInfo.version.<get-version>|<get-version>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cms.signed/SignerInfo.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cms.signed/SignerInfo.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cms.signed/SignerInfo.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.cms.signed/VerifiedSigner { // com.davils.krypt.cms.signed/VerifiedSigner|null[0]
+    final val certificate // com.davils.krypt.cms.signed/VerifiedSigner.certificate|{}certificate[0]
+        final fun <get-certificate>(): com.davils.krypt.x509/Certificate // com.davils.krypt.cms.signed/VerifiedSigner.certificate.<get-certificate>|<get-certificate>(){}[0]
+    final val path // com.davils.krypt.cms.signed/VerifiedSigner.path|{}path[0]
+        final fun <get-path>(): com.davils.krypt.x509.path/PathValidation.Valid? // com.davils.krypt.cms.signed/VerifiedSigner.path.<get-path>|<get-path>(){}[0]
+    final val signer // com.davils.krypt.cms.signed/VerifiedSigner.signer|{}signer[0]
+        final fun <get-signer>(): com.davils.krypt.cms.signed/SignerInfo // com.davils.krypt.cms.signed/VerifiedSigner.signer.<get-signer>|<get-signer>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cms.signed/VerifiedSigner.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cms.signed/VerifiedSigner.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cms.signed/VerifiedSigner.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.cms.timestamp/Accuracy { // com.davils.krypt.cms.timestamp/Accuracy|null[0]
+    constructor <init>(kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ...) // com.davils.krypt.cms.timestamp/Accuracy.<init>|<init>(kotlin.Int;kotlin.Int;kotlin.Int){}[0]
+
+    final val duration // com.davils.krypt.cms.timestamp/Accuracy.duration|{}duration[0]
+        final fun <get-duration>(): kotlin.time/Duration // com.davils.krypt.cms.timestamp/Accuracy.duration.<get-duration>|<get-duration>(){}[0]
+    final val micros // com.davils.krypt.cms.timestamp/Accuracy.micros|{}micros[0]
+        final fun <get-micros>(): kotlin/Int // com.davils.krypt.cms.timestamp/Accuracy.micros.<get-micros>|<get-micros>(){}[0]
+    final val millis // com.davils.krypt.cms.timestamp/Accuracy.millis|{}millis[0]
+        final fun <get-millis>(): kotlin/Int // com.davils.krypt.cms.timestamp/Accuracy.millis.<get-millis>|<get-millis>(){}[0]
+    final val seconds // com.davils.krypt.cms.timestamp/Accuracy.seconds|{}seconds[0]
+        final fun <get-seconds>(): kotlin/Int // com.davils.krypt.cms.timestamp/Accuracy.seconds.<get-seconds>|<get-seconds>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cms.timestamp/Accuracy.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cms.timestamp/Accuracy.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cms.timestamp/Accuracy.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.cms.timestamp/TimeStampAuthority { // com.davils.krypt.cms.timestamp/TimeStampAuthority|null[0]
+    constructor <init>(com.davils.krypt.primitive/Crypto, com.davils.krypt.primitive.signature/Signer, com.davils.krypt.x509/Certificate, com.davils.krypt.asn1/ObjectIdentifier, kotlin.collections/Set<com.davils.krypt.asn1/ObjectIdentifier> = ..., com.davils.krypt.cms.timestamp/Accuracy? = ..., kotlin.collections/List<com.davils.krypt.x509/Certificate> = ..., kotlin.collections/Set<com.davils.krypt.core.algorithm/DigestAlgorithm> = ..., com.davils.krypt.cms/CmsLimits = ...) // com.davils.krypt.cms.timestamp/TimeStampAuthority.<init>|<init>(com.davils.krypt.primitive.Crypto;com.davils.krypt.primitive.signature.Signer;com.davils.krypt.x509.Certificate;com.davils.krypt.asn1.ObjectIdentifier;kotlin.collections.Set<com.davils.krypt.asn1.ObjectIdentifier>;com.davils.krypt.cms.timestamp.Accuracy?;kotlin.collections.List<com.davils.krypt.x509.Certificate>;kotlin.collections.Set<com.davils.krypt.core.algorithm.DigestAlgorithm>;com.davils.krypt.cms.CmsLimits){}[0]
+
+    final val accuracy // com.davils.krypt.cms.timestamp/TimeStampAuthority.accuracy|{}accuracy[0]
+        final fun <get-accuracy>(): com.davils.krypt.cms.timestamp/Accuracy? // com.davils.krypt.cms.timestamp/TimeStampAuthority.accuracy.<get-accuracy>|<get-accuracy>(){}[0]
+    final val certificate // com.davils.krypt.cms.timestamp/TimeStampAuthority.certificate|{}certificate[0]
+        final fun <get-certificate>(): com.davils.krypt.x509/Certificate // com.davils.krypt.cms.timestamp/TimeStampAuthority.certificate.<get-certificate>|<get-certificate>(){}[0]
+    final val crypto // com.davils.krypt.cms.timestamp/TimeStampAuthority.crypto|{}crypto[0]
+        final fun <get-crypto>(): com.davils.krypt.primitive/Crypto // com.davils.krypt.cms.timestamp/TimeStampAuthority.crypto.<get-crypto>|<get-crypto>(){}[0]
+    final val limits // com.davils.krypt.cms.timestamp/TimeStampAuthority.limits|{}limits[0]
+        final fun <get-limits>(): com.davils.krypt.cms/CmsLimits // com.davils.krypt.cms.timestamp/TimeStampAuthority.limits.<get-limits>|<get-limits>(){}[0]
+    final val policy // com.davils.krypt.cms.timestamp/TimeStampAuthority.policy|{}policy[0]
+        final fun <get-policy>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.cms.timestamp/TimeStampAuthority.policy.<get-policy>|<get-policy>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.cms.timestamp/TimeStampAuthority.toString|toString(){}[0]
+    final suspend fun respond(com.davils.krypt.cms.timestamp/TimeStampRequest): kotlinx.io.bytestring/ByteString // com.davils.krypt.cms.timestamp/TimeStampAuthority.respond|respond(com.davils.krypt.cms.timestamp.TimeStampRequest){}[0]
+    final suspend fun respond(kotlinx.io.bytestring/ByteString): kotlinx.io.bytestring/ByteString // com.davils.krypt.cms.timestamp/TimeStampAuthority.respond|respond(kotlinx.io.bytestring.ByteString){}[0]
+}
+
+final class com.davils.krypt.cms.timestamp/TimeStampParameters { // com.davils.krypt.cms.timestamp/TimeStampParameters|null[0]
+    constructor <init>(com.davils.krypt.cms.signed/SignatureParameters = ..., com.davils.krypt.asn1/DerInteger? = ..., com.davils.krypt.asn1/ObjectIdentifier? = ..., kotlin/Boolean = ...) // com.davils.krypt.cms.timestamp/TimeStampParameters.<init>|<init>(com.davils.krypt.cms.signed.SignatureParameters;com.davils.krypt.asn1.DerInteger?;com.davils.krypt.asn1.ObjectIdentifier?;kotlin.Boolean){}[0]
+
+    final val isCertificateRequired // com.davils.krypt.cms.timestamp/TimeStampParameters.isCertificateRequired|{}isCertificateRequired[0]
+        final fun <get-isCertificateRequired>(): kotlin/Boolean // com.davils.krypt.cms.timestamp/TimeStampParameters.isCertificateRequired.<get-isCertificateRequired>|<get-isCertificateRequired>(){}[0]
+    final val nonce // com.davils.krypt.cms.timestamp/TimeStampParameters.nonce|{}nonce[0]
+        final fun <get-nonce>(): com.davils.krypt.asn1/DerInteger? // com.davils.krypt.cms.timestamp/TimeStampParameters.nonce.<get-nonce>|<get-nonce>(){}[0]
+    final val policy // com.davils.krypt.cms.timestamp/TimeStampParameters.policy|{}policy[0]
+        final fun <get-policy>(): com.davils.krypt.asn1/ObjectIdentifier? // com.davils.krypt.cms.timestamp/TimeStampParameters.policy.<get-policy>|<get-policy>(){}[0]
+    final val signature // com.davils.krypt.cms.timestamp/TimeStampParameters.signature|{}signature[0]
+        final fun <get-signature>(): com.davils.krypt.cms.signed/SignatureParameters // com.davils.krypt.cms.timestamp/TimeStampParameters.signature.<get-signature>|<get-signature>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cms.timestamp/TimeStampParameters.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cms.timestamp/TimeStampParameters.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cms.timestamp/TimeStampParameters.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.cms.timestamp/TimeStampRequest { // com.davils.krypt.cms.timestamp/TimeStampRequest|null[0]
+    final val digest // com.davils.krypt.cms.timestamp/TimeStampRequest.digest|{}digest[0]
+        final fun <get-digest>(): com.davils.krypt.core.algorithm/DigestAlgorithm? // com.davils.krypt.cms.timestamp/TimeStampRequest.digest.<get-digest>|<get-digest>(){}[0]
+    final val encoded // com.davils.krypt.cms.timestamp/TimeStampRequest.encoded|{}encoded[0]
+        final fun <get-encoded>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cms.timestamp/TimeStampRequest.encoded.<get-encoded>|<get-encoded>(){}[0]
+    final val hasExtensions // com.davils.krypt.cms.timestamp/TimeStampRequest.hasExtensions|{}hasExtensions[0]
+        final fun <get-hasExtensions>(): kotlin/Boolean // com.davils.krypt.cms.timestamp/TimeStampRequest.hasExtensions.<get-hasExtensions>|<get-hasExtensions>(){}[0]
+    final val hashedMessage // com.davils.krypt.cms.timestamp/TimeStampRequest.hashedMessage|{}hashedMessage[0]
+        final fun <get-hashedMessage>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cms.timestamp/TimeStampRequest.hashedMessage.<get-hashedMessage>|<get-hashedMessage>(){}[0]
+    final val isCertificateRequested // com.davils.krypt.cms.timestamp/TimeStampRequest.isCertificateRequested|{}isCertificateRequested[0]
+        final fun <get-isCertificateRequested>(): kotlin/Boolean // com.davils.krypt.cms.timestamp/TimeStampRequest.isCertificateRequested.<get-isCertificateRequested>|<get-isCertificateRequested>(){}[0]
+    final val nonce // com.davils.krypt.cms.timestamp/TimeStampRequest.nonce|{}nonce[0]
+        final fun <get-nonce>(): com.davils.krypt.asn1/DerInteger? // com.davils.krypt.cms.timestamp/TimeStampRequest.nonce.<get-nonce>|<get-nonce>(){}[0]
+    final val policy // com.davils.krypt.cms.timestamp/TimeStampRequest.policy|{}policy[0]
+        final fun <get-policy>(): com.davils.krypt.asn1/ObjectIdentifier? // com.davils.krypt.cms.timestamp/TimeStampRequest.policy.<get-policy>|<get-policy>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cms.timestamp/TimeStampRequest.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cms.timestamp/TimeStampRequest.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cms.timestamp/TimeStampRequest.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.cms.timestamp/TimeStampResponse { // com.davils.krypt.cms.timestamp/TimeStampResponse|null[0]
+    final val encoded // com.davils.krypt.cms.timestamp/TimeStampResponse.encoded|{}encoded[0]
+        final fun <get-encoded>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cms.timestamp/TimeStampResponse.encoded.<get-encoded>|<get-encoded>(){}[0]
+    final val failures // com.davils.krypt.cms.timestamp/TimeStampResponse.failures|{}failures[0]
+        final fun <get-failures>(): kotlin.collections/Set<kotlin/Int> // com.davils.krypt.cms.timestamp/TimeStampResponse.failures.<get-failures>|<get-failures>(){}[0]
+    final val status // com.davils.krypt.cms.timestamp/TimeStampResponse.status|{}status[0]
+        final fun <get-status>(): com.davils.krypt.cms.timestamp/TimeStampStatus // com.davils.krypt.cms.timestamp/TimeStampResponse.status.<get-status>|<get-status>(){}[0]
+    final val statusText // com.davils.krypt.cms.timestamp/TimeStampResponse.statusText|{}statusText[0]
+        final fun <get-statusText>(): kotlin.collections/List<kotlin/String> // com.davils.krypt.cms.timestamp/TimeStampResponse.statusText.<get-statusText>|<get-statusText>(){}[0]
+    final val token // com.davils.krypt.cms.timestamp/TimeStampResponse.token|{}token[0]
+        final fun <get-token>(): com.davils.krypt.cms.timestamp/TimeStampToken? // com.davils.krypt.cms.timestamp/TimeStampResponse.token.<get-token>|<get-token>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cms.timestamp/TimeStampResponse.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cms.timestamp/TimeStampResponse.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cms.timestamp/TimeStampResponse.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.cms.timestamp/TimeStampToken { // com.davils.krypt.cms.timestamp/TimeStampToken|null[0]
+    final val encoded // com.davils.krypt.cms.timestamp/TimeStampToken.encoded|{}encoded[0]
+        final fun <get-encoded>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cms.timestamp/TimeStampToken.encoded.<get-encoded>|<get-encoded>(){}[0]
+    final val info // com.davils.krypt.cms.timestamp/TimeStampToken.info|{}info[0]
+        final fun <get-info>(): com.davils.krypt.cms.timestamp/TstInfo // com.davils.krypt.cms.timestamp/TimeStampToken.info.<get-info>|<get-info>(){}[0]
+    final val signedData // com.davils.krypt.cms.timestamp/TimeStampToken.signedData|{}signedData[0]
+        final fun <get-signedData>(): com.davils.krypt.cms.signed/SignedData // com.davils.krypt.cms.timestamp/TimeStampToken.signedData.<get-signedData>|<get-signedData>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cms.timestamp/TimeStampToken.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cms.timestamp/TimeStampToken.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cms.timestamp/TimeStampToken.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.cms.timestamp/TimeStamps { // com.davils.krypt.cms.timestamp/TimeStamps|null[0]
+    constructor <init>(com.davils.krypt.primitive/Crypto, com.davils.krypt.cms/CmsLimits = ...) // com.davils.krypt.cms.timestamp/TimeStamps.<init>|<init>(com.davils.krypt.primitive.Crypto;com.davils.krypt.cms.CmsLimits){}[0]
+
+    final val crypto // com.davils.krypt.cms.timestamp/TimeStamps.crypto|{}crypto[0]
+        final fun <get-crypto>(): com.davils.krypt.primitive/Crypto // com.davils.krypt.cms.timestamp/TimeStamps.crypto.<get-crypto>|<get-crypto>(){}[0]
+    final val limits // com.davils.krypt.cms.timestamp/TimeStamps.limits|{}limits[0]
+        final fun <get-limits>(): com.davils.krypt.cms/CmsLimits // com.davils.krypt.cms.timestamp/TimeStamps.limits.<get-limits>|<get-limits>(){}[0]
+
+    final fun decodeRequest(kotlinx.io.bytestring/ByteString): com.davils.kore.core.outcome/Outcome<com.davils.krypt.cms.timestamp/TimeStampRequest, com.davils.krypt.cms/CmsFailure> // com.davils.krypt.cms.timestamp/TimeStamps.decodeRequest|decodeRequest(kotlinx.io.bytestring.ByteString){}[0]
+    final fun decodeResponse(kotlinx.io.bytestring/ByteString): com.davils.kore.core.outcome/Outcome<com.davils.krypt.cms.timestamp/TimeStampResponse, com.davils.krypt.cms/CmsFailure> // com.davils.krypt.cms.timestamp/TimeStamps.decodeResponse|decodeResponse(kotlinx.io.bytestring.ByteString){}[0]
+    final fun decodeToken(kotlinx.io.bytestring/ByteString): com.davils.kore.core.outcome/Outcome<com.davils.krypt.cms.timestamp/TimeStampToken, com.davils.krypt.cms/CmsFailure> // com.davils.krypt.cms.timestamp/TimeStamps.decodeToken|decodeToken(kotlinx.io.bytestring.ByteString){}[0]
+    final fun signatureTimeStamp(com.davils.krypt.cms.timestamp/TimeStampToken): com.davils.krypt.cms/Attribute // com.davils.krypt.cms.timestamp/TimeStamps.signatureTimeStamp|signatureTimeStamp(com.davils.krypt.cms.timestamp.TimeStampToken){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cms.timestamp/TimeStamps.toString|toString(){}[0]
+    final suspend fun request(kotlinx.io.bytestring/ByteString, com.davils.krypt.core.algorithm/DigestAlgorithm = ..., com.davils.krypt.asn1/ObjectIdentifier? = ..., kotlin/Boolean = ..., kotlin/Int? = ...): com.davils.krypt.cms.timestamp/TimeStampRequest // com.davils.krypt.cms.timestamp/TimeStamps.request|request(kotlinx.io.bytestring.ByteString;com.davils.krypt.core.algorithm.DigestAlgorithm;com.davils.krypt.asn1.ObjectIdentifier?;kotlin.Boolean;kotlin.Int?){}[0]
+    final suspend fun verify(com.davils.krypt.cms.timestamp/TimeStampResponse, com.davils.krypt.cms.timestamp/TimeStampRequest, com.davils.krypt.cms.signed/SignatureParameters = ...): com.davils.kore.core.outcome/Outcome<com.davils.krypt.cms.timestamp/TimeStampToken, com.davils.krypt.cms/CmsFailure> // com.davils.krypt.cms.timestamp/TimeStamps.verify|verify(com.davils.krypt.cms.timestamp.TimeStampResponse;com.davils.krypt.cms.timestamp.TimeStampRequest;com.davils.krypt.cms.signed.SignatureParameters){}[0]
+    final suspend fun verifySignatureTimeStamps(com.davils.krypt.cms.signed/SignerInfo, com.davils.krypt.cms.timestamp/TimeStampParameters = ...): com.davils.kore.core.outcome/Outcome<kotlin.collections/List<com.davils.krypt.cms.timestamp/TimeStampToken>, com.davils.krypt.cms/CmsFailure> // com.davils.krypt.cms.timestamp/TimeStamps.verifySignatureTimeStamps|verifySignatureTimeStamps(com.davils.krypt.cms.signed.SignerInfo;com.davils.krypt.cms.timestamp.TimeStampParameters){}[0]
+    final suspend fun verifyToken(com.davils.krypt.cms.timestamp/TimeStampToken, kotlinx.io.bytestring/ByteString, com.davils.krypt.cms.timestamp/TimeStampParameters = ...): com.davils.kore.core.outcome/Outcome<com.davils.krypt.cms.timestamp/TimeStampToken, com.davils.krypt.cms/CmsFailure> // com.davils.krypt.cms.timestamp/TimeStamps.verifyToken|verifyToken(com.davils.krypt.cms.timestamp.TimeStampToken;kotlinx.io.bytestring.ByteString;com.davils.krypt.cms.timestamp.TimeStampParameters){}[0]
+
+    final object Companion { // com.davils.krypt.cms.timestamp/TimeStamps.Companion|null[0]
+        final const val DEFAULT_NONCE_SIZE // com.davils.krypt.cms.timestamp/TimeStamps.Companion.DEFAULT_NONCE_SIZE|{}DEFAULT_NONCE_SIZE[0]
+            final fun <get-DEFAULT_NONCE_SIZE>(): kotlin/Int // com.davils.krypt.cms.timestamp/TimeStamps.Companion.DEFAULT_NONCE_SIZE.<get-DEFAULT_NONCE_SIZE>|<get-DEFAULT_NONCE_SIZE>(){}[0]
+        final const val MAXIMUM_NONCE_SIZE // com.davils.krypt.cms.timestamp/TimeStamps.Companion.MAXIMUM_NONCE_SIZE|{}MAXIMUM_NONCE_SIZE[0]
+            final fun <get-MAXIMUM_NONCE_SIZE>(): kotlin/Int // com.davils.krypt.cms.timestamp/TimeStamps.Companion.MAXIMUM_NONCE_SIZE.<get-MAXIMUM_NONCE_SIZE>|<get-MAXIMUM_NONCE_SIZE>(){}[0]
+        final const val MINIMUM_NONCE_SIZE // com.davils.krypt.cms.timestamp/TimeStamps.Companion.MINIMUM_NONCE_SIZE|{}MINIMUM_NONCE_SIZE[0]
+            final fun <get-MINIMUM_NONCE_SIZE>(): kotlin/Int // com.davils.krypt.cms.timestamp/TimeStamps.Companion.MINIMUM_NONCE_SIZE.<get-MINIMUM_NONCE_SIZE>|<get-MINIMUM_NONCE_SIZE>(){}[0]
+    }
+}
+
+final class com.davils.krypt.cms.timestamp/TstInfo { // com.davils.krypt.cms.timestamp/TstInfo|null[0]
+    final val accuracy // com.davils.krypt.cms.timestamp/TstInfo.accuracy|{}accuracy[0]
+        final fun <get-accuracy>(): com.davils.krypt.cms.timestamp/Accuracy? // com.davils.krypt.cms.timestamp/TstInfo.accuracy.<get-accuracy>|<get-accuracy>(){}[0]
+    final val digest // com.davils.krypt.cms.timestamp/TstInfo.digest|{}digest[0]
+        final fun <get-digest>(): com.davils.krypt.core.algorithm/DigestAlgorithm? // com.davils.krypt.cms.timestamp/TstInfo.digest.<get-digest>|<get-digest>(){}[0]
+    final val encoded // com.davils.krypt.cms.timestamp/TstInfo.encoded|{}encoded[0]
+        final fun <get-encoded>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cms.timestamp/TstInfo.encoded.<get-encoded>|<get-encoded>(){}[0]
+    final val genTime // com.davils.krypt.cms.timestamp/TstInfo.genTime|{}genTime[0]
+        final fun <get-genTime>(): kotlin.time/Instant // com.davils.krypt.cms.timestamp/TstInfo.genTime.<get-genTime>|<get-genTime>(){}[0]
+    final val hashedMessage // com.davils.krypt.cms.timestamp/TstInfo.hashedMessage|{}hashedMessage[0]
+        final fun <get-hashedMessage>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cms.timestamp/TstInfo.hashedMessage.<get-hashedMessage>|<get-hashedMessage>(){}[0]
+    final val isOrdered // com.davils.krypt.cms.timestamp/TstInfo.isOrdered|{}isOrdered[0]
+        final fun <get-isOrdered>(): kotlin/Boolean // com.davils.krypt.cms.timestamp/TstInfo.isOrdered.<get-isOrdered>|<get-isOrdered>(){}[0]
+    final val nonce // com.davils.krypt.cms.timestamp/TstInfo.nonce|{}nonce[0]
+        final fun <get-nonce>(): com.davils.krypt.asn1/DerInteger? // com.davils.krypt.cms.timestamp/TstInfo.nonce.<get-nonce>|<get-nonce>(){}[0]
+    final val policy // com.davils.krypt.cms.timestamp/TstInfo.policy|{}policy[0]
+        final fun <get-policy>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.cms.timestamp/TstInfo.policy.<get-policy>|<get-policy>(){}[0]
+    final val serialNumber // com.davils.krypt.cms.timestamp/TstInfo.serialNumber|{}serialNumber[0]
+        final fun <get-serialNumber>(): com.davils.krypt.asn1/DerInteger // com.davils.krypt.cms.timestamp/TstInfo.serialNumber.<get-serialNumber>|<get-serialNumber>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cms.timestamp/TstInfo.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cms.timestamp/TstInfo.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cms.timestamp/TstInfo.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.cms/Attribute { // com.davils.krypt.cms/Attribute|null[0]
+    constructor <init>(com.davils.krypt.asn1/ObjectIdentifier, kotlin.collections/List<kotlinx.io.bytestring/ByteString>) // com.davils.krypt.cms/Attribute.<init>|<init>(com.davils.krypt.asn1.ObjectIdentifier;kotlin.collections.List<kotlinx.io.bytestring.ByteString>){}[0]
+
+    final val type // com.davils.krypt.cms/Attribute.type|{}type[0]
+        final fun <get-type>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.cms/Attribute.type.<get-type>|<get-type>(){}[0]
+    final val values // com.davils.krypt.cms/Attribute.values|{}values[0]
+        final fun <get-values>(): kotlin.collections/List<kotlinx.io.bytestring/ByteString> // com.davils.krypt.cms/Attribute.values.<get-values>|<get-values>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cms/Attribute.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cms/Attribute.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cms/Attribute.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.cms/Cms { // com.davils.krypt.cms/Cms|null[0]
+    constructor <init>(com.davils.krypt.primitive/Crypto, com.davils.krypt.cms/CmsLimits = ...) // com.davils.krypt.cms/Cms.<init>|<init>(com.davils.krypt.primitive.Crypto;com.davils.krypt.cms.CmsLimits){}[0]
+
+    final val crypto // com.davils.krypt.cms/Cms.crypto|{}crypto[0]
+        final fun <get-crypto>(): com.davils.krypt.primitive/Crypto // com.davils.krypt.cms/Cms.crypto.<get-crypto>|<get-crypto>(){}[0]
+    final val limits // com.davils.krypt.cms/Cms.limits|{}limits[0]
+        final fun <get-limits>(): com.davils.krypt.cms/CmsLimits // com.davils.krypt.cms/Cms.limits.<get-limits>|<get-limits>(){}[0]
+
+    final fun addUnsignedAttribute(com.davils.krypt.cms.signed/SignedData, com.davils.krypt.cms.signed/SignerInfo, com.davils.krypt.cms/Attribute): com.davils.krypt.cms.signed/SignedData // com.davils.krypt.cms/Cms.addUnsignedAttribute|addUnsignedAttribute(com.davils.krypt.cms.signed.SignedData;com.davils.krypt.cms.signed.SignerInfo;com.davils.krypt.cms.Attribute){}[0]
+    final fun decodeEncrypted(kotlinx.io.bytestring/ByteString): com.davils.kore.core.outcome/Outcome<com.davils.krypt.cms.enveloped/EncryptedData, com.davils.krypt.cms/CmsFailure> // com.davils.krypt.cms/Cms.decodeEncrypted|decodeEncrypted(kotlinx.io.bytestring.ByteString){}[0]
+    final fun decodeEnveloped(kotlinx.io.bytestring/ByteString): com.davils.kore.core.outcome/Outcome<com.davils.krypt.cms.enveloped/EnvelopedData, com.davils.krypt.cms/CmsFailure> // com.davils.krypt.cms/Cms.decodeEnveloped|decodeEnveloped(kotlinx.io.bytestring.ByteString){}[0]
+    final fun decodeSigned(kotlinx.io.bytestring/ByteString): com.davils.kore.core.outcome/Outcome<com.davils.krypt.cms.signed/SignedData, com.davils.krypt.cms/CmsFailure> // com.davils.krypt.cms/Cms.decodeSigned|decodeSigned(kotlinx.io.bytestring.ByteString){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cms/Cms.toString|toString(){}[0]
+    final suspend fun countersign(com.davils.krypt.cms.signed/SignedData, com.davils.krypt.cms.signed/SignerInfo, com.davils.krypt.primitive.signature/Signer, com.davils.krypt.x509/Certificate, kotlin/Function1<com.davils.krypt.cms.signed/SignerBuilder, kotlin/Unit> = ...): com.davils.krypt.cms.signed/SignedData // com.davils.krypt.cms/Cms.countersign|countersign(com.davils.krypt.cms.signed.SignedData;com.davils.krypt.cms.signed.SignerInfo;com.davils.krypt.primitive.signature.Signer;com.davils.krypt.x509.Certificate;kotlin.Function1<com.davils.krypt.cms.signed.SignerBuilder,kotlin.Unit>){}[0]
+    final suspend fun decrypt(com.davils.krypt.cms.enveloped/EncryptedData, com.davils.krypt.primitive.key/SecretKey): com.davils.kore.core.outcome/Outcome<kotlinx.io.bytestring/ByteString, com.davils.krypt.cms/CmsFailure> // com.davils.krypt.cms/Cms.decrypt|decrypt(com.davils.krypt.cms.enveloped.EncryptedData;com.davils.krypt.primitive.key.SecretKey){}[0]
+    final suspend fun decrypt(com.davils.krypt.cms.enveloped/EnvelopedData, com.davils.krypt.cms.enveloped/Credential): com.davils.kore.core.outcome/Outcome<kotlinx.io.bytestring/ByteString, com.davils.krypt.cms/CmsFailure> // com.davils.krypt.cms/Cms.decrypt|decrypt(com.davils.krypt.cms.enveloped.EnvelopedData;com.davils.krypt.cms.enveloped.Credential){}[0]
+    final suspend fun encrypt(kotlinx.io.bytestring/ByteString, com.davils.krypt.primitive.key/SecretKey, com.davils.krypt.cms.enveloped/ContentEncryption = ...): com.davils.krypt.cms.enveloped/EncryptedData // com.davils.krypt.cms/Cms.encrypt|encrypt(kotlinx.io.bytestring.ByteString;com.davils.krypt.primitive.key.SecretKey;com.davils.krypt.cms.enveloped.ContentEncryption){}[0]
+    final suspend fun envelop(kotlinx.io.bytestring/ByteString, kotlin.collections/List<com.davils.krypt.cms.enveloped/Recipient>, com.davils.krypt.cms.enveloped/ContentEncryption = ..., com.davils.krypt.asn1/ObjectIdentifier = ...): com.davils.krypt.cms.enveloped/EnvelopedData // com.davils.krypt.cms/Cms.envelop|envelop(kotlinx.io.bytestring.ByteString;kotlin.collections.List<com.davils.krypt.cms.enveloped.Recipient>;com.davils.krypt.cms.enveloped.ContentEncryption;com.davils.krypt.asn1.ObjectIdentifier){}[0]
+    final suspend fun sign(kotlinx.io.bytestring/ByteString, kotlin/Function1<com.davils.krypt.cms.signed/SignedDataBuilder, kotlin/Unit>): com.davils.krypt.cms.signed/SignedData // com.davils.krypt.cms/Cms.sign|sign(kotlinx.io.bytestring.ByteString;kotlin.Function1<com.davils.krypt.cms.signed.SignedDataBuilder,kotlin.Unit>){}[0]
+    final suspend fun verify(com.davils.krypt.cms.signed/SignedData, kotlinx.io.bytestring/ByteString? = ..., com.davils.krypt.cms.signed/SignatureParameters = ...): com.davils.kore.core.outcome/Outcome<kotlin.collections/List<com.davils.krypt.cms.signed/VerifiedSigner>, com.davils.krypt.cms/CmsFailure> // com.davils.krypt.cms/Cms.verify|verify(com.davils.krypt.cms.signed.SignedData;kotlinx.io.bytestring.ByteString?;com.davils.krypt.cms.signed.SignatureParameters){}[0]
+    final suspend fun verifyCountersignature(com.davils.krypt.cms.signed/SignedData, com.davils.krypt.cms.signed/SignerInfo, com.davils.krypt.cms.signed/SignerInfo, com.davils.krypt.cms.signed/SignatureParameters = ...): com.davils.kore.core.outcome/Outcome<com.davils.krypt.cms.signed/VerifiedSigner, com.davils.krypt.cms/CmsFailure> // com.davils.krypt.cms/Cms.verifyCountersignature|verifyCountersignature(com.davils.krypt.cms.signed.SignedData;com.davils.krypt.cms.signed.SignerInfo;com.davils.krypt.cms.signed.SignerInfo;com.davils.krypt.cms.signed.SignatureParameters){}[0]
+    final suspend fun verifySigner(com.davils.krypt.cms.signed/SignedData, com.davils.krypt.cms.signed/SignerInfo, kotlinx.io.bytestring/ByteString? = ..., com.davils.krypt.cms.signed/SignatureParameters = ...): com.davils.kore.core.outcome/Outcome<com.davils.krypt.cms.signed/VerifiedSigner, com.davils.krypt.cms/CmsFailure> // com.davils.krypt.cms/Cms.verifySigner|verifySigner(com.davils.krypt.cms.signed.SignedData;com.davils.krypt.cms.signed.SignerInfo;kotlinx.io.bytestring.ByteString?;com.davils.krypt.cms.signed.SignatureParameters){}[0]
+}
+
+final class com.davils.krypt.cms/CmsLimits { // com.davils.krypt.cms/CmsLimits|null[0]
+    constructor <init>(kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ...) // com.davils.krypt.cms/CmsLimits.<init>|<init>(kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int){}[0]
+
+    final val maximumAttributes // com.davils.krypt.cms/CmsLimits.maximumAttributes|{}maximumAttributes[0]
+        final fun <get-maximumAttributes>(): kotlin/Int // com.davils.krypt.cms/CmsLimits.maximumAttributes.<get-maximumAttributes>|<get-maximumAttributes>(){}[0]
+    final val maximumBytes // com.davils.krypt.cms/CmsLimits.maximumBytes|{}maximumBytes[0]
+        final fun <get-maximumBytes>(): kotlin/Int // com.davils.krypt.cms/CmsLimits.maximumBytes.<get-maximumBytes>|<get-maximumBytes>(){}[0]
+    final val maximumCertificates // com.davils.krypt.cms/CmsLimits.maximumCertificates|{}maximumCertificates[0]
+        final fun <get-maximumCertificates>(): kotlin/Int // com.davils.krypt.cms/CmsLimits.maximumCertificates.<get-maximumCertificates>|<get-maximumCertificates>(){}[0]
+    final val maximumContentBytes // com.davils.krypt.cms/CmsLimits.maximumContentBytes|{}maximumContentBytes[0]
+        final fun <get-maximumContentBytes>(): kotlin/Int // com.davils.krypt.cms/CmsLimits.maximumContentBytes.<get-maximumContentBytes>|<get-maximumContentBytes>(){}[0]
+    final val maximumNesting // com.davils.krypt.cms/CmsLimits.maximumNesting|{}maximumNesting[0]
+        final fun <get-maximumNesting>(): kotlin/Int // com.davils.krypt.cms/CmsLimits.maximumNesting.<get-maximumNesting>|<get-maximumNesting>(){}[0]
+    final val maximumRecipients // com.davils.krypt.cms/CmsLimits.maximumRecipients|{}maximumRecipients[0]
+        final fun <get-maximumRecipients>(): kotlin/Int // com.davils.krypt.cms/CmsLimits.maximumRecipients.<get-maximumRecipients>|<get-maximumRecipients>(){}[0]
+    final val maximumRevocationLists // com.davils.krypt.cms/CmsLimits.maximumRevocationLists|{}maximumRevocationLists[0]
+        final fun <get-maximumRevocationLists>(): kotlin/Int // com.davils.krypt.cms/CmsLimits.maximumRevocationLists.<get-maximumRevocationLists>|<get-maximumRevocationLists>(){}[0]
+    final val maximumSigners // com.davils.krypt.cms/CmsLimits.maximumSigners|{}maximumSigners[0]
+        final fun <get-maximumSigners>(): kotlin/Int // com.davils.krypt.cms/CmsLimits.maximumSigners.<get-maximumSigners>|<get-maximumSigners>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cms/CmsLimits.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cms/CmsLimits.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cms/CmsLimits.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.cms/CmsLimits.Companion|null[0]
+        final const val DEFAULT_MAXIMUM_ATTRIBUTES // com.davils.krypt.cms/CmsLimits.Companion.DEFAULT_MAXIMUM_ATTRIBUTES|{}DEFAULT_MAXIMUM_ATTRIBUTES[0]
+            final fun <get-DEFAULT_MAXIMUM_ATTRIBUTES>(): kotlin/Int // com.davils.krypt.cms/CmsLimits.Companion.DEFAULT_MAXIMUM_ATTRIBUTES.<get-DEFAULT_MAXIMUM_ATTRIBUTES>|<get-DEFAULT_MAXIMUM_ATTRIBUTES>(){}[0]
+        final const val DEFAULT_MAXIMUM_BYTES // com.davils.krypt.cms/CmsLimits.Companion.DEFAULT_MAXIMUM_BYTES|{}DEFAULT_MAXIMUM_BYTES[0]
+            final fun <get-DEFAULT_MAXIMUM_BYTES>(): kotlin/Int // com.davils.krypt.cms/CmsLimits.Companion.DEFAULT_MAXIMUM_BYTES.<get-DEFAULT_MAXIMUM_BYTES>|<get-DEFAULT_MAXIMUM_BYTES>(){}[0]
+        final const val DEFAULT_MAXIMUM_CERTIFICATES // com.davils.krypt.cms/CmsLimits.Companion.DEFAULT_MAXIMUM_CERTIFICATES|{}DEFAULT_MAXIMUM_CERTIFICATES[0]
+            final fun <get-DEFAULT_MAXIMUM_CERTIFICATES>(): kotlin/Int // com.davils.krypt.cms/CmsLimits.Companion.DEFAULT_MAXIMUM_CERTIFICATES.<get-DEFAULT_MAXIMUM_CERTIFICATES>|<get-DEFAULT_MAXIMUM_CERTIFICATES>(){}[0]
+        final const val DEFAULT_MAXIMUM_CONTENT_BYTES // com.davils.krypt.cms/CmsLimits.Companion.DEFAULT_MAXIMUM_CONTENT_BYTES|{}DEFAULT_MAXIMUM_CONTENT_BYTES[0]
+            final fun <get-DEFAULT_MAXIMUM_CONTENT_BYTES>(): kotlin/Int // com.davils.krypt.cms/CmsLimits.Companion.DEFAULT_MAXIMUM_CONTENT_BYTES.<get-DEFAULT_MAXIMUM_CONTENT_BYTES>|<get-DEFAULT_MAXIMUM_CONTENT_BYTES>(){}[0]
+        final const val DEFAULT_MAXIMUM_NESTING // com.davils.krypt.cms/CmsLimits.Companion.DEFAULT_MAXIMUM_NESTING|{}DEFAULT_MAXIMUM_NESTING[0]
+            final fun <get-DEFAULT_MAXIMUM_NESTING>(): kotlin/Int // com.davils.krypt.cms/CmsLimits.Companion.DEFAULT_MAXIMUM_NESTING.<get-DEFAULT_MAXIMUM_NESTING>|<get-DEFAULT_MAXIMUM_NESTING>(){}[0]
+        final const val DEFAULT_MAXIMUM_RECIPIENTS // com.davils.krypt.cms/CmsLimits.Companion.DEFAULT_MAXIMUM_RECIPIENTS|{}DEFAULT_MAXIMUM_RECIPIENTS[0]
+            final fun <get-DEFAULT_MAXIMUM_RECIPIENTS>(): kotlin/Int // com.davils.krypt.cms/CmsLimits.Companion.DEFAULT_MAXIMUM_RECIPIENTS.<get-DEFAULT_MAXIMUM_RECIPIENTS>|<get-DEFAULT_MAXIMUM_RECIPIENTS>(){}[0]
+        final const val DEFAULT_MAXIMUM_REVOCATION_LISTS // com.davils.krypt.cms/CmsLimits.Companion.DEFAULT_MAXIMUM_REVOCATION_LISTS|{}DEFAULT_MAXIMUM_REVOCATION_LISTS[0]
+            final fun <get-DEFAULT_MAXIMUM_REVOCATION_LISTS>(): kotlin/Int // com.davils.krypt.cms/CmsLimits.Companion.DEFAULT_MAXIMUM_REVOCATION_LISTS.<get-DEFAULT_MAXIMUM_REVOCATION_LISTS>|<get-DEFAULT_MAXIMUM_REVOCATION_LISTS>(){}[0]
+        final const val DEFAULT_MAXIMUM_SIGNERS // com.davils.krypt.cms/CmsLimits.Companion.DEFAULT_MAXIMUM_SIGNERS|{}DEFAULT_MAXIMUM_SIGNERS[0]
+            final fun <get-DEFAULT_MAXIMUM_SIGNERS>(): kotlin/Int // com.davils.krypt.cms/CmsLimits.Companion.DEFAULT_MAXIMUM_SIGNERS.<get-DEFAULT_MAXIMUM_SIGNERS>|<get-DEFAULT_MAXIMUM_SIGNERS>(){}[0]
+        final const val HARD_MAXIMUM_ATTRIBUTES // com.davils.krypt.cms/CmsLimits.Companion.HARD_MAXIMUM_ATTRIBUTES|{}HARD_MAXIMUM_ATTRIBUTES[0]
+            final fun <get-HARD_MAXIMUM_ATTRIBUTES>(): kotlin/Int // com.davils.krypt.cms/CmsLimits.Companion.HARD_MAXIMUM_ATTRIBUTES.<get-HARD_MAXIMUM_ATTRIBUTES>|<get-HARD_MAXIMUM_ATTRIBUTES>(){}[0]
+        final const val HARD_MAXIMUM_BYTES // com.davils.krypt.cms/CmsLimits.Companion.HARD_MAXIMUM_BYTES|{}HARD_MAXIMUM_BYTES[0]
+            final fun <get-HARD_MAXIMUM_BYTES>(): kotlin/Int // com.davils.krypt.cms/CmsLimits.Companion.HARD_MAXIMUM_BYTES.<get-HARD_MAXIMUM_BYTES>|<get-HARD_MAXIMUM_BYTES>(){}[0]
+        final const val HARD_MAXIMUM_CERTIFICATES // com.davils.krypt.cms/CmsLimits.Companion.HARD_MAXIMUM_CERTIFICATES|{}HARD_MAXIMUM_CERTIFICATES[0]
+            final fun <get-HARD_MAXIMUM_CERTIFICATES>(): kotlin/Int // com.davils.krypt.cms/CmsLimits.Companion.HARD_MAXIMUM_CERTIFICATES.<get-HARD_MAXIMUM_CERTIFICATES>|<get-HARD_MAXIMUM_CERTIFICATES>(){}[0]
+        final const val HARD_MAXIMUM_NESTING // com.davils.krypt.cms/CmsLimits.Companion.HARD_MAXIMUM_NESTING|{}HARD_MAXIMUM_NESTING[0]
+            final fun <get-HARD_MAXIMUM_NESTING>(): kotlin/Int // com.davils.krypt.cms/CmsLimits.Companion.HARD_MAXIMUM_NESTING.<get-HARD_MAXIMUM_NESTING>|<get-HARD_MAXIMUM_NESTING>(){}[0]
+        final const val HARD_MAXIMUM_RECIPIENTS // com.davils.krypt.cms/CmsLimits.Companion.HARD_MAXIMUM_RECIPIENTS|{}HARD_MAXIMUM_RECIPIENTS[0]
+            final fun <get-HARD_MAXIMUM_RECIPIENTS>(): kotlin/Int // com.davils.krypt.cms/CmsLimits.Companion.HARD_MAXIMUM_RECIPIENTS.<get-HARD_MAXIMUM_RECIPIENTS>|<get-HARD_MAXIMUM_RECIPIENTS>(){}[0]
+        final const val HARD_MAXIMUM_REVOCATION_LISTS // com.davils.krypt.cms/CmsLimits.Companion.HARD_MAXIMUM_REVOCATION_LISTS|{}HARD_MAXIMUM_REVOCATION_LISTS[0]
+            final fun <get-HARD_MAXIMUM_REVOCATION_LISTS>(): kotlin/Int // com.davils.krypt.cms/CmsLimits.Companion.HARD_MAXIMUM_REVOCATION_LISTS.<get-HARD_MAXIMUM_REVOCATION_LISTS>|<get-HARD_MAXIMUM_REVOCATION_LISTS>(){}[0]
+        final const val HARD_MAXIMUM_SIGNERS // com.davils.krypt.cms/CmsLimits.Companion.HARD_MAXIMUM_SIGNERS|{}HARD_MAXIMUM_SIGNERS[0]
+            final fun <get-HARD_MAXIMUM_SIGNERS>(): kotlin/Int // com.davils.krypt.cms/CmsLimits.Companion.HARD_MAXIMUM_SIGNERS.<get-HARD_MAXIMUM_SIGNERS>|<get-HARD_MAXIMUM_SIGNERS>(){}[0]
+
+        final val Default // com.davils.krypt.cms/CmsLimits.Companion.Default|{}Default[0]
+            final fun <get-Default>(): com.davils.krypt.cms/CmsLimits // com.davils.krypt.cms/CmsLimits.Companion.Default.<get-Default>|<get-Default>(){}[0]
+    }
+}
+
+final object com.davils.krypt.cms/ContentTypes { // com.davils.krypt.cms/ContentTypes|null[0]
+    final val AuthEnvelopedData // com.davils.krypt.cms/ContentTypes.AuthEnvelopedData|{}AuthEnvelopedData[0]
+        final fun <get-AuthEnvelopedData>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.cms/ContentTypes.AuthEnvelopedData.<get-AuthEnvelopedData>|<get-AuthEnvelopedData>(){}[0]
+    final val Data // com.davils.krypt.cms/ContentTypes.Data|{}Data[0]
+        final fun <get-Data>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.cms/ContentTypes.Data.<get-Data>|<get-Data>(){}[0]
+    final val EncryptedData // com.davils.krypt.cms/ContentTypes.EncryptedData|{}EncryptedData[0]
+        final fun <get-EncryptedData>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.cms/ContentTypes.EncryptedData.<get-EncryptedData>|<get-EncryptedData>(){}[0]
+    final val EnvelopedData // com.davils.krypt.cms/ContentTypes.EnvelopedData|{}EnvelopedData[0]
+        final fun <get-EnvelopedData>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.cms/ContentTypes.EnvelopedData.<get-EnvelopedData>|<get-EnvelopedData>(){}[0]
+    final val SignedData // com.davils.krypt.cms/ContentTypes.SignedData|{}SignedData[0]
+        final fun <get-SignedData>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.cms/ContentTypes.SignedData.<get-SignedData>|<get-SignedData>(){}[0]
+    final val TstInfo // com.davils.krypt.cms/ContentTypes.TstInfo|{}TstInfo[0]
+        final fun <get-TstInfo>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.cms/ContentTypes.TstInfo.<get-TstInfo>|<get-TstInfo>(){}[0]
+}
