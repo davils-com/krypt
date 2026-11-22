@@ -23,7 +23,8 @@ config:
 
 comments:
   # Kreate's test suites live in src/<suite> and, in a multiplatform project, in src/common<Suite> and
-  # src/jvm<Suite>, which the default test exclusions of Detekt do not know.
+  # src/jvm<Suite>, which the default test exclusions of Detekt do not know. The JMH benchmarks in src/benchmarks are
+  # public because JMH needs them to be, but they are no API.
   UndocumentedPublicClass:
     active: true
     excludes: &testSources
@@ -34,6 +35,7 @@ comments:
       - '**/jvmUnitTest/**'
       - '**/commonIntegrationTest/**'
       - '**/jvmIntegrationTest/**'
+      - '**/benchmarks/**'
     searchInNestedClass: true
     searchInInnerClass: true
     searchInInnerObject: true
