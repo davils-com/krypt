@@ -2,6 +2,18 @@
     "schemaVersion": 1,
     "standards": [
         {
+            "id": "github:spiffe/spiffe",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-spiffe: SPIFFE-ID, X509-SVID, JWT-SVID, trust domain and bundle, federation and Workload API.",
+            "snapshot": {
+                "title": "spiffe/spiffe",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
+            }
+        },
+        {
             "id": "rfc:10024",
             "reviewedOn": "2026-11-22",
             "note": "Reviewed for krypt-tls.",
@@ -145,6 +157,42 @@
                 "replacedBy": [],
                 "updatedBy": [],
                 "errata": {}
+            }
+        },
+        {
+            "id": "rfc:3986",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-spiffe: SPIFFE ids are RFC 3986 URIs, parsed only in their canonical form.",
+            "snapshot": {
+                "title": "Uniform Resource Identifier (URI): Generic Syntax",
+                "status": "INTERNET STANDARD",
+                "published": "January 2005",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [
+                    "RFC7320",
+                    "RFC8820"
+                ],
+                "errata": {
+                    "1783": "REJECTED",
+                    "2033": "HELD",
+                    "2525": "VERIFIED",
+                    "2624": "HELD",
+                    "2717": "REJECTED",
+                    "2933": "HELD",
+                    "3330": "REJECTED",
+                    "4293": "REJECTED",
+                    "4393": "REJECTED",
+                    "4394": "REJECTED",
+                    "4547": "HELD",
+                    "4789": "HELD",
+                    "4942": "HELD",
+                    "5428": "HELD",
+                    "7019": "REJECTED",
+                    "7590": "VERIFIED",
+                    "8442": "REJECTED",
+                    "9147": "REPORTED"
+                }
             }
         },
         {

@@ -58,6 +58,9 @@ kreate {
             rfc(3560) {
                 note = "RSA-OAEP key transport in CMS: the KeyTransRecipientInfo of krypt-cms with SHA-2 and MGF1."
             }
+            rfc(3986) {
+                note = "URIs: the SPIFFE ids of krypt-spiffe are URIs of the scheme spiffe, parsed strictly by hand."
+            }
             rfc(4055) {
                 note = "RSASSA-PSS and RSAES-OAEP in X.509: the algorithm identifiers and parameters krypt-x509 " +
                     "reads and writes."
@@ -276,6 +279,10 @@ kreate {
             }
             rfc(10024) {
                 note = "The hybrid group X25519MLKEM768 of TLS 1.3, which krypt-tls offers first where the JDK has it."
+            }
+            github("spiffe/spiffe") {
+                note = "SPIFFE: ids and trust domains, X.509-SVIDs, JWT-SVIDs, trust bundles and bundle maps, " +
+                    "federation and the Workload API, which krypt-spiffe follows without opening a socket."
             }
             unicode {
                 note = "Untrusted names, subjects and texts are shown through SafeText of Kore."
