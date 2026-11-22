@@ -93,6 +93,7 @@ kreate {
                 ":krypt-primitive",
                 ":krypt-keyset",
                 ":krypt-stream",
+                ":krypt-storage",
                 ":krypt-testing",
             )
         }

@@ -1,0 +1,137 @@
+// Klib ABI Dump
+// Targets: [wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.davils:krypt-storage>
+final enum class com.davils.krypt.storage/StorageFailure : kotlin/Enum<com.davils.krypt.storage/StorageFailure> { // com.davils.krypt.storage/StorageFailure|null[0]
+    enum entry DecryptionFailed // com.davils.krypt.storage/StorageFailure.DecryptionFailed|null[0]
+    enum entry Malformed // com.davils.krypt.storage/StorageFailure.Malformed|null[0]
+    enum entry Missing // com.davils.krypt.storage/StorageFailure.Missing|null[0]
+    enum entry Rollback // com.davils.krypt.storage/StorageFailure.Rollback|null[0]
+
+    final val entries // com.davils.krypt.storage/StorageFailure.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.storage/StorageFailure> // com.davils.krypt.storage/StorageFailure.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.storage/StorageFailure // com.davils.krypt.storage/StorageFailure.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.storage/StorageFailure> // com.davils.krypt.storage/StorageFailure.values|values#static(){}[0]
+}
+
+abstract interface com.davils.krypt.storage.blob/BlobStore { // com.davils.krypt.storage.blob/BlobStore|null[0]
+    abstract suspend fun delete(kotlin/String): kotlin/Boolean // com.davils.krypt.storage.blob/BlobStore.delete|delete(kotlin.String){}[0]
+    abstract suspend fun open(kotlin/String): com.davils.krypt.stream/RandomAccessSource? // com.davils.krypt.storage.blob/BlobStore.open|open(kotlin.String){}[0]
+    abstract suspend fun write(kotlin/String, kotlin.coroutines/SuspendFunction1<com.davils.krypt.core.io/ByteSink, kotlin/Unit>) // com.davils.krypt.storage.blob/BlobStore.write|write(kotlin.String;kotlin.coroutines.SuspendFunction1<com.davils.krypt.core.io.ByteSink,kotlin.Unit>){}[0]
+}
+
+abstract interface com.davils.krypt.storage.blob/VersionLedger { // com.davils.krypt.storage.blob/VersionLedger|null[0]
+    abstract suspend fun current(kotlin/String): kotlin/Long? // com.davils.krypt.storage.blob/VersionLedger.current|current(kotlin.String){}[0]
+    abstract suspend fun forget(kotlin/String) // com.davils.krypt.storage.blob/VersionLedger.forget|forget(kotlin.String){}[0]
+    abstract suspend fun record(kotlin/String, kotlin/Long, kotlin/Long?): kotlin/Boolean // com.davils.krypt.storage.blob/VersionLedger.record|record(kotlin.String;kotlin.Long;kotlin.Long?){}[0]
+}
+
+final class com.davils.krypt.storage.blob/EncryptedBlobStore { // com.davils.krypt.storage.blob/EncryptedBlobStore|null[0]
+    constructor <init>(com.davils.krypt.stream/Containers, com.davils.krypt.storage.blob/BlobStore, com.davils.krypt.keyset/KeysetAead, com.davils.krypt.keyset/KeysetMac, com.davils.krypt.storage.blob/VersionLedger? = ..., kotlin/Int = ...) // com.davils.krypt.storage.blob/EncryptedBlobStore.<init>|<init>(com.davils.krypt.stream.Containers;com.davils.krypt.storage.blob.BlobStore;com.davils.krypt.keyset.KeysetAead;com.davils.krypt.keyset.KeysetMac;com.davils.krypt.storage.blob.VersionLedger?;kotlin.Int){}[0]
+
+    final val dataKeys // com.davils.krypt.storage.blob/EncryptedBlobStore.dataKeys|{}dataKeys[0]
+        final fun <get-dataKeys>(): com.davils.krypt.keyset/KeysetAead // com.davils.krypt.storage.blob/EncryptedBlobStore.dataKeys.<get-dataKeys>|<get-dataKeys>(){}[0]
+    final val names // com.davils.krypt.storage.blob/EncryptedBlobStore.names|{}names[0]
+        final fun <get-names>(): com.davils.krypt.keyset/KeysetMac // com.davils.krypt.storage.blob/EncryptedBlobStore.names.<get-names>|<get-names>(){}[0]
+    final val segmentSize // com.davils.krypt.storage.blob/EncryptedBlobStore.segmentSize|{}segmentSize[0]
+        final fun <get-segmentSize>(): kotlin/Int // com.davils.krypt.storage.blob/EncryptedBlobStore.segmentSize.<get-segmentSize>|<get-segmentSize>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.storage.blob/EncryptedBlobStore.toString|toString(){}[0]
+    final suspend fun delete(kotlin/String): kotlin/Boolean // com.davils.krypt.storage.blob/EncryptedBlobStore.delete|delete(kotlin.String){}[0]
+    final suspend fun get(kotlin/String): com.davils.kore.core.outcome/Outcome<kotlinx.io.bytestring/ByteString, com.davils.krypt.storage/StorageFailure> // com.davils.krypt.storage.blob/EncryptedBlobStore.get|get(kotlin.String){}[0]
+    final suspend fun metadata(kotlin/String): com.davils.kore.core.outcome/Outcome<com.davils.krypt.storage.blob/ObjectMetadata, com.davils.krypt.storage/StorageFailure> // com.davils.krypt.storage.blob/EncryptedBlobStore.metadata|metadata(kotlin.String){}[0]
+    final suspend fun open(kotlin/String): com.davils.kore.core.outcome/Outcome<com.davils.krypt.storage.blob/StoredObject, com.davils.krypt.storage/StorageFailure> // com.davils.krypt.storage.blob/EncryptedBlobStore.open|open(kotlin.String){}[0]
+    final suspend fun put(kotlin/String, com.davils.krypt.core.io/ByteSource, kotlin/String = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ...): com.davils.krypt.storage.blob/ObjectMetadata // com.davils.krypt.storage.blob/EncryptedBlobStore.put|put(kotlin.String;com.davils.krypt.core.io.ByteSource;kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+    final suspend fun put(kotlin/String, kotlinx.io.bytestring/ByteString, kotlin/String = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ...): com.davils.krypt.storage.blob/ObjectMetadata // com.davils.krypt.storage.blob/EncryptedBlobStore.put|put(kotlin.String;kotlinx.io.bytestring.ByteString;kotlin.String;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+    final suspend fun read(kotlin/String, com.davils.krypt.core.io/ByteSink): com.davils.kore.core.outcome/Outcome<com.davils.krypt.storage.blob/ObjectMetadata, com.davils.krypt.storage/StorageFailure> // com.davils.krypt.storage.blob/EncryptedBlobStore.read|read(kotlin.String;com.davils.krypt.core.io.ByteSink){}[0]
+    final suspend fun rewrap(kotlin/String): com.davils.kore.core.outcome/Outcome<com.davils.krypt.storage.blob/ObjectMetadata, com.davils.krypt.storage/StorageFailure> // com.davils.krypt.storage.blob/EncryptedBlobStore.rewrap|rewrap(kotlin.String){}[0]
+}
+
+final class com.davils.krypt.storage.blob/ObjectMetadata { // com.davils.krypt.storage.blob/ObjectMetadata|null[0]
+    constructor <init>(kotlin/String, kotlin/Long, kotlin/String, kotlin.time/Instant, kotlin.collections/Map<kotlin/String, kotlin/String> = ...) // com.davils.krypt.storage.blob/ObjectMetadata.<init>|<init>(kotlin.String;kotlin.Long;kotlin.String;kotlin.time.Instant;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+
+    final val attributes // com.davils.krypt.storage.blob/ObjectMetadata.attributes|{}attributes[0]
+        final fun <get-attributes>(): kotlin.collections/Map<kotlin/String, kotlin/String> // com.davils.krypt.storage.blob/ObjectMetadata.attributes.<get-attributes>|<get-attributes>(){}[0]
+    final val contentType // com.davils.krypt.storage.blob/ObjectMetadata.contentType|{}contentType[0]
+        final fun <get-contentType>(): kotlin/String // com.davils.krypt.storage.blob/ObjectMetadata.contentType.<get-contentType>|<get-contentType>(){}[0]
+    final val createdAt // com.davils.krypt.storage.blob/ObjectMetadata.createdAt|{}createdAt[0]
+        final fun <get-createdAt>(): kotlin.time/Instant // com.davils.krypt.storage.blob/ObjectMetadata.createdAt.<get-createdAt>|<get-createdAt>(){}[0]
+    final val name // com.davils.krypt.storage.blob/ObjectMetadata.name|{}name[0]
+        final fun <get-name>(): kotlin/String // com.davils.krypt.storage.blob/ObjectMetadata.name.<get-name>|<get-name>(){}[0]
+    final val version // com.davils.krypt.storage.blob/ObjectMetadata.version|{}version[0]
+        final fun <get-version>(): kotlin/Long // com.davils.krypt.storage.blob/ObjectMetadata.version.<get-version>|<get-version>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.storage.blob/ObjectMetadata.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.storage.blob/ObjectMetadata.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.storage.blob/ObjectMetadata.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.storage.blob/StoredObject { // com.davils.krypt.storage.blob/StoredObject|null[0]
+    final val metadata // com.davils.krypt.storage.blob/StoredObject.metadata|{}metadata[0]
+        final fun <get-metadata>(): com.davils.krypt.storage.blob/ObjectMetadata // com.davils.krypt.storage.blob/StoredObject.metadata.<get-metadata>|<get-metadata>(){}[0]
+    final val reader // com.davils.krypt.storage.blob/StoredObject.reader|{}reader[0]
+        final fun <get-reader>(): com.davils.krypt.stream/ContainerReader // com.davils.krypt.storage.blob/StoredObject.reader.<get-reader>|<get-reader>(){}[0]
+
+    final fun close() // com.davils.krypt.storage.blob/StoredObject.close|close(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.storage.blob/StoredObject.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.storage.record/BlindIndex { // com.davils.krypt.storage.record/BlindIndex|null[0]
+    constructor <init>(com.davils.krypt.keyset/KeysetMac, kotlin/String, kotlin/Int = ..., kotlin/Function1<kotlin/String, kotlin/String> = ...) // com.davils.krypt.storage.record/BlindIndex.<init>|<init>(com.davils.krypt.keyset.KeysetMac;kotlin.String;kotlin.Int;kotlin.Function1<kotlin.String,kotlin.String>){}[0]
+
+    final val column // com.davils.krypt.storage.record/BlindIndex.column|{}column[0]
+        final fun <get-column>(): kotlin/String // com.davils.krypt.storage.record/BlindIndex.column.<get-column>|<get-column>(){}[0]
+    final val mac // com.davils.krypt.storage.record/BlindIndex.mac|{}mac[0]
+        final fun <get-mac>(): com.davils.krypt.keyset/KeysetMac // com.davils.krypt.storage.record/BlindIndex.mac.<get-mac>|<get-mac>(){}[0]
+    final val size // com.davils.krypt.storage.record/BlindIndex.size|{}size[0]
+        final fun <get-size>(): kotlin/Int // com.davils.krypt.storage.record/BlindIndex.size.<get-size>|<get-size>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.storage.record/BlindIndex.toString|toString(){}[0]
+    final suspend fun candidates(kotlin/String): kotlin.collections/List<kotlin/String> // com.davils.krypt.storage.record/BlindIndex.candidates|candidates(kotlin.String){}[0]
+    final suspend fun of(kotlin/String): kotlin/String // com.davils.krypt.storage.record/BlindIndex.of|of(kotlin.String){}[0]
+}
+
+final class com.davils.krypt.storage.record/RecordCipher { // com.davils.krypt.storage.record/RecordCipher|null[0]
+    constructor <init>(com.davils.krypt.keyset/KeysetAead) // com.davils.krypt.storage.record/RecordCipher.<init>|<init>(com.davils.krypt.keyset.KeysetAead){}[0]
+
+    final val aead // com.davils.krypt.storage.record/RecordCipher.aead|{}aead[0]
+        final fun <get-aead>(): com.davils.krypt.keyset/KeysetAead // com.davils.krypt.storage.record/RecordCipher.aead.<get-aead>|<get-aead>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.storage.record/RecordCipher.toString|toString(){}[0]
+    final suspend fun decrypt(kotlinx.io.bytestring/ByteString, com.davils.krypt.storage.record/RecordContext): kotlinx.io.bytestring/ByteString? // com.davils.krypt.storage.record/RecordCipher.decrypt|decrypt(kotlinx.io.bytestring.ByteString;com.davils.krypt.storage.record.RecordContext){}[0]
+    final suspend fun decryptText(kotlin/String, com.davils.krypt.storage.record/RecordContext): kotlin/String? // com.davils.krypt.storage.record/RecordCipher.decryptText|decryptText(kotlin.String;com.davils.krypt.storage.record.RecordContext){}[0]
+    final suspend fun encrypt(kotlinx.io.bytestring/ByteString, com.davils.krypt.storage.record/RecordContext): kotlinx.io.bytestring/ByteString // com.davils.krypt.storage.record/RecordCipher.encrypt|encrypt(kotlinx.io.bytestring.ByteString;com.davils.krypt.storage.record.RecordContext){}[0]
+    final suspend fun encryptText(kotlin/String, com.davils.krypt.storage.record/RecordContext): kotlin/String // com.davils.krypt.storage.record/RecordCipher.encryptText|encryptText(kotlin.String;com.davils.krypt.storage.record.RecordContext){}[0]
+}
+
+final class com.davils.krypt.storage.record/RecordContext { // com.davils.krypt.storage.record/RecordContext|null[0]
+    constructor <init>(kotlin/String, kotlin/String, kotlin/String) // com.davils.krypt.storage.record/RecordContext.<init>|<init>(kotlin.String;kotlin.String;kotlin.String){}[0]
+
+    final val column // com.davils.krypt.storage.record/RecordContext.column|{}column[0]
+        final fun <get-column>(): kotlin/String // com.davils.krypt.storage.record/RecordContext.column.<get-column>|<get-column>(){}[0]
+    final val row // com.davils.krypt.storage.record/RecordContext.row|{}row[0]
+        final fun <get-row>(): kotlin/String // com.davils.krypt.storage.record/RecordContext.row.<get-row>|<get-row>(){}[0]
+    final val table // com.davils.krypt.storage.record/RecordContext.table|{}table[0]
+        final fun <get-table>(): kotlin/String // com.davils.krypt.storage.record/RecordContext.table.<get-table>|<get-table>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.storage.record/RecordContext.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.storage.record/RecordContext.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.storage.record/RecordContext.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.storage/SubjectKeys { // com.davils.krypt.storage/SubjectKeys|null[0]
+    constructor <init>(com.davils.krypt.keyset.store/KeysetVault) // com.davils.krypt.storage/SubjectKeys.<init>|<init>(com.davils.krypt.keyset.store.KeysetVault){}[0]
+
+    final val vault // com.davils.krypt.storage/SubjectKeys.vault|{}vault[0]
+        final fun <get-vault>(): com.davils.krypt.keyset.store/KeysetVault // com.davils.krypt.storage/SubjectKeys.vault.<get-vault>|<get-vault>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.storage/SubjectKeys.toString|toString(){}[0]
+    final suspend fun aead(kotlin/String): com.davils.kore.core.outcome/Outcome<com.davils.krypt.keyset/KeysetAead, com.davils.krypt.keyset/KeysetFailure> // com.davils.krypt.storage/SubjectKeys.aead|aead(kotlin.String){}[0]
+    final suspend fun rotate(kotlin/String): com.davils.kore.core.outcome/Outcome<com.davils.krypt.keyset/Keyset, com.davils.krypt.keyset/KeysetFailure> // com.davils.krypt.storage/SubjectKeys.rotate|rotate(kotlin.String){}[0]
+    final suspend fun shred(kotlin/String): kotlin/Boolean // com.davils.krypt.storage/SubjectKeys.shred|shred(kotlin.String){}[0]
+}

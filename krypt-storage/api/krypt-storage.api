@@ -1,0 +1,101 @@
+public final class com/davils/krypt/storage/StorageFailure : java/lang/Enum {
+	public static final field DecryptionFailed Lcom/davils/krypt/storage/StorageFailure;
+	public static final field Malformed Lcom/davils/krypt/storage/StorageFailure;
+	public static final field Missing Lcom/davils/krypt/storage/StorageFailure;
+	public static final field Rollback Lcom/davils/krypt/storage/StorageFailure;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/storage/StorageFailure;
+	public static fun values ()[Lcom/davils/krypt/storage/StorageFailure;
+}
+
+public final class com/davils/krypt/storage/SubjectKeys {
+	public fun <init> (Lcom/davils/krypt/keyset/store/KeysetVault;)V
+	public final fun aead (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getVault ()Lcom/davils/krypt/keyset/store/KeysetVault;
+	public final fun rotate (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun shred (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/davils/krypt/storage/blob/BlobStore {
+	public abstract fun delete (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun open (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun write (Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/storage/blob/EncryptedBlobStore {
+	public fun <init> (Lcom/davils/krypt/stream/Containers;Lcom/davils/krypt/storage/blob/BlobStore;Lcom/davils/krypt/keyset/KeysetAead;Lcom/davils/krypt/keyset/KeysetMac;Lcom/davils/krypt/storage/blob/VersionLedger;I)V
+	public synthetic fun <init> (Lcom/davils/krypt/stream/Containers;Lcom/davils/krypt/storage/blob/BlobStore;Lcom/davils/krypt/keyset/KeysetAead;Lcom/davils/krypt/keyset/KeysetMac;Lcom/davils/krypt/storage/blob/VersionLedger;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun delete (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun get (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getDataKeys ()Lcom/davils/krypt/keyset/KeysetAead;
+	public final fun getNames ()Lcom/davils/krypt/keyset/KeysetMac;
+	public final fun getSegmentSize ()I
+	public final fun metadata (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun open (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun put (Ljava/lang/String;Lcom/davils/krypt/core/io/ByteSource;Ljava/lang/String;Ljava/util/Map;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun put (Ljava/lang/String;Lkotlinx/io/bytestring/ByteString;Ljava/lang/String;Ljava/util/Map;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun put$default (Lcom/davils/krypt/storage/blob/EncryptedBlobStore;Ljava/lang/String;Lcom/davils/krypt/core/io/ByteSource;Ljava/lang/String;Ljava/util/Map;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun put$default (Lcom/davils/krypt/storage/blob/EncryptedBlobStore;Ljava/lang/String;Lkotlinx/io/bytestring/ByteString;Ljava/lang/String;Ljava/util/Map;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun read (Ljava/lang/String;Lcom/davils/krypt/core/io/ByteSink;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun rewrap (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/storage/blob/ObjectMetadata {
+	public fun <init> (Ljava/lang/String;JLjava/lang/String;Lkotlin/time/Instant;Ljava/util/Map;)V
+	public synthetic fun <init> (Ljava/lang/String;JLjava/lang/String;Lkotlin/time/Instant;Ljava/util/Map;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAttributes ()Ljava/util/Map;
+	public final fun getContentType ()Ljava/lang/String;
+	public final fun getCreatedAt ()Lkotlin/time/Instant;
+	public final fun getName ()Ljava/lang/String;
+	public final fun getVersion ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/storage/blob/StoredObject {
+	public final fun close ()V
+	public final fun getMetadata ()Lcom/davils/krypt/storage/blob/ObjectMetadata;
+	public final fun getReader ()Lcom/davils/krypt/stream/ContainerReader;
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/davils/krypt/storage/blob/VersionLedger {
+	public abstract fun current (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun forget (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun record (Ljava/lang/String;JLjava/lang/Long;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/storage/record/BlindIndex {
+	public fun <init> (Lcom/davils/krypt/keyset/KeysetMac;Ljava/lang/String;ILkotlin/jvm/functions/Function1;)V
+	public synthetic fun <init> (Lcom/davils/krypt/keyset/KeysetMac;Ljava/lang/String;ILkotlin/jvm/functions/Function1;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun candidates (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getColumn ()Ljava/lang/String;
+	public final fun getMac ()Lcom/davils/krypt/keyset/KeysetMac;
+	public final fun getSize ()I
+	public final fun of (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/storage/record/RecordCipher {
+	public fun <init> (Lcom/davils/krypt/keyset/KeysetAead;)V
+	public final fun decrypt (Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/storage/record/RecordContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun decryptText (Ljava/lang/String;Lcom/davils/krypt/storage/record/RecordContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun encrypt (Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/storage/record/RecordContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun encryptText (Ljava/lang/String;Lcom/davils/krypt/storage/record/RecordContext;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getAead ()Lcom/davils/krypt/keyset/KeysetAead;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/storage/record/RecordContext {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getColumn ()Ljava/lang/String;
+	public final fun getRow ()Ljava/lang/String;
+	public final fun getTable ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+

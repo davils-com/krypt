@@ -108,6 +108,8 @@ libraries:
       - '**/manifest/ManifestSignature.kt'
       - '**/stream/Recipient.kt'
       - '**/stream/Credential.kt'
+      - '**/record/RecordContext.kt'
+      - '**/blob/ObjectMetadata.kt'
   # The compiler rejects an explicit Unit return type as redundant under warnings as errors.
   LibraryCodeMustSpecifyReturnType:
     active: true
@@ -173,6 +175,8 @@ style:
       - '**/manifest/ManifestSignature.kt'
       - '**/stream/Recipient.kt'
       - '**/stream/Credential.kt'
+      - '**/record/RecordContext.kt'
+      - '**/blob/ObjectMetadata.kt'
   # The compiler rejects an explicit Unit return type as redundant under warnings as errors.
   OptionalUnit:
     active: false
