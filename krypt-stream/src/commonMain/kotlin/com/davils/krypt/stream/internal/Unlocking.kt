@@ -31,19 +31,20 @@ internal class Unlocking(private val crypto: Crypto, private val limits: StreamL
         val wrapContext = Octets.concat(KeySchedule.RECIPIENT_LABEL, header.core)
         val dataKey = dataKeyOf(header = header, credentials = credentials, context = wrapContext)
             ?: refuse(StreamFailure.NotARecipient)
-        val schedule = dataKey.use { secret ->
-            KeySchedule.derive(
-                crypto = crypto,
-                dataKey = secret,
-                salt = header.salt,
-                context = context,
-                suite = header.suite,
-            )
-        }
+        val schedule = KeySchedule.derive(
+            crypto = crypto,
+            dataKey = dataKey,
+            salt = header.salt,
+            context = context,
+            suite = header.suite,
+        )
         val isCommitted = ConstantTime.equals(first = schedule.commitment, second = header.commitment)
         val mac = crypto.macs.verify(key = schedule.macKey, data = header.authenticated, tag = header.mac)
         val isAuthentic = isCommitted && mac.isValid
-        if (!isAuthentic) schedule.destroy()
+        if (!isAuthentic) {
+            schedule.destroy()
+            dataKey.destroy()
+        }
         StreamRefusal.ensure(isAuthentic, StreamFailure.DecryptionFailed)
         val cipher = SegmentCipher(
             crypto = crypto,
@@ -51,7 +52,7 @@ internal class Unlocking(private val crypto: Crypto, private val limits: StreamL
             key = schedule.payload,
             prefix = header.noncePrefix,
         )
-        return Unlocked(header = header, schedule = schedule, cipher = cipher)
+        return Unlocked(header = header, dataKey = dataKey, schedule = schedule, cipher = cipher)
     }
 
     private suspend fun dataKeyOf(header: Header, credentials: List<Credential>, context: ByteString): SecretBytes? {

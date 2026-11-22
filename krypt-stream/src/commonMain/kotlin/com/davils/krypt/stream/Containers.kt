@@ -37,6 +37,7 @@ import com.davils.krypt.stream.internal.RandomAccessByteSource
 import com.davils.krypt.stream.internal.SegmentCipher
 import com.davils.krypt.stream.internal.SegmentWalk
 import com.davils.krypt.stream.internal.StreamRefusal
+import com.davils.krypt.stream.internal.Unlocked
 import com.davils.krypt.stream.internal.Unlocking
 import com.davils.krypt.stream.internal.Wrapping
 import kotlinx.io.bytestring.ByteString
@@ -231,6 +232,46 @@ public class Containers(public val crypto: Crypto, public val limits: StreamLimi
     }
 
     /**
+     * Wraps the data key of the container [source] holds for new [recipients] and writes the container into [sink],
+     * without encrypting the data again: the segments are authenticated and copied as they are.
+     *
+     * This is how a container moves to the new primary key of a key set after a rotation, or gets another reader.
+     * The data key stays the same, so a recipient that was removed but kept the data key can still read the copy;
+     * encrypt the data again when a key was compromised.
+     *
+     * @param source the container, possibly from an attacker.
+     * @param sink where the rewrapped container goes; discard it unless the result is a success.
+     * @param credentials what may open a recipient of the container now.
+     * @param recipients who can open the rewrapped container; at least one.
+     * @param associatedData the authenticated context the container was encrypted with.
+     * @return the seal of the rewrapped container, or why the container could not be read.
+     * @throws IllegalArgumentException if there are no or too many recipients.
+     * @since 1.0.0
+     */
+    public suspend fun rewrap(
+        source: ByteSource,
+        sink: ByteSink,
+        credentials: List<Credential>,
+        recipients: List<Recipient>,
+        associatedData: ByteString = ByteString(),
+    ): Outcome<ContainerSeal, StreamFailure> {
+        require(recipients.size in 1..limits.maximumRecipients) {
+            "A container has 1 to ${limits.maximumRecipients} recipients"
+        }
+        return attempt {
+            val header = HeaderCodec.read(source, limits)
+            val unlocking = Unlocking(crypto, limits)
+            val unlocked = unlocking.unlock(header = header, credentials = credentials, associatedData = associatedData)
+            try {
+                val rewrapped = rewrapped(unlocked = unlocked, recipients = recipients)
+                copySegments(source = source, sink = sink, unlocked = unlocked, header = rewrapped)
+            } finally {
+                unlocked.destroy()
+            }
+        }
+    }
+
+    /**
      * Encrypts [plaintext] held in memory into a container.
      *
      * @param plaintext the plaintext.
@@ -324,6 +365,41 @@ public class Containers(public val crypto: Crypto, public val limits: StreamLimi
             plaintextBytes = plaintextBytes,
             root = tree.root(),
         )
+    }
+
+    private suspend fun rewrapped(unlocked: Unlocked, recipients: List<Recipient>): Header {
+        val header = unlocked.header
+        val wrapping = Wrapping(crypto, limits)
+        val context = Octets.concat(KeySchedule.RECIPIENT_LABEL, header.core)
+        val entries = recipients.map { recipient ->
+            wrapping.wrap(recipient = recipient, dataKey = unlocked.dataKey, context = context)
+        }
+        val unsigned = header.copy(recipients = entries, mac = ByteString())
+        val mac = crypto.macs.mac(
+            key = unlocked.schedule.macKey,
+            data = unsigned.authenticated,
+            algorithm = MacAlgorithm.HmacSha256,
+        )
+        return unsigned.copy(mac = mac)
+    }
+
+    private suspend fun copySegments(
+        source: ByteSource,
+        sink: ByteSink,
+        unlocked: Unlocked,
+        header: Header,
+    ): ContainerSeal {
+        val encoded = header.encoded
+        sink.write(source = encoded.toByteArray(), offset = 0, length = encoded.size)
+        var plaintextBytes = 0L
+        val walk = SegmentWalk(crypto, limits)
+        walk.walk(source, header) { index, isLast, segment ->
+            val plaintext = unlocked.cipher.open(index = index, isLast = isLast, ciphertext = segment)
+                ?: StreamRefusal.refuse(StreamFailure.DecryptionFailed)
+            sink.write(source = segment.toByteArray(), offset = 0, length = segment.size)
+            plaintextBytes += plaintext.size
+        }
+        return sealOf(header = header, walk = walk, plaintextBytes = plaintextBytes)
     }
 
     private suspend fun sealOf(header: Header, walk: SegmentWalk, plaintextBytes: Long): ContainerSeal {

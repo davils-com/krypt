@@ -37,6 +37,8 @@ public final class com/davils/krypt/stream/Containers {
 	public final fun inspect (Lcom/davils/krypt/core/io/ByteSource;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public final fun open (Lcom/davils/krypt/stream/RandomAccessSource;Ljava/util/List;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static synthetic fun open$default (Lcom/davils/krypt/stream/Containers;Lcom/davils/krypt/stream/RandomAccessSource;Ljava/util/List;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun rewrap (Lcom/davils/krypt/core/io/ByteSource;Lcom/davils/krypt/core/io/ByteSink;Ljava/util/List;Ljava/util/List;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun rewrap$default (Lcom/davils/krypt/stream/Containers;Lcom/davils/krypt/core/io/ByteSource;Lcom/davils/krypt/core/io/ByteSink;Ljava/util/List;Ljava/util/List;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 	public fun toString ()Ljava/lang/String;
 }
 

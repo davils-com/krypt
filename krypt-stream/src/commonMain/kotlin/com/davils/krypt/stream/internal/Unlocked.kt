@@ -16,8 +16,16 @@
 
 package com.davils.krypt.stream.internal
 
-internal class Unlocked(val header: Header, val schedule: KeySchedule, val cipher: SegmentCipher) {
+import com.davils.krypt.core.SecretBytes
+
+internal class Unlocked(
+    val header: Header,
+    val dataKey: SecretBytes,
+    val schedule: KeySchedule,
+    val cipher: SegmentCipher,
+) {
     fun destroy() {
+        dataKey.destroy()
         schedule.destroy()
     }
 }
