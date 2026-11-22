@@ -32,4 +32,6 @@ internal class MemoryRepository(private var interferences: Int = 0) : KeysetRepo
         if (isExpected) stored[name] = keyset
         return isExpected
     }
+
+    override suspend fun delete(name: String): Boolean = stored.remove(name) != null
 }

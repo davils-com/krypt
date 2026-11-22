@@ -14,9 +14,14 @@
  * limitations under the License.
  */
 
+@file:OptIn(DavilsInternal::class)
+
 package com.davils.krypt.keyset.store
 
+import com.davils.kore.core.annotation.DavilsInternal
 import com.davils.kore.core.outcome.Outcome
+import com.davils.krypt.core.audit.AuditAction
+import com.davils.krypt.core.telemetry.AuditTrail
 import com.davils.krypt.keyset.KeyPurpose
 import com.davils.krypt.keyset.Keyset
 import com.davils.krypt.keyset.KeysetFailure
@@ -29,6 +34,7 @@ private const val DEFAULT_ATTEMPTS: Int = 3
 private const val MAXIMUM_ATTEMPTS: Int = 16
 private const val FIRST_PRINTABLE: Char = ' '
 private const val LAST_PRINTABLE: Char = '~'
+private val DELETE: AuditAction = AuditAction("keyset.delete")
 
 /**
  * Keeps named key sets in a [repository], encrypted by [kms] and bound to their names, and changes them safely under
@@ -52,6 +58,8 @@ public class KeysetVault(
     private val kms: KeyManagementService,
     public val attempts: Int = DEFAULT_ATTEMPTS,
 ) {
+    private val trail = AuditTrail(keysets.crypto.environment)
+
     init {
         require(attempts in 1..MAXIMUM_ATTEMPTS) { "A vault tries 1 to $MAXIMUM_ATTEMPTS times" }
     }
@@ -112,6 +120,22 @@ public class KeysetVault(
             attempt++
         }
         return result
+    }
+
+    /**
+     * Deletes the key set stored under [name], which shreds by crypto everything it protected; the deletion is
+     * recorded in the audit trail first.
+     *
+     * @param name the name.
+     * @return true if a key set was deleted.
+     * @throws IllegalArgumentException if [name] is invalid.
+     * @throws com.davils.krypt.core.audit.AuditRefusedException if a required audit could not record the deletion.
+     * @since 1.0.0
+     */
+    public suspend fun delete(name: String): Boolean {
+        checkName(name)
+        trail.require(action = DELETE, subject = name)
+        return repository.delete(name)
     }
 
     /**

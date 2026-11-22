@@ -52,6 +52,9 @@ class KeysetVaultTest : FunSpec({
         vault.load(OTHER).failureOrNull() shouldBe KeysetFailure.Missing
         vault.update(OTHER) { keyset -> keyset }.failureOrNull() shouldBe KeysetFailure.Missing
         vault.attempts shouldBe ATTEMPTS
+        vault.delete(NAME) shouldBe true
+        vault.delete(NAME) shouldBe false
+        vault.load(NAME).failureOrNull() shouldBe KeysetFailure.Missing
         vault.toString() shouldContain "LocalKms"
     }
 

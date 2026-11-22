@@ -61,6 +61,7 @@ abstract interface com.davils.krypt.keyset.kms/KeyManagementService { // com.dav
 }
 
 abstract interface com.davils.krypt.keyset.store/KeysetRepository { // com.davils.krypt.keyset.store/KeysetRepository|null[0]
+    abstract suspend fun delete(kotlin/String): kotlin/Boolean // com.davils.krypt.keyset.store/KeysetRepository.delete|delete(kotlin.String){}[0]
     abstract suspend fun load(kotlin/String): com.davils.krypt.keyset.store/StoredKeyset? // com.davils.krypt.keyset.store/KeysetRepository.load|load(kotlin.String){}[0]
     abstract suspend fun store(kotlin/String, com.davils.krypt.keyset.store/StoredKeyset, kotlin/Long?): kotlin/Boolean // com.davils.krypt.keyset.store/KeysetRepository.store|store(kotlin.String;com.davils.krypt.keyset.store.StoredKeyset;kotlin.Long?){}[0]
 }
@@ -110,6 +111,7 @@ final class com.davils.krypt.keyset.store/KeysetVault { // com.davils.krypt.keys
 
     final fun toString(): kotlin/String // com.davils.krypt.keyset.store/KeysetVault.toString|toString(){}[0]
     final suspend fun create(kotlin/String, com.davils.krypt.keyset/KeyPurpose): com.davils.kore.core.outcome/Outcome<com.davils.krypt.keyset/Keyset, com.davils.krypt.keyset/KeysetFailure> // com.davils.krypt.keyset.store/KeysetVault.create|create(kotlin.String;com.davils.krypt.keyset.KeyPurpose){}[0]
+    final suspend fun delete(kotlin/String): kotlin/Boolean // com.davils.krypt.keyset.store/KeysetVault.delete|delete(kotlin.String){}[0]
     final suspend fun load(kotlin/String): com.davils.kore.core.outcome/Outcome<com.davils.krypt.keyset/Keyset, com.davils.krypt.keyset/KeysetFailure> // com.davils.krypt.keyset.store/KeysetVault.load|load(kotlin.String){}[0]
     final suspend fun update(kotlin/String, kotlin.coroutines/SuspendFunction1<com.davils.krypt.keyset/Keyset, com.davils.krypt.keyset/Keyset>): com.davils.kore.core.outcome/Outcome<com.davils.krypt.keyset/Keyset, com.davils.krypt.keyset/KeysetFailure> // com.davils.krypt.keyset.store/KeysetVault.update|update(kotlin.String;kotlin.coroutines.SuspendFunction1<com.davils.krypt.keyset.Keyset,com.davils.krypt.keyset.Keyset>){}[0]
 }

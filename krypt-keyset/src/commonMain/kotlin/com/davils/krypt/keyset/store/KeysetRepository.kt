@@ -45,4 +45,13 @@ public interface KeysetRepository {
      * @since 1.0.0
      */
     public suspend fun store(name: String, keyset: StoredKeyset, expectedRevision: Long?): Boolean
+
+    /**
+     * Deletes the key set stored under [name], so that nothing it protected can be decrypted again.
+     *
+     * @param name the name.
+     * @return true if a key set was deleted.
+     * @since 1.0.0
+     */
+    public suspend fun delete(name: String): Boolean
 }
