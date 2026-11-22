@@ -141,6 +141,7 @@ public class Keys internal constructor(private val crypto: Crypto) {
      * @param password the password.
      * @param iterations the PBKDF2 iterations; the minimum of the policy by default.
      * @return the DER encoding.
+     * @throws IllegalArgumentException if [password] holds an unpaired UTF-16 surrogate.
      * @throws IllegalStateException if the key is not extractable or was destroyed.
      * @throws com.davils.krypt.primitive.PolicyViolationException if the policy forbids the iterations.
      * @since 1.0.0
@@ -158,8 +159,8 @@ public class Keys internal constructor(private val crypto: Crypto) {
      *
      * @param encrypted the DER encoding.
      * @param password the password.
-     * @return the key, or why it was refused; a wrong password and a tampered file both give
-     *   [KeyFailure.WrongPassword].
+     * @return the key, or why it was refused; a wrong password, a password with an unpaired UTF-16 surrogate and a
+     *   tampered file all give [KeyFailure.WrongPassword].
      * @since 1.0.0
      */
     public suspend fun decrypt(encrypted: ByteString, password: SecretText): Outcome<PrivateKey, KeyFailure> =
@@ -231,6 +232,7 @@ public class Keys internal constructor(private val crypto: Crypto) {
      * @param password the password.
      * @param iterations the PBKDF2 iterations; the minimum of the policy by default.
      * @return the PEM text.
+     * @throws IllegalArgumentException if [password] holds an unpaired UTF-16 surrogate.
      * @throws IllegalStateException if the key is not extractable or was destroyed.
      * @since 1.0.0
      */

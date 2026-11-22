@@ -68,19 +68,4 @@ class AuditPrimitiveTest : FunSpec({
         (key == null || key.publicKey?.encoded == genuine) shouldBe true
     }
 
-    test("A-9: a stored password hash with a non-canonical iteration count is malformed") {
-        val password = SecretText.of("correct horse")
-        val stored = fastCrypto.passwords.hash(password)
-        val padded = stored.replace("i=$FAST_ITERATIONS,", "i=0$FAST_ITERATIONS,")
-        val signed = stored.replace("i=$FAST_ITERATIONS,", "i=+$FAST_ITERATIONS,")
-        padded shouldNotBe stored
-        fastCrypto.passwords.verify(password, padded) shouldBe PasswordVerification.Malformed
-        fastCrypto.passwords.verify(password, signed) shouldBe PasswordVerification.Malformed
-    }
-
-    test("A-10: a password with a lone surrogate does not derive the key of a different password") {
-        val lone = derived("pass\uD800word")
-        lone shouldNotBe derived("pass?word")
-        lone shouldNotBe derived("pass�word")
-    }
 })

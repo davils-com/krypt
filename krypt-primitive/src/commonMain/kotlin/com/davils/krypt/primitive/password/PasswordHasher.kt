@@ -23,6 +23,7 @@ import com.davils.krypt.core.algorithm.KdfAlgorithm
 import com.davils.krypt.core.encoding.Base64
 import com.davils.krypt.core.policy.AlgorithmUse
 import com.davils.krypt.primitive.Crypto
+import com.davils.krypt.primitive.internal.isWellFormed
 import kotlinx.io.bytestring.ByteString
 
 private const val SALT_BYTES: Int = 16
@@ -32,6 +33,7 @@ private const val MAXIMUM_HASH: Int = 64
 private const val MAXIMUM_ENCODED: Int = 512
 private const val FIELDS: Int = 5
 private const val SEPARATOR: Char = '$'
+private const val MAXIMUM_DIGITS: Int = 10
 
 /**
  * Hashes passwords for storage with PBKDF2, in the PHC string format: `$pbkdf2-sha256$i=600000,l=32$<salt>$<hash>`,
@@ -39,7 +41,8 @@ private const val SEPARATOR: Char = '$'
  *
  * New hashes use the iterations the policy demands for new protection; checking accepts what the policy verifies and
  * reports a hash below the current strength as [PasswordVerification.ValidButOutdated], so applications upgrade
- * hashes on the next successful login. A stored hash that demands more iterations than the policy permits is refused
+ * hashes on the next successful login. A stored string is read strictly: the parameters are exactly `i` and `l` in
+ * this order, as canonical decimals without a sign or leading zeros, so every hash has exactly one string. A stored hash that demands more iterations than the policy permits is refused
  * unchecked, so a tampered database cannot stall the server.
  *
  * @since 1.0.0
@@ -48,10 +51,10 @@ public class PasswordHasher internal constructor(private val crypto: Crypto) {
     /**
      * Hashes [password].
      *
-     * @param password the password.
+     * @param password the password, without an unpaired UTF-16 surrogate.
      * @param algorithm the PBKDF2; [KdfAlgorithm.Pbkdf2Sha256] by default.
      * @return the PHC string.
-     * @throws IllegalArgumentException if [algorithm] is not a PBKDF2.
+     * @throws IllegalArgumentException if [algorithm] is not a PBKDF2 or [password] holds an unpaired surrogate.
      * @throws com.davils.krypt.primitive.PolicyViolationException if the policy forbids [algorithm].
      * @since 1.0.0
      */
@@ -75,7 +78,7 @@ public class PasswordHasher internal constructor(private val crypto: Crypto) {
     /**
      * Checks [password] against [encoded], in constant time.
      *
-     * @param password the password.
+     * @param password the password; one with an unpaired UTF-16 surrogate is never right, since no hash is made of it.
      * @param encoded the stored PHC string.
      * @return whether the password is right and the hash is current.
      * @since 1.0.0
@@ -90,7 +93,10 @@ public class PasswordHasher internal constructor(private val crypto: Crypto) {
                 policy.permits(found.algorithm, AlgorithmUse.Verify)
         }
         val found = stored ?: return PasswordVerification.Malformed
-        return check(password = password, stored = found)
+        return when (isWellFormed(password)) {
+            true -> check(password = password, stored = found)
+            false -> PasswordVerification.Invalid
+        }
     }
 
     private suspend fun check(password: SecretText, stored: StoredHash): PasswordVerification {
@@ -127,9 +133,9 @@ public class PasswordHasher internal constructor(private val crypto: Crypto) {
 
     private fun storedOf(parts: List<String>): StoredHash? {
         val algorithm = ALGORITHMS[parts[1]]
-        val parameters = parametersOf(parts[2])
-        val iterations = parameters["i"]?.toIntOrNull()
-        val length = parameters["l"]?.toIntOrNull()
+        val parameters = parts[2].split(',')
+        val iterations = decimalOf(field = parameters.getOrNull(0), name = "i=")
+        val length = decimalOf(field = parameters.getOrNull(1), name = "l=")
         val salt = Base64.decode(text = parts[3], padding = false).getOrNull()
         val hash = Base64.decode(text = parts[4], padding = false).getOrNull()
         val isComplete = algorithm != null && iterations != null && salt != null && hash != null && parameters.size == 2
@@ -140,13 +146,13 @@ public class PasswordHasher internal constructor(private val crypto: Crypto) {
         return StoredHash(algorithm = algorithm, iterations = iterations, salt = salt, hash = hash)
     }
 
-    private fun parametersOf(text: String): Map<String, String> {
-        val pairs = text.split(',')
-        return pairs.associate { pair ->
-            pair.substringBefore(
-                '=',
-            ) to pair.substringAfter(delimiter = '=', missingDelimiterValue = "")
-        }
+    private fun decimalOf(field: String?, name: String): Int? {
+        val digits = field?.takeIf { text -> text.startsWith(name) }?.substring(name.length)
+        val isCanonical = digits != null &&
+            digits.length in 1..MAXIMUM_DIGITS &&
+            digits.all { char -> char in '0'..'9' } &&
+            (digits.length == 1 || digits[0] != '0')
+        return digits?.takeIf { isCanonical }?.toIntOrNull()
     }
 
     private fun identifierOf(algorithm: KdfAlgorithm): String =

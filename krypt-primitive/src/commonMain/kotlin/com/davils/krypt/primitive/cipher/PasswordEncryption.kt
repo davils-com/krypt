@@ -42,9 +42,10 @@ public object PasswordEncryption {
      *
      * @param crypto the primitives.
      * @param plaintext the content.
-     * @param password the password.
+     * @param password the password, without an unpaired UTF-16 surrogate.
      * @param iterations the iterations of PBKDF2.
      * @return the DER of the AlgorithmIdentifier of PBES2 and the ciphertext.
+     * @throws IllegalArgumentException if [password] holds an unpaired surrogate.
      * @throws com.davils.krypt.primitive.PolicyViolationException if the policy forbids [iterations].
      * @since 1.0.0
      */
@@ -62,7 +63,7 @@ public object PasswordEncryption {
      * @param crypto the primitives.
      * @param algorithm the DER of the AlgorithmIdentifier, possibly from an attacker.
      * @param ciphertext the ciphertext.
-     * @param password the password.
+     * @param password the password; one with an unpaired UTF-16 surrogate gives [KeyFailure.WrongPassword].
      * @return the content, or why it could not be decrypted.
      * @since 1.0.0
      */

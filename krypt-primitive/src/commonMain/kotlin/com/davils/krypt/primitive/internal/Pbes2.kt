@@ -136,6 +136,7 @@ internal object Pbes2 {
     ): Outcome<SecretBytes, KeyFailure> {
         val algorithm = KDFS.getValue(parameters.kdf.digest)
         crypto.permit(algorithm, AlgorithmUse.Verify)
+        if (!isWellFormed(password)) return Outcome.Failure(KeyFailure.WrongPassword)
         val derived = crypto.backend.pbkdf2(
             digest = parameters.kdf.digest,
             password = password,
