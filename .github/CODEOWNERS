@@ -32,6 +32,8 @@
 /krypt-tls/src/main/java/             @davils-com/maintainers
 /krypt-cms/api/                       @davils-com/maintainers
 /krypt-cms/src/jvmMain/java/          @davils-com/maintainers
+/krypt-acme/api/                      @davils-com/maintainers
+/krypt-acme/src/jvmMain/java/         @davils-com/maintainers
 /krypt-cose/api/                      @davils-com/maintainers
 /krypt-cose/src/jvmMain/java/         @davils-com/maintainers
 /krypt-spiffe/api/                    @davils-com/maintainers

@@ -100,4 +100,15 @@ kollect 1.0.0. The code comes from the security library of an internal Davils pr
   `jwt-svid` keys, `spiffe_sequence` and `spiffe_refresh_hint`, a bounded `BundleSet` per trust domain for
   federation, `SvidSource` and `BundleSource` the application implements and an `X509Source` that swaps the SVIDs and
   bundles it is pushed atomically and refuses rollbacks; and a `SpiffeAuthorizer` for mutual TLS in krypt-tls.
-- **Test support**: deterministic and replayed randomness, an audit log and test environments.
+- **ACME**: the client logic of RFC 8555 over an `AcmeTransport` of the application, so krypt opens no socket: the
+  directory with its meta object, a bounded nonce pool with a bounded retry after `badNonce`, flattened JWS requests
+  with `kid` or `jwk`, accounts with contacts, terms agreement, external account binding, lookup by key, update,
+  deactivation and key rollover; orders for DNS names and IP addresses of RFC 8738 with `notBefore` and `notAfter`,
+  authorizations and their deactivation, the key authorization, the `http-01` path, the `dns-01` record and the
+  `tls-alpn-01` validation certificate of RFC 8737; finalization with a certification request of krypt-x509, the
+  download of PEM chains with their alternates, revocation by the account or by the key of the certificate, polling
+  by `Retry-After` in helpers the caller invokes, and the renewal information of RFC 9773 with certificate
+  identifiers and `replaces`. Problem documents of RFC 9457 become typed failures, every response and URL is checked
+  against limits, and test support gains an in-memory ACME server.
+- **Test support**: deterministic and replayed randomness, an audit log, test environments and an in-memory ACME
+  server.

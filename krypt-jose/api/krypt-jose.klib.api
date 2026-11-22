@@ -814,5 +814,10 @@ final class com.davils.krypt.jose/JoseLimits { // com.davils.krypt.jose/JoseLimi
     }
 }
 
+final object com.davils.krypt.jose/StrictJson { // com.davils.krypt.jose/StrictJson|null[0]
+    final fun decode(kotlinx.io.bytestring/ByteString, com.davils.krypt.jose/JoseLimits = ...): com.davils.kore.core.outcome/Outcome<com.davils.krypt.jose/JsonValue, com.davils.krypt.jose/JoseFailure> // com.davils.krypt.jose/StrictJson.decode|decode(kotlinx.io.bytestring.ByteString;com.davils.krypt.jose.JoseLimits){}[0]
+    final fun decodeObject(kotlinx.io.bytestring/ByteString, com.davils.krypt.jose/JoseLimits = ...): com.davils.kore.core.outcome/Outcome<com.davils.krypt.jose/JsonValue.Object, com.davils.krypt.jose/JoseFailure> // com.davils.krypt.jose/StrictJson.decodeObject|decodeObject(kotlinx.io.bytestring.ByteString;com.davils.krypt.jose.JoseLimits){}[0]
+}
+
 final fun com.davils.krypt.jose.jwt/jwtClaims(kotlin/Function1<com.davils.krypt.jose.jwt/JwtClaimsBuilder, kotlin/Unit>): com.davils.krypt.jose.jwt/JwtClaims // com.davils.krypt.jose.jwt/jwtClaims|jwtClaims(kotlin.Function1<com.davils.krypt.jose.jwt.JwtClaimsBuilder,kotlin.Unit>){}[0]
 final fun com.davils.krypt.jose.jwt/jwtValidator(kotlin/Function1<com.davils.krypt.jose.jwt/JwtValidatorBuilder, kotlin/Unit>): com.davils.krypt.jose.jwt/JwtValidator // com.davils.krypt.jose.jwt/jwtValidator|jwtValidator(kotlin.Function1<com.davils.krypt.jose.jwt.JwtValidatorBuilder,kotlin.Unit>){}[0]

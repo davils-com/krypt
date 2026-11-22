@@ -1,0 +1,576 @@
+// Klib ABI Dump
+// Targets: [wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.davils:krypt-acme>
+final enum class com.davils.krypt.acme.order/ChallengeType : kotlin/Enum<com.davils.krypt.acme.order/ChallengeType> { // com.davils.krypt.acme.order/ChallengeType|null[0]
+    enum entry Dns01 // com.davils.krypt.acme.order/ChallengeType.Dns01|null[0]
+    enum entry Http01 // com.davils.krypt.acme.order/ChallengeType.Http01|null[0]
+    enum entry TlsAlpn01 // com.davils.krypt.acme.order/ChallengeType.TlsAlpn01|null[0]
+
+    final val entries // com.davils.krypt.acme.order/ChallengeType.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.acme.order/ChallengeType> // com.davils.krypt.acme.order/ChallengeType.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val typeName // com.davils.krypt.acme.order/ChallengeType.typeName|{}typeName[0]
+        final fun <get-typeName>(): kotlin/String // com.davils.krypt.acme.order/ChallengeType.typeName.<get-typeName>|<get-typeName>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.acme.order/ChallengeType // com.davils.krypt.acme.order/ChallengeType.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.acme.order/ChallengeType> // com.davils.krypt.acme.order/ChallengeType.values|values#static(){}[0]
+
+    final object Companion { // com.davils.krypt.acme.order/ChallengeType.Companion|null[0]
+        final fun of(kotlin/String): com.davils.krypt.acme.order/ChallengeType? // com.davils.krypt.acme.order/ChallengeType.Companion.of|of(kotlin.String){}[0]
+    }
+}
+
+final enum class com.davils.krypt.acme/AcmeError : com.davils.krypt.acme/AcmeFailure, kotlin/Enum<com.davils.krypt.acme/AcmeError> { // com.davils.krypt.acme/AcmeError|null[0]
+    enum entry InsecureUrl // com.davils.krypt.acme/AcmeError.InsecureUrl|null[0]
+    enum entry LimitExceeded // com.davils.krypt.acme/AcmeError.LimitExceeded|null[0]
+    enum entry Malformed // com.davils.krypt.acme/AcmeError.Malformed|null[0]
+    enum entry PollsExhausted // com.davils.krypt.acme/AcmeError.PollsExhausted|null[0]
+    enum entry Transport // com.davils.krypt.acme/AcmeError.Transport|null[0]
+    enum entry UnexpectedStatus // com.davils.krypt.acme/AcmeError.UnexpectedStatus|null[0]
+    enum entry Unsupported // com.davils.krypt.acme/AcmeError.Unsupported|null[0]
+
+    final val entries // com.davils.krypt.acme/AcmeError.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.acme/AcmeError> // com.davils.krypt.acme/AcmeError.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.acme/AcmeError // com.davils.krypt.acme/AcmeError.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.acme/AcmeError> // com.davils.krypt.acme/AcmeError.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.acme/AcmeMethod : kotlin/Enum<com.davils.krypt.acme/AcmeMethod> { // com.davils.krypt.acme/AcmeMethod|null[0]
+    enum entry Get // com.davils.krypt.acme/AcmeMethod.Get|null[0]
+    enum entry Head // com.davils.krypt.acme/AcmeMethod.Head|null[0]
+    enum entry Post // com.davils.krypt.acme/AcmeMethod.Post|null[0]
+
+    final val entries // com.davils.krypt.acme/AcmeMethod.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.acme/AcmeMethod> // com.davils.krypt.acme/AcmeMethod.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val methodName // com.davils.krypt.acme/AcmeMethod.methodName|{}methodName[0]
+        final fun <get-methodName>(): kotlin/String // com.davils.krypt.acme/AcmeMethod.methodName.<get-methodName>|<get-methodName>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.acme/AcmeMethod // com.davils.krypt.acme/AcmeMethod.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.acme/AcmeMethod> // com.davils.krypt.acme/AcmeMethod.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.acme/AcmeProblemType : kotlin/Enum<com.davils.krypt.acme/AcmeProblemType> { // com.davils.krypt.acme/AcmeProblemType|null[0]
+    enum entry AccountDoesNotExist // com.davils.krypt.acme/AcmeProblemType.AccountDoesNotExist|null[0]
+    enum entry AlreadyReplaced // com.davils.krypt.acme/AcmeProblemType.AlreadyReplaced|null[0]
+    enum entry AlreadyRevoked // com.davils.krypt.acme/AcmeProblemType.AlreadyRevoked|null[0]
+    enum entry BadCsr // com.davils.krypt.acme/AcmeProblemType.BadCsr|null[0]
+    enum entry BadNonce // com.davils.krypt.acme/AcmeProblemType.BadNonce|null[0]
+    enum entry BadPublicKey // com.davils.krypt.acme/AcmeProblemType.BadPublicKey|null[0]
+    enum entry BadRevocationReason // com.davils.krypt.acme/AcmeProblemType.BadRevocationReason|null[0]
+    enum entry BadSignatureAlgorithm // com.davils.krypt.acme/AcmeProblemType.BadSignatureAlgorithm|null[0]
+    enum entry Caa // com.davils.krypt.acme/AcmeProblemType.Caa|null[0]
+    enum entry Compound // com.davils.krypt.acme/AcmeProblemType.Compound|null[0]
+    enum entry Connection // com.davils.krypt.acme/AcmeProblemType.Connection|null[0]
+    enum entry Dns // com.davils.krypt.acme/AcmeProblemType.Dns|null[0]
+    enum entry ExternalAccountRequired // com.davils.krypt.acme/AcmeProblemType.ExternalAccountRequired|null[0]
+    enum entry IncorrectResponse // com.davils.krypt.acme/AcmeProblemType.IncorrectResponse|null[0]
+    enum entry InvalidContact // com.davils.krypt.acme/AcmeProblemType.InvalidContact|null[0]
+    enum entry Malformed // com.davils.krypt.acme/AcmeProblemType.Malformed|null[0]
+    enum entry OrderNotReady // com.davils.krypt.acme/AcmeProblemType.OrderNotReady|null[0]
+    enum entry RateLimited // com.davils.krypt.acme/AcmeProblemType.RateLimited|null[0]
+    enum entry RejectedIdentifier // com.davils.krypt.acme/AcmeProblemType.RejectedIdentifier|null[0]
+    enum entry ServerInternal // com.davils.krypt.acme/AcmeProblemType.ServerInternal|null[0]
+    enum entry Tls // com.davils.krypt.acme/AcmeProblemType.Tls|null[0]
+    enum entry Unauthorized // com.davils.krypt.acme/AcmeProblemType.Unauthorized|null[0]
+    enum entry UnsupportedContact // com.davils.krypt.acme/AcmeProblemType.UnsupportedContact|null[0]
+    enum entry UnsupportedIdentifier // com.davils.krypt.acme/AcmeProblemType.UnsupportedIdentifier|null[0]
+    enum entry UserActionRequired // com.davils.krypt.acme/AcmeProblemType.UserActionRequired|null[0]
+
+    final val code // com.davils.krypt.acme/AcmeProblemType.code|{}code[0]
+        final fun <get-code>(): kotlin/String // com.davils.krypt.acme/AcmeProblemType.code.<get-code>|<get-code>(){}[0]
+    final val entries // com.davils.krypt.acme/AcmeProblemType.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.acme/AcmeProblemType> // com.davils.krypt.acme/AcmeProblemType.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val urn // com.davils.krypt.acme/AcmeProblemType.urn|{}urn[0]
+        final fun <get-urn>(): kotlin/String // com.davils.krypt.acme/AcmeProblemType.urn.<get-urn>|<get-urn>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.acme/AcmeProblemType // com.davils.krypt.acme/AcmeProblemType.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.acme/AcmeProblemType> // com.davils.krypt.acme/AcmeProblemType.values|values#static(){}[0]
+
+    final object Companion { // com.davils.krypt.acme/AcmeProblemType.Companion|null[0]
+        final fun of(kotlin/String): com.davils.krypt.acme/AcmeProblemType? // com.davils.krypt.acme/AcmeProblemType.Companion.of|of(kotlin.String){}[0]
+    }
+}
+
+final enum class com.davils.krypt.acme/AcmeStatus : kotlin/Enum<com.davils.krypt.acme/AcmeStatus> { // com.davils.krypt.acme/AcmeStatus|null[0]
+    enum entry Deactivated // com.davils.krypt.acme/AcmeStatus.Deactivated|null[0]
+    enum entry Expired // com.davils.krypt.acme/AcmeStatus.Expired|null[0]
+    enum entry Invalid // com.davils.krypt.acme/AcmeStatus.Invalid|null[0]
+    enum entry Pending // com.davils.krypt.acme/AcmeStatus.Pending|null[0]
+    enum entry Processing // com.davils.krypt.acme/AcmeStatus.Processing|null[0]
+    enum entry Ready // com.davils.krypt.acme/AcmeStatus.Ready|null[0]
+    enum entry Revoked // com.davils.krypt.acme/AcmeStatus.Revoked|null[0]
+    enum entry Valid // com.davils.krypt.acme/AcmeStatus.Valid|null[0]
+
+    final val entries // com.davils.krypt.acme/AcmeStatus.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.acme/AcmeStatus> // com.davils.krypt.acme/AcmeStatus.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val statusName // com.davils.krypt.acme/AcmeStatus.statusName|{}statusName[0]
+        final fun <get-statusName>(): kotlin/String // com.davils.krypt.acme/AcmeStatus.statusName.<get-statusName>|<get-statusName>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.acme/AcmeStatus // com.davils.krypt.acme/AcmeStatus.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.acme/AcmeStatus> // com.davils.krypt.acme/AcmeStatus.values|values#static(){}[0]
+
+    final object Companion { // com.davils.krypt.acme/AcmeStatus.Companion|null[0]
+        final fun of(kotlin/String): com.davils.krypt.acme/AcmeStatus? // com.davils.krypt.acme/AcmeStatus.Companion.of|of(kotlin.String){}[0]
+    }
+}
+
+final enum class com.davils.krypt.acme/IdentifierType : kotlin/Enum<com.davils.krypt.acme/IdentifierType> { // com.davils.krypt.acme/IdentifierType|null[0]
+    enum entry Dns // com.davils.krypt.acme/IdentifierType.Dns|null[0]
+    enum entry Ip // com.davils.krypt.acme/IdentifierType.Ip|null[0]
+
+    final val entries // com.davils.krypt.acme/IdentifierType.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.acme/IdentifierType> // com.davils.krypt.acme/IdentifierType.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val typeName // com.davils.krypt.acme/IdentifierType.typeName|{}typeName[0]
+        final fun <get-typeName>(): kotlin/String // com.davils.krypt.acme/IdentifierType.typeName.<get-typeName>|<get-typeName>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.acme/IdentifierType // com.davils.krypt.acme/IdentifierType.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.acme/IdentifierType> // com.davils.krypt.acme/IdentifierType.values|values#static(){}[0]
+
+    final object Companion { // com.davils.krypt.acme/IdentifierType.Companion|null[0]
+        final fun of(kotlin/String): com.davils.krypt.acme/IdentifierType? // com.davils.krypt.acme/IdentifierType.Companion.of|of(kotlin.String){}[0]
+    }
+}
+
+abstract fun interface com.davils.krypt.acme/AcmeTransport { // com.davils.krypt.acme/AcmeTransport|null[0]
+    open val isPlainHttpAllowed // com.davils.krypt.acme/AcmeTransport.isPlainHttpAllowed|{}isPlainHttpAllowed[0]
+        open fun <get-isPlainHttpAllowed>(): kotlin/Boolean // com.davils.krypt.acme/AcmeTransport.isPlainHttpAllowed.<get-isPlainHttpAllowed>|<get-isPlainHttpAllowed>(){}[0]
+
+    abstract suspend fun exchange(com.davils.krypt.acme/AcmeRequest): com.davils.krypt.acme/AcmeResponse // com.davils.krypt.acme/AcmeTransport.exchange|exchange(com.davils.krypt.acme.AcmeRequest){}[0]
+}
+
+sealed interface com.davils.krypt.acme/AcmeFailure // com.davils.krypt.acme/AcmeFailure|null[0]
+
+final class com.davils.krypt.acme.account/AccountKey { // com.davils.krypt.acme.account/AccountKey|null[0]
+    constructor <init>(com.davils.krypt.primitive.key/PrivateKey, com.davils.krypt.jose.jws/JwsAlgorithm = ...) // com.davils.krypt.acme.account/AccountKey.<init>|<init>(com.davils.krypt.primitive.key.PrivateKey;com.davils.krypt.jose.jws.JwsAlgorithm){}[0]
+
+    final val algorithm // com.davils.krypt.acme.account/AccountKey.algorithm|{}algorithm[0]
+        final fun <get-algorithm>(): com.davils.krypt.jose.jws/JwsAlgorithm // com.davils.krypt.acme.account/AccountKey.algorithm.<get-algorithm>|<get-algorithm>(){}[0]
+    final val privateKey // com.davils.krypt.acme.account/AccountKey.privateKey|{}privateKey[0]
+        final fun <get-privateKey>(): com.davils.krypt.primitive.key/PrivateKey // com.davils.krypt.acme.account/AccountKey.privateKey.<get-privateKey>|<get-privateKey>(){}[0]
+    final val publicKey // com.davils.krypt.acme.account/AccountKey.publicKey|{}publicKey[0]
+        final fun <get-publicKey>(): com.davils.krypt.primitive.key/PublicKey // com.davils.krypt.acme.account/AccountKey.publicKey.<get-publicKey>|<get-publicKey>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.acme.account/AccountKey.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.acme.account/AccountKey.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.acme.account/AccountKey.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.acme.account/AccountKey.Companion|null[0]
+        final fun defaultAlgorithm(com.davils.krypt.primitive.key/PrivateKey): com.davils.krypt.jose.jws/JwsAlgorithm // com.davils.krypt.acme.account/AccountKey.Companion.defaultAlgorithm|defaultAlgorithm(com.davils.krypt.primitive.key.PrivateKey){}[0]
+    }
+}
+
+final class com.davils.krypt.acme.account/AcmeAccount { // com.davils.krypt.acme.account/AcmeAccount|null[0]
+    final val contacts // com.davils.krypt.acme.account/AcmeAccount.contacts|{}contacts[0]
+        final fun <get-contacts>(): kotlin.collections/List<kotlin/String> // com.davils.krypt.acme.account/AcmeAccount.contacts.<get-contacts>|<get-contacts>(){}[0]
+    final val isCreated // com.davils.krypt.acme.account/AcmeAccount.isCreated|{}isCreated[0]
+        final fun <get-isCreated>(): kotlin/Boolean // com.davils.krypt.acme.account/AcmeAccount.isCreated.<get-isCreated>|<get-isCreated>(){}[0]
+    final val isTermsOfServiceAgreed // com.davils.krypt.acme.account/AcmeAccount.isTermsOfServiceAgreed|{}isTermsOfServiceAgreed[0]
+        final fun <get-isTermsOfServiceAgreed>(): kotlin/Boolean? // com.davils.krypt.acme.account/AcmeAccount.isTermsOfServiceAgreed.<get-isTermsOfServiceAgreed>|<get-isTermsOfServiceAgreed>(){}[0]
+    final val orders // com.davils.krypt.acme.account/AcmeAccount.orders|{}orders[0]
+        final fun <get-orders>(): kotlin/String? // com.davils.krypt.acme.account/AcmeAccount.orders.<get-orders>|<get-orders>(){}[0]
+    final val status // com.davils.krypt.acme.account/AcmeAccount.status|{}status[0]
+        final fun <get-status>(): com.davils.krypt.acme/AcmeStatus // com.davils.krypt.acme.account/AcmeAccount.status.<get-status>|<get-status>(){}[0]
+    final val url // com.davils.krypt.acme.account/AcmeAccount.url|{}url[0]
+        final fun <get-url>(): kotlin/String // com.davils.krypt.acme.account/AcmeAccount.url.<get-url>|<get-url>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.acme.account/AcmeAccount.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.acme.account/AcmeAccount.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.acme.account/AcmeAccount.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.acme.account/ExternalAccountBinding { // com.davils.krypt.acme.account/ExternalAccountBinding|null[0]
+    constructor <init>(kotlin/String, com.davils.krypt.primitive.key/SecretKey, com.davils.krypt.jose.jws/JwsAlgorithm = ...) // com.davils.krypt.acme.account/ExternalAccountBinding.<init>|<init>(kotlin.String;com.davils.krypt.primitive.key.SecretKey;com.davils.krypt.jose.jws.JwsAlgorithm){}[0]
+
+    final val algorithm // com.davils.krypt.acme.account/ExternalAccountBinding.algorithm|{}algorithm[0]
+        final fun <get-algorithm>(): com.davils.krypt.jose.jws/JwsAlgorithm // com.davils.krypt.acme.account/ExternalAccountBinding.algorithm.<get-algorithm>|<get-algorithm>(){}[0]
+    final val key // com.davils.krypt.acme.account/ExternalAccountBinding.key|{}key[0]
+        final fun <get-key>(): com.davils.krypt.primitive.key/SecretKey // com.davils.krypt.acme.account/ExternalAccountBinding.key.<get-key>|<get-key>(){}[0]
+    final val keyId // com.davils.krypt.acme.account/ExternalAccountBinding.keyId|{}keyId[0]
+        final fun <get-keyId>(): kotlin/String // com.davils.krypt.acme.account/ExternalAccountBinding.keyId.<get-keyId>|<get-keyId>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.acme.account/ExternalAccountBinding.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.acme.account/ExternalAccountBinding.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.acme.account/ExternalAccountBinding.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.acme.order/AcmeAuthorization { // com.davils.krypt.acme.order/AcmeAuthorization|null[0]
+    final val challenges // com.davils.krypt.acme.order/AcmeAuthorization.challenges|{}challenges[0]
+        final fun <get-challenges>(): kotlin.collections/List<com.davils.krypt.acme.order/AcmeChallenge> // com.davils.krypt.acme.order/AcmeAuthorization.challenges.<get-challenges>|<get-challenges>(){}[0]
+    final val expires // com.davils.krypt.acme.order/AcmeAuthorization.expires|{}expires[0]
+        final fun <get-expires>(): kotlin.time/Instant? // com.davils.krypt.acme.order/AcmeAuthorization.expires.<get-expires>|<get-expires>(){}[0]
+    final val identifier // com.davils.krypt.acme.order/AcmeAuthorization.identifier|{}identifier[0]
+        final fun <get-identifier>(): com.davils.krypt.acme/AcmeIdentifier // com.davils.krypt.acme.order/AcmeAuthorization.identifier.<get-identifier>|<get-identifier>(){}[0]
+    final val isWildcard // com.davils.krypt.acme.order/AcmeAuthorization.isWildcard|{}isWildcard[0]
+        final fun <get-isWildcard>(): kotlin/Boolean // com.davils.krypt.acme.order/AcmeAuthorization.isWildcard.<get-isWildcard>|<get-isWildcard>(){}[0]
+    final val retryAfter // com.davils.krypt.acme.order/AcmeAuthorization.retryAfter|{}retryAfter[0]
+        final fun <get-retryAfter>(): kotlin.time/Duration? // com.davils.krypt.acme.order/AcmeAuthorization.retryAfter.<get-retryAfter>|<get-retryAfter>(){}[0]
+    final val status // com.davils.krypt.acme.order/AcmeAuthorization.status|{}status[0]
+        final fun <get-status>(): com.davils.krypt.acme/AcmeStatus // com.davils.krypt.acme.order/AcmeAuthorization.status.<get-status>|<get-status>(){}[0]
+    final val url // com.davils.krypt.acme.order/AcmeAuthorization.url|{}url[0]
+        final fun <get-url>(): kotlin/String // com.davils.krypt.acme.order/AcmeAuthorization.url.<get-url>|<get-url>(){}[0]
+
+    final fun challenge(com.davils.krypt.acme.order/ChallengeType): com.davils.krypt.acme.order/AcmeChallenge? // com.davils.krypt.acme.order/AcmeAuthorization.challenge|challenge(com.davils.krypt.acme.order.ChallengeType){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.acme.order/AcmeAuthorization.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.acme.order/AcmeAuthorization.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.acme.order/AcmeAuthorization.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.acme.order/AcmeChallenge { // com.davils.krypt.acme.order/AcmeChallenge|null[0]
+    final val error // com.davils.krypt.acme.order/AcmeChallenge.error|{}error[0]
+        final fun <get-error>(): com.davils.krypt.acme/AcmeProblem? // com.davils.krypt.acme.order/AcmeChallenge.error.<get-error>|<get-error>(){}[0]
+    final val kind // com.davils.krypt.acme.order/AcmeChallenge.kind|{}kind[0]
+        final fun <get-kind>(): com.davils.krypt.acme.order/ChallengeType? // com.davils.krypt.acme.order/AcmeChallenge.kind.<get-kind>|<get-kind>(){}[0]
+    final val retryAfter // com.davils.krypt.acme.order/AcmeChallenge.retryAfter|{}retryAfter[0]
+        final fun <get-retryAfter>(): kotlin.time/Duration? // com.davils.krypt.acme.order/AcmeChallenge.retryAfter.<get-retryAfter>|<get-retryAfter>(){}[0]
+    final val status // com.davils.krypt.acme.order/AcmeChallenge.status|{}status[0]
+        final fun <get-status>(): com.davils.krypt.acme/AcmeStatus // com.davils.krypt.acme.order/AcmeChallenge.status.<get-status>|<get-status>(){}[0]
+    final val token // com.davils.krypt.acme.order/AcmeChallenge.token|{}token[0]
+        final fun <get-token>(): kotlin/String? // com.davils.krypt.acme.order/AcmeChallenge.token.<get-token>|<get-token>(){}[0]
+    final val type // com.davils.krypt.acme.order/AcmeChallenge.type|{}type[0]
+        final fun <get-type>(): kotlin/String // com.davils.krypt.acme.order/AcmeChallenge.type.<get-type>|<get-type>(){}[0]
+    final val url // com.davils.krypt.acme.order/AcmeChallenge.url|{}url[0]
+        final fun <get-url>(): kotlin/String // com.davils.krypt.acme.order/AcmeChallenge.url.<get-url>|<get-url>(){}[0]
+    final val validated // com.davils.krypt.acme.order/AcmeChallenge.validated|{}validated[0]
+        final fun <get-validated>(): kotlin.time/Instant? // com.davils.krypt.acme.order/AcmeChallenge.validated.<get-validated>|<get-validated>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.acme.order/AcmeChallenge.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.acme.order/AcmeChallenge.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.acme.order/AcmeChallenge.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.acme.order/AcmeOrder { // com.davils.krypt.acme.order/AcmeOrder|null[0]
+    final val authorizations // com.davils.krypt.acme.order/AcmeOrder.authorizations|{}authorizations[0]
+        final fun <get-authorizations>(): kotlin.collections/List<kotlin/String> // com.davils.krypt.acme.order/AcmeOrder.authorizations.<get-authorizations>|<get-authorizations>(){}[0]
+    final val certificate // com.davils.krypt.acme.order/AcmeOrder.certificate|{}certificate[0]
+        final fun <get-certificate>(): kotlin/String? // com.davils.krypt.acme.order/AcmeOrder.certificate.<get-certificate>|<get-certificate>(){}[0]
+    final val error // com.davils.krypt.acme.order/AcmeOrder.error|{}error[0]
+        final fun <get-error>(): com.davils.krypt.acme/AcmeProblem? // com.davils.krypt.acme.order/AcmeOrder.error.<get-error>|<get-error>(){}[0]
+    final val expires // com.davils.krypt.acme.order/AcmeOrder.expires|{}expires[0]
+        final fun <get-expires>(): kotlin.time/Instant? // com.davils.krypt.acme.order/AcmeOrder.expires.<get-expires>|<get-expires>(){}[0]
+    final val finalize // com.davils.krypt.acme.order/AcmeOrder.finalize|{}finalize[0]
+        final fun <get-finalize>(): kotlin/String // com.davils.krypt.acme.order/AcmeOrder.finalize.<get-finalize>|<get-finalize>(){}[0]
+    final val identifiers // com.davils.krypt.acme.order/AcmeOrder.identifiers|{}identifiers[0]
+        final fun <get-identifiers>(): kotlin.collections/List<com.davils.krypt.acme/AcmeIdentifier> // com.davils.krypt.acme.order/AcmeOrder.identifiers.<get-identifiers>|<get-identifiers>(){}[0]
+    final val notAfter // com.davils.krypt.acme.order/AcmeOrder.notAfter|{}notAfter[0]
+        final fun <get-notAfter>(): kotlin.time/Instant? // com.davils.krypt.acme.order/AcmeOrder.notAfter.<get-notAfter>|<get-notAfter>(){}[0]
+    final val notBefore // com.davils.krypt.acme.order/AcmeOrder.notBefore|{}notBefore[0]
+        final fun <get-notBefore>(): kotlin.time/Instant? // com.davils.krypt.acme.order/AcmeOrder.notBefore.<get-notBefore>|<get-notBefore>(){}[0]
+    final val replaces // com.davils.krypt.acme.order/AcmeOrder.replaces|{}replaces[0]
+        final fun <get-replaces>(): kotlin/String? // com.davils.krypt.acme.order/AcmeOrder.replaces.<get-replaces>|<get-replaces>(){}[0]
+    final val retryAfter // com.davils.krypt.acme.order/AcmeOrder.retryAfter|{}retryAfter[0]
+        final fun <get-retryAfter>(): kotlin.time/Duration? // com.davils.krypt.acme.order/AcmeOrder.retryAfter.<get-retryAfter>|<get-retryAfter>(){}[0]
+    final val status // com.davils.krypt.acme.order/AcmeOrder.status|{}status[0]
+        final fun <get-status>(): com.davils.krypt.acme/AcmeStatus // com.davils.krypt.acme.order/AcmeOrder.status.<get-status>|<get-status>(){}[0]
+    final val url // com.davils.krypt.acme.order/AcmeOrder.url|{}url[0]
+        final fun <get-url>(): kotlin/String // com.davils.krypt.acme.order/AcmeOrder.url.<get-url>|<get-url>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.acme.order/AcmeOrder.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.acme.order/AcmeOrder.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.acme.order/AcmeOrder.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.acme.order/CertificateChain { // com.davils.krypt.acme.order/CertificateChain|null[0]
+    final val alternates // com.davils.krypt.acme.order/CertificateChain.alternates|{}alternates[0]
+        final fun <get-alternates>(): kotlin.collections/List<kotlin/String> // com.davils.krypt.acme.order/CertificateChain.alternates.<get-alternates>|<get-alternates>(){}[0]
+    final val certificates // com.davils.krypt.acme.order/CertificateChain.certificates|{}certificates[0]
+        final fun <get-certificates>(): kotlin.collections/List<com.davils.krypt.x509/Certificate> // com.davils.krypt.acme.order/CertificateChain.certificates.<get-certificates>|<get-certificates>(){}[0]
+    final val leaf // com.davils.krypt.acme.order/CertificateChain.leaf|{}leaf[0]
+        final fun <get-leaf>(): com.davils.krypt.x509/Certificate // com.davils.krypt.acme.order/CertificateChain.leaf.<get-leaf>|<get-leaf>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.acme.order/CertificateChain.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.acme.order/CertificateChain.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.acme.order/CertificateChain.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.acme.order/Challenges { // com.davils.krypt.acme.order/Challenges|null[0]
+    constructor <init>(com.davils.krypt.primitive/Crypto) // com.davils.krypt.acme.order/Challenges.<init>|<init>(com.davils.krypt.primitive.Crypto){}[0]
+
+    final val crypto // com.davils.krypt.acme.order/Challenges.crypto|{}crypto[0]
+        final fun <get-crypto>(): com.davils.krypt.primitive/Crypto // com.davils.krypt.acme.order/Challenges.crypto.<get-crypto>|<get-crypto>(){}[0]
+
+    final fun dns01Name(com.davils.krypt.acme/AcmeIdentifier): kotlin/String // com.davils.krypt.acme.order/Challenges.dns01Name|dns01Name(com.davils.krypt.acme.AcmeIdentifier){}[0]
+    final fun http01Path(kotlin/String): kotlin/String // com.davils.krypt.acme.order/Challenges.http01Path|http01Path(kotlin.String){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.acme.order/Challenges.toString|toString(){}[0]
+    final suspend fun dns01Value(kotlin/String): kotlin/String // com.davils.krypt.acme.order/Challenges.dns01Value|dns01Value(kotlin.String){}[0]
+    final suspend fun keyAuthorization(kotlin/String, com.davils.krypt.primitive.key/PublicKey): kotlin/String // com.davils.krypt.acme.order/Challenges.keyAuthorization|keyAuthorization(kotlin.String;com.davils.krypt.primitive.key.PublicKey){}[0]
+    final suspend fun tlsAlpn01Certificate(com.davils.krypt.acme/AcmeIdentifier, kotlin/String, com.davils.krypt.primitive.signature/Signer, kotlin.time/Duration = ...): com.davils.krypt.x509/Certificate // com.davils.krypt.acme.order/Challenges.tlsAlpn01Certificate|tlsAlpn01Certificate(com.davils.krypt.acme.AcmeIdentifier;kotlin.String;com.davils.krypt.primitive.signature.Signer;kotlin.time.Duration){}[0]
+    final suspend fun tlsAlpn01Extension(kotlin/String): com.davils.krypt.x509.extension/Extension // com.davils.krypt.acme.order/Challenges.tlsAlpn01Extension|tlsAlpn01Extension(kotlin.String){}[0]
+
+    final object Companion { // com.davils.krypt.acme.order/Challenges.Companion|null[0]
+        final const val ALPN_PROTOCOL // com.davils.krypt.acme.order/Challenges.Companion.ALPN_PROTOCOL|{}ALPN_PROTOCOL[0]
+            final fun <get-ALPN_PROTOCOL>(): kotlin/String // com.davils.krypt.acme.order/Challenges.Companion.ALPN_PROTOCOL.<get-ALPN_PROTOCOL>|<get-ALPN_PROTOCOL>(){}[0]
+        final const val DNS01_LABEL // com.davils.krypt.acme.order/Challenges.Companion.DNS01_LABEL|{}DNS01_LABEL[0]
+            final fun <get-DNS01_LABEL>(): kotlin/String // com.davils.krypt.acme.order/Challenges.Companion.DNS01_LABEL.<get-DNS01_LABEL>|<get-DNS01_LABEL>(){}[0]
+        final const val HTTP01_PREFIX // com.davils.krypt.acme.order/Challenges.Companion.HTTP01_PREFIX|{}HTTP01_PREFIX[0]
+            final fun <get-HTTP01_PREFIX>(): kotlin/String // com.davils.krypt.acme.order/Challenges.Companion.HTTP01_PREFIX.<get-HTTP01_PREFIX>|<get-HTTP01_PREFIX>(){}[0]
+
+        final val ACME_IDENTIFIER // com.davils.krypt.acme.order/Challenges.Companion.ACME_IDENTIFIER|{}ACME_IDENTIFIER[0]
+            final fun <get-ACME_IDENTIFIER>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.acme.order/Challenges.Companion.ACME_IDENTIFIER.<get-ACME_IDENTIFIER>|<get-ACME_IDENTIFIER>(){}[0]
+    }
+}
+
+final class com.davils.krypt.acme.renewal/RenewalInfo { // com.davils.krypt.acme.renewal/RenewalInfo|null[0]
+    final val certificateId // com.davils.krypt.acme.renewal/RenewalInfo.certificateId|{}certificateId[0]
+        final fun <get-certificateId>(): kotlin/String // com.davils.krypt.acme.renewal/RenewalInfo.certificateId.<get-certificateId>|<get-certificateId>(){}[0]
+    final val end // com.davils.krypt.acme.renewal/RenewalInfo.end|{}end[0]
+        final fun <get-end>(): kotlin.time/Instant // com.davils.krypt.acme.renewal/RenewalInfo.end.<get-end>|<get-end>(){}[0]
+    final val explanation // com.davils.krypt.acme.renewal/RenewalInfo.explanation|{}explanation[0]
+        final fun <get-explanation>(): kotlin/String? // com.davils.krypt.acme.renewal/RenewalInfo.explanation.<get-explanation>|<get-explanation>(){}[0]
+    final val retryAfter // com.davils.krypt.acme.renewal/RenewalInfo.retryAfter|{}retryAfter[0]
+        final fun <get-retryAfter>(): kotlin.time/Duration? // com.davils.krypt.acme.renewal/RenewalInfo.retryAfter.<get-retryAfter>|<get-retryAfter>(){}[0]
+    final val start // com.davils.krypt.acme.renewal/RenewalInfo.start|{}start[0]
+        final fun <get-start>(): kotlin.time/Instant // com.davils.krypt.acme.renewal/RenewalInfo.start.<get-start>|<get-start>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.acme.renewal/RenewalInfo.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.acme.renewal/RenewalInfo.hashCode|hashCode(){}[0]
+    final fun isRenewalDue(kotlin.time/Instant): kotlin/Boolean // com.davils.krypt.acme.renewal/RenewalInfo.isRenewalDue|isRenewalDue(kotlin.time.Instant){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.acme.renewal/RenewalInfo.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.acme/AcmeClient { // com.davils.krypt.acme/AcmeClient|null[0]
+    constructor <init>(com.davils.krypt.acme/AcmeTransport, kotlin/String, com.davils.krypt.primitive/Crypto, com.davils.krypt.acme/AcmeLimits = ...) // com.davils.krypt.acme/AcmeClient.<init>|<init>(com.davils.krypt.acme.AcmeTransport;kotlin.String;com.davils.krypt.primitive.Crypto;com.davils.krypt.acme.AcmeLimits){}[0]
+
+    final val challenges // com.davils.krypt.acme/AcmeClient.challenges|{}challenges[0]
+        final fun <get-challenges>(): com.davils.krypt.acme.order/Challenges // com.davils.krypt.acme/AcmeClient.challenges.<get-challenges>|<get-challenges>(){}[0]
+    final val crypto // com.davils.krypt.acme/AcmeClient.crypto|{}crypto[0]
+        final fun <get-crypto>(): com.davils.krypt.primitive/Crypto // com.davils.krypt.acme/AcmeClient.crypto.<get-crypto>|<get-crypto>(){}[0]
+    final val directoryUrl // com.davils.krypt.acme/AcmeClient.directoryUrl|{}directoryUrl[0]
+        final fun <get-directoryUrl>(): kotlin/String // com.davils.krypt.acme/AcmeClient.directoryUrl.<get-directoryUrl>|<get-directoryUrl>(){}[0]
+    final val limits // com.davils.krypt.acme/AcmeClient.limits|{}limits[0]
+        final fun <get-limits>(): com.davils.krypt.acme/AcmeLimits // com.davils.krypt.acme/AcmeClient.limits.<get-limits>|<get-limits>(){}[0]
+
+    final fun session(com.davils.krypt.acme.account/AccountKey, kotlin/String): com.davils.krypt.acme/AcmeSession // com.davils.krypt.acme/AcmeClient.session|session(com.davils.krypt.acme.account.AccountKey;kotlin.String){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.acme/AcmeClient.toString|toString(){}[0]
+    final suspend fun directory(): com.davils.kore.core.outcome/Outcome<com.davils.krypt.acme/AcmeDirectory, com.davils.krypt.acme/AcmeFailure> // com.davils.krypt.acme/AcmeClient.directory|directory(){}[0]
+    final suspend fun findAccount(com.davils.krypt.acme.account/AccountKey): com.davils.kore.core.outcome/Outcome<com.davils.krypt.acme.account/AcmeAccount, com.davils.krypt.acme/AcmeFailure> // com.davils.krypt.acme/AcmeClient.findAccount|findAccount(com.davils.krypt.acme.account.AccountKey){}[0]
+    final suspend fun newAccount(com.davils.krypt.acme.account/AccountKey, kotlin.collections/List<kotlin/String> = ..., kotlin/Boolean = ..., com.davils.krypt.acme.account/ExternalAccountBinding? = ...): com.davils.kore.core.outcome/Outcome<com.davils.krypt.acme.account/AcmeAccount, com.davils.krypt.acme/AcmeFailure> // com.davils.krypt.acme/AcmeClient.newAccount|newAccount(com.davils.krypt.acme.account.AccountKey;kotlin.collections.List<kotlin.String>;kotlin.Boolean;com.davils.krypt.acme.account.ExternalAccountBinding?){}[0]
+    final suspend fun renewalInfo(com.davils.krypt.x509/Certificate): com.davils.kore.core.outcome/Outcome<com.davils.krypt.acme.renewal/RenewalInfo, com.davils.krypt.acme/AcmeFailure> // com.davils.krypt.acme/AcmeClient.renewalInfo|renewalInfo(com.davils.krypt.x509.Certificate){}[0]
+    final suspend fun renewalInfo(kotlin/String): com.davils.kore.core.outcome/Outcome<com.davils.krypt.acme.renewal/RenewalInfo, com.davils.krypt.acme/AcmeFailure> // com.davils.krypt.acme/AcmeClient.renewalInfo|renewalInfo(kotlin.String){}[0]
+    final suspend fun revoke(com.davils.krypt.x509/Certificate, com.davils.krypt.acme.account/AccountKey, com.davils.krypt.x509/RevocationReason? = ...): com.davils.kore.core.outcome/Outcome<kotlin/Unit, com.davils.krypt.acme/AcmeFailure> // com.davils.krypt.acme/AcmeClient.revoke|revoke(com.davils.krypt.x509.Certificate;com.davils.krypt.acme.account.AccountKey;com.davils.krypt.x509.RevocationReason?){}[0]
+}
+
+final class com.davils.krypt.acme/AcmeDirectory { // com.davils.krypt.acme/AcmeDirectory|null[0]
+    final val keyChange // com.davils.krypt.acme/AcmeDirectory.keyChange|{}keyChange[0]
+        final fun <get-keyChange>(): kotlin/String? // com.davils.krypt.acme/AcmeDirectory.keyChange.<get-keyChange>|<get-keyChange>(){}[0]
+    final val meta // com.davils.krypt.acme/AcmeDirectory.meta|{}meta[0]
+        final fun <get-meta>(): com.davils.krypt.acme/DirectoryMeta // com.davils.krypt.acme/AcmeDirectory.meta.<get-meta>|<get-meta>(){}[0]
+    final val newAccount // com.davils.krypt.acme/AcmeDirectory.newAccount|{}newAccount[0]
+        final fun <get-newAccount>(): kotlin/String // com.davils.krypt.acme/AcmeDirectory.newAccount.<get-newAccount>|<get-newAccount>(){}[0]
+    final val newAuthorization // com.davils.krypt.acme/AcmeDirectory.newAuthorization|{}newAuthorization[0]
+        final fun <get-newAuthorization>(): kotlin/String? // com.davils.krypt.acme/AcmeDirectory.newAuthorization.<get-newAuthorization>|<get-newAuthorization>(){}[0]
+    final val newNonce // com.davils.krypt.acme/AcmeDirectory.newNonce|{}newNonce[0]
+        final fun <get-newNonce>(): kotlin/String // com.davils.krypt.acme/AcmeDirectory.newNonce.<get-newNonce>|<get-newNonce>(){}[0]
+    final val newOrder // com.davils.krypt.acme/AcmeDirectory.newOrder|{}newOrder[0]
+        final fun <get-newOrder>(): kotlin/String // com.davils.krypt.acme/AcmeDirectory.newOrder.<get-newOrder>|<get-newOrder>(){}[0]
+    final val renewalInfo // com.davils.krypt.acme/AcmeDirectory.renewalInfo|{}renewalInfo[0]
+        final fun <get-renewalInfo>(): kotlin/String? // com.davils.krypt.acme/AcmeDirectory.renewalInfo.<get-renewalInfo>|<get-renewalInfo>(){}[0]
+    final val revokeCertificate // com.davils.krypt.acme/AcmeDirectory.revokeCertificate|{}revokeCertificate[0]
+        final fun <get-revokeCertificate>(): kotlin/String? // com.davils.krypt.acme/AcmeDirectory.revokeCertificate.<get-revokeCertificate>|<get-revokeCertificate>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.acme/AcmeDirectory.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.acme/AcmeDirectory.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.acme/AcmeDirectory.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.acme/AcmeIdentifier { // com.davils.krypt.acme/AcmeIdentifier|null[0]
+    constructor <init>(com.davils.krypt.acme/IdentifierType, kotlin/String) // com.davils.krypt.acme/AcmeIdentifier.<init>|<init>(com.davils.krypt.acme.IdentifierType;kotlin.String){}[0]
+
+    final val isWildcard // com.davils.krypt.acme/AcmeIdentifier.isWildcard|{}isWildcard[0]
+        final fun <get-isWildcard>(): kotlin/Boolean // com.davils.krypt.acme/AcmeIdentifier.isWildcard.<get-isWildcard>|<get-isWildcard>(){}[0]
+    final val type // com.davils.krypt.acme/AcmeIdentifier.type|{}type[0]
+        final fun <get-type>(): com.davils.krypt.acme/IdentifierType // com.davils.krypt.acme/AcmeIdentifier.type.<get-type>|<get-type>(){}[0]
+    final val value // com.davils.krypt.acme/AcmeIdentifier.value|{}value[0]
+        final fun <get-value>(): kotlin/String // com.davils.krypt.acme/AcmeIdentifier.value.<get-value>|<get-value>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.acme/AcmeIdentifier.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.acme/AcmeIdentifier.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.acme/AcmeIdentifier.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.acme/AcmeIdentifier.Companion|null[0]
+        final fun dns(kotlin/String): com.davils.krypt.acme/AcmeIdentifier // com.davils.krypt.acme/AcmeIdentifier.Companion.dns|dns(kotlin.String){}[0]
+        final fun ip(kotlin/String): com.davils.krypt.acme/AcmeIdentifier // com.davils.krypt.acme/AcmeIdentifier.Companion.ip|ip(kotlin.String){}[0]
+    }
+}
+
+final class com.davils.krypt.acme/AcmeLimits { // com.davils.krypt.acme/AcmeLimits|null[0]
+    constructor <init>(kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin.time/Duration = ..., com.davils.krypt.jose/JoseLimits = ...) // com.davils.krypt.acme/AcmeLimits.<init>|<init>(kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.time.Duration;com.davils.krypt.jose.JoseLimits){}[0]
+
+    final val json // com.davils.krypt.acme/AcmeLimits.json|{}json[0]
+        final fun <get-json>(): com.davils.krypt.jose/JoseLimits // com.davils.krypt.acme/AcmeLimits.json.<get-json>|<get-json>(){}[0]
+    final val maximumCertificates // com.davils.krypt.acme/AcmeLimits.maximumCertificates|{}maximumCertificates[0]
+        final fun <get-maximumCertificates>(): kotlin/Int // com.davils.krypt.acme/AcmeLimits.maximumCertificates.<get-maximumCertificates>|<get-maximumCertificates>(){}[0]
+    final val maximumEntries // com.davils.krypt.acme/AcmeLimits.maximumEntries|{}maximumEntries[0]
+        final fun <get-maximumEntries>(): kotlin/Int // com.davils.krypt.acme/AcmeLimits.maximumEntries.<get-maximumEntries>|<get-maximumEntries>(){}[0]
+    final val maximumHeaderBytes // com.davils.krypt.acme/AcmeLimits.maximumHeaderBytes|{}maximumHeaderBytes[0]
+        final fun <get-maximumHeaderBytes>(): kotlin/Int // com.davils.krypt.acme/AcmeLimits.maximumHeaderBytes.<get-maximumHeaderBytes>|<get-maximumHeaderBytes>(){}[0]
+    final val maximumHeaders // com.davils.krypt.acme/AcmeLimits.maximumHeaders|{}maximumHeaders[0]
+        final fun <get-maximumHeaders>(): kotlin/Int // com.davils.krypt.acme/AcmeLimits.maximumHeaders.<get-maximumHeaders>|<get-maximumHeaders>(){}[0]
+    final val maximumNonceRetries // com.davils.krypt.acme/AcmeLimits.maximumNonceRetries|{}maximumNonceRetries[0]
+        final fun <get-maximumNonceRetries>(): kotlin/Int // com.davils.krypt.acme/AcmeLimits.maximumNonceRetries.<get-maximumNonceRetries>|<get-maximumNonceRetries>(){}[0]
+    final val maximumNonces // com.davils.krypt.acme/AcmeLimits.maximumNonces|{}maximumNonces[0]
+        final fun <get-maximumNonces>(): kotlin/Int // com.davils.krypt.acme/AcmeLimits.maximumNonces.<get-maximumNonces>|<get-maximumNonces>(){}[0]
+    final val maximumResponseBytes // com.davils.krypt.acme/AcmeLimits.maximumResponseBytes|{}maximumResponseBytes[0]
+        final fun <get-maximumResponseBytes>(): kotlin/Int // com.davils.krypt.acme/AcmeLimits.maximumResponseBytes.<get-maximumResponseBytes>|<get-maximumResponseBytes>(){}[0]
+    final val maximumRetryAfter // com.davils.krypt.acme/AcmeLimits.maximumRetryAfter|{}maximumRetryAfter[0]
+        final fun <get-maximumRetryAfter>(): kotlin.time/Duration // com.davils.krypt.acme/AcmeLimits.maximumRetryAfter.<get-maximumRetryAfter>|<get-maximumRetryAfter>(){}[0]
+    final val maximumUrlLength // com.davils.krypt.acme/AcmeLimits.maximumUrlLength|{}maximumUrlLength[0]
+        final fun <get-maximumUrlLength>(): kotlin/Int // com.davils.krypt.acme/AcmeLimits.maximumUrlLength.<get-maximumUrlLength>|<get-maximumUrlLength>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.acme/AcmeLimits.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.acme/AcmeLimits.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.acme/AcmeLimits.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.acme/AcmeLimits.Companion|null[0]
+        final const val DEFAULT_MAXIMUM_CERTIFICATES // com.davils.krypt.acme/AcmeLimits.Companion.DEFAULT_MAXIMUM_CERTIFICATES|{}DEFAULT_MAXIMUM_CERTIFICATES[0]
+            final fun <get-DEFAULT_MAXIMUM_CERTIFICATES>(): kotlin/Int // com.davils.krypt.acme/AcmeLimits.Companion.DEFAULT_MAXIMUM_CERTIFICATES.<get-DEFAULT_MAXIMUM_CERTIFICATES>|<get-DEFAULT_MAXIMUM_CERTIFICATES>(){}[0]
+        final const val DEFAULT_MAXIMUM_ENTRIES // com.davils.krypt.acme/AcmeLimits.Companion.DEFAULT_MAXIMUM_ENTRIES|{}DEFAULT_MAXIMUM_ENTRIES[0]
+            final fun <get-DEFAULT_MAXIMUM_ENTRIES>(): kotlin/Int // com.davils.krypt.acme/AcmeLimits.Companion.DEFAULT_MAXIMUM_ENTRIES.<get-DEFAULT_MAXIMUM_ENTRIES>|<get-DEFAULT_MAXIMUM_ENTRIES>(){}[0]
+        final const val DEFAULT_MAXIMUM_HEADERS // com.davils.krypt.acme/AcmeLimits.Companion.DEFAULT_MAXIMUM_HEADERS|{}DEFAULT_MAXIMUM_HEADERS[0]
+            final fun <get-DEFAULT_MAXIMUM_HEADERS>(): kotlin/Int // com.davils.krypt.acme/AcmeLimits.Companion.DEFAULT_MAXIMUM_HEADERS.<get-DEFAULT_MAXIMUM_HEADERS>|<get-DEFAULT_MAXIMUM_HEADERS>(){}[0]
+        final const val DEFAULT_MAXIMUM_HEADER_BYTES // com.davils.krypt.acme/AcmeLimits.Companion.DEFAULT_MAXIMUM_HEADER_BYTES|{}DEFAULT_MAXIMUM_HEADER_BYTES[0]
+            final fun <get-DEFAULT_MAXIMUM_HEADER_BYTES>(): kotlin/Int // com.davils.krypt.acme/AcmeLimits.Companion.DEFAULT_MAXIMUM_HEADER_BYTES.<get-DEFAULT_MAXIMUM_HEADER_BYTES>|<get-DEFAULT_MAXIMUM_HEADER_BYTES>(){}[0]
+        final const val DEFAULT_MAXIMUM_NONCES // com.davils.krypt.acme/AcmeLimits.Companion.DEFAULT_MAXIMUM_NONCES|{}DEFAULT_MAXIMUM_NONCES[0]
+            final fun <get-DEFAULT_MAXIMUM_NONCES>(): kotlin/Int // com.davils.krypt.acme/AcmeLimits.Companion.DEFAULT_MAXIMUM_NONCES.<get-DEFAULT_MAXIMUM_NONCES>|<get-DEFAULT_MAXIMUM_NONCES>(){}[0]
+        final const val DEFAULT_MAXIMUM_NONCE_RETRIES // com.davils.krypt.acme/AcmeLimits.Companion.DEFAULT_MAXIMUM_NONCE_RETRIES|{}DEFAULT_MAXIMUM_NONCE_RETRIES[0]
+            final fun <get-DEFAULT_MAXIMUM_NONCE_RETRIES>(): kotlin/Int // com.davils.krypt.acme/AcmeLimits.Companion.DEFAULT_MAXIMUM_NONCE_RETRIES.<get-DEFAULT_MAXIMUM_NONCE_RETRIES>|<get-DEFAULT_MAXIMUM_NONCE_RETRIES>(){}[0]
+        final const val DEFAULT_MAXIMUM_RESPONSE_BYTES // com.davils.krypt.acme/AcmeLimits.Companion.DEFAULT_MAXIMUM_RESPONSE_BYTES|{}DEFAULT_MAXIMUM_RESPONSE_BYTES[0]
+            final fun <get-DEFAULT_MAXIMUM_RESPONSE_BYTES>(): kotlin/Int // com.davils.krypt.acme/AcmeLimits.Companion.DEFAULT_MAXIMUM_RESPONSE_BYTES.<get-DEFAULT_MAXIMUM_RESPONSE_BYTES>|<get-DEFAULT_MAXIMUM_RESPONSE_BYTES>(){}[0]
+        final const val DEFAULT_MAXIMUM_URL_LENGTH // com.davils.krypt.acme/AcmeLimits.Companion.DEFAULT_MAXIMUM_URL_LENGTH|{}DEFAULT_MAXIMUM_URL_LENGTH[0]
+            final fun <get-DEFAULT_MAXIMUM_URL_LENGTH>(): kotlin/Int // com.davils.krypt.acme/AcmeLimits.Companion.DEFAULT_MAXIMUM_URL_LENGTH.<get-DEFAULT_MAXIMUM_URL_LENGTH>|<get-DEFAULT_MAXIMUM_URL_LENGTH>(){}[0]
+        final const val HARD_MAXIMUM_CERTIFICATES // com.davils.krypt.acme/AcmeLimits.Companion.HARD_MAXIMUM_CERTIFICATES|{}HARD_MAXIMUM_CERTIFICATES[0]
+            final fun <get-HARD_MAXIMUM_CERTIFICATES>(): kotlin/Int // com.davils.krypt.acme/AcmeLimits.Companion.HARD_MAXIMUM_CERTIFICATES.<get-HARD_MAXIMUM_CERTIFICATES>|<get-HARD_MAXIMUM_CERTIFICATES>(){}[0]
+        final const val HARD_MAXIMUM_ENTRIES // com.davils.krypt.acme/AcmeLimits.Companion.HARD_MAXIMUM_ENTRIES|{}HARD_MAXIMUM_ENTRIES[0]
+            final fun <get-HARD_MAXIMUM_ENTRIES>(): kotlin/Int // com.davils.krypt.acme/AcmeLimits.Companion.HARD_MAXIMUM_ENTRIES.<get-HARD_MAXIMUM_ENTRIES>|<get-HARD_MAXIMUM_ENTRIES>(){}[0]
+        final const val HARD_MAXIMUM_HEADERS // com.davils.krypt.acme/AcmeLimits.Companion.HARD_MAXIMUM_HEADERS|{}HARD_MAXIMUM_HEADERS[0]
+            final fun <get-HARD_MAXIMUM_HEADERS>(): kotlin/Int // com.davils.krypt.acme/AcmeLimits.Companion.HARD_MAXIMUM_HEADERS.<get-HARD_MAXIMUM_HEADERS>|<get-HARD_MAXIMUM_HEADERS>(){}[0]
+        final const val HARD_MAXIMUM_HEADER_BYTES // com.davils.krypt.acme/AcmeLimits.Companion.HARD_MAXIMUM_HEADER_BYTES|{}HARD_MAXIMUM_HEADER_BYTES[0]
+            final fun <get-HARD_MAXIMUM_HEADER_BYTES>(): kotlin/Int // com.davils.krypt.acme/AcmeLimits.Companion.HARD_MAXIMUM_HEADER_BYTES.<get-HARD_MAXIMUM_HEADER_BYTES>|<get-HARD_MAXIMUM_HEADER_BYTES>(){}[0]
+        final const val HARD_MAXIMUM_NONCES // com.davils.krypt.acme/AcmeLimits.Companion.HARD_MAXIMUM_NONCES|{}HARD_MAXIMUM_NONCES[0]
+            final fun <get-HARD_MAXIMUM_NONCES>(): kotlin/Int // com.davils.krypt.acme/AcmeLimits.Companion.HARD_MAXIMUM_NONCES.<get-HARD_MAXIMUM_NONCES>|<get-HARD_MAXIMUM_NONCES>(){}[0]
+        final const val HARD_MAXIMUM_NONCE_RETRIES // com.davils.krypt.acme/AcmeLimits.Companion.HARD_MAXIMUM_NONCE_RETRIES|{}HARD_MAXIMUM_NONCE_RETRIES[0]
+            final fun <get-HARD_MAXIMUM_NONCE_RETRIES>(): kotlin/Int // com.davils.krypt.acme/AcmeLimits.Companion.HARD_MAXIMUM_NONCE_RETRIES.<get-HARD_MAXIMUM_NONCE_RETRIES>|<get-HARD_MAXIMUM_NONCE_RETRIES>(){}[0]
+        final const val HARD_MAXIMUM_RESPONSE_BYTES // com.davils.krypt.acme/AcmeLimits.Companion.HARD_MAXIMUM_RESPONSE_BYTES|{}HARD_MAXIMUM_RESPONSE_BYTES[0]
+            final fun <get-HARD_MAXIMUM_RESPONSE_BYTES>(): kotlin/Int // com.davils.krypt.acme/AcmeLimits.Companion.HARD_MAXIMUM_RESPONSE_BYTES.<get-HARD_MAXIMUM_RESPONSE_BYTES>|<get-HARD_MAXIMUM_RESPONSE_BYTES>(){}[0]
+        final const val HARD_MAXIMUM_URL_LENGTH // com.davils.krypt.acme/AcmeLimits.Companion.HARD_MAXIMUM_URL_LENGTH|{}HARD_MAXIMUM_URL_LENGTH[0]
+            final fun <get-HARD_MAXIMUM_URL_LENGTH>(): kotlin/Int // com.davils.krypt.acme/AcmeLimits.Companion.HARD_MAXIMUM_URL_LENGTH.<get-HARD_MAXIMUM_URL_LENGTH>|<get-HARD_MAXIMUM_URL_LENGTH>(){}[0]
+
+        final val DEFAULT_MAXIMUM_RETRY_AFTER // com.davils.krypt.acme/AcmeLimits.Companion.DEFAULT_MAXIMUM_RETRY_AFTER|{}DEFAULT_MAXIMUM_RETRY_AFTER[0]
+            final fun <get-DEFAULT_MAXIMUM_RETRY_AFTER>(): kotlin.time/Duration // com.davils.krypt.acme/AcmeLimits.Companion.DEFAULT_MAXIMUM_RETRY_AFTER.<get-DEFAULT_MAXIMUM_RETRY_AFTER>|<get-DEFAULT_MAXIMUM_RETRY_AFTER>(){}[0]
+        final val Default // com.davils.krypt.acme/AcmeLimits.Companion.Default|{}Default[0]
+            final fun <get-Default>(): com.davils.krypt.acme/AcmeLimits // com.davils.krypt.acme/AcmeLimits.Companion.Default.<get-Default>|<get-Default>(){}[0]
+        final val HARD_MAXIMUM_RETRY_AFTER // com.davils.krypt.acme/AcmeLimits.Companion.HARD_MAXIMUM_RETRY_AFTER|{}HARD_MAXIMUM_RETRY_AFTER[0]
+            final fun <get-HARD_MAXIMUM_RETRY_AFTER>(): kotlin.time/Duration // com.davils.krypt.acme/AcmeLimits.Companion.HARD_MAXIMUM_RETRY_AFTER.<get-HARD_MAXIMUM_RETRY_AFTER>|<get-HARD_MAXIMUM_RETRY_AFTER>(){}[0]
+    }
+}
+
+final class com.davils.krypt.acme/AcmeProblem : com.davils.krypt.acme/AcmeFailure { // com.davils.krypt.acme/AcmeProblem|null[0]
+    final val detail // com.davils.krypt.acme/AcmeProblem.detail|{}detail[0]
+        final fun <get-detail>(): kotlin/String? // com.davils.krypt.acme/AcmeProblem.detail.<get-detail>|<get-detail>(){}[0]
+    final val identifier // com.davils.krypt.acme/AcmeProblem.identifier|{}identifier[0]
+        final fun <get-identifier>(): com.davils.krypt.acme/AcmeIdentifier? // com.davils.krypt.acme/AcmeProblem.identifier.<get-identifier>|<get-identifier>(){}[0]
+    final val instance // com.davils.krypt.acme/AcmeProblem.instance|{}instance[0]
+        final fun <get-instance>(): kotlin/String? // com.davils.krypt.acme/AcmeProblem.instance.<get-instance>|<get-instance>(){}[0]
+    final val kind // com.davils.krypt.acme/AcmeProblem.kind|{}kind[0]
+        final fun <get-kind>(): com.davils.krypt.acme/AcmeProblemType? // com.davils.krypt.acme/AcmeProblem.kind.<get-kind>|<get-kind>(){}[0]
+    final val retryAfter // com.davils.krypt.acme/AcmeProblem.retryAfter|{}retryAfter[0]
+        final fun <get-retryAfter>(): kotlin.time/Duration? // com.davils.krypt.acme/AcmeProblem.retryAfter.<get-retryAfter>|<get-retryAfter>(){}[0]
+    final val status // com.davils.krypt.acme/AcmeProblem.status|{}status[0]
+        final fun <get-status>(): kotlin/Int? // com.davils.krypt.acme/AcmeProblem.status.<get-status>|<get-status>(){}[0]
+    final val subproblems // com.davils.krypt.acme/AcmeProblem.subproblems|{}subproblems[0]
+        final fun <get-subproblems>(): kotlin.collections/List<com.davils.krypt.acme/AcmeProblem> // com.davils.krypt.acme/AcmeProblem.subproblems.<get-subproblems>|<get-subproblems>(){}[0]
+    final val title // com.davils.krypt.acme/AcmeProblem.title|{}title[0]
+        final fun <get-title>(): kotlin/String? // com.davils.krypt.acme/AcmeProblem.title.<get-title>|<get-title>(){}[0]
+    final val type // com.davils.krypt.acme/AcmeProblem.type|{}type[0]
+        final fun <get-type>(): kotlin/String // com.davils.krypt.acme/AcmeProblem.type.<get-type>|<get-type>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.acme/AcmeProblem.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.acme/AcmeProblem.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.acme/AcmeProblem.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.acme/AcmeRequest { // com.davils.krypt.acme/AcmeRequest|null[0]
+    constructor <init>(com.davils.krypt.acme/AcmeMethod, kotlin/String, kotlin.collections/List<kotlin/Pair<kotlin/String, kotlin/String>> = ..., kotlinx.io.bytestring/ByteString = ...) // com.davils.krypt.acme/AcmeRequest.<init>|<init>(com.davils.krypt.acme.AcmeMethod;kotlin.String;kotlin.collections.List<kotlin.Pair<kotlin.String,kotlin.String>>;kotlinx.io.bytestring.ByteString){}[0]
+
+    final val body // com.davils.krypt.acme/AcmeRequest.body|{}body[0]
+        final fun <get-body>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.acme/AcmeRequest.body.<get-body>|<get-body>(){}[0]
+    final val headers // com.davils.krypt.acme/AcmeRequest.headers|{}headers[0]
+        final fun <get-headers>(): kotlin.collections/List<kotlin/Pair<kotlin/String, kotlin/String>> // com.davils.krypt.acme/AcmeRequest.headers.<get-headers>|<get-headers>(){}[0]
+    final val method // com.davils.krypt.acme/AcmeRequest.method|{}method[0]
+        final fun <get-method>(): com.davils.krypt.acme/AcmeMethod // com.davils.krypt.acme/AcmeRequest.method.<get-method>|<get-method>(){}[0]
+    final val url // com.davils.krypt.acme/AcmeRequest.url|{}url[0]
+        final fun <get-url>(): kotlin/String // com.davils.krypt.acme/AcmeRequest.url.<get-url>|<get-url>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.acme/AcmeRequest.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.acme/AcmeRequest.hashCode|hashCode(){}[0]
+    final fun header(kotlin/String): kotlin/String? // com.davils.krypt.acme/AcmeRequest.header|header(kotlin.String){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.acme/AcmeRequest.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.acme/AcmeResponse { // com.davils.krypt.acme/AcmeResponse|null[0]
+    constructor <init>(kotlin/Int, kotlin.collections/List<kotlin/Pair<kotlin/String, kotlin/String>> = ..., kotlinx.io.bytestring/ByteString = ...) // com.davils.krypt.acme/AcmeResponse.<init>|<init>(kotlin.Int;kotlin.collections.List<kotlin.Pair<kotlin.String,kotlin.String>>;kotlinx.io.bytestring.ByteString){}[0]
+
+    final val body // com.davils.krypt.acme/AcmeResponse.body|{}body[0]
+        final fun <get-body>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.acme/AcmeResponse.body.<get-body>|<get-body>(){}[0]
+    final val headers // com.davils.krypt.acme/AcmeResponse.headers|{}headers[0]
+        final fun <get-headers>(): kotlin.collections/List<kotlin/Pair<kotlin/String, kotlin/String>> // com.davils.krypt.acme/AcmeResponse.headers.<get-headers>|<get-headers>(){}[0]
+    final val status // com.davils.krypt.acme/AcmeResponse.status|{}status[0]
+        final fun <get-status>(): kotlin/Int // com.davils.krypt.acme/AcmeResponse.status.<get-status>|<get-status>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.acme/AcmeResponse.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.acme/AcmeResponse.hashCode|hashCode(){}[0]
+    final fun headers(kotlin/String): kotlin.collections/List<kotlin/String> // com.davils.krypt.acme/AcmeResponse.headers|headers(kotlin.String){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.acme/AcmeResponse.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.acme/AcmeSession { // com.davils.krypt.acme/AcmeSession|null[0]
+    final val accountUrl // com.davils.krypt.acme/AcmeSession.accountUrl|{}accountUrl[0]
+        final fun <get-accountUrl>(): kotlin/String // com.davils.krypt.acme/AcmeSession.accountUrl.<get-accountUrl>|<get-accountUrl>(){}[0]
+    final val client // com.davils.krypt.acme/AcmeSession.client|{}client[0]
+        final fun <get-client>(): com.davils.krypt.acme/AcmeClient // com.davils.krypt.acme/AcmeSession.client.<get-client>|<get-client>(){}[0]
+    final val key // com.davils.krypt.acme/AcmeSession.key|{}key[0]
+        final fun <get-key>(): com.davils.krypt.acme.account/AccountKey // com.davils.krypt.acme/AcmeSession.key.<get-key>|<get-key>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.acme/AcmeSession.toString|toString(){}[0]
+    final suspend fun account(): com.davils.kore.core.outcome/Outcome<com.davils.krypt.acme.account/AcmeAccount, com.davils.krypt.acme/AcmeFailure> // com.davils.krypt.acme/AcmeSession.account|account(){}[0]
+    final suspend fun authorization(kotlin/String): com.davils.kore.core.outcome/Outcome<com.davils.krypt.acme.order/AcmeAuthorization, com.davils.krypt.acme/AcmeFailure> // com.davils.krypt.acme/AcmeSession.authorization|authorization(kotlin.String){}[0]
+    final suspend fun awaitAuthorization(com.davils.krypt.acme.order/AcmeAuthorization, kotlin/Int = ..., kotlin.time/Duration = ...): com.davils.kore.core.outcome/Outcome<com.davils.krypt.acme.order/AcmeAuthorization, com.davils.krypt.acme/AcmeFailure> // com.davils.krypt.acme/AcmeSession.awaitAuthorization|awaitAuthorization(com.davils.krypt.acme.order.AcmeAuthorization;kotlin.Int;kotlin.time.Duration){}[0]
+    final suspend fun awaitOrder(com.davils.krypt.acme.order/AcmeOrder, kotlin/Int = ..., kotlin.time/Duration = ...): com.davils.kore.core.outcome/Outcome<com.davils.krypt.acme.order/AcmeOrder, com.davils.krypt.acme/AcmeFailure> // com.davils.krypt.acme/AcmeSession.awaitOrder|awaitOrder(com.davils.krypt.acme.order.AcmeOrder;kotlin.Int;kotlin.time.Duration){}[0]
+    final suspend fun certificate(kotlin/String): com.davils.kore.core.outcome/Outcome<com.davils.krypt.acme.order/CertificateChain, com.davils.krypt.acme/AcmeFailure> // com.davils.krypt.acme/AcmeSession.certificate|certificate(kotlin.String){}[0]
+    final suspend fun challenge(kotlin/String): com.davils.kore.core.outcome/Outcome<com.davils.krypt.acme.order/AcmeChallenge, com.davils.krypt.acme/AcmeFailure> // com.davils.krypt.acme/AcmeSession.challenge|challenge(kotlin.String){}[0]
+    final suspend fun changeKey(com.davils.krypt.acme.account/AccountKey): com.davils.kore.core.outcome/Outcome<com.davils.krypt.acme/AcmeSession, com.davils.krypt.acme/AcmeFailure> // com.davils.krypt.acme/AcmeSession.changeKey|changeKey(com.davils.krypt.acme.account.AccountKey){}[0]
+    final suspend fun deactivateAccount(): com.davils.kore.core.outcome/Outcome<com.davils.krypt.acme.account/AcmeAccount, com.davils.krypt.acme/AcmeFailure> // com.davils.krypt.acme/AcmeSession.deactivateAccount|deactivateAccount(){}[0]
+    final suspend fun deactivateAuthorization(kotlin/String): com.davils.kore.core.outcome/Outcome<com.davils.krypt.acme.order/AcmeAuthorization, com.davils.krypt.acme/AcmeFailure> // com.davils.krypt.acme/AcmeSession.deactivateAuthorization|deactivateAuthorization(kotlin.String){}[0]
+    final suspend fun finalize(com.davils.krypt.acme.order/AcmeOrder, com.davils.krypt.primitive.signature/Signer): com.davils.kore.core.outcome/Outcome<com.davils.krypt.acme.order/AcmeOrder, com.davils.krypt.acme/AcmeFailure> // com.davils.krypt.acme/AcmeSession.finalize|finalize(com.davils.krypt.acme.order.AcmeOrder;com.davils.krypt.primitive.signature.Signer){}[0]
+    final suspend fun finalize(com.davils.krypt.acme.order/AcmeOrder, com.davils.krypt.x509.request/CertificationRequest): com.davils.kore.core.outcome/Outcome<com.davils.krypt.acme.order/AcmeOrder, com.davils.krypt.acme/AcmeFailure> // com.davils.krypt.acme/AcmeSession.finalize|finalize(com.davils.krypt.acme.order.AcmeOrder;com.davils.krypt.x509.request.CertificationRequest){}[0]
+    final suspend fun keyAuthorization(com.davils.krypt.acme.order/AcmeChallenge): kotlin/String // com.davils.krypt.acme/AcmeSession.keyAuthorization|keyAuthorization(com.davils.krypt.acme.order.AcmeChallenge){}[0]
+    final suspend fun newOrder(kotlin.collections/List<com.davils.krypt.acme/AcmeIdentifier>, kotlin.time/Instant? = ..., kotlin.time/Instant? = ..., kotlin/String? = ...): com.davils.kore.core.outcome/Outcome<com.davils.krypt.acme.order/AcmeOrder, com.davils.krypt.acme/AcmeFailure> // com.davils.krypt.acme/AcmeSession.newOrder|newOrder(kotlin.collections.List<com.davils.krypt.acme.AcmeIdentifier>;kotlin.time.Instant?;kotlin.time.Instant?;kotlin.String?){}[0]
+    final suspend fun order(kotlin/String): com.davils.kore.core.outcome/Outcome<com.davils.krypt.acme.order/AcmeOrder, com.davils.krypt.acme/AcmeFailure> // com.davils.krypt.acme/AcmeSession.order|order(kotlin.String){}[0]
+    final suspend fun respond(com.davils.krypt.acme.order/AcmeChallenge): com.davils.kore.core.outcome/Outcome<com.davils.krypt.acme.order/AcmeChallenge, com.davils.krypt.acme/AcmeFailure> // com.davils.krypt.acme/AcmeSession.respond|respond(com.davils.krypt.acme.order.AcmeChallenge){}[0]
+    final suspend fun revoke(com.davils.krypt.x509/Certificate, com.davils.krypt.x509/RevocationReason? = ...): com.davils.kore.core.outcome/Outcome<kotlin/Unit, com.davils.krypt.acme/AcmeFailure> // com.davils.krypt.acme/AcmeSession.revoke|revoke(com.davils.krypt.x509.Certificate;com.davils.krypt.x509.RevocationReason?){}[0]
+    final suspend fun updateAccount(kotlin.collections/List<kotlin/String>): com.davils.kore.core.outcome/Outcome<com.davils.krypt.acme.account/AcmeAccount, com.davils.krypt.acme/AcmeFailure> // com.davils.krypt.acme/AcmeSession.updateAccount|updateAccount(kotlin.collections.List<kotlin.String>){}[0]
+}
+
+final class com.davils.krypt.acme/DirectoryMeta { // com.davils.krypt.acme/DirectoryMeta|null[0]
+    final val caaIdentities // com.davils.krypt.acme/DirectoryMeta.caaIdentities|{}caaIdentities[0]
+        final fun <get-caaIdentities>(): kotlin.collections/List<kotlin/String> // com.davils.krypt.acme/DirectoryMeta.caaIdentities.<get-caaIdentities>|<get-caaIdentities>(){}[0]
+    final val isExternalAccountRequired // com.davils.krypt.acme/DirectoryMeta.isExternalAccountRequired|{}isExternalAccountRequired[0]
+        final fun <get-isExternalAccountRequired>(): kotlin/Boolean // com.davils.krypt.acme/DirectoryMeta.isExternalAccountRequired.<get-isExternalAccountRequired>|<get-isExternalAccountRequired>(){}[0]
+    final val termsOfService // com.davils.krypt.acme/DirectoryMeta.termsOfService|{}termsOfService[0]
+        final fun <get-termsOfService>(): kotlin/String? // com.davils.krypt.acme/DirectoryMeta.termsOfService.<get-termsOfService>|<get-termsOfService>(){}[0]
+    final val website // com.davils.krypt.acme/DirectoryMeta.website|{}website[0]
+        final fun <get-website>(): kotlin/String? // com.davils.krypt.acme/DirectoryMeta.website.<get-website>|<get-website>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.acme/DirectoryMeta.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.acme/DirectoryMeta.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.acme/DirectoryMeta.toString|toString(){}[0]
+}
+
+final object com.davils.krypt.acme.renewal/CertificateIdentifiers { // com.davils.krypt.acme.renewal/CertificateIdentifiers|null[0]
+    final fun of(com.davils.krypt.x509/Certificate): kotlin/String? // com.davils.krypt.acme.renewal/CertificateIdentifiers.of|of(com.davils.krypt.x509.Certificate){}[0]
+    final fun of(kotlinx.io.bytestring/ByteString, com.davils.krypt.asn1/DerInteger): kotlin/String // com.davils.krypt.acme.renewal/CertificateIdentifiers.of|of(kotlinx.io.bytestring.ByteString;com.davils.krypt.asn1.DerInteger){}[0]
+}

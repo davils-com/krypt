@@ -1105,6 +1105,27 @@
             }
         },
         {
+            "id": "rfc:8288",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-acme.",
+            "snapshot": {
+                "title": "Web Linking",
+                "status": "PROPOSED STANDARD",
+                "published": "October 2017",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "5168": "REPORTED",
+                    "5169": "REPORTED",
+                    "5319": "VERIFIED",
+                    "5878": "VERIFIED",
+                    "9024": "REJECTED",
+                    "9091": "REPORTED"
+                }
+            }
+        },
+        {
             "id": "rfc:8392",
             "reviewedOn": "2026-11-22",
             "note": "Reviewed for krypt-cose.",
@@ -1244,12 +1265,78 @@
             }
         },
         {
+            "id": "rfc:8555",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-acme.",
+            "snapshot": {
+                "title": "Automatic Certificate Management Environment (ACME)",
+                "status": "PROPOSED STANDARD",
+                "published": "March 2019",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "5729": "VERIFIED",
+                    "5732": "VERIFIED",
+                    "5733": "VERIFIED",
+                    "5734": "VERIFIED",
+                    "5735": "VERIFIED",
+                    "5771": "REJECTED",
+                    "5861": "REPORTED",
+                    "5979": "HELD",
+                    "5983": "VERIFIED",
+                    "6016": "VERIFIED",
+                    "6030": "HELD",
+                    "6103": "VERIFIED",
+                    "6104": "VERIFIED",
+                    "6276": "HELD",
+                    "6317": "HELD",
+                    "6364": "VERIFIED",
+                    "6843": "HELD",
+                    "6950": "HELD",
+                    "7565": "VERIFIED",
+                    "7826": "REPORTED",
+                    "8381": "REPORTED",
+                    "8883": "VERIFIED",
+                    "9050": "REJECTED"
+                }
+            }
+        },
+        {
             "id": "rfc:8725",
             "reviewedOn": "2026-11-22",
             "note": "Reviewed for krypt-jose.",
             "snapshot": {
                 "title": "JSON Web Token Best Current Practices",
                 "status": "BEST CURRENT PRACTICE",
+                "published": "February 2020",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
+            }
+        },
+        {
+            "id": "rfc:8737",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-acme.",
+            "snapshot": {
+                "title": "Automated Certificate Management Environment (ACME) TLS Application-Layer Protocol Negotiation (ALPN) Challenge Extension",
+                "status": "PROPOSED STANDARD",
+                "published": "February 2020",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
+            }
+        },
+        {
+            "id": "rfc:8738",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-acme.",
+            "snapshot": {
+                "title": "Automated Certificate Management Environment (ACME) IP Identifier Validation Extension",
+                "status": "PROPOSED STANDARD",
                 "published": "February 2020",
                 "withdrawn": false,
                 "replacedBy": [],
@@ -1312,6 +1399,35 @@
             }
         },
         {
+            "id": "rfc:9110",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-acme.",
+            "snapshot": {
+                "title": "HTTP Semantics",
+                "status": "INTERNET STANDARD",
+                "published": "June 2022",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "7105": "VERIFIED",
+                    "7107": "REJECTED",
+                    "7109": "VERIFIED",
+                    "7138": "VERIFIED",
+                    "7306": "VERIFIED",
+                    "7419": "VERIFIED",
+                    "7530": "REJECTED",
+                    "7599": "REJECTED",
+                    "7870": "REJECTED",
+                    "8138": "REJECTED",
+                    "8268": "VERIFIED",
+                    "8459": "REJECTED",
+                    "9162": "REJECTED",
+                    "9164": "REJECTED"
+                }
+            }
+        },
+        {
             "id": "rfc:9180",
             "reviewedOn": "2026-11-22",
             "note": "HPKE: every mode in common code over the DHKEMs, HKDF and the AEADs, checked against its test vectors.",
@@ -1360,6 +1476,23 @@
                 "replacedBy": [],
                 "updatedBy": [],
                 "errata": {}
+            }
+        },
+        {
+            "id": "rfc:9457",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-acme.",
+            "snapshot": {
+                "title": "Problem Details for HTTP APIs",
+                "status": "PROPOSED STANDARD",
+                "published": "August 2023",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "7731": "HELD",
+                    "8858": "REPORTED"
+                }
             }
         },
         {
@@ -1438,6 +1571,20 @@
                 "errata": {
                     "8390": "REPORTED"
                 }
+            }
+        },
+        {
+            "id": "rfc:9773",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-acme.",
+            "snapshot": {
+                "title": "ACME Renewal Information (ARI) Extension",
+                "status": "PROPOSED STANDARD",
+                "published": "June 2025",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
             }
         },
         {

@@ -28,8 +28,9 @@ correctness first.
 | `krypt-cose` | `com.davils:krypt-cose` | A strict deterministic CBOR codec, COSE signatures, MACs and encryption with recipients, COSE keys and key sets with thumbprints, and CBOR Web Tokens |
 | `krypt-cms` | `com.davils:krypt-cms` | CMS: signed, enveloped, authenticated-enveloped and encrypted data with every common recipient, and RFC 3161 time-stamp requests, responses, tokens and the logic of a time-stamping authority |
 | `krypt-spiffe` | `com.davils:krypt-spiffe` | SPIFFE ids and trust domains, X.509-SVIDs validated against the bundle of their trust domain, JWT-SVIDs over JOSE, trust bundles and bundle maps for federation, and sources of SVIDs and bundles the application feeds |
+| `krypt-acme` | `com.davils:krypt-acme` | The client logic of ACME by RFC 8555 over a transport of the application: the directory, nonces, accounts with external account binding and key rollover, orders, the `http-01`, `dns-01` and `tls-alpn-01` challenges, finalization, alternate chains, revocation, problem documents and renewal information |
 | `krypt-tls` | `com.davils:krypt-tls` | TLS over JSSE, for the JVM only: the `tls { }` DSL, contexts, engines and socket factories, rotating key and trust managers on the path validation of krypt, revocation, Certificate Transparency, mutual TLS with a peer policy and hot reload of material |
-| `krypt-testing` | `com.davils:krypt-testing` | Test support: deterministic and replayed randomness, audit logs and test environments |
+| `krypt-testing` | `com.davils:krypt-testing` | Test support: deterministic and replayed randomness, audit logs, test environments and an in-memory ACME server |
 | `krypt-bom` | `com.davils:krypt-bom` | The bill of materials of every module |
 | `build-logic` | - | One convention plugin per concern, composed by `krypt.kotlin-library` for a library module, `krypt.jvm-library` for a module only the JVM offers, `krypt.bom` for the BOM and `krypt.root` for the root project; they hold nothing but `plugins { }` and `kreate { }` |
 
@@ -37,9 +38,9 @@ correctness first.
 `kotlinx-coroutines-core` and `kotlinx-io-bytestring`; `krypt-asn1` builds on `krypt-core`, `krypt-primitive` on
 both, and `krypt-keyset`, `krypt-stream` and `krypt-storage` each on the one before. `krypt-x509` builds on
 `krypt-primitive`; `krypt-keystore`, `krypt-ocsp`, `krypt-ct`, `krypt-jose`, `krypt-cose` and `krypt-cms` on
-`krypt-x509`; `krypt-spiffe` on `krypt-jose`; `krypt-authority` on `krypt-ocsp` and `krypt-keystore`; and
-`krypt-tls` on `krypt-keystore`, `krypt-ocsp`, `krypt-ct` and `krypt-spiffe`. The code is ported from the security library of an internal Davils project and hardened
-on the way.
+`krypt-x509`; `krypt-spiffe` and `krypt-acme` on `krypt-jose`; `krypt-authority` on `krypt-ocsp` and
+`krypt-keystore`; and `krypt-tls` on `krypt-keystore`, `krypt-ocsp`, `krypt-ct` and `krypt-spiffe`. The code is
+ported from the security library of an internal Davils project and hardened on the way.
 
 The package of a module is `com.davils.krypt.<module>` without dashes, and its Java module has the same name. It is
 declared in `src/jvmMain/java/module-info.java` of the module, which exports only packages with public API, never an
