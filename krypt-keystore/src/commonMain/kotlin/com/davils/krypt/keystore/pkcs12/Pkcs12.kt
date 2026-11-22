@@ -31,6 +31,7 @@ import com.davils.krypt.keystore.internal.BagAttributes
 import com.davils.krypt.keystore.internal.BagValue
 import com.davils.krypt.keystore.internal.KeystoreRefusal
 import com.davils.krypt.keystore.internal.MacChecks
+import com.davils.krypt.keystore.internal.PasswordBudget
 import com.davils.krypt.keystore.internal.Pkcs12Oids
 import com.davils.krypt.keystore.internal.Pkcs12Reader
 import com.davils.krypt.keystore.internal.Pkcs12Writer
@@ -60,8 +61,11 @@ private const val MAC_KEY_BYTES: Int = 32
  *
  * The MAC is checked before anything else is read, so a changed file and a wrong password are both
  * [KeystoreFailure.WrongPassword]. Every iteration count is bounded by the crypto policy or the limits before any
- * work, and the size, the depth and the number of entries are bounded by [limits]. Bags of other types, such as
- * CRLs and secrets, and nested contents are skipped.
+ * work, and the size, the depth and the number of entries are bounded by [limits]. The iterations of every password
+ * derivation of one file together, those of the MAC, of every encrypted content and of every shrouded key, are
+ * bounded by [KeystoreLimits.maximumPasswordIterations] and checked before each derivation, so a file of many
+ * encrypted parts is [KeystoreFailure.Refused] instead of multiplying the work. Bags of other types, such as CRLs
+ * and secrets, and nested contents are skipped.
  *
  * @property crypto the primitives.
  * @property limits the limits of reading.
@@ -155,25 +159,36 @@ public class Pkcs12(public val crypto: Crypto, public val limits: KeystoreLimits
         KeystoreRefusal.ensure(bytes.size <= limits.maximumBytes, KeystoreFailure.Malformed)
         val pfx = KeystoreRefusal.present(Pkcs12Reader.pfx(bytes, derLimits), KeystoreFailure.Malformed)
         val mac = KeystoreRefusal.present(pfx.mac, KeystoreFailure.Unsupported)
-        MacChecks(crypto, password).check(mac = mac, data = pfx.authenticated, limits = limits)
+        val budget = PasswordBudget(limits.maximumPasswordIterations)
+        MacChecks(crypto = crypto, password = password, budget = budget).check(
+            mac = mac,
+            data = pfx.authenticated,
+            limits = limits,
+        )
         val read = Pkcs12Reader.contents(pfx.authenticated, derLimits, limits.maximumEntries)
         val contents = KeystoreRefusal.present(read, KeystoreFailure.Malformed)
-        val bags = contents.flatMap { content -> bagsOf(content, password) }
+        val bags = contents.flatMap { content -> bagsOf(content = content, password = password, budget = budget) }
         KeystoreRefusal.ensure(bags.size <= limits.maximumEntries, KeystoreFailure.Malformed)
-        return assemble(bags = bags, password = password)
+        return assemble(bags = bags, password = password, budget = budget)
     }
 
-    private suspend fun bagsOf(content: SafeContent, password: SecretText): List<SafeBag> {
+    private suspend fun bagsOf(content: SafeContent, password: SecretText, budget: PasswordBudget): List<SafeBag> {
         val encoded = when (content) {
             is SafeContent.Plain -> content.bags
-            is SafeContent.Encrypted -> decrypt(content, password)
+            is SafeContent.Encrypted -> decrypt(content = content, password = password, budget = budget)
             SafeContent.Foreign -> throw KeystoreRefusal(KeystoreFailure.Unsupported)
         }
         val bags = Pkcs12Reader.bags(encoded, derLimits, limits.maximumEntries)
         return KeystoreRefusal.present(bags, KeystoreFailure.Malformed)
     }
 
-    private suspend fun decrypt(content: SafeContent.Encrypted, password: SecretText): ByteString {
+    private suspend fun decrypt(
+        content: SafeContent.Encrypted,
+        password: SecretText,
+        budget: PasswordBudget,
+    ): ByteString {
+        val iterations = Pkcs12Reader.iterationsOf(content.algorithm)
+        budget.spend(KeystoreRefusal.present(iterations, KeystoreFailure.Malformed))
         val decrypted = PasswordEncryption.decrypt(
             crypto = crypto,
             algorithm = content.algorithm,
@@ -183,11 +198,12 @@ public class Pkcs12(public val crypto: Crypto, public val limits: KeystoreLimits
         return decrypted.orRefuse().use { plaintext -> plaintext.reveal { bytes -> ByteString(bytes) } }
     }
 
-    private suspend fun assemble(bags: List<SafeBag>, password: SecretText): Pkcs12Store {
+    private suspend fun assemble(bags: List<SafeBag>, password: SecretText, budget: PasswordBudget): Pkcs12Store {
         val found = bags.mapNotNull { bag -> certificateOf(bag) }
         val keys = bags.mapNotNull { bag ->
             (bag.value as? BagValue.Key)?.let { value ->
-                keyEntry(value = value, attributes = bag.attributes, found = found, password = password)
+                val key = keyOf(value = value, password = password, budget = budget)
+                keyEntry(key = key, attributes = bag.attributes, found = found)
             }
         }
         val leaves = keys.map { entry -> entry.identity.certificate }
@@ -213,12 +229,10 @@ public class Pkcs12(public val crypto: Crypto, public val limits: KeystoreLimits
     }
 
     private suspend fun keyEntry(
-        value: BagValue.Key,
+        key: PrivateKey,
         attributes: BagAttributes,
         found: List<Pair<Certificate, BagAttributes>>,
-        password: SecretText,
     ): KeyEntry {
-        val key = keyOf(value, password)
         val localKeyId = attributes.localKeyId
         val matching = found.filter { (_, other) -> localKeyId != null && other.localKeyId == localKeyId }
         val candidates = (matching + found).map { (certificate, _) -> certificate }
@@ -227,8 +241,12 @@ public class Pkcs12(public val crypto: Crypto, public val limits: KeystoreLimits
         return KeyEntry(identity = identity, alias = attributes.friendlyName)
     }
 
-    private suspend fun keyOf(value: BagValue.Key, password: SecretText): PrivateKey {
-        if (value.isEncrypted) return crypto.keys.decrypt(encrypted = value.encoded, password = password).orRefuse()
+    private suspend fun keyOf(value: BagValue.Key, password: SecretText, budget: PasswordBudget): PrivateKey {
+        if (value.isEncrypted) {
+            val iterations = Pkcs12Reader.shroudedIterationsOf(value.encoded)
+            budget.spend(KeystoreRefusal.present(iterations, KeystoreFailure.Malformed))
+            return crypto.keys.decrypt(encrypted = value.encoded, password = password).orRefuse()
+        }
         return SecretBytes.copyOf(value.encoded).use { encoded -> crypto.keys.decodePrivate(encoded).orRefuse() }
     }
 

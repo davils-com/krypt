@@ -34,6 +34,7 @@ internal object Pkcs12Oids {
     val ANY_EXTENDED_KEY_USAGE: ObjectIdentifier = ObjectIdentifier.of("2.5.29.37.0")
     val PBMAC1: ObjectIdentifier = ObjectIdentifier.of("1.2.840.113549.1.5.14")
     val PBKDF2: ObjectIdentifier = ObjectIdentifier.of("1.2.840.113549.1.5.12")
+    val PBES2: ObjectIdentifier = ObjectIdentifier.of("1.2.840.113549.1.5.13")
 
     val HMACS: Map<ObjectIdentifier, MacAlgorithm> = mapOf(
         ObjectIdentifier.of("1.2.840.113549.2.9") to MacAlgorithm.HmacSha256,
