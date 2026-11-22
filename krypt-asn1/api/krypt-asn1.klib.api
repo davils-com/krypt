@@ -1,0 +1,315 @@
+// Klib ABI Dump
+// Targets: [wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.davils:krypt-asn1>
+final enum class com.davils.krypt.asn1.pem/PemFailure : kotlin/Enum<com.davils.krypt.asn1.pem/PemFailure> { // com.davils.krypt.asn1.pem/PemFailure|null[0]
+    enum entry InvalidBase64 // com.davils.krypt.asn1.pem/PemFailure.InvalidBase64|null[0]
+    enum entry InvalidLabel // com.davils.krypt.asn1.pem/PemFailure.InvalidLabel|null[0]
+    enum entry LimitExceeded // com.davils.krypt.asn1.pem/PemFailure.LimitExceeded|null[0]
+    enum entry Unterminated // com.davils.krypt.asn1.pem/PemFailure.Unterminated|null[0]
+
+    final val entries // com.davils.krypt.asn1.pem/PemFailure.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.asn1.pem/PemFailure> // com.davils.krypt.asn1.pem/PemFailure.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.asn1.pem/PemFailure // com.davils.krypt.asn1.pem/PemFailure.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.asn1.pem/PemFailure> // com.davils.krypt.asn1.pem/PemFailure.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.asn1/DerFailure : kotlin/Enum<com.davils.krypt.asn1/DerFailure> { // com.davils.krypt.asn1/DerFailure|null[0]
+    enum entry InvalidValue // com.davils.krypt.asn1/DerFailure.InvalidValue|null[0]
+    enum entry LimitExceeded // com.davils.krypt.asn1/DerFailure.LimitExceeded|null[0]
+    enum entry NonCanonicalValue // com.davils.krypt.asn1/DerFailure.NonCanonicalValue|null[0]
+    enum entry NonMinimalEncoding // com.davils.krypt.asn1/DerFailure.NonMinimalEncoding|null[0]
+    enum entry TrailingData // com.davils.krypt.asn1/DerFailure.TrailingData|null[0]
+    enum entry Truncated // com.davils.krypt.asn1/DerFailure.Truncated|null[0]
+    enum entry UnexpectedTag // com.davils.krypt.asn1/DerFailure.UnexpectedTag|null[0]
+
+    final val entries // com.davils.krypt.asn1/DerFailure.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.asn1/DerFailure> // com.davils.krypt.asn1/DerFailure.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.asn1/DerFailure // com.davils.krypt.asn1/DerFailure.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.asn1/DerFailure> // com.davils.krypt.asn1/DerFailure.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.asn1/TagClass : kotlin/Enum<com.davils.krypt.asn1/TagClass> { // com.davils.krypt.asn1/TagClass|null[0]
+    enum entry Application // com.davils.krypt.asn1/TagClass.Application|null[0]
+    enum entry ContextSpecific // com.davils.krypt.asn1/TagClass.ContextSpecific|null[0]
+    enum entry Private // com.davils.krypt.asn1/TagClass.Private|null[0]
+    enum entry Universal // com.davils.krypt.asn1/TagClass.Universal|null[0]
+
+    final val bits // com.davils.krypt.asn1/TagClass.bits|{}bits[0]
+        final fun <get-bits>(): kotlin/Int // com.davils.krypt.asn1/TagClass.bits.<get-bits>|<get-bits>(){}[0]
+    final val entries // com.davils.krypt.asn1/TagClass.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.asn1/TagClass> // com.davils.krypt.asn1/TagClass.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.asn1/TagClass // com.davils.krypt.asn1/TagClass.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.asn1/TagClass> // com.davils.krypt.asn1/TagClass.values|values#static(){}[0]
+}
+
+final class com.davils.krypt.asn1.pem/PemBlock { // com.davils.krypt.asn1.pem/PemBlock|null[0]
+    constructor <init>(kotlin/String, kotlinx.io.bytestring/ByteString, kotlin.collections/List<kotlin/Pair<kotlin/String, kotlin/String>> = ...) // com.davils.krypt.asn1.pem/PemBlock.<init>|<init>(kotlin.String;kotlinx.io.bytestring.ByteString;kotlin.collections.List<kotlin.Pair<kotlin.String,kotlin.String>>){}[0]
+
+    final val bytes // com.davils.krypt.asn1.pem/PemBlock.bytes|{}bytes[0]
+        final fun <get-bytes>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.asn1.pem/PemBlock.bytes.<get-bytes>|<get-bytes>(){}[0]
+    final val headers // com.davils.krypt.asn1.pem/PemBlock.headers|{}headers[0]
+        final fun <get-headers>(): kotlin.collections/List<kotlin/Pair<kotlin/String, kotlin/String>> // com.davils.krypt.asn1.pem/PemBlock.headers.<get-headers>|<get-headers>(){}[0]
+    final val label // com.davils.krypt.asn1.pem/PemBlock.label|{}label[0]
+        final fun <get-label>(): kotlin/String // com.davils.krypt.asn1.pem/PemBlock.label.<get-label>|<get-label>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.asn1.pem/PemBlock.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.asn1.pem/PemBlock.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.asn1.pem/PemBlock.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.asn1/BitString { // com.davils.krypt.asn1/BitString|null[0]
+    constructor <init>(kotlinx.io.bytestring/ByteString, kotlin/Int = ...) // com.davils.krypt.asn1/BitString.<init>|<init>(kotlinx.io.bytestring.ByteString;kotlin.Int){}[0]
+
+    final val bytes // com.davils.krypt.asn1/BitString.bytes|{}bytes[0]
+        final fun <get-bytes>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.asn1/BitString.bytes.<get-bytes>|<get-bytes>(){}[0]
+    final val size // com.davils.krypt.asn1/BitString.size|{}size[0]
+        final fun <get-size>(): kotlin/Int // com.davils.krypt.asn1/BitString.size.<get-size>|<get-size>(){}[0]
+    final val unusedBits // com.davils.krypt.asn1/BitString.unusedBits|{}unusedBits[0]
+        final fun <get-unusedBits>(): kotlin/Int // com.davils.krypt.asn1/BitString.unusedBits.<get-unusedBits>|<get-unusedBits>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.asn1/BitString.equals|equals(kotlin.Any?){}[0]
+    final fun get(kotlin/Int): kotlin/Boolean // com.davils.krypt.asn1/BitString.get|get(kotlin.Int){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.asn1/BitString.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.asn1/BitString.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.asn1/BitString.Companion|null[0]
+        final fun ofNamedBits(kotlin.collections/Set<kotlin/Int>): com.davils.krypt.asn1/BitString // com.davils.krypt.asn1/BitString.Companion.ofNamedBits|ofNamedBits(kotlin.collections.Set<kotlin.Int>){}[0]
+    }
+}
+
+final class com.davils.krypt.asn1/DerElement { // com.davils.krypt.asn1/DerElement|null[0]
+    final val content // com.davils.krypt.asn1/DerElement.content|{}content[0]
+        final fun <get-content>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.asn1/DerElement.content.<get-content>|<get-content>(){}[0]
+    final val encoded // com.davils.krypt.asn1/DerElement.encoded|{}encoded[0]
+        final fun <get-encoded>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.asn1/DerElement.encoded.<get-encoded>|<get-encoded>(){}[0]
+    final val tag // com.davils.krypt.asn1/DerElement.tag|{}tag[0]
+        final fun <get-tag>(): com.davils.krypt.asn1/Tag // com.davils.krypt.asn1/DerElement.tag.<get-tag>|<get-tag>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.asn1/DerElement.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.asn1/DerElement.hashCode|hashCode(){}[0]
+    final fun reader(): com.davils.krypt.asn1/DerReader // com.davils.krypt.asn1/DerElement.reader|reader(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.asn1/DerElement.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.asn1/DerException : kotlin/IllegalArgumentException { // com.davils.krypt.asn1/DerException|null[0]
+    constructor <init>(com.davils.krypt.asn1/DerFailure, kotlin/String) // com.davils.krypt.asn1/DerException.<init>|<init>(com.davils.krypt.asn1.DerFailure;kotlin.String){}[0]
+
+    final val failure // com.davils.krypt.asn1/DerException.failure|{}failure[0]
+        final fun <get-failure>(): com.davils.krypt.asn1/DerFailure // com.davils.krypt.asn1/DerException.failure.<get-failure>|<get-failure>(){}[0]
+}
+
+final class com.davils.krypt.asn1/DerInteger : kotlin/Comparable<com.davils.krypt.asn1/DerInteger> { // com.davils.krypt.asn1/DerInteger|null[0]
+    final val bytes // com.davils.krypt.asn1/DerInteger.bytes|{}bytes[0]
+        final fun <get-bytes>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.asn1/DerInteger.bytes.<get-bytes>|<get-bytes>(){}[0]
+    final val isNegative // com.davils.krypt.asn1/DerInteger.isNegative|{}isNegative[0]
+        final fun <get-isNegative>(): kotlin/Boolean // com.davils.krypt.asn1/DerInteger.isNegative.<get-isNegative>|<get-isNegative>(){}[0]
+
+    final fun compareTo(com.davils.krypt.asn1/DerInteger): kotlin/Int // com.davils.krypt.asn1/DerInteger.compareTo|compareTo(com.davils.krypt.asn1.DerInteger){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.asn1/DerInteger.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.asn1/DerInteger.hashCode|hashCode(){}[0]
+    final fun magnitude(): kotlinx.io.bytestring/ByteString // com.davils.krypt.asn1/DerInteger.magnitude|magnitude(){}[0]
+    final fun toLongOrNull(): kotlin/Long? // com.davils.krypt.asn1/DerInteger.toLongOrNull|toLongOrNull(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.asn1/DerInteger.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.asn1/DerInteger.Companion|null[0]
+        final val Zero // com.davils.krypt.asn1/DerInteger.Companion.Zero|{}Zero[0]
+            final fun <get-Zero>(): com.davils.krypt.asn1/DerInteger // com.davils.krypt.asn1/DerInteger.Companion.Zero.<get-Zero>|<get-Zero>(){}[0]
+
+        final fun decodeOrNull(kotlinx.io.bytestring/ByteString): com.davils.krypt.asn1/DerInteger? // com.davils.krypt.asn1/DerInteger.Companion.decodeOrNull|decodeOrNull(kotlinx.io.bytestring.ByteString){}[0]
+        final fun of(kotlin/Long): com.davils.krypt.asn1/DerInteger // com.davils.krypt.asn1/DerInteger.Companion.of|of(kotlin.Long){}[0]
+        final fun ofMagnitude(kotlinx.io.bytestring/ByteString): com.davils.krypt.asn1/DerInteger // com.davils.krypt.asn1/DerInteger.Companion.ofMagnitude|ofMagnitude(kotlinx.io.bytestring.ByteString){}[0]
+    }
+}
+
+final class com.davils.krypt.asn1/DerLimits : com.davils.kore.core.validation/Validatable { // com.davils.krypt.asn1/DerLimits|null[0]
+    constructor <init>(kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ...) // com.davils.krypt.asn1/DerLimits.<init>|<init>(kotlin.Int;kotlin.Int;kotlin.Int){}[0]
+
+    final val maximumBytes // com.davils.krypt.asn1/DerLimits.maximumBytes|{}maximumBytes[0]
+        final fun <get-maximumBytes>(): kotlin/Int // com.davils.krypt.asn1/DerLimits.maximumBytes.<get-maximumBytes>|<get-maximumBytes>(){}[0]
+    final val maximumDepth // com.davils.krypt.asn1/DerLimits.maximumDepth|{}maximumDepth[0]
+        final fun <get-maximumDepth>(): kotlin/Int // com.davils.krypt.asn1/DerLimits.maximumDepth.<get-maximumDepth>|<get-maximumDepth>(){}[0]
+    final val maximumElements // com.davils.krypt.asn1/DerLimits.maximumElements|{}maximumElements[0]
+        final fun <get-maximumElements>(): kotlin/Int // com.davils.krypt.asn1/DerLimits.maximumElements.<get-maximumElements>|<get-maximumElements>(){}[0]
+
+    final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.krypt.asn1/DerLimits.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.asn1/DerLimits.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.asn1/DerLimits.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.asn1/DerLimits.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.asn1/DerLimits.Companion|null[0]
+        final const val HARD_MAXIMUM_BYTES // com.davils.krypt.asn1/DerLimits.Companion.HARD_MAXIMUM_BYTES|{}HARD_MAXIMUM_BYTES[0]
+            final fun <get-HARD_MAXIMUM_BYTES>(): kotlin/Int // com.davils.krypt.asn1/DerLimits.Companion.HARD_MAXIMUM_BYTES.<get-HARD_MAXIMUM_BYTES>|<get-HARD_MAXIMUM_BYTES>(){}[0]
+        final const val HARD_MAXIMUM_DEPTH // com.davils.krypt.asn1/DerLimits.Companion.HARD_MAXIMUM_DEPTH|{}HARD_MAXIMUM_DEPTH[0]
+            final fun <get-HARD_MAXIMUM_DEPTH>(): kotlin/Int // com.davils.krypt.asn1/DerLimits.Companion.HARD_MAXIMUM_DEPTH.<get-HARD_MAXIMUM_DEPTH>|<get-HARD_MAXIMUM_DEPTH>(){}[0]
+        final const val HARD_MAXIMUM_ELEMENTS // com.davils.krypt.asn1/DerLimits.Companion.HARD_MAXIMUM_ELEMENTS|{}HARD_MAXIMUM_ELEMENTS[0]
+            final fun <get-HARD_MAXIMUM_ELEMENTS>(): kotlin/Int // com.davils.krypt.asn1/DerLimits.Companion.HARD_MAXIMUM_ELEMENTS.<get-HARD_MAXIMUM_ELEMENTS>|<get-HARD_MAXIMUM_ELEMENTS>(){}[0]
+
+        final val Default // com.davils.krypt.asn1/DerLimits.Companion.Default|{}Default[0]
+            final fun <get-Default>(): com.davils.krypt.asn1/DerLimits // com.davils.krypt.asn1/DerLimits.Companion.Default.<get-Default>|<get-Default>(){}[0]
+    }
+}
+
+final class com.davils.krypt.asn1/DerReader { // com.davils.krypt.asn1/DerReader|null[0]
+    final val isExhausted // com.davils.krypt.asn1/DerReader.isExhausted|{}isExhausted[0]
+        final fun <get-isExhausted>(): kotlin/Boolean // com.davils.krypt.asn1/DerReader.isExhausted.<get-isExhausted>|<get-isExhausted>(){}[0]
+
+    final fun <#A1: kotlin/Any?> readConstructed(com.davils.krypt.asn1/Tag, kotlin/Function1<com.davils.krypt.asn1/DerReader, #A1>): #A1 // com.davils.krypt.asn1/DerReader.readConstructed|readConstructed(com.davils.krypt.asn1.Tag;kotlin.Function1<com.davils.krypt.asn1.DerReader,0:0>){0§<kotlin.Any?>}[0]
+    final fun <#A1: kotlin/Any?> readExplicit(kotlin/Int, kotlin/Function1<com.davils.krypt.asn1/DerReader, #A1>): #A1 // com.davils.krypt.asn1/DerReader.readExplicit|readExplicit(kotlin.Int;kotlin.Function1<com.davils.krypt.asn1.DerReader,0:0>){0§<kotlin.Any?>}[0]
+    final fun <#A1: kotlin/Any?> readOptionalExplicit(kotlin/Int, kotlin/Function1<com.davils.krypt.asn1/DerReader, #A1>): #A1? // com.davils.krypt.asn1/DerReader.readOptionalExplicit|readOptionalExplicit(kotlin.Int;kotlin.Function1<com.davils.krypt.asn1.DerReader,0:0>){0§<kotlin.Any?>}[0]
+    final fun <#A1: kotlin/Any?> readSequence(kotlin/Function1<com.davils.krypt.asn1/DerReader, #A1>): #A1 // com.davils.krypt.asn1/DerReader.readSequence|readSequence(kotlin.Function1<com.davils.krypt.asn1.DerReader,0:0>){0§<kotlin.Any?>}[0]
+    final fun <#A1: kotlin/Any?> readSet(kotlin/Function1<com.davils.krypt.asn1/DerReader, #A1>): #A1 // com.davils.krypt.asn1/DerReader.readSet|readSet(kotlin.Function1<com.davils.krypt.asn1.DerReader,0:0>){0§<kotlin.Any?>}[0]
+    final fun finish() // com.davils.krypt.asn1/DerReader.finish|finish(){}[0]
+    final fun isNext(com.davils.krypt.asn1/Tag): kotlin/Boolean // com.davils.krypt.asn1/DerReader.isNext|isNext(com.davils.krypt.asn1.Tag){}[0]
+    final fun peekTag(): com.davils.krypt.asn1/Tag? // com.davils.krypt.asn1/DerReader.peekTag|peekTag(){}[0]
+    final fun readBitString(com.davils.krypt.asn1/Tag = ...): com.davils.krypt.asn1/BitString // com.davils.krypt.asn1/DerReader.readBitString|readBitString(com.davils.krypt.asn1.Tag){}[0]
+    final fun readBoolean(com.davils.krypt.asn1/Tag = ...): kotlin/Boolean // com.davils.krypt.asn1/DerReader.readBoolean|readBoolean(com.davils.krypt.asn1.Tag){}[0]
+    final fun readElement(): com.davils.krypt.asn1/DerElement // com.davils.krypt.asn1/DerReader.readElement|readElement(){}[0]
+    final fun readElement(com.davils.krypt.asn1/Tag): com.davils.krypt.asn1/DerElement // com.davils.krypt.asn1/DerReader.readElement|readElement(com.davils.krypt.asn1.Tag){}[0]
+    final fun readInteger(com.davils.krypt.asn1/Tag = ...): com.davils.krypt.asn1/DerInteger // com.davils.krypt.asn1/DerReader.readInteger|readInteger(com.davils.krypt.asn1.Tag){}[0]
+    final fun readNull(com.davils.krypt.asn1/Tag = ...) // com.davils.krypt.asn1/DerReader.readNull|readNull(com.davils.krypt.asn1.Tag){}[0]
+    final fun readObjectIdentifier(com.davils.krypt.asn1/Tag = ...): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.asn1/DerReader.readObjectIdentifier|readObjectIdentifier(com.davils.krypt.asn1.Tag){}[0]
+    final fun readOctetString(com.davils.krypt.asn1/Tag = ...): kotlinx.io.bytestring/ByteString // com.davils.krypt.asn1/DerReader.readOctetString|readOctetString(com.davils.krypt.asn1.Tag){}[0]
+    final fun readOptional(com.davils.krypt.asn1/Tag): com.davils.krypt.asn1/DerElement? // com.davils.krypt.asn1/DerReader.readOptional|readOptional(com.davils.krypt.asn1.Tag){}[0]
+    final fun readText(): kotlin/String // com.davils.krypt.asn1/DerReader.readText|readText(){}[0]
+    final fun refuse(com.davils.krypt.asn1/DerFailure, kotlin/String): kotlin/Nothing // com.davils.krypt.asn1/DerReader.refuse|refuse(com.davils.krypt.asn1.DerFailure;kotlin.String){}[0]
+}
+
+final class com.davils.krypt.asn1/DerWriter { // com.davils.krypt.asn1/DerWriter|null[0]
+    final fun bitString(com.davils.krypt.asn1/BitString, com.davils.krypt.asn1/Tag = ...) // com.davils.krypt.asn1/DerWriter.bitString|bitString(com.davils.krypt.asn1.BitString;com.davils.krypt.asn1.Tag){}[0]
+    final fun boolean(kotlin/Boolean, com.davils.krypt.asn1/Tag = ...) // com.davils.krypt.asn1/DerWriter.boolean|boolean(kotlin.Boolean;com.davils.krypt.asn1.Tag){}[0]
+    final fun constructed(com.davils.krypt.asn1/Tag, kotlin/Function1<com.davils.krypt.asn1/DerWriter, kotlin/Unit>) // com.davils.krypt.asn1/DerWriter.constructed|constructed(com.davils.krypt.asn1.Tag;kotlin.Function1<com.davils.krypt.asn1.DerWriter,kotlin.Unit>){}[0]
+    final fun element(com.davils.krypt.asn1/Tag, kotlinx.io.bytestring/ByteString) // com.davils.krypt.asn1/DerWriter.element|element(com.davils.krypt.asn1.Tag;kotlinx.io.bytestring.ByteString){}[0]
+    final fun explicit(kotlin/Int, kotlin/Function1<com.davils.krypt.asn1/DerWriter, kotlin/Unit>) // com.davils.krypt.asn1/DerWriter.explicit|explicit(kotlin.Int;kotlin.Function1<com.davils.krypt.asn1.DerWriter,kotlin.Unit>){}[0]
+    final fun generalizedTime(kotlin.time/Instant, com.davils.krypt.asn1/Tag = ...) // com.davils.krypt.asn1/DerWriter.generalizedTime|generalizedTime(kotlin.time.Instant;com.davils.krypt.asn1.Tag){}[0]
+    final fun ia5String(kotlin/String, com.davils.krypt.asn1/Tag = ...) // com.davils.krypt.asn1/DerWriter.ia5String|ia5String(kotlin.String;com.davils.krypt.asn1.Tag){}[0]
+    final fun integer(com.davils.krypt.asn1/DerInteger, com.davils.krypt.asn1/Tag = ...) // com.davils.krypt.asn1/DerWriter.integer|integer(com.davils.krypt.asn1.DerInteger;com.davils.krypt.asn1.Tag){}[0]
+    final fun integer(kotlin/Long, com.davils.krypt.asn1/Tag = ...) // com.davils.krypt.asn1/DerWriter.integer|integer(kotlin.Long;com.davils.krypt.asn1.Tag){}[0]
+    final fun nullValue(com.davils.krypt.asn1/Tag = ...) // com.davils.krypt.asn1/DerWriter.nullValue|nullValue(com.davils.krypt.asn1.Tag){}[0]
+    final fun objectIdentifier(com.davils.krypt.asn1/ObjectIdentifier, com.davils.krypt.asn1/Tag = ...) // com.davils.krypt.asn1/DerWriter.objectIdentifier|objectIdentifier(com.davils.krypt.asn1.ObjectIdentifier;com.davils.krypt.asn1.Tag){}[0]
+    final fun octetString(kotlinx.io.bytestring/ByteString, com.davils.krypt.asn1/Tag = ...) // com.davils.krypt.asn1/DerWriter.octetString|octetString(kotlinx.io.bytestring.ByteString;com.davils.krypt.asn1.Tag){}[0]
+    final fun octetStringOf(kotlin/Function1<com.davils.krypt.asn1/DerWriter, kotlin/Unit>) // com.davils.krypt.asn1/DerWriter.octetStringOf|octetStringOf(kotlin.Function1<com.davils.krypt.asn1.DerWriter,kotlin.Unit>){}[0]
+    final fun printableString(kotlin/String, com.davils.krypt.asn1/Tag = ...) // com.davils.krypt.asn1/DerWriter.printableString|printableString(kotlin.String;com.davils.krypt.asn1.Tag){}[0]
+    final fun raw(kotlinx.io.bytestring/ByteString) // com.davils.krypt.asn1/DerWriter.raw|raw(kotlinx.io.bytestring.ByteString){}[0]
+    final fun sequence(kotlin/Function1<com.davils.krypt.asn1/DerWriter, kotlin/Unit>) // com.davils.krypt.asn1/DerWriter.sequence|sequence(kotlin.Function1<com.davils.krypt.asn1.DerWriter,kotlin.Unit>){}[0]
+    final fun setOf(kotlin/Function1<com.davils.krypt.asn1/DerWriter, kotlin/Unit>) // com.davils.krypt.asn1/DerWriter.setOf|setOf(kotlin.Function1<com.davils.krypt.asn1.DerWriter,kotlin.Unit>){}[0]
+    final fun time(kotlin.time/Instant) // com.davils.krypt.asn1/DerWriter.time|time(kotlin.time.Instant){}[0]
+    final fun utf8String(kotlin/String, com.davils.krypt.asn1/Tag = ...) // com.davils.krypt.asn1/DerWriter.utf8String|utf8String(kotlin.String;com.davils.krypt.asn1.Tag){}[0]
+}
+
+final class com.davils.krypt.asn1/ObjectIdentifier : kotlin/Comparable<com.davils.krypt.asn1/ObjectIdentifier> { // com.davils.krypt.asn1/ObjectIdentifier|null[0]
+    final val arcs // com.davils.krypt.asn1/ObjectIdentifier.arcs|{}arcs[0]
+        final fun <get-arcs>(): kotlin.collections/List<kotlin/Long> // com.davils.krypt.asn1/ObjectIdentifier.arcs.<get-arcs>|<get-arcs>(){}[0]
+    final val content // com.davils.krypt.asn1/ObjectIdentifier.content|{}content[0]
+        final fun <get-content>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.asn1/ObjectIdentifier.content.<get-content>|<get-content>(){}[0]
+    final val dotted // com.davils.krypt.asn1/ObjectIdentifier.dotted|{}dotted[0]
+        final fun <get-dotted>(): kotlin/String // com.davils.krypt.asn1/ObjectIdentifier.dotted.<get-dotted>|<get-dotted>(){}[0]
+
+    final fun compareTo(com.davils.krypt.asn1/ObjectIdentifier): kotlin/Int // com.davils.krypt.asn1/ObjectIdentifier.compareTo|compareTo(com.davils.krypt.asn1.ObjectIdentifier){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.asn1/ObjectIdentifier.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.asn1/ObjectIdentifier.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.asn1/ObjectIdentifier.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.asn1/ObjectIdentifier.Companion|null[0]
+        final const val MAXIMUM_ARCS // com.davils.krypt.asn1/ObjectIdentifier.Companion.MAXIMUM_ARCS|{}MAXIMUM_ARCS[0]
+            final fun <get-MAXIMUM_ARCS>(): kotlin/Int // com.davils.krypt.asn1/ObjectIdentifier.Companion.MAXIMUM_ARCS.<get-MAXIMUM_ARCS>|<get-MAXIMUM_ARCS>(){}[0]
+
+        final fun decodeOrNull(kotlinx.io.bytestring/ByteString): com.davils.krypt.asn1/ObjectIdentifier? // com.davils.krypt.asn1/ObjectIdentifier.Companion.decodeOrNull|decodeOrNull(kotlinx.io.bytestring.ByteString){}[0]
+        final fun of(kotlin/String): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.asn1/ObjectIdentifier.Companion.of|of(kotlin.String){}[0]
+        final fun parseOrNull(kotlin/String): com.davils.krypt.asn1/ObjectIdentifier? // com.davils.krypt.asn1/ObjectIdentifier.Companion.parseOrNull|parseOrNull(kotlin.String){}[0]
+    }
+}
+
+final class com.davils.krypt.asn1/Tag { // com.davils.krypt.asn1/Tag|null[0]
+    constructor <init>(com.davils.krypt.asn1/TagClass, kotlin/Boolean, kotlin/Int) // com.davils.krypt.asn1/Tag.<init>|<init>(com.davils.krypt.asn1.TagClass;kotlin.Boolean;kotlin.Int){}[0]
+
+    final val isConstructed // com.davils.krypt.asn1/Tag.isConstructed|{}isConstructed[0]
+        final fun <get-isConstructed>(): kotlin/Boolean // com.davils.krypt.asn1/Tag.isConstructed.<get-isConstructed>|<get-isConstructed>(){}[0]
+    final val number // com.davils.krypt.asn1/Tag.number|{}number[0]
+        final fun <get-number>(): kotlin/Int // com.davils.krypt.asn1/Tag.number.<get-number>|<get-number>(){}[0]
+    final val tagClass // com.davils.krypt.asn1/Tag.tagClass|{}tagClass[0]
+        final fun <get-tagClass>(): com.davils.krypt.asn1/TagClass // com.davils.krypt.asn1/Tag.tagClass.<get-tagClass>|<get-tagClass>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.asn1/Tag.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.asn1/Tag.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.asn1/Tag.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.asn1/Tag.Companion|null[0]
+        final const val MAXIMUM_NUMBER // com.davils.krypt.asn1/Tag.Companion.MAXIMUM_NUMBER|{}MAXIMUM_NUMBER[0]
+            final fun <get-MAXIMUM_NUMBER>(): kotlin/Int // com.davils.krypt.asn1/Tag.Companion.MAXIMUM_NUMBER.<get-MAXIMUM_NUMBER>|<get-MAXIMUM_NUMBER>(){}[0]
+
+        final val BitString // com.davils.krypt.asn1/Tag.Companion.BitString|{}BitString[0]
+            final fun <get-BitString>(): com.davils.krypt.asn1/Tag // com.davils.krypt.asn1/Tag.Companion.BitString.<get-BitString>|<get-BitString>(){}[0]
+        final val BmpString // com.davils.krypt.asn1/Tag.Companion.BmpString|{}BmpString[0]
+            final fun <get-BmpString>(): com.davils.krypt.asn1/Tag // com.davils.krypt.asn1/Tag.Companion.BmpString.<get-BmpString>|<get-BmpString>(){}[0]
+        final val Boolean // com.davils.krypt.asn1/Tag.Companion.Boolean|{}Boolean[0]
+            final fun <get-Boolean>(): com.davils.krypt.asn1/Tag // com.davils.krypt.asn1/Tag.Companion.Boolean.<get-Boolean>|<get-Boolean>(){}[0]
+        final val Enumerated // com.davils.krypt.asn1/Tag.Companion.Enumerated|{}Enumerated[0]
+            final fun <get-Enumerated>(): com.davils.krypt.asn1/Tag // com.davils.krypt.asn1/Tag.Companion.Enumerated.<get-Enumerated>|<get-Enumerated>(){}[0]
+        final val GeneralizedTime // com.davils.krypt.asn1/Tag.Companion.GeneralizedTime|{}GeneralizedTime[0]
+            final fun <get-GeneralizedTime>(): com.davils.krypt.asn1/Tag // com.davils.krypt.asn1/Tag.Companion.GeneralizedTime.<get-GeneralizedTime>|<get-GeneralizedTime>(){}[0]
+        final val Ia5String // com.davils.krypt.asn1/Tag.Companion.Ia5String|{}Ia5String[0]
+            final fun <get-Ia5String>(): com.davils.krypt.asn1/Tag // com.davils.krypt.asn1/Tag.Companion.Ia5String.<get-Ia5String>|<get-Ia5String>(){}[0]
+        final val Integer // com.davils.krypt.asn1/Tag.Companion.Integer|{}Integer[0]
+            final fun <get-Integer>(): com.davils.krypt.asn1/Tag // com.davils.krypt.asn1/Tag.Companion.Integer.<get-Integer>|<get-Integer>(){}[0]
+        final val Null // com.davils.krypt.asn1/Tag.Companion.Null|{}Null[0]
+            final fun <get-Null>(): com.davils.krypt.asn1/Tag // com.davils.krypt.asn1/Tag.Companion.Null.<get-Null>|<get-Null>(){}[0]
+        final val NumericString // com.davils.krypt.asn1/Tag.Companion.NumericString|{}NumericString[0]
+            final fun <get-NumericString>(): com.davils.krypt.asn1/Tag // com.davils.krypt.asn1/Tag.Companion.NumericString.<get-NumericString>|<get-NumericString>(){}[0]
+        final val ObjectIdentifier // com.davils.krypt.asn1/Tag.Companion.ObjectIdentifier|{}ObjectIdentifier[0]
+            final fun <get-ObjectIdentifier>(): com.davils.krypt.asn1/Tag // com.davils.krypt.asn1/Tag.Companion.ObjectIdentifier.<get-ObjectIdentifier>|<get-ObjectIdentifier>(){}[0]
+        final val OctetString // com.davils.krypt.asn1/Tag.Companion.OctetString|{}OctetString[0]
+            final fun <get-OctetString>(): com.davils.krypt.asn1/Tag // com.davils.krypt.asn1/Tag.Companion.OctetString.<get-OctetString>|<get-OctetString>(){}[0]
+        final val PrintableString // com.davils.krypt.asn1/Tag.Companion.PrintableString|{}PrintableString[0]
+            final fun <get-PrintableString>(): com.davils.krypt.asn1/Tag // com.davils.krypt.asn1/Tag.Companion.PrintableString.<get-PrintableString>|<get-PrintableString>(){}[0]
+        final val Sequence // com.davils.krypt.asn1/Tag.Companion.Sequence|{}Sequence[0]
+            final fun <get-Sequence>(): com.davils.krypt.asn1/Tag // com.davils.krypt.asn1/Tag.Companion.Sequence.<get-Sequence>|<get-Sequence>(){}[0]
+        final val Set // com.davils.krypt.asn1/Tag.Companion.Set|{}Set[0]
+            final fun <get-Set>(): com.davils.krypt.asn1/Tag // com.davils.krypt.asn1/Tag.Companion.Set.<get-Set>|<get-Set>(){}[0]
+        final val TeletexString // com.davils.krypt.asn1/Tag.Companion.TeletexString|{}TeletexString[0]
+            final fun <get-TeletexString>(): com.davils.krypt.asn1/Tag // com.davils.krypt.asn1/Tag.Companion.TeletexString.<get-TeletexString>|<get-TeletexString>(){}[0]
+        final val UniversalString // com.davils.krypt.asn1/Tag.Companion.UniversalString|{}UniversalString[0]
+            final fun <get-UniversalString>(): com.davils.krypt.asn1/Tag // com.davils.krypt.asn1/Tag.Companion.UniversalString.<get-UniversalString>|<get-UniversalString>(){}[0]
+        final val UtcTime // com.davils.krypt.asn1/Tag.Companion.UtcTime|{}UtcTime[0]
+            final fun <get-UtcTime>(): com.davils.krypt.asn1/Tag // com.davils.krypt.asn1/Tag.Companion.UtcTime.<get-UtcTime>|<get-UtcTime>(){}[0]
+        final val Utf8String // com.davils.krypt.asn1/Tag.Companion.Utf8String|{}Utf8String[0]
+            final fun <get-Utf8String>(): com.davils.krypt.asn1/Tag // com.davils.krypt.asn1/Tag.Companion.Utf8String.<get-Utf8String>|<get-Utf8String>(){}[0]
+        final val VisibleString // com.davils.krypt.asn1/Tag.Companion.VisibleString|{}VisibleString[0]
+            final fun <get-VisibleString>(): com.davils.krypt.asn1/Tag // com.davils.krypt.asn1/Tag.Companion.VisibleString.<get-VisibleString>|<get-VisibleString>(){}[0]
+
+        final fun context(kotlin/Int, kotlin/Boolean): com.davils.krypt.asn1/Tag // com.davils.krypt.asn1/Tag.Companion.context|context(kotlin.Int;kotlin.Boolean){}[0]
+    }
+}
+
+final object com.davils.krypt.asn1.pem/Pem { // com.davils.krypt.asn1.pem/Pem|null[0]
+    final const val MAXIMUM_BLOCKS // com.davils.krypt.asn1.pem/Pem.MAXIMUM_BLOCKS|{}MAXIMUM_BLOCKS[0]
+        final fun <get-MAXIMUM_BLOCKS>(): kotlin/Int // com.davils.krypt.asn1.pem/Pem.MAXIMUM_BLOCKS.<get-MAXIMUM_BLOCKS>|<get-MAXIMUM_BLOCKS>(){}[0]
+    final const val MAXIMUM_HEADERS // com.davils.krypt.asn1.pem/Pem.MAXIMUM_HEADERS|{}MAXIMUM_HEADERS[0]
+        final fun <get-MAXIMUM_HEADERS>(): kotlin/Int // com.davils.krypt.asn1.pem/Pem.MAXIMUM_HEADERS.<get-MAXIMUM_HEADERS>|<get-MAXIMUM_HEADERS>(){}[0]
+    final const val MAXIMUM_TEXT_LENGTH // com.davils.krypt.asn1.pem/Pem.MAXIMUM_TEXT_LENGTH|{}MAXIMUM_TEXT_LENGTH[0]
+        final fun <get-MAXIMUM_TEXT_LENGTH>(): kotlin/Int // com.davils.krypt.asn1.pem/Pem.MAXIMUM_TEXT_LENGTH.<get-MAXIMUM_TEXT_LENGTH>|<get-MAXIMUM_TEXT_LENGTH>(){}[0]
+
+    final fun decode(kotlin/String): com.davils.kore.core.outcome/Outcome<kotlin.collections/List<com.davils.krypt.asn1.pem/PemBlock>, com.davils.krypt.asn1.pem/PemFailure> // com.davils.krypt.asn1.pem/Pem.decode|decode(kotlin.String){}[0]
+    final fun encode(kotlin.collections/List<com.davils.krypt.asn1.pem/PemBlock>): kotlin/String // com.davils.krypt.asn1.pem/Pem.encode|encode(kotlin.collections.List<com.davils.krypt.asn1.pem.PemBlock>){}[0]
+    final fun encode(kotlin/String, kotlinx.io.bytestring/ByteString): kotlin/String // com.davils.krypt.asn1.pem/Pem.encode|encode(kotlin.String;kotlinx.io.bytestring.ByteString){}[0]
+}
+
+final object com.davils.krypt.asn1/Der { // com.davils.krypt.asn1/Der|null[0]
+    final fun <#A1: kotlin/Any?> decode(kotlinx.io.bytestring/ByteString, com.davils.krypt.asn1/DerLimits = ..., kotlin/Function1<com.davils.krypt.asn1/DerReader, #A1>): com.davils.kore.core.outcome/Outcome<#A1, com.davils.krypt.asn1/DerFailure> // com.davils.krypt.asn1/Der.decode|decode(kotlinx.io.bytestring.ByteString;com.davils.krypt.asn1.DerLimits;kotlin.Function1<com.davils.krypt.asn1.DerReader,0:0>){0§<kotlin.Any?>}[0]
+    final fun <#A1: kotlin/Any?> decodeOrNull(kotlinx.io.bytestring/ByteString, com.davils.krypt.asn1/DerLimits = ..., kotlin/Function1<com.davils.krypt.asn1/DerReader, #A1>): #A1? // com.davils.krypt.asn1/Der.decodeOrNull|decodeOrNull(kotlinx.io.bytestring.ByteString;com.davils.krypt.asn1.DerLimits;kotlin.Function1<com.davils.krypt.asn1.DerReader,0:0>){0§<kotlin.Any?>}[0]
+    final fun encode(kotlin/Function1<com.davils.krypt.asn1/DerWriter, kotlin/Unit>): kotlinx.io.bytestring/ByteString // com.davils.krypt.asn1/Der.encode|encode(kotlin.Function1<com.davils.krypt.asn1.DerWriter,kotlin.Unit>){}[0]
+}
+
+final fun (com.davils.krypt.asn1/DerReader).com.davils.krypt.asn1/readGeneralizedTime(com.davils.krypt.asn1/Tag = ...): kotlin.time/Instant // com.davils.krypt.asn1/readGeneralizedTime|readGeneralizedTime@com.davils.krypt.asn1.DerReader(com.davils.krypt.asn1.Tag){}[0]
+final fun (com.davils.krypt.asn1/DerReader).com.davils.krypt.asn1/readInt(kotlin.ranges/IntRange, com.davils.krypt.asn1/Tag = ...): kotlin/Int // com.davils.krypt.asn1/readInt|readInt@com.davils.krypt.asn1.DerReader(kotlin.ranges.IntRange;com.davils.krypt.asn1.Tag){}[0]
+final fun (com.davils.krypt.asn1/DerReader).com.davils.krypt.asn1/readRemaining(): kotlin.collections/List<com.davils.krypt.asn1/DerElement> // com.davils.krypt.asn1/readRemaining|readRemaining@com.davils.krypt.asn1.DerReader(){}[0]
+final fun (com.davils.krypt.asn1/DerReader).com.davils.krypt.asn1/readText(com.davils.krypt.asn1/Tag, com.davils.krypt.asn1/Tag = ...): kotlin/String // com.davils.krypt.asn1/readText|readText@com.davils.krypt.asn1.DerReader(com.davils.krypt.asn1.Tag;com.davils.krypt.asn1.Tag){}[0]
+final fun (com.davils.krypt.asn1/DerReader).com.davils.krypt.asn1/readTime(): kotlin.time/Instant // com.davils.krypt.asn1/readTime|readTime@com.davils.krypt.asn1.DerReader(){}[0]
+final fun <#A: kotlin/Any?> (com.davils.krypt.asn1/DerReader).com.davils.krypt.asn1/readListOf(kotlin/Int, com.davils.krypt.asn1/Tag = ..., kotlin/Function1<com.davils.krypt.asn1/DerReader, #A>): kotlin.collections/List<#A> // com.davils.krypt.asn1/readListOf|readListOf@com.davils.krypt.asn1.DerReader(kotlin.Int;com.davils.krypt.asn1.Tag;kotlin.Function1<com.davils.krypt.asn1.DerReader,0:0>){0§<kotlin.Any?>}[0]

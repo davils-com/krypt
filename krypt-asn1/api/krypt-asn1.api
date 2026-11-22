@@ -1,0 +1,266 @@
+public final class com/davils/krypt/asn1/BitString {
+	public static final field Companion Lcom/davils/krypt/asn1/BitString$Companion;
+	public fun <init> (Lkotlinx/io/bytestring/ByteString;I)V
+	public synthetic fun <init> (Lkotlinx/io/bytestring/ByteString;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun get (I)Z
+	public final fun getBytes ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getSize ()I
+	public final fun getUnusedBits ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/asn1/BitString$Companion {
+	public final fun ofNamedBits (Ljava/util/Set;)Lcom/davils/krypt/asn1/BitString;
+}
+
+public final class com/davils/krypt/asn1/Der {
+	public static final field INSTANCE Lcom/davils/krypt/asn1/Der;
+	public final fun decode (Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/asn1/DerLimits;Lkotlin/jvm/functions/Function1;)Lcom/davils/kore/core/outcome/Outcome;
+	public static synthetic fun decode$default (Lcom/davils/krypt/asn1/Der;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/asn1/DerLimits;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun decodeOrNull (Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/asn1/DerLimits;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public static synthetic fun decodeOrNull$default (Lcom/davils/krypt/asn1/Der;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/asn1/DerLimits;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun encode (Lkotlin/jvm/functions/Function1;)Lkotlinx/io/bytestring/ByteString;
+}
+
+public final class com/davils/krypt/asn1/DerElement {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getContent ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getEncoded ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getTag ()Lcom/davils/krypt/asn1/Tag;
+	public fun hashCode ()I
+	public final fun reader ()Lcom/davils/krypt/asn1/DerReader;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/asn1/DerException : java/lang/IllegalArgumentException {
+	public fun <init> (Lcom/davils/krypt/asn1/DerFailure;Ljava/lang/String;)V
+	public final fun getFailure ()Lcom/davils/krypt/asn1/DerFailure;
+}
+
+public final class com/davils/krypt/asn1/DerFailure : java/lang/Enum {
+	public static final field InvalidValue Lcom/davils/krypt/asn1/DerFailure;
+	public static final field LimitExceeded Lcom/davils/krypt/asn1/DerFailure;
+	public static final field NonCanonicalValue Lcom/davils/krypt/asn1/DerFailure;
+	public static final field NonMinimalEncoding Lcom/davils/krypt/asn1/DerFailure;
+	public static final field TrailingData Lcom/davils/krypt/asn1/DerFailure;
+	public static final field Truncated Lcom/davils/krypt/asn1/DerFailure;
+	public static final field UnexpectedTag Lcom/davils/krypt/asn1/DerFailure;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/asn1/DerFailure;
+	public static fun values ()[Lcom/davils/krypt/asn1/DerFailure;
+}
+
+public final class com/davils/krypt/asn1/DerInteger : java/lang/Comparable {
+	public static final field Companion Lcom/davils/krypt/asn1/DerInteger$Companion;
+	public fun compareTo (Lcom/davils/krypt/asn1/DerInteger;)I
+	public synthetic fun compareTo (Ljava/lang/Object;)I
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBytes ()Lkotlinx/io/bytestring/ByteString;
+	public fun hashCode ()I
+	public final fun isNegative ()Z
+	public final fun magnitude ()Lkotlinx/io/bytestring/ByteString;
+	public final fun toLongOrNull ()Ljava/lang/Long;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/asn1/DerInteger$Companion {
+	public final fun decodeOrNull (Lkotlinx/io/bytestring/ByteString;)Lcom/davils/krypt/asn1/DerInteger;
+	public final fun getZero ()Lcom/davils/krypt/asn1/DerInteger;
+	public final fun of (J)Lcom/davils/krypt/asn1/DerInteger;
+	public final fun ofMagnitude (Lkotlinx/io/bytestring/ByteString;)Lcom/davils/krypt/asn1/DerInteger;
+}
+
+public final class com/davils/krypt/asn1/DerLimits : com/davils/kore/core/validation/Validatable {
+	public static final field Companion Lcom/davils/krypt/asn1/DerLimits$Companion;
+	public static final field HARD_MAXIMUM_BYTES I
+	public static final field HARD_MAXIMUM_DEPTH I
+	public static final field HARD_MAXIMUM_ELEMENTS I
+	public fun <init> ()V
+	public fun <init> (III)V
+	public synthetic fun <init> (IIIILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMaximumBytes ()I
+	public final fun getMaximumDepth ()I
+	public final fun getMaximumElements ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public final class com/davils/krypt/asn1/DerLimits$Companion {
+	public final fun getDefault ()Lcom/davils/krypt/asn1/DerLimits;
+}
+
+public final class com/davils/krypt/asn1/DerReader {
+	public final fun finish ()V
+	public final fun isExhausted ()Z
+	public final fun isNext (Lcom/davils/krypt/asn1/Tag;)Z
+	public final fun peekTag ()Lcom/davils/krypt/asn1/Tag;
+	public final fun readBitString (Lcom/davils/krypt/asn1/Tag;)Lcom/davils/krypt/asn1/BitString;
+	public static synthetic fun readBitString$default (Lcom/davils/krypt/asn1/DerReader;Lcom/davils/krypt/asn1/Tag;ILjava/lang/Object;)Lcom/davils/krypt/asn1/BitString;
+	public final fun readBoolean (Lcom/davils/krypt/asn1/Tag;)Z
+	public static synthetic fun readBoolean$default (Lcom/davils/krypt/asn1/DerReader;Lcom/davils/krypt/asn1/Tag;ILjava/lang/Object;)Z
+	public final fun readConstructed (Lcom/davils/krypt/asn1/Tag;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public final fun readElement ()Lcom/davils/krypt/asn1/DerElement;
+	public final fun readElement (Lcom/davils/krypt/asn1/Tag;)Lcom/davils/krypt/asn1/DerElement;
+	public final fun readExplicit (ILkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public final fun readInteger (Lcom/davils/krypt/asn1/Tag;)Lcom/davils/krypt/asn1/DerInteger;
+	public static synthetic fun readInteger$default (Lcom/davils/krypt/asn1/DerReader;Lcom/davils/krypt/asn1/Tag;ILjava/lang/Object;)Lcom/davils/krypt/asn1/DerInteger;
+	public final fun readNull (Lcom/davils/krypt/asn1/Tag;)V
+	public static synthetic fun readNull$default (Lcom/davils/krypt/asn1/DerReader;Lcom/davils/krypt/asn1/Tag;ILjava/lang/Object;)V
+	public final fun readObjectIdentifier (Lcom/davils/krypt/asn1/Tag;)Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public static synthetic fun readObjectIdentifier$default (Lcom/davils/krypt/asn1/DerReader;Lcom/davils/krypt/asn1/Tag;ILjava/lang/Object;)Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun readOctetString (Lcom/davils/krypt/asn1/Tag;)Lkotlinx/io/bytestring/ByteString;
+	public static synthetic fun readOctetString$default (Lcom/davils/krypt/asn1/DerReader;Lcom/davils/krypt/asn1/Tag;ILjava/lang/Object;)Lkotlinx/io/bytestring/ByteString;
+	public final fun readOptional (Lcom/davils/krypt/asn1/Tag;)Lcom/davils/krypt/asn1/DerElement;
+	public final fun readOptionalExplicit (ILkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public final fun readSequence (Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public final fun readSet (Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public final fun readText ()Ljava/lang/String;
+	public final fun refuse (Lcom/davils/krypt/asn1/DerFailure;Ljava/lang/String;)Ljava/lang/Void;
+}
+
+public final class com/davils/krypt/asn1/DerReadsKt {
+	public static final fun readGeneralizedTime (Lcom/davils/krypt/asn1/DerReader;Lcom/davils/krypt/asn1/Tag;)Lkotlin/time/Instant;
+	public static synthetic fun readGeneralizedTime$default (Lcom/davils/krypt/asn1/DerReader;Lcom/davils/krypt/asn1/Tag;ILjava/lang/Object;)Lkotlin/time/Instant;
+	public static final fun readInt (Lcom/davils/krypt/asn1/DerReader;Lkotlin/ranges/IntRange;Lcom/davils/krypt/asn1/Tag;)I
+	public static synthetic fun readInt$default (Lcom/davils/krypt/asn1/DerReader;Lkotlin/ranges/IntRange;Lcom/davils/krypt/asn1/Tag;ILjava/lang/Object;)I
+	public static final fun readListOf (Lcom/davils/krypt/asn1/DerReader;ILcom/davils/krypt/asn1/Tag;Lkotlin/jvm/functions/Function1;)Ljava/util/List;
+	public static synthetic fun readListOf$default (Lcom/davils/krypt/asn1/DerReader;ILcom/davils/krypt/asn1/Tag;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Ljava/util/List;
+	public static final fun readRemaining (Lcom/davils/krypt/asn1/DerReader;)Ljava/util/List;
+	public static final fun readText (Lcom/davils/krypt/asn1/DerReader;Lcom/davils/krypt/asn1/Tag;Lcom/davils/krypt/asn1/Tag;)Ljava/lang/String;
+	public static synthetic fun readText$default (Lcom/davils/krypt/asn1/DerReader;Lcom/davils/krypt/asn1/Tag;Lcom/davils/krypt/asn1/Tag;ILjava/lang/Object;)Ljava/lang/String;
+	public static final fun readTime (Lcom/davils/krypt/asn1/DerReader;)Lkotlin/time/Instant;
+}
+
+public final class com/davils/krypt/asn1/DerWriter {
+	public final fun bitString (Lcom/davils/krypt/asn1/BitString;Lcom/davils/krypt/asn1/Tag;)V
+	public static synthetic fun bitString$default (Lcom/davils/krypt/asn1/DerWriter;Lcom/davils/krypt/asn1/BitString;Lcom/davils/krypt/asn1/Tag;ILjava/lang/Object;)V
+	public final fun boolean (ZLcom/davils/krypt/asn1/Tag;)V
+	public static synthetic fun boolean$default (Lcom/davils/krypt/asn1/DerWriter;ZLcom/davils/krypt/asn1/Tag;ILjava/lang/Object;)V
+	public final fun constructed (Lcom/davils/krypt/asn1/Tag;Lkotlin/jvm/functions/Function1;)V
+	public final fun element (Lcom/davils/krypt/asn1/Tag;Lkotlinx/io/bytestring/ByteString;)V
+	public final fun explicit (ILkotlin/jvm/functions/Function1;)V
+	public final fun generalizedTime (Lkotlin/time/Instant;Lcom/davils/krypt/asn1/Tag;)V
+	public static synthetic fun generalizedTime$default (Lcom/davils/krypt/asn1/DerWriter;Lkotlin/time/Instant;Lcom/davils/krypt/asn1/Tag;ILjava/lang/Object;)V
+	public final fun ia5String (Ljava/lang/String;Lcom/davils/krypt/asn1/Tag;)V
+	public static synthetic fun ia5String$default (Lcom/davils/krypt/asn1/DerWriter;Ljava/lang/String;Lcom/davils/krypt/asn1/Tag;ILjava/lang/Object;)V
+	public final fun integer (JLcom/davils/krypt/asn1/Tag;)V
+	public final fun integer (Lcom/davils/krypt/asn1/DerInteger;Lcom/davils/krypt/asn1/Tag;)V
+	public static synthetic fun integer$default (Lcom/davils/krypt/asn1/DerWriter;JLcom/davils/krypt/asn1/Tag;ILjava/lang/Object;)V
+	public static synthetic fun integer$default (Lcom/davils/krypt/asn1/DerWriter;Lcom/davils/krypt/asn1/DerInteger;Lcom/davils/krypt/asn1/Tag;ILjava/lang/Object;)V
+	public final fun nullValue (Lcom/davils/krypt/asn1/Tag;)V
+	public static synthetic fun nullValue$default (Lcom/davils/krypt/asn1/DerWriter;Lcom/davils/krypt/asn1/Tag;ILjava/lang/Object;)V
+	public final fun objectIdentifier (Lcom/davils/krypt/asn1/ObjectIdentifier;Lcom/davils/krypt/asn1/Tag;)V
+	public static synthetic fun objectIdentifier$default (Lcom/davils/krypt/asn1/DerWriter;Lcom/davils/krypt/asn1/ObjectIdentifier;Lcom/davils/krypt/asn1/Tag;ILjava/lang/Object;)V
+	public final fun octetString (Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/asn1/Tag;)V
+	public static synthetic fun octetString$default (Lcom/davils/krypt/asn1/DerWriter;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/asn1/Tag;ILjava/lang/Object;)V
+	public final fun octetStringOf (Lkotlin/jvm/functions/Function1;)V
+	public final fun printableString (Ljava/lang/String;Lcom/davils/krypt/asn1/Tag;)V
+	public static synthetic fun printableString$default (Lcom/davils/krypt/asn1/DerWriter;Ljava/lang/String;Lcom/davils/krypt/asn1/Tag;ILjava/lang/Object;)V
+	public final fun raw (Lkotlinx/io/bytestring/ByteString;)V
+	public final fun sequence (Lkotlin/jvm/functions/Function1;)V
+	public final fun setOf (Lkotlin/jvm/functions/Function1;)V
+	public final fun time (Lkotlin/time/Instant;)V
+	public final fun utf8String (Ljava/lang/String;Lcom/davils/krypt/asn1/Tag;)V
+	public static synthetic fun utf8String$default (Lcom/davils/krypt/asn1/DerWriter;Ljava/lang/String;Lcom/davils/krypt/asn1/Tag;ILjava/lang/Object;)V
+}
+
+public final class com/davils/krypt/asn1/ObjectIdentifier : java/lang/Comparable {
+	public static final field Companion Lcom/davils/krypt/asn1/ObjectIdentifier$Companion;
+	public static final field MAXIMUM_ARCS I
+	public fun compareTo (Lcom/davils/krypt/asn1/ObjectIdentifier;)I
+	public synthetic fun compareTo (Ljava/lang/Object;)I
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getArcs ()Ljava/util/List;
+	public final fun getContent ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getDotted ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/asn1/ObjectIdentifier$Companion {
+	public final fun decodeOrNull (Lkotlinx/io/bytestring/ByteString;)Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun of (Ljava/lang/String;)Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun parseOrNull (Ljava/lang/String;)Lcom/davils/krypt/asn1/ObjectIdentifier;
+}
+
+public final class com/davils/krypt/asn1/Tag {
+	public static final field Companion Lcom/davils/krypt/asn1/Tag$Companion;
+	public static final field MAXIMUM_NUMBER I
+	public fun <init> (Lcom/davils/krypt/asn1/TagClass;ZI)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getNumber ()I
+	public final fun getTagClass ()Lcom/davils/krypt/asn1/TagClass;
+	public fun hashCode ()I
+	public final fun isConstructed ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/asn1/Tag$Companion {
+	public final fun context (IZ)Lcom/davils/krypt/asn1/Tag;
+	public final fun getBitString ()Lcom/davils/krypt/asn1/Tag;
+	public final fun getBmpString ()Lcom/davils/krypt/asn1/Tag;
+	public final fun getBoolean ()Lcom/davils/krypt/asn1/Tag;
+	public final fun getEnumerated ()Lcom/davils/krypt/asn1/Tag;
+	public final fun getGeneralizedTime ()Lcom/davils/krypt/asn1/Tag;
+	public final fun getIa5String ()Lcom/davils/krypt/asn1/Tag;
+	public final fun getInteger ()Lcom/davils/krypt/asn1/Tag;
+	public final fun getNull ()Lcom/davils/krypt/asn1/Tag;
+	public final fun getNumericString ()Lcom/davils/krypt/asn1/Tag;
+	public final fun getObjectIdentifier ()Lcom/davils/krypt/asn1/Tag;
+	public final fun getOctetString ()Lcom/davils/krypt/asn1/Tag;
+	public final fun getPrintableString ()Lcom/davils/krypt/asn1/Tag;
+	public final fun getSequence ()Lcom/davils/krypt/asn1/Tag;
+	public final fun getSet ()Lcom/davils/krypt/asn1/Tag;
+	public final fun getTeletexString ()Lcom/davils/krypt/asn1/Tag;
+	public final fun getUniversalString ()Lcom/davils/krypt/asn1/Tag;
+	public final fun getUtcTime ()Lcom/davils/krypt/asn1/Tag;
+	public final fun getUtf8String ()Lcom/davils/krypt/asn1/Tag;
+	public final fun getVisibleString ()Lcom/davils/krypt/asn1/Tag;
+}
+
+public final class com/davils/krypt/asn1/TagClass : java/lang/Enum {
+	public static final field Application Lcom/davils/krypt/asn1/TagClass;
+	public static final field ContextSpecific Lcom/davils/krypt/asn1/TagClass;
+	public static final field Private Lcom/davils/krypt/asn1/TagClass;
+	public static final field Universal Lcom/davils/krypt/asn1/TagClass;
+	public final fun getBits ()I
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/asn1/TagClass;
+	public static fun values ()[Lcom/davils/krypt/asn1/TagClass;
+}
+
+public final class com/davils/krypt/asn1/pem/Pem {
+	public static final field INSTANCE Lcom/davils/krypt/asn1/pem/Pem;
+	public static final field MAXIMUM_BLOCKS I
+	public static final field MAXIMUM_HEADERS I
+	public static final field MAXIMUM_TEXT_LENGTH I
+	public final fun decode (Ljava/lang/String;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun encode (Ljava/lang/String;Lkotlinx/io/bytestring/ByteString;)Ljava/lang/String;
+	public final fun encode (Ljava/util/List;)Ljava/lang/String;
+}
+
+public final class com/davils/krypt/asn1/pem/PemBlock {
+	public fun <init> (Ljava/lang/String;Lkotlinx/io/bytestring/ByteString;Ljava/util/List;)V
+	public synthetic fun <init> (Ljava/lang/String;Lkotlinx/io/bytestring/ByteString;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBytes ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getHeaders ()Ljava/util/List;
+	public final fun getLabel ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/asn1/pem/PemFailure : java/lang/Enum {
+	public static final field InvalidBase64 Lcom/davils/krypt/asn1/pem/PemFailure;
+	public static final field InvalidLabel Lcom/davils/krypt/asn1/pem/PemFailure;
+	public static final field LimitExceeded Lcom/davils/krypt/asn1/pem/PemFailure;
+	public static final field Unterminated Lcom/davils/krypt/asn1/pem/PemFailure;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/asn1/pem/PemFailure;
+	public static fun values ()[Lcom/davils/krypt/asn1/pem/PemFailure;
+}
+
