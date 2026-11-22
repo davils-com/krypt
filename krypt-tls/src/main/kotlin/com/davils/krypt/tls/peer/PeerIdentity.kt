@@ -17,6 +17,7 @@
 package com.davils.krypt.tls.peer
 
 import com.davils.krypt.asn1.ObjectIdentifier
+import com.davils.krypt.tls.internal.CheckedPeer
 import com.davils.krypt.x509.Certificate
 import com.davils.krypt.x509.name.GeneralName
 import com.davils.krypt.x509.path.TrustAnchor
@@ -33,7 +34,7 @@ import javax.net.ssl.SSLSession
  * @property anchor the trust anchor the path leads to.
  * @since 1.0.0
  */
-public class PeerIdentity internal constructor(
+public class PeerIdentity private constructor(
     chain: List<Certificate>,
     path: List<Certificate>,
     public val anchor: TrustAnchor,
@@ -81,6 +82,9 @@ public class PeerIdentity internal constructor(
     public val purposes: List<ObjectIdentifier> get() = certificate.extensions.extendedKeyUsage.orEmpty()
 
     private val values: List<Any?> get() = listOf(chain, path, anchor)
+
+    internal constructor(checked: CheckedPeer) :
+        this(chain = checked.chain, path = checked.path, anchor = checked.anchor)
 
     /**
      * Compares the chain, the path and the anchor.

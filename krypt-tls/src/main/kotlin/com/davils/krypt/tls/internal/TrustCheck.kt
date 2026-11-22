@@ -22,7 +22,6 @@ import com.davils.krypt.asn1.ObjectIdentifier
 import com.davils.krypt.ct.Transparency
 import com.davils.krypt.ocsp.Ocsp
 import com.davils.krypt.ocsp.OcspResponseSource
-import com.davils.krypt.ocsp.OcspRevocationChecker
 import com.davils.krypt.primitive.Crypto
 import com.davils.krypt.tls.peer.Authorization
 import com.davils.krypt.tls.peer.PeerAuthorizer
@@ -33,10 +32,8 @@ import com.davils.krypt.tls.trust.TrustRefusedException
 import com.davils.krypt.tls.trust.TrustSettings
 import com.davils.krypt.x509.Certificate
 import com.davils.krypt.x509.crl.RevocationLists
-import com.davils.krypt.x509.path.CrlRevocationChecker
 import com.davils.krypt.x509.path.PathValidation
 import com.davils.krypt.x509.path.PathValidator
-import com.davils.krypt.x509.path.RevocationChecker
 import com.davils.krypt.x509.path.RevocationListSource
 import com.davils.krypt.x509.path.ServiceIdentity
 import com.davils.krypt.x509.path.TrustAnchor
@@ -52,14 +49,18 @@ internal class TrustCheck(
 
     private val transparency: Transparency = Transparency(crypto)
 
-    private val sources: List<RevocationChecker> = listOfNotNull(
-        settings.ocspSource?.let { source -> OcspRevocationChecker(ocsp, contained(source)) },
-        settings.revocationListSource?.let { source ->
-            CrlRevocationChecker(RevocationLists(crypto, settings.limits), contained(source))
-        },
+    private val sources: RevocationSources = RevocationSources(
+        ocsp = ocsp,
+        responses = settings.ocspSource?.let { source -> contained(source) },
+        lists = RevocationLists(crypto, settings.limits),
+        listSource = settings.revocationListSource?.let { source -> contained(source) },
     )
 
-    suspend fun check(handshake: Handshake, anchors: List<TrustAnchor>): PeerIdentity {
+    suspend fun check(
+        handshake: Handshake,
+        anchors: List<TrustAnchor>,
+        isAnchorConfirmed: (TrustAnchor) -> Boolean,
+    ): PeerIdentity {
         val chain = handshake.chain
         val revocation = HandshakeRevocation(
             ocsp = ocsp,
@@ -82,12 +83,13 @@ internal class TrustCheck(
             is PathValidation.Valid -> validation
             is PathValidation.Invalid -> throw TrustRefusedException(TrustFailure.of(validation.failure))
         }
+        refuse(!isAnchorConfirmed(valid.anchor), TrustFailure.NoTrustedPath)
         val leaf = valid.path.first()
         refuse(handshake.isHostVerified && !matches(leaf, handshake.host), TrustFailure.HostMismatch)
         refuse(settings.pins?.matches(crypto, valid) == false, TrustFailure.PinMismatch)
         refuse(isStapleMissing(leaf, revocation), TrustFailure.MustStapleMissing)
         refuse(!isTransparent(valid, revocation), TrustFailure.TransparencyNotCompliant)
-        val identity = PeerIdentity(chain = chain, path = valid.path, anchor = valid.anchor)
+        val identity = PeerIdentity(CheckedPeer(chain = chain, path = valid.path, anchor = valid.anchor))
         refuse(!isAuthorized(identity), TrustFailure.Unauthorized)
         return identity
     }

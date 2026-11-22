@@ -21,6 +21,8 @@ package com.davils.krypt.spiffe
 import com.davils.kore.core.annotation.DavilsInternal
 import com.davils.kore.core.outcome.Outcome
 import com.davils.kore.core.text.SafeText
+import com.davils.krypt.spiffe.internal.CheckedDomain
+import com.davils.krypt.spiffe.internal.CheckedId
 import com.davils.krypt.spiffe.internal.IdParser
 
 /**
@@ -35,14 +37,16 @@ import com.davils.krypt.spiffe.internal.IdParser
  * @property name the name, such as `example.org`.
  * @since 1.0.0
  */
-public class TrustDomain internal constructor(public val name: String) : Comparable<TrustDomain> {
+public class TrustDomain private constructor(public val name: String) : Comparable<TrustDomain> {
     /**
      * The SPIFFE id of the trust domain itself, `spiffe://` and the [name] without a path, which signing authorities
      * carry.
      *
      * @since 1.0.0
      */
-    public val id: SpiffeId get() = SpiffeId(trustDomain = this, path = "")
+    public val id: SpiffeId get() = SpiffeId(CheckedId(trustDomain = this, path = ""))
+
+    internal constructor(checked: CheckedDomain) : this(checked.name)
 
     /**
      * Returns the SPIFFE id of this trust domain with the path of [segments].
@@ -110,7 +114,8 @@ public class TrustDomain internal constructor(public val name: String) : Compara
          * @since 1.0.0
          */
         public fun parse(name: String): Outcome<TrustDomain, SpiffeIdFailure> {
-            val failure = IdParser.trustDomainFailure(name) ?: return Outcome.Success(TrustDomain(name))
+            val failure = IdParser.trustDomainFailure(name)
+                ?: return Outcome.Success(TrustDomain(CheckedDomain(name)))
             return Outcome.Failure(failure)
         }
 
@@ -125,7 +130,7 @@ public class TrustDomain internal constructor(public val name: String) : Compara
         public fun of(name: String): TrustDomain {
             val failure = IdParser.trustDomainFailure(name)
             require(failure == null) { "${SafeText.quoted(name)} is no trust domain name: ${failure?.name.orEmpty()}" }
-            return TrustDomain(name)
+            return TrustDomain(CheckedDomain(name))
         }
     }
 }

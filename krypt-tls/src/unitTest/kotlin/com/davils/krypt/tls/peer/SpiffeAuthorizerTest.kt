@@ -32,6 +32,7 @@ import com.davils.krypt.tls.fixture.SPIFFE_ID
 import com.davils.krypt.tls.fixture.clientConfiguration
 import com.davils.krypt.tls.fixture.connect
 import com.davils.krypt.tls.fixture.serverConfiguration
+import com.davils.krypt.tls.internal.CheckedPeer
 import com.davils.krypt.tls.trust.TrustFailure
 import com.davils.krypt.x509.extension.ExtensionsBuilder
 import com.davils.krypt.x509.extension.KeyPurposes
@@ -54,22 +55,25 @@ private suspend fun peer(
     extensions: ExtensionsBuilder.() -> Unit = CLIENT,
 ): PeerIdentity {
     val identity = pki.custom(names.toList(), extensions)
-    return PeerIdentity(chain = identity.chain, path = identity.chain, anchor = pki.anchor)
+    return PeerIdentity(CheckedPeer(chain = identity.chain, path = identity.chain, anchor = pki.anchor))
 }
 
-private fun bundlesOf(pki: Pki): BundleSet =
-    BundleSet(listOf(TrustBundle(TrustDomain.of(DOMAIN), x509Authorities = listOf(pki.certificate))))
+private fun bundlesOf(pki: Pki, domain: String = DOMAIN): BundleSet =
+    BundleSet(listOf(TrustBundle(TrustDomain.of(domain), x509Authorities = listOf(pki.certificate))))
+
+private fun federationOf(pki: Pki): BundleSet = bundlesOf(pki).with(bundlesOf(pki, FOREIGN).bundles.first())
 
 class SpiffeAuthorizerTest : FunSpec({
     test("ids are allowed exactly and trust domains as a whole") {
         val pki = Pki.create()
         val inside = peer(pki, GeneralName.Uri(SPIFFE_ID))
         val outside = peer(pki, GeneralName.Uri(FOREIGN_ID))
-        val exact = SpiffeAuthorizer.ids(idOf(SPIFFE_ID))
+        val bundles = federationOf(pki)
+        val exact = SpiffeAuthorizer.ids(bundles, idOf(SPIFFE_ID))
         exact.authorize(inside) shouldBe Authorization.Granted
         exact.authorize(outside) shouldBe Authorization.Denied
         exact.ids shouldBe setOf(idOf(SPIFFE_ID))
-        val domains = SpiffeAuthorizer.trustDomains(TrustDomain.of(FOREIGN))
+        val domains = SpiffeAuthorizer.trustDomains(bundles, TrustDomain.of(FOREIGN))
         domains.authorize(outside) shouldBe Authorization.Granted
         domains.authorize(inside) shouldBe Authorization.Denied
         domains.trustDomains shouldBe setOf(TrustDomain.of(FOREIGN))
@@ -79,14 +83,17 @@ class SpiffeAuthorizerTest : FunSpec({
     test("a predicate decides about the id, and a failing one denies") {
         val pki = Pki.create()
         val inside = peer(pki, GeneralName.Uri(SPIFFE_ID))
-        SpiffeAuthorizer.matching { id -> id.segments.first() == "ns" }.authorize(inside) shouldBe Authorization.Granted
-        SpiffeAuthorizer.matching { false }.authorize(inside) shouldBe Authorization.Denied
-        SpiffeAuthorizer.matching { error("The predicate broke") }.authorize(inside) shouldBe Authorization.Denied
+        val bundles = bundlesOf(pki)
+        val namespaced = SpiffeAuthorizer.matching(bundles) { id -> id.segments.first() == "ns" }
+        namespaced.authorize(inside) shouldBe Authorization.Granted
+        SpiffeAuthorizer.matching(bundles) { false }.authorize(inside) shouldBe Authorization.Denied
+        val broken = SpiffeAuthorizer.matching(bundles) { error("The predicate broke") }
+        broken.authorize(inside) shouldBe Authorization.Denied
     }
 
     test("a peer without an X.509-SVID is denied whatever its names") {
         val pki = Pki.create()
-        val everyone = SpiffeAuthorizer.matching { true }
+        val everyone = SpiffeAuthorizer.matching(bundlesOf(pki)) { true }
         everyone.authorize(peer(pki, GeneralName.Dns("api.example.org"))) shouldBe Authorization.Denied
         val twice = peer(pki, GeneralName.Uri(SPIFFE_ID), GeneralName.Uri(FOREIGN_ID))
         everyone.authorize(twice) shouldBe Authorization.Denied
@@ -99,37 +106,38 @@ class SpiffeAuthorizerTest : FunSpec({
         everyone.authorize(peer(pki, GeneralName.Uri(SPIFFE_ID))) shouldBe Authorization.Granted
     }
 
-    test("with bundles, the anchor of the peer must be an X.509 authority of its trust domain") {
+    test("the anchor of the peer must be an X.509 authority of the bundle of its trust domain") {
         val pki = Pki.create()
         val other = Pki.create()
         val inside = peer(pki, GeneralName.Uri(SPIFFE_ID))
         val domain = TrustDomain.of(DOMAIN)
-        SpiffeAuthorizer.trustDomains(domain, bundles = bundlesOf(pki)).authorize(inside) shouldBe Authorization.Granted
-        SpiffeAuthorizer.trustDomains(domain, bundles = bundlesOf(other)).authorize(inside) shouldBe
+        SpiffeAuthorizer.trustDomains(bundlesOf(pki), domain).authorize(inside) shouldBe Authorization.Granted
+        SpiffeAuthorizer.trustDomains(bundlesOf(other), domain).authorize(inside) shouldBe
             Authorization.Denied
-        SpiffeAuthorizer.trustDomains(domain, bundles = BundleSet()).authorize(inside) shouldBe Authorization.Denied
+        SpiffeAuthorizer.trustDomains(BundleSet(), domain).authorize(inside) shouldBe Authorization.Denied
         val broken = BundleSource { _ -> error("The Workload API is gone") }
-        SpiffeAuthorizer.ids(idOf(SPIFFE_ID), bundles = broken).authorize(inside) shouldBe Authorization.Denied
+        SpiffeAuthorizer.ids(broken, idOf(SPIFFE_ID)).authorize(inside) shouldBe Authorization.Denied
         val foreignInside = peer(pki, GeneralName.Uri(FOREIGN_ID))
-        val federated = SpiffeAuthorizer.matching(bundles = bundlesOf(pki)) { true }
+        val federated = SpiffeAuthorizer.matching(bundlesOf(pki)) { true }
         federated.authorize(foreignInside) shouldBe Authorization.Denied
-        federated.toString() shouldContain "bundles=true"
+        federated.toString() shouldContain "predicate=true"
     }
 
     test("an authorizer names at least one and at most the maximum of rules") {
-        shouldThrow<IllegalArgumentException> { SpiffeAuthorizer.ids() }
-        shouldThrow<IllegalArgumentException> { SpiffeAuthorizer.trustDomains() }
+        val bundles = BundleSet()
+        shouldThrow<IllegalArgumentException> { SpiffeAuthorizer.ids(bundles) }
+        shouldThrow<IllegalArgumentException> { SpiffeAuthorizer.trustDomains(bundles) }
         val many = Array(PeerPolicy.HARD_MAXIMUM_RULES + 1) { index -> TrustDomain.of("d$index") }
-        shouldThrow<IllegalArgumentException> { SpiffeAuthorizer.trustDomains(trustDomains = many) }
+        shouldThrow<IllegalArgumentException> { SpiffeAuthorizer.trustDomains(bundles, trustDomains = many) }
         val most = Array(PeerPolicy.HARD_MAXIMUM_RULES) { index -> TrustDomain.of("d$index") }
-        val bounded = SpiffeAuthorizer.trustDomains(trustDomains = most)
+        val bounded = SpiffeAuthorizer.trustDomains(bundles, trustDomains = most)
         bounded.trustDomains.size shouldBe PeerPolicy.HARD_MAXIMUM_RULES
     }
 
     test("a server admits only clients of the allowed trust domain anchored in its bundle") {
         val pki = Pki.create()
         val server = pki.identity(CertificateProfile.TlsServer, SERVER_NAME)
-        val authorizer = SpiffeAuthorizer.trustDomains(TrustDomain.of(DOMAIN), bundles = bundlesOf(pki))
+        val authorizer = SpiffeAuthorizer.trustDomains(bundlesOf(pki), TrustDomain.of(DOMAIN))
         val serverContext = TlsContext(
             serverConfiguration(pki, listOf(server)) {
                 clientAuthentication = ClientAuthentication.Required

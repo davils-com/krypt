@@ -26,6 +26,7 @@ import com.davils.kore.core.outcome.map
 import com.davils.kore.core.text.SafeText
 import com.davils.krypt.acme.account.AccountKey
 import com.davils.krypt.acme.account.AcmeAccount
+import com.davils.krypt.acme.internal.CheckedSession
 import com.davils.krypt.acme.internal.Exchange
 import com.davils.krypt.acme.internal.Polling
 import com.davils.krypt.acme.internal.Reply
@@ -69,13 +70,16 @@ import kotlin.time.Instant
  * @property accountUrl the URL of the account.
  * @since 1.0.0
  */
-public class AcmeSession internal constructor(
+public class AcmeSession private constructor(
     public val client: AcmeClient,
     public val key: AccountKey,
     public val accountUrl: String,
 ) {
     private val exchange: Exchange = client.exchange
     private val signing: Signing = Signing.ByKeyId(key = key, accountUrl = accountUrl)
+
+    internal constructor(checked: CheckedSession) :
+        this(client = checked.client, key = checked.key, accountUrl = checked.accountUrl)
 
     /**
      * Reads the account.
@@ -126,7 +130,7 @@ public class AcmeSession internal constructor(
             )
             exchange.post(url = found, payload = bytesOf(nested), signing = signing)
         }
-        return reply.map { _ -> AcmeSession(client = client, key = newKey, accountUrl = accountUrl) }
+        return reply.map { _ -> AcmeSession(CheckedSession(client = client, key = newKey, accountUrl = accountUrl)) }
     }
 
     /**
@@ -296,6 +300,13 @@ public class AcmeSession internal constructor(
      * Polls [order] while it is [AcmeStatus.Pending] or [AcmeStatus.Processing], waiting as long as the
      * `Retry-After` of each response asks or [interval] where none does.
      *
+     * The server decides how long each wait lasts: the wait before each poll is the `Retry-After` of the last
+     * response, at most [AcmeLimits.maximumRetryAfter] of the limits of the [client] (one day by default), or
+     * [interval] where the response has none, and each poll is one request over the transport of the application,
+     * which bounds its duration. One call polls at most [maximumPolls] times, so it waits at most [maximumPolls] times
+     * the longer of the two, up to 30 days with the defaults, and has no overall deadline of its own: bound the total
+     * time with `withTimeout` of kotlinx.coroutines, which cancels the wait and the poll in progress.
+     *
      * @param order the order.
      * @param maximumPolls how often to poll at most, 1 to 1000.
      * @param interval the wait without a `Retry-After`; one second by default.
@@ -324,6 +335,13 @@ public class AcmeSession internal constructor(
     /**
      * Polls [authorization] while it is [AcmeStatus.Pending], waiting as long as the `Retry-After` of each response
      * asks or [interval] where none does.
+     *
+     * The server decides how long each wait lasts: the wait before each poll is the `Retry-After` of the last
+     * response, at most [AcmeLimits.maximumRetryAfter] of the limits of the [client] (one day by default), or
+     * [interval] where the response has none, and each poll is one request over the transport of the application,
+     * which bounds its duration. One call polls at most [maximumPolls] times, so it waits at most [maximumPolls] times
+     * the longer of the two, up to 30 days with the defaults, and has no overall deadline of its own: bound the total
+     * time with `withTimeout` of kotlinx.coroutines, which cancels the wait and the poll in progress.
      *
      * @param authorization the authorization.
      * @param maximumPolls how often to poll at most, 1 to 1000.

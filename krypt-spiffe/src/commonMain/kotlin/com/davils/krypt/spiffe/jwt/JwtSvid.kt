@@ -22,6 +22,7 @@ import com.davils.kore.core.annotation.DavilsInternal
 import com.davils.kore.core.text.SafeText
 import com.davils.krypt.jose.jwt.JwtClaims
 import com.davils.krypt.spiffe.SpiffeId
+import com.davils.krypt.spiffe.internal.CheckedJwtSvid
 import kotlin.time.Instant
 
 /**
@@ -37,7 +38,7 @@ import kotlin.time.Instant
  * @property token the compact serialization.
  * @since 1.0.0
  */
-public class JwtSvid internal constructor(
+public class JwtSvid private constructor(
     public val id: SpiffeId,
     audience: List<String>,
     public val expiresAt: Instant,
@@ -50,6 +51,14 @@ public class JwtSvid internal constructor(
      * @since 1.0.0
      */
     public val audience: List<String> = audience.toList()
+
+    internal constructor(checked: CheckedJwtSvid) : this(
+        id = checked.id,
+        audience = checked.audience,
+        expiresAt = checked.expiresAt,
+        claims = checked.claims,
+        token = checked.token,
+    )
 
     /**
      * Compares the tokens.

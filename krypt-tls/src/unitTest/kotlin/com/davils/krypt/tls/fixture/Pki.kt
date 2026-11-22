@@ -36,6 +36,7 @@ import com.davils.krypt.x509.extension.KeyUsage
 import com.davils.krypt.x509.name.GeneralName
 import com.davils.krypt.x509.name.distinguishedName
 import com.davils.krypt.x509.path.TrustAnchor
+import kotlin.time.Duration
 import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.hours
 
@@ -106,6 +107,8 @@ internal class Pki private constructor(
     }
 
     suspend fun revocationList(): RevocationList = authority.revocationList()
+
+    suspend fun revocationList(validity: Duration): RevocationList = authority.revocationList(validity)
 
     fun responder(): OcspResponder = OcspResponder(
         ocsp = Ocsp(crypto),

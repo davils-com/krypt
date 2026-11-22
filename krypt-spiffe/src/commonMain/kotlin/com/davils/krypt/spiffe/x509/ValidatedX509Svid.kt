@@ -17,6 +17,7 @@
 package com.davils.krypt.spiffe.x509
 
 import com.davils.krypt.spiffe.SpiffeId
+import com.davils.krypt.spiffe.internal.CheckedX509Svid
 import com.davils.krypt.x509.Certificate
 import com.davils.krypt.x509.path.TrustAnchor
 
@@ -29,7 +30,7 @@ import com.davils.krypt.x509.path.TrustAnchor
  * @property anchor the X.509 authority of the bundle of the trust domain of [id] the path leads to.
  * @since 1.0.0
  */
-public class ValidatedX509Svid internal constructor(
+public class ValidatedX509Svid private constructor(
     public val id: SpiffeId,
     path: List<Certificate>,
     public val anchor: TrustAnchor,
@@ -47,6 +48,9 @@ public class ValidatedX509Svid internal constructor(
      * @since 1.0.0
      */
     public val certificate: Certificate get() = path.first()
+
+    internal constructor(checked: CheckedX509Svid) :
+        this(id = checked.id, path = checked.path, anchor = checked.anchor)
 
     /**
      * Compares the id, the path and the anchor.

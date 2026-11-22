@@ -31,15 +31,22 @@ import kotlin.time.Instant
 /**
  * A bounded cache of the revocation status of certificates that the trust manager fills and the application drives.
  *
- * Only a good or a revoked status is kept, each for [lifetime]; an unknown status is never cached. The cache starts no
- * timer: an entry is ignored once it expired and removed by the next [put] or by [prune], which the application calls
- * when it likes. When the cache is full, the oldest entry gives way. A stapled OCSP response is checked before the
- * cache, so a peer that staples is never judged by an older status.
+ * Only a good or a revoked status is kept; an unknown status is never cached. An entry expires when [put] recorded it,
+ * at the time the status was learned plus [lifetime], or earlier at the `nextUpdate` of the OCSP response or the
+ * revocation list it came from. Reading an entry never extends it: the trust manager records only a status it has just
+ * learned from a stapled or fetched response or a revocation list, never one it read from the cache, so once an entry
+ * expired the next handshake asks the sources again, and with [RevocationMode.HardFail] a certificate whose status the
+ * sources cannot tell any longer is refused. A certificate revoked after its status was cached is thus accepted for at
+ * most [lifetime], and never past the `nextUpdate` of the answer the entry came from.
+ *
+ * The cache starts no timer: an entry is ignored once it expired and removed by the next [put] or by [prune], which
+ * the application calls when it likes. When the cache is full, the oldest entry gives way. A stapled OCSP response is
+ * checked before the cache, so a peer that staples is never judged by an older status.
  *
  * Safe to share between threads.
  *
  * @property capacity the most entries the cache holds.
- * @property lifetime how long an entry counts.
+ * @property lifetime how long an entry counts at most after the status was learned.
  * @constructor Creates an empty cache.
  * @throws IllegalArgumentException if [capacity] lies outside 1 to [HARD_MAXIMUM_CAPACITY] or [lifetime] outside a
  *   positive time up to [HARD_MAXIMUM_LIFETIME].
@@ -81,19 +88,28 @@ public class RevocationCache(
     }
 
     /**
-     * Records the status of [certificate] from [at] on, replacing an older entry and removing the expired ones.
+     * Records the status of [certificate] as learned at [at], replacing an older entry and removing the expired ones.
+     *
+     * The entry expires at [at] plus [lifetime] or at [nextUpdate], whichever comes first; a status whose [nextUpdate]
+     * is not after [at] only removes the older entry. Record a status only when it was just learned from its source:
+     * recording a status read from the cache again would extend its life.
      *
      * @param certificate the certificate.
      * @param status its status; an unknown status is ignored.
      * @param at the time the status was learned.
+     * @param nextUpdate the `nextUpdate` of the OCSP response or the revocation list the status came from, or null if
+     *   it named none.
      * @since 1.0.0
      */
-    public fun put(certificate: Certificate, status: RevocationStatus, at: Instant) {
+    public fun put(certificate: Certificate, status: RevocationStatus, at: Instant, nextUpdate: Instant? = null) {
         if (status == RevocationStatus.Unknown) return
-        val entry = CachedStatus(certificate = certificate, status = status, expiresAt = at + lifetime)
+        val latest = at + lifetime
+        val expiresAt = minOf(a = latest, b = nextUpdate ?: latest)
+        val entry = CachedStatus(certificate = certificate, status = status, expiresAt = expiresAt)
+        val added = listOfNotNull(entry.takeIf { at < expiresAt })
         synchronized(lock) {
             val kept = entries.load().filter { found -> found.certificate != certificate && at < found.expiresAt }
-            entries.store(kept.takeLast(capacity - 1) + entry)
+            entries.store(kept.takeLast(capacity - added.size) + added)
         }
     }
 

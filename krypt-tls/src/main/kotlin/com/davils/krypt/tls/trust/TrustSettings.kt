@@ -31,8 +31,10 @@ private const val SUBJECT: String = "trust"
 /**
  * Whom a TLS peer must chain to and what else its certificates must show, built by [TrustSettingsBuilder].
  *
- * The certificates of a peer are validated by krypt-x509 by RFC 5280, never by the PKIX of the JDK, against the
- * [anchors] and, only if [isSystemIncluded], the anchors of the JDK as well; both together count when both are given.
+ * The certificates of a peer are validated by krypt-x509 by RFC 5280 against the [anchors] and, only if
+ * [isSystemIncluded], the anchors of the JDK as well; both together count when both are given. A path that ends in an
+ * anchor of the JDK alone must in addition be accepted by the PKIX trust manager of the JDK, so that its distrust
+ * policies, disabled algorithms and anchor constraints keep applying to its roots.
  *
  * @since 1.0.0
  */
@@ -46,7 +48,9 @@ public class TrustSettings internal constructor(builder: TrustSettingsBuilder) :
 
     /**
      * Whether the anchors of the JDK count, too. A root of the JDK that krypt cannot read or whose key the crypto
-     * policy forbids is left out.
+     * policy forbids is left out. A path to a root of the JDK must also pass the default PKIX trust manager of the JDK
+     * for the same side, with `jdk.security.caDistrustPolicies`, `jdk.certpath.disabledAlgorithms` and the constraints
+     * of the JDK on its anchors; a refusal of the JDK is [TrustFailure.NoTrustedPath].
      *
      * @since 1.0.0
      */

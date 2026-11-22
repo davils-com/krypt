@@ -19,11 +19,20 @@ package com.davils.krypt.tls.internal
 import com.davils.krypt.x509.path.TrustAnchor
 import java.security.cert.X509Certificate
 
-internal data class TrustRing(val anchors: List<TrustAnchor>, val issuers: List<X509Certificate>) {
+internal data class TrustRing(
+    val application: List<TrustAnchor>,
+    val anchors: List<TrustAnchor>,
+    val issuers: List<X509Certificate>,
+) {
     companion object {
-        fun of(anchors: List<TrustAnchor>): TrustRing {
+        fun of(application: List<TrustAnchor>, system: List<TrustAnchor>): TrustRing {
+            val anchors = application + system
             val certificates = anchors.mapNotNull { anchor -> anchor.certificate }
-            return TrustRing(anchors.toList(), certificates.map { certificate -> JcaCertificates.toJca(certificate) })
+            return TrustRing(
+                application = application.toList(),
+                anchors = anchors,
+                issuers = certificates.map { certificate -> JcaCertificates.toJca(certificate) },
+            )
         }
     }
 }

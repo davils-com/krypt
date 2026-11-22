@@ -32,11 +32,12 @@ import com.davils.krypt.spiffe.internal.reading
  *
  * Reading is strict and bounded by [limits]. The JSON follows the rules of krypt-jose, a duplicate member is refused,
  * and every JWK is read by the rules of [JsonWebKeys]. As the specification demands, a key without `use`, of an
- * unknown `use` or of a key type krypt does not know is ignored, as is an `x509-svid` key without certificates; of the
- * certificates of `x5c` the first one is the authority, and it must hold the key of its JWK. A key for `x509-svid`
- * or `jwt-svid` that is otherwise invalid, private or symmetric refuses the whole bundle, as does a `jwt-svid` key
- * without `kid` or with the `kid` of another. Other members of the bundle are ignored. The sequence and the refresh
- * hint are non-negative integers up to 2^53 - 1.
+ * unknown `use` or of a key type krypt does not know is ignored, as is an `x509-svid` key without certificates; the
+ * `x5c` of an `x509-svid` key holds exactly one certificate, the authority, which must hold the key of its JWK. A key
+ * for `x509-svid` or `jwt-svid` that is otherwise invalid, private or symmetric refuses the whole bundle, as do an
+ * `x509-svid` key with more than one certificate and a `jwt-svid` key without `kid` or with the `kid` of another.
+ * Other members of the bundle are ignored. The sequence and the refresh hint are non-negative integers up to
+ * 2^53 - 1.
  *
  * A bundle does not name its trust domain, so the caller names it when reading, from the configuration it fetched the
  * bundle by; a bundle map names the trust domain of every bundle.

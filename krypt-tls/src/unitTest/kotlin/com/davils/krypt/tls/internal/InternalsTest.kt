@@ -64,7 +64,7 @@ class InternalsTest : FunSpec({
         val codec = Certificates(crypto)
         JcaCertificates.fromJca(codec, arrayOf(certificate)).shouldNotBeNull()
         JcaCertificates.fromJca(codec, Array(JcaCertificates.MAXIMUM_CHAIN + 1) { certificate }).shouldBeNull()
-        SystemAnchors.load(codec, isIncluded = true).shouldNotBeEmpty()
-        SystemAnchors.load(codec, isIncluded = false).shouldBeEmpty()
+        SystemTrust.load(codec, isIncluded = true).anchors.shouldNotBeEmpty()
+        SystemTrust.load(codec, isIncluded = false).anchors.shouldBeEmpty()
     }
 })

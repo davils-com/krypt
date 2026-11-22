@@ -26,6 +26,7 @@ import com.davils.kore.core.text.SafeText
 import com.davils.krypt.acme.account.AccountKey
 import com.davils.krypt.acme.account.AcmeAccount
 import com.davils.krypt.acme.account.ExternalAccountBinding
+import com.davils.krypt.acme.internal.CheckedSession
 import com.davils.krypt.acme.internal.Exchange
 import com.davils.krypt.acme.internal.Signing
 import com.davils.krypt.acme.internal.Tokens
@@ -151,7 +152,7 @@ public class AcmeClient(
      * @since 1.0.0
      */
     public fun session(key: AccountKey, accountUrl: String): AcmeSession =
-        AcmeSession(client = this, key = key, accountUrl = exchange.readers.url(accountUrl))
+        AcmeSession(CheckedSession(client = this, key = key, accountUrl = exchange.readers.url(accountUrl)))
 
     /**
      * Revokes [certificate] with a request signed by its own key, by RFC 8555 section 7.6, without an account.

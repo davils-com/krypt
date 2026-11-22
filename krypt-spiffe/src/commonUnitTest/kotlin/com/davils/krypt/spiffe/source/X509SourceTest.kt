@@ -82,9 +82,8 @@ class X509SourceTest : FunSpec({
         source.bundles[domain] shouldBe first
         source.svids shouldBe listOf(svid)
         val unsequenced = TrustBundle(domain, listOf(root.certificate))
-        source.update(listOf(svid), BundleSet(listOf(unsequenced))).value()
-        source.updateBundles(BundleSet(listOf(older))).value()
-        val same = TrustBundle(domain, listOf(root.certificate), sequence = 1L)
+        source.update(listOf(svid), BundleSet(listOf(unsequenced))).failure() shouldBe SourceFailure.Rollback
+        val same = TrustBundle(domain, listOf(root.certificate), sequence = 2L)
         source.updateBundles(BundleSet(listOf(same, TrustBundle(foreign)))).value()
         source.bundles.trustDomains shouldBe listOf(foreign, domain)
         source.updateBundles(BundleSet(listOf(same))).value()

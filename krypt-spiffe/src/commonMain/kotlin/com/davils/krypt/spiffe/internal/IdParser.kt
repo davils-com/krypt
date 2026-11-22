@@ -50,7 +50,7 @@ internal object IdParser {
         val failure = failureOf(text)
         if (failure != null) return Outcome.Failure(failure)
         val (name, path) = split(text.substring(startIndex = PREFIX.length))
-        return Outcome.Success(SpiffeId(trustDomain = TrustDomain(name), path = path))
+        return Outcome.Success(SpiffeId(CheckedId(trustDomain = TrustDomain(CheckedDomain(name)), path = path)))
     }
 
     fun trustDomainFailure(name: String): SpiffeIdFailure? =

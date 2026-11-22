@@ -22,6 +22,7 @@ import com.davils.krypt.tls.fixture.Pki
 import com.davils.krypt.tls.fixture.SPIFFE_DOMAIN
 import com.davils.krypt.tls.fixture.SPIFFE_ID
 import com.davils.krypt.tls.fixture.StubSession
+import com.davils.krypt.tls.internal.CheckedPeer
 import com.davils.krypt.x509.extension.KeyPurposes
 import com.davils.krypt.x509.name.GeneralName
 import io.kotest.assertions.throwables.shouldThrow
@@ -36,7 +37,7 @@ private const val MAIL: String = "ops@Example.org"
 
 private suspend fun peer(pki: Pki, vararg names: GeneralName): PeerIdentity {
     val identity = pki.custom(names.toList()) { extendedKeyUsage(listOf(KeyPurposes.ClientAuth)) }
-    return PeerIdentity(chain = identity.chain, path = identity.chain, anchor = pki.anchor)
+    return PeerIdentity(CheckedPeer(chain = identity.chain, path = identity.chain, anchor = pki.anchor))
 }
 
 class PeerPolicyTest : FunSpec({
@@ -107,11 +108,14 @@ class PeerPolicyTest : FunSpec({
         val other = Pki.create("Other")
         val first = peer(pki, GeneralName.Uri(SPIFFE_ID))
         val second = peer(pki, GeneralName.Uri(SPIFFE_ID))
-        first shouldBe PeerIdentity(chain = first.chain, path = first.path, anchor = first.anchor)
-        first.hashCode() shouldBe PeerIdentity(chain = first.chain, path = first.path, anchor = first.anchor).hashCode()
+        val same = PeerIdentity(CheckedPeer(chain = first.chain, path = first.path, anchor = first.anchor))
+        first shouldBe same
+        first.hashCode() shouldBe same.hashCode()
         (first == second) shouldBe false
-        (first == PeerIdentity(chain = first.chain, path = second.path, anchor = first.anchor)) shouldBe false
-        (first == PeerIdentity(chain = first.chain, path = first.path, anchor = other.anchor)) shouldBe false
+        val otherPath = PeerIdentity(CheckedPeer(chain = first.chain, path = second.path, anchor = first.anchor))
+        (first == otherPath) shouldBe false
+        val otherAnchor = PeerIdentity(CheckedPeer(chain = first.chain, path = first.path, anchor = other.anchor))
+        (first == otherAnchor) shouldBe false
         first.equals(SPIFFE_ID) shouldBe false
         first.toString() shouldContain "PeerIdentity"
         PeerIdentity.of(StubSession(emptyList())).shouldBeNull()
