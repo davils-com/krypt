@@ -25,6 +25,9 @@ import com.davils.krypt.cms.fixture.CONTENT
 import com.davils.krypt.cms.fixture.Pki
 import com.davils.krypt.cms.fixture.cms
 import com.davils.krypt.cms.fixture.crypto
+import com.davils.krypt.cms.fixture.decryptCbc
+import com.davils.krypt.cms.fixture.encryptCbc
+import com.davils.krypt.cms.fixture.envelopCbc
 import com.davils.krypt.cms.fixture.flipped
 import com.davils.krypt.cms.fixture.replaced
 import com.davils.krypt.cms.fixture.value
@@ -106,31 +109,31 @@ class EnvelopedTest : FunSpec({
         ) +
             montgomery.map { found -> found.credential }
         ContentEncryption.entries.forEach { encryption ->
-            val enveloped = quick.envelop(CONTENT, recipients, encryption)
+            val enveloped = quick.envelopCbc(CONTENT, recipients, encryption)
             enveloped.isAuthenticated shouldBe encryption.isAuthenticated
             enveloped.recipients.size shouldBe recipients.size
-            credentials.forEach { credential -> quick.decrypt(enveloped, credential).value() shouldBe CONTENT }
+            credentials.forEach { credential -> quick.decryptCbc(enveloped, credential).value() shouldBe CONTENT }
         }
     }
 
     test("versions follow RFC 5652") {
         val pki = Pki.create()
         val rsa = pki.issue(KeyType.Rsa3072, NAME)
-        val transport = cms.envelop(
+        val transport = cms.envelopCbc(
             CONTENT,
             listOf(Recipient.KeyTransport(rsa.certificate)),
             ContentEncryption.Aes128Cbc,
         )
         transport.version shouldBe 0
         val keyed = Recipient.KeyTransport(rsa.certificate, isKeyIdentifierUsed = true)
-        cms.envelop(CONTENT, listOf(keyed), ContentEncryption.Aes128Cbc).version shouldBe 2
+        cms.envelopCbc(CONTENT, listOf(keyed), ContentEncryption.Aes128Cbc).version shouldBe 2
         val password = Recipient.Password(SecretText.of(SECRET), ITERATIONS)
-        quick.envelop(CONTENT, listOf(password), ContentEncryption.Aes128Cbc).version shouldBe PASSWORD_VERSION
+        quick.envelopCbc(CONTENT, listOf(password), ContentEncryption.Aes128Cbc).version shouldBe PASSWORD_VERSION
         cms.envelop(CONTENT, listOf(keyed)).version shouldBe 0
         val typed = cms.envelop(CONTENT, listOf(keyed), contentType = ContentTypes.SignedData)
         typed.contentType shouldBe ContentTypes.SignedData
         typed.authenticatedAttributes?.size shouldBe 1
-        cms.decrypt(typed, rsa.credential).value() shouldBe CONTENT
+        cms.decryptCbc(typed, rsa.credential).value() shouldBe CONTENT
     }
 
     test("wrong keys, passwords and tags fail alike") {
@@ -147,23 +150,23 @@ class EnvelopedTest : FunSpec({
         val other = pki.issue(KeyType.Rsa3072, NAME)
         val impostor = Credential.Certified(rsa.certificate, other.pair.privateKey)
         val wrongCurve = Credential.Certified(ec.certificate, other.pair.privateKey)
-        quick.decrypt(enveloped, impostor).failureOrNull() shouldBe CmsFailure.DecryptionFailed
-        quick.decrypt(enveloped, wrongCurve).failureOrNull() shouldBe CmsFailure.DecryptionFailed
-        quick.decrypt(enveloped, Credential.Kek(ByteString(1), kek(KEK_BYTES, fill = 2))).failureOrNull() shouldBe
+        quick.decryptCbc(enveloped, impostor).failureOrNull() shouldBe CmsFailure.DecryptionFailed
+        quick.decryptCbc(enveloped, wrongCurve).failureOrNull() shouldBe CmsFailure.DecryptionFailed
+        quick.decryptCbc(enveloped, Credential.Kek(ByteString(1), kek(KEK_BYTES, fill = 2))).failureOrNull() shouldBe
             CmsFailure.DecryptionFailed
-        quick.decrypt(enveloped, Credential.Kek(ByteString(1), kek(SHORT_KEK_BYTES))).failureOrNull() shouldBe
+        quick.decryptCbc(enveloped, Credential.Kek(ByteString(1), kek(SHORT_KEK_BYTES))).failureOrNull() shouldBe
             CmsFailure.DecryptionFailed
-        quick.decrypt(enveloped, Credential.Password(SecretText.of("wrong"))).failureOrNull() shouldBe
+        quick.decryptCbc(enveloped, Credential.Password(SecretText.of("wrong"))).failureOrNull() shouldBe
             CmsFailure.DecryptionFailed
-        quick.decrypt(enveloped, Credential.Kek(ByteString(2), kek(KEK_BYTES))).failureOrNull() shouldBe
+        quick.decryptCbc(enveloped, Credential.Kek(ByteString(2), kek(KEK_BYTES))).failureOrNull() shouldBe
             CmsFailure.RecipientNotFound
         val mac = enveloped.parts.mac
         val forged = cms.decodeEnveloped(replaced(encoded = enveloped.encoded, old = mac, new = flipped(mac))).value()
-        quick.decrypt(forged, rsa.credential).failureOrNull() shouldBe CmsFailure.DecryptionFailed
+        quick.decryptCbc(forged, rsa.credential).failureOrNull() shouldBe CmsFailure.DecryptionFailed
         val ciphertext = checkNotNull(enveloped.encryptedContent)
         val tampered = replaced(encoded = enveloped.encoded, old = ciphertext, new = flipped(ciphertext))
         val changed = cms.decodeEnveloped(tampered).value()
-        quick.decrypt(changed, rsa.credential).failureOrNull() shouldBe CmsFailure.DecryptionFailed
+        quick.decryptCbc(changed, rsa.credential).failureOrNull() shouldBe CmsFailure.DecryptionFailed
     }
 
     test("the policy bounds passwords and algorithms") {
@@ -173,7 +176,7 @@ class EnvelopedTest : FunSpec({
         val strict = Cms(
             Crypto(environment { policy = cryptoPolicy { minimumVerifiedIterations = STRICT_ITERATIONS } }),
         )
-        strict.decrypt(enveloped, Credential.Password(SecretText.of(SECRET))).failureOrNull() shouldBe
+        strict.decryptCbc(enveloped, Credential.Password(SecretText.of(SECRET))).failureOrNull() shouldBe
             CmsFailure.AlgorithmNotPermitted
         shouldThrow<IllegalArgumentException> {
             Recipient.Password(
@@ -215,16 +218,16 @@ class EnvelopedTest : FunSpec({
 
     test("encrypted data with a caller key") {
         val key = kek(KEK_BYTES)
-        val encrypted = cms.encrypt(CONTENT, key)
+        val encrypted = cms.encryptCbc(CONTENT, key)
         encrypted.version shouldBe 0
         encrypted.contentType shouldBe ContentTypes.Data
         encrypted.unprotectedAttributes shouldBe emptyList()
-        cms.decrypt(cms.decodeEncrypted(encrypted.encoded).value(), key).value() shouldBe CONTENT
-        cms.decrypt(encrypted, kek(KEK_BYTES, fill = 2)).failureOrNull() shouldBe CmsFailure.DecryptionFailed
-        cms.decrypt(encrypted, kek(SHORT_KEK_BYTES)).failureOrNull() shouldBe CmsFailure.DecryptionFailed
-        shouldThrow<IllegalArgumentException> { cms.encrypt(CONTENT, key, ContentEncryption.Aes256Gcm) }
-        shouldThrow<IllegalArgumentException> { cms.encrypt(CONTENT, key, ContentEncryption.Aes128Cbc) }
+        cms.decryptCbc(cms.decodeEncrypted(encrypted.encoded).value(), key).value() shouldBe CONTENT
+        cms.decryptCbc(encrypted, kek(KEK_BYTES, fill = 2)).failureOrNull() shouldBe CmsFailure.DecryptionFailed
+        cms.decryptCbc(encrypted, kek(SHORT_KEK_BYTES)).failureOrNull() shouldBe CmsFailure.DecryptionFailed
+        shouldThrow<IllegalArgumentException> { cms.encryptCbc(CONTENT, key, ContentEncryption.Aes256Gcm) }
+        shouldThrow<IllegalArgumentException> { cms.encryptCbc(CONTENT, key, ContentEncryption.Aes128Cbc) }
         val small = Cms(crypto, CmsLimits(maximumContentBytes = 1))
-        shouldThrow<IllegalArgumentException> { small.encrypt(CONTENT, key) }
+        shouldThrow<IllegalArgumentException> { small.encryptCbc(CONTENT, key) }
     }
 })

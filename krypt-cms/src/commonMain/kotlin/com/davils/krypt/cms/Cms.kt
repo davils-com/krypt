@@ -231,16 +231,24 @@ public class Cms(public val crypto: Crypto, public val limits: CmsLimits = CmsLi
      * Encrypts [content] under a fresh content-encryption key from the randomness of the environment and protects
      * that key for every recipient.
      *
-     * With AES-CBC the result is EnvelopedData of RFC 5652, which is not authenticated: whoever changes the
-     * ciphertext changes the plaintext unnoticed. With AES-GCM it is AuthEnvelopedData of RFC 5083 with a random
-     * nonce of 12 bytes; prefer it. A content type other than id-data is then authenticated as an attribute.
+     * With AES-GCM, the default, the result is AuthEnvelopedData of RFC 5083 with a random nonce of 12 bytes; a
+     * content type other than id-data is then authenticated as an attribute. With AES-CBC it is EnvelopedData of
+     * RFC 5652, which is not authenticated.
+     *
+     * AES-CBC is not authenticated: whoever changes the ciphertext changes the plaintext unnoticed, and a service that
+     * shows, by its answer, its timing or what it does next, whether a changed message decrypted is a padding and
+     * format oracle that reveals the plaintext, as in the Efail attacks. It is therefore refused unless
+     * `isUnauthenticatedCbcAllowed` is true; set it only for legacy peers, and only when the content is
+     * authenticated otherwise, such as signed content whose signature is verified before anything acts on it.
      *
      * @param content the content, at most [CmsLimits.maximumContentBytes].
      * @param recipients the recipients, 1 to [CmsLimits.maximumRecipients], of which at most one is a password.
      * @param encryption the content encryption; AES-256-GCM by default.
      * @param contentType the type of the content.
+     * @param isUnauthenticatedCbcAllowed true to write unauthenticated EnvelopedData with AES-CBC; see above.
      * @return the enveloped data.
-     * @throws IllegalArgumentException if a limit is broken or a recipient's key does not fit its kind.
+     * @throws IllegalArgumentException if a limit is broken, a recipient's key does not fit its kind or [encryption]
+     *   is AES-CBC without [isUnauthenticatedCbcAllowed].
      * @throws com.davils.krypt.primitive.PolicyViolationException if the policy forbids an algorithm, a key or the
      *   iterations of a password recipient.
      * @since 1.0.0
@@ -250,12 +258,14 @@ public class Cms(public val crypto: Crypto, public val limits: CmsLimits = CmsLi
         recipients: List<Recipient>,
         encryption: ContentEncryption = ContentEncryption.Aes256Gcm,
         contentType: ObjectIdentifier = ContentTypes.Data,
+        isUnauthenticatedCbcAllowed: Boolean = false,
     ): EnvelopedData {
         val encoded = envelopedEngine.envelop(
             content = content,
             recipients = recipients,
             encryption = encryption,
             contentType = contentType,
+            isUnauthenticatedCbcAllowed = isUnauthenticatedCbcAllowed,
         )
         return envelopedEngine.decodeOwn(encoded)
     }
@@ -285,8 +295,17 @@ public class Cms(public val crypto: Crypto, public val limits: CmsLimits = CmsLi
      * Every recipient that matches [credential] is tried. If none yields a content-encryption key of the right size,
      * the content is decrypted with a random key anyway, so a wrong key, a wrong password, a broken padding and a
      * wrong tag all end in the same [CmsFailure.DecryptionFailed] after the same work: there is no oracle, as for
-     * the million-message attack on RSA. EnvelopedData is not authenticated, so a successful decryption does not
-     * prove that the content is unchanged; sign it or use AuthEnvelopedData.
+     * the million-message attack on RSA.
+     *
+     * EnvelopedData with AES-CBC is refused with [CmsFailure.AlgorithmNotPermitted] before any key is used, unless
+     * [isUnauthenticatedCbcAllowed] is true. Even then a successful decryption does not prove that the content is
+     * unchanged.
+     *
+     * AES-CBC is not authenticated: whoever changes the ciphertext changes the plaintext unnoticed, and a service that
+     * shows, by its answer, its timing or what it does next, whether a changed message decrypted is a padding and
+     * format oracle that reveals the plaintext, as in the Efail attacks. It is therefore refused unless
+     * `isUnauthenticatedCbcAllowed` is true; set it only for legacy peers, and only when the content is
+     * authenticated otherwise, such as signed content whose signature is verified before anything acts on it.
      *
      * Password recipients derive their key with PBKDF2 within the iterations the policy accepts for verification;
      * HMAC-SHA-1, the default of PBKDF2 that OpenSSL writes, needs a policy that accepts SHA-1 for verification. A
@@ -297,29 +316,50 @@ public class Cms(public val crypto: Crypto, public val limits: CmsLimits = CmsLi
      *
      * @param envelopedData the enveloped data.
      * @param credential the key, the key-encryption key or the password of a recipient.
+     * @param isUnauthenticatedCbcAllowed true to decrypt unauthenticated EnvelopedData with AES-CBC; see above.
      * @return the content, or why it could not be decrypted.
      * @since 1.0.0
      */
-    public suspend fun decrypt(envelopedData: EnvelopedData, credential: Credential): Outcome<ByteString, CmsFailure> =
-        envelopedEngine.decrypt(envelopedData, credential)
+    public suspend fun decrypt(
+        envelopedData: EnvelopedData,
+        credential: Credential,
+        isUnauthenticatedCbcAllowed: Boolean = false,
+    ): Outcome<ByteString, CmsFailure> = envelopedEngine.decrypt(
+        data = envelopedData,
+        credential = credential,
+        isUnauthenticatedCbcAllowed = isUnauthenticatedCbcAllowed,
+    )
 
     /**
      * Encrypts [content] with AES-CBC under [key], as EncryptedData of RFC 5652, which is not authenticated.
      *
+     * AES-CBC is not authenticated: whoever changes the ciphertext changes the plaintext unnoticed, and a service that
+     * shows, by its answer, its timing or what it does next, whether a changed message decrypted is a padding and
+     * format oracle that reveals the plaintext, as in the Efail attacks. It is therefore refused unless
+     * `isUnauthenticatedCbcAllowed` is true; set it only for legacy peers, and only when the content is
+     * authenticated otherwise, such as signed content whose signature is verified before anything acts on it.
+     *
      * @param content the content, at most [CmsLimits.maximumContentBytes].
      * @param key the key of 16 or 32 bytes, as [encryption] needs.
      * @param encryption AES-128-CBC or AES-256-CBC.
+     * @param isUnauthenticatedCbcAllowed true to write unauthenticated EncryptedData at all; see above.
      * @return the encrypted data.
-     * @throws IllegalArgumentException if [encryption] is AES-GCM, the key has the wrong size or the content is too
-     *   large.
+     * @throws IllegalArgumentException if [isUnauthenticatedCbcAllowed] is false, [encryption] is AES-GCM, the key has
+     *   the wrong size or the content is too large.
      * @since 1.0.0
      */
     public suspend fun encrypt(
         content: ByteString,
         key: SecretKey,
         encryption: ContentEncryption = ContentEncryption.Aes256Cbc,
+        isUnauthenticatedCbcAllowed: Boolean = false,
     ): EncryptedData {
-        val encoded = envelopedEngine.encrypt(content = content, key = key, encryption = encryption)
+        val encoded = envelopedEngine.encrypt(
+            content = content,
+            key = key,
+            encryption = encryption,
+            isUnauthenticatedCbcAllowed = isUnauthenticatedCbcAllowed,
+        )
         return envelopedEngine.decodeOwnEncrypted(encoded)
     }
 
@@ -336,15 +376,31 @@ public class Cms(public val crypto: Crypto, public val limits: CmsLimits = CmsLi
     }
 
     /**
-     * Decrypts [encryptedData] with [key], with one failure for a wrong key and a wrong padding alike.
+     * Decrypts [encryptedData] with [key], with one failure for a wrong key and a wrong padding alike. EncryptedData
+     * is AES-CBC, so it is refused with [CmsFailure.AlgorithmNotPermitted] unless [isUnauthenticatedCbcAllowed] is
+     * true.
+     *
+     * AES-CBC is not authenticated: whoever changes the ciphertext changes the plaintext unnoticed, and a service that
+     * shows, by its answer, its timing or what it does next, whether a changed message decrypted is a padding and
+     * format oracle that reveals the plaintext, as in the Efail attacks. It is therefore refused unless
+     * `isUnauthenticatedCbcAllowed` is true; set it only for legacy peers, and only when the content is
+     * authenticated otherwise, such as signed content whose signature is verified before anything acts on it.
      *
      * @param encryptedData the encrypted data.
      * @param key the key.
+     * @param isUnauthenticatedCbcAllowed true to decrypt unauthenticated EncryptedData at all; see above.
      * @return the content, or why it could not be decrypted.
      * @since 1.0.0
      */
-    public suspend fun decrypt(encryptedData: EncryptedData, key: SecretKey): Outcome<ByteString, CmsFailure> =
-        envelopedEngine.decrypt(encryptedData, key)
+    public suspend fun decrypt(
+        encryptedData: EncryptedData,
+        key: SecretKey,
+        isUnauthenticatedCbcAllowed: Boolean = false,
+    ): Outcome<ByteString, CmsFailure> = envelopedEngine.decrypt(
+        data = encryptedData,
+        key = key,
+        isUnauthenticatedCbcAllowed = isUnauthenticatedCbcAllowed,
+    )
 
     /**
      * Shows the limits.

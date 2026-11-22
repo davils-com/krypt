@@ -26,8 +26,8 @@ import kotlinx.io.bytestring.ByteString
  * decrypted.
  *
  * EnvelopedData with AES-CBC is not authenticated: a change of the ciphertext goes unnoticed and a decryption that
- * reports its padding opens an oracle, which krypt avoids with one failure for everything. Prefer
- * AuthEnvelopedData with AES-GCM.
+ * reports its padding opens an oracle, which krypt narrows with one failure for everything; krypt decrypts it only
+ * with `isUnauthenticatedCbcAllowed`. Prefer AuthEnvelopedData with AES-GCM.
  *
  * @since 1.0.0
  */

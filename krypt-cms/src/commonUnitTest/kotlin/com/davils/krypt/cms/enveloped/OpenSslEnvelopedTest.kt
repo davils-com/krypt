@@ -39,6 +39,7 @@ import com.davils.krypt.cms.fixture.RSA_RECIPIENT_KEY
 import com.davils.krypt.cms.fixture.certificate
 import com.davils.krypt.cms.fixture.cms
 import com.davils.krypt.cms.fixture.crypto
+import com.davils.krypt.cms.fixture.decryptCbc
 import com.davils.krypt.cms.fixture.hex
 import com.davils.krypt.cms.fixture.privateKey
 import com.davils.krypt.cms.fixture.value
@@ -66,24 +67,24 @@ class OpenSslEnvelopedTest : FunSpec({
         enveloped.isAuthenticated shouldBe false
         enveloped.encryption shouldBe ContentEncryption.Aes256Cbc
         enveloped.recipients.single().type shouldBe RecipientType.KeyTransport
-        cms.decrypt(enveloped, rsa).value() shouldBe CONTENT
+        cms.decryptCbc(enveloped, rsa).value() shouldBe CONTENT
         val authenticated = cms.decodeEnveloped(AUTH_ENVELOPED_RSA).value()
         authenticated.isAuthenticated shouldBe true
         authenticated.encryption shouldBe ContentEncryption.Aes256Gcm
-        cms.decrypt(authenticated, rsa).value() shouldBe CONTENT
+        cms.decryptCbc(authenticated, rsa).value() shouldBe CONTENT
         val ec = Credential.Certified(certificate(EC_RECIPIENT_CERTIFICATE), privateKey(EC_RECIPIENT_KEY))
         val agreed = cms.decodeEnveloped(ENVELOPED_EC).value()
         agreed.recipients.single().type shouldBe RecipientType.KeyAgreement
-        cms.decrypt(agreed, ec).value() shouldBe CONTENT
-        cms.decrypt(agreed, rsa).failureOrNull() shouldBe CmsFailure.RecipientNotFound
+        cms.decryptCbc(agreed, ec).value() shouldBe CONTENT
+        cms.decryptCbc(agreed, rsa).failureOrNull() shouldBe CmsFailure.RecipientNotFound
     }
 
     test("krypt decrypts what OpenSSL envelops for a key-encryption key and a password") {
         val kek = Credential.Kek("kek-1".encodeToByteString(), SecretKey.of(SecretBytes.copyOf(hex(KEK))))
-        cms.decrypt(cms.decodeEnveloped(ENVELOPED_KEK).value(), kek).value() shouldBe CONTENT
+        cms.decryptCbc(cms.decodeEnveloped(ENVELOPED_KEK).value(), kek).value() shouldBe CONTENT
         val password = Credential.Password(SecretText.of(PASSWORD))
         val enveloped = cms.decodeEnveloped(ENVELOPED_PASSWORD).value()
-        cms.decrypt(enveloped, password).failureOrNull() shouldBe CmsFailure.AlgorithmNotPermitted
+        cms.decryptCbc(enveloped, password).failureOrNull() shouldBe CmsFailure.AlgorithmNotPermitted
         val legacy = Cms(
             Crypto(
                 environment {
@@ -92,16 +93,16 @@ class OpenSslEnvelopedTest : FunSpec({
                 },
             ),
         )
-        legacy.decrypt(enveloped, password).value() shouldBe CONTENT
+        legacy.decryptCbc(enveloped, password).value() shouldBe CONTENT
         val wrong = Credential.Password(SecretText.of("wrong"))
-        legacy.decrypt(enveloped, wrong).failureOrNull() shouldBe CmsFailure.DecryptionFailed
+        legacy.decryptCbc(enveloped, wrong).failureOrNull() shouldBe CmsFailure.DecryptionFailed
     }
 
     test("krypt decrypts what OpenSSL encrypts with a caller key") {
         val encrypted = cms.decodeEncrypted(ENCRYPTED).value()
         encrypted.encryption shouldBe ContentEncryption.Aes128Cbc
         val key = SecretKey.of(SecretBytes.copyOf(hex(ENCRYPTION_KEY)))
-        cms.decrypt(encrypted, key).value() shouldBe CONTENT
+        cms.decryptCbc(encrypted, key).value() shouldBe CONTENT
     }
 
     test("krypt decrypts what OpenSSL envelops for an ML-KEM recipient where the platform has ML-KEM") {
@@ -109,7 +110,7 @@ class OpenSslEnvelopedTest : FunSpec({
         enveloped.recipients.single().type shouldBe RecipientType.Kem
         if (crypto.capabilities.supports(KemAlgorithm.MlKem768)) {
             val kem = Credential.Certified(certificate(KEM_RECIPIENT_CERTIFICATE), privateKey(KEM_RECIPIENT_KEY))
-            cms.decrypt(enveloped, kem).value() shouldBe CONTENT
+            cms.decryptCbc(enveloped, kem).value() shouldBe CONTENT
         }
     }
 })

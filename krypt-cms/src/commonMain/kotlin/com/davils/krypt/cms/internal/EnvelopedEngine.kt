@@ -45,6 +45,7 @@ private const val TAG_BYTES: Int = 16
 private const val VERSION_PASSWORD_OR_OTHER: Int = 3
 private const val VERSION_EXTENDED: Int = 2
 private const val MAXIMUM_PASSWORDS: Int = CmsLimits.MAXIMUM_PASSWORD_RECIPIENTS
+private const val UNAUTHENTICATED: String = "AES-CBC is not authenticated and needs isUnauthenticatedCbcAllowed"
 
 private val AEADS: Map<ContentEncryption, AeadAlgorithm> = mapOf(
     ContentEncryption.Aes128Gcm to AeadAlgorithm.Aes128Gcm,
@@ -69,7 +70,9 @@ internal class EnvelopedEngine(private val crypto: Crypto, private val limits: C
         recipients: List<Recipient>,
         encryption: ContentEncryption,
         contentType: ObjectIdentifier,
+        isUnauthenticatedCbcAllowed: Boolean,
     ): ByteString {
+        require(encryption.isAuthenticated || isUnauthenticatedCbcAllowed) { UNAUTHENTICATED }
         require(
             content.size <= limits.maximumContentBytes,
         ) { "The content exceeds ${limits.maximumContentBytes} bytes" }
@@ -102,7 +105,13 @@ internal class EnvelopedEngine(private val crypto: Crypto, private val limits: C
         }
     }
 
-    suspend fun encrypt(content: ByteString, key: SecretKey, encryption: ContentEncryption): ByteString {
+    suspend fun encrypt(
+        content: ByteString,
+        key: SecretKey,
+        encryption: ContentEncryption,
+        isUnauthenticatedCbcAllowed: Boolean,
+    ): ByteString {
+        require(isUnauthenticatedCbcAllowed) { UNAUTHENTICATED }
         require(!encryption.isAuthenticated) { "EncryptedData is encrypted with AES-CBC" }
         require(
             key.bits == encryption.keyBytes * Byte.SIZE_BITS,
@@ -118,13 +127,24 @@ internal class EnvelopedEngine(private val crypto: Crypto, private val limits: C
         return codec.encodeEncrypted(ContentTypes.Data, algorithm, ciphertext)
     }
 
-    suspend fun decrypt(data: EnvelopedData, credential: Credential): Outcome<ByteString, CmsFailure> {
-        val algorithm = data.parts.algorithm ?: return Outcome.Failure(CmsFailure.AlgorithmNotPermitted)
+    suspend fun decrypt(
+        data: EnvelopedData,
+        credential: Credential,
+        isUnauthenticatedCbcAllowed: Boolean,
+    ): Outcome<ByteString, CmsFailure> {
+        val algorithm = data.parts.algorithm?.takeIf { found ->
+            found.encryption.isAuthenticated || isUnauthenticatedCbcAllowed
+        } ?: return Outcome.Failure(CmsFailure.AlgorithmNotPermitted)
         return decryptWith(data = data, algorithm = algorithm, credential = credential)
     }
 
-    suspend fun decrypt(data: EncryptedData, key: SecretKey): Outcome<ByteString, CmsFailure> {
-        val algorithm = data.algorithm ?: return Outcome.Failure(CmsFailure.AlgorithmNotPermitted)
+    suspend fun decrypt(
+        data: EncryptedData,
+        key: SecretKey,
+        isUnauthenticatedCbcAllowed: Boolean,
+    ): Outcome<ByteString, CmsFailure> {
+        val algorithm = data.algorithm?.takeIf { isUnauthenticatedCbcAllowed }
+            ?: return Outcome.Failure(CmsFailure.AlgorithmNotPermitted)
         return decryptWith(data = data, algorithm = algorithm, key = key)
     }
 

@@ -27,6 +27,7 @@ import com.davils.krypt.cms.fixture.certificates
 import com.davils.krypt.cms.fixture.cms
 import com.davils.krypt.cms.fixture.constructed
 import com.davils.krypt.cms.fixture.crypto
+import com.davils.krypt.cms.fixture.decryptCbc
 import com.davils.krypt.cms.fixture.der
 import com.davils.krypt.cms.fixture.hex
 import com.davils.krypt.cms.fixture.refusal
@@ -69,15 +70,15 @@ class EnvelopedEdgeTest : FunSpec({
                 CONTENT,
                 listOf(Recipient.KeyAgreement(x25519.certificate, userKeyingMaterial = ukm)),
             )
-            cms.decrypt(enveloped, x25519.credential).value() shouldBe CONTENT
+            cms.decryptCbc(enveloped, x25519.credential).value() shouldBe CONTENT
         }
         if (crypto.capabilities.supports(KemAlgorithm.MlKem1024)) {
             val small = pki.issue(KeyType.MlKem768, NAME)
             val large = pki.issue(KeyType.MlKem1024, NAME)
             val enveloped = cms.envelop(CONTENT, listOf(Recipient.Kem(small.certificate)))
-            cms.decrypt(enveloped, small.credential).value() shouldBe CONTENT
+            cms.decryptCbc(enveloped, small.credential).value() shouldBe CONTENT
             val mismatched = Credential.Certified(small.certificate, large.pair.privateKey)
-            cms.decrypt(enveloped, mismatched).failureOrNull() shouldBe CmsFailure.DecryptionFailed
+            cms.decryptCbc(enveloped, mismatched).failureOrNull() shouldBe CmsFailure.DecryptionFailed
             val large1024 = cms.envelop(CONTENT, listOf(Recipient.Kem(large.certificate)))
             large1024.recipients.single().type shouldBe RecipientType.Kem
         }
@@ -110,7 +111,7 @@ class EnvelopedEdgeTest : FunSpec({
         listOf(ByteString(ByteArray(BLOCK)), ByteString(ByteArray(2 * BLOCK + 1))).forEach { wrapped ->
             val fields = base.recipient.with(ENCRYPTED_KEY, der { octetString(wrapped) })
             val decoded = fast.decodeEnveloped(base.withRecipients(listOf(tagged(constructed(3), fields)))).value()
-            fast.decrypt(decoded, credential).failureOrNull() shouldBe CmsFailure.DecryptionFailed
+            fast.decryptCbc(decoded, credential).failureOrNull() shouldBe CmsFailure.DecryptionFailed
         }
     }
 })

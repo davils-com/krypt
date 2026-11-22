@@ -77,10 +77,10 @@ internal suspend fun Cms.refusal(
 internal fun Cms.enveloped(encoded: ByteString): EnvelopedData = decodeEnveloped(encoded).value()
 
 internal suspend fun Cms.opened(data: EnvelopedData, credential: Credential): ByteString =
-    decrypt(envelopedData = data, credential = credential).value()
+    decrypt(envelopedData = data, credential = credential, isUnauthenticatedCbcAllowed = true).value()
 
 internal suspend fun Cms.refusal(data: EnvelopedData, credential: Credential): CmsFailure? =
-    decrypt(envelopedData = data, credential = credential).failureOrNull()
+    decrypt(envelopedData = data, credential = credential, isUnauthenticatedCbcAllowed = true).failureOrNull()
 
 internal fun <T> Outcome<T, CmsFailure>.value(): T = checkNotNull(
     getOrNull(),
