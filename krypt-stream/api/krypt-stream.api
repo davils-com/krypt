@@ -1,0 +1,213 @@
+public final class com/davils/krypt/stream/ContainerReader {
+	public final fun close ()V
+	public final fun getPlaintextBytes ()J
+	public final fun getSegmentSize ()I
+	public final fun getSegments ()J
+	public final fun read (JILkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun segment (JLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/stream/ContainerSeal {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCiphertextBytes ()J
+	public final fun getHeaderDigest ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getManifest ()Lcom/davils/krypt/stream/manifest/Manifest;
+	public final fun getPlaintextBytes ()J
+	public final fun getRoot ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getSegmentSize ()I
+	public final fun getSegments ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/stream/Containers {
+	public fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/stream/StreamLimits;)V
+	public synthetic fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/stream/StreamLimits;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun decrypt (Lcom/davils/krypt/core/io/ByteSource;Lcom/davils/krypt/core/io/ByteSink;Ljava/util/List;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun decrypt (Lkotlinx/io/bytestring/ByteString;Ljava/util/List;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun decrypt$default (Lcom/davils/krypt/stream/Containers;Lcom/davils/krypt/core/io/ByteSource;Lcom/davils/krypt/core/io/ByteSink;Ljava/util/List;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun decrypt$default (Lcom/davils/krypt/stream/Containers;Lkotlinx/io/bytestring/ByteString;Ljava/util/List;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun encrypt (Lcom/davils/krypt/core/io/ByteSource;Lcom/davils/krypt/core/io/ByteSink;Ljava/util/List;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/stream/StreamSuite;ILkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun encrypt (Lkotlinx/io/bytestring/ByteString;Ljava/util/List;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun encrypt$default (Lcom/davils/krypt/stream/Containers;Lcom/davils/krypt/core/io/ByteSource;Lcom/davils/krypt/core/io/ByteSink;Ljava/util/List;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/stream/StreamSuite;ILkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun encrypt$default (Lcom/davils/krypt/stream/Containers;Lkotlinx/io/bytestring/ByteString;Ljava/util/List;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun getCrypto ()Lcom/davils/krypt/primitive/Crypto;
+	public final fun getLimits ()Lcom/davils/krypt/stream/StreamLimits;
+	public final fun inspect (Lcom/davils/krypt/core/io/ByteSource;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun open (Lcom/davils/krypt/stream/RandomAccessSource;Ljava/util/List;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun open$default (Lcom/davils/krypt/stream/Containers;Lcom/davils/krypt/stream/RandomAccessSource;Ljava/util/List;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/davils/krypt/stream/Credential {
+}
+
+public final class com/davils/krypt/stream/Credential$Hybrid : com/davils/krypt/stream/Credential {
+	public fun <init> (Lcom/davils/krypt/keyset/HybridDecrypter;)V
+	public final fun getDecrypter ()Lcom/davils/krypt/keyset/HybridDecrypter;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/stream/Credential$Key : com/davils/krypt/stream/Credential {
+	public fun <init> (Lcom/davils/krypt/keyset/KeysetAead;)V
+	public final fun getAead ()Lcom/davils/krypt/keyset/KeysetAead;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/stream/Credential$Password : com/davils/krypt/stream/Credential {
+	public fun <init> (Lcom/davils/krypt/core/SecretText;)V
+	public final fun getPassword ()Lcom/davils/krypt/core/SecretText;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/stream/Credential$Service : com/davils/krypt/stream/Credential {
+	public fun <init> (Lcom/davils/krypt/keyset/kms/KeyManagementService;)V
+	public final fun getKms ()Lcom/davils/krypt/keyset/kms/KeyManagementService;
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/davils/krypt/stream/RandomAccessSource {
+	public abstract fun getSize ()J
+	public abstract fun read (JILkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/stream/RandomAccessSourcesKt {
+	public static final fun asRandomAccessSource (Lkotlinx/io/bytestring/ByteString;)Lcom/davils/krypt/stream/RandomAccessSource;
+}
+
+public abstract interface class com/davils/krypt/stream/Recipient {
+}
+
+public final class com/davils/krypt/stream/Recipient$Hybrid : com/davils/krypt/stream/Recipient {
+	public fun <init> (Lcom/davils/krypt/keyset/HybridEncrypter;)V
+	public final fun getEncrypter ()Lcom/davils/krypt/keyset/HybridEncrypter;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/stream/Recipient$Key : com/davils/krypt/stream/Recipient {
+	public fun <init> (Lcom/davils/krypt/keyset/KeysetAead;)V
+	public final fun getAead ()Lcom/davils/krypt/keyset/KeysetAead;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/stream/Recipient$Password : com/davils/krypt/stream/Recipient {
+	public fun <init> (Lcom/davils/krypt/core/SecretText;I)V
+	public synthetic fun <init> (Lcom/davils/krypt/core/SecretText;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getIterations ()I
+	public final fun getPassword ()Lcom/davils/krypt/core/SecretText;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/stream/Recipient$Service : com/davils/krypt/stream/Recipient {
+	public fun <init> (Lcom/davils/krypt/keyset/kms/KeyManagementService;)V
+	public final fun getKms ()Lcom/davils/krypt/keyset/kms/KeyManagementService;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/stream/StreamFailure : java/lang/Enum {
+	public static final field DecryptionFailed Lcom/davils/krypt/stream/StreamFailure;
+	public static final field Malformed Lcom/davils/krypt/stream/StreamFailure;
+	public static final field NotARecipient Lcom/davils/krypt/stream/StreamFailure;
+	public static final field Refused Lcom/davils/krypt/stream/StreamFailure;
+	public static final field Unsupported Lcom/davils/krypt/stream/StreamFailure;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/stream/StreamFailure;
+	public static fun values ()[Lcom/davils/krypt/stream/StreamFailure;
+}
+
+public final class com/davils/krypt/stream/StreamLimits {
+	public static final field Companion Lcom/davils/krypt/stream/StreamLimits$Companion;
+	public static final field DEFAULT_MAXIMUM_ITERATIONS I
+	public static final field DEFAULT_MAXIMUM_RECIPIENTS I
+	public static final field DEFAULT_MAXIMUM_SIGNATURES I
+	public static final field HARD_MAXIMUM_RECIPIENTS I
+	public static final field HARD_MAXIMUM_SEGMENTS J
+	public static final field HARD_MAXIMUM_SIGNATURES I
+	public fun <init> ()V
+	public fun <init> (IJII)V
+	public synthetic fun <init> (IJIIILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMaximumIterations ()I
+	public final fun getMaximumRecipients ()I
+	public final fun getMaximumSegments ()J
+	public final fun getMaximumSignatures ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/stream/StreamLimits$Companion {
+	public final fun getDefault ()Lcom/davils/krypt/stream/StreamLimits;
+}
+
+public final class com/davils/krypt/stream/StreamSuite : java/lang/Enum {
+	public static final field Aes256Gcm Lcom/davils/krypt/stream/StreamSuite;
+	public static final field ChaCha20Poly1305 Lcom/davils/krypt/stream/StreamSuite;
+	public final fun getAead ()Lcom/davils/krypt/core/algorithm/AeadAlgorithm;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getId ()I
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/stream/StreamSuite;
+	public static fun values ()[Lcom/davils/krypt/stream/StreamSuite;
+}
+
+public final class com/davils/krypt/stream/manifest/Manifest {
+	public fun <init> (Lcom/davils/krypt/stream/manifest/ManifestKind;Lcom/davils/krypt/core/algorithm/DigestAlgorithm;IJJLkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;)V
+	public synthetic fun <init> (Lcom/davils/krypt/stream/manifest/ManifestKind;Lcom/davils/krypt/core/algorithm/DigestAlgorithm;IJJLkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getContext ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getDigest ()Lcom/davils/krypt/core/algorithm/DigestAlgorithm;
+	public final fun getKind ()Lcom/davils/krypt/stream/manifest/ManifestKind;
+	public final fun getLength ()J
+	public final fun getRoot ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getSegmentSize ()I
+	public final fun getSegments ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/stream/manifest/ManifestKind : java/lang/Enum {
+	public static final field Container Lcom/davils/krypt/stream/manifest/ManifestKind;
+	public static final field Data Lcom/davils/krypt/stream/manifest/ManifestKind;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/stream/manifest/ManifestKind;
+	public static fun values ()[Lcom/davils/krypt/stream/manifest/ManifestKind;
+}
+
+public final class com/davils/krypt/stream/manifest/ManifestSignature {
+	public fun <init> (Lkotlinx/io/bytestring/ByteString;Ljava/lang/Integer;Lkotlinx/io/bytestring/ByteString;)V
+	public synthetic fun <init> (Lkotlinx/io/bytestring/ByteString;Ljava/lang/Integer;Lkotlinx/io/bytestring/ByteString;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCountersigns ()Ljava/lang/Integer;
+	public final fun getSignature ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getTimestamp ()Lkotlinx/io/bytestring/ByteString;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/stream/manifest/Manifests {
+	public fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/stream/StreamLimits;)V
+	public synthetic fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/stream/StreamLimits;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun countersign (Lcom/davils/krypt/stream/manifest/SignedManifest;ILcom/davils/krypt/keyset/KeysetSigner;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun decode (Lkotlinx/io/bytestring/ByteString;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun encode (Lcom/davils/krypt/stream/manifest/SignedManifest;)Lkotlinx/io/bytestring/ByteString;
+	public final fun getCrypto ()Lcom/davils/krypt/primitive/Crypto;
+	public final fun getLimits ()Lcom/davils/krypt/stream/StreamLimits;
+	public final fun matches (Lcom/davils/krypt/stream/manifest/Manifest;Lcom/davils/krypt/core/io/ByteSource;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun of (Lcom/davils/krypt/core/io/ByteSource;ILcom/davils/krypt/core/algorithm/DigestAlgorithm;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun of$default (Lcom/davils/krypt/stream/manifest/Manifests;Lcom/davils/krypt/core/io/ByteSource;ILcom/davils/krypt/core/algorithm/DigestAlgorithm;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun sign (Lcom/davils/krypt/stream/manifest/Manifest;Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun timestamp (Lcom/davils/krypt/stream/manifest/SignedManifest;ILkotlinx/io/bytestring/ByteString;)Lcom/davils/krypt/stream/manifest/SignedManifest;
+	public fun toString ()Ljava/lang/String;
+	public final fun verify (Lcom/davils/krypt/stream/manifest/SignedManifest;Lcom/davils/krypt/keyset/KeysetVerifier;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun verifyAll (Lcom/davils/krypt/stream/manifest/SignedManifest;Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun verifyCountersignature (Lcom/davils/krypt/stream/manifest/SignedManifest;ILcom/davils/krypt/keyset/KeysetVerifier;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/stream/manifest/SignedManifest {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getManifest ()Lcom/davils/krypt/stream/manifest/Manifest;
+	public final fun getSignatures ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+

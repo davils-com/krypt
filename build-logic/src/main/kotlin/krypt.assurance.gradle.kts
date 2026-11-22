@@ -92,6 +92,7 @@ kreate {
                 ":krypt-asn1",
                 ":krypt-primitive",
                 ":krypt-keyset",
+                ":krypt-stream",
                 ":krypt-testing",
             )
         }

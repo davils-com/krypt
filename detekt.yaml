@@ -104,6 +104,10 @@ libraries:
       - '**/exchange/HpkeSuite.kt'
       - '**/keyset/KeyPurpose.kt'
       - '**/store/StoredKeyset.kt'
+      - '**/manifest/Manifest.kt'
+      - '**/manifest/ManifestSignature.kt'
+      - '**/stream/Recipient.kt'
+      - '**/stream/Credential.kt'
   # The compiler rejects an explicit Unit return type as redundant under warnings as errors.
   LibraryCodeMustSpecifyReturnType:
     active: true
@@ -165,6 +169,10 @@ style:
       - '**/exchange/HpkeSuite.kt'
       - '**/keyset/KeyPurpose.kt'
       - '**/store/StoredKeyset.kt'
+      - '**/manifest/Manifest.kt'
+      - '**/manifest/ManifestSignature.kt'
+      - '**/stream/Recipient.kt'
+      - '**/stream/Credential.kt'
   # The compiler rejects an explicit Unit return type as redundant under warnings as errors.
   OptionalUnit:
     active: false

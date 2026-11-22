@@ -1,0 +1,291 @@
+// Klib ABI Dump
+// Targets: [wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.davils:krypt-stream>
+final enum class com.davils.krypt.stream.manifest/ManifestKind : kotlin/Enum<com.davils.krypt.stream.manifest/ManifestKind> { // com.davils.krypt.stream.manifest/ManifestKind|null[0]
+    enum entry Container // com.davils.krypt.stream.manifest/ManifestKind.Container|null[0]
+    enum entry Data // com.davils.krypt.stream.manifest/ManifestKind.Data|null[0]
+
+    final val entries // com.davils.krypt.stream.manifest/ManifestKind.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.stream.manifest/ManifestKind> // com.davils.krypt.stream.manifest/ManifestKind.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.stream.manifest/ManifestKind // com.davils.krypt.stream.manifest/ManifestKind.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.stream.manifest/ManifestKind> // com.davils.krypt.stream.manifest/ManifestKind.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.stream/StreamFailure : kotlin/Enum<com.davils.krypt.stream/StreamFailure> { // com.davils.krypt.stream/StreamFailure|null[0]
+    enum entry DecryptionFailed // com.davils.krypt.stream/StreamFailure.DecryptionFailed|null[0]
+    enum entry Malformed // com.davils.krypt.stream/StreamFailure.Malformed|null[0]
+    enum entry NotARecipient // com.davils.krypt.stream/StreamFailure.NotARecipient|null[0]
+    enum entry Refused // com.davils.krypt.stream/StreamFailure.Refused|null[0]
+    enum entry Unsupported // com.davils.krypt.stream/StreamFailure.Unsupported|null[0]
+
+    final val entries // com.davils.krypt.stream/StreamFailure.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.stream/StreamFailure> // com.davils.krypt.stream/StreamFailure.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.stream/StreamFailure // com.davils.krypt.stream/StreamFailure.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.stream/StreamFailure> // com.davils.krypt.stream/StreamFailure.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.stream/StreamSuite : kotlin/Enum<com.davils.krypt.stream/StreamSuite> { // com.davils.krypt.stream/StreamSuite|null[0]
+    enum entry Aes256Gcm // com.davils.krypt.stream/StreamSuite.Aes256Gcm|null[0]
+    enum entry ChaCha20Poly1305 // com.davils.krypt.stream/StreamSuite.ChaCha20Poly1305|null[0]
+
+    final val aead // com.davils.krypt.stream/StreamSuite.aead|{}aead[0]
+        final fun <get-aead>(): com.davils.krypt.core.algorithm/AeadAlgorithm // com.davils.krypt.stream/StreamSuite.aead.<get-aead>|<get-aead>(){}[0]
+    final val entries // com.davils.krypt.stream/StreamSuite.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.stream/StreamSuite> // com.davils.krypt.stream/StreamSuite.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val id // com.davils.krypt.stream/StreamSuite.id|{}id[0]
+        final fun <get-id>(): kotlin/Int // com.davils.krypt.stream/StreamSuite.id.<get-id>|<get-id>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.stream/StreamSuite // com.davils.krypt.stream/StreamSuite.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.stream/StreamSuite> // com.davils.krypt.stream/StreamSuite.values|values#static(){}[0]
+}
+
+abstract interface com.davils.krypt.stream/RandomAccessSource { // com.davils.krypt.stream/RandomAccessSource|null[0]
+    abstract val size // com.davils.krypt.stream/RandomAccessSource.size|{}size[0]
+        abstract fun <get-size>(): kotlin/Long // com.davils.krypt.stream/RandomAccessSource.size.<get-size>|<get-size>(){}[0]
+
+    abstract suspend fun read(kotlin/Long, kotlin/Int): kotlinx.io.bytestring/ByteString // com.davils.krypt.stream/RandomAccessSource.read|read(kotlin.Long;kotlin.Int){}[0]
+}
+
+sealed interface com.davils.krypt.stream/Credential { // com.davils.krypt.stream/Credential|null[0]
+    final class Hybrid : com.davils.krypt.stream/Credential { // com.davils.krypt.stream/Credential.Hybrid|null[0]
+        constructor <init>(com.davils.krypt.keyset/HybridDecrypter) // com.davils.krypt.stream/Credential.Hybrid.<init>|<init>(com.davils.krypt.keyset.HybridDecrypter){}[0]
+
+        final val decrypter // com.davils.krypt.stream/Credential.Hybrid.decrypter|{}decrypter[0]
+            final fun <get-decrypter>(): com.davils.krypt.keyset/HybridDecrypter // com.davils.krypt.stream/Credential.Hybrid.decrypter.<get-decrypter>|<get-decrypter>(){}[0]
+
+        final fun toString(): kotlin/String // com.davils.krypt.stream/Credential.Hybrid.toString|toString(){}[0]
+    }
+
+    final class Key : com.davils.krypt.stream/Credential { // com.davils.krypt.stream/Credential.Key|null[0]
+        constructor <init>(com.davils.krypt.keyset/KeysetAead) // com.davils.krypt.stream/Credential.Key.<init>|<init>(com.davils.krypt.keyset.KeysetAead){}[0]
+
+        final val aead // com.davils.krypt.stream/Credential.Key.aead|{}aead[0]
+            final fun <get-aead>(): com.davils.krypt.keyset/KeysetAead // com.davils.krypt.stream/Credential.Key.aead.<get-aead>|<get-aead>(){}[0]
+
+        final fun toString(): kotlin/String // com.davils.krypt.stream/Credential.Key.toString|toString(){}[0]
+    }
+
+    final class Password : com.davils.krypt.stream/Credential { // com.davils.krypt.stream/Credential.Password|null[0]
+        constructor <init>(com.davils.krypt.core/SecretText) // com.davils.krypt.stream/Credential.Password.<init>|<init>(com.davils.krypt.core.SecretText){}[0]
+
+        final val password // com.davils.krypt.stream/Credential.Password.password|{}password[0]
+            final fun <get-password>(): com.davils.krypt.core/SecretText // com.davils.krypt.stream/Credential.Password.password.<get-password>|<get-password>(){}[0]
+
+        final fun toString(): kotlin/String // com.davils.krypt.stream/Credential.Password.toString|toString(){}[0]
+    }
+
+    final class Service : com.davils.krypt.stream/Credential { // com.davils.krypt.stream/Credential.Service|null[0]
+        constructor <init>(com.davils.krypt.keyset.kms/KeyManagementService) // com.davils.krypt.stream/Credential.Service.<init>|<init>(com.davils.krypt.keyset.kms.KeyManagementService){}[0]
+
+        final val kms // com.davils.krypt.stream/Credential.Service.kms|{}kms[0]
+            final fun <get-kms>(): com.davils.krypt.keyset.kms/KeyManagementService // com.davils.krypt.stream/Credential.Service.kms.<get-kms>|<get-kms>(){}[0]
+
+        final fun toString(): kotlin/String // com.davils.krypt.stream/Credential.Service.toString|toString(){}[0]
+    }
+}
+
+sealed interface com.davils.krypt.stream/Recipient { // com.davils.krypt.stream/Recipient|null[0]
+    final class Hybrid : com.davils.krypt.stream/Recipient { // com.davils.krypt.stream/Recipient.Hybrid|null[0]
+        constructor <init>(com.davils.krypt.keyset/HybridEncrypter) // com.davils.krypt.stream/Recipient.Hybrid.<init>|<init>(com.davils.krypt.keyset.HybridEncrypter){}[0]
+
+        final val encrypter // com.davils.krypt.stream/Recipient.Hybrid.encrypter|{}encrypter[0]
+            final fun <get-encrypter>(): com.davils.krypt.keyset/HybridEncrypter // com.davils.krypt.stream/Recipient.Hybrid.encrypter.<get-encrypter>|<get-encrypter>(){}[0]
+
+        final fun toString(): kotlin/String // com.davils.krypt.stream/Recipient.Hybrid.toString|toString(){}[0]
+    }
+
+    final class Key : com.davils.krypt.stream/Recipient { // com.davils.krypt.stream/Recipient.Key|null[0]
+        constructor <init>(com.davils.krypt.keyset/KeysetAead) // com.davils.krypt.stream/Recipient.Key.<init>|<init>(com.davils.krypt.keyset.KeysetAead){}[0]
+
+        final val aead // com.davils.krypt.stream/Recipient.Key.aead|{}aead[0]
+            final fun <get-aead>(): com.davils.krypt.keyset/KeysetAead // com.davils.krypt.stream/Recipient.Key.aead.<get-aead>|<get-aead>(){}[0]
+
+        final fun toString(): kotlin/String // com.davils.krypt.stream/Recipient.Key.toString|toString(){}[0]
+    }
+
+    final class Password : com.davils.krypt.stream/Recipient { // com.davils.krypt.stream/Recipient.Password|null[0]
+        constructor <init>(com.davils.krypt.core/SecretText, kotlin/Int = ...) // com.davils.krypt.stream/Recipient.Password.<init>|<init>(com.davils.krypt.core.SecretText;kotlin.Int){}[0]
+
+        final val iterations // com.davils.krypt.stream/Recipient.Password.iterations|{}iterations[0]
+            final fun <get-iterations>(): kotlin/Int // com.davils.krypt.stream/Recipient.Password.iterations.<get-iterations>|<get-iterations>(){}[0]
+        final val password // com.davils.krypt.stream/Recipient.Password.password|{}password[0]
+            final fun <get-password>(): com.davils.krypt.core/SecretText // com.davils.krypt.stream/Recipient.Password.password.<get-password>|<get-password>(){}[0]
+
+        final fun toString(): kotlin/String // com.davils.krypt.stream/Recipient.Password.toString|toString(){}[0]
+    }
+
+    final class Service : com.davils.krypt.stream/Recipient { // com.davils.krypt.stream/Recipient.Service|null[0]
+        constructor <init>(com.davils.krypt.keyset.kms/KeyManagementService) // com.davils.krypt.stream/Recipient.Service.<init>|<init>(com.davils.krypt.keyset.kms.KeyManagementService){}[0]
+
+        final val kms // com.davils.krypt.stream/Recipient.Service.kms|{}kms[0]
+            final fun <get-kms>(): com.davils.krypt.keyset.kms/KeyManagementService // com.davils.krypt.stream/Recipient.Service.kms.<get-kms>|<get-kms>(){}[0]
+
+        final fun toString(): kotlin/String // com.davils.krypt.stream/Recipient.Service.toString|toString(){}[0]
+    }
+}
+
+final class com.davils.krypt.stream.manifest/Manifest { // com.davils.krypt.stream.manifest/Manifest|null[0]
+    constructor <init>(com.davils.krypt.stream.manifest/ManifestKind, com.davils.krypt.core.algorithm/DigestAlgorithm, kotlin/Int, kotlin/Long, kotlin/Long, kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString = ...) // com.davils.krypt.stream.manifest/Manifest.<init>|<init>(com.davils.krypt.stream.manifest.ManifestKind;com.davils.krypt.core.algorithm.DigestAlgorithm;kotlin.Int;kotlin.Long;kotlin.Long;kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString){}[0]
+
+    final val context // com.davils.krypt.stream.manifest/Manifest.context|{}context[0]
+        final fun <get-context>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.stream.manifest/Manifest.context.<get-context>|<get-context>(){}[0]
+    final val digest // com.davils.krypt.stream.manifest/Manifest.digest|{}digest[0]
+        final fun <get-digest>(): com.davils.krypt.core.algorithm/DigestAlgorithm // com.davils.krypt.stream.manifest/Manifest.digest.<get-digest>|<get-digest>(){}[0]
+    final val kind // com.davils.krypt.stream.manifest/Manifest.kind|{}kind[0]
+        final fun <get-kind>(): com.davils.krypt.stream.manifest/ManifestKind // com.davils.krypt.stream.manifest/Manifest.kind.<get-kind>|<get-kind>(){}[0]
+    final val length // com.davils.krypt.stream.manifest/Manifest.length|{}length[0]
+        final fun <get-length>(): kotlin/Long // com.davils.krypt.stream.manifest/Manifest.length.<get-length>|<get-length>(){}[0]
+    final val root // com.davils.krypt.stream.manifest/Manifest.root|{}root[0]
+        final fun <get-root>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.stream.manifest/Manifest.root.<get-root>|<get-root>(){}[0]
+    final val segmentSize // com.davils.krypt.stream.manifest/Manifest.segmentSize|{}segmentSize[0]
+        final fun <get-segmentSize>(): kotlin/Int // com.davils.krypt.stream.manifest/Manifest.segmentSize.<get-segmentSize>|<get-segmentSize>(){}[0]
+    final val segments // com.davils.krypt.stream.manifest/Manifest.segments|{}segments[0]
+        final fun <get-segments>(): kotlin/Long // com.davils.krypt.stream.manifest/Manifest.segments.<get-segments>|<get-segments>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.stream.manifest/Manifest.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.stream.manifest/Manifest.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.stream.manifest/Manifest.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.stream.manifest/ManifestSignature { // com.davils.krypt.stream.manifest/ManifestSignature|null[0]
+    constructor <init>(kotlinx.io.bytestring/ByteString, kotlin/Int? = ..., kotlinx.io.bytestring/ByteString? = ...) // com.davils.krypt.stream.manifest/ManifestSignature.<init>|<init>(kotlinx.io.bytestring.ByteString;kotlin.Int?;kotlinx.io.bytestring.ByteString?){}[0]
+
+    final val countersigns // com.davils.krypt.stream.manifest/ManifestSignature.countersigns|{}countersigns[0]
+        final fun <get-countersigns>(): kotlin/Int? // com.davils.krypt.stream.manifest/ManifestSignature.countersigns.<get-countersigns>|<get-countersigns>(){}[0]
+    final val signature // com.davils.krypt.stream.manifest/ManifestSignature.signature|{}signature[0]
+        final fun <get-signature>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.stream.manifest/ManifestSignature.signature.<get-signature>|<get-signature>(){}[0]
+    final val timestamp // com.davils.krypt.stream.manifest/ManifestSignature.timestamp|{}timestamp[0]
+        final fun <get-timestamp>(): kotlinx.io.bytestring/ByteString? // com.davils.krypt.stream.manifest/ManifestSignature.timestamp.<get-timestamp>|<get-timestamp>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.stream.manifest/ManifestSignature.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.stream.manifest/ManifestSignature.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.stream.manifest/ManifestSignature.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.stream.manifest/Manifests { // com.davils.krypt.stream.manifest/Manifests|null[0]
+    constructor <init>(com.davils.krypt.primitive/Crypto, com.davils.krypt.stream/StreamLimits = ...) // com.davils.krypt.stream.manifest/Manifests.<init>|<init>(com.davils.krypt.primitive.Crypto;com.davils.krypt.stream.StreamLimits){}[0]
+
+    final val crypto // com.davils.krypt.stream.manifest/Manifests.crypto|{}crypto[0]
+        final fun <get-crypto>(): com.davils.krypt.primitive/Crypto // com.davils.krypt.stream.manifest/Manifests.crypto.<get-crypto>|<get-crypto>(){}[0]
+    final val limits // com.davils.krypt.stream.manifest/Manifests.limits|{}limits[0]
+        final fun <get-limits>(): com.davils.krypt.stream/StreamLimits // com.davils.krypt.stream.manifest/Manifests.limits.<get-limits>|<get-limits>(){}[0]
+
+    final fun decode(kotlinx.io.bytestring/ByteString): com.davils.kore.core.outcome/Outcome<com.davils.krypt.stream.manifest/SignedManifest, com.davils.krypt.stream/StreamFailure> // com.davils.krypt.stream.manifest/Manifests.decode|decode(kotlinx.io.bytestring.ByteString){}[0]
+    final fun encode(com.davils.krypt.stream.manifest/SignedManifest): kotlinx.io.bytestring/ByteString // com.davils.krypt.stream.manifest/Manifests.encode|encode(com.davils.krypt.stream.manifest.SignedManifest){}[0]
+    final fun timestamp(com.davils.krypt.stream.manifest/SignedManifest, kotlin/Int, kotlinx.io.bytestring/ByteString): com.davils.krypt.stream.manifest/SignedManifest // com.davils.krypt.stream.manifest/Manifests.timestamp|timestamp(com.davils.krypt.stream.manifest.SignedManifest;kotlin.Int;kotlinx.io.bytestring.ByteString){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.stream.manifest/Manifests.toString|toString(){}[0]
+    final suspend fun countersign(com.davils.krypt.stream.manifest/SignedManifest, kotlin/Int, com.davils.krypt.keyset/KeysetSigner): com.davils.krypt.stream.manifest/SignedManifest // com.davils.krypt.stream.manifest/Manifests.countersign|countersign(com.davils.krypt.stream.manifest.SignedManifest;kotlin.Int;com.davils.krypt.keyset.KeysetSigner){}[0]
+    final suspend fun matches(com.davils.krypt.stream.manifest/Manifest, com.davils.krypt.core.io/ByteSource): kotlin/Boolean // com.davils.krypt.stream.manifest/Manifests.matches|matches(com.davils.krypt.stream.manifest.Manifest;com.davils.krypt.core.io.ByteSource){}[0]
+    final suspend fun of(com.davils.krypt.core.io/ByteSource, kotlin/Int = ..., com.davils.krypt.core.algorithm/DigestAlgorithm = ...): com.davils.krypt.stream.manifest/Manifest // com.davils.krypt.stream.manifest/Manifests.of|of(com.davils.krypt.core.io.ByteSource;kotlin.Int;com.davils.krypt.core.algorithm.DigestAlgorithm){}[0]
+    final suspend fun sign(com.davils.krypt.stream.manifest/Manifest, kotlin.collections/List<com.davils.krypt.keyset/KeysetSigner>): com.davils.krypt.stream.manifest/SignedManifest // com.davils.krypt.stream.manifest/Manifests.sign|sign(com.davils.krypt.stream.manifest.Manifest;kotlin.collections.List<com.davils.krypt.keyset.KeysetSigner>){}[0]
+    final suspend fun verify(com.davils.krypt.stream.manifest/SignedManifest, com.davils.krypt.keyset/KeysetVerifier): com.davils.krypt.primitive/Verification // com.davils.krypt.stream.manifest/Manifests.verify|verify(com.davils.krypt.stream.manifest.SignedManifest;com.davils.krypt.keyset.KeysetVerifier){}[0]
+    final suspend fun verifyAll(com.davils.krypt.stream.manifest/SignedManifest, kotlin.collections/List<com.davils.krypt.keyset/KeysetVerifier>): com.davils.krypt.primitive/Verification // com.davils.krypt.stream.manifest/Manifests.verifyAll|verifyAll(com.davils.krypt.stream.manifest.SignedManifest;kotlin.collections.List<com.davils.krypt.keyset.KeysetVerifier>){}[0]
+    final suspend fun verifyCountersignature(com.davils.krypt.stream.manifest/SignedManifest, kotlin/Int, com.davils.krypt.keyset/KeysetVerifier): com.davils.krypt.primitive/Verification // com.davils.krypt.stream.manifest/Manifests.verifyCountersignature|verifyCountersignature(com.davils.krypt.stream.manifest.SignedManifest;kotlin.Int;com.davils.krypt.keyset.KeysetVerifier){}[0]
+}
+
+final class com.davils.krypt.stream.manifest/SignedManifest { // com.davils.krypt.stream.manifest/SignedManifest|null[0]
+    final val manifest // com.davils.krypt.stream.manifest/SignedManifest.manifest|{}manifest[0]
+        final fun <get-manifest>(): com.davils.krypt.stream.manifest/Manifest // com.davils.krypt.stream.manifest/SignedManifest.manifest.<get-manifest>|<get-manifest>(){}[0]
+    final val signatures // com.davils.krypt.stream.manifest/SignedManifest.signatures|{}signatures[0]
+        final fun <get-signatures>(): kotlin.collections/List<com.davils.krypt.stream.manifest/ManifestSignature> // com.davils.krypt.stream.manifest/SignedManifest.signatures.<get-signatures>|<get-signatures>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.stream.manifest/SignedManifest.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.stream.manifest/SignedManifest.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.stream.manifest/SignedManifest.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.stream/ContainerReader { // com.davils.krypt.stream/ContainerReader|null[0]
+    final val plaintextBytes // com.davils.krypt.stream/ContainerReader.plaintextBytes|{}plaintextBytes[0]
+        final fun <get-plaintextBytes>(): kotlin/Long // com.davils.krypt.stream/ContainerReader.plaintextBytes.<get-plaintextBytes>|<get-plaintextBytes>(){}[0]
+    final val segmentSize // com.davils.krypt.stream/ContainerReader.segmentSize|{}segmentSize[0]
+        final fun <get-segmentSize>(): kotlin/Int // com.davils.krypt.stream/ContainerReader.segmentSize.<get-segmentSize>|<get-segmentSize>(){}[0]
+    final val segments // com.davils.krypt.stream/ContainerReader.segments|{}segments[0]
+        final fun <get-segments>(): kotlin/Long // com.davils.krypt.stream/ContainerReader.segments.<get-segments>|<get-segments>(){}[0]
+
+    final fun close() // com.davils.krypt.stream/ContainerReader.close|close(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.stream/ContainerReader.toString|toString(){}[0]
+    final suspend fun read(kotlin/Long, kotlin/Int): kotlinx.io.bytestring/ByteString? // com.davils.krypt.stream/ContainerReader.read|read(kotlin.Long;kotlin.Int){}[0]
+    final suspend fun segment(kotlin/Long): kotlinx.io.bytestring/ByteString? // com.davils.krypt.stream/ContainerReader.segment|segment(kotlin.Long){}[0]
+}
+
+final class com.davils.krypt.stream/ContainerSeal { // com.davils.krypt.stream/ContainerSeal|null[0]
+    final val ciphertextBytes // com.davils.krypt.stream/ContainerSeal.ciphertextBytes|{}ciphertextBytes[0]
+        final fun <get-ciphertextBytes>(): kotlin/Long // com.davils.krypt.stream/ContainerSeal.ciphertextBytes.<get-ciphertextBytes>|<get-ciphertextBytes>(){}[0]
+    final val headerDigest // com.davils.krypt.stream/ContainerSeal.headerDigest|{}headerDigest[0]
+        final fun <get-headerDigest>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.stream/ContainerSeal.headerDigest.<get-headerDigest>|<get-headerDigest>(){}[0]
+    final val manifest // com.davils.krypt.stream/ContainerSeal.manifest|{}manifest[0]
+        final fun <get-manifest>(): com.davils.krypt.stream.manifest/Manifest // com.davils.krypt.stream/ContainerSeal.manifest.<get-manifest>|<get-manifest>(){}[0]
+    final val plaintextBytes // com.davils.krypt.stream/ContainerSeal.plaintextBytes|{}plaintextBytes[0]
+        final fun <get-plaintextBytes>(): kotlin/Long // com.davils.krypt.stream/ContainerSeal.plaintextBytes.<get-plaintextBytes>|<get-plaintextBytes>(){}[0]
+    final val root // com.davils.krypt.stream/ContainerSeal.root|{}root[0]
+        final fun <get-root>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.stream/ContainerSeal.root.<get-root>|<get-root>(){}[0]
+    final val segmentSize // com.davils.krypt.stream/ContainerSeal.segmentSize|{}segmentSize[0]
+        final fun <get-segmentSize>(): kotlin/Int // com.davils.krypt.stream/ContainerSeal.segmentSize.<get-segmentSize>|<get-segmentSize>(){}[0]
+    final val segments // com.davils.krypt.stream/ContainerSeal.segments|{}segments[0]
+        final fun <get-segments>(): kotlin/Long // com.davils.krypt.stream/ContainerSeal.segments.<get-segments>|<get-segments>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.stream/ContainerSeal.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.stream/ContainerSeal.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.stream/ContainerSeal.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.stream/Containers { // com.davils.krypt.stream/Containers|null[0]
+    constructor <init>(com.davils.krypt.primitive/Crypto, com.davils.krypt.stream/StreamLimits = ...) // com.davils.krypt.stream/Containers.<init>|<init>(com.davils.krypt.primitive.Crypto;com.davils.krypt.stream.StreamLimits){}[0]
+
+    final val crypto // com.davils.krypt.stream/Containers.crypto|{}crypto[0]
+        final fun <get-crypto>(): com.davils.krypt.primitive/Crypto // com.davils.krypt.stream/Containers.crypto.<get-crypto>|<get-crypto>(){}[0]
+    final val limits // com.davils.krypt.stream/Containers.limits|{}limits[0]
+        final fun <get-limits>(): com.davils.krypt.stream/StreamLimits // com.davils.krypt.stream/Containers.limits.<get-limits>|<get-limits>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.stream/Containers.toString|toString(){}[0]
+    final suspend fun decrypt(com.davils.krypt.core.io/ByteSource, com.davils.krypt.core.io/ByteSink, kotlin.collections/List<com.davils.krypt.stream/Credential>, kotlinx.io.bytestring/ByteString = ...): com.davils.kore.core.outcome/Outcome<com.davils.krypt.stream/ContainerSeal, com.davils.krypt.stream/StreamFailure> // com.davils.krypt.stream/Containers.decrypt|decrypt(com.davils.krypt.core.io.ByteSource;com.davils.krypt.core.io.ByteSink;kotlin.collections.List<com.davils.krypt.stream.Credential>;kotlinx.io.bytestring.ByteString){}[0]
+    final suspend fun decrypt(kotlinx.io.bytestring/ByteString, kotlin.collections/List<com.davils.krypt.stream/Credential>, kotlinx.io.bytestring/ByteString = ...): com.davils.kore.core.outcome/Outcome<kotlinx.io.bytestring/ByteString, com.davils.krypt.stream/StreamFailure> // com.davils.krypt.stream/Containers.decrypt|decrypt(kotlinx.io.bytestring.ByteString;kotlin.collections.List<com.davils.krypt.stream.Credential>;kotlinx.io.bytestring.ByteString){}[0]
+    final suspend fun encrypt(com.davils.krypt.core.io/ByteSource, com.davils.krypt.core.io/ByteSink, kotlin.collections/List<com.davils.krypt.stream/Recipient>, kotlinx.io.bytestring/ByteString = ..., com.davils.krypt.stream/StreamSuite = ..., kotlin/Int = ...): com.davils.krypt.stream/ContainerSeal // com.davils.krypt.stream/Containers.encrypt|encrypt(com.davils.krypt.core.io.ByteSource;com.davils.krypt.core.io.ByteSink;kotlin.collections.List<com.davils.krypt.stream.Recipient>;kotlinx.io.bytestring.ByteString;com.davils.krypt.stream.StreamSuite;kotlin.Int){}[0]
+    final suspend fun encrypt(kotlinx.io.bytestring/ByteString, kotlin.collections/List<com.davils.krypt.stream/Recipient>, kotlinx.io.bytestring/ByteString = ...): kotlinx.io.bytestring/ByteString // com.davils.krypt.stream/Containers.encrypt|encrypt(kotlinx.io.bytestring.ByteString;kotlin.collections.List<com.davils.krypt.stream.Recipient>;kotlinx.io.bytestring.ByteString){}[0]
+    final suspend fun inspect(com.davils.krypt.core.io/ByteSource): com.davils.kore.core.outcome/Outcome<com.davils.krypt.stream/ContainerSeal, com.davils.krypt.stream/StreamFailure> // com.davils.krypt.stream/Containers.inspect|inspect(com.davils.krypt.core.io.ByteSource){}[0]
+    final suspend fun open(com.davils.krypt.stream/RandomAccessSource, kotlin.collections/List<com.davils.krypt.stream/Credential>, kotlinx.io.bytestring/ByteString = ...): com.davils.kore.core.outcome/Outcome<com.davils.krypt.stream/ContainerReader, com.davils.krypt.stream/StreamFailure> // com.davils.krypt.stream/Containers.open|open(com.davils.krypt.stream.RandomAccessSource;kotlin.collections.List<com.davils.krypt.stream.Credential>;kotlinx.io.bytestring.ByteString){}[0]
+}
+
+final class com.davils.krypt.stream/StreamLimits { // com.davils.krypt.stream/StreamLimits|null[0]
+    constructor <init>(kotlin/Int = ..., kotlin/Long = ..., kotlin/Int = ..., kotlin/Int = ...) // com.davils.krypt.stream/StreamLimits.<init>|<init>(kotlin.Int;kotlin.Long;kotlin.Int;kotlin.Int){}[0]
+
+    final val maximumIterations // com.davils.krypt.stream/StreamLimits.maximumIterations|{}maximumIterations[0]
+        final fun <get-maximumIterations>(): kotlin/Int // com.davils.krypt.stream/StreamLimits.maximumIterations.<get-maximumIterations>|<get-maximumIterations>(){}[0]
+    final val maximumRecipients // com.davils.krypt.stream/StreamLimits.maximumRecipients|{}maximumRecipients[0]
+        final fun <get-maximumRecipients>(): kotlin/Int // com.davils.krypt.stream/StreamLimits.maximumRecipients.<get-maximumRecipients>|<get-maximumRecipients>(){}[0]
+    final val maximumSegments // com.davils.krypt.stream/StreamLimits.maximumSegments|{}maximumSegments[0]
+        final fun <get-maximumSegments>(): kotlin/Long // com.davils.krypt.stream/StreamLimits.maximumSegments.<get-maximumSegments>|<get-maximumSegments>(){}[0]
+    final val maximumSignatures // com.davils.krypt.stream/StreamLimits.maximumSignatures|{}maximumSignatures[0]
+        final fun <get-maximumSignatures>(): kotlin/Int // com.davils.krypt.stream/StreamLimits.maximumSignatures.<get-maximumSignatures>|<get-maximumSignatures>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.stream/StreamLimits.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.stream/StreamLimits.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.stream/StreamLimits.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.stream/StreamLimits.Companion|null[0]
+        final const val DEFAULT_MAXIMUM_ITERATIONS // com.davils.krypt.stream/StreamLimits.Companion.DEFAULT_MAXIMUM_ITERATIONS|{}DEFAULT_MAXIMUM_ITERATIONS[0]
+            final fun <get-DEFAULT_MAXIMUM_ITERATIONS>(): kotlin/Int // com.davils.krypt.stream/StreamLimits.Companion.DEFAULT_MAXIMUM_ITERATIONS.<get-DEFAULT_MAXIMUM_ITERATIONS>|<get-DEFAULT_MAXIMUM_ITERATIONS>(){}[0]
+        final const val DEFAULT_MAXIMUM_RECIPIENTS // com.davils.krypt.stream/StreamLimits.Companion.DEFAULT_MAXIMUM_RECIPIENTS|{}DEFAULT_MAXIMUM_RECIPIENTS[0]
+            final fun <get-DEFAULT_MAXIMUM_RECIPIENTS>(): kotlin/Int // com.davils.krypt.stream/StreamLimits.Companion.DEFAULT_MAXIMUM_RECIPIENTS.<get-DEFAULT_MAXIMUM_RECIPIENTS>|<get-DEFAULT_MAXIMUM_RECIPIENTS>(){}[0]
+        final const val DEFAULT_MAXIMUM_SIGNATURES // com.davils.krypt.stream/StreamLimits.Companion.DEFAULT_MAXIMUM_SIGNATURES|{}DEFAULT_MAXIMUM_SIGNATURES[0]
+            final fun <get-DEFAULT_MAXIMUM_SIGNATURES>(): kotlin/Int // com.davils.krypt.stream/StreamLimits.Companion.DEFAULT_MAXIMUM_SIGNATURES.<get-DEFAULT_MAXIMUM_SIGNATURES>|<get-DEFAULT_MAXIMUM_SIGNATURES>(){}[0]
+        final const val HARD_MAXIMUM_RECIPIENTS // com.davils.krypt.stream/StreamLimits.Companion.HARD_MAXIMUM_RECIPIENTS|{}HARD_MAXIMUM_RECIPIENTS[0]
+            final fun <get-HARD_MAXIMUM_RECIPIENTS>(): kotlin/Int // com.davils.krypt.stream/StreamLimits.Companion.HARD_MAXIMUM_RECIPIENTS.<get-HARD_MAXIMUM_RECIPIENTS>|<get-HARD_MAXIMUM_RECIPIENTS>(){}[0]
+        final const val HARD_MAXIMUM_SEGMENTS // com.davils.krypt.stream/StreamLimits.Companion.HARD_MAXIMUM_SEGMENTS|{}HARD_MAXIMUM_SEGMENTS[0]
+            final fun <get-HARD_MAXIMUM_SEGMENTS>(): kotlin/Long // com.davils.krypt.stream/StreamLimits.Companion.HARD_MAXIMUM_SEGMENTS.<get-HARD_MAXIMUM_SEGMENTS>|<get-HARD_MAXIMUM_SEGMENTS>(){}[0]
+        final const val HARD_MAXIMUM_SIGNATURES // com.davils.krypt.stream/StreamLimits.Companion.HARD_MAXIMUM_SIGNATURES|{}HARD_MAXIMUM_SIGNATURES[0]
+            final fun <get-HARD_MAXIMUM_SIGNATURES>(): kotlin/Int // com.davils.krypt.stream/StreamLimits.Companion.HARD_MAXIMUM_SIGNATURES.<get-HARD_MAXIMUM_SIGNATURES>|<get-HARD_MAXIMUM_SIGNATURES>(){}[0]
+
+        final val Default // com.davils.krypt.stream/StreamLimits.Companion.Default|{}Default[0]
+            final fun <get-Default>(): com.davils.krypt.stream/StreamLimits // com.davils.krypt.stream/StreamLimits.Companion.Default.<get-Default>|<get-Default>(){}[0]
+    }
+}
+
+final fun (kotlinx.io.bytestring/ByteString).com.davils.krypt.stream/asRandomAccessSource(): com.davils.krypt.stream/RandomAccessSource // com.davils.krypt.stream/asRandomAccessSource|asRandomAccessSource@kotlinx.io.bytestring.ByteString(){}[0]

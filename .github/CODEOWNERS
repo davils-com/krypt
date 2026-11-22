@@ -12,6 +12,8 @@
 /krypt-primitive/src/jvmMain/java/    @davils-com/maintainers
 /krypt-keyset/api/                    @davils-com/maintainers
 /krypt-keyset/src/jvmMain/java/       @davils-com/maintainers
+/krypt-stream/api/                    @davils-com/maintainers
+/krypt-stream/src/jvmMain/java/       @davils-com/maintainers
 
 # Anything that decides what CI trusts or what leaves the build.
 /.github/workflows/                   @davils-com/maintainers

@@ -30,6 +30,7 @@ dependencies {
         api(project(":krypt-asn1"))
         api(project(":krypt-primitive"))
         api(project(":krypt-keyset"))
+        api(project(":krypt-stream"))
         api(project(":krypt-testing"))
     }
 }

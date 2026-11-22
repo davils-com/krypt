@@ -28,18 +28,21 @@ check:
       - ":krypt-asn1:clean"
       - ":krypt-primitive:clean"
       - ":krypt-keyset:clean"
+      - ":krypt-stream:clean"
       - ":krypt-testing:clean"
     tasks:
       - ":krypt-core:jvmJar"
       - ":krypt-asn1:jvmJar"
       - ":krypt-primitive:jvmJar"
       - ":krypt-keyset:jvmJar"
+      - ":krypt-stream:jvmJar"
       - ":krypt-testing:jvmJar"
     artifacts:
       - "krypt-core/build/libs/*.jar"
       - "krypt-asn1/build/libs/*.jar"
       - "krypt-primitive/build/libs/*.jar"
       - "krypt-keyset/build/libs/*.jar"
+      - "krypt-stream/build/libs/*.jar"
       - "krypt-testing/build/libs/*.jar"
 
 policy:
@@ -73,6 +76,7 @@ publish:
     - ":krypt-asn1:publishAllPublicationsToDavilsRepository"
     - ":krypt-primitive:publishAllPublicationsToDavilsRepository"
     - ":krypt-keyset:publishAllPublicationsToDavilsRepository"
+    - ":krypt-stream:publishAllPublicationsToDavilsRepository"
     - ":krypt-testing:publishAllPublicationsToDavilsRepository"
     - ":krypt-bom:publishAllPublicationsToDavilsRepository"
 
@@ -121,6 +125,15 @@ release:
       - path: com/davils/krypt-keyset
         artifact: krypt-keyset
         task: ":krypt-keyset:publishKotlinMultiplatformPublicationToDavilsRepository"
+      - path: com/davils/krypt-stream-jvm
+        artifact: krypt-stream-jvm
+        task: ":krypt-stream:publishJvmPublicationToDavilsRepository"
+      - path: com/davils/krypt-stream-wasm-js
+        artifact: krypt-stream-wasm-js
+        task: ":krypt-stream:publishWasmJsPublicationToDavilsRepository"
+      - path: com/davils/krypt-stream
+        artifact: krypt-stream
+        task: ":krypt-stream:publishKotlinMultiplatformPublicationToDavilsRepository"
       - path: com/davils/krypt-testing-jvm
         artifact: krypt-testing-jvm
         task: ":krypt-testing:publishJvmPublicationToDavilsRepository"
@@ -143,6 +156,8 @@ release:
       - "krypt-primitive/build/libs/*.klib"
       - "krypt-keyset/build/libs/*.jar"
       - "krypt-keyset/build/libs/*.klib"
+      - "krypt-stream/build/libs/*.jar"
+      - "krypt-stream/build/libs/*.klib"
       - "krypt-testing/build/libs/*.jar"
       - "krypt-testing/build/libs/*.klib"
   github-release:
