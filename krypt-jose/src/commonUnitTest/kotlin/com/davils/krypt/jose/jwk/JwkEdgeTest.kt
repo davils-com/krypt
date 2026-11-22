@@ -14,18 +14,23 @@
  * limitations under the License.
  */
 
+@file:OptIn(DavilsInternal::class)
+
 package com.davils.krypt.jose.jwk
 
+import com.davils.kore.core.annotation.DavilsInternal
 import com.davils.krypt.core.algorithm.KeyType
 import com.davils.krypt.core.algorithm.SignatureAlgorithm
 import com.davils.krypt.core.environment
 import com.davils.krypt.core.policy.cryptoPolicy
 import com.davils.krypt.jose.JoseFailure
+import com.davils.krypt.jose.JsonValue
 import com.davils.krypt.jose.fixture.crypto
 import com.davils.krypt.jose.fixture.failure
 import com.davils.krypt.jose.fixture.keys
 import com.davils.krypt.jose.fixture.value
 import com.davils.krypt.primitive.Crypto
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
@@ -48,5 +53,18 @@ class JwkEdgeTest : FunSpec({
         val jwk = keys.of(crypto.keys.generate(KeyType.P256).privateKey)
         restricted.privateKey(jwk).failure() shouldBe JoseFailure.InvalidKey
         keys.privateKey(jwk).value().publicKey shouldBe keys.publicKey(jwk).value()
+    }
+
+    test("parses objects, reads JWKs from them and writes JWKs as objects for other krypt modules") {
+        val jwk = keys.of(crypto.keys.generate(KeyType.P256).publicKey, keyId = "k")
+        val members = keys.members(jwk)
+        keys.read(members).value() shouldBe jwk
+        keys.parse(jwk.encode()).value() shouldBe members
+        keys.parse("[]").failure() shouldBe JoseFailure.Malformed
+        keys.read(JsonValue.Object.of("kty" to JsonValue.Text("XYZ"))).failure() shouldBe
+            JoseFailure.UnsupportedAlgorithm
+        val secret = keys.of(crypto.keys.generateSecret())
+        secret.destroy()
+        shouldThrow<IllegalStateException> { keys.members(secret) }
     }
 })

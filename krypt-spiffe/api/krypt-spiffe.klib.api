@@ -1,0 +1,435 @@
+// Klib ABI Dump
+// Targets: [wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.davils:krypt-spiffe>
+final enum class com.davils.krypt.spiffe.bundle/BundleFailure : kotlin/Enum<com.davils.krypt.spiffe.bundle/BundleFailure> { // com.davils.krypt.spiffe.bundle/BundleFailure|null[0]
+    enum entry DuplicateKeyId // com.davils.krypt.spiffe.bundle/BundleFailure.DuplicateKeyId|null[0]
+    enum entry InvalidKey // com.davils.krypt.spiffe.bundle/BundleFailure.InvalidKey|null[0]
+    enum entry InvalidTrustDomain // com.davils.krypt.spiffe.bundle/BundleFailure.InvalidTrustDomain|null[0]
+    enum entry LimitExceeded // com.davils.krypt.spiffe.bundle/BundleFailure.LimitExceeded|null[0]
+    enum entry Malformed // com.davils.krypt.spiffe.bundle/BundleFailure.Malformed|null[0]
+    enum entry MissingKeyId // com.davils.krypt.spiffe.bundle/BundleFailure.MissingKeyId|null[0]
+
+    final val entries // com.davils.krypt.spiffe.bundle/BundleFailure.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.spiffe.bundle/BundleFailure> // com.davils.krypt.spiffe.bundle/BundleFailure.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.spiffe.bundle/BundleFailure // com.davils.krypt.spiffe.bundle/BundleFailure.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.spiffe.bundle/BundleFailure> // com.davils.krypt.spiffe.bundle/BundleFailure.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.spiffe.jwt/JwtSvidFailure : kotlin/Enum<com.davils.krypt.spiffe.jwt/JwtSvidFailure> { // com.davils.krypt.spiffe.jwt/JwtSvidFailure|null[0]
+    enum entry BadSignature // com.davils.krypt.spiffe.jwt/JwtSvidFailure.BadSignature|null[0]
+    enum entry Expired // com.davils.krypt.spiffe.jwt/JwtSvidFailure.Expired|null[0]
+    enum entry InvalidSubject // com.davils.krypt.spiffe.jwt/JwtSvidFailure.InvalidSubject|null[0]
+    enum entry KeyNotFound // com.davils.krypt.spiffe.jwt/JwtSvidFailure.KeyNotFound|null[0]
+    enum entry LimitExceeded // com.davils.krypt.spiffe.jwt/JwtSvidFailure.LimitExceeded|null[0]
+    enum entry Malformed // com.davils.krypt.spiffe.jwt/JwtSvidFailure.Malformed|null[0]
+    enum entry MissingExpiration // com.davils.krypt.spiffe.jwt/JwtSvidFailure.MissingExpiration|null[0]
+    enum entry MissingKeyId // com.davils.krypt.spiffe.jwt/JwtSvidFailure.MissingKeyId|null[0]
+    enum entry NoBundle // com.davils.krypt.spiffe.jwt/JwtSvidFailure.NoBundle|null[0]
+    enum entry NotYetValid // com.davils.krypt.spiffe.jwt/JwtSvidFailure.NotYetValid|null[0]
+    enum entry UnsupportedAlgorithm // com.davils.krypt.spiffe.jwt/JwtSvidFailure.UnsupportedAlgorithm|null[0]
+    enum entry UnsupportedHeader // com.davils.krypt.spiffe.jwt/JwtSvidFailure.UnsupportedHeader|null[0]
+    enum entry WrongAudience // com.davils.krypt.spiffe.jwt/JwtSvidFailure.WrongAudience|null[0]
+    enum entry WrongType // com.davils.krypt.spiffe.jwt/JwtSvidFailure.WrongType|null[0]
+
+    final val entries // com.davils.krypt.spiffe.jwt/JwtSvidFailure.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.spiffe.jwt/JwtSvidFailure> // com.davils.krypt.spiffe.jwt/JwtSvidFailure.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.spiffe.jwt/JwtSvidFailure // com.davils.krypt.spiffe.jwt/JwtSvidFailure.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.spiffe.jwt/JwtSvidFailure> // com.davils.krypt.spiffe.jwt/JwtSvidFailure.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.spiffe.source/SourceFailure : kotlin/Enum<com.davils.krypt.spiffe.source/SourceFailure> { // com.davils.krypt.spiffe.source/SourceFailure|null[0]
+    enum entry LimitExceeded // com.davils.krypt.spiffe.source/SourceFailure.LimitExceeded|null[0]
+    enum entry MissingBundle // com.davils.krypt.spiffe.source/SourceFailure.MissingBundle|null[0]
+    enum entry NoSvid // com.davils.krypt.spiffe.source/SourceFailure.NoSvid|null[0]
+    enum entry Rollback // com.davils.krypt.spiffe.source/SourceFailure.Rollback|null[0]
+
+    final val entries // com.davils.krypt.spiffe.source/SourceFailure.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.spiffe.source/SourceFailure> // com.davils.krypt.spiffe.source/SourceFailure.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.spiffe.source/SourceFailure // com.davils.krypt.spiffe.source/SourceFailure.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.spiffe.source/SourceFailure> // com.davils.krypt.spiffe.source/SourceFailure.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.spiffe.x509/X509SvidFailure : kotlin/Enum<com.davils.krypt.spiffe.x509/X509SvidFailure> { // com.davils.krypt.spiffe.x509/X509SvidFailure|null[0]
+    enum entry CertificateAuthority // com.davils.krypt.spiffe.x509/X509SvidFailure.CertificateAuthority|null[0]
+    enum entry EmptyChain // com.davils.krypt.spiffe.x509/X509SvidFailure.EmptyChain|null[0]
+    enum entry Expired // com.davils.krypt.spiffe.x509/X509SvidFailure.Expired|null[0]
+    enum entry InvalidSpiffeId // com.davils.krypt.spiffe.x509/X509SvidFailure.InvalidSpiffeId|null[0]
+    enum entry KeyMismatch // com.davils.krypt.spiffe.x509/X509SvidFailure.KeyMismatch|null[0]
+    enum entry KeyUsage // com.davils.krypt.spiffe.x509/X509SvidFailure.KeyUsage|null[0]
+    enum entry LimitExceeded // com.davils.krypt.spiffe.x509/X509SvidFailure.LimitExceeded|null[0]
+    enum entry NoBundle // com.davils.krypt.spiffe.x509/X509SvidFailure.NoBundle|null[0]
+    enum entry NoSpiffeId // com.davils.krypt.spiffe.x509/X509SvidFailure.NoSpiffeId|null[0]
+    enum entry Revoked // com.davils.krypt.spiffe.x509/X509SvidFailure.Revoked|null[0]
+    enum entry SeveralUris // com.davils.krypt.spiffe.x509/X509SvidFailure.SeveralUris|null[0]
+    enum entry SigningCertificate // com.davils.krypt.spiffe.x509/X509SvidFailure.SigningCertificate|null[0]
+    enum entry TrustDomainId // com.davils.krypt.spiffe.x509/X509SvidFailure.TrustDomainId|null[0]
+    enum entry Untrusted // com.davils.krypt.spiffe.x509/X509SvidFailure.Untrusted|null[0]
+
+    final val entries // com.davils.krypt.spiffe.x509/X509SvidFailure.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.spiffe.x509/X509SvidFailure> // com.davils.krypt.spiffe.x509/X509SvidFailure.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.spiffe.x509/X509SvidFailure // com.davils.krypt.spiffe.x509/X509SvidFailure.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.spiffe.x509/X509SvidFailure> // com.davils.krypt.spiffe.x509/X509SvidFailure.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.spiffe/SpiffeIdFailure : kotlin/Enum<com.davils.krypt.spiffe/SpiffeIdFailure> { // com.davils.krypt.spiffe/SpiffeIdFailure|null[0]
+    enum entry BadPathCharacter // com.davils.krypt.spiffe/SpiffeIdFailure.BadPathCharacter|null[0]
+    enum entry BadTrustDomainCharacter // com.davils.krypt.spiffe/SpiffeIdFailure.BadTrustDomainCharacter|null[0]
+    enum entry DotSegment // com.davils.krypt.spiffe/SpiffeIdFailure.DotSegment|null[0]
+    enum entry Empty // com.davils.krypt.spiffe/SpiffeIdFailure.Empty|null[0]
+    enum entry EmptySegment // com.davils.krypt.spiffe/SpiffeIdFailure.EmptySegment|null[0]
+    enum entry Fragment // com.davils.krypt.spiffe/SpiffeIdFailure.Fragment|null[0]
+    enum entry MissingTrustDomain // com.davils.krypt.spiffe/SpiffeIdFailure.MissingTrustDomain|null[0]
+    enum entry PercentEncoded // com.davils.krypt.spiffe/SpiffeIdFailure.PercentEncoded|null[0]
+    enum entry Port // com.davils.krypt.spiffe/SpiffeIdFailure.Port|null[0]
+    enum entry Query // com.davils.krypt.spiffe/SpiffeIdFailure.Query|null[0]
+    enum entry TooLong // com.davils.krypt.spiffe/SpiffeIdFailure.TooLong|null[0]
+    enum entry TrailingSlash // com.davils.krypt.spiffe/SpiffeIdFailure.TrailingSlash|null[0]
+    enum entry TrustDomainTooLong // com.davils.krypt.spiffe/SpiffeIdFailure.TrustDomainTooLong|null[0]
+    enum entry UserInfo // com.davils.krypt.spiffe/SpiffeIdFailure.UserInfo|null[0]
+    enum entry WrongScheme // com.davils.krypt.spiffe/SpiffeIdFailure.WrongScheme|null[0]
+
+    final val entries // com.davils.krypt.spiffe/SpiffeIdFailure.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.spiffe/SpiffeIdFailure> // com.davils.krypt.spiffe/SpiffeIdFailure.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.spiffe/SpiffeIdFailure // com.davils.krypt.spiffe/SpiffeIdFailure.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.spiffe/SpiffeIdFailure> // com.davils.krypt.spiffe/SpiffeIdFailure.values|values#static(){}[0]
+}
+
+abstract fun interface com.davils.krypt.spiffe.source/BundleSource { // com.davils.krypt.spiffe.source/BundleSource|null[0]
+    abstract suspend fun bundle(com.davils.krypt.spiffe/TrustDomain): com.davils.krypt.spiffe.bundle/TrustBundle? // com.davils.krypt.spiffe.source/BundleSource.bundle|bundle(com.davils.krypt.spiffe.TrustDomain){}[0]
+}
+
+abstract fun interface com.davils.krypt.spiffe.source/SvidSource { // com.davils.krypt.spiffe.source/SvidSource|null[0]
+    abstract suspend fun svid(): com.davils.krypt.spiffe.x509/X509Svid? // com.davils.krypt.spiffe.source/SvidSource.svid|svid(){}[0]
+}
+
+final class com.davils.krypt.spiffe.bundle/BundleSet : com.davils.krypt.spiffe.source/BundleSource { // com.davils.krypt.spiffe.bundle/BundleSet|null[0]
+    constructor <init>(kotlin.collections/List<com.davils.krypt.spiffe.bundle/TrustBundle> = ...) // com.davils.krypt.spiffe.bundle/BundleSet.<init>|<init>(kotlin.collections.List<com.davils.krypt.spiffe.bundle.TrustBundle>){}[0]
+
+    final val bundles // com.davils.krypt.spiffe.bundle/BundleSet.bundles|{}bundles[0]
+        final fun <get-bundles>(): kotlin.collections/List<com.davils.krypt.spiffe.bundle/TrustBundle> // com.davils.krypt.spiffe.bundle/BundleSet.bundles.<get-bundles>|<get-bundles>(){}[0]
+    final val size // com.davils.krypt.spiffe.bundle/BundleSet.size|{}size[0]
+        final fun <get-size>(): kotlin/Int // com.davils.krypt.spiffe.bundle/BundleSet.size.<get-size>|<get-size>(){}[0]
+    final val trustDomains // com.davils.krypt.spiffe.bundle/BundleSet.trustDomains|{}trustDomains[0]
+        final fun <get-trustDomains>(): kotlin.collections/List<com.davils.krypt.spiffe/TrustDomain> // com.davils.krypt.spiffe.bundle/BundleSet.trustDomains.<get-trustDomains>|<get-trustDomains>(){}[0]
+
+    final fun contains(com.davils.krypt.spiffe/TrustDomain): kotlin/Boolean // com.davils.krypt.spiffe.bundle/BundleSet.contains|contains(com.davils.krypt.spiffe.TrustDomain){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.spiffe.bundle/BundleSet.equals|equals(kotlin.Any?){}[0]
+    final fun get(com.davils.krypt.spiffe/TrustDomain): com.davils.krypt.spiffe.bundle/TrustBundle? // com.davils.krypt.spiffe.bundle/BundleSet.get|get(com.davils.krypt.spiffe.TrustDomain){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.spiffe.bundle/BundleSet.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.spiffe.bundle/BundleSet.toString|toString(){}[0]
+    final fun with(com.davils.krypt.spiffe.bundle/TrustBundle): com.davils.krypt.spiffe.bundle/BundleSet // com.davils.krypt.spiffe.bundle/BundleSet.with|with(com.davils.krypt.spiffe.bundle.TrustBundle){}[0]
+    final fun without(com.davils.krypt.spiffe/TrustDomain): com.davils.krypt.spiffe.bundle/BundleSet // com.davils.krypt.spiffe.bundle/BundleSet.without|without(com.davils.krypt.spiffe.TrustDomain){}[0]
+    final suspend fun bundle(com.davils.krypt.spiffe/TrustDomain): com.davils.krypt.spiffe.bundle/TrustBundle? // com.davils.krypt.spiffe.bundle/BundleSet.bundle|bundle(com.davils.krypt.spiffe.TrustDomain){}[0]
+
+    final object Companion { // com.davils.krypt.spiffe.bundle/BundleSet.Companion|null[0]
+        final val Empty // com.davils.krypt.spiffe.bundle/BundleSet.Companion.Empty|{}Empty[0]
+            final fun <get-Empty>(): com.davils.krypt.spiffe.bundle/BundleSet // com.davils.krypt.spiffe.bundle/BundleSet.Companion.Empty.<get-Empty>|<get-Empty>(){}[0]
+    }
+}
+
+final class com.davils.krypt.spiffe.bundle/JwtAuthority { // com.davils.krypt.spiffe.bundle/JwtAuthority|null[0]
+    constructor <init>(kotlin/String, com.davils.krypt.primitive.key/PublicKey) // com.davils.krypt.spiffe.bundle/JwtAuthority.<init>|<init>(kotlin.String;com.davils.krypt.primitive.key.PublicKey){}[0]
+
+    final val keyId // com.davils.krypt.spiffe.bundle/JwtAuthority.keyId|{}keyId[0]
+        final fun <get-keyId>(): kotlin/String // com.davils.krypt.spiffe.bundle/JwtAuthority.keyId.<get-keyId>|<get-keyId>(){}[0]
+    final val publicKey // com.davils.krypt.spiffe.bundle/JwtAuthority.publicKey|{}publicKey[0]
+        final fun <get-publicKey>(): com.davils.krypt.primitive.key/PublicKey // com.davils.krypt.spiffe.bundle/JwtAuthority.publicKey.<get-publicKey>|<get-publicKey>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.spiffe.bundle/JwtAuthority.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.spiffe.bundle/JwtAuthority.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.spiffe.bundle/JwtAuthority.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.spiffe.bundle/JwtAuthority.Companion|null[0]
+        final const val MAXIMUM_KEY_ID_LENGTH // com.davils.krypt.spiffe.bundle/JwtAuthority.Companion.MAXIMUM_KEY_ID_LENGTH|{}MAXIMUM_KEY_ID_LENGTH[0]
+            final fun <get-MAXIMUM_KEY_ID_LENGTH>(): kotlin/Int // com.davils.krypt.spiffe.bundle/JwtAuthority.Companion.MAXIMUM_KEY_ID_LENGTH.<get-MAXIMUM_KEY_ID_LENGTH>|<get-MAXIMUM_KEY_ID_LENGTH>(){}[0]
+    }
+}
+
+final class com.davils.krypt.spiffe.bundle/TrustBundle { // com.davils.krypt.spiffe.bundle/TrustBundle|null[0]
+    constructor <init>(com.davils.krypt.spiffe/TrustDomain, kotlin.collections/List<com.davils.krypt.x509/Certificate> = ..., kotlin.collections/List<com.davils.krypt.spiffe.bundle/JwtAuthority> = ..., kotlin/Long? = ..., kotlin.time/Duration? = ...) // com.davils.krypt.spiffe.bundle/TrustBundle.<init>|<init>(com.davils.krypt.spiffe.TrustDomain;kotlin.collections.List<com.davils.krypt.x509.Certificate>;kotlin.collections.List<com.davils.krypt.spiffe.bundle.JwtAuthority>;kotlin.Long?;kotlin.time.Duration?){}[0]
+
+    final val isEmpty // com.davils.krypt.spiffe.bundle/TrustBundle.isEmpty|{}isEmpty[0]
+        final fun <get-isEmpty>(): kotlin/Boolean // com.davils.krypt.spiffe.bundle/TrustBundle.isEmpty.<get-isEmpty>|<get-isEmpty>(){}[0]
+    final val jwtAuthorities // com.davils.krypt.spiffe.bundle/TrustBundle.jwtAuthorities|{}jwtAuthorities[0]
+        final fun <get-jwtAuthorities>(): kotlin.collections/List<com.davils.krypt.spiffe.bundle/JwtAuthority> // com.davils.krypt.spiffe.bundle/TrustBundle.jwtAuthorities.<get-jwtAuthorities>|<get-jwtAuthorities>(){}[0]
+    final val refreshHint // com.davils.krypt.spiffe.bundle/TrustBundle.refreshHint|{}refreshHint[0]
+        final fun <get-refreshHint>(): kotlin.time/Duration? // com.davils.krypt.spiffe.bundle/TrustBundle.refreshHint.<get-refreshHint>|<get-refreshHint>(){}[0]
+    final val sequence // com.davils.krypt.spiffe.bundle/TrustBundle.sequence|{}sequence[0]
+        final fun <get-sequence>(): kotlin/Long? // com.davils.krypt.spiffe.bundle/TrustBundle.sequence.<get-sequence>|<get-sequence>(){}[0]
+    final val trustDomain // com.davils.krypt.spiffe.bundle/TrustBundle.trustDomain|{}trustDomain[0]
+        final fun <get-trustDomain>(): com.davils.krypt.spiffe/TrustDomain // com.davils.krypt.spiffe.bundle/TrustBundle.trustDomain.<get-trustDomain>|<get-trustDomain>(){}[0]
+    final val x509Authorities // com.davils.krypt.spiffe.bundle/TrustBundle.x509Authorities|{}x509Authorities[0]
+        final fun <get-x509Authorities>(): kotlin.collections/List<com.davils.krypt.x509/Certificate> // com.davils.krypt.spiffe.bundle/TrustBundle.x509Authorities.<get-x509Authorities>|<get-x509Authorities>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.spiffe.bundle/TrustBundle.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.spiffe.bundle/TrustBundle.hashCode|hashCode(){}[0]
+    final fun jwtAuthority(kotlin/String): com.davils.krypt.spiffe.bundle/JwtAuthority? // com.davils.krypt.spiffe.bundle/TrustBundle.jwtAuthority|jwtAuthority(kotlin.String){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.spiffe.bundle/TrustBundle.toString|toString(){}[0]
+    final fun trustAnchors(): kotlin.collections/List<com.davils.krypt.x509.path/TrustAnchor> // com.davils.krypt.spiffe.bundle/TrustBundle.trustAnchors|trustAnchors(){}[0]
+
+    final object Companion { // com.davils.krypt.spiffe.bundle/TrustBundle.Companion|null[0]
+        final const val MAXIMUM_REFRESH_HINT_SECONDS // com.davils.krypt.spiffe.bundle/TrustBundle.Companion.MAXIMUM_REFRESH_HINT_SECONDS|{}MAXIMUM_REFRESH_HINT_SECONDS[0]
+            final fun <get-MAXIMUM_REFRESH_HINT_SECONDS>(): kotlin/Long // com.davils.krypt.spiffe.bundle/TrustBundle.Companion.MAXIMUM_REFRESH_HINT_SECONDS.<get-MAXIMUM_REFRESH_HINT_SECONDS>|<get-MAXIMUM_REFRESH_HINT_SECONDS>(){}[0]
+    }
+}
+
+final class com.davils.krypt.spiffe.bundle/TrustBundles { // com.davils.krypt.spiffe.bundle/TrustBundles|null[0]
+    constructor <init>(com.davils.krypt.primitive/Crypto, com.davils.krypt.spiffe/SpiffeLimits = ...) // com.davils.krypt.spiffe.bundle/TrustBundles.<init>|<init>(com.davils.krypt.primitive.Crypto;com.davils.krypt.spiffe.SpiffeLimits){}[0]
+
+    final val crypto // com.davils.krypt.spiffe.bundle/TrustBundles.crypto|{}crypto[0]
+        final fun <get-crypto>(): com.davils.krypt.primitive/Crypto // com.davils.krypt.spiffe.bundle/TrustBundles.crypto.<get-crypto>|<get-crypto>(){}[0]
+    final val limits // com.davils.krypt.spiffe.bundle/TrustBundles.limits|{}limits[0]
+        final fun <get-limits>(): com.davils.krypt.spiffe/SpiffeLimits // com.davils.krypt.spiffe.bundle/TrustBundles.limits.<get-limits>|<get-limits>(){}[0]
+
+    final fun decode(com.davils.krypt.spiffe/TrustDomain, kotlin/String): com.davils.kore.core.outcome/Outcome<com.davils.krypt.spiffe.bundle/TrustBundle, com.davils.krypt.spiffe.bundle/BundleFailure> // com.davils.krypt.spiffe.bundle/TrustBundles.decode|decode(com.davils.krypt.spiffe.TrustDomain;kotlin.String){}[0]
+    final fun decodeMap(kotlin/String): com.davils.kore.core.outcome/Outcome<com.davils.krypt.spiffe.bundle/BundleSet, com.davils.krypt.spiffe.bundle/BundleFailure> // com.davils.krypt.spiffe.bundle/TrustBundles.decodeMap|decodeMap(kotlin.String){}[0]
+    final fun encode(com.davils.krypt.spiffe.bundle/TrustBundle): kotlin/String // com.davils.krypt.spiffe.bundle/TrustBundles.encode|encode(com.davils.krypt.spiffe.bundle.TrustBundle){}[0]
+    final fun encodeMap(com.davils.krypt.spiffe.bundle/BundleSet): kotlin/String // com.davils.krypt.spiffe.bundle/TrustBundles.encodeMap|encodeMap(com.davils.krypt.spiffe.bundle.BundleSet){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.spiffe.bundle/TrustBundles.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.spiffe.jwt/JwtSvid { // com.davils.krypt.spiffe.jwt/JwtSvid|null[0]
+    final val audience // com.davils.krypt.spiffe.jwt/JwtSvid.audience|{}audience[0]
+        final fun <get-audience>(): kotlin.collections/List<kotlin/String> // com.davils.krypt.spiffe.jwt/JwtSvid.audience.<get-audience>|<get-audience>(){}[0]
+    final val claims // com.davils.krypt.spiffe.jwt/JwtSvid.claims|{}claims[0]
+        final fun <get-claims>(): com.davils.krypt.jose.jwt/JwtClaims // com.davils.krypt.spiffe.jwt/JwtSvid.claims.<get-claims>|<get-claims>(){}[0]
+    final val expiresAt // com.davils.krypt.spiffe.jwt/JwtSvid.expiresAt|{}expiresAt[0]
+        final fun <get-expiresAt>(): kotlin.time/Instant // com.davils.krypt.spiffe.jwt/JwtSvid.expiresAt.<get-expiresAt>|<get-expiresAt>(){}[0]
+    final val id // com.davils.krypt.spiffe.jwt/JwtSvid.id|{}id[0]
+        final fun <get-id>(): com.davils.krypt.spiffe/SpiffeId // com.davils.krypt.spiffe.jwt/JwtSvid.id.<get-id>|<get-id>(){}[0]
+    final val token // com.davils.krypt.spiffe.jwt/JwtSvid.token|{}token[0]
+        final fun <get-token>(): kotlin/String // com.davils.krypt.spiffe.jwt/JwtSvid.token.<get-token>|<get-token>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.spiffe.jwt/JwtSvid.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.spiffe.jwt/JwtSvid.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.spiffe.jwt/JwtSvid.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.spiffe.jwt/JwtSvidSigner { // com.davils.krypt.spiffe.jwt/JwtSvidSigner|null[0]
+    constructor <init>(com.davils.krypt.primitive/Crypto, com.davils.krypt.primitive.key/PrivateKey, kotlin/String, com.davils.krypt.jose.jws/JwsAlgorithm) // com.davils.krypt.spiffe.jwt/JwtSvidSigner.<init>|<init>(com.davils.krypt.primitive.Crypto;com.davils.krypt.primitive.key.PrivateKey;kotlin.String;com.davils.krypt.jose.jws.JwsAlgorithm){}[0]
+
+    final val algorithm // com.davils.krypt.spiffe.jwt/JwtSvidSigner.algorithm|{}algorithm[0]
+        final fun <get-algorithm>(): com.davils.krypt.jose.jws/JwsAlgorithm // com.davils.krypt.spiffe.jwt/JwtSvidSigner.algorithm.<get-algorithm>|<get-algorithm>(){}[0]
+    final val crypto // com.davils.krypt.spiffe.jwt/JwtSvidSigner.crypto|{}crypto[0]
+        final fun <get-crypto>(): com.davils.krypt.primitive/Crypto // com.davils.krypt.spiffe.jwt/JwtSvidSigner.crypto.<get-crypto>|<get-crypto>(){}[0]
+    final val keyId // com.davils.krypt.spiffe.jwt/JwtSvidSigner.keyId|{}keyId[0]
+        final fun <get-keyId>(): kotlin/String // com.davils.krypt.spiffe.jwt/JwtSvidSigner.keyId.<get-keyId>|<get-keyId>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.spiffe.jwt/JwtSvidSigner.toString|toString(){}[0]
+    final suspend fun sign(com.davils.krypt.spiffe/SpiffeId, kotlin.collections/List<kotlin/String>, kotlin.time/Duration, com.davils.krypt.jose/JsonValue.Object = ...): com.davils.krypt.spiffe.jwt/JwtSvid // com.davils.krypt.spiffe.jwt/JwtSvidSigner.sign|sign(com.davils.krypt.spiffe.SpiffeId;kotlin.collections.List<kotlin.String>;kotlin.time.Duration;com.davils.krypt.jose.JsonValue.Object){}[0]
+
+    final object Companion { // com.davils.krypt.spiffe.jwt/JwtSvidSigner.Companion|null[0]
+        final val MAXIMUM_LIFETIME // com.davils.krypt.spiffe.jwt/JwtSvidSigner.Companion.MAXIMUM_LIFETIME|{}MAXIMUM_LIFETIME[0]
+            final fun <get-MAXIMUM_LIFETIME>(): kotlin.time/Duration // com.davils.krypt.spiffe.jwt/JwtSvidSigner.Companion.MAXIMUM_LIFETIME.<get-MAXIMUM_LIFETIME>|<get-MAXIMUM_LIFETIME>(){}[0]
+    }
+}
+
+final class com.davils.krypt.spiffe.jwt/JwtSvidValidator { // com.davils.krypt.spiffe.jwt/JwtSvidValidator|null[0]
+    constructor <init>(com.davils.krypt.primitive/Crypto, com.davils.krypt.spiffe.source/BundleSource, kotlin.time/Duration = ..., kotlin.collections/Set<com.davils.krypt.jose.jws/JwsAlgorithm> = ..., com.davils.krypt.spiffe/SpiffeLimits = ...) // com.davils.krypt.spiffe.jwt/JwtSvidValidator.<init>|<init>(com.davils.krypt.primitive.Crypto;com.davils.krypt.spiffe.source.BundleSource;kotlin.time.Duration;kotlin.collections.Set<com.davils.krypt.jose.jws.JwsAlgorithm>;com.davils.krypt.spiffe.SpiffeLimits){}[0]
+
+    final val algorithms // com.davils.krypt.spiffe.jwt/JwtSvidValidator.algorithms|{}algorithms[0]
+        final fun <get-algorithms>(): kotlin.collections/Set<com.davils.krypt.jose.jws/JwsAlgorithm> // com.davils.krypt.spiffe.jwt/JwtSvidValidator.algorithms.<get-algorithms>|<get-algorithms>(){}[0]
+    final val clockSkew // com.davils.krypt.spiffe.jwt/JwtSvidValidator.clockSkew|{}clockSkew[0]
+        final fun <get-clockSkew>(): kotlin.time/Duration // com.davils.krypt.spiffe.jwt/JwtSvidValidator.clockSkew.<get-clockSkew>|<get-clockSkew>(){}[0]
+    final val crypto // com.davils.krypt.spiffe.jwt/JwtSvidValidator.crypto|{}crypto[0]
+        final fun <get-crypto>(): com.davils.krypt.primitive/Crypto // com.davils.krypt.spiffe.jwt/JwtSvidValidator.crypto.<get-crypto>|<get-crypto>(){}[0]
+    final val limits // com.davils.krypt.spiffe.jwt/JwtSvidValidator.limits|{}limits[0]
+        final fun <get-limits>(): com.davils.krypt.spiffe/SpiffeLimits // com.davils.krypt.spiffe.jwt/JwtSvidValidator.limits.<get-limits>|<get-limits>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.spiffe.jwt/JwtSvidValidator.toString|toString(){}[0]
+    final suspend fun validate(kotlin/String, kotlin/String): com.davils.kore.core.outcome/Outcome<com.davils.krypt.spiffe.jwt/JwtSvid, com.davils.krypt.spiffe.jwt/JwtSvidFailure> // com.davils.krypt.spiffe.jwt/JwtSvidValidator.validate|validate(kotlin.String;kotlin.String){}[0]
+
+    final object Companion { // com.davils.krypt.spiffe.jwt/JwtSvidValidator.Companion|null[0]
+        final val ALGORITHMS // com.davils.krypt.spiffe.jwt/JwtSvidValidator.Companion.ALGORITHMS|{}ALGORITHMS[0]
+            final fun <get-ALGORITHMS>(): kotlin.collections/Set<com.davils.krypt.jose.jws/JwsAlgorithm> // com.davils.krypt.spiffe.jwt/JwtSvidValidator.Companion.ALGORITHMS.<get-ALGORITHMS>|<get-ALGORITHMS>(){}[0]
+        final val DEFAULT_CLOCK_SKEW // com.davils.krypt.spiffe.jwt/JwtSvidValidator.Companion.DEFAULT_CLOCK_SKEW|{}DEFAULT_CLOCK_SKEW[0]
+            final fun <get-DEFAULT_CLOCK_SKEW>(): kotlin.time/Duration // com.davils.krypt.spiffe.jwt/JwtSvidValidator.Companion.DEFAULT_CLOCK_SKEW.<get-DEFAULT_CLOCK_SKEW>|<get-DEFAULT_CLOCK_SKEW>(){}[0]
+        final val MAXIMUM_CLOCK_SKEW // com.davils.krypt.spiffe.jwt/JwtSvidValidator.Companion.MAXIMUM_CLOCK_SKEW|{}MAXIMUM_CLOCK_SKEW[0]
+            final fun <get-MAXIMUM_CLOCK_SKEW>(): kotlin.time/Duration // com.davils.krypt.spiffe.jwt/JwtSvidValidator.Companion.MAXIMUM_CLOCK_SKEW.<get-MAXIMUM_CLOCK_SKEW>|<get-MAXIMUM_CLOCK_SKEW>(){}[0]
+    }
+}
+
+final class com.davils.krypt.spiffe.source/X509Source : com.davils.krypt.spiffe.source/BundleSource, com.davils.krypt.spiffe.source/SvidSource { // com.davils.krypt.spiffe.source/X509Source|null[0]
+    constructor <init>(com.davils.krypt.spiffe/SpiffeLimits = ...) // com.davils.krypt.spiffe.source/X509Source.<init>|<init>(com.davils.krypt.spiffe.SpiffeLimits){}[0]
+
+    final val bundles // com.davils.krypt.spiffe.source/X509Source.bundles|{}bundles[0]
+        final fun <get-bundles>(): com.davils.krypt.spiffe.bundle/BundleSet // com.davils.krypt.spiffe.source/X509Source.bundles.<get-bundles>|<get-bundles>(){}[0]
+    final val limits // com.davils.krypt.spiffe.source/X509Source.limits|{}limits[0]
+        final fun <get-limits>(): com.davils.krypt.spiffe/SpiffeLimits // com.davils.krypt.spiffe.source/X509Source.limits.<get-limits>|<get-limits>(){}[0]
+    final val svids // com.davils.krypt.spiffe.source/X509Source.svids|{}svids[0]
+        final fun <get-svids>(): kotlin.collections/List<com.davils.krypt.spiffe.x509/X509Svid> // com.davils.krypt.spiffe.source/X509Source.svids.<get-svids>|<get-svids>(){}[0]
+
+    final fun svid(kotlin/String): com.davils.krypt.spiffe.x509/X509Svid? // com.davils.krypt.spiffe.source/X509Source.svid|svid(kotlin.String){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.spiffe.source/X509Source.toString|toString(){}[0]
+    final fun update(kotlin.collections/List<com.davils.krypt.spiffe.x509/X509Svid>, com.davils.krypt.spiffe.bundle/BundleSet): com.davils.kore.core.outcome/Outcome<kotlin/Unit, com.davils.krypt.spiffe.source/SourceFailure> // com.davils.krypt.spiffe.source/X509Source.update|update(kotlin.collections.List<com.davils.krypt.spiffe.x509.X509Svid>;com.davils.krypt.spiffe.bundle.BundleSet){}[0]
+    final fun updateBundles(com.davils.krypt.spiffe.bundle/BundleSet): com.davils.kore.core.outcome/Outcome<kotlin/Unit, com.davils.krypt.spiffe.source/SourceFailure> // com.davils.krypt.spiffe.source/X509Source.updateBundles|updateBundles(com.davils.krypt.spiffe.bundle.BundleSet){}[0]
+    final suspend fun bundle(com.davils.krypt.spiffe/TrustDomain): com.davils.krypt.spiffe.bundle/TrustBundle? // com.davils.krypt.spiffe.source/X509Source.bundle|bundle(com.davils.krypt.spiffe.TrustDomain){}[0]
+    final suspend fun svid(): com.davils.krypt.spiffe.x509/X509Svid? // com.davils.krypt.spiffe.source/X509Source.svid|svid(){}[0]
+}
+
+final class com.davils.krypt.spiffe.x509/ValidatedX509Svid { // com.davils.krypt.spiffe.x509/ValidatedX509Svid|null[0]
+    final val anchor // com.davils.krypt.spiffe.x509/ValidatedX509Svid.anchor|{}anchor[0]
+        final fun <get-anchor>(): com.davils.krypt.x509.path/TrustAnchor // com.davils.krypt.spiffe.x509/ValidatedX509Svid.anchor.<get-anchor>|<get-anchor>(){}[0]
+    final val certificate // com.davils.krypt.spiffe.x509/ValidatedX509Svid.certificate|{}certificate[0]
+        final fun <get-certificate>(): com.davils.krypt.x509/Certificate // com.davils.krypt.spiffe.x509/ValidatedX509Svid.certificate.<get-certificate>|<get-certificate>(){}[0]
+    final val id // com.davils.krypt.spiffe.x509/ValidatedX509Svid.id|{}id[0]
+        final fun <get-id>(): com.davils.krypt.spiffe/SpiffeId // com.davils.krypt.spiffe.x509/ValidatedX509Svid.id.<get-id>|<get-id>(){}[0]
+    final val path // com.davils.krypt.spiffe.x509/ValidatedX509Svid.path|{}path[0]
+        final fun <get-path>(): kotlin.collections/List<com.davils.krypt.x509/Certificate> // com.davils.krypt.spiffe.x509/ValidatedX509Svid.path.<get-path>|<get-path>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.spiffe.x509/ValidatedX509Svid.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.spiffe.x509/ValidatedX509Svid.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.spiffe.x509/ValidatedX509Svid.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.spiffe.x509/X509Svid { // com.davils.krypt.spiffe.x509/X509Svid|null[0]
+    final val certificate // com.davils.krypt.spiffe.x509/X509Svid.certificate|{}certificate[0]
+        final fun <get-certificate>(): com.davils.krypt.x509/Certificate // com.davils.krypt.spiffe.x509/X509Svid.certificate.<get-certificate>|<get-certificate>(){}[0]
+    final val chain // com.davils.krypt.spiffe.x509/X509Svid.chain|{}chain[0]
+        final fun <get-chain>(): kotlin.collections/List<com.davils.krypt.x509/Certificate> // com.davils.krypt.spiffe.x509/X509Svid.chain.<get-chain>|<get-chain>(){}[0]
+    final val hint // com.davils.krypt.spiffe.x509/X509Svid.hint|{}hint[0]
+        final fun <get-hint>(): kotlin/String? // com.davils.krypt.spiffe.x509/X509Svid.hint.<get-hint>|<get-hint>(){}[0]
+    final val id // com.davils.krypt.spiffe.x509/X509Svid.id|{}id[0]
+        final fun <get-id>(): com.davils.krypt.spiffe/SpiffeId // com.davils.krypt.spiffe.x509/X509Svid.id.<get-id>|<get-id>(){}[0]
+    final val privateKey // com.davils.krypt.spiffe.x509/X509Svid.privateKey|{}privateKey[0]
+        final fun <get-privateKey>(): com.davils.krypt.primitive.key/PrivateKey // com.davils.krypt.spiffe.x509/X509Svid.privateKey.<get-privateKey>|<get-privateKey>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.spiffe.x509/X509Svid.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.spiffe.x509/X509Svid.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.spiffe.x509/X509Svid.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.spiffe.x509/X509Svid.Companion|null[0]
+        final const val MAXIMUM_HINT_LENGTH // com.davils.krypt.spiffe.x509/X509Svid.Companion.MAXIMUM_HINT_LENGTH|{}MAXIMUM_HINT_LENGTH[0]
+            final fun <get-MAXIMUM_HINT_LENGTH>(): kotlin/Int // com.davils.krypt.spiffe.x509/X509Svid.Companion.MAXIMUM_HINT_LENGTH.<get-MAXIMUM_HINT_LENGTH>|<get-MAXIMUM_HINT_LENGTH>(){}[0]
+
+        final fun of(kotlin.collections/List<com.davils.krypt.x509/Certificate>, com.davils.krypt.primitive.key/PrivateKey, kotlin/String? = ..., com.davils.krypt.spiffe/SpiffeLimits = ...): com.davils.kore.core.outcome/Outcome<com.davils.krypt.spiffe.x509/X509Svid, com.davils.krypt.spiffe.x509/X509SvidFailure> // com.davils.krypt.spiffe.x509/X509Svid.Companion.of|of(kotlin.collections.List<com.davils.krypt.x509.Certificate>;com.davils.krypt.primitive.key.PrivateKey;kotlin.String?;com.davils.krypt.spiffe.SpiffeLimits){}[0]
+    }
+}
+
+final class com.davils.krypt.spiffe.x509/X509SvidValidator { // com.davils.krypt.spiffe.x509/X509SvidValidator|null[0]
+    constructor <init>(com.davils.krypt.primitive/Crypto, com.davils.krypt.spiffe.source/BundleSource, com.davils.krypt.x509.path/RevocationChecker? = ..., com.davils.krypt.spiffe/SpiffeLimits = ..., com.davils.krypt.x509/X509Limits = ...) // com.davils.krypt.spiffe.x509/X509SvidValidator.<init>|<init>(com.davils.krypt.primitive.Crypto;com.davils.krypt.spiffe.source.BundleSource;com.davils.krypt.x509.path.RevocationChecker?;com.davils.krypt.spiffe.SpiffeLimits;com.davils.krypt.x509.X509Limits){}[0]
+
+    final val crypto // com.davils.krypt.spiffe.x509/X509SvidValidator.crypto|{}crypto[0]
+        final fun <get-crypto>(): com.davils.krypt.primitive/Crypto // com.davils.krypt.spiffe.x509/X509SvidValidator.crypto.<get-crypto>|<get-crypto>(){}[0]
+    final val limits // com.davils.krypt.spiffe.x509/X509SvidValidator.limits|{}limits[0]
+        final fun <get-limits>(): com.davils.krypt.spiffe/SpiffeLimits // com.davils.krypt.spiffe.x509/X509SvidValidator.limits.<get-limits>|<get-limits>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.spiffe.x509/X509SvidValidator.toString|toString(){}[0]
+    final suspend fun validate(kotlin.collections/List<com.davils.krypt.x509/Certificate>, com.davils.krypt.x509.path/ValidationParameters = ...): com.davils.kore.core.outcome/Outcome<com.davils.krypt.spiffe.x509/ValidatedX509Svid, com.davils.krypt.spiffe.x509/X509SvidFailure> // com.davils.krypt.spiffe.x509/X509SvidValidator.validate|validate(kotlin.collections.List<com.davils.krypt.x509.Certificate>;com.davils.krypt.x509.path.ValidationParameters){}[0]
+}
+
+final class com.davils.krypt.spiffe/SpiffeId : kotlin/Comparable<com.davils.krypt.spiffe/SpiffeId> { // com.davils.krypt.spiffe/SpiffeId|null[0]
+    final val isTrustDomainId // com.davils.krypt.spiffe/SpiffeId.isTrustDomainId|{}isTrustDomainId[0]
+        final fun <get-isTrustDomainId>(): kotlin/Boolean // com.davils.krypt.spiffe/SpiffeId.isTrustDomainId.<get-isTrustDomainId>|<get-isTrustDomainId>(){}[0]
+    final val path // com.davils.krypt.spiffe/SpiffeId.path|{}path[0]
+        final fun <get-path>(): kotlin/String // com.davils.krypt.spiffe/SpiffeId.path.<get-path>|<get-path>(){}[0]
+    final val segments // com.davils.krypt.spiffe/SpiffeId.segments|{}segments[0]
+        final fun <get-segments>(): kotlin.collections/List<kotlin/String> // com.davils.krypt.spiffe/SpiffeId.segments.<get-segments>|<get-segments>(){}[0]
+    final val text // com.davils.krypt.spiffe/SpiffeId.text|{}text[0]
+        final fun <get-text>(): kotlin/String // com.davils.krypt.spiffe/SpiffeId.text.<get-text>|<get-text>(){}[0]
+    final val trustDomain // com.davils.krypt.spiffe/SpiffeId.trustDomain|{}trustDomain[0]
+        final fun <get-trustDomain>(): com.davils.krypt.spiffe/TrustDomain // com.davils.krypt.spiffe/SpiffeId.trustDomain.<get-trustDomain>|<get-trustDomain>(){}[0]
+
+    final fun compareTo(com.davils.krypt.spiffe/SpiffeId): kotlin/Int // com.davils.krypt.spiffe/SpiffeId.compareTo|compareTo(com.davils.krypt.spiffe.SpiffeId){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.spiffe/SpiffeId.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.spiffe/SpiffeId.hashCode|hashCode(){}[0]
+    final fun memberOf(com.davils.krypt.spiffe/TrustDomain): kotlin/Boolean // com.davils.krypt.spiffe/SpiffeId.memberOf|memberOf(com.davils.krypt.spiffe.TrustDomain){}[0]
+    final fun toGeneralName(): com.davils.krypt.x509.name/GeneralName.Uri // com.davils.krypt.spiffe/SpiffeId.toGeneralName|toGeneralName(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.spiffe/SpiffeId.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.spiffe/SpiffeId.Companion|null[0]
+        final const val MAXIMUM_LENGTH // com.davils.krypt.spiffe/SpiffeId.Companion.MAXIMUM_LENGTH|{}MAXIMUM_LENGTH[0]
+            final fun <get-MAXIMUM_LENGTH>(): kotlin/Int // com.davils.krypt.spiffe/SpiffeId.Companion.MAXIMUM_LENGTH.<get-MAXIMUM_LENGTH>|<get-MAXIMUM_LENGTH>(){}[0]
+
+        final fun of(com.davils.krypt.spiffe/TrustDomain, kotlin.collections/List<kotlin/String>): com.davils.krypt.spiffe/SpiffeId // com.davils.krypt.spiffe/SpiffeId.Companion.of|of(com.davils.krypt.spiffe.TrustDomain;kotlin.collections.List<kotlin.String>){}[0]
+        final fun of(com.davils.krypt.x509.name/GeneralName): com.davils.kore.core.outcome/Outcome<com.davils.krypt.spiffe/SpiffeId, com.davils.krypt.spiffe/SpiffeIdFailure> // com.davils.krypt.spiffe/SpiffeId.Companion.of|of(com.davils.krypt.x509.name.GeneralName){}[0]
+        final fun parse(kotlin/String): com.davils.kore.core.outcome/Outcome<com.davils.krypt.spiffe/SpiffeId, com.davils.krypt.spiffe/SpiffeIdFailure> // com.davils.krypt.spiffe/SpiffeId.Companion.parse|parse(kotlin.String){}[0]
+    }
+}
+
+final class com.davils.krypt.spiffe/SpiffeLimits { // com.davils.krypt.spiffe/SpiffeLimits|null[0]
+    constructor <init>(kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ...) // com.davils.krypt.spiffe/SpiffeLimits.<init>|<init>(kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int){}[0]
+
+    final val maximumAuthorities // com.davils.krypt.spiffe/SpiffeLimits.maximumAuthorities|{}maximumAuthorities[0]
+        final fun <get-maximumAuthorities>(): kotlin/Int // com.davils.krypt.spiffe/SpiffeLimits.maximumAuthorities.<get-maximumAuthorities>|<get-maximumAuthorities>(){}[0]
+    final val maximumBytes // com.davils.krypt.spiffe/SpiffeLimits.maximumBytes|{}maximumBytes[0]
+        final fun <get-maximumBytes>(): kotlin/Int // com.davils.krypt.spiffe/SpiffeLimits.maximumBytes.<get-maximumBytes>|<get-maximumBytes>(){}[0]
+    final val maximumChainLength // com.davils.krypt.spiffe/SpiffeLimits.maximumChainLength|{}maximumChainLength[0]
+        final fun <get-maximumChainLength>(): kotlin/Int // com.davils.krypt.spiffe/SpiffeLimits.maximumChainLength.<get-maximumChainLength>|<get-maximumChainLength>(){}[0]
+    final val maximumSvids // com.davils.krypt.spiffe/SpiffeLimits.maximumSvids|{}maximumSvids[0]
+        final fun <get-maximumSvids>(): kotlin/Int // com.davils.krypt.spiffe/SpiffeLimits.maximumSvids.<get-maximumSvids>|<get-maximumSvids>(){}[0]
+    final val maximumTokenBytes // com.davils.krypt.spiffe/SpiffeLimits.maximumTokenBytes|{}maximumTokenBytes[0]
+        final fun <get-maximumTokenBytes>(): kotlin/Int // com.davils.krypt.spiffe/SpiffeLimits.maximumTokenBytes.<get-maximumTokenBytes>|<get-maximumTokenBytes>(){}[0]
+    final val maximumTrustDomains // com.davils.krypt.spiffe/SpiffeLimits.maximumTrustDomains|{}maximumTrustDomains[0]
+        final fun <get-maximumTrustDomains>(): kotlin/Int // com.davils.krypt.spiffe/SpiffeLimits.maximumTrustDomains.<get-maximumTrustDomains>|<get-maximumTrustDomains>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.spiffe/SpiffeLimits.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.spiffe/SpiffeLimits.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.spiffe/SpiffeLimits.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.spiffe/SpiffeLimits.Companion|null[0]
+        final const val DEFAULT_MAXIMUM_AUTHORITIES // com.davils.krypt.spiffe/SpiffeLimits.Companion.DEFAULT_MAXIMUM_AUTHORITIES|{}DEFAULT_MAXIMUM_AUTHORITIES[0]
+            final fun <get-DEFAULT_MAXIMUM_AUTHORITIES>(): kotlin/Int // com.davils.krypt.spiffe/SpiffeLimits.Companion.DEFAULT_MAXIMUM_AUTHORITIES.<get-DEFAULT_MAXIMUM_AUTHORITIES>|<get-DEFAULT_MAXIMUM_AUTHORITIES>(){}[0]
+        final const val DEFAULT_MAXIMUM_BYTES // com.davils.krypt.spiffe/SpiffeLimits.Companion.DEFAULT_MAXIMUM_BYTES|{}DEFAULT_MAXIMUM_BYTES[0]
+            final fun <get-DEFAULT_MAXIMUM_BYTES>(): kotlin/Int // com.davils.krypt.spiffe/SpiffeLimits.Companion.DEFAULT_MAXIMUM_BYTES.<get-DEFAULT_MAXIMUM_BYTES>|<get-DEFAULT_MAXIMUM_BYTES>(){}[0]
+        final const val DEFAULT_MAXIMUM_CHAIN_LENGTH // com.davils.krypt.spiffe/SpiffeLimits.Companion.DEFAULT_MAXIMUM_CHAIN_LENGTH|{}DEFAULT_MAXIMUM_CHAIN_LENGTH[0]
+            final fun <get-DEFAULT_MAXIMUM_CHAIN_LENGTH>(): kotlin/Int // com.davils.krypt.spiffe/SpiffeLimits.Companion.DEFAULT_MAXIMUM_CHAIN_LENGTH.<get-DEFAULT_MAXIMUM_CHAIN_LENGTH>|<get-DEFAULT_MAXIMUM_CHAIN_LENGTH>(){}[0]
+        final const val DEFAULT_MAXIMUM_SVIDS // com.davils.krypt.spiffe/SpiffeLimits.Companion.DEFAULT_MAXIMUM_SVIDS|{}DEFAULT_MAXIMUM_SVIDS[0]
+            final fun <get-DEFAULT_MAXIMUM_SVIDS>(): kotlin/Int // com.davils.krypt.spiffe/SpiffeLimits.Companion.DEFAULT_MAXIMUM_SVIDS.<get-DEFAULT_MAXIMUM_SVIDS>|<get-DEFAULT_MAXIMUM_SVIDS>(){}[0]
+        final const val DEFAULT_MAXIMUM_TOKEN_BYTES // com.davils.krypt.spiffe/SpiffeLimits.Companion.DEFAULT_MAXIMUM_TOKEN_BYTES|{}DEFAULT_MAXIMUM_TOKEN_BYTES[0]
+            final fun <get-DEFAULT_MAXIMUM_TOKEN_BYTES>(): kotlin/Int // com.davils.krypt.spiffe/SpiffeLimits.Companion.DEFAULT_MAXIMUM_TOKEN_BYTES.<get-DEFAULT_MAXIMUM_TOKEN_BYTES>|<get-DEFAULT_MAXIMUM_TOKEN_BYTES>(){}[0]
+        final const val DEFAULT_MAXIMUM_TRUST_DOMAINS // com.davils.krypt.spiffe/SpiffeLimits.Companion.DEFAULT_MAXIMUM_TRUST_DOMAINS|{}DEFAULT_MAXIMUM_TRUST_DOMAINS[0]
+            final fun <get-DEFAULT_MAXIMUM_TRUST_DOMAINS>(): kotlin/Int // com.davils.krypt.spiffe/SpiffeLimits.Companion.DEFAULT_MAXIMUM_TRUST_DOMAINS.<get-DEFAULT_MAXIMUM_TRUST_DOMAINS>|<get-DEFAULT_MAXIMUM_TRUST_DOMAINS>(){}[0]
+        final const val HARD_MAXIMUM_AUTHORITIES // com.davils.krypt.spiffe/SpiffeLimits.Companion.HARD_MAXIMUM_AUTHORITIES|{}HARD_MAXIMUM_AUTHORITIES[0]
+            final fun <get-HARD_MAXIMUM_AUTHORITIES>(): kotlin/Int // com.davils.krypt.spiffe/SpiffeLimits.Companion.HARD_MAXIMUM_AUTHORITIES.<get-HARD_MAXIMUM_AUTHORITIES>|<get-HARD_MAXIMUM_AUTHORITIES>(){}[0]
+        final const val HARD_MAXIMUM_BYTES // com.davils.krypt.spiffe/SpiffeLimits.Companion.HARD_MAXIMUM_BYTES|{}HARD_MAXIMUM_BYTES[0]
+            final fun <get-HARD_MAXIMUM_BYTES>(): kotlin/Int // com.davils.krypt.spiffe/SpiffeLimits.Companion.HARD_MAXIMUM_BYTES.<get-HARD_MAXIMUM_BYTES>|<get-HARD_MAXIMUM_BYTES>(){}[0]
+        final const val HARD_MAXIMUM_CHAIN_LENGTH // com.davils.krypt.spiffe/SpiffeLimits.Companion.HARD_MAXIMUM_CHAIN_LENGTH|{}HARD_MAXIMUM_CHAIN_LENGTH[0]
+            final fun <get-HARD_MAXIMUM_CHAIN_LENGTH>(): kotlin/Int // com.davils.krypt.spiffe/SpiffeLimits.Companion.HARD_MAXIMUM_CHAIN_LENGTH.<get-HARD_MAXIMUM_CHAIN_LENGTH>|<get-HARD_MAXIMUM_CHAIN_LENGTH>(){}[0]
+        final const val HARD_MAXIMUM_SVIDS // com.davils.krypt.spiffe/SpiffeLimits.Companion.HARD_MAXIMUM_SVIDS|{}HARD_MAXIMUM_SVIDS[0]
+            final fun <get-HARD_MAXIMUM_SVIDS>(): kotlin/Int // com.davils.krypt.spiffe/SpiffeLimits.Companion.HARD_MAXIMUM_SVIDS.<get-HARD_MAXIMUM_SVIDS>|<get-HARD_MAXIMUM_SVIDS>(){}[0]
+        final const val HARD_MAXIMUM_TOKEN_BYTES // com.davils.krypt.spiffe/SpiffeLimits.Companion.HARD_MAXIMUM_TOKEN_BYTES|{}HARD_MAXIMUM_TOKEN_BYTES[0]
+            final fun <get-HARD_MAXIMUM_TOKEN_BYTES>(): kotlin/Int // com.davils.krypt.spiffe/SpiffeLimits.Companion.HARD_MAXIMUM_TOKEN_BYTES.<get-HARD_MAXIMUM_TOKEN_BYTES>|<get-HARD_MAXIMUM_TOKEN_BYTES>(){}[0]
+        final const val HARD_MAXIMUM_TRUST_DOMAINS // com.davils.krypt.spiffe/SpiffeLimits.Companion.HARD_MAXIMUM_TRUST_DOMAINS|{}HARD_MAXIMUM_TRUST_DOMAINS[0]
+            final fun <get-HARD_MAXIMUM_TRUST_DOMAINS>(): kotlin/Int // com.davils.krypt.spiffe/SpiffeLimits.Companion.HARD_MAXIMUM_TRUST_DOMAINS.<get-HARD_MAXIMUM_TRUST_DOMAINS>|<get-HARD_MAXIMUM_TRUST_DOMAINS>(){}[0]
+
+        final val Default // com.davils.krypt.spiffe/SpiffeLimits.Companion.Default|{}Default[0]
+            final fun <get-Default>(): com.davils.krypt.spiffe/SpiffeLimits // com.davils.krypt.spiffe/SpiffeLimits.Companion.Default.<get-Default>|<get-Default>(){}[0]
+    }
+}
+
+final class com.davils.krypt.spiffe/TrustDomain : kotlin/Comparable<com.davils.krypt.spiffe/TrustDomain> { // com.davils.krypt.spiffe/TrustDomain|null[0]
+    final val id // com.davils.krypt.spiffe/TrustDomain.id|{}id[0]
+        final fun <get-id>(): com.davils.krypt.spiffe/SpiffeId // com.davils.krypt.spiffe/TrustDomain.id.<get-id>|<get-id>(){}[0]
+    final val name // com.davils.krypt.spiffe/TrustDomain.name|{}name[0]
+        final fun <get-name>(): kotlin/String // com.davils.krypt.spiffe/TrustDomain.name.<get-name>|<get-name>(){}[0]
+
+    final fun compareTo(com.davils.krypt.spiffe/TrustDomain): kotlin/Int // com.davils.krypt.spiffe/TrustDomain.compareTo|compareTo(com.davils.krypt.spiffe.TrustDomain){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.spiffe/TrustDomain.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.spiffe/TrustDomain.hashCode|hashCode(){}[0]
+    final fun idOf(kotlin/Array<out kotlin/String>...): com.davils.krypt.spiffe/SpiffeId // com.davils.krypt.spiffe/TrustDomain.idOf|idOf(kotlin.Array<out|kotlin.String>...){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.spiffe/TrustDomain.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.spiffe/TrustDomain.Companion|null[0]
+        final const val MAXIMUM_LENGTH // com.davils.krypt.spiffe/TrustDomain.Companion.MAXIMUM_LENGTH|{}MAXIMUM_LENGTH[0]
+            final fun <get-MAXIMUM_LENGTH>(): kotlin/Int // com.davils.krypt.spiffe/TrustDomain.Companion.MAXIMUM_LENGTH.<get-MAXIMUM_LENGTH>|<get-MAXIMUM_LENGTH>(){}[0]
+
+        final fun of(kotlin/String): com.davils.krypt.spiffe/TrustDomain // com.davils.krypt.spiffe/TrustDomain.Companion.of|of(kotlin.String){}[0]
+        final fun parse(kotlin/String): com.davils.kore.core.outcome/Outcome<com.davils.krypt.spiffe/TrustDomain, com.davils.krypt.spiffe/SpiffeIdFailure> // com.davils.krypt.spiffe/TrustDomain.Companion.parse|parse(kotlin.String){}[0]
+    }
+}
+
+final object com.davils.krypt.spiffe.x509/X509SvidRules { // com.davils.krypt.spiffe.x509/X509SvidRules|null[0]
+    final fun leaf(com.davils.krypt.x509/Certificate): com.davils.kore.core.outcome/Outcome<com.davils.krypt.spiffe/SpiffeId, com.davils.krypt.spiffe.x509/X509SvidFailure> // com.davils.krypt.spiffe.x509/X509SvidRules.leaf|leaf(com.davils.krypt.x509.Certificate){}[0]
+    final fun path(kotlin.collections/List<com.davils.krypt.x509/Certificate>): com.davils.kore.core.outcome/Outcome<com.davils.krypt.spiffe/SpiffeId, com.davils.krypt.spiffe.x509/X509SvidFailure> // com.davils.krypt.spiffe.x509/X509SvidRules.path|path(kotlin.collections.List<com.davils.krypt.x509.Certificate>){}[0]
+}

@@ -103,6 +103,7 @@ kreate {
                 ":krypt-tls",
                 ":krypt-cms",
                 ":krypt-cose",
+                ":krypt-spiffe",
                 ":krypt-testing",
             )
         }

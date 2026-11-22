@@ -14,8 +14,11 @@
  * limitations under the License.
  */
 
+@file:OptIn(DavilsInternal::class)
+
 package com.davils.krypt.jose.internal
 
+import com.davils.kore.core.annotation.DavilsInternal
 import com.davils.krypt.core.SecretBytes
 import com.davils.krypt.core.algorithm.AeadAlgorithm
 import com.davils.krypt.core.algorithm.AsymmetricEncryptionAlgorithm

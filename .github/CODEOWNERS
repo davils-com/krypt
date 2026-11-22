@@ -34,6 +34,8 @@
 /krypt-cms/src/jvmMain/java/          @davils-com/maintainers
 /krypt-cose/api/                      @davils-com/maintainers
 /krypt-cose/src/jvmMain/java/         @davils-com/maintainers
+/krypt-spiffe/api/                    @davils-com/maintainers
+/krypt-spiffe/src/jvmMain/java/       @davils-com/maintainers
 
 # Anything that decides what CI trusts or what leaves the build.
 /.github/workflows/                   @davils-com/maintainers

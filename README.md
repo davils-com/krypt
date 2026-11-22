@@ -21,6 +21,7 @@ network, reports through events on [konfetti](https://github.com/davils-com/konf
 | `krypt-ocsp` | `com.davils:krypt-ocsp` | OCSP requests, responses, verification, a revocation checker and a responder |
 | `krypt-ct` | `com.davils:krypt-ct` | Signed certificate timestamps, log lists and a CT policy |
 | `krypt-authority` | `com.davils:krypt-authority` | A certificate authority with profiles, an issuance policy, revocation lists and OCSP status |
+| `krypt-spiffe` | `com.davils:krypt-spiffe` | SPIFFE ids, X.509-SVID and JWT-SVID validation, JWT-SVID signing, trust bundles, federation and sources of SVIDs and bundles |
 | `krypt-tls` | `com.davils:krypt-tls` | TLS over JSSE for the JVM only: configured contexts and engines, rotating key and trust managers, revocation, CT, mutual TLS and hot reload |
 | `krypt-testing` | `com.davils:krypt-testing` | Deterministic and replayed randomness, audit logs and test environments |
 | `krypt-bom` | `com.davils:krypt-bom` | The bill of materials of every module |

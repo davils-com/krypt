@@ -31,6 +31,7 @@ dependencies {
     api(project(":krypt-keystore"))
     api(project(":krypt-ocsp"))
     api(project(":krypt-ct"))
+    api(project(":krypt-spiffe"))
 }
 
 configurations.matching { configuration -> configuration.name == "unitTestImplementation" }.configureEach {
