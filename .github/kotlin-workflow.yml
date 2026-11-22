@@ -31,6 +31,7 @@ check:
       - ":krypt-stream:clean"
       - ":krypt-storage:clean"
       - ":krypt-x509:clean"
+      - ":krypt-ct:clean"
       - ":krypt-testing:clean"
     tasks:
       - ":krypt-core:jvmJar"
@@ -40,6 +41,7 @@ check:
       - ":krypt-stream:jvmJar"
       - ":krypt-storage:jvmJar"
       - ":krypt-x509:jvmJar"
+      - ":krypt-ct:jvmJar"
       - ":krypt-testing:jvmJar"
     artifacts:
       - "krypt-core/build/libs/*.jar"
@@ -49,6 +51,7 @@ check:
       - "krypt-stream/build/libs/*.jar"
       - "krypt-storage/build/libs/*.jar"
       - "krypt-x509/build/libs/*.jar"
+      - "krypt-ct/build/libs/*.jar"
       - "krypt-testing/build/libs/*.jar"
 
 policy:
@@ -85,6 +88,7 @@ publish:
     - ":krypt-stream:publishAllPublicationsToDavilsRepository"
     - ":krypt-storage:publishAllPublicationsToDavilsRepository"
     - ":krypt-x509:publishAllPublicationsToDavilsRepository"
+    - ":krypt-ct:publishAllPublicationsToDavilsRepository"
     - ":krypt-testing:publishAllPublicationsToDavilsRepository"
     - ":krypt-bom:publishAllPublicationsToDavilsRepository"
 
@@ -160,6 +164,15 @@ release:
       - path: com/davils/krypt-x509
         artifact: krypt-x509
         task: ":krypt-x509:publishKotlinMultiplatformPublicationToDavilsRepository"
+      - path: com/davils/krypt-ct-jvm
+        artifact: krypt-ct-jvm
+        task: ":krypt-ct:publishJvmPublicationToDavilsRepository"
+      - path: com/davils/krypt-ct-wasm-js
+        artifact: krypt-ct-wasm-js
+        task: ":krypt-ct:publishWasmJsPublicationToDavilsRepository"
+      - path: com/davils/krypt-ct
+        artifact: krypt-ct
+        task: ":krypt-ct:publishKotlinMultiplatformPublicationToDavilsRepository"
       - path: com/davils/krypt-testing-jvm
         artifact: krypt-testing-jvm
         task: ":krypt-testing:publishJvmPublicationToDavilsRepository"
@@ -188,6 +201,8 @@ release:
       - "krypt-storage/build/libs/*.klib"
       - "krypt-x509/build/libs/*.jar"
       - "krypt-x509/build/libs/*.klib"
+      - "krypt-ct/build/libs/*.jar"
+      - "krypt-ct/build/libs/*.klib"
       - "krypt-testing/build/libs/*.jar"
       - "krypt-testing/build/libs/*.klib"
   github-release:

@@ -1,0 +1,178 @@
+public final class com/davils/krypt/ct/CtCompliance : java/lang/Enum {
+	public static final field Compliant Lcom/davils/krypt/ct/CtCompliance;
+	public static final field NotEnoughOperators Lcom/davils/krypt/ct/CtCompliance;
+	public static final field NotEnoughTimestamps Lcom/davils/krypt/ct/CtCompliance;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/ct/CtCompliance;
+	public static fun values ()[Lcom/davils/krypt/ct/CtCompliance;
+}
+
+public final class com/davils/krypt/ct/CtFailure : java/lang/Enum {
+	public static final field LimitExceeded Lcom/davils/krypt/ct/CtFailure;
+	public static final field Malformed Lcom/davils/krypt/ct/CtFailure;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/ct/CtFailure;
+	public static fun values ()[Lcom/davils/krypt/ct/CtFailure;
+}
+
+public final class com/davils/krypt/ct/CtLimits {
+	public static final field Companion Lcom/davils/krypt/ct/CtLimits$Companion;
+	public static final field DEFAULT_MAXIMUM_EXTENSION_BYTES I
+	public static final field DEFAULT_MAXIMUM_LIST_BYTES I
+	public static final field DEFAULT_MAXIMUM_SIGNATURE_BYTES I
+	public static final field DEFAULT_MAXIMUM_TIMESTAMPS I
+	public static final field HARD_MAXIMUM_FIELD_BYTES I
+	public static final field HARD_MAXIMUM_LIST_BYTES I
+	public static final field HARD_MAXIMUM_TIMESTAMPS I
+	public fun <init> ()V
+	public fun <init> (IIII)V
+	public synthetic fun <init> (IIIIILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMaximumExtensionBytes ()I
+	public final fun getMaximumListBytes ()I
+	public final fun getMaximumSignatureBytes ()I
+	public final fun getMaximumTimestamps ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/ct/CtLimits$Companion {
+	public final fun getDefault ()Lcom/davils/krypt/ct/CtLimits;
+}
+
+public final class com/davils/krypt/ct/CtLog {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getLogId ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getOperator ()Ljava/lang/String;
+	public final fun getPublicKey ()Lcom/davils/krypt/primitive/key/PublicKey;
+	public final fun getUsableFrom ()Lkotlin/time/Instant;
+	public final fun getUsableUntil ()Lkotlin/time/Instant;
+	public fun hashCode ()I
+	public final fun isUsableAt (Lkotlin/time/Instant;)Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/ct/CtPolicy : com/davils/kore/core/validation/Validatable {
+	public static final field Companion Lcom/davils/krypt/ct/CtPolicy$Companion;
+	public static final field MAXIMUM_COUNT I
+	public static final field MAXIMUM_DAYS I
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMinimumForLong ()I
+	public final fun getMinimumForShort ()I
+	public final fun getMinimumOperators ()I
+	public final fun getShortLifetimeDays ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public final class com/davils/krypt/ct/CtPolicy$Companion {
+	public final fun getDefault ()Lcom/davils/krypt/ct/CtPolicy;
+}
+
+public final class com/davils/krypt/ct/CtPolicyBuilder : com/davils/kore/core/dsl/ValidatingBuilder {
+	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+	public final fun getMinimumForLong ()I
+	public final fun getMinimumForShort ()I
+	public final fun getMinimumOperators ()I
+	public final fun getShortLifetimeDays ()I
+	public final fun setMinimumForLong (I)V
+	public final fun setMinimumForShort (I)V
+	public final fun setMinimumOperators (I)V
+	public final fun setShortLifetimeDays (I)V
+}
+
+public final class com/davils/krypt/ct/CtVerdict {
+	public final fun getCompliance ()Lcom/davils/krypt/ct/CtCompliance;
+	public final fun getLogs ()I
+	public final fun getOperators ()I
+	public final fun getRequired ()I
+	public final fun getResults ()Ljava/util/List;
+	public final fun isCompliant ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/ct/LogList {
+	public fun <init> (Ljava/util/List;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun find (Lkotlinx/io/bytestring/ByteString;)Lcom/davils/krypt/ct/CtLog;
+	public final fun getLogs ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/ct/PoliciesKt {
+	public static final fun ctPolicy (Lkotlin/jvm/functions/Function1;)Lcom/davils/krypt/ct/CtPolicy;
+}
+
+public final class com/davils/krypt/ct/SctOrigin : java/lang/Enum {
+	public static final field Embedded Lcom/davils/krypt/ct/SctOrigin;
+	public static final field Ocsp Lcom/davils/krypt/ct/SctOrigin;
+	public static final field Tls Lcom/davils/krypt/ct/SctOrigin;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/ct/SctOrigin;
+	public static fun values ()[Lcom/davils/krypt/ct/SctOrigin;
+}
+
+public final class com/davils/krypt/ct/SctResult {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getLog ()Lcom/davils/krypt/ct/CtLog;
+	public final fun getOrigin ()Lcom/davils/krypt/ct/SctOrigin;
+	public final fun getStatus ()Lcom/davils/krypt/ct/SctStatus;
+	public final fun getTimestamp ()Lcom/davils/krypt/ct/SignedCertificateTimestamp;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/ct/SctStatus : java/lang/Enum {
+	public static final field AlgorithmNotPermitted Lcom/davils/krypt/ct/SctStatus;
+	public static final field FutureTimestamp Lcom/davils/krypt/ct/SctStatus;
+	public static final field InvalidSignature Lcom/davils/krypt/ct/SctStatus;
+	public static final field LogNotUsable Lcom/davils/krypt/ct/SctStatus;
+	public static final field UnknownLog Lcom/davils/krypt/ct/SctStatus;
+	public static final field Valid Lcom/davils/krypt/ct/SctStatus;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/ct/SctStatus;
+	public static fun values ()[Lcom/davils/krypt/ct/SctStatus;
+}
+
+public final class com/davils/krypt/ct/SignedCertificateTimestamp {
+	public static final field Companion Lcom/davils/krypt/ct/SignedCertificateTimestamp$Companion;
+	public static final field ECDSA I
+	public static final field LOG_ID_BYTES I
+	public static final field RSA I
+	public static final field SHA256 I
+	public fun <init> (Lkotlinx/io/bytestring/ByteString;Lkotlin/time/Instant;Lkotlinx/io/bytestring/ByteString;IILkotlinx/io/bytestring/ByteString;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAlgorithm ()Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;
+	public final fun getEncoded ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getExtensions ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getHashAlgorithm ()I
+	public final fun getLogId ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getSignature ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getSignatureAlgorithm ()I
+	public final fun getTimestamp ()Lkotlin/time/Instant;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/ct/SignedCertificateTimestamp$Companion {
+}
+
+public final class com/davils/krypt/ct/Transparency {
+	public fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/ct/CtLimits;)V
+	public synthetic fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/ct/CtLimits;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun check (Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/ct/LogList;Lcom/davils/krypt/ct/CtPolicy;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/time/Instant;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun check$default (Lcom/davils/krypt/ct/Transparency;Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/ct/LogList;Lcom/davils/krypt/ct/CtPolicy;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/time/Instant;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun decodeList (Lkotlinx/io/bytestring/ByteString;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun embedded (Lcom/davils/krypt/x509/Certificate;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun encodeList (Ljava/util/List;)Lkotlinx/io/bytestring/ByteString;
+	public final fun extension (Ljava/util/List;)Lcom/davils/krypt/x509/extension/Extension;
+	public final fun fromOcsp (Lkotlinx/io/bytestring/ByteString;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun getLimits ()Lcom/davils/krypt/ct/CtLimits;
+	public final fun log (Lcom/davils/krypt/primitive/key/PublicKey;Ljava/lang/String;Lkotlin/time/Instant;Lkotlin/time/Instant;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun log$default (Lcom/davils/krypt/ct/Transparency;Lcom/davils/krypt/primitive/key/PublicKey;Ljava/lang/String;Lkotlin/time/Instant;Lkotlin/time/Instant;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun verify (Lcom/davils/krypt/ct/SignedCertificateTimestamp;Lcom/davils/krypt/ct/SctOrigin;Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/ct/LogList;Lkotlin/time/Instant;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun verify$default (Lcom/davils/krypt/ct/Transparency;Lcom/davils/krypt/ct/SignedCertificateTimestamp;Lcom/davils/krypt/ct/SctOrigin;Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/ct/LogList;Lkotlin/time/Instant;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+

@@ -18,6 +18,8 @@
 /krypt-storage/src/jvmMain/java/      @davils-com/maintainers
 /krypt-x509/api/                      @davils-com/maintainers
 /krypt-x509/src/jvmMain/java/         @davils-com/maintainers
+/krypt-ct/api/                        @davils-com/maintainers
+/krypt-ct/src/jvmMain/java/           @davils-com/maintainers
 
 # Anything that decides what CI trusts or what leaves the build.
 /.github/workflows/                   @davils-com/maintainers

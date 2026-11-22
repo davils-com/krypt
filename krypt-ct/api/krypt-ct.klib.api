@@ -1,0 +1,251 @@
+// Klib ABI Dump
+// Targets: [wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.davils:krypt-ct>
+final enum class com.davils.krypt.ct/CtCompliance : kotlin/Enum<com.davils.krypt.ct/CtCompliance> { // com.davils.krypt.ct/CtCompliance|null[0]
+    enum entry Compliant // com.davils.krypt.ct/CtCompliance.Compliant|null[0]
+    enum entry NotEnoughOperators // com.davils.krypt.ct/CtCompliance.NotEnoughOperators|null[0]
+    enum entry NotEnoughTimestamps // com.davils.krypt.ct/CtCompliance.NotEnoughTimestamps|null[0]
+
+    final val entries // com.davils.krypt.ct/CtCompliance.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.ct/CtCompliance> // com.davils.krypt.ct/CtCompliance.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.ct/CtCompliance // com.davils.krypt.ct/CtCompliance.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.ct/CtCompliance> // com.davils.krypt.ct/CtCompliance.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.ct/CtFailure : kotlin/Enum<com.davils.krypt.ct/CtFailure> { // com.davils.krypt.ct/CtFailure|null[0]
+    enum entry LimitExceeded // com.davils.krypt.ct/CtFailure.LimitExceeded|null[0]
+    enum entry Malformed // com.davils.krypt.ct/CtFailure.Malformed|null[0]
+
+    final val entries // com.davils.krypt.ct/CtFailure.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.ct/CtFailure> // com.davils.krypt.ct/CtFailure.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.ct/CtFailure // com.davils.krypt.ct/CtFailure.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.ct/CtFailure> // com.davils.krypt.ct/CtFailure.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.ct/SctOrigin : kotlin/Enum<com.davils.krypt.ct/SctOrigin> { // com.davils.krypt.ct/SctOrigin|null[0]
+    enum entry Embedded // com.davils.krypt.ct/SctOrigin.Embedded|null[0]
+    enum entry Ocsp // com.davils.krypt.ct/SctOrigin.Ocsp|null[0]
+    enum entry Tls // com.davils.krypt.ct/SctOrigin.Tls|null[0]
+
+    final val entries // com.davils.krypt.ct/SctOrigin.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.ct/SctOrigin> // com.davils.krypt.ct/SctOrigin.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.ct/SctOrigin // com.davils.krypt.ct/SctOrigin.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.ct/SctOrigin> // com.davils.krypt.ct/SctOrigin.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.ct/SctStatus : kotlin/Enum<com.davils.krypt.ct/SctStatus> { // com.davils.krypt.ct/SctStatus|null[0]
+    enum entry AlgorithmNotPermitted // com.davils.krypt.ct/SctStatus.AlgorithmNotPermitted|null[0]
+    enum entry FutureTimestamp // com.davils.krypt.ct/SctStatus.FutureTimestamp|null[0]
+    enum entry InvalidSignature // com.davils.krypt.ct/SctStatus.InvalidSignature|null[0]
+    enum entry LogNotUsable // com.davils.krypt.ct/SctStatus.LogNotUsable|null[0]
+    enum entry UnknownLog // com.davils.krypt.ct/SctStatus.UnknownLog|null[0]
+    enum entry Valid // com.davils.krypt.ct/SctStatus.Valid|null[0]
+
+    final val entries // com.davils.krypt.ct/SctStatus.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.ct/SctStatus> // com.davils.krypt.ct/SctStatus.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.ct/SctStatus // com.davils.krypt.ct/SctStatus.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.ct/SctStatus> // com.davils.krypt.ct/SctStatus.values|values#static(){}[0]
+}
+
+final class com.davils.krypt.ct/CtLimits { // com.davils.krypt.ct/CtLimits|null[0]
+    constructor <init>(kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ...) // com.davils.krypt.ct/CtLimits.<init>|<init>(kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int){}[0]
+
+    final val maximumExtensionBytes // com.davils.krypt.ct/CtLimits.maximumExtensionBytes|{}maximumExtensionBytes[0]
+        final fun <get-maximumExtensionBytes>(): kotlin/Int // com.davils.krypt.ct/CtLimits.maximumExtensionBytes.<get-maximumExtensionBytes>|<get-maximumExtensionBytes>(){}[0]
+    final val maximumListBytes // com.davils.krypt.ct/CtLimits.maximumListBytes|{}maximumListBytes[0]
+        final fun <get-maximumListBytes>(): kotlin/Int // com.davils.krypt.ct/CtLimits.maximumListBytes.<get-maximumListBytes>|<get-maximumListBytes>(){}[0]
+    final val maximumSignatureBytes // com.davils.krypt.ct/CtLimits.maximumSignatureBytes|{}maximumSignatureBytes[0]
+        final fun <get-maximumSignatureBytes>(): kotlin/Int // com.davils.krypt.ct/CtLimits.maximumSignatureBytes.<get-maximumSignatureBytes>|<get-maximumSignatureBytes>(){}[0]
+    final val maximumTimestamps // com.davils.krypt.ct/CtLimits.maximumTimestamps|{}maximumTimestamps[0]
+        final fun <get-maximumTimestamps>(): kotlin/Int // com.davils.krypt.ct/CtLimits.maximumTimestamps.<get-maximumTimestamps>|<get-maximumTimestamps>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.ct/CtLimits.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.ct/CtLimits.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.ct/CtLimits.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.ct/CtLimits.Companion|null[0]
+        final const val DEFAULT_MAXIMUM_EXTENSION_BYTES // com.davils.krypt.ct/CtLimits.Companion.DEFAULT_MAXIMUM_EXTENSION_BYTES|{}DEFAULT_MAXIMUM_EXTENSION_BYTES[0]
+            final fun <get-DEFAULT_MAXIMUM_EXTENSION_BYTES>(): kotlin/Int // com.davils.krypt.ct/CtLimits.Companion.DEFAULT_MAXIMUM_EXTENSION_BYTES.<get-DEFAULT_MAXIMUM_EXTENSION_BYTES>|<get-DEFAULT_MAXIMUM_EXTENSION_BYTES>(){}[0]
+        final const val DEFAULT_MAXIMUM_LIST_BYTES // com.davils.krypt.ct/CtLimits.Companion.DEFAULT_MAXIMUM_LIST_BYTES|{}DEFAULT_MAXIMUM_LIST_BYTES[0]
+            final fun <get-DEFAULT_MAXIMUM_LIST_BYTES>(): kotlin/Int // com.davils.krypt.ct/CtLimits.Companion.DEFAULT_MAXIMUM_LIST_BYTES.<get-DEFAULT_MAXIMUM_LIST_BYTES>|<get-DEFAULT_MAXIMUM_LIST_BYTES>(){}[0]
+        final const val DEFAULT_MAXIMUM_SIGNATURE_BYTES // com.davils.krypt.ct/CtLimits.Companion.DEFAULT_MAXIMUM_SIGNATURE_BYTES|{}DEFAULT_MAXIMUM_SIGNATURE_BYTES[0]
+            final fun <get-DEFAULT_MAXIMUM_SIGNATURE_BYTES>(): kotlin/Int // com.davils.krypt.ct/CtLimits.Companion.DEFAULT_MAXIMUM_SIGNATURE_BYTES.<get-DEFAULT_MAXIMUM_SIGNATURE_BYTES>|<get-DEFAULT_MAXIMUM_SIGNATURE_BYTES>(){}[0]
+        final const val DEFAULT_MAXIMUM_TIMESTAMPS // com.davils.krypt.ct/CtLimits.Companion.DEFAULT_MAXIMUM_TIMESTAMPS|{}DEFAULT_MAXIMUM_TIMESTAMPS[0]
+            final fun <get-DEFAULT_MAXIMUM_TIMESTAMPS>(): kotlin/Int // com.davils.krypt.ct/CtLimits.Companion.DEFAULT_MAXIMUM_TIMESTAMPS.<get-DEFAULT_MAXIMUM_TIMESTAMPS>|<get-DEFAULT_MAXIMUM_TIMESTAMPS>(){}[0]
+        final const val HARD_MAXIMUM_FIELD_BYTES // com.davils.krypt.ct/CtLimits.Companion.HARD_MAXIMUM_FIELD_BYTES|{}HARD_MAXIMUM_FIELD_BYTES[0]
+            final fun <get-HARD_MAXIMUM_FIELD_BYTES>(): kotlin/Int // com.davils.krypt.ct/CtLimits.Companion.HARD_MAXIMUM_FIELD_BYTES.<get-HARD_MAXIMUM_FIELD_BYTES>|<get-HARD_MAXIMUM_FIELD_BYTES>(){}[0]
+        final const val HARD_MAXIMUM_LIST_BYTES // com.davils.krypt.ct/CtLimits.Companion.HARD_MAXIMUM_LIST_BYTES|{}HARD_MAXIMUM_LIST_BYTES[0]
+            final fun <get-HARD_MAXIMUM_LIST_BYTES>(): kotlin/Int // com.davils.krypt.ct/CtLimits.Companion.HARD_MAXIMUM_LIST_BYTES.<get-HARD_MAXIMUM_LIST_BYTES>|<get-HARD_MAXIMUM_LIST_BYTES>(){}[0]
+        final const val HARD_MAXIMUM_TIMESTAMPS // com.davils.krypt.ct/CtLimits.Companion.HARD_MAXIMUM_TIMESTAMPS|{}HARD_MAXIMUM_TIMESTAMPS[0]
+            final fun <get-HARD_MAXIMUM_TIMESTAMPS>(): kotlin/Int // com.davils.krypt.ct/CtLimits.Companion.HARD_MAXIMUM_TIMESTAMPS.<get-HARD_MAXIMUM_TIMESTAMPS>|<get-HARD_MAXIMUM_TIMESTAMPS>(){}[0]
+
+        final val Default // com.davils.krypt.ct/CtLimits.Companion.Default|{}Default[0]
+            final fun <get-Default>(): com.davils.krypt.ct/CtLimits // com.davils.krypt.ct/CtLimits.Companion.Default.<get-Default>|<get-Default>(){}[0]
+    }
+}
+
+final class com.davils.krypt.ct/CtLog { // com.davils.krypt.ct/CtLog|null[0]
+    final val logId // com.davils.krypt.ct/CtLog.logId|{}logId[0]
+        final fun <get-logId>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.ct/CtLog.logId.<get-logId>|<get-logId>(){}[0]
+    final val operator // com.davils.krypt.ct/CtLog.operator|{}operator[0]
+        final fun <get-operator>(): kotlin/String // com.davils.krypt.ct/CtLog.operator.<get-operator>|<get-operator>(){}[0]
+    final val publicKey // com.davils.krypt.ct/CtLog.publicKey|{}publicKey[0]
+        final fun <get-publicKey>(): com.davils.krypt.primitive.key/PublicKey // com.davils.krypt.ct/CtLog.publicKey.<get-publicKey>|<get-publicKey>(){}[0]
+    final val usableFrom // com.davils.krypt.ct/CtLog.usableFrom|{}usableFrom[0]
+        final fun <get-usableFrom>(): kotlin.time/Instant? // com.davils.krypt.ct/CtLog.usableFrom.<get-usableFrom>|<get-usableFrom>(){}[0]
+    final val usableUntil // com.davils.krypt.ct/CtLog.usableUntil|{}usableUntil[0]
+        final fun <get-usableUntil>(): kotlin.time/Instant? // com.davils.krypt.ct/CtLog.usableUntil.<get-usableUntil>|<get-usableUntil>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.ct/CtLog.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.ct/CtLog.hashCode|hashCode(){}[0]
+    final fun isUsableAt(kotlin.time/Instant): kotlin/Boolean // com.davils.krypt.ct/CtLog.isUsableAt|isUsableAt(kotlin.time.Instant){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.ct/CtLog.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.ct/CtPolicy : com.davils.kore.core.validation/Validatable { // com.davils.krypt.ct/CtPolicy|null[0]
+    final val minimumForLong // com.davils.krypt.ct/CtPolicy.minimumForLong|{}minimumForLong[0]
+        final fun <get-minimumForLong>(): kotlin/Int // com.davils.krypt.ct/CtPolicy.minimumForLong.<get-minimumForLong>|<get-minimumForLong>(){}[0]
+    final val minimumForShort // com.davils.krypt.ct/CtPolicy.minimumForShort|{}minimumForShort[0]
+        final fun <get-minimumForShort>(): kotlin/Int // com.davils.krypt.ct/CtPolicy.minimumForShort.<get-minimumForShort>|<get-minimumForShort>(){}[0]
+    final val minimumOperators // com.davils.krypt.ct/CtPolicy.minimumOperators|{}minimumOperators[0]
+        final fun <get-minimumOperators>(): kotlin/Int // com.davils.krypt.ct/CtPolicy.minimumOperators.<get-minimumOperators>|<get-minimumOperators>(){}[0]
+    final val shortLifetimeDays // com.davils.krypt.ct/CtPolicy.shortLifetimeDays|{}shortLifetimeDays[0]
+        final fun <get-shortLifetimeDays>(): kotlin/Int // com.davils.krypt.ct/CtPolicy.shortLifetimeDays.<get-shortLifetimeDays>|<get-shortLifetimeDays>(){}[0]
+
+    final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.krypt.ct/CtPolicy.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.ct/CtPolicy.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.ct/CtPolicy.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.ct/CtPolicy.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.ct/CtPolicy.Companion|null[0]
+        final const val MAXIMUM_COUNT // com.davils.krypt.ct/CtPolicy.Companion.MAXIMUM_COUNT|{}MAXIMUM_COUNT[0]
+            final fun <get-MAXIMUM_COUNT>(): kotlin/Int // com.davils.krypt.ct/CtPolicy.Companion.MAXIMUM_COUNT.<get-MAXIMUM_COUNT>|<get-MAXIMUM_COUNT>(){}[0]
+        final const val MAXIMUM_DAYS // com.davils.krypt.ct/CtPolicy.Companion.MAXIMUM_DAYS|{}MAXIMUM_DAYS[0]
+            final fun <get-MAXIMUM_DAYS>(): kotlin/Int // com.davils.krypt.ct/CtPolicy.Companion.MAXIMUM_DAYS.<get-MAXIMUM_DAYS>|<get-MAXIMUM_DAYS>(){}[0]
+
+        final val Default // com.davils.krypt.ct/CtPolicy.Companion.Default|{}Default[0]
+            final fun <get-Default>(): com.davils.krypt.ct/CtPolicy // com.davils.krypt.ct/CtPolicy.Companion.Default.<get-Default>|<get-Default>(){}[0]
+    }
+}
+
+final class com.davils.krypt.ct/CtPolicyBuilder : com.davils.kore.core.dsl/ValidatingBuilder<com.davils.krypt.ct/CtPolicy> { // com.davils.krypt.ct/CtPolicyBuilder|null[0]
+    final var minimumForLong // com.davils.krypt.ct/CtPolicyBuilder.minimumForLong|{}minimumForLong[0]
+        final fun <get-minimumForLong>(): kotlin/Int // com.davils.krypt.ct/CtPolicyBuilder.minimumForLong.<get-minimumForLong>|<get-minimumForLong>(){}[0]
+        final fun <set-minimumForLong>(kotlin/Int) // com.davils.krypt.ct/CtPolicyBuilder.minimumForLong.<set-minimumForLong>|<set-minimumForLong>(kotlin.Int){}[0]
+    final var minimumForShort // com.davils.krypt.ct/CtPolicyBuilder.minimumForShort|{}minimumForShort[0]
+        final fun <get-minimumForShort>(): kotlin/Int // com.davils.krypt.ct/CtPolicyBuilder.minimumForShort.<get-minimumForShort>|<get-minimumForShort>(){}[0]
+        final fun <set-minimumForShort>(kotlin/Int) // com.davils.krypt.ct/CtPolicyBuilder.minimumForShort.<set-minimumForShort>|<set-minimumForShort>(kotlin.Int){}[0]
+    final var minimumOperators // com.davils.krypt.ct/CtPolicyBuilder.minimumOperators|{}minimumOperators[0]
+        final fun <get-minimumOperators>(): kotlin/Int // com.davils.krypt.ct/CtPolicyBuilder.minimumOperators.<get-minimumOperators>|<get-minimumOperators>(){}[0]
+        final fun <set-minimumOperators>(kotlin/Int) // com.davils.krypt.ct/CtPolicyBuilder.minimumOperators.<set-minimumOperators>|<set-minimumOperators>(kotlin.Int){}[0]
+    final var shortLifetimeDays // com.davils.krypt.ct/CtPolicyBuilder.shortLifetimeDays|{}shortLifetimeDays[0]
+        final fun <get-shortLifetimeDays>(): kotlin/Int // com.davils.krypt.ct/CtPolicyBuilder.shortLifetimeDays.<get-shortLifetimeDays>|<get-shortLifetimeDays>(){}[0]
+        final fun <set-shortLifetimeDays>(kotlin/Int) // com.davils.krypt.ct/CtPolicyBuilder.shortLifetimeDays.<set-shortLifetimeDays>|<set-shortLifetimeDays>(kotlin.Int){}[0]
+}
+
+final class com.davils.krypt.ct/CtVerdict { // com.davils.krypt.ct/CtVerdict|null[0]
+    final val compliance // com.davils.krypt.ct/CtVerdict.compliance|{}compliance[0]
+        final fun <get-compliance>(): com.davils.krypt.ct/CtCompliance // com.davils.krypt.ct/CtVerdict.compliance.<get-compliance>|<get-compliance>(){}[0]
+    final val isCompliant // com.davils.krypt.ct/CtVerdict.isCompliant|{}isCompliant[0]
+        final fun <get-isCompliant>(): kotlin/Boolean // com.davils.krypt.ct/CtVerdict.isCompliant.<get-isCompliant>|<get-isCompliant>(){}[0]
+    final val logs // com.davils.krypt.ct/CtVerdict.logs|{}logs[0]
+        final fun <get-logs>(): kotlin/Int // com.davils.krypt.ct/CtVerdict.logs.<get-logs>|<get-logs>(){}[0]
+    final val operators // com.davils.krypt.ct/CtVerdict.operators|{}operators[0]
+        final fun <get-operators>(): kotlin/Int // com.davils.krypt.ct/CtVerdict.operators.<get-operators>|<get-operators>(){}[0]
+    final val required // com.davils.krypt.ct/CtVerdict.required|{}required[0]
+        final fun <get-required>(): kotlin/Int // com.davils.krypt.ct/CtVerdict.required.<get-required>|<get-required>(){}[0]
+    final val results // com.davils.krypt.ct/CtVerdict.results|{}results[0]
+        final fun <get-results>(): kotlin.collections/List<com.davils.krypt.ct/SctResult> // com.davils.krypt.ct/CtVerdict.results.<get-results>|<get-results>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.ct/CtVerdict.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.ct/LogList { // com.davils.krypt.ct/LogList|null[0]
+    constructor <init>(kotlin.collections/List<com.davils.krypt.ct/CtLog>) // com.davils.krypt.ct/LogList.<init>|<init>(kotlin.collections.List<com.davils.krypt.ct.CtLog>){}[0]
+
+    final val logs // com.davils.krypt.ct/LogList.logs|{}logs[0]
+        final fun <get-logs>(): kotlin.collections/List<com.davils.krypt.ct/CtLog> // com.davils.krypt.ct/LogList.logs.<get-logs>|<get-logs>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.ct/LogList.equals|equals(kotlin.Any?){}[0]
+    final fun find(kotlinx.io.bytestring/ByteString): com.davils.krypt.ct/CtLog? // com.davils.krypt.ct/LogList.find|find(kotlinx.io.bytestring.ByteString){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.ct/LogList.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.ct/LogList.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.ct/SctResult { // com.davils.krypt.ct/SctResult|null[0]
+    final val log // com.davils.krypt.ct/SctResult.log|{}log[0]
+        final fun <get-log>(): com.davils.krypt.ct/CtLog? // com.davils.krypt.ct/SctResult.log.<get-log>|<get-log>(){}[0]
+    final val origin // com.davils.krypt.ct/SctResult.origin|{}origin[0]
+        final fun <get-origin>(): com.davils.krypt.ct/SctOrigin // com.davils.krypt.ct/SctResult.origin.<get-origin>|<get-origin>(){}[0]
+    final val status // com.davils.krypt.ct/SctResult.status|{}status[0]
+        final fun <get-status>(): com.davils.krypt.ct/SctStatus // com.davils.krypt.ct/SctResult.status.<get-status>|<get-status>(){}[0]
+    final val timestamp // com.davils.krypt.ct/SctResult.timestamp|{}timestamp[0]
+        final fun <get-timestamp>(): com.davils.krypt.ct/SignedCertificateTimestamp // com.davils.krypt.ct/SctResult.timestamp.<get-timestamp>|<get-timestamp>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.ct/SctResult.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.ct/SctResult.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.ct/SctResult.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.ct/SignedCertificateTimestamp { // com.davils.krypt.ct/SignedCertificateTimestamp|null[0]
+    constructor <init>(kotlinx.io.bytestring/ByteString, kotlin.time/Instant, kotlinx.io.bytestring/ByteString, kotlin/Int, kotlin/Int, kotlinx.io.bytestring/ByteString) // com.davils.krypt.ct/SignedCertificateTimestamp.<init>|<init>(kotlinx.io.bytestring.ByteString;kotlin.time.Instant;kotlinx.io.bytestring.ByteString;kotlin.Int;kotlin.Int;kotlinx.io.bytestring.ByteString){}[0]
+
+    final val algorithm // com.davils.krypt.ct/SignedCertificateTimestamp.algorithm|{}algorithm[0]
+        final fun <get-algorithm>(): com.davils.krypt.core.algorithm/SignatureAlgorithm? // com.davils.krypt.ct/SignedCertificateTimestamp.algorithm.<get-algorithm>|<get-algorithm>(){}[0]
+    final val encoded // com.davils.krypt.ct/SignedCertificateTimestamp.encoded|{}encoded[0]
+        final fun <get-encoded>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.ct/SignedCertificateTimestamp.encoded.<get-encoded>|<get-encoded>(){}[0]
+    final val extensions // com.davils.krypt.ct/SignedCertificateTimestamp.extensions|{}extensions[0]
+        final fun <get-extensions>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.ct/SignedCertificateTimestamp.extensions.<get-extensions>|<get-extensions>(){}[0]
+    final val hashAlgorithm // com.davils.krypt.ct/SignedCertificateTimestamp.hashAlgorithm|{}hashAlgorithm[0]
+        final fun <get-hashAlgorithm>(): kotlin/Int // com.davils.krypt.ct/SignedCertificateTimestamp.hashAlgorithm.<get-hashAlgorithm>|<get-hashAlgorithm>(){}[0]
+    final val logId // com.davils.krypt.ct/SignedCertificateTimestamp.logId|{}logId[0]
+        final fun <get-logId>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.ct/SignedCertificateTimestamp.logId.<get-logId>|<get-logId>(){}[0]
+    final val signature // com.davils.krypt.ct/SignedCertificateTimestamp.signature|{}signature[0]
+        final fun <get-signature>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.ct/SignedCertificateTimestamp.signature.<get-signature>|<get-signature>(){}[0]
+    final val signatureAlgorithm // com.davils.krypt.ct/SignedCertificateTimestamp.signatureAlgorithm|{}signatureAlgorithm[0]
+        final fun <get-signatureAlgorithm>(): kotlin/Int // com.davils.krypt.ct/SignedCertificateTimestamp.signatureAlgorithm.<get-signatureAlgorithm>|<get-signatureAlgorithm>(){}[0]
+    final val timestamp // com.davils.krypt.ct/SignedCertificateTimestamp.timestamp|{}timestamp[0]
+        final fun <get-timestamp>(): kotlin.time/Instant // com.davils.krypt.ct/SignedCertificateTimestamp.timestamp.<get-timestamp>|<get-timestamp>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.ct/SignedCertificateTimestamp.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.ct/SignedCertificateTimestamp.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.ct/SignedCertificateTimestamp.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.ct/SignedCertificateTimestamp.Companion|null[0]
+        final const val ECDSA // com.davils.krypt.ct/SignedCertificateTimestamp.Companion.ECDSA|{}ECDSA[0]
+            final fun <get-ECDSA>(): kotlin/Int // com.davils.krypt.ct/SignedCertificateTimestamp.Companion.ECDSA.<get-ECDSA>|<get-ECDSA>(){}[0]
+        final const val LOG_ID_BYTES // com.davils.krypt.ct/SignedCertificateTimestamp.Companion.LOG_ID_BYTES|{}LOG_ID_BYTES[0]
+            final fun <get-LOG_ID_BYTES>(): kotlin/Int // com.davils.krypt.ct/SignedCertificateTimestamp.Companion.LOG_ID_BYTES.<get-LOG_ID_BYTES>|<get-LOG_ID_BYTES>(){}[0]
+        final const val RSA // com.davils.krypt.ct/SignedCertificateTimestamp.Companion.RSA|{}RSA[0]
+            final fun <get-RSA>(): kotlin/Int // com.davils.krypt.ct/SignedCertificateTimestamp.Companion.RSA.<get-RSA>|<get-RSA>(){}[0]
+        final const val SHA256 // com.davils.krypt.ct/SignedCertificateTimestamp.Companion.SHA256|{}SHA256[0]
+            final fun <get-SHA256>(): kotlin/Int // com.davils.krypt.ct/SignedCertificateTimestamp.Companion.SHA256.<get-SHA256>|<get-SHA256>(){}[0]
+    }
+}
+
+final class com.davils.krypt.ct/Transparency { // com.davils.krypt.ct/Transparency|null[0]
+    constructor <init>(com.davils.krypt.primitive/Crypto, com.davils.krypt.ct/CtLimits = ...) // com.davils.krypt.ct/Transparency.<init>|<init>(com.davils.krypt.primitive.Crypto;com.davils.krypt.ct.CtLimits){}[0]
+
+    final val limits // com.davils.krypt.ct/Transparency.limits|{}limits[0]
+        final fun <get-limits>(): com.davils.krypt.ct/CtLimits // com.davils.krypt.ct/Transparency.limits.<get-limits>|<get-limits>(){}[0]
+
+    final fun decodeList(kotlinx.io.bytestring/ByteString): com.davils.kore.core.outcome/Outcome<kotlin.collections/List<com.davils.krypt.ct/SignedCertificateTimestamp>, com.davils.krypt.ct/CtFailure> // com.davils.krypt.ct/Transparency.decodeList|decodeList(kotlinx.io.bytestring.ByteString){}[0]
+    final fun embedded(com.davils.krypt.x509/Certificate): com.davils.kore.core.outcome/Outcome<kotlin.collections/List<com.davils.krypt.ct/SignedCertificateTimestamp>, com.davils.krypt.ct/CtFailure> // com.davils.krypt.ct/Transparency.embedded|embedded(com.davils.krypt.x509.Certificate){}[0]
+    final fun encodeList(kotlin.collections/List<com.davils.krypt.ct/SignedCertificateTimestamp>): kotlinx.io.bytestring/ByteString // com.davils.krypt.ct/Transparency.encodeList|encodeList(kotlin.collections.List<com.davils.krypt.ct.SignedCertificateTimestamp>){}[0]
+    final fun extension(kotlin.collections/List<com.davils.krypt.ct/SignedCertificateTimestamp>): com.davils.krypt.x509.extension/Extension // com.davils.krypt.ct/Transparency.extension|extension(kotlin.collections.List<com.davils.krypt.ct.SignedCertificateTimestamp>){}[0]
+    final fun fromOcsp(kotlinx.io.bytestring/ByteString): com.davils.kore.core.outcome/Outcome<kotlin.collections/List<com.davils.krypt.ct/SignedCertificateTimestamp>, com.davils.krypt.ct/CtFailure> // com.davils.krypt.ct/Transparency.fromOcsp|fromOcsp(kotlinx.io.bytestring.ByteString){}[0]
+    final suspend fun check(com.davils.krypt.x509/Certificate, com.davils.krypt.x509/Certificate, com.davils.krypt.ct/LogList, com.davils.krypt.ct/CtPolicy = ..., kotlinx.io.bytestring/ByteString? = ..., kotlinx.io.bytestring/ByteString? = ..., kotlin.time/Instant? = ...): com.davils.kore.core.outcome/Outcome<com.davils.krypt.ct/CtVerdict, com.davils.krypt.ct/CtFailure> // com.davils.krypt.ct/Transparency.check|check(com.davils.krypt.x509.Certificate;com.davils.krypt.x509.Certificate;com.davils.krypt.ct.LogList;com.davils.krypt.ct.CtPolicy;kotlinx.io.bytestring.ByteString?;kotlinx.io.bytestring.ByteString?;kotlin.time.Instant?){}[0]
+    final suspend fun log(com.davils.krypt.primitive.key/PublicKey, kotlin/String, kotlin.time/Instant? = ..., kotlin.time/Instant? = ...): com.davils.krypt.ct/CtLog // com.davils.krypt.ct/Transparency.log|log(com.davils.krypt.primitive.key.PublicKey;kotlin.String;kotlin.time.Instant?;kotlin.time.Instant?){}[0]
+    final suspend fun verify(com.davils.krypt.ct/SignedCertificateTimestamp, com.davils.krypt.ct/SctOrigin, com.davils.krypt.x509/Certificate, com.davils.krypt.x509/Certificate, com.davils.krypt.ct/LogList, kotlin.time/Instant? = ...): com.davils.krypt.ct/SctResult // com.davils.krypt.ct/Transparency.verify|verify(com.davils.krypt.ct.SignedCertificateTimestamp;com.davils.krypt.ct.SctOrigin;com.davils.krypt.x509.Certificate;com.davils.krypt.x509.Certificate;com.davils.krypt.ct.LogList;kotlin.time.Instant?){}[0]
+}
+
+final fun com.davils.krypt.ct/ctPolicy(kotlin/Function1<com.davils.krypt.ct/CtPolicyBuilder, kotlin/Unit>): com.davils.krypt.ct/CtPolicy // com.davils.krypt.ct/ctPolicy|ctPolicy(kotlin.Function1<com.davils.krypt.ct.CtPolicyBuilder,kotlin.Unit>){}[0]
