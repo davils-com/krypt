@@ -46,7 +46,6 @@ import com.davils.krypt.cose.fixture.SIGN1_FAIL_03
 import com.davils.krypt.cose.fixture.SIGN1_FAIL_04
 import com.davils.krypt.cose.fixture.SIGN1_FAIL_06
 import com.davils.krypt.cose.fixture.SIGN1_FAIL_07
-import com.davils.krypt.cose.fixture.SIGN1_PASS_01
 import com.davils.krypt.cose.fixture.SIGN1_PASS_01_KEY_0
 import com.davils.krypt.cose.fixture.SIGN1_PASS_02
 import com.davils.krypt.cose.fixture.SIGN1_PASS_02_AAD
@@ -106,7 +105,6 @@ private suspend fun failsSign1(encoded: String, failure: CoseFailure) {
 
 class SignTest : FunSpec({
     test("the Sign1 examples of the COSE working group verify") {
-        verifiesSign1(encoded = SIGN1_PASS_01, keyHex = SIGN1_PASS_01_KEY_0)
         verifiesSign1(encoded = SIGN1_PASS_02, keyHex = SIGN1_PASS_01_KEY_0, externalAad = hex(SIGN1_PASS_02_AAD))
         verifiesSign1(encoded = SIGN1_PASS_03, keyHex = SIGN1_PASS_01_KEY_0)
         verifiesSign1(encoded = ECDSA_SIG_01, keyHex = ECDSA_SIG_01_KEY_0)

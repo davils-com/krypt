@@ -35,7 +35,8 @@ internal object Layers {
         unprotectedHeaders: CoseHeaders,
         algorithm: CoseAlgorithm,
     ): CoseHeaders {
-        val existing = protectedHeaders[HeaderLabels.ALGORITHM] ?: unprotectedHeaders[HeaderLabels.ALGORITHM]
+        require(unprotectedHeaders[HeaderLabels.ALGORITHM] == null) { "The algorithm is a protected header parameter" }
+        val existing = protectedHeaders[HeaderLabels.ALGORITHM]
         require(existing == null || existing.longOrNull() == algorithm.id) {
             "The algorithm of the headers is ${algorithm.algorithmName}"
         }
@@ -64,8 +65,8 @@ internal object Layers {
         allowed: Set<CoseAlgorithm>,
         kind: CoseAlgorithmKind,
     ): CoseAlgorithm {
-        val item = protectedHeaders[HeaderLabels.ALGORITHM] ?: unprotectedHeaders[HeaderLabels.ALGORITHM]
-        val algorithm = item?.longOrNull()?.let { id -> CoseAlgorithm.of(id) }
+        ensure(unprotectedHeaders[HeaderLabels.ALGORITHM] == null, CoseFailure.Malformed)
+        val algorithm = protectedHeaders[HeaderLabels.ALGORITHM]?.longOrNull()?.let { id -> CoseAlgorithm.of(id) }
         val permitted = algorithm?.takeIf { found -> found in allowed && found.kind == kind }
         return present(permitted, CoseFailure.AlgorithmNotPermitted)
     }

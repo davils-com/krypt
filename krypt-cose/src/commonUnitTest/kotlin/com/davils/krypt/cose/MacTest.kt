@@ -32,9 +32,6 @@ import com.davils.krypt.cose.fixture.HMAC_ENC_01
 import com.davils.krypt.cose.fixture.HMAC_ENC_02
 import com.davils.krypt.cose.fixture.HMAC_ENC_03
 import com.davils.krypt.cose.fixture.HMAC_ENC_04
-import com.davils.krypt.cose.fixture.MAC0_PASS_02
-import com.davils.krypt.cose.fixture.MAC0_PASS_02_AAD
-import com.davils.krypt.cose.fixture.MAC0_PASS_03
 import com.davils.krypt.cose.fixture.P256_HKDF_256_03
 import com.davils.krypt.cose.fixture.P256_HKDF_256_03_KEY_0
 import com.davils.krypt.cose.fixture.cose
@@ -88,15 +85,6 @@ class MacTest : FunSpec({
         verifiesMac0(encoded = HMAC_ENC_01, keyHex = HMAC_01_KEY_0)
         verifiesMac0(encoded = HMAC_ENC_02, keyHex = HMAC_02_KEY_0)
         verifiesMac0(encoded = HMAC_ENC_03, keyHex = HMAC_03_KEY_0)
-        verifiesMac0(encoded = MAC0_PASS_03, keyHex = HMAC_01_KEY_0)
-        val external = relaxed.decodeMac0(hex(MAC0_PASS_02)).value()
-        val outcome1 = relaxed.verify(
-            message = external,
-            keys = listOf(key(HMAC_01_KEY_0)),
-            algorithms = MACS,
-            externalAad = hex(MAC0_PASS_02_AAD),
-        )
-        outcome1.value() shouldBe utf8(CONTENT)
     }
 
     test("a MAC derived by ECDH-ES verifies") {
