@@ -26,6 +26,7 @@ import com.davils.kore.core.outcome.map
 import com.davils.kore.core.text.SafeText
 import com.davils.krypt.acme.account.AccountKey
 import com.davils.krypt.acme.account.AcmeAccount
+import com.davils.krypt.acme.internal.CheckedSession
 import com.davils.krypt.acme.internal.Exchange
 import com.davils.krypt.acme.internal.Polling
 import com.davils.krypt.acme.internal.Reply
@@ -69,13 +70,16 @@ import kotlin.time.Instant
  * @property accountUrl the URL of the account.
  * @since 1.0.0
  */
-public class AcmeSession internal constructor(
+public class AcmeSession private constructor(
     public val client: AcmeClient,
     public val key: AccountKey,
     public val accountUrl: String,
 ) {
     private val exchange: Exchange = client.exchange
     private val signing: Signing = Signing.ByKeyId(key = key, accountUrl = accountUrl)
+
+    internal constructor(checked: CheckedSession) :
+        this(client = checked.client, key = checked.key, accountUrl = checked.accountUrl)
 
     /**
      * Reads the account.
@@ -126,7 +130,7 @@ public class AcmeSession internal constructor(
             )
             exchange.post(url = found, payload = bytesOf(nested), signing = signing)
         }
-        return reply.map { _ -> AcmeSession(client = client, key = newKey, accountUrl = accountUrl) }
+        return reply.map { _ -> AcmeSession(CheckedSession(client = client, key = newKey, accountUrl = accountUrl)) }
     }
 
     /**
