@@ -24,10 +24,21 @@ import com.davils.krypt.asn1.pem.Pem
 import com.davils.krypt.asn1.pem.PemBlock
 import com.davils.krypt.core.SecretBytes
 import com.davils.krypt.core.SecretText
+import com.davils.krypt.core.algorithm.AeadAlgorithm
+import com.davils.krypt.core.algorithm.Algorithm
+import com.davils.krypt.core.algorithm.AsymmetricEncryptionAlgorithm
 import com.davils.krypt.core.algorithm.DigestAlgorithm
+import com.davils.krypt.core.algorithm.KdfAlgorithm
+import com.davils.krypt.core.algorithm.KemAlgorithm
+import com.davils.krypt.core.algorithm.KeyAgreementAlgorithm
+import com.davils.krypt.core.algorithm.KeyFamily
 import com.davils.krypt.core.algorithm.KeyType
+import com.davils.krypt.core.algorithm.KeyWrapAlgorithm
+import com.davils.krypt.core.algorithm.MacAlgorithm
+import com.davils.krypt.core.algorithm.SignatureAlgorithm
 import com.davils.krypt.core.policy.AlgorithmUse
 import com.davils.krypt.primitive.Crypto
+import com.davils.krypt.primitive.PolicyViolationException
 import com.davils.krypt.primitive.UnsupportedAlgorithmException
 import com.davils.krypt.primitive.internal.KeyCodec
 import com.davils.krypt.primitive.internal.KeyProbes
@@ -54,12 +65,17 @@ public class Keys internal constructor(private val crypto: Crypto) {
      *
      * @param type the key type.
      * @return the key pair, whose private key is extractable.
-     * @throws com.davils.krypt.primitive.PolicyViolationException if the policy forbids the size or the curve.
+     * @throws com.davils.krypt.primitive.PolicyViolationException if the policy forbids the size or the curve, or
+     *   permits no algorithm that uses keys of [type] for something new, such as an X25519 key under
+     *   [com.davils.krypt.core.policy.CryptoPolicy.Fips].
      * @throws UnsupportedAlgorithmException if the platform cannot generate [type].
      * @since 1.0.0
      */
     public suspend fun generate(type: KeyType): KeyPair {
         crypto.permitKey(type, AlgorithmUse.Protect)
+        val protecting = crypto.environment.policy.protecting
+        val isUsed = protecting.any { algorithm -> familyOf(algorithm) == type.family }
+        if (!isUsed) throw PolicyViolationException("${type.name} keys, which no permitted algorithm uses")
         if (!crypto.capabilities.supports(type)) throw UnsupportedAlgorithmException(type.name)
         return crypto.backend.generate(type)
     }
@@ -282,6 +298,18 @@ public class Keys internal constructor(private val crypto: Crypto) {
             failure,
             KeyFailure.WrongPassword,
         )[(failure == KeyFailure.Malformed).compareTo(false)]
+    }
+
+    private fun familyOf(algorithm: Algorithm): KeyFamily? = when (algorithm) {
+        is SignatureAlgorithm -> algorithm.family
+        is KeyAgreementAlgorithm -> algorithm.family
+        is KemAlgorithm -> algorithm.family
+        is AsymmetricEncryptionAlgorithm -> KeyFamily.Rsa
+        is DigestAlgorithm -> null
+        is MacAlgorithm -> null
+        is AeadAlgorithm -> null
+        is KeyWrapAlgorithm -> null
+        is KdfAlgorithm -> null
     }
 
     private fun spkiOf(block: PemBlock): ByteString? = SPKI_CONVERTERS[block.label]?.invoke(block.bytes)
