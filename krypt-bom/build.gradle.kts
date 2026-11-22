@@ -37,6 +37,7 @@ dependencies {
         api(project(":krypt-ct"))
         api(project(":krypt-ocsp"))
         api(project(":krypt-authority"))
+        api(project(":krypt-cose"))
         api(project(":krypt-testing"))
     }
 }

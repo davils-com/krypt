@@ -1,0 +1,887 @@
+// Klib ABI Dump
+// Targets: [wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.davils:krypt-cose>
+final enum class com.davils.krypt.cose.cbor/CborFailure : kotlin/Enum<com.davils.krypt.cose.cbor/CborFailure> { // com.davils.krypt.cose.cbor/CborFailure|null[0]
+    enum entry DuplicateKey // com.davils.krypt.cose.cbor/CborFailure.DuplicateKey|null[0]
+    enum entry IndefiniteLength // com.davils.krypt.cose.cbor/CborFailure.IndefiniteLength|null[0]
+    enum entry InvalidText // com.davils.krypt.cose.cbor/CborFailure.InvalidText|null[0]
+    enum entry LimitExceeded // com.davils.krypt.cose.cbor/CborFailure.LimitExceeded|null[0]
+    enum entry Malformed // com.davils.krypt.cose.cbor/CborFailure.Malformed|null[0]
+    enum entry NotDeterministic // com.davils.krypt.cose.cbor/CborFailure.NotDeterministic|null[0]
+    enum entry TrailingData // com.davils.krypt.cose.cbor/CborFailure.TrailingData|null[0]
+    enum entry Truncated // com.davils.krypt.cose.cbor/CborFailure.Truncated|null[0]
+
+    final val entries // com.davils.krypt.cose.cbor/CborFailure.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.cose.cbor/CborFailure> // com.davils.krypt.cose.cbor/CborFailure.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.cose.cbor/CborFailure // com.davils.krypt.cose.cbor/CborFailure.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.cose.cbor/CborFailure> // com.davils.krypt.cose.cbor/CborFailure.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.cose.cbor/CborMode : kotlin/Enum<com.davils.krypt.cose.cbor/CborMode> { // com.davils.krypt.cose.cbor/CborMode|null[0]
+    enum entry Deterministic // com.davils.krypt.cose.cbor/CborMode.Deterministic|null[0]
+    enum entry Relaxed // com.davils.krypt.cose.cbor/CborMode.Relaxed|null[0]
+
+    final val entries // com.davils.krypt.cose.cbor/CborMode.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.cose.cbor/CborMode> // com.davils.krypt.cose.cbor/CborMode.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.cose.cbor/CborMode // com.davils.krypt.cose.cbor/CborMode.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.cose.cbor/CborMode> // com.davils.krypt.cose.cbor/CborMode.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.cose.cwt/CwtFailure : kotlin/Enum<com.davils.krypt.cose.cwt/CwtFailure> { // com.davils.krypt.cose.cwt/CwtFailure|null[0]
+    enum entry AlgorithmNotPermitted // com.davils.krypt.cose.cwt/CwtFailure.AlgorithmNotPermitted|null[0]
+    enum entry DecryptionFailed // com.davils.krypt.cose.cwt/CwtFailure.DecryptionFailed|null[0]
+    enum entry Expired // com.davils.krypt.cose.cwt/CwtFailure.Expired|null[0]
+    enum entry InvalidSignature // com.davils.krypt.cose.cwt/CwtFailure.InvalidSignature|null[0]
+    enum entry InvalidTag // com.davils.krypt.cose.cwt/CwtFailure.InvalidTag|null[0]
+    enum entry IssuedInFuture // com.davils.krypt.cose.cwt/CwtFailure.IssuedInFuture|null[0]
+    enum entry KeyNotFound // com.davils.krypt.cose.cwt/CwtFailure.KeyNotFound|null[0]
+    enum entry Malformed // com.davils.krypt.cose.cwt/CwtFailure.Malformed|null[0]
+    enum entry MissingClaim // com.davils.krypt.cose.cwt/CwtFailure.MissingClaim|null[0]
+    enum entry NotYetValid // com.davils.krypt.cose.cwt/CwtFailure.NotYetValid|null[0]
+    enum entry UnknownCritical // com.davils.krypt.cose.cwt/CwtFailure.UnknownCritical|null[0]
+    enum entry UnsupportedKey // com.davils.krypt.cose.cwt/CwtFailure.UnsupportedKey|null[0]
+    enum entry WrongAudience // com.davils.krypt.cose.cwt/CwtFailure.WrongAudience|null[0]
+    enum entry WrongIssuer // com.davils.krypt.cose.cwt/CwtFailure.WrongIssuer|null[0]
+
+    final val entries // com.davils.krypt.cose.cwt/CwtFailure.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.cose.cwt/CwtFailure> // com.davils.krypt.cose.cwt/CwtFailure.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.cose.cwt/CwtFailure // com.davils.krypt.cose.cwt/CwtFailure.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.cose.cwt/CwtFailure> // com.davils.krypt.cose.cwt/CwtFailure.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.cose.key/CoseCurve : kotlin/Enum<com.davils.krypt.cose.key/CoseCurve> { // com.davils.krypt.cose.key/CoseCurve|null[0]
+    enum entry Ed25519 // com.davils.krypt.cose.key/CoseCurve.Ed25519|null[0]
+    enum entry Ed448 // com.davils.krypt.cose.key/CoseCurve.Ed448|null[0]
+    enum entry P256 // com.davils.krypt.cose.key/CoseCurve.P256|null[0]
+    enum entry P384 // com.davils.krypt.cose.key/CoseCurve.P384|null[0]
+    enum entry P521 // com.davils.krypt.cose.key/CoseCurve.P521|null[0]
+    enum entry X25519 // com.davils.krypt.cose.key/CoseCurve.X25519|null[0]
+    enum entry X448 // com.davils.krypt.cose.key/CoseCurve.X448|null[0]
+
+    final val curve // com.davils.krypt.cose.key/CoseCurve.curve|{}curve[0]
+        final fun <get-curve>(): com.davils.krypt.core.algorithm/EllipticCurve? // com.davils.krypt.cose.key/CoseCurve.curve.<get-curve>|<get-curve>(){}[0]
+    final val entries // com.davils.krypt.cose.key/CoseCurve.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.cose.key/CoseCurve> // com.davils.krypt.cose.key/CoseCurve.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val family // com.davils.krypt.cose.key/CoseCurve.family|{}family[0]
+        final fun <get-family>(): com.davils.krypt.core.algorithm/KeyFamily // com.davils.krypt.cose.key/CoseCurve.family.<get-family>|<get-family>(){}[0]
+    final val id // com.davils.krypt.cose.key/CoseCurve.id|{}id[0]
+        final fun <get-id>(): kotlin/Long // com.davils.krypt.cose.key/CoseCurve.id.<get-id>|<get-id>(){}[0]
+    final val keyType // com.davils.krypt.cose.key/CoseCurve.keyType|{}keyType[0]
+        final fun <get-keyType>(): com.davils.krypt.cose.key/CoseKeyType // com.davils.krypt.cose.key/CoseCurve.keyType.<get-keyType>|<get-keyType>(){}[0]
+    final val size // com.davils.krypt.cose.key/CoseCurve.size|{}size[0]
+        final fun <get-size>(): kotlin/Int // com.davils.krypt.cose.key/CoseCurve.size.<get-size>|<get-size>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.cose.key/CoseCurve // com.davils.krypt.cose.key/CoseCurve.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.cose.key/CoseCurve> // com.davils.krypt.cose.key/CoseCurve.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.cose.key/CoseKeyOperation : kotlin/Enum<com.davils.krypt.cose.key/CoseKeyOperation> { // com.davils.krypt.cose.key/CoseKeyOperation|null[0]
+    enum entry Decrypt // com.davils.krypt.cose.key/CoseKeyOperation.Decrypt|null[0]
+    enum entry DeriveBits // com.davils.krypt.cose.key/CoseKeyOperation.DeriveBits|null[0]
+    enum entry DeriveKey // com.davils.krypt.cose.key/CoseKeyOperation.DeriveKey|null[0]
+    enum entry Encrypt // com.davils.krypt.cose.key/CoseKeyOperation.Encrypt|null[0]
+    enum entry MacCreate // com.davils.krypt.cose.key/CoseKeyOperation.MacCreate|null[0]
+    enum entry MacVerify // com.davils.krypt.cose.key/CoseKeyOperation.MacVerify|null[0]
+    enum entry Sign // com.davils.krypt.cose.key/CoseKeyOperation.Sign|null[0]
+    enum entry UnwrapKey // com.davils.krypt.cose.key/CoseKeyOperation.UnwrapKey|null[0]
+    enum entry Verify // com.davils.krypt.cose.key/CoseKeyOperation.Verify|null[0]
+    enum entry WrapKey // com.davils.krypt.cose.key/CoseKeyOperation.WrapKey|null[0]
+
+    final val entries // com.davils.krypt.cose.key/CoseKeyOperation.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.cose.key/CoseKeyOperation> // com.davils.krypt.cose.key/CoseKeyOperation.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val id // com.davils.krypt.cose.key/CoseKeyOperation.id|{}id[0]
+        final fun <get-id>(): kotlin/Long // com.davils.krypt.cose.key/CoseKeyOperation.id.<get-id>|<get-id>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.cose.key/CoseKeyOperation // com.davils.krypt.cose.key/CoseKeyOperation.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.cose.key/CoseKeyOperation> // com.davils.krypt.cose.key/CoseKeyOperation.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.cose.key/CoseKeyType : kotlin/Enum<com.davils.krypt.cose.key/CoseKeyType> { // com.davils.krypt.cose.key/CoseKeyType|null[0]
+    enum entry Ec2 // com.davils.krypt.cose.key/CoseKeyType.Ec2|null[0]
+    enum entry Okp // com.davils.krypt.cose.key/CoseKeyType.Okp|null[0]
+    enum entry Rsa // com.davils.krypt.cose.key/CoseKeyType.Rsa|null[0]
+    enum entry Symmetric // com.davils.krypt.cose.key/CoseKeyType.Symmetric|null[0]
+
+    final val entries // com.davils.krypt.cose.key/CoseKeyType.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.cose.key/CoseKeyType> // com.davils.krypt.cose.key/CoseKeyType.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val id // com.davils.krypt.cose.key/CoseKeyType.id|{}id[0]
+        final fun <get-id>(): kotlin/Long // com.davils.krypt.cose.key/CoseKeyType.id.<get-id>|<get-id>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.cose.key/CoseKeyType // com.davils.krypt.cose.key/CoseKeyType.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.cose.key/CoseKeyType> // com.davils.krypt.cose.key/CoseKeyType.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.cose/CoseAlgorithm : kotlin/Enum<com.davils.krypt.cose/CoseAlgorithm> { // com.davils.krypt.cose/CoseAlgorithm|null[0]
+    enum entry A128Gcm // com.davils.krypt.cose/CoseAlgorithm.A128Gcm|null[0]
+    enum entry A128Kw // com.davils.krypt.cose/CoseAlgorithm.A128Kw|null[0]
+    enum entry A192Gcm // com.davils.krypt.cose/CoseAlgorithm.A192Gcm|null[0]
+    enum entry A192Kw // com.davils.krypt.cose/CoseAlgorithm.A192Kw|null[0]
+    enum entry A256Gcm // com.davils.krypt.cose/CoseAlgorithm.A256Gcm|null[0]
+    enum entry A256Kw // com.davils.krypt.cose/CoseAlgorithm.A256Kw|null[0]
+    enum entry ChaCha20Poly1305 // com.davils.krypt.cose/CoseAlgorithm.ChaCha20Poly1305|null[0]
+    enum entry Direct // com.davils.krypt.cose/CoseAlgorithm.Direct|null[0]
+    enum entry EcdhEsA128Kw // com.davils.krypt.cose/CoseAlgorithm.EcdhEsA128Kw|null[0]
+    enum entry EcdhEsA192Kw // com.davils.krypt.cose/CoseAlgorithm.EcdhEsA192Kw|null[0]
+    enum entry EcdhEsA256Kw // com.davils.krypt.cose/CoseAlgorithm.EcdhEsA256Kw|null[0]
+    enum entry EcdhEsHkdf256 // com.davils.krypt.cose/CoseAlgorithm.EcdhEsHkdf256|null[0]
+    enum entry EcdhEsHkdf512 // com.davils.krypt.cose/CoseAlgorithm.EcdhEsHkdf512|null[0]
+    enum entry Ed25519 // com.davils.krypt.cose/CoseAlgorithm.Ed25519|null[0]
+    enum entry Ed448 // com.davils.krypt.cose/CoseAlgorithm.Ed448|null[0]
+    enum entry EdDsa // com.davils.krypt.cose/CoseAlgorithm.EdDsa|null[0]
+    enum entry Es256 // com.davils.krypt.cose/CoseAlgorithm.Es256|null[0]
+    enum entry Es384 // com.davils.krypt.cose/CoseAlgorithm.Es384|null[0]
+    enum entry Es512 // com.davils.krypt.cose/CoseAlgorithm.Es512|null[0]
+    enum entry Esp256 // com.davils.krypt.cose/CoseAlgorithm.Esp256|null[0]
+    enum entry Esp384 // com.davils.krypt.cose/CoseAlgorithm.Esp384|null[0]
+    enum entry Esp512 // com.davils.krypt.cose/CoseAlgorithm.Esp512|null[0]
+    enum entry Hmac256 // com.davils.krypt.cose/CoseAlgorithm.Hmac256|null[0]
+    enum entry Hmac256Truncated64 // com.davils.krypt.cose/CoseAlgorithm.Hmac256Truncated64|null[0]
+    enum entry Hmac384 // com.davils.krypt.cose/CoseAlgorithm.Hmac384|null[0]
+    enum entry Hmac512 // com.davils.krypt.cose/CoseAlgorithm.Hmac512|null[0]
+    enum entry Ps256 // com.davils.krypt.cose/CoseAlgorithm.Ps256|null[0]
+    enum entry Ps384 // com.davils.krypt.cose/CoseAlgorithm.Ps384|null[0]
+    enum entry Ps512 // com.davils.krypt.cose/CoseAlgorithm.Ps512|null[0]
+
+    final val algorithmName // com.davils.krypt.cose/CoseAlgorithm.algorithmName|{}algorithmName[0]
+        final fun <get-algorithmName>(): kotlin/String // com.davils.krypt.cose/CoseAlgorithm.algorithmName.<get-algorithmName>|<get-algorithmName>(){}[0]
+    final val entries // com.davils.krypt.cose/CoseAlgorithm.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.cose/CoseAlgorithm> // com.davils.krypt.cose/CoseAlgorithm.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val id // com.davils.krypt.cose/CoseAlgorithm.id|{}id[0]
+        final fun <get-id>(): kotlin/Long // com.davils.krypt.cose/CoseAlgorithm.id.<get-id>|<get-id>(){}[0]
+    final val kind // com.davils.krypt.cose/CoseAlgorithm.kind|{}kind[0]
+        final fun <get-kind>(): com.davils.krypt.cose/CoseAlgorithmKind // com.davils.krypt.cose/CoseAlgorithm.kind.<get-kind>|<get-kind>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.cose/CoseAlgorithm // com.davils.krypt.cose/CoseAlgorithm.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.cose/CoseAlgorithm> // com.davils.krypt.cose/CoseAlgorithm.values|values#static(){}[0]
+
+    final object Companion { // com.davils.krypt.cose/CoseAlgorithm.Companion|null[0]
+        final fun of(kotlin/Long): com.davils.krypt.cose/CoseAlgorithm? // com.davils.krypt.cose/CoseAlgorithm.Companion.of|of(kotlin.Long){}[0]
+    }
+}
+
+final enum class com.davils.krypt.cose/CoseAlgorithmKind : kotlin/Enum<com.davils.krypt.cose/CoseAlgorithmKind> { // com.davils.krypt.cose/CoseAlgorithmKind|null[0]
+    enum entry ContentEncryption // com.davils.krypt.cose/CoseAlgorithmKind.ContentEncryption|null[0]
+    enum entry KeyDistribution // com.davils.krypt.cose/CoseAlgorithmKind.KeyDistribution|null[0]
+    enum entry Mac // com.davils.krypt.cose/CoseAlgorithmKind.Mac|null[0]
+    enum entry Signature // com.davils.krypt.cose/CoseAlgorithmKind.Signature|null[0]
+
+    final val entries // com.davils.krypt.cose/CoseAlgorithmKind.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.cose/CoseAlgorithmKind> // com.davils.krypt.cose/CoseAlgorithmKind.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.cose/CoseAlgorithmKind // com.davils.krypt.cose/CoseAlgorithmKind.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.cose/CoseAlgorithmKind> // com.davils.krypt.cose/CoseAlgorithmKind.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.cose/CoseFailure : kotlin/Enum<com.davils.krypt.cose/CoseFailure> { // com.davils.krypt.cose/CoseFailure|null[0]
+    enum entry AlgorithmNotPermitted // com.davils.krypt.cose/CoseFailure.AlgorithmNotPermitted|null[0]
+    enum entry DecryptionFailed // com.davils.krypt.cose/CoseFailure.DecryptionFailed|null[0]
+    enum entry InvalidSignature // com.davils.krypt.cose/CoseFailure.InvalidSignature|null[0]
+    enum entry InvalidTag // com.davils.krypt.cose/CoseFailure.InvalidTag|null[0]
+    enum entry KeyNotFound // com.davils.krypt.cose/CoseFailure.KeyNotFound|null[0]
+    enum entry Malformed // com.davils.krypt.cose/CoseFailure.Malformed|null[0]
+    enum entry UnknownCritical // com.davils.krypt.cose/CoseFailure.UnknownCritical|null[0]
+    enum entry UnsupportedKey // com.davils.krypt.cose/CoseFailure.UnsupportedKey|null[0]
+
+    final val entries // com.davils.krypt.cose/CoseFailure.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.cose/CoseFailure> // com.davils.krypt.cose/CoseFailure.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.cose/CoseFailure // com.davils.krypt.cose/CoseFailure.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.cose/CoseFailure> // com.davils.krypt.cose/CoseFailure.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.cose/CoseMessageType : kotlin/Enum<com.davils.krypt.cose/CoseMessageType> { // com.davils.krypt.cose/CoseMessageType|null[0]
+    enum entry Encrypt // com.davils.krypt.cose/CoseMessageType.Encrypt|null[0]
+    enum entry Encrypt0 // com.davils.krypt.cose/CoseMessageType.Encrypt0|null[0]
+    enum entry Mac // com.davils.krypt.cose/CoseMessageType.Mac|null[0]
+    enum entry Mac0 // com.davils.krypt.cose/CoseMessageType.Mac0|null[0]
+    enum entry Sign // com.davils.krypt.cose/CoseMessageType.Sign|null[0]
+    enum entry Sign1 // com.davils.krypt.cose/CoseMessageType.Sign1|null[0]
+
+    final val entries // com.davils.krypt.cose/CoseMessageType.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.cose/CoseMessageType> // com.davils.krypt.cose/CoseMessageType.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val tag // com.davils.krypt.cose/CoseMessageType.tag|{}tag[0]
+        final fun <get-tag>(): kotlin/ULong // com.davils.krypt.cose/CoseMessageType.tag.<get-tag>|<get-tag>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.cose/CoseMessageType // com.davils.krypt.cose/CoseMessageType.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.cose/CoseMessageType> // com.davils.krypt.cose/CoseMessageType.values|values#static(){}[0]
+}
+
+final class com.davils.krypt.cose.cbor/CborArray : com.davils.krypt.cose.cbor/CborItem { // com.davils.krypt.cose.cbor/CborArray|null[0]
+    constructor <init>(kotlin.collections/List<com.davils.krypt.cose.cbor/CborItem>) // com.davils.krypt.cose.cbor/CborArray.<init>|<init>(kotlin.collections.List<com.davils.krypt.cose.cbor.CborItem>){}[0]
+
+    final val items // com.davils.krypt.cose.cbor/CborArray.items|{}items[0]
+        final fun <get-items>(): kotlin.collections/List<com.davils.krypt.cose.cbor/CborItem> // com.davils.krypt.cose.cbor/CborArray.items.<get-items>|<get-items>(){}[0]
+    final val size // com.davils.krypt.cose.cbor/CborArray.size|{}size[0]
+        final fun <get-size>(): kotlin/Int // com.davils.krypt.cose.cbor/CborArray.size.<get-size>|<get-size>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cose.cbor/CborArray.equals|equals(kotlin.Any?){}[0]
+    final fun get(kotlin/Int): com.davils.krypt.cose.cbor/CborItem // com.davils.krypt.cose.cbor/CborArray.get|get(kotlin.Int){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cose.cbor/CborArray.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cose.cbor/CborArray.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.cose.cbor/CborArray.Companion|null[0]
+        final fun of(kotlin/Array<out com.davils.krypt.cose.cbor/CborItem>...): com.davils.krypt.cose.cbor/CborArray // com.davils.krypt.cose.cbor/CborArray.Companion.of|of(kotlin.Array<out|com.davils.krypt.cose.cbor.CborItem>...){}[0]
+    }
+}
+
+final class com.davils.krypt.cose.cbor/CborBytes : com.davils.krypt.cose.cbor/CborItem { // com.davils.krypt.cose.cbor/CborBytes|null[0]
+    constructor <init>(kotlinx.io.bytestring/ByteString) // com.davils.krypt.cose.cbor/CborBytes.<init>|<init>(kotlinx.io.bytestring.ByteString){}[0]
+
+    final val bytes // com.davils.krypt.cose.cbor/CborBytes.bytes|{}bytes[0]
+        final fun <get-bytes>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cose.cbor/CborBytes.bytes.<get-bytes>|<get-bytes>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cose.cbor/CborBytes.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cose.cbor/CborBytes.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cose.cbor/CborBytes.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.cose.cbor/CborFloat : com.davils.krypt.cose.cbor/CborItem { // com.davils.krypt.cose.cbor/CborFloat|null[0]
+    constructor <init>(kotlin/Double) // com.davils.krypt.cose.cbor/CborFloat.<init>|<init>(kotlin.Double){}[0]
+
+    final val value // com.davils.krypt.cose.cbor/CborFloat.value|{}value[0]
+        final fun <get-value>(): kotlin/Double // com.davils.krypt.cose.cbor/CborFloat.value.<get-value>|<get-value>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cose.cbor/CborFloat.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cose.cbor/CborFloat.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cose.cbor/CborFloat.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.cose.cbor/CborInteger : com.davils.krypt.cose.cbor/CborItem { // com.davils.krypt.cose.cbor/CborInteger|null[0]
+    final val argument // com.davils.krypt.cose.cbor/CborInteger.argument|{}argument[0]
+        final fun <get-argument>(): kotlin/ULong // com.davils.krypt.cose.cbor/CborInteger.argument.<get-argument>|<get-argument>(){}[0]
+    final val isNegative // com.davils.krypt.cose.cbor/CborInteger.isNegative|{}isNegative[0]
+        final fun <get-isNegative>(): kotlin/Boolean // com.davils.krypt.cose.cbor/CborInteger.isNegative.<get-isNegative>|<get-isNegative>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cose.cbor/CborInteger.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cose.cbor/CborInteger.hashCode|hashCode(){}[0]
+    final fun toLongOrNull(): kotlin/Long? // com.davils.krypt.cose.cbor/CborInteger.toLongOrNull|toLongOrNull(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cose.cbor/CborInteger.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.cose.cbor/CborInteger.Companion|null[0]
+        final fun negative(kotlin/ULong): com.davils.krypt.cose.cbor/CborInteger // com.davils.krypt.cose.cbor/CborInteger.Companion.negative|negative(kotlin.ULong){}[0]
+        final fun of(kotlin/Long): com.davils.krypt.cose.cbor/CborInteger // com.davils.krypt.cose.cbor/CborInteger.Companion.of|of(kotlin.Long){}[0]
+        final fun unsigned(kotlin/ULong): com.davils.krypt.cose.cbor/CborInteger // com.davils.krypt.cose.cbor/CborInteger.Companion.unsigned|unsigned(kotlin.ULong){}[0]
+    }
+}
+
+final class com.davils.krypt.cose.cbor/CborLimits : com.davils.kore.core.validation/Validatable { // com.davils.krypt.cose.cbor/CborLimits|null[0]
+    constructor <init>(kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ...) // com.davils.krypt.cose.cbor/CborLimits.<init>|<init>(kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int){}[0]
+
+    final val maximumBytes // com.davils.krypt.cose.cbor/CborLimits.maximumBytes|{}maximumBytes[0]
+        final fun <get-maximumBytes>(): kotlin/Int // com.davils.krypt.cose.cbor/CborLimits.maximumBytes.<get-maximumBytes>|<get-maximumBytes>(){}[0]
+    final val maximumDepth // com.davils.krypt.cose.cbor/CborLimits.maximumDepth|{}maximumDepth[0]
+        final fun <get-maximumDepth>(): kotlin/Int // com.davils.krypt.cose.cbor/CborLimits.maximumDepth.<get-maximumDepth>|<get-maximumDepth>(){}[0]
+    final val maximumItems // com.davils.krypt.cose.cbor/CborLimits.maximumItems|{}maximumItems[0]
+        final fun <get-maximumItems>(): kotlin/Int // com.davils.krypt.cose.cbor/CborLimits.maximumItems.<get-maximumItems>|<get-maximumItems>(){}[0]
+    final val maximumMapEntries // com.davils.krypt.cose.cbor/CborLimits.maximumMapEntries|{}maximumMapEntries[0]
+        final fun <get-maximumMapEntries>(): kotlin/Int // com.davils.krypt.cose.cbor/CborLimits.maximumMapEntries.<get-maximumMapEntries>|<get-maximumMapEntries>(){}[0]
+    final val maximumStringBytes // com.davils.krypt.cose.cbor/CborLimits.maximumStringBytes|{}maximumStringBytes[0]
+        final fun <get-maximumStringBytes>(): kotlin/Int // com.davils.krypt.cose.cbor/CborLimits.maximumStringBytes.<get-maximumStringBytes>|<get-maximumStringBytes>(){}[0]
+
+    final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.krypt.cose.cbor/CborLimits.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cose.cbor/CborLimits.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cose.cbor/CborLimits.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cose.cbor/CborLimits.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.cose.cbor/CborLimits.Companion|null[0]
+        final const val HARD_MAXIMUM_BYTES // com.davils.krypt.cose.cbor/CborLimits.Companion.HARD_MAXIMUM_BYTES|{}HARD_MAXIMUM_BYTES[0]
+            final fun <get-HARD_MAXIMUM_BYTES>(): kotlin/Int // com.davils.krypt.cose.cbor/CborLimits.Companion.HARD_MAXIMUM_BYTES.<get-HARD_MAXIMUM_BYTES>|<get-HARD_MAXIMUM_BYTES>(){}[0]
+        final const val HARD_MAXIMUM_DEPTH // com.davils.krypt.cose.cbor/CborLimits.Companion.HARD_MAXIMUM_DEPTH|{}HARD_MAXIMUM_DEPTH[0]
+            final fun <get-HARD_MAXIMUM_DEPTH>(): kotlin/Int // com.davils.krypt.cose.cbor/CborLimits.Companion.HARD_MAXIMUM_DEPTH.<get-HARD_MAXIMUM_DEPTH>|<get-HARD_MAXIMUM_DEPTH>(){}[0]
+        final const val HARD_MAXIMUM_ITEMS // com.davils.krypt.cose.cbor/CborLimits.Companion.HARD_MAXIMUM_ITEMS|{}HARD_MAXIMUM_ITEMS[0]
+            final fun <get-HARD_MAXIMUM_ITEMS>(): kotlin/Int // com.davils.krypt.cose.cbor/CborLimits.Companion.HARD_MAXIMUM_ITEMS.<get-HARD_MAXIMUM_ITEMS>|<get-HARD_MAXIMUM_ITEMS>(){}[0]
+        final const val HARD_MAXIMUM_MAP_ENTRIES // com.davils.krypt.cose.cbor/CborLimits.Companion.HARD_MAXIMUM_MAP_ENTRIES|{}HARD_MAXIMUM_MAP_ENTRIES[0]
+            final fun <get-HARD_MAXIMUM_MAP_ENTRIES>(): kotlin/Int // com.davils.krypt.cose.cbor/CborLimits.Companion.HARD_MAXIMUM_MAP_ENTRIES.<get-HARD_MAXIMUM_MAP_ENTRIES>|<get-HARD_MAXIMUM_MAP_ENTRIES>(){}[0]
+
+        final val Default // com.davils.krypt.cose.cbor/CborLimits.Companion.Default|{}Default[0]
+            final fun <get-Default>(): com.davils.krypt.cose.cbor/CborLimits // com.davils.krypt.cose.cbor/CborLimits.Companion.Default.<get-Default>|<get-Default>(){}[0]
+    }
+}
+
+final class com.davils.krypt.cose.cbor/CborMap : com.davils.krypt.cose.cbor/CborItem { // com.davils.krypt.cose.cbor/CborMap|null[0]
+    constructor <init>(kotlin.collections/List<kotlin/Pair<com.davils.krypt.cose.cbor/CborItem, com.davils.krypt.cose.cbor/CborItem>>) // com.davils.krypt.cose.cbor/CborMap.<init>|<init>(kotlin.collections.List<kotlin.Pair<com.davils.krypt.cose.cbor.CborItem,com.davils.krypt.cose.cbor.CborItem>>){}[0]
+
+    final val entries // com.davils.krypt.cose.cbor/CborMap.entries|{}entries[0]
+        final fun <get-entries>(): kotlin.collections/List<kotlin/Pair<com.davils.krypt.cose.cbor/CborItem, com.davils.krypt.cose.cbor/CborItem>> // com.davils.krypt.cose.cbor/CborMap.entries.<get-entries>|<get-entries>(){}[0]
+    final val keys // com.davils.krypt.cose.cbor/CborMap.keys|{}keys[0]
+        final fun <get-keys>(): kotlin.collections/List<com.davils.krypt.cose.cbor/CborItem> // com.davils.krypt.cose.cbor/CborMap.keys.<get-keys>|<get-keys>(){}[0]
+    final val size // com.davils.krypt.cose.cbor/CborMap.size|{}size[0]
+        final fun <get-size>(): kotlin/Int // com.davils.krypt.cose.cbor/CborMap.size.<get-size>|<get-size>(){}[0]
+
+    final fun contains(com.davils.krypt.cose.cbor/CborItem): kotlin/Boolean // com.davils.krypt.cose.cbor/CborMap.contains|contains(com.davils.krypt.cose.cbor.CborItem){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cose.cbor/CborMap.equals|equals(kotlin.Any?){}[0]
+    final fun get(com.davils.krypt.cose.cbor/CborItem): com.davils.krypt.cose.cbor/CborItem? // com.davils.krypt.cose.cbor/CborMap.get|get(com.davils.krypt.cose.cbor.CborItem){}[0]
+    final fun get(kotlin/Long): com.davils.krypt.cose.cbor/CborItem? // com.davils.krypt.cose.cbor/CborMap.get|get(kotlin.Long){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cose.cbor/CborMap.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cose.cbor/CborMap.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.cose.cbor/CborMap.Companion|null[0]
+        final val Empty // com.davils.krypt.cose.cbor/CborMap.Companion.Empty|{}Empty[0]
+            final fun <get-Empty>(): com.davils.krypt.cose.cbor/CborMap // com.davils.krypt.cose.cbor/CborMap.Companion.Empty.<get-Empty>|<get-Empty>(){}[0]
+
+        final fun of(kotlin/Array<out kotlin/Pair<com.davils.krypt.cose.cbor/CborItem, com.davils.krypt.cose.cbor/CborItem>>...): com.davils.krypt.cose.cbor/CborMap // com.davils.krypt.cose.cbor/CborMap.Companion.of|of(kotlin.Array<out|kotlin.Pair<com.davils.krypt.cose.cbor.CborItem,com.davils.krypt.cose.cbor.CborItem>>...){}[0]
+    }
+}
+
+final class com.davils.krypt.cose.cbor/CborSimple : com.davils.krypt.cose.cbor/CborItem { // com.davils.krypt.cose.cbor/CborSimple|null[0]
+    constructor <init>(kotlin/Int) // com.davils.krypt.cose.cbor/CborSimple.<init>|<init>(kotlin.Int){}[0]
+
+    final val isBoolean // com.davils.krypt.cose.cbor/CborSimple.isBoolean|{}isBoolean[0]
+        final fun <get-isBoolean>(): kotlin/Boolean // com.davils.krypt.cose.cbor/CborSimple.isBoolean.<get-isBoolean>|<get-isBoolean>(){}[0]
+    final val value // com.davils.krypt.cose.cbor/CborSimple.value|{}value[0]
+        final fun <get-value>(): kotlin/Int // com.davils.krypt.cose.cbor/CborSimple.value.<get-value>|<get-value>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cose.cbor/CborSimple.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cose.cbor/CborSimple.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cose.cbor/CborSimple.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.cose.cbor/CborSimple.Companion|null[0]
+        final val False // com.davils.krypt.cose.cbor/CborSimple.Companion.False|{}False[0]
+            final fun <get-False>(): com.davils.krypt.cose.cbor/CborSimple // com.davils.krypt.cose.cbor/CborSimple.Companion.False.<get-False>|<get-False>(){}[0]
+        final val Null // com.davils.krypt.cose.cbor/CborSimple.Companion.Null|{}Null[0]
+            final fun <get-Null>(): com.davils.krypt.cose.cbor/CborSimple // com.davils.krypt.cose.cbor/CborSimple.Companion.Null.<get-Null>|<get-Null>(){}[0]
+        final val True // com.davils.krypt.cose.cbor/CborSimple.Companion.True|{}True[0]
+            final fun <get-True>(): com.davils.krypt.cose.cbor/CborSimple // com.davils.krypt.cose.cbor/CborSimple.Companion.True.<get-True>|<get-True>(){}[0]
+        final val Undefined // com.davils.krypt.cose.cbor/CborSimple.Companion.Undefined|{}Undefined[0]
+            final fun <get-Undefined>(): com.davils.krypt.cose.cbor/CborSimple // com.davils.krypt.cose.cbor/CborSimple.Companion.Undefined.<get-Undefined>|<get-Undefined>(){}[0]
+
+        final fun of(kotlin/Boolean): com.davils.krypt.cose.cbor/CborSimple // com.davils.krypt.cose.cbor/CborSimple.Companion.of|of(kotlin.Boolean){}[0]
+    }
+}
+
+final class com.davils.krypt.cose.cbor/CborTag : com.davils.krypt.cose.cbor/CborItem { // com.davils.krypt.cose.cbor/CborTag|null[0]
+    constructor <init>(kotlin/ULong, com.davils.krypt.cose.cbor/CborItem) // com.davils.krypt.cose.cbor/CborTag.<init>|<init>(kotlin.ULong;com.davils.krypt.cose.cbor.CborItem){}[0]
+
+    final val content // com.davils.krypt.cose.cbor/CborTag.content|{}content[0]
+        final fun <get-content>(): com.davils.krypt.cose.cbor/CborItem // com.davils.krypt.cose.cbor/CborTag.content.<get-content>|<get-content>(){}[0]
+    final val number // com.davils.krypt.cose.cbor/CborTag.number|{}number[0]
+        final fun <get-number>(): kotlin/ULong // com.davils.krypt.cose.cbor/CborTag.number.<get-number>|<get-number>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cose.cbor/CborTag.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cose.cbor/CborTag.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cose.cbor/CborTag.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.cose.cbor/CborText : com.davils.krypt.cose.cbor/CborItem { // com.davils.krypt.cose.cbor/CborText|null[0]
+    constructor <init>(kotlin/String) // com.davils.krypt.cose.cbor/CborText.<init>|<init>(kotlin.String){}[0]
+
+    final val text // com.davils.krypt.cose.cbor/CborText.text|{}text[0]
+        final fun <get-text>(): kotlin/String // com.davils.krypt.cose.cbor/CborText.text.<get-text>|<get-text>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cose.cbor/CborText.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cose.cbor/CborText.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cose.cbor/CborText.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.cose.cwt/Cwt { // com.davils.krypt.cose.cwt/Cwt|null[0]
+    constructor <init>(com.davils.krypt.cose/Cose) // com.davils.krypt.cose.cwt/Cwt.<init>|<init>(com.davils.krypt.cose.Cose){}[0]
+
+    final val cose // com.davils.krypt.cose.cwt/Cwt.cose|{}cose[0]
+        final fun <get-cose>(): com.davils.krypt.cose/Cose // com.davils.krypt.cose.cwt/Cwt.cose.<get-cose>|<get-cose>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.cose.cwt/Cwt.toString|toString(){}[0]
+    final suspend fun encrypt(com.davils.krypt.cose.cwt/CwtClaims, com.davils.krypt.cose.key/CoseKey, com.davils.krypt.cose/CoseAlgorithm, kotlin/Boolean = ...): kotlinx.io.bytestring/ByteString // com.davils.krypt.cose.cwt/Cwt.encrypt|encrypt(com.davils.krypt.cose.cwt.CwtClaims;com.davils.krypt.cose.key.CoseKey;com.davils.krypt.cose.CoseAlgorithm;kotlin.Boolean){}[0]
+    final suspend fun mac(com.davils.krypt.cose.cwt/CwtClaims, com.davils.krypt.cose.key/CoseKey, com.davils.krypt.cose/CoseAlgorithm, kotlin/Boolean = ...): kotlinx.io.bytestring/ByteString // com.davils.krypt.cose.cwt/Cwt.mac|mac(com.davils.krypt.cose.cwt.CwtClaims;com.davils.krypt.cose.key.CoseKey;com.davils.krypt.cose.CoseAlgorithm;kotlin.Boolean){}[0]
+    final suspend fun sign(com.davils.krypt.cose.cwt/CwtClaims, com.davils.krypt.cose/CoseSigner, kotlin/Boolean = ...): kotlinx.io.bytestring/ByteString // com.davils.krypt.cose.cwt/Cwt.sign|sign(com.davils.krypt.cose.cwt.CwtClaims;com.davils.krypt.cose.CoseSigner;kotlin.Boolean){}[0]
+    final suspend fun validate(kotlinx.io.bytestring/ByteString, kotlin.collections/List<com.davils.krypt.cose.key/CoseKey>, com.davils.krypt.cose.cwt/CwtValidation): com.davils.kore.core.outcome/Outcome<com.davils.krypt.cose.cwt/CwtClaims, com.davils.krypt.cose.cwt/CwtFailure> // com.davils.krypt.cose.cwt/Cwt.validate|validate(kotlinx.io.bytestring.ByteString;kotlin.collections.List<com.davils.krypt.cose.key.CoseKey>;com.davils.krypt.cose.cwt.CwtValidation){}[0]
+
+    final object Companion { // com.davils.krypt.cose.cwt/Cwt.Companion|null[0]
+        final const val MAXIMUM_LAYERS // com.davils.krypt.cose.cwt/Cwt.Companion.MAXIMUM_LAYERS|{}MAXIMUM_LAYERS[0]
+            final fun <get-MAXIMUM_LAYERS>(): kotlin/Int // com.davils.krypt.cose.cwt/Cwt.Companion.MAXIMUM_LAYERS.<get-MAXIMUM_LAYERS>|<get-MAXIMUM_LAYERS>(){}[0]
+        final const val TAG // com.davils.krypt.cose.cwt/Cwt.Companion.TAG|{}TAG[0]
+            final fun <get-TAG>(): kotlin/ULong // com.davils.krypt.cose.cwt/Cwt.Companion.TAG.<get-TAG>|<get-TAG>(){}[0]
+    }
+}
+
+final class com.davils.krypt.cose.cwt/CwtClaims { // com.davils.krypt.cose.cwt/CwtClaims|null[0]
+    final val audience // com.davils.krypt.cose.cwt/CwtClaims.audience|{}audience[0]
+        final fun <get-audience>(): kotlin.collections/List<kotlin/String> // com.davils.krypt.cose.cwt/CwtClaims.audience.<get-audience>|<get-audience>(){}[0]
+    final val claims // com.davils.krypt.cose.cwt/CwtClaims.claims|{}claims[0]
+        final fun <get-claims>(): com.davils.krypt.cose.cbor/CborMap // com.davils.krypt.cose.cwt/CwtClaims.claims.<get-claims>|<get-claims>(){}[0]
+    final val cwtId // com.davils.krypt.cose.cwt/CwtClaims.cwtId|{}cwtId[0]
+        final fun <get-cwtId>(): kotlinx.io.bytestring/ByteString? // com.davils.krypt.cose.cwt/CwtClaims.cwtId.<get-cwtId>|<get-cwtId>(){}[0]
+    final val expiration // com.davils.krypt.cose.cwt/CwtClaims.expiration|{}expiration[0]
+        final fun <get-expiration>(): kotlin.time/Instant? // com.davils.krypt.cose.cwt/CwtClaims.expiration.<get-expiration>|<get-expiration>(){}[0]
+    final val issuedAt // com.davils.krypt.cose.cwt/CwtClaims.issuedAt|{}issuedAt[0]
+        final fun <get-issuedAt>(): kotlin.time/Instant? // com.davils.krypt.cose.cwt/CwtClaims.issuedAt.<get-issuedAt>|<get-issuedAt>(){}[0]
+    final val issuer // com.davils.krypt.cose.cwt/CwtClaims.issuer|{}issuer[0]
+        final fun <get-issuer>(): kotlin/String? // com.davils.krypt.cose.cwt/CwtClaims.issuer.<get-issuer>|<get-issuer>(){}[0]
+    final val notBefore // com.davils.krypt.cose.cwt/CwtClaims.notBefore|{}notBefore[0]
+        final fun <get-notBefore>(): kotlin.time/Instant? // com.davils.krypt.cose.cwt/CwtClaims.notBefore.<get-notBefore>|<get-notBefore>(){}[0]
+    final val subject // com.davils.krypt.cose.cwt/CwtClaims.subject|{}subject[0]
+        final fun <get-subject>(): kotlin/String? // com.davils.krypt.cose.cwt/CwtClaims.subject.<get-subject>|<get-subject>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cose.cwt/CwtClaims.equals|equals(kotlin.Any?){}[0]
+    final fun get(com.davils.krypt.cose.cbor/CborItem): com.davils.krypt.cose.cbor/CborItem? // com.davils.krypt.cose.cwt/CwtClaims.get|get(com.davils.krypt.cose.cbor.CborItem){}[0]
+    final fun get(kotlin/Long): com.davils.krypt.cose.cbor/CborItem? // com.davils.krypt.cose.cwt/CwtClaims.get|get(kotlin.Long){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cose.cwt/CwtClaims.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cose.cwt/CwtClaims.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.cose.cwt/CwtClaims.Companion|null[0]
+        final const val AUDIENCE // com.davils.krypt.cose.cwt/CwtClaims.Companion.AUDIENCE|{}AUDIENCE[0]
+            final fun <get-AUDIENCE>(): kotlin/Long // com.davils.krypt.cose.cwt/CwtClaims.Companion.AUDIENCE.<get-AUDIENCE>|<get-AUDIENCE>(){}[0]
+        final const val CWT_ID // com.davils.krypt.cose.cwt/CwtClaims.Companion.CWT_ID|{}CWT_ID[0]
+            final fun <get-CWT_ID>(): kotlin/Long // com.davils.krypt.cose.cwt/CwtClaims.Companion.CWT_ID.<get-CWT_ID>|<get-CWT_ID>(){}[0]
+        final const val EXPIRATION // com.davils.krypt.cose.cwt/CwtClaims.Companion.EXPIRATION|{}EXPIRATION[0]
+            final fun <get-EXPIRATION>(): kotlin/Long // com.davils.krypt.cose.cwt/CwtClaims.Companion.EXPIRATION.<get-EXPIRATION>|<get-EXPIRATION>(){}[0]
+        final const val ISSUED_AT // com.davils.krypt.cose.cwt/CwtClaims.Companion.ISSUED_AT|{}ISSUED_AT[0]
+            final fun <get-ISSUED_AT>(): kotlin/Long // com.davils.krypt.cose.cwt/CwtClaims.Companion.ISSUED_AT.<get-ISSUED_AT>|<get-ISSUED_AT>(){}[0]
+        final const val ISSUER // com.davils.krypt.cose.cwt/CwtClaims.Companion.ISSUER|{}ISSUER[0]
+            final fun <get-ISSUER>(): kotlin/Long // com.davils.krypt.cose.cwt/CwtClaims.Companion.ISSUER.<get-ISSUER>|<get-ISSUER>(){}[0]
+        final const val NOT_BEFORE // com.davils.krypt.cose.cwt/CwtClaims.Companion.NOT_BEFORE|{}NOT_BEFORE[0]
+            final fun <get-NOT_BEFORE>(): kotlin/Long // com.davils.krypt.cose.cwt/CwtClaims.Companion.NOT_BEFORE.<get-NOT_BEFORE>|<get-NOT_BEFORE>(){}[0]
+        final const val SUBJECT // com.davils.krypt.cose.cwt/CwtClaims.Companion.SUBJECT|{}SUBJECT[0]
+            final fun <get-SUBJECT>(): kotlin/Long // com.davils.krypt.cose.cwt/CwtClaims.Companion.SUBJECT.<get-SUBJECT>|<get-SUBJECT>(){}[0]
+
+        final fun of(com.davils.krypt.cose.cbor/CborMap): com.davils.krypt.cose.cwt/CwtClaims // com.davils.krypt.cose.cwt/CwtClaims.Companion.of|of(com.davils.krypt.cose.cbor.CborMap){}[0]
+        final fun of(kotlin/String? = ..., kotlin/String? = ..., kotlin.collections/List<kotlin/String> = ..., kotlin.time/Instant? = ..., kotlin.time/Instant? = ..., kotlin.time/Instant? = ..., kotlinx.io.bytestring/ByteString? = ..., com.davils.krypt.cose.cbor/CborMap = ...): com.davils.krypt.cose.cwt/CwtClaims // com.davils.krypt.cose.cwt/CwtClaims.Companion.of|of(kotlin.String?;kotlin.String?;kotlin.collections.List<kotlin.String>;kotlin.time.Instant?;kotlin.time.Instant?;kotlin.time.Instant?;kotlinx.io.bytestring.ByteString?;com.davils.krypt.cose.cbor.CborMap){}[0]
+    }
+}
+
+final class com.davils.krypt.cose.cwt/CwtValidation : com.davils.kore.core.validation/Validatable { // com.davils.krypt.cose.cwt/CwtValidation|null[0]
+    final val algorithms // com.davils.krypt.cose.cwt/CwtValidation.algorithms|{}algorithms[0]
+        final fun <get-algorithms>(): kotlin.collections/Set<com.davils.krypt.cose/CoseAlgorithm> // com.davils.krypt.cose.cwt/CwtValidation.algorithms.<get-algorithms>|<get-algorithms>(){}[0]
+    final val at // com.davils.krypt.cose.cwt/CwtValidation.at|{}at[0]
+        final fun <get-at>(): kotlin.time/Instant? // com.davils.krypt.cose.cwt/CwtValidation.at.<get-at>|<get-at>(){}[0]
+    final val audience // com.davils.krypt.cose.cwt/CwtValidation.audience|{}audience[0]
+        final fun <get-audience>(): kotlin/String? // com.davils.krypt.cose.cwt/CwtValidation.audience.<get-audience>|<get-audience>(){}[0]
+    final val issuer // com.davils.krypt.cose.cwt/CwtValidation.issuer|{}issuer[0]
+        final fun <get-issuer>(): kotlin/String? // com.davils.krypt.cose.cwt/CwtValidation.issuer.<get-issuer>|<get-issuer>(){}[0]
+    final val requiredClaims // com.davils.krypt.cose.cwt/CwtValidation.requiredClaims|{}requiredClaims[0]
+        final fun <get-requiredClaims>(): kotlin.collections/Set<com.davils.krypt.cose.cbor/CborItem> // com.davils.krypt.cose.cwt/CwtValidation.requiredClaims.<get-requiredClaims>|<get-requiredClaims>(){}[0]
+    final val skew // com.davils.krypt.cose.cwt/CwtValidation.skew|{}skew[0]
+        final fun <get-skew>(): kotlin.time/Duration // com.davils.krypt.cose.cwt/CwtValidation.skew.<get-skew>|<get-skew>(){}[0]
+    final val untaggedType // com.davils.krypt.cose.cwt/CwtValidation.untaggedType|{}untaggedType[0]
+        final fun <get-untaggedType>(): com.davils.krypt.cose/CoseMessageType? // com.davils.krypt.cose.cwt/CwtValidation.untaggedType.<get-untaggedType>|<get-untaggedType>(){}[0]
+
+    final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.krypt.cose.cwt/CwtValidation.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cose.cwt/CwtValidation.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cose.cwt/CwtValidation.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cose.cwt/CwtValidation.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.cose.cwt/CwtValidation.Companion|null[0]
+        final val MAXIMUM_SKEW // com.davils.krypt.cose.cwt/CwtValidation.Companion.MAXIMUM_SKEW|{}MAXIMUM_SKEW[0]
+            final fun <get-MAXIMUM_SKEW>(): kotlin.time/Duration // com.davils.krypt.cose.cwt/CwtValidation.Companion.MAXIMUM_SKEW.<get-MAXIMUM_SKEW>|<get-MAXIMUM_SKEW>(){}[0]
+    }
+}
+
+final class com.davils.krypt.cose.cwt/CwtValidationBuilder : com.davils.kore.core.dsl/ValidatingBuilder<com.davils.krypt.cose.cwt/CwtValidation> { // com.davils.krypt.cose.cwt/CwtValidationBuilder|null[0]
+    final var at // com.davils.krypt.cose.cwt/CwtValidationBuilder.at|{}at[0]
+        final fun <get-at>(): kotlin.time/Instant? // com.davils.krypt.cose.cwt/CwtValidationBuilder.at.<get-at>|<get-at>(){}[0]
+        final fun <set-at>(kotlin.time/Instant?) // com.davils.krypt.cose.cwt/CwtValidationBuilder.at.<set-at>|<set-at>(kotlin.time.Instant?){}[0]
+    final var audience // com.davils.krypt.cose.cwt/CwtValidationBuilder.audience|{}audience[0]
+        final fun <get-audience>(): kotlin/String? // com.davils.krypt.cose.cwt/CwtValidationBuilder.audience.<get-audience>|<get-audience>(){}[0]
+        final fun <set-audience>(kotlin/String?) // com.davils.krypt.cose.cwt/CwtValidationBuilder.audience.<set-audience>|<set-audience>(kotlin.String?){}[0]
+    final var issuer // com.davils.krypt.cose.cwt/CwtValidationBuilder.issuer|{}issuer[0]
+        final fun <get-issuer>(): kotlin/String? // com.davils.krypt.cose.cwt/CwtValidationBuilder.issuer.<get-issuer>|<get-issuer>(){}[0]
+        final fun <set-issuer>(kotlin/String?) // com.davils.krypt.cose.cwt/CwtValidationBuilder.issuer.<set-issuer>|<set-issuer>(kotlin.String?){}[0]
+    final var skew // com.davils.krypt.cose.cwt/CwtValidationBuilder.skew|{}skew[0]
+        final fun <get-skew>(): kotlin.time/Duration // com.davils.krypt.cose.cwt/CwtValidationBuilder.skew.<get-skew>|<get-skew>(){}[0]
+        final fun <set-skew>(kotlin.time/Duration) // com.davils.krypt.cose.cwt/CwtValidationBuilder.skew.<set-skew>|<set-skew>(kotlin.time.Duration){}[0]
+    final var untaggedType // com.davils.krypt.cose.cwt/CwtValidationBuilder.untaggedType|{}untaggedType[0]
+        final fun <get-untaggedType>(): com.davils.krypt.cose/CoseMessageType? // com.davils.krypt.cose.cwt/CwtValidationBuilder.untaggedType.<get-untaggedType>|<get-untaggedType>(){}[0]
+        final fun <set-untaggedType>(com.davils.krypt.cose/CoseMessageType?) // com.davils.krypt.cose.cwt/CwtValidationBuilder.untaggedType.<set-untaggedType>|<set-untaggedType>(com.davils.krypt.cose.CoseMessageType?){}[0]
+
+    final fun algorithms(kotlin/Array<out com.davils.krypt.cose/CoseAlgorithm>...) // com.davils.krypt.cose.cwt/CwtValidationBuilder.algorithms|algorithms(kotlin.Array<out|com.davils.krypt.cose.CoseAlgorithm>...){}[0]
+    final fun require(com.davils.krypt.cose.cbor/CborItem) // com.davils.krypt.cose.cwt/CwtValidationBuilder.require|require(com.davils.krypt.cose.cbor.CborItem){}[0]
+    final fun require(kotlin/LongArray...) // com.davils.krypt.cose.cwt/CwtValidationBuilder.require|require(kotlin.LongArray...){}[0]
+}
+
+final class com.davils.krypt.cose.key/CoseKey { // com.davils.krypt.cose.key/CoseKey|null[0]
+    final val algorithm // com.davils.krypt.cose.key/CoseKey.algorithm|{}algorithm[0]
+        final fun <get-algorithm>(): com.davils.krypt.cose/CoseAlgorithm? // com.davils.krypt.cose.key/CoseKey.algorithm.<get-algorithm>|<get-algorithm>(){}[0]
+    final val baseIv // com.davils.krypt.cose.key/CoseKey.baseIv|{}baseIv[0]
+        final fun <get-baseIv>(): kotlinx.io.bytestring/ByteString? // com.davils.krypt.cose.key/CoseKey.baseIv.<get-baseIv>|<get-baseIv>(){}[0]
+    final val curve // com.davils.krypt.cose.key/CoseKey.curve|{}curve[0]
+        final fun <get-curve>(): com.davils.krypt.cose.key/CoseCurve? // com.davils.krypt.cose.key/CoseKey.curve.<get-curve>|<get-curve>(){}[0]
+    final val keyId // com.davils.krypt.cose.key/CoseKey.keyId|{}keyId[0]
+        final fun <get-keyId>(): kotlinx.io.bytestring/ByteString? // com.davils.krypt.cose.key/CoseKey.keyId.<get-keyId>|<get-keyId>(){}[0]
+    final val operations // com.davils.krypt.cose.key/CoseKey.operations|{}operations[0]
+        final fun <get-operations>(): kotlin.collections/Set<com.davils.krypt.cose.key/CoseKeyOperation> // com.davils.krypt.cose.key/CoseKey.operations.<get-operations>|<get-operations>(){}[0]
+    final val privateKey // com.davils.krypt.cose.key/CoseKey.privateKey|{}privateKey[0]
+        final fun <get-privateKey>(): com.davils.krypt.primitive.key/PrivateKey? // com.davils.krypt.cose.key/CoseKey.privateKey.<get-privateKey>|<get-privateKey>(){}[0]
+    final val publicKey // com.davils.krypt.cose.key/CoseKey.publicKey|{}publicKey[0]
+        final fun <get-publicKey>(): com.davils.krypt.primitive.key/PublicKey? // com.davils.krypt.cose.key/CoseKey.publicKey.<get-publicKey>|<get-publicKey>(){}[0]
+    final val secretKey // com.davils.krypt.cose.key/CoseKey.secretKey|{}secretKey[0]
+        final fun <get-secretKey>(): com.davils.krypt.primitive.key/SecretKey? // com.davils.krypt.cose.key/CoseKey.secretKey.<get-secretKey>|<get-secretKey>(){}[0]
+    final val type // com.davils.krypt.cose.key/CoseKey.type|{}type[0]
+        final fun <get-type>(): com.davils.krypt.cose.key/CoseKeyType // com.davils.krypt.cose.key/CoseKey.type.<get-type>|<get-type>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cose.key/CoseKey.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cose.key/CoseKey.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cose.key/CoseKey.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.cose.key/CoseKey.Companion|null[0]
+        final fun of(com.davils.krypt.primitive.key/PrivateKey, com.davils.krypt.primitive.key/PublicKey? = ..., kotlinx.io.bytestring/ByteString? = ..., com.davils.krypt.cose/CoseAlgorithm? = ..., kotlin.collections/Set<com.davils.krypt.cose.key/CoseKeyOperation> = ...): com.davils.krypt.cose.key/CoseKey // com.davils.krypt.cose.key/CoseKey.Companion.of|of(com.davils.krypt.primitive.key.PrivateKey;com.davils.krypt.primitive.key.PublicKey?;kotlinx.io.bytestring.ByteString?;com.davils.krypt.cose.CoseAlgorithm?;kotlin.collections.Set<com.davils.krypt.cose.key.CoseKeyOperation>){}[0]
+        final fun of(com.davils.krypt.primitive.key/PublicKey, kotlinx.io.bytestring/ByteString? = ..., com.davils.krypt.cose/CoseAlgorithm? = ..., kotlin.collections/Set<com.davils.krypt.cose.key/CoseKeyOperation> = ...): com.davils.krypt.cose.key/CoseKey // com.davils.krypt.cose.key/CoseKey.Companion.of|of(com.davils.krypt.primitive.key.PublicKey;kotlinx.io.bytestring.ByteString?;com.davils.krypt.cose.CoseAlgorithm?;kotlin.collections.Set<com.davils.krypt.cose.key.CoseKeyOperation>){}[0]
+        final fun of(com.davils.krypt.primitive.key/SecretKey, kotlinx.io.bytestring/ByteString? = ..., com.davils.krypt.cose/CoseAlgorithm? = ..., kotlin.collections/Set<com.davils.krypt.cose.key/CoseKeyOperation> = ..., kotlinx.io.bytestring/ByteString? = ...): com.davils.krypt.cose.key/CoseKey // com.davils.krypt.cose.key/CoseKey.Companion.of|of(com.davils.krypt.primitive.key.SecretKey;kotlinx.io.bytestring.ByteString?;com.davils.krypt.cose.CoseAlgorithm?;kotlin.collections.Set<com.davils.krypt.cose.key.CoseKeyOperation>;kotlinx.io.bytestring.ByteString?){}[0]
+    }
+}
+
+final class com.davils.krypt.cose.key/CoseKeySet { // com.davils.krypt.cose.key/CoseKeySet|null[0]
+    constructor <init>(kotlin.collections/List<com.davils.krypt.cose.key/CoseKey>) // com.davils.krypt.cose.key/CoseKeySet.<init>|<init>(kotlin.collections.List<com.davils.krypt.cose.key.CoseKey>){}[0]
+
+    final val keys // com.davils.krypt.cose.key/CoseKeySet.keys|{}keys[0]
+        final fun <get-keys>(): kotlin.collections/List<com.davils.krypt.cose.key/CoseKey> // com.davils.krypt.cose.key/CoseKeySet.keys.<get-keys>|<get-keys>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cose.key/CoseKeySet.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cose.key/CoseKeySet.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cose.key/CoseKeySet.toString|toString(){}[0]
+    final fun withKeyId(kotlinx.io.bytestring/ByteString): kotlin.collections/List<com.davils.krypt.cose.key/CoseKey> // com.davils.krypt.cose.key/CoseKeySet.withKeyId|withKeyId(kotlinx.io.bytestring.ByteString){}[0]
+}
+
+final class com.davils.krypt.cose.key/CoseKeys { // com.davils.krypt.cose.key/CoseKeys|null[0]
+    constructor <init>(com.davils.krypt.primitive/Crypto, com.davils.krypt.cose/CoseLimits = ..., com.davils.krypt.cose.cbor/CborMode = ...) // com.davils.krypt.cose.key/CoseKeys.<init>|<init>(com.davils.krypt.primitive.Crypto;com.davils.krypt.cose.CoseLimits;com.davils.krypt.cose.cbor.CborMode){}[0]
+
+    final val crypto // com.davils.krypt.cose.key/CoseKeys.crypto|{}crypto[0]
+        final fun <get-crypto>(): com.davils.krypt.primitive/Crypto // com.davils.krypt.cose.key/CoseKeys.crypto.<get-crypto>|<get-crypto>(){}[0]
+    final val limits // com.davils.krypt.cose.key/CoseKeys.limits|{}limits[0]
+        final fun <get-limits>(): com.davils.krypt.cose/CoseLimits // com.davils.krypt.cose.key/CoseKeys.limits.<get-limits>|<get-limits>(){}[0]
+    final val mode // com.davils.krypt.cose.key/CoseKeys.mode|{}mode[0]
+        final fun <get-mode>(): com.davils.krypt.cose.cbor/CborMode // com.davils.krypt.cose.key/CoseKeys.mode.<get-mode>|<get-mode>(){}[0]
+
+    final fun decode(kotlinx.io.bytestring/ByteString): com.davils.kore.core.outcome/Outcome<com.davils.krypt.cose.key/CoseKey, com.davils.krypt.cose/CoseFailure> // com.davils.krypt.cose.key/CoseKeys.decode|decode(kotlinx.io.bytestring.ByteString){}[0]
+    final fun decodeSet(kotlinx.io.bytestring/ByteString): com.davils.kore.core.outcome/Outcome<com.davils.krypt.cose.key/CoseKeySet, com.davils.krypt.cose/CoseFailure> // com.davils.krypt.cose.key/CoseKeys.decodeSet|decodeSet(kotlinx.io.bytestring.ByteString){}[0]
+    final fun encode(com.davils.krypt.cose.key/CoseKey): kotlinx.io.bytestring/ByteString // com.davils.krypt.cose.key/CoseKeys.encode|encode(com.davils.krypt.cose.key.CoseKey){}[0]
+    final fun encodePrivate(com.davils.krypt.cose.key/CoseKey): com.davils.krypt.core/SecretBytes // com.davils.krypt.cose.key/CoseKeys.encodePrivate|encodePrivate(com.davils.krypt.cose.key.CoseKey){}[0]
+    final fun encodeSet(com.davils.krypt.cose.key/CoseKeySet): kotlinx.io.bytestring/ByteString // com.davils.krypt.cose.key/CoseKeys.encodeSet|encodeSet(com.davils.krypt.cose.key.CoseKeySet){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cose.key/CoseKeys.toString|toString(){}[0]
+    final suspend fun thumbprint(com.davils.krypt.cose.key/CoseKey, com.davils.krypt.core.algorithm/DigestAlgorithm = ...): kotlinx.io.bytestring/ByteString // com.davils.krypt.cose.key/CoseKeys.thumbprint|thumbprint(com.davils.krypt.cose.key.CoseKey;com.davils.krypt.core.algorithm.DigestAlgorithm){}[0]
+}
+
+final class com.davils.krypt.cose/Cose { // com.davils.krypt.cose/Cose|null[0]
+    constructor <init>(com.davils.krypt.primitive/Crypto, com.davils.krypt.cose/CoseLimits = ..., com.davils.krypt.cose.cbor/CborMode = ..., kotlin.collections/Set<com.davils.krypt.cose.cbor/CborItem> = ...) // com.davils.krypt.cose/Cose.<init>|<init>(com.davils.krypt.primitive.Crypto;com.davils.krypt.cose.CoseLimits;com.davils.krypt.cose.cbor.CborMode;kotlin.collections.Set<com.davils.krypt.cose.cbor.CborItem>){}[0]
+
+    final val criticalLabels // com.davils.krypt.cose/Cose.criticalLabels|{}criticalLabels[0]
+        final fun <get-criticalLabels>(): kotlin.collections/Set<com.davils.krypt.cose.cbor/CborItem> // com.davils.krypt.cose/Cose.criticalLabels.<get-criticalLabels>|<get-criticalLabels>(){}[0]
+    final val crypto // com.davils.krypt.cose/Cose.crypto|{}crypto[0]
+        final fun <get-crypto>(): com.davils.krypt.primitive/Crypto // com.davils.krypt.cose/Cose.crypto.<get-crypto>|<get-crypto>(){}[0]
+    final val limits // com.davils.krypt.cose/Cose.limits|{}limits[0]
+        final fun <get-limits>(): com.davils.krypt.cose/CoseLimits // com.davils.krypt.cose/Cose.limits.<get-limits>|<get-limits>(){}[0]
+    final val mode // com.davils.krypt.cose/Cose.mode|{}mode[0]
+        final fun <get-mode>(): com.davils.krypt.cose.cbor/CborMode // com.davils.krypt.cose/Cose.mode.<get-mode>|<get-mode>(){}[0]
+
+    final fun certificateChain(com.davils.krypt.cose/CoseHeaders): com.davils.kore.core.outcome/Outcome<kotlin.collections/List<com.davils.krypt.x509/Certificate>, com.davils.krypt.cose/CoseFailure> // com.davils.krypt.cose/Cose.certificateChain|certificateChain(com.davils.krypt.cose.CoseHeaders){}[0]
+    final fun decode(kotlinx.io.bytestring/ByteString): com.davils.kore.core.outcome/Outcome<com.davils.krypt.cose/CoseMessage, com.davils.krypt.cose/CoseFailure> // com.davils.krypt.cose/Cose.decode|decode(kotlinx.io.bytestring.ByteString){}[0]
+    final fun decodeEncrypt(kotlinx.io.bytestring/ByteString): com.davils.kore.core.outcome/Outcome<com.davils.krypt.cose/CoseEncrypt, com.davils.krypt.cose/CoseFailure> // com.davils.krypt.cose/Cose.decodeEncrypt|decodeEncrypt(kotlinx.io.bytestring.ByteString){}[0]
+    final fun decodeEncrypt0(kotlinx.io.bytestring/ByteString): com.davils.kore.core.outcome/Outcome<com.davils.krypt.cose/CoseEncrypt0, com.davils.krypt.cose/CoseFailure> // com.davils.krypt.cose/Cose.decodeEncrypt0|decodeEncrypt0(kotlinx.io.bytestring.ByteString){}[0]
+    final fun decodeMac(kotlinx.io.bytestring/ByteString): com.davils.kore.core.outcome/Outcome<com.davils.krypt.cose/CoseMac, com.davils.krypt.cose/CoseFailure> // com.davils.krypt.cose/Cose.decodeMac|decodeMac(kotlinx.io.bytestring.ByteString){}[0]
+    final fun decodeMac0(kotlinx.io.bytestring/ByteString): com.davils.kore.core.outcome/Outcome<com.davils.krypt.cose/CoseMac0, com.davils.krypt.cose/CoseFailure> // com.davils.krypt.cose/Cose.decodeMac0|decodeMac0(kotlinx.io.bytestring.ByteString){}[0]
+    final fun decodeSign(kotlinx.io.bytestring/ByteString): com.davils.kore.core.outcome/Outcome<com.davils.krypt.cose/CoseSign, com.davils.krypt.cose/CoseFailure> // com.davils.krypt.cose/Cose.decodeSign|decodeSign(kotlinx.io.bytestring.ByteString){}[0]
+    final fun decodeSign1(kotlinx.io.bytestring/ByteString): com.davils.kore.core.outcome/Outcome<com.davils.krypt.cose/CoseSign1, com.davils.krypt.cose/CoseFailure> // com.davils.krypt.cose/Cose.decodeSign1|decodeSign1(kotlinx.io.bytestring.ByteString){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cose/Cose.toString|toString(){}[0]
+    final suspend fun certificateHash(com.davils.krypt.x509/Certificate, com.davils.krypt.core.algorithm/DigestAlgorithm = ...): com.davils.krypt.cose/CoseCertificateHash // com.davils.krypt.cose/Cose.certificateHash|certificateHash(com.davils.krypt.x509.Certificate;com.davils.krypt.core.algorithm.DigestAlgorithm){}[0]
+    final suspend fun decrypt(com.davils.krypt.cose/CoseEncrypt, kotlin.collections/List<com.davils.krypt.cose.key/CoseKey>, kotlin.collections/Set<com.davils.krypt.cose/CoseAlgorithm>, kotlinx.io.bytestring/ByteString = ..., kotlinx.io.bytestring/ByteString? = ...): com.davils.kore.core.outcome/Outcome<kotlinx.io.bytestring/ByteString, com.davils.krypt.cose/CoseFailure> // com.davils.krypt.cose/Cose.decrypt|decrypt(com.davils.krypt.cose.CoseEncrypt;kotlin.collections.List<com.davils.krypt.cose.key.CoseKey>;kotlin.collections.Set<com.davils.krypt.cose.CoseAlgorithm>;kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString?){}[0]
+    final suspend fun decrypt(com.davils.krypt.cose/CoseEncrypt0, kotlin.collections/List<com.davils.krypt.cose.key/CoseKey>, kotlin.collections/Set<com.davils.krypt.cose/CoseAlgorithm>, kotlinx.io.bytestring/ByteString = ..., kotlinx.io.bytestring/ByteString? = ...): com.davils.kore.core.outcome/Outcome<kotlinx.io.bytestring/ByteString, com.davils.krypt.cose/CoseFailure> // com.davils.krypt.cose/Cose.decrypt|decrypt(com.davils.krypt.cose.CoseEncrypt0;kotlin.collections.List<com.davils.krypt.cose.key.CoseKey>;kotlin.collections.Set<com.davils.krypt.cose.CoseAlgorithm>;kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString?){}[0]
+    final suspend fun encrypt(kotlinx.io.bytestring/ByteString, com.davils.krypt.cose/CoseAlgorithm, kotlin.collections/List<com.davils.krypt.cose/CoseRecipientSpec>, com.davils.krypt.cose/CoseHeaders = ..., com.davils.krypt.cose/CoseHeaders = ..., kotlinx.io.bytestring/ByteString = ..., kotlin/Boolean = ...): com.davils.krypt.cose/CoseEncrypt // com.davils.krypt.cose/Cose.encrypt|encrypt(kotlinx.io.bytestring.ByteString;com.davils.krypt.cose.CoseAlgorithm;kotlin.collections.List<com.davils.krypt.cose.CoseRecipientSpec>;com.davils.krypt.cose.CoseHeaders;com.davils.krypt.cose.CoseHeaders;kotlinx.io.bytestring.ByteString;kotlin.Boolean){}[0]
+    final suspend fun encrypt0(kotlinx.io.bytestring/ByteString, com.davils.krypt.cose.key/CoseKey, com.davils.krypt.cose/CoseAlgorithm, com.davils.krypt.cose/CoseHeaders = ..., com.davils.krypt.cose/CoseHeaders = ..., kotlinx.io.bytestring/ByteString = ..., kotlin/Boolean = ...): com.davils.krypt.cose/CoseEncrypt0 // com.davils.krypt.cose/Cose.encrypt0|encrypt0(kotlinx.io.bytestring.ByteString;com.davils.krypt.cose.key.CoseKey;com.davils.krypt.cose.CoseAlgorithm;com.davils.krypt.cose.CoseHeaders;com.davils.krypt.cose.CoseHeaders;kotlinx.io.bytestring.ByteString;kotlin.Boolean){}[0]
+    final suspend fun mac(kotlinx.io.bytestring/ByteString, com.davils.krypt.cose/CoseAlgorithm, kotlin.collections/List<com.davils.krypt.cose/CoseRecipientSpec>, com.davils.krypt.cose/CoseHeaders = ..., com.davils.krypt.cose/CoseHeaders = ..., kotlinx.io.bytestring/ByteString = ..., kotlin/Boolean = ...): com.davils.krypt.cose/CoseMac // com.davils.krypt.cose/Cose.mac|mac(kotlinx.io.bytestring.ByteString;com.davils.krypt.cose.CoseAlgorithm;kotlin.collections.List<com.davils.krypt.cose.CoseRecipientSpec>;com.davils.krypt.cose.CoseHeaders;com.davils.krypt.cose.CoseHeaders;kotlinx.io.bytestring.ByteString;kotlin.Boolean){}[0]
+    final suspend fun mac0(kotlinx.io.bytestring/ByteString, com.davils.krypt.cose.key/CoseKey, com.davils.krypt.cose/CoseAlgorithm, com.davils.krypt.cose/CoseHeaders = ..., com.davils.krypt.cose/CoseHeaders = ..., kotlinx.io.bytestring/ByteString = ..., kotlin/Boolean = ...): com.davils.krypt.cose/CoseMac0 // com.davils.krypt.cose/Cose.mac0|mac0(kotlinx.io.bytestring.ByteString;com.davils.krypt.cose.key.CoseKey;com.davils.krypt.cose.CoseAlgorithm;com.davils.krypt.cose.CoseHeaders;com.davils.krypt.cose.CoseHeaders;kotlinx.io.bytestring.ByteString;kotlin.Boolean){}[0]
+    final suspend fun matches(com.davils.krypt.cose/CoseCertificateHash, com.davils.krypt.x509/Certificate): kotlin/Boolean // com.davils.krypt.cose/Cose.matches|matches(com.davils.krypt.cose.CoseCertificateHash;com.davils.krypt.x509.Certificate){}[0]
+    final suspend fun sign(kotlinx.io.bytestring/ByteString, kotlin.collections/List<com.davils.krypt.cose/CoseSigner>, com.davils.krypt.cose/CoseHeaders = ..., com.davils.krypt.cose/CoseHeaders = ..., kotlinx.io.bytestring/ByteString = ..., kotlin/Boolean = ...): com.davils.krypt.cose/CoseSign // com.davils.krypt.cose/Cose.sign|sign(kotlinx.io.bytestring.ByteString;kotlin.collections.List<com.davils.krypt.cose.CoseSigner>;com.davils.krypt.cose.CoseHeaders;com.davils.krypt.cose.CoseHeaders;kotlinx.io.bytestring.ByteString;kotlin.Boolean){}[0]
+    final suspend fun sign1(kotlinx.io.bytestring/ByteString, com.davils.krypt.cose/CoseSigner, kotlinx.io.bytestring/ByteString = ..., kotlin/Boolean = ...): com.davils.krypt.cose/CoseSign1 // com.davils.krypt.cose/Cose.sign1|sign1(kotlinx.io.bytestring.ByteString;com.davils.krypt.cose.CoseSigner;kotlinx.io.bytestring.ByteString;kotlin.Boolean){}[0]
+    final suspend fun verify(com.davils.krypt.cose/CoseMac, kotlin.collections/List<com.davils.krypt.cose.key/CoseKey>, kotlin.collections/Set<com.davils.krypt.cose/CoseAlgorithm>, kotlinx.io.bytestring/ByteString = ..., kotlinx.io.bytestring/ByteString? = ...): com.davils.kore.core.outcome/Outcome<kotlinx.io.bytestring/ByteString, com.davils.krypt.cose/CoseFailure> // com.davils.krypt.cose/Cose.verify|verify(com.davils.krypt.cose.CoseMac;kotlin.collections.List<com.davils.krypt.cose.key.CoseKey>;kotlin.collections.Set<com.davils.krypt.cose.CoseAlgorithm>;kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString?){}[0]
+    final suspend fun verify(com.davils.krypt.cose/CoseMac0, kotlin.collections/List<com.davils.krypt.cose.key/CoseKey>, kotlin.collections/Set<com.davils.krypt.cose/CoseAlgorithm>, kotlinx.io.bytestring/ByteString = ..., kotlinx.io.bytestring/ByteString? = ...): com.davils.kore.core.outcome/Outcome<kotlinx.io.bytestring/ByteString, com.davils.krypt.cose/CoseFailure> // com.davils.krypt.cose/Cose.verify|verify(com.davils.krypt.cose.CoseMac0;kotlin.collections.List<com.davils.krypt.cose.key.CoseKey>;kotlin.collections.Set<com.davils.krypt.cose.CoseAlgorithm>;kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString?){}[0]
+    final suspend fun verify(com.davils.krypt.cose/CoseSign, kotlin.collections/List<com.davils.krypt.cose.key/CoseKey>, kotlin.collections/Set<com.davils.krypt.cose/CoseAlgorithm>, kotlinx.io.bytestring/ByteString = ..., kotlinx.io.bytestring/ByteString? = ...): com.davils.kore.core.outcome/Outcome<com.davils.krypt.cose/CoseSignature, com.davils.krypt.cose/CoseFailure> // com.davils.krypt.cose/Cose.verify|verify(com.davils.krypt.cose.CoseSign;kotlin.collections.List<com.davils.krypt.cose.key.CoseKey>;kotlin.collections.Set<com.davils.krypt.cose.CoseAlgorithm>;kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString?){}[0]
+    final suspend fun verify(com.davils.krypt.cose/CoseSign1, kotlin.collections/List<com.davils.krypt.cose.key/CoseKey>, kotlin.collections/Set<com.davils.krypt.cose/CoseAlgorithm>, kotlinx.io.bytestring/ByteString = ..., kotlinx.io.bytestring/ByteString? = ...): com.davils.kore.core.outcome/Outcome<kotlinx.io.bytestring/ByteString, com.davils.krypt.cose/CoseFailure> // com.davils.krypt.cose/Cose.verify|verify(com.davils.krypt.cose.CoseSign1;kotlin.collections.List<com.davils.krypt.cose.key.CoseKey>;kotlin.collections.Set<com.davils.krypt.cose.CoseAlgorithm>;kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString?){}[0]
+}
+
+final class com.davils.krypt.cose/CoseCertificateHash { // com.davils.krypt.cose/CoseCertificateHash|null[0]
+    constructor <init>(com.davils.krypt.cose.cbor/CborItem, kotlinx.io.bytestring/ByteString) // com.davils.krypt.cose/CoseCertificateHash.<init>|<init>(com.davils.krypt.cose.cbor.CborItem;kotlinx.io.bytestring.ByteString){}[0]
+
+    final val algorithm // com.davils.krypt.cose/CoseCertificateHash.algorithm|{}algorithm[0]
+        final fun <get-algorithm>(): com.davils.krypt.cose.cbor/CborItem // com.davils.krypt.cose/CoseCertificateHash.algorithm.<get-algorithm>|<get-algorithm>(){}[0]
+    final val digest // com.davils.krypt.cose/CoseCertificateHash.digest|{}digest[0]
+        final fun <get-digest>(): com.davils.krypt.core.algorithm/DigestAlgorithm? // com.davils.krypt.cose/CoseCertificateHash.digest.<get-digest>|<get-digest>(){}[0]
+    final val value // com.davils.krypt.cose/CoseCertificateHash.value|{}value[0]
+        final fun <get-value>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cose/CoseCertificateHash.value.<get-value>|<get-value>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cose/CoseCertificateHash.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cose/CoseCertificateHash.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cose/CoseCertificateHash.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.cose/CoseCertificateHash.Companion|null[0]
+        final fun idOf(com.davils.krypt.core.algorithm/DigestAlgorithm): com.davils.krypt.cose.cbor/CborInteger // com.davils.krypt.cose/CoseCertificateHash.Companion.idOf|idOf(com.davils.krypt.core.algorithm.DigestAlgorithm){}[0]
+    }
+}
+
+final class com.davils.krypt.cose/CoseEncrypt : com.davils.krypt.cose/CoseMessage { // com.davils.krypt.cose/CoseEncrypt|null[0]
+    final val ciphertext // com.davils.krypt.cose/CoseEncrypt.ciphertext|{}ciphertext[0]
+        final fun <get-ciphertext>(): kotlinx.io.bytestring/ByteString? // com.davils.krypt.cose/CoseEncrypt.ciphertext.<get-ciphertext>|<get-ciphertext>(){}[0]
+    final val protectedEncoding // com.davils.krypt.cose/CoseEncrypt.protectedEncoding|{}protectedEncoding[0]
+        final fun <get-protectedEncoding>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cose/CoseEncrypt.protectedEncoding.<get-protectedEncoding>|<get-protectedEncoding>(){}[0]
+    final val protectedHeaders // com.davils.krypt.cose/CoseEncrypt.protectedHeaders|{}protectedHeaders[0]
+        final fun <get-protectedHeaders>(): com.davils.krypt.cose/CoseHeaders // com.davils.krypt.cose/CoseEncrypt.protectedHeaders.<get-protectedHeaders>|<get-protectedHeaders>(){}[0]
+    final val recipients // com.davils.krypt.cose/CoseEncrypt.recipients|{}recipients[0]
+        final fun <get-recipients>(): kotlin.collections/List<com.davils.krypt.cose/CoseRecipient> // com.davils.krypt.cose/CoseEncrypt.recipients.<get-recipients>|<get-recipients>(){}[0]
+    final val type // com.davils.krypt.cose/CoseEncrypt.type|{}type[0]
+        final fun <get-type>(): com.davils.krypt.cose/CoseMessageType // com.davils.krypt.cose/CoseEncrypt.type.<get-type>|<get-type>(){}[0]
+    final val unprotectedHeaders // com.davils.krypt.cose/CoseEncrypt.unprotectedHeaders|{}unprotectedHeaders[0]
+        final fun <get-unprotectedHeaders>(): com.davils.krypt.cose/CoseHeaders // com.davils.krypt.cose/CoseEncrypt.unprotectedHeaders.<get-unprotectedHeaders>|<get-unprotectedHeaders>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cose/CoseEncrypt.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cose/CoseEncrypt.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cose/CoseEncrypt.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.cose/CoseEncrypt0 : com.davils.krypt.cose/CoseMessage { // com.davils.krypt.cose/CoseEncrypt0|null[0]
+    final val ciphertext // com.davils.krypt.cose/CoseEncrypt0.ciphertext|{}ciphertext[0]
+        final fun <get-ciphertext>(): kotlinx.io.bytestring/ByteString? // com.davils.krypt.cose/CoseEncrypt0.ciphertext.<get-ciphertext>|<get-ciphertext>(){}[0]
+    final val protectedEncoding // com.davils.krypt.cose/CoseEncrypt0.protectedEncoding|{}protectedEncoding[0]
+        final fun <get-protectedEncoding>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cose/CoseEncrypt0.protectedEncoding.<get-protectedEncoding>|<get-protectedEncoding>(){}[0]
+    final val protectedHeaders // com.davils.krypt.cose/CoseEncrypt0.protectedHeaders|{}protectedHeaders[0]
+        final fun <get-protectedHeaders>(): com.davils.krypt.cose/CoseHeaders // com.davils.krypt.cose/CoseEncrypt0.protectedHeaders.<get-protectedHeaders>|<get-protectedHeaders>(){}[0]
+    final val type // com.davils.krypt.cose/CoseEncrypt0.type|{}type[0]
+        final fun <get-type>(): com.davils.krypt.cose/CoseMessageType // com.davils.krypt.cose/CoseEncrypt0.type.<get-type>|<get-type>(){}[0]
+    final val unprotectedHeaders // com.davils.krypt.cose/CoseEncrypt0.unprotectedHeaders|{}unprotectedHeaders[0]
+        final fun <get-unprotectedHeaders>(): com.davils.krypt.cose/CoseHeaders // com.davils.krypt.cose/CoseEncrypt0.unprotectedHeaders.<get-unprotectedHeaders>|<get-unprotectedHeaders>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cose/CoseEncrypt0.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cose/CoseEncrypt0.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cose/CoseEncrypt0.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.cose/CoseHeaders { // com.davils.krypt.cose/CoseHeaders|null[0]
+    final val algorithm // com.davils.krypt.cose/CoseHeaders.algorithm|{}algorithm[0]
+        final fun <get-algorithm>(): com.davils.krypt.cose/CoseAlgorithm? // com.davils.krypt.cose/CoseHeaders.algorithm.<get-algorithm>|<get-algorithm>(){}[0]
+    final val certificateChain // com.davils.krypt.cose/CoseHeaders.certificateChain|{}certificateChain[0]
+        final fun <get-certificateChain>(): kotlin.collections/List<kotlinx.io.bytestring/ByteString> // com.davils.krypt.cose/CoseHeaders.certificateChain.<get-certificateChain>|<get-certificateChain>(){}[0]
+    final val certificateHash // com.davils.krypt.cose/CoseHeaders.certificateHash|{}certificateHash[0]
+        final fun <get-certificateHash>(): com.davils.krypt.cose/CoseCertificateHash? // com.davils.krypt.cose/CoseHeaders.certificateHash.<get-certificateHash>|<get-certificateHash>(){}[0]
+    final val contentType // com.davils.krypt.cose/CoseHeaders.contentType|{}contentType[0]
+        final fun <get-contentType>(): com.davils.krypt.cose.cbor/CborItem? // com.davils.krypt.cose/CoseHeaders.contentType.<get-contentType>|<get-contentType>(){}[0]
+    final val critical // com.davils.krypt.cose/CoseHeaders.critical|{}critical[0]
+        final fun <get-critical>(): kotlin.collections/List<com.davils.krypt.cose.cbor/CborItem> // com.davils.krypt.cose/CoseHeaders.critical.<get-critical>|<get-critical>(){}[0]
+    final val isEmpty // com.davils.krypt.cose/CoseHeaders.isEmpty|{}isEmpty[0]
+        final fun <get-isEmpty>(): kotlin/Boolean // com.davils.krypt.cose/CoseHeaders.isEmpty.<get-isEmpty>|<get-isEmpty>(){}[0]
+    final val iv // com.davils.krypt.cose/CoseHeaders.iv|{}iv[0]
+        final fun <get-iv>(): kotlinx.io.bytestring/ByteString? // com.davils.krypt.cose/CoseHeaders.iv.<get-iv>|<get-iv>(){}[0]
+    final val keyId // com.davils.krypt.cose/CoseHeaders.keyId|{}keyId[0]
+        final fun <get-keyId>(): kotlinx.io.bytestring/ByteString? // com.davils.krypt.cose/CoseHeaders.keyId.<get-keyId>|<get-keyId>(){}[0]
+    final val parameters // com.davils.krypt.cose/CoseHeaders.parameters|{}parameters[0]
+        final fun <get-parameters>(): com.davils.krypt.cose.cbor/CborMap // com.davils.krypt.cose/CoseHeaders.parameters.<get-parameters>|<get-parameters>(){}[0]
+    final val partialIv // com.davils.krypt.cose/CoseHeaders.partialIv|{}partialIv[0]
+        final fun <get-partialIv>(): kotlinx.io.bytestring/ByteString? // com.davils.krypt.cose/CoseHeaders.partialIv.<get-partialIv>|<get-partialIv>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cose/CoseHeaders.equals|equals(kotlin.Any?){}[0]
+    final fun get(com.davils.krypt.cose.cbor/CborItem): com.davils.krypt.cose.cbor/CborItem? // com.davils.krypt.cose/CoseHeaders.get|get(com.davils.krypt.cose.cbor.CborItem){}[0]
+    final fun get(kotlin/Long): com.davils.krypt.cose.cbor/CborItem? // com.davils.krypt.cose/CoseHeaders.get|get(kotlin.Long){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cose/CoseHeaders.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cose/CoseHeaders.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.cose/CoseHeaders.Companion|null[0]
+        final val Empty // com.davils.krypt.cose/CoseHeaders.Companion.Empty|{}Empty[0]
+            final fun <get-Empty>(): com.davils.krypt.cose/CoseHeaders // com.davils.krypt.cose/CoseHeaders.Companion.Empty.<get-Empty>|<get-Empty>(){}[0]
+
+        final fun of(com.davils.krypt.cose.cbor/CborMap): com.davils.krypt.cose/CoseHeaders // com.davils.krypt.cose/CoseHeaders.Companion.of|of(com.davils.krypt.cose.cbor.CborMap){}[0]
+        final fun of(kotlinx.io.bytestring/ByteString? = ..., com.davils.krypt.cose.cbor/CborItem? = ..., kotlin.collections/List<com.davils.krypt.x509/Certificate> = ..., com.davils.krypt.cose/CoseCertificateHash? = ..., kotlin.collections/List<com.davils.krypt.cose.cbor/CborItem> = ..., com.davils.krypt.cose.cbor/CborMap = ...): com.davils.krypt.cose/CoseHeaders // com.davils.krypt.cose/CoseHeaders.Companion.of|of(kotlinx.io.bytestring.ByteString?;com.davils.krypt.cose.cbor.CborItem?;kotlin.collections.List<com.davils.krypt.x509.Certificate>;com.davils.krypt.cose.CoseCertificateHash?;kotlin.collections.List<com.davils.krypt.cose.cbor.CborItem>;com.davils.krypt.cose.cbor.CborMap){}[0]
+    }
+}
+
+final class com.davils.krypt.cose/CoseLimits : com.davils.kore.core.validation/Validatable { // com.davils.krypt.cose/CoseLimits|null[0]
+    constructor <init>(com.davils.krypt.cose.cbor/CborLimits = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ...) // com.davils.krypt.cose/CoseLimits.<init>|<init>(com.davils.krypt.cose.cbor.CborLimits;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int){}[0]
+
+    final val cbor // com.davils.krypt.cose/CoseLimits.cbor|{}cbor[0]
+        final fun <get-cbor>(): com.davils.krypt.cose.cbor/CborLimits // com.davils.krypt.cose/CoseLimits.cbor.<get-cbor>|<get-cbor>(){}[0]
+    final val maximumCertificates // com.davils.krypt.cose/CoseLimits.maximumCertificates|{}maximumCertificates[0]
+        final fun <get-maximumCertificates>(): kotlin/Int // com.davils.krypt.cose/CoseLimits.maximumCertificates.<get-maximumCertificates>|<get-maximumCertificates>(){}[0]
+    final val maximumKeys // com.davils.krypt.cose/CoseLimits.maximumKeys|{}maximumKeys[0]
+        final fun <get-maximumKeys>(): kotlin/Int // com.davils.krypt.cose/CoseLimits.maximumKeys.<get-maximumKeys>|<get-maximumKeys>(){}[0]
+    final val maximumRecipients // com.davils.krypt.cose/CoseLimits.maximumRecipients|{}maximumRecipients[0]
+        final fun <get-maximumRecipients>(): kotlin/Int // com.davils.krypt.cose/CoseLimits.maximumRecipients.<get-maximumRecipients>|<get-maximumRecipients>(){}[0]
+    final val maximumSignatures // com.davils.krypt.cose/CoseLimits.maximumSignatures|{}maximumSignatures[0]
+        final fun <get-maximumSignatures>(): kotlin/Int // com.davils.krypt.cose/CoseLimits.maximumSignatures.<get-maximumSignatures>|<get-maximumSignatures>(){}[0]
+
+    final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.krypt.cose/CoseLimits.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cose/CoseLimits.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cose/CoseLimits.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cose/CoseLimits.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.cose/CoseLimits.Companion|null[0]
+        final const val HARD_MAXIMUM_CERTIFICATES // com.davils.krypt.cose/CoseLimits.Companion.HARD_MAXIMUM_CERTIFICATES|{}HARD_MAXIMUM_CERTIFICATES[0]
+            final fun <get-HARD_MAXIMUM_CERTIFICATES>(): kotlin/Int // com.davils.krypt.cose/CoseLimits.Companion.HARD_MAXIMUM_CERTIFICATES.<get-HARD_MAXIMUM_CERTIFICATES>|<get-HARD_MAXIMUM_CERTIFICATES>(){}[0]
+        final const val HARD_MAXIMUM_KEYS // com.davils.krypt.cose/CoseLimits.Companion.HARD_MAXIMUM_KEYS|{}HARD_MAXIMUM_KEYS[0]
+            final fun <get-HARD_MAXIMUM_KEYS>(): kotlin/Int // com.davils.krypt.cose/CoseLimits.Companion.HARD_MAXIMUM_KEYS.<get-HARD_MAXIMUM_KEYS>|<get-HARD_MAXIMUM_KEYS>(){}[0]
+        final const val HARD_MAXIMUM_RECIPIENTS // com.davils.krypt.cose/CoseLimits.Companion.HARD_MAXIMUM_RECIPIENTS|{}HARD_MAXIMUM_RECIPIENTS[0]
+            final fun <get-HARD_MAXIMUM_RECIPIENTS>(): kotlin/Int // com.davils.krypt.cose/CoseLimits.Companion.HARD_MAXIMUM_RECIPIENTS.<get-HARD_MAXIMUM_RECIPIENTS>|<get-HARD_MAXIMUM_RECIPIENTS>(){}[0]
+        final const val HARD_MAXIMUM_SIGNATURES // com.davils.krypt.cose/CoseLimits.Companion.HARD_MAXIMUM_SIGNATURES|{}HARD_MAXIMUM_SIGNATURES[0]
+            final fun <get-HARD_MAXIMUM_SIGNATURES>(): kotlin/Int // com.davils.krypt.cose/CoseLimits.Companion.HARD_MAXIMUM_SIGNATURES.<get-HARD_MAXIMUM_SIGNATURES>|<get-HARD_MAXIMUM_SIGNATURES>(){}[0]
+
+        final val Default // com.davils.krypt.cose/CoseLimits.Companion.Default|{}Default[0]
+            final fun <get-Default>(): com.davils.krypt.cose/CoseLimits // com.davils.krypt.cose/CoseLimits.Companion.Default.<get-Default>|<get-Default>(){}[0]
+    }
+}
+
+final class com.davils.krypt.cose/CoseMac : com.davils.krypt.cose/CoseMessage { // com.davils.krypt.cose/CoseMac|null[0]
+    final val payload // com.davils.krypt.cose/CoseMac.payload|{}payload[0]
+        final fun <get-payload>(): kotlinx.io.bytestring/ByteString? // com.davils.krypt.cose/CoseMac.payload.<get-payload>|<get-payload>(){}[0]
+    final val protectedEncoding // com.davils.krypt.cose/CoseMac.protectedEncoding|{}protectedEncoding[0]
+        final fun <get-protectedEncoding>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cose/CoseMac.protectedEncoding.<get-protectedEncoding>|<get-protectedEncoding>(){}[0]
+    final val protectedHeaders // com.davils.krypt.cose/CoseMac.protectedHeaders|{}protectedHeaders[0]
+        final fun <get-protectedHeaders>(): com.davils.krypt.cose/CoseHeaders // com.davils.krypt.cose/CoseMac.protectedHeaders.<get-protectedHeaders>|<get-protectedHeaders>(){}[0]
+    final val recipients // com.davils.krypt.cose/CoseMac.recipients|{}recipients[0]
+        final fun <get-recipients>(): kotlin.collections/List<com.davils.krypt.cose/CoseRecipient> // com.davils.krypt.cose/CoseMac.recipients.<get-recipients>|<get-recipients>(){}[0]
+    final val tag // com.davils.krypt.cose/CoseMac.tag|{}tag[0]
+        final fun <get-tag>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cose/CoseMac.tag.<get-tag>|<get-tag>(){}[0]
+    final val type // com.davils.krypt.cose/CoseMac.type|{}type[0]
+        final fun <get-type>(): com.davils.krypt.cose/CoseMessageType // com.davils.krypt.cose/CoseMac.type.<get-type>|<get-type>(){}[0]
+    final val unprotectedHeaders // com.davils.krypt.cose/CoseMac.unprotectedHeaders|{}unprotectedHeaders[0]
+        final fun <get-unprotectedHeaders>(): com.davils.krypt.cose/CoseHeaders // com.davils.krypt.cose/CoseMac.unprotectedHeaders.<get-unprotectedHeaders>|<get-unprotectedHeaders>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cose/CoseMac.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cose/CoseMac.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cose/CoseMac.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.cose/CoseMac0 : com.davils.krypt.cose/CoseMessage { // com.davils.krypt.cose/CoseMac0|null[0]
+    final val payload // com.davils.krypt.cose/CoseMac0.payload|{}payload[0]
+        final fun <get-payload>(): kotlinx.io.bytestring/ByteString? // com.davils.krypt.cose/CoseMac0.payload.<get-payload>|<get-payload>(){}[0]
+    final val protectedEncoding // com.davils.krypt.cose/CoseMac0.protectedEncoding|{}protectedEncoding[0]
+        final fun <get-protectedEncoding>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cose/CoseMac0.protectedEncoding.<get-protectedEncoding>|<get-protectedEncoding>(){}[0]
+    final val protectedHeaders // com.davils.krypt.cose/CoseMac0.protectedHeaders|{}protectedHeaders[0]
+        final fun <get-protectedHeaders>(): com.davils.krypt.cose/CoseHeaders // com.davils.krypt.cose/CoseMac0.protectedHeaders.<get-protectedHeaders>|<get-protectedHeaders>(){}[0]
+    final val tag // com.davils.krypt.cose/CoseMac0.tag|{}tag[0]
+        final fun <get-tag>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cose/CoseMac0.tag.<get-tag>|<get-tag>(){}[0]
+    final val type // com.davils.krypt.cose/CoseMac0.type|{}type[0]
+        final fun <get-type>(): com.davils.krypt.cose/CoseMessageType // com.davils.krypt.cose/CoseMac0.type.<get-type>|<get-type>(){}[0]
+    final val unprotectedHeaders // com.davils.krypt.cose/CoseMac0.unprotectedHeaders|{}unprotectedHeaders[0]
+        final fun <get-unprotectedHeaders>(): com.davils.krypt.cose/CoseHeaders // com.davils.krypt.cose/CoseMac0.unprotectedHeaders.<get-unprotectedHeaders>|<get-unprotectedHeaders>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cose/CoseMac0.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cose/CoseMac0.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cose/CoseMac0.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.cose/CoseRecipient { // com.davils.krypt.cose/CoseRecipient|null[0]
+    final val ciphertext // com.davils.krypt.cose/CoseRecipient.ciphertext|{}ciphertext[0]
+        final fun <get-ciphertext>(): kotlinx.io.bytestring/ByteString? // com.davils.krypt.cose/CoseRecipient.ciphertext.<get-ciphertext>|<get-ciphertext>(){}[0]
+    final val protectedEncoding // com.davils.krypt.cose/CoseRecipient.protectedEncoding|{}protectedEncoding[0]
+        final fun <get-protectedEncoding>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cose/CoseRecipient.protectedEncoding.<get-protectedEncoding>|<get-protectedEncoding>(){}[0]
+    final val protectedHeaders // com.davils.krypt.cose/CoseRecipient.protectedHeaders|{}protectedHeaders[0]
+        final fun <get-protectedHeaders>(): com.davils.krypt.cose/CoseHeaders // com.davils.krypt.cose/CoseRecipient.protectedHeaders.<get-protectedHeaders>|<get-protectedHeaders>(){}[0]
+    final val recipients // com.davils.krypt.cose/CoseRecipient.recipients|{}recipients[0]
+        final fun <get-recipients>(): kotlin.collections/List<com.davils.krypt.cose/CoseRecipient> // com.davils.krypt.cose/CoseRecipient.recipients.<get-recipients>|<get-recipients>(){}[0]
+    final val unprotectedHeaders // com.davils.krypt.cose/CoseRecipient.unprotectedHeaders|{}unprotectedHeaders[0]
+        final fun <get-unprotectedHeaders>(): com.davils.krypt.cose/CoseHeaders // com.davils.krypt.cose/CoseRecipient.unprotectedHeaders.<get-unprotectedHeaders>|<get-unprotectedHeaders>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cose/CoseRecipient.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cose/CoseRecipient.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cose/CoseRecipient.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.cose/CoseRecipientSpec { // com.davils.krypt.cose/CoseRecipientSpec|null[0]
+    constructor <init>(com.davils.krypt.cose.key/CoseKey, com.davils.krypt.cose/CoseAlgorithm, com.davils.krypt.cose/CoseHeaders = ..., com.davils.krypt.cose/CoseHeaders = ...) // com.davils.krypt.cose/CoseRecipientSpec.<init>|<init>(com.davils.krypt.cose.key.CoseKey;com.davils.krypt.cose.CoseAlgorithm;com.davils.krypt.cose.CoseHeaders;com.davils.krypt.cose.CoseHeaders){}[0]
+
+    final val algorithm // com.davils.krypt.cose/CoseRecipientSpec.algorithm|{}algorithm[0]
+        final fun <get-algorithm>(): com.davils.krypt.cose/CoseAlgorithm // com.davils.krypt.cose/CoseRecipientSpec.algorithm.<get-algorithm>|<get-algorithm>(){}[0]
+    final val key // com.davils.krypt.cose/CoseRecipientSpec.key|{}key[0]
+        final fun <get-key>(): com.davils.krypt.cose.key/CoseKey // com.davils.krypt.cose/CoseRecipientSpec.key.<get-key>|<get-key>(){}[0]
+    final val protectedHeaders // com.davils.krypt.cose/CoseRecipientSpec.protectedHeaders|{}protectedHeaders[0]
+        final fun <get-protectedHeaders>(): com.davils.krypt.cose/CoseHeaders // com.davils.krypt.cose/CoseRecipientSpec.protectedHeaders.<get-protectedHeaders>|<get-protectedHeaders>(){}[0]
+    final val unprotectedHeaders // com.davils.krypt.cose/CoseRecipientSpec.unprotectedHeaders|{}unprotectedHeaders[0]
+        final fun <get-unprotectedHeaders>(): com.davils.krypt.cose/CoseHeaders // com.davils.krypt.cose/CoseRecipientSpec.unprotectedHeaders.<get-unprotectedHeaders>|<get-unprotectedHeaders>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cose/CoseRecipientSpec.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cose/CoseRecipientSpec.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cose/CoseRecipientSpec.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.cose/CoseSign : com.davils.krypt.cose/CoseMessage { // com.davils.krypt.cose/CoseSign|null[0]
+    final val payload // com.davils.krypt.cose/CoseSign.payload|{}payload[0]
+        final fun <get-payload>(): kotlinx.io.bytestring/ByteString? // com.davils.krypt.cose/CoseSign.payload.<get-payload>|<get-payload>(){}[0]
+    final val protectedEncoding // com.davils.krypt.cose/CoseSign.protectedEncoding|{}protectedEncoding[0]
+        final fun <get-protectedEncoding>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cose/CoseSign.protectedEncoding.<get-protectedEncoding>|<get-protectedEncoding>(){}[0]
+    final val protectedHeaders // com.davils.krypt.cose/CoseSign.protectedHeaders|{}protectedHeaders[0]
+        final fun <get-protectedHeaders>(): com.davils.krypt.cose/CoseHeaders // com.davils.krypt.cose/CoseSign.protectedHeaders.<get-protectedHeaders>|<get-protectedHeaders>(){}[0]
+    final val signatures // com.davils.krypt.cose/CoseSign.signatures|{}signatures[0]
+        final fun <get-signatures>(): kotlin.collections/List<com.davils.krypt.cose/CoseSignature> // com.davils.krypt.cose/CoseSign.signatures.<get-signatures>|<get-signatures>(){}[0]
+    final val type // com.davils.krypt.cose/CoseSign.type|{}type[0]
+        final fun <get-type>(): com.davils.krypt.cose/CoseMessageType // com.davils.krypt.cose/CoseSign.type.<get-type>|<get-type>(){}[0]
+    final val unprotectedHeaders // com.davils.krypt.cose/CoseSign.unprotectedHeaders|{}unprotectedHeaders[0]
+        final fun <get-unprotectedHeaders>(): com.davils.krypt.cose/CoseHeaders // com.davils.krypt.cose/CoseSign.unprotectedHeaders.<get-unprotectedHeaders>|<get-unprotectedHeaders>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cose/CoseSign.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cose/CoseSign.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cose/CoseSign.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.cose/CoseSign1 : com.davils.krypt.cose/CoseMessage { // com.davils.krypt.cose/CoseSign1|null[0]
+    final val payload // com.davils.krypt.cose/CoseSign1.payload|{}payload[0]
+        final fun <get-payload>(): kotlinx.io.bytestring/ByteString? // com.davils.krypt.cose/CoseSign1.payload.<get-payload>|<get-payload>(){}[0]
+    final val protectedEncoding // com.davils.krypt.cose/CoseSign1.protectedEncoding|{}protectedEncoding[0]
+        final fun <get-protectedEncoding>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cose/CoseSign1.protectedEncoding.<get-protectedEncoding>|<get-protectedEncoding>(){}[0]
+    final val protectedHeaders // com.davils.krypt.cose/CoseSign1.protectedHeaders|{}protectedHeaders[0]
+        final fun <get-protectedHeaders>(): com.davils.krypt.cose/CoseHeaders // com.davils.krypt.cose/CoseSign1.protectedHeaders.<get-protectedHeaders>|<get-protectedHeaders>(){}[0]
+    final val signature // com.davils.krypt.cose/CoseSign1.signature|{}signature[0]
+        final fun <get-signature>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cose/CoseSign1.signature.<get-signature>|<get-signature>(){}[0]
+    final val type // com.davils.krypt.cose/CoseSign1.type|{}type[0]
+        final fun <get-type>(): com.davils.krypt.cose/CoseMessageType // com.davils.krypt.cose/CoseSign1.type.<get-type>|<get-type>(){}[0]
+    final val unprotectedHeaders // com.davils.krypt.cose/CoseSign1.unprotectedHeaders|{}unprotectedHeaders[0]
+        final fun <get-unprotectedHeaders>(): com.davils.krypt.cose/CoseHeaders // com.davils.krypt.cose/CoseSign1.unprotectedHeaders.<get-unprotectedHeaders>|<get-unprotectedHeaders>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cose/CoseSign1.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cose/CoseSign1.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cose/CoseSign1.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.cose/CoseSignature { // com.davils.krypt.cose/CoseSignature|null[0]
+    final val protectedEncoding // com.davils.krypt.cose/CoseSignature.protectedEncoding|{}protectedEncoding[0]
+        final fun <get-protectedEncoding>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cose/CoseSignature.protectedEncoding.<get-protectedEncoding>|<get-protectedEncoding>(){}[0]
+    final val protectedHeaders // com.davils.krypt.cose/CoseSignature.protectedHeaders|{}protectedHeaders[0]
+        final fun <get-protectedHeaders>(): com.davils.krypt.cose/CoseHeaders // com.davils.krypt.cose/CoseSignature.protectedHeaders.<get-protectedHeaders>|<get-protectedHeaders>(){}[0]
+    final val signature // com.davils.krypt.cose/CoseSignature.signature|{}signature[0]
+        final fun <get-signature>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cose/CoseSignature.signature.<get-signature>|<get-signature>(){}[0]
+    final val unprotectedHeaders // com.davils.krypt.cose/CoseSignature.unprotectedHeaders|{}unprotectedHeaders[0]
+        final fun <get-unprotectedHeaders>(): com.davils.krypt.cose/CoseHeaders // com.davils.krypt.cose/CoseSignature.unprotectedHeaders.<get-unprotectedHeaders>|<get-unprotectedHeaders>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cose/CoseSignature.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cose/CoseSignature.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cose/CoseSignature.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.cose/CoseSigner { // com.davils.krypt.cose/CoseSigner|null[0]
+    constructor <init>(com.davils.krypt.cose.key/CoseKey, com.davils.krypt.cose/CoseAlgorithm, com.davils.krypt.cose/CoseHeaders = ..., com.davils.krypt.cose/CoseHeaders = ...) // com.davils.krypt.cose/CoseSigner.<init>|<init>(com.davils.krypt.cose.key.CoseKey;com.davils.krypt.cose.CoseAlgorithm;com.davils.krypt.cose.CoseHeaders;com.davils.krypt.cose.CoseHeaders){}[0]
+
+    final val algorithm // com.davils.krypt.cose/CoseSigner.algorithm|{}algorithm[0]
+        final fun <get-algorithm>(): com.davils.krypt.cose/CoseAlgorithm // com.davils.krypt.cose/CoseSigner.algorithm.<get-algorithm>|<get-algorithm>(){}[0]
+    final val key // com.davils.krypt.cose/CoseSigner.key|{}key[0]
+        final fun <get-key>(): com.davils.krypt.cose.key/CoseKey // com.davils.krypt.cose/CoseSigner.key.<get-key>|<get-key>(){}[0]
+    final val protectedHeaders // com.davils.krypt.cose/CoseSigner.protectedHeaders|{}protectedHeaders[0]
+        final fun <get-protectedHeaders>(): com.davils.krypt.cose/CoseHeaders // com.davils.krypt.cose/CoseSigner.protectedHeaders.<get-protectedHeaders>|<get-protectedHeaders>(){}[0]
+    final val unprotectedHeaders // com.davils.krypt.cose/CoseSigner.unprotectedHeaders|{}unprotectedHeaders[0]
+        final fun <get-unprotectedHeaders>(): com.davils.krypt.cose/CoseHeaders // com.davils.krypt.cose/CoseSigner.unprotectedHeaders.<get-unprotectedHeaders>|<get-unprotectedHeaders>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.cose/CoseSigner.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.cose/CoseSigner.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.cose/CoseSigner.toString|toString(){}[0]
+}
+
+sealed class com.davils.krypt.cose.cbor/CborItem // com.davils.krypt.cose.cbor/CborItem|null[0]
+
+sealed class com.davils.krypt.cose/CoseMessage { // com.davils.krypt.cose/CoseMessage|null[0]
+    abstract val protectedEncoding // com.davils.krypt.cose/CoseMessage.protectedEncoding|{}protectedEncoding[0]
+        abstract fun <get-protectedEncoding>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.cose/CoseMessage.protectedEncoding.<get-protectedEncoding>|<get-protectedEncoding>(){}[0]
+    abstract val protectedHeaders // com.davils.krypt.cose/CoseMessage.protectedHeaders|{}protectedHeaders[0]
+        abstract fun <get-protectedHeaders>(): com.davils.krypt.cose/CoseHeaders // com.davils.krypt.cose/CoseMessage.protectedHeaders.<get-protectedHeaders>|<get-protectedHeaders>(){}[0]
+    abstract val type // com.davils.krypt.cose/CoseMessage.type|{}type[0]
+        abstract fun <get-type>(): com.davils.krypt.cose/CoseMessageType // com.davils.krypt.cose/CoseMessage.type.<get-type>|<get-type>(){}[0]
+    abstract val unprotectedHeaders // com.davils.krypt.cose/CoseMessage.unprotectedHeaders|{}unprotectedHeaders[0]
+        abstract fun <get-unprotectedHeaders>(): com.davils.krypt.cose/CoseHeaders // com.davils.krypt.cose/CoseMessage.unprotectedHeaders.<get-unprotectedHeaders>|<get-unprotectedHeaders>(){}[0]
+
+    final fun encode(kotlin/Boolean = ...): kotlinx.io.bytestring/ByteString // com.davils.krypt.cose/CoseMessage.encode|encode(kotlin.Boolean){}[0]
+}
+
+final object com.davils.krypt.cose.cbor/Cbor { // com.davils.krypt.cose.cbor/Cbor|null[0]
+    final fun decode(kotlinx.io.bytestring/ByteString, com.davils.krypt.cose.cbor/CborLimits = ..., com.davils.krypt.cose.cbor/CborMode = ...): com.davils.kore.core.outcome/Outcome<com.davils.krypt.cose.cbor/CborItem, com.davils.krypt.cose.cbor/CborFailure> // com.davils.krypt.cose.cbor/Cbor.decode|decode(kotlinx.io.bytestring.ByteString;com.davils.krypt.cose.cbor.CborLimits;com.davils.krypt.cose.cbor.CborMode){}[0]
+    final fun encode(com.davils.krypt.cose.cbor/CborItem): kotlinx.io.bytestring/ByteString // com.davils.krypt.cose.cbor/Cbor.encode|encode(com.davils.krypt.cose.cbor.CborItem){}[0]
+}
+
+final fun com.davils.krypt.cose.cwt/cwtValidation(kotlin/Function1<com.davils.krypt.cose.cwt/CwtValidationBuilder, kotlin/Unit>): com.davils.krypt.cose.cwt/CwtValidation // com.davils.krypt.cose.cwt/cwtValidation|cwtValidation(kotlin.Function1<com.davils.krypt.cose.cwt.CwtValidationBuilder,kotlin.Unit>){}[0]

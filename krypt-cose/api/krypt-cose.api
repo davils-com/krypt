@@ -1,0 +1,678 @@
+public final class com/davils/krypt/cose/Cose {
+	public fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/cose/CoseLimits;Lcom/davils/krypt/cose/cbor/CborMode;Ljava/util/Set;)V
+	public synthetic fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/cose/CoseLimits;Lcom/davils/krypt/cose/cbor/CborMode;Ljava/util/Set;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun certificateChain (Lcom/davils/krypt/cose/CoseHeaders;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun certificateHash (Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/core/algorithm/DigestAlgorithm;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun certificateHash$default (Lcom/davils/krypt/cose/Cose;Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/core/algorithm/DigestAlgorithm;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun decode (Lkotlinx/io/bytestring/ByteString;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun decodeEncrypt (Lkotlinx/io/bytestring/ByteString;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun decodeEncrypt0 (Lkotlinx/io/bytestring/ByteString;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun decodeMac (Lkotlinx/io/bytestring/ByteString;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun decodeMac0 (Lkotlinx/io/bytestring/ByteString;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun decodeSign (Lkotlinx/io/bytestring/ByteString;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun decodeSign1 (Lkotlinx/io/bytestring/ByteString;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun decrypt (Lcom/davils/krypt/cose/CoseEncrypt0;Ljava/util/List;Ljava/util/Set;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun decrypt (Lcom/davils/krypt/cose/CoseEncrypt;Ljava/util/List;Ljava/util/Set;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun decrypt$default (Lcom/davils/krypt/cose/Cose;Lcom/davils/krypt/cose/CoseEncrypt0;Ljava/util/List;Ljava/util/Set;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun decrypt$default (Lcom/davils/krypt/cose/Cose;Lcom/davils/krypt/cose/CoseEncrypt;Ljava/util/List;Ljava/util/Set;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun encrypt (Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/cose/CoseAlgorithm;Ljava/util/List;Lcom/davils/krypt/cose/CoseHeaders;Lcom/davils/krypt/cose/CoseHeaders;Lkotlinx/io/bytestring/ByteString;ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun encrypt$default (Lcom/davils/krypt/cose/Cose;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/cose/CoseAlgorithm;Ljava/util/List;Lcom/davils/krypt/cose/CoseHeaders;Lcom/davils/krypt/cose/CoseHeaders;Lkotlinx/io/bytestring/ByteString;ZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun encrypt0 (Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/cose/key/CoseKey;Lcom/davils/krypt/cose/CoseAlgorithm;Lcom/davils/krypt/cose/CoseHeaders;Lcom/davils/krypt/cose/CoseHeaders;Lkotlinx/io/bytestring/ByteString;ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun encrypt0$default (Lcom/davils/krypt/cose/Cose;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/cose/key/CoseKey;Lcom/davils/krypt/cose/CoseAlgorithm;Lcom/davils/krypt/cose/CoseHeaders;Lcom/davils/krypt/cose/CoseHeaders;Lkotlinx/io/bytestring/ByteString;ZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun getCriticalLabels ()Ljava/util/Set;
+	public final fun getCrypto ()Lcom/davils/krypt/primitive/Crypto;
+	public final fun getLimits ()Lcom/davils/krypt/cose/CoseLimits;
+	public final fun getMode ()Lcom/davils/krypt/cose/cbor/CborMode;
+	public final fun mac (Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/cose/CoseAlgorithm;Ljava/util/List;Lcom/davils/krypt/cose/CoseHeaders;Lcom/davils/krypt/cose/CoseHeaders;Lkotlinx/io/bytestring/ByteString;ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun mac$default (Lcom/davils/krypt/cose/Cose;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/cose/CoseAlgorithm;Ljava/util/List;Lcom/davils/krypt/cose/CoseHeaders;Lcom/davils/krypt/cose/CoseHeaders;Lkotlinx/io/bytestring/ByteString;ZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun mac0 (Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/cose/key/CoseKey;Lcom/davils/krypt/cose/CoseAlgorithm;Lcom/davils/krypt/cose/CoseHeaders;Lcom/davils/krypt/cose/CoseHeaders;Lkotlinx/io/bytestring/ByteString;ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun mac0$default (Lcom/davils/krypt/cose/Cose;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/cose/key/CoseKey;Lcom/davils/krypt/cose/CoseAlgorithm;Lcom/davils/krypt/cose/CoseHeaders;Lcom/davils/krypt/cose/CoseHeaders;Lkotlinx/io/bytestring/ByteString;ZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun matches (Lcom/davils/krypt/cose/CoseCertificateHash;Lcom/davils/krypt/x509/Certificate;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun sign (Lkotlinx/io/bytestring/ByteString;Ljava/util/List;Lcom/davils/krypt/cose/CoseHeaders;Lcom/davils/krypt/cose/CoseHeaders;Lkotlinx/io/bytestring/ByteString;ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun sign$default (Lcom/davils/krypt/cose/Cose;Lkotlinx/io/bytestring/ByteString;Ljava/util/List;Lcom/davils/krypt/cose/CoseHeaders;Lcom/davils/krypt/cose/CoseHeaders;Lkotlinx/io/bytestring/ByteString;ZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun sign1 (Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/cose/CoseSigner;Lkotlinx/io/bytestring/ByteString;ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun sign1$default (Lcom/davils/krypt/cose/Cose;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/cose/CoseSigner;Lkotlinx/io/bytestring/ByteString;ZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public fun toString ()Ljava/lang/String;
+	public final fun verify (Lcom/davils/krypt/cose/CoseMac0;Ljava/util/List;Ljava/util/Set;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun verify (Lcom/davils/krypt/cose/CoseMac;Ljava/util/List;Ljava/util/Set;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun verify (Lcom/davils/krypt/cose/CoseSign1;Ljava/util/List;Ljava/util/Set;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun verify (Lcom/davils/krypt/cose/CoseSign;Ljava/util/List;Ljava/util/Set;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun verify$default (Lcom/davils/krypt/cose/Cose;Lcom/davils/krypt/cose/CoseMac0;Ljava/util/List;Ljava/util/Set;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun verify$default (Lcom/davils/krypt/cose/Cose;Lcom/davils/krypt/cose/CoseMac;Ljava/util/List;Ljava/util/Set;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun verify$default (Lcom/davils/krypt/cose/Cose;Lcom/davils/krypt/cose/CoseSign1;Ljava/util/List;Ljava/util/Set;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun verify$default (Lcom/davils/krypt/cose/Cose;Lcom/davils/krypt/cose/CoseSign;Ljava/util/List;Ljava/util/Set;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/cose/CoseAlgorithm : java/lang/Enum {
+	public static final field A128Gcm Lcom/davils/krypt/cose/CoseAlgorithm;
+	public static final field A128Kw Lcom/davils/krypt/cose/CoseAlgorithm;
+	public static final field A192Gcm Lcom/davils/krypt/cose/CoseAlgorithm;
+	public static final field A192Kw Lcom/davils/krypt/cose/CoseAlgorithm;
+	public static final field A256Gcm Lcom/davils/krypt/cose/CoseAlgorithm;
+	public static final field A256Kw Lcom/davils/krypt/cose/CoseAlgorithm;
+	public static final field ChaCha20Poly1305 Lcom/davils/krypt/cose/CoseAlgorithm;
+	public static final field Companion Lcom/davils/krypt/cose/CoseAlgorithm$Companion;
+	public static final field Direct Lcom/davils/krypt/cose/CoseAlgorithm;
+	public static final field EcdhEsA128Kw Lcom/davils/krypt/cose/CoseAlgorithm;
+	public static final field EcdhEsA192Kw Lcom/davils/krypt/cose/CoseAlgorithm;
+	public static final field EcdhEsA256Kw Lcom/davils/krypt/cose/CoseAlgorithm;
+	public static final field EcdhEsHkdf256 Lcom/davils/krypt/cose/CoseAlgorithm;
+	public static final field EcdhEsHkdf512 Lcom/davils/krypt/cose/CoseAlgorithm;
+	public static final field Ed25519 Lcom/davils/krypt/cose/CoseAlgorithm;
+	public static final field Ed448 Lcom/davils/krypt/cose/CoseAlgorithm;
+	public static final field EdDsa Lcom/davils/krypt/cose/CoseAlgorithm;
+	public static final field Es256 Lcom/davils/krypt/cose/CoseAlgorithm;
+	public static final field Es384 Lcom/davils/krypt/cose/CoseAlgorithm;
+	public static final field Es512 Lcom/davils/krypt/cose/CoseAlgorithm;
+	public static final field Esp256 Lcom/davils/krypt/cose/CoseAlgorithm;
+	public static final field Esp384 Lcom/davils/krypt/cose/CoseAlgorithm;
+	public static final field Esp512 Lcom/davils/krypt/cose/CoseAlgorithm;
+	public static final field Hmac256 Lcom/davils/krypt/cose/CoseAlgorithm;
+	public static final field Hmac256Truncated64 Lcom/davils/krypt/cose/CoseAlgorithm;
+	public static final field Hmac384 Lcom/davils/krypt/cose/CoseAlgorithm;
+	public static final field Hmac512 Lcom/davils/krypt/cose/CoseAlgorithm;
+	public static final field Ps256 Lcom/davils/krypt/cose/CoseAlgorithm;
+	public static final field Ps384 Lcom/davils/krypt/cose/CoseAlgorithm;
+	public static final field Ps512 Lcom/davils/krypt/cose/CoseAlgorithm;
+	public final fun getAlgorithmName ()Ljava/lang/String;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getId ()J
+	public final fun getKind ()Lcom/davils/krypt/cose/CoseAlgorithmKind;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/cose/CoseAlgorithm;
+	public static fun values ()[Lcom/davils/krypt/cose/CoseAlgorithm;
+}
+
+public final class com/davils/krypt/cose/CoseAlgorithm$Companion {
+	public final fun of (J)Lcom/davils/krypt/cose/CoseAlgorithm;
+}
+
+public final class com/davils/krypt/cose/CoseAlgorithmKind : java/lang/Enum {
+	public static final field ContentEncryption Lcom/davils/krypt/cose/CoseAlgorithmKind;
+	public static final field KeyDistribution Lcom/davils/krypt/cose/CoseAlgorithmKind;
+	public static final field Mac Lcom/davils/krypt/cose/CoseAlgorithmKind;
+	public static final field Signature Lcom/davils/krypt/cose/CoseAlgorithmKind;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/cose/CoseAlgorithmKind;
+	public static fun values ()[Lcom/davils/krypt/cose/CoseAlgorithmKind;
+}
+
+public final class com/davils/krypt/cose/CoseCertificateHash {
+	public static final field Companion Lcom/davils/krypt/cose/CoseCertificateHash$Companion;
+	public fun <init> (Lcom/davils/krypt/cose/cbor/CborItem;Lkotlinx/io/bytestring/ByteString;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAlgorithm ()Lcom/davils/krypt/cose/cbor/CborItem;
+	public final fun getDigest ()Lcom/davils/krypt/core/algorithm/DigestAlgorithm;
+	public final fun getValue ()Lkotlinx/io/bytestring/ByteString;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/cose/CoseCertificateHash$Companion {
+	public final fun idOf (Lcom/davils/krypt/core/algorithm/DigestAlgorithm;)Lcom/davils/krypt/cose/cbor/CborInteger;
+}
+
+public final class com/davils/krypt/cose/CoseEncrypt : com/davils/krypt/cose/CoseMessage {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCiphertext ()Lkotlinx/io/bytestring/ByteString;
+	public fun getProtectedEncoding ()Lkotlinx/io/bytestring/ByteString;
+	public fun getProtectedHeaders ()Lcom/davils/krypt/cose/CoseHeaders;
+	public final fun getRecipients ()Ljava/util/List;
+	public fun getType ()Lcom/davils/krypt/cose/CoseMessageType;
+	public fun getUnprotectedHeaders ()Lcom/davils/krypt/cose/CoseHeaders;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/cose/CoseEncrypt0 : com/davils/krypt/cose/CoseMessage {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCiphertext ()Lkotlinx/io/bytestring/ByteString;
+	public fun getProtectedEncoding ()Lkotlinx/io/bytestring/ByteString;
+	public fun getProtectedHeaders ()Lcom/davils/krypt/cose/CoseHeaders;
+	public fun getType ()Lcom/davils/krypt/cose/CoseMessageType;
+	public fun getUnprotectedHeaders ()Lcom/davils/krypt/cose/CoseHeaders;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/cose/CoseFailure : java/lang/Enum {
+	public static final field AlgorithmNotPermitted Lcom/davils/krypt/cose/CoseFailure;
+	public static final field DecryptionFailed Lcom/davils/krypt/cose/CoseFailure;
+	public static final field InvalidSignature Lcom/davils/krypt/cose/CoseFailure;
+	public static final field InvalidTag Lcom/davils/krypt/cose/CoseFailure;
+	public static final field KeyNotFound Lcom/davils/krypt/cose/CoseFailure;
+	public static final field Malformed Lcom/davils/krypt/cose/CoseFailure;
+	public static final field UnknownCritical Lcom/davils/krypt/cose/CoseFailure;
+	public static final field UnsupportedKey Lcom/davils/krypt/cose/CoseFailure;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/cose/CoseFailure;
+	public static fun values ()[Lcom/davils/krypt/cose/CoseFailure;
+}
+
+public final class com/davils/krypt/cose/CoseHeaders {
+	public static final field Companion Lcom/davils/krypt/cose/CoseHeaders$Companion;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun get (J)Lcom/davils/krypt/cose/cbor/CborItem;
+	public final fun get (Lcom/davils/krypt/cose/cbor/CborItem;)Lcom/davils/krypt/cose/cbor/CborItem;
+	public final fun getAlgorithm ()Lcom/davils/krypt/cose/CoseAlgorithm;
+	public final fun getCertificateChain ()Ljava/util/List;
+	public final fun getCertificateHash ()Lcom/davils/krypt/cose/CoseCertificateHash;
+	public final fun getContentType ()Lcom/davils/krypt/cose/cbor/CborItem;
+	public final fun getCritical ()Ljava/util/List;
+	public final fun getIv ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getKeyId ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getParameters ()Lcom/davils/krypt/cose/cbor/CborMap;
+	public final fun getPartialIv ()Lkotlinx/io/bytestring/ByteString;
+	public fun hashCode ()I
+	public final fun isEmpty ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/cose/CoseHeaders$Companion {
+	public final fun getEmpty ()Lcom/davils/krypt/cose/CoseHeaders;
+	public final fun of (Lcom/davils/krypt/cose/cbor/CborMap;)Lcom/davils/krypt/cose/CoseHeaders;
+	public final fun of (Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/cose/cbor/CborItem;Ljava/util/List;Lcom/davils/krypt/cose/CoseCertificateHash;Ljava/util/List;Lcom/davils/krypt/cose/cbor/CborMap;)Lcom/davils/krypt/cose/CoseHeaders;
+	public static synthetic fun of$default (Lcom/davils/krypt/cose/CoseHeaders$Companion;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/cose/cbor/CborItem;Ljava/util/List;Lcom/davils/krypt/cose/CoseCertificateHash;Ljava/util/List;Lcom/davils/krypt/cose/cbor/CborMap;ILjava/lang/Object;)Lcom/davils/krypt/cose/CoseHeaders;
+}
+
+public final class com/davils/krypt/cose/CoseLimits : com/davils/kore/core/validation/Validatable {
+	public static final field Companion Lcom/davils/krypt/cose/CoseLimits$Companion;
+	public static final field HARD_MAXIMUM_CERTIFICATES I
+	public static final field HARD_MAXIMUM_KEYS I
+	public static final field HARD_MAXIMUM_RECIPIENTS I
+	public static final field HARD_MAXIMUM_SIGNATURES I
+	public fun <init> ()V
+	public fun <init> (Lcom/davils/krypt/cose/cbor/CborLimits;IIII)V
+	public synthetic fun <init> (Lcom/davils/krypt/cose/cbor/CborLimits;IIIIILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCbor ()Lcom/davils/krypt/cose/cbor/CborLimits;
+	public final fun getMaximumCertificates ()I
+	public final fun getMaximumKeys ()I
+	public final fun getMaximumRecipients ()I
+	public final fun getMaximumSignatures ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public final class com/davils/krypt/cose/CoseLimits$Companion {
+	public final fun getDefault ()Lcom/davils/krypt/cose/CoseLimits;
+}
+
+public final class com/davils/krypt/cose/CoseMac : com/davils/krypt/cose/CoseMessage {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getPayload ()Lkotlinx/io/bytestring/ByteString;
+	public fun getProtectedEncoding ()Lkotlinx/io/bytestring/ByteString;
+	public fun getProtectedHeaders ()Lcom/davils/krypt/cose/CoseHeaders;
+	public final fun getRecipients ()Ljava/util/List;
+	public final fun getTag ()Lkotlinx/io/bytestring/ByteString;
+	public fun getType ()Lcom/davils/krypt/cose/CoseMessageType;
+	public fun getUnprotectedHeaders ()Lcom/davils/krypt/cose/CoseHeaders;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/cose/CoseMac0 : com/davils/krypt/cose/CoseMessage {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getPayload ()Lkotlinx/io/bytestring/ByteString;
+	public fun getProtectedEncoding ()Lkotlinx/io/bytestring/ByteString;
+	public fun getProtectedHeaders ()Lcom/davils/krypt/cose/CoseHeaders;
+	public final fun getTag ()Lkotlinx/io/bytestring/ByteString;
+	public fun getType ()Lcom/davils/krypt/cose/CoseMessageType;
+	public fun getUnprotectedHeaders ()Lcom/davils/krypt/cose/CoseHeaders;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract class com/davils/krypt/cose/CoseMessage {
+	public final fun encode (Z)Lkotlinx/io/bytestring/ByteString;
+	public static synthetic fun encode$default (Lcom/davils/krypt/cose/CoseMessage;ZILjava/lang/Object;)Lkotlinx/io/bytestring/ByteString;
+	public abstract fun getProtectedEncoding ()Lkotlinx/io/bytestring/ByteString;
+	public abstract fun getProtectedHeaders ()Lcom/davils/krypt/cose/CoseHeaders;
+	public abstract fun getType ()Lcom/davils/krypt/cose/CoseMessageType;
+	public abstract fun getUnprotectedHeaders ()Lcom/davils/krypt/cose/CoseHeaders;
+}
+
+public final class com/davils/krypt/cose/CoseMessageType : java/lang/Enum {
+	public static final field Encrypt Lcom/davils/krypt/cose/CoseMessageType;
+	public static final field Encrypt0 Lcom/davils/krypt/cose/CoseMessageType;
+	public static final field Mac Lcom/davils/krypt/cose/CoseMessageType;
+	public static final field Mac0 Lcom/davils/krypt/cose/CoseMessageType;
+	public static final field Sign Lcom/davils/krypt/cose/CoseMessageType;
+	public static final field Sign1 Lcom/davils/krypt/cose/CoseMessageType;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getTag-s-VKNKU ()J
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/cose/CoseMessageType;
+	public static fun values ()[Lcom/davils/krypt/cose/CoseMessageType;
+}
+
+public final class com/davils/krypt/cose/CoseRecipient {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCiphertext ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getProtectedEncoding ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getProtectedHeaders ()Lcom/davils/krypt/cose/CoseHeaders;
+	public final fun getRecipients ()Ljava/util/List;
+	public final fun getUnprotectedHeaders ()Lcom/davils/krypt/cose/CoseHeaders;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/cose/CoseRecipientSpec {
+	public fun <init> (Lcom/davils/krypt/cose/key/CoseKey;Lcom/davils/krypt/cose/CoseAlgorithm;Lcom/davils/krypt/cose/CoseHeaders;Lcom/davils/krypt/cose/CoseHeaders;)V
+	public synthetic fun <init> (Lcom/davils/krypt/cose/key/CoseKey;Lcom/davils/krypt/cose/CoseAlgorithm;Lcom/davils/krypt/cose/CoseHeaders;Lcom/davils/krypt/cose/CoseHeaders;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAlgorithm ()Lcom/davils/krypt/cose/CoseAlgorithm;
+	public final fun getKey ()Lcom/davils/krypt/cose/key/CoseKey;
+	public final fun getProtectedHeaders ()Lcom/davils/krypt/cose/CoseHeaders;
+	public final fun getUnprotectedHeaders ()Lcom/davils/krypt/cose/CoseHeaders;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/cose/CoseSign : com/davils/krypt/cose/CoseMessage {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getPayload ()Lkotlinx/io/bytestring/ByteString;
+	public fun getProtectedEncoding ()Lkotlinx/io/bytestring/ByteString;
+	public fun getProtectedHeaders ()Lcom/davils/krypt/cose/CoseHeaders;
+	public final fun getSignatures ()Ljava/util/List;
+	public fun getType ()Lcom/davils/krypt/cose/CoseMessageType;
+	public fun getUnprotectedHeaders ()Lcom/davils/krypt/cose/CoseHeaders;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/cose/CoseSign1 : com/davils/krypt/cose/CoseMessage {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getPayload ()Lkotlinx/io/bytestring/ByteString;
+	public fun getProtectedEncoding ()Lkotlinx/io/bytestring/ByteString;
+	public fun getProtectedHeaders ()Lcom/davils/krypt/cose/CoseHeaders;
+	public final fun getSignature ()Lkotlinx/io/bytestring/ByteString;
+	public fun getType ()Lcom/davils/krypt/cose/CoseMessageType;
+	public fun getUnprotectedHeaders ()Lcom/davils/krypt/cose/CoseHeaders;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/cose/CoseSignature {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getProtectedEncoding ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getProtectedHeaders ()Lcom/davils/krypt/cose/CoseHeaders;
+	public final fun getSignature ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getUnprotectedHeaders ()Lcom/davils/krypt/cose/CoseHeaders;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/cose/CoseSigner {
+	public fun <init> (Lcom/davils/krypt/cose/key/CoseKey;Lcom/davils/krypt/cose/CoseAlgorithm;Lcom/davils/krypt/cose/CoseHeaders;Lcom/davils/krypt/cose/CoseHeaders;)V
+	public synthetic fun <init> (Lcom/davils/krypt/cose/key/CoseKey;Lcom/davils/krypt/cose/CoseAlgorithm;Lcom/davils/krypt/cose/CoseHeaders;Lcom/davils/krypt/cose/CoseHeaders;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAlgorithm ()Lcom/davils/krypt/cose/CoseAlgorithm;
+	public final fun getKey ()Lcom/davils/krypt/cose/key/CoseKey;
+	public final fun getProtectedHeaders ()Lcom/davils/krypt/cose/CoseHeaders;
+	public final fun getUnprotectedHeaders ()Lcom/davils/krypt/cose/CoseHeaders;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/cose/cbor/Cbor {
+	public static final field INSTANCE Lcom/davils/krypt/cose/cbor/Cbor;
+	public final fun decode (Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/cose/cbor/CborLimits;Lcom/davils/krypt/cose/cbor/CborMode;)Lcom/davils/kore/core/outcome/Outcome;
+	public static synthetic fun decode$default (Lcom/davils/krypt/cose/cbor/Cbor;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/cose/cbor/CborLimits;Lcom/davils/krypt/cose/cbor/CborMode;ILjava/lang/Object;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun encode (Lcom/davils/krypt/cose/cbor/CborItem;)Lkotlinx/io/bytestring/ByteString;
+}
+
+public final class com/davils/krypt/cose/cbor/CborArray : com/davils/krypt/cose/cbor/CborItem {
+	public static final field Companion Lcom/davils/krypt/cose/cbor/CborArray$Companion;
+	public fun <init> (Ljava/util/List;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun get (I)Lcom/davils/krypt/cose/cbor/CborItem;
+	public final fun getItems ()Ljava/util/List;
+	public final fun getSize ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/cose/cbor/CborArray$Companion {
+	public final fun of ([Lcom/davils/krypt/cose/cbor/CborItem;)Lcom/davils/krypt/cose/cbor/CborArray;
+}
+
+public final class com/davils/krypt/cose/cbor/CborBytes : com/davils/krypt/cose/cbor/CborItem {
+	public fun <init> (Lkotlinx/io/bytestring/ByteString;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBytes ()Lkotlinx/io/bytestring/ByteString;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/cose/cbor/CborFailure : java/lang/Enum {
+	public static final field DuplicateKey Lcom/davils/krypt/cose/cbor/CborFailure;
+	public static final field IndefiniteLength Lcom/davils/krypt/cose/cbor/CborFailure;
+	public static final field InvalidText Lcom/davils/krypt/cose/cbor/CborFailure;
+	public static final field LimitExceeded Lcom/davils/krypt/cose/cbor/CborFailure;
+	public static final field Malformed Lcom/davils/krypt/cose/cbor/CborFailure;
+	public static final field NotDeterministic Lcom/davils/krypt/cose/cbor/CborFailure;
+	public static final field TrailingData Lcom/davils/krypt/cose/cbor/CborFailure;
+	public static final field Truncated Lcom/davils/krypt/cose/cbor/CborFailure;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/cose/cbor/CborFailure;
+	public static fun values ()[Lcom/davils/krypt/cose/cbor/CborFailure;
+}
+
+public final class com/davils/krypt/cose/cbor/CborFloat : com/davils/krypt/cose/cbor/CborItem {
+	public fun <init> (D)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()D
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/cose/cbor/CborInteger : com/davils/krypt/cose/cbor/CborItem {
+	public static final field Companion Lcom/davils/krypt/cose/cbor/CborInteger$Companion;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getArgument-s-VKNKU ()J
+	public fun hashCode ()I
+	public final fun isNegative ()Z
+	public final fun toLongOrNull ()Ljava/lang/Long;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/cose/cbor/CborInteger$Companion {
+	public final fun negative-VKZWuLQ (J)Lcom/davils/krypt/cose/cbor/CborInteger;
+	public final fun of (J)Lcom/davils/krypt/cose/cbor/CborInteger;
+	public final fun unsigned-VKZWuLQ (J)Lcom/davils/krypt/cose/cbor/CborInteger;
+}
+
+public abstract class com/davils/krypt/cose/cbor/CborItem {
+}
+
+public final class com/davils/krypt/cose/cbor/CborLimits : com/davils/kore/core/validation/Validatable {
+	public static final field Companion Lcom/davils/krypt/cose/cbor/CborLimits$Companion;
+	public static final field HARD_MAXIMUM_BYTES I
+	public static final field HARD_MAXIMUM_DEPTH I
+	public static final field HARD_MAXIMUM_ITEMS I
+	public static final field HARD_MAXIMUM_MAP_ENTRIES I
+	public fun <init> ()V
+	public fun <init> (IIIII)V
+	public synthetic fun <init> (IIIIIILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMaximumBytes ()I
+	public final fun getMaximumDepth ()I
+	public final fun getMaximumItems ()I
+	public final fun getMaximumMapEntries ()I
+	public final fun getMaximumStringBytes ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public final class com/davils/krypt/cose/cbor/CborLimits$Companion {
+	public final fun getDefault ()Lcom/davils/krypt/cose/cbor/CborLimits;
+}
+
+public final class com/davils/krypt/cose/cbor/CborMap : com/davils/krypt/cose/cbor/CborItem {
+	public static final field Companion Lcom/davils/krypt/cose/cbor/CborMap$Companion;
+	public fun <init> (Ljava/util/List;)V
+	public final fun contains (Lcom/davils/krypt/cose/cbor/CborItem;)Z
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun get (J)Lcom/davils/krypt/cose/cbor/CborItem;
+	public final fun get (Lcom/davils/krypt/cose/cbor/CborItem;)Lcom/davils/krypt/cose/cbor/CborItem;
+	public final fun getEntries ()Ljava/util/List;
+	public final fun getKeys ()Ljava/util/List;
+	public final fun getSize ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/cose/cbor/CborMap$Companion {
+	public final fun getEmpty ()Lcom/davils/krypt/cose/cbor/CborMap;
+	public final fun of ([Lkotlin/Pair;)Lcom/davils/krypt/cose/cbor/CborMap;
+}
+
+public final class com/davils/krypt/cose/cbor/CborMode : java/lang/Enum {
+	public static final field Deterministic Lcom/davils/krypt/cose/cbor/CborMode;
+	public static final field Relaxed Lcom/davils/krypt/cose/cbor/CborMode;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/cose/cbor/CborMode;
+	public static fun values ()[Lcom/davils/krypt/cose/cbor/CborMode;
+}
+
+public final class com/davils/krypt/cose/cbor/CborSimple : com/davils/krypt/cose/cbor/CborItem {
+	public static final field Companion Lcom/davils/krypt/cose/cbor/CborSimple$Companion;
+	public fun <init> (I)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()I
+	public fun hashCode ()I
+	public final fun isBoolean ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/cose/cbor/CborSimple$Companion {
+	public final fun getFalse ()Lcom/davils/krypt/cose/cbor/CborSimple;
+	public final fun getNull ()Lcom/davils/krypt/cose/cbor/CborSimple;
+	public final fun getTrue ()Lcom/davils/krypt/cose/cbor/CborSimple;
+	public final fun getUndefined ()Lcom/davils/krypt/cose/cbor/CborSimple;
+	public final fun of (Z)Lcom/davils/krypt/cose/cbor/CborSimple;
+}
+
+public final class com/davils/krypt/cose/cbor/CborTag : com/davils/krypt/cose/cbor/CborItem {
+	public synthetic fun <init> (JLcom/davils/krypt/cose/cbor/CborItem;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getContent ()Lcom/davils/krypt/cose/cbor/CborItem;
+	public final fun getNumber-s-VKNKU ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/cose/cbor/CborText : com/davils/krypt/cose/cbor/CborItem {
+	public fun <init> (Ljava/lang/String;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getText ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/cose/cwt/Cwt {
+	public static final field Companion Lcom/davils/krypt/cose/cwt/Cwt$Companion;
+	public static final field MAXIMUM_LAYERS I
+	public static final field TAG J
+	public fun <init> (Lcom/davils/krypt/cose/Cose;)V
+	public final fun encrypt (Lcom/davils/krypt/cose/cwt/CwtClaims;Lcom/davils/krypt/cose/key/CoseKey;Lcom/davils/krypt/cose/CoseAlgorithm;ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun encrypt$default (Lcom/davils/krypt/cose/cwt/Cwt;Lcom/davils/krypt/cose/cwt/CwtClaims;Lcom/davils/krypt/cose/key/CoseKey;Lcom/davils/krypt/cose/CoseAlgorithm;ZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun getCose ()Lcom/davils/krypt/cose/Cose;
+	public final fun mac (Lcom/davils/krypt/cose/cwt/CwtClaims;Lcom/davils/krypt/cose/key/CoseKey;Lcom/davils/krypt/cose/CoseAlgorithm;ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun mac$default (Lcom/davils/krypt/cose/cwt/Cwt;Lcom/davils/krypt/cose/cwt/CwtClaims;Lcom/davils/krypt/cose/key/CoseKey;Lcom/davils/krypt/cose/CoseAlgorithm;ZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun sign (Lcom/davils/krypt/cose/cwt/CwtClaims;Lcom/davils/krypt/cose/CoseSigner;ZLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun sign$default (Lcom/davils/krypt/cose/cwt/Cwt;Lcom/davils/krypt/cose/cwt/CwtClaims;Lcom/davils/krypt/cose/CoseSigner;ZLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public fun toString ()Ljava/lang/String;
+	public final fun validate (Lkotlinx/io/bytestring/ByteString;Ljava/util/List;Lcom/davils/krypt/cose/cwt/CwtValidation;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/cose/cwt/Cwt$Companion {
+}
+
+public final class com/davils/krypt/cose/cwt/CwtClaims {
+	public static final field AUDIENCE J
+	public static final field CWT_ID J
+	public static final field Companion Lcom/davils/krypt/cose/cwt/CwtClaims$Companion;
+	public static final field EXPIRATION J
+	public static final field ISSUED_AT J
+	public static final field ISSUER J
+	public static final field NOT_BEFORE J
+	public static final field SUBJECT J
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun get (J)Lcom/davils/krypt/cose/cbor/CborItem;
+	public final fun get (Lcom/davils/krypt/cose/cbor/CborItem;)Lcom/davils/krypt/cose/cbor/CborItem;
+	public final fun getAudience ()Ljava/util/List;
+	public final fun getClaims ()Lcom/davils/krypt/cose/cbor/CborMap;
+	public final fun getCwtId ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getExpiration ()Lkotlin/time/Instant;
+	public final fun getIssuedAt ()Lkotlin/time/Instant;
+	public final fun getIssuer ()Ljava/lang/String;
+	public final fun getNotBefore ()Lkotlin/time/Instant;
+	public final fun getSubject ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/cose/cwt/CwtClaims$Companion {
+	public final fun of (Lcom/davils/krypt/cose/cbor/CborMap;)Lcom/davils/krypt/cose/cwt/CwtClaims;
+	public final fun of (Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Lkotlin/time/Instant;Lkotlin/time/Instant;Lkotlin/time/Instant;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/cose/cbor/CborMap;)Lcom/davils/krypt/cose/cwt/CwtClaims;
+	public static synthetic fun of$default (Lcom/davils/krypt/cose/cwt/CwtClaims$Companion;Ljava/lang/String;Ljava/lang/String;Ljava/util/List;Lkotlin/time/Instant;Lkotlin/time/Instant;Lkotlin/time/Instant;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/cose/cbor/CborMap;ILjava/lang/Object;)Lcom/davils/krypt/cose/cwt/CwtClaims;
+}
+
+public final class com/davils/krypt/cose/cwt/CwtFailure : java/lang/Enum {
+	public static final field AlgorithmNotPermitted Lcom/davils/krypt/cose/cwt/CwtFailure;
+	public static final field DecryptionFailed Lcom/davils/krypt/cose/cwt/CwtFailure;
+	public static final field Expired Lcom/davils/krypt/cose/cwt/CwtFailure;
+	public static final field InvalidSignature Lcom/davils/krypt/cose/cwt/CwtFailure;
+	public static final field InvalidTag Lcom/davils/krypt/cose/cwt/CwtFailure;
+	public static final field IssuedInFuture Lcom/davils/krypt/cose/cwt/CwtFailure;
+	public static final field KeyNotFound Lcom/davils/krypt/cose/cwt/CwtFailure;
+	public static final field Malformed Lcom/davils/krypt/cose/cwt/CwtFailure;
+	public static final field MissingClaim Lcom/davils/krypt/cose/cwt/CwtFailure;
+	public static final field NotYetValid Lcom/davils/krypt/cose/cwt/CwtFailure;
+	public static final field UnknownCritical Lcom/davils/krypt/cose/cwt/CwtFailure;
+	public static final field UnsupportedKey Lcom/davils/krypt/cose/cwt/CwtFailure;
+	public static final field WrongAudience Lcom/davils/krypt/cose/cwt/CwtFailure;
+	public static final field WrongIssuer Lcom/davils/krypt/cose/cwt/CwtFailure;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/cose/cwt/CwtFailure;
+	public static fun values ()[Lcom/davils/krypt/cose/cwt/CwtFailure;
+}
+
+public final class com/davils/krypt/cose/cwt/CwtValidation : com/davils/kore/core/validation/Validatable {
+	public static final field Companion Lcom/davils/krypt/cose/cwt/CwtValidation$Companion;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAlgorithms ()Ljava/util/Set;
+	public final fun getAt ()Lkotlin/time/Instant;
+	public final fun getAudience ()Ljava/lang/String;
+	public final fun getIssuer ()Ljava/lang/String;
+	public final fun getRequiredClaims ()Ljava/util/Set;
+	public final fun getSkew-UwyO8pc ()J
+	public final fun getUntaggedType ()Lcom/davils/krypt/cose/CoseMessageType;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public final class com/davils/krypt/cose/cwt/CwtValidation$Companion {
+	public final fun getMAXIMUM_SKEW-UwyO8pc ()J
+}
+
+public final class com/davils/krypt/cose/cwt/CwtValidationBuilder : com/davils/kore/core/dsl/ValidatingBuilder {
+	public final fun algorithms ([Lcom/davils/krypt/cose/CoseAlgorithm;)V
+	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+	public final fun getAt ()Lkotlin/time/Instant;
+	public final fun getAudience ()Ljava/lang/String;
+	public final fun getIssuer ()Ljava/lang/String;
+	public final fun getSkew-UwyO8pc ()J
+	public final fun getUntaggedType ()Lcom/davils/krypt/cose/CoseMessageType;
+	public final fun require (Lcom/davils/krypt/cose/cbor/CborItem;)V
+	public final fun require ([J)V
+	public final fun setAt (Lkotlin/time/Instant;)V
+	public final fun setAudience (Ljava/lang/String;)V
+	public final fun setIssuer (Ljava/lang/String;)V
+	public final fun setSkew-LRDsOJo (J)V
+	public final fun setUntaggedType (Lcom/davils/krypt/cose/CoseMessageType;)V
+}
+
+public final class com/davils/krypt/cose/cwt/CwtsKt {
+	public static final fun cwtValidation (Lkotlin/jvm/functions/Function1;)Lcom/davils/krypt/cose/cwt/CwtValidation;
+}
+
+public final class com/davils/krypt/cose/key/CoseCurve : java/lang/Enum {
+	public static final field Ed25519 Lcom/davils/krypt/cose/key/CoseCurve;
+	public static final field Ed448 Lcom/davils/krypt/cose/key/CoseCurve;
+	public static final field P256 Lcom/davils/krypt/cose/key/CoseCurve;
+	public static final field P384 Lcom/davils/krypt/cose/key/CoseCurve;
+	public static final field P521 Lcom/davils/krypt/cose/key/CoseCurve;
+	public static final field X25519 Lcom/davils/krypt/cose/key/CoseCurve;
+	public static final field X448 Lcom/davils/krypt/cose/key/CoseCurve;
+	public final fun getCurve ()Lcom/davils/krypt/core/algorithm/EllipticCurve;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getFamily ()Lcom/davils/krypt/core/algorithm/KeyFamily;
+	public final fun getId ()J
+	public final fun getKeyType ()Lcom/davils/krypt/cose/key/CoseKeyType;
+	public final fun getSize ()I
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/cose/key/CoseCurve;
+	public static fun values ()[Lcom/davils/krypt/cose/key/CoseCurve;
+}
+
+public final class com/davils/krypt/cose/key/CoseKey {
+	public static final field Companion Lcom/davils/krypt/cose/key/CoseKey$Companion;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAlgorithm ()Lcom/davils/krypt/cose/CoseAlgorithm;
+	public final fun getBaseIv ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getCurve ()Lcom/davils/krypt/cose/key/CoseCurve;
+	public final fun getKeyId ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getOperations ()Ljava/util/Set;
+	public final fun getPrivateKey ()Lcom/davils/krypt/primitive/key/PrivateKey;
+	public final fun getPublicKey ()Lcom/davils/krypt/primitive/key/PublicKey;
+	public final fun getSecretKey ()Lcom/davils/krypt/primitive/key/SecretKey;
+	public final fun getType ()Lcom/davils/krypt/cose/key/CoseKeyType;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/cose/key/CoseKey$Companion {
+	public final fun of (Lcom/davils/krypt/primitive/key/PrivateKey;Lcom/davils/krypt/primitive/key/PublicKey;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/cose/CoseAlgorithm;Ljava/util/Set;)Lcom/davils/krypt/cose/key/CoseKey;
+	public final fun of (Lcom/davils/krypt/primitive/key/PublicKey;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/cose/CoseAlgorithm;Ljava/util/Set;)Lcom/davils/krypt/cose/key/CoseKey;
+	public final fun of (Lcom/davils/krypt/primitive/key/SecretKey;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/cose/CoseAlgorithm;Ljava/util/Set;Lkotlinx/io/bytestring/ByteString;)Lcom/davils/krypt/cose/key/CoseKey;
+	public static synthetic fun of$default (Lcom/davils/krypt/cose/key/CoseKey$Companion;Lcom/davils/krypt/primitive/key/PrivateKey;Lcom/davils/krypt/primitive/key/PublicKey;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/cose/CoseAlgorithm;Ljava/util/Set;ILjava/lang/Object;)Lcom/davils/krypt/cose/key/CoseKey;
+	public static synthetic fun of$default (Lcom/davils/krypt/cose/key/CoseKey$Companion;Lcom/davils/krypt/primitive/key/PublicKey;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/cose/CoseAlgorithm;Ljava/util/Set;ILjava/lang/Object;)Lcom/davils/krypt/cose/key/CoseKey;
+	public static synthetic fun of$default (Lcom/davils/krypt/cose/key/CoseKey$Companion;Lcom/davils/krypt/primitive/key/SecretKey;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/cose/CoseAlgorithm;Ljava/util/Set;Lkotlinx/io/bytestring/ByteString;ILjava/lang/Object;)Lcom/davils/krypt/cose/key/CoseKey;
+}
+
+public final class com/davils/krypt/cose/key/CoseKeyOperation : java/lang/Enum {
+	public static final field Decrypt Lcom/davils/krypt/cose/key/CoseKeyOperation;
+	public static final field DeriveBits Lcom/davils/krypt/cose/key/CoseKeyOperation;
+	public static final field DeriveKey Lcom/davils/krypt/cose/key/CoseKeyOperation;
+	public static final field Encrypt Lcom/davils/krypt/cose/key/CoseKeyOperation;
+	public static final field MacCreate Lcom/davils/krypt/cose/key/CoseKeyOperation;
+	public static final field MacVerify Lcom/davils/krypt/cose/key/CoseKeyOperation;
+	public static final field Sign Lcom/davils/krypt/cose/key/CoseKeyOperation;
+	public static final field UnwrapKey Lcom/davils/krypt/cose/key/CoseKeyOperation;
+	public static final field Verify Lcom/davils/krypt/cose/key/CoseKeyOperation;
+	public static final field WrapKey Lcom/davils/krypt/cose/key/CoseKeyOperation;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getId ()J
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/cose/key/CoseKeyOperation;
+	public static fun values ()[Lcom/davils/krypt/cose/key/CoseKeyOperation;
+}
+
+public final class com/davils/krypt/cose/key/CoseKeySet {
+	public fun <init> (Ljava/util/List;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getKeys ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+	public final fun withKeyId (Lkotlinx/io/bytestring/ByteString;)Ljava/util/List;
+}
+
+public final class com/davils/krypt/cose/key/CoseKeyType : java/lang/Enum {
+	public static final field Ec2 Lcom/davils/krypt/cose/key/CoseKeyType;
+	public static final field Okp Lcom/davils/krypt/cose/key/CoseKeyType;
+	public static final field Rsa Lcom/davils/krypt/cose/key/CoseKeyType;
+	public static final field Symmetric Lcom/davils/krypt/cose/key/CoseKeyType;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getId ()J
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/cose/key/CoseKeyType;
+	public static fun values ()[Lcom/davils/krypt/cose/key/CoseKeyType;
+}
+
+public final class com/davils/krypt/cose/key/CoseKeys {
+	public fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/cose/CoseLimits;Lcom/davils/krypt/cose/cbor/CborMode;)V
+	public synthetic fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/cose/CoseLimits;Lcom/davils/krypt/cose/cbor/CborMode;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun decode (Lkotlinx/io/bytestring/ByteString;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun decodeSet (Lkotlinx/io/bytestring/ByteString;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun encode (Lcom/davils/krypt/cose/key/CoseKey;)Lkotlinx/io/bytestring/ByteString;
+	public final fun encodePrivate (Lcom/davils/krypt/cose/key/CoseKey;)Lcom/davils/krypt/core/SecretBytes;
+	public final fun encodeSet (Lcom/davils/krypt/cose/key/CoseKeySet;)Lkotlinx/io/bytestring/ByteString;
+	public final fun getCrypto ()Lcom/davils/krypt/primitive/Crypto;
+	public final fun getLimits ()Lcom/davils/krypt/cose/CoseLimits;
+	public final fun getMode ()Lcom/davils/krypt/cose/cbor/CborMode;
+	public final fun thumbprint (Lcom/davils/krypt/cose/key/CoseKey;Lcom/davils/krypt/core/algorithm/DigestAlgorithm;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun thumbprint$default (Lcom/davils/krypt/cose/key/CoseKeys;Lcom/davils/krypt/cose/key/CoseKey;Lcom/davils/krypt/core/algorithm/DigestAlgorithm;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public fun toString ()Ljava/lang/String;
+}
+
