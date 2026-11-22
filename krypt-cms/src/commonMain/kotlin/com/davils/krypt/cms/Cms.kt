@@ -264,7 +264,9 @@ public class Cms(public val crypto: Crypto, public val limits: CmsLimits = CmsLi
      * Reads enveloped data of RFC 5652 or authenticated-enveloped data of RFC 5083 in DER, as a ContentInfo.
      *
      * The originator information is skipped. Recipients of a kind or with algorithms krypt does not know are kept
-     * and reported as unusable when decrypting.
+     * and reported as unusable when decrypting. As RFC 5083 section 2.1 asks, authenticated-enveloped data of a
+     * content type other than id-data must carry authenticated attributes, and their content-type attribute must
+     * name the content type of the encrypted content, which nothing else authenticates.
      *
      * @param encoded the encoding, possibly from an attacker.
      * @return the enveloped data, or [CmsFailure.Malformed].

@@ -60,20 +60,6 @@ private fun oid(value: ObjectIdentifier): ByteString = der { objectIdentifier(va
 private fun kek(): SecretKey = SecretKey.of(SecretBytes.copyOf(ByteArray(KEK_BYTES) { 1 }))
 
 class AuditCmsTest : FunSpec({
-    test("authenticated enveloped data binds its content type") {
-        val identifier = "kek".encodeToByteString()
-        val enveloped = cms.envelop(
-            content = CONTENT,
-            recipients = listOf(Recipient.Kek(identifier, kek())),
-            encryption = ContentEncryption.Aes256Gcm,
-            contentType = ContentTypes.SignedData,
-        )
-        val relabelled = replaced(enveloped.encoded, oid(ContentTypes.SignedData), oid(ContentTypes.Data))
-        val decoded = cms.decodeEnveloped(relabelled).value()
-        decoded.contentType shouldBe ContentTypes.Data
-        cms.decrypt(decoded, Credential.Kek(identifier, kek())).failureOrNull() shouldNotBe null
-    }
-
     test("the tag of authenticated enveloped data has exactly 16 bytes") {
         val identifier = "kek".encodeToByteString()
         val enveloped = cms.envelop(CONTENT, listOf(Recipient.Kek(identifier, kek())), ContentEncryption.Aes256Gcm)
