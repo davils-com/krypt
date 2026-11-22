@@ -123,6 +123,7 @@ public final class com/davils/krypt/stream/StreamLimits {
 	public static final field DEFAULT_MAXIMUM_ITERATIONS I
 	public static final field DEFAULT_MAXIMUM_RECIPIENTS I
 	public static final field DEFAULT_MAXIMUM_SIGNATURES I
+	public static final field HARD_MAXIMUM_ITERATIONS I
 	public static final field HARD_MAXIMUM_RECIPIENTS I
 	public static final field HARD_MAXIMUM_SEGMENTS J
 	public static final field HARD_MAXIMUM_SIGNATURES I

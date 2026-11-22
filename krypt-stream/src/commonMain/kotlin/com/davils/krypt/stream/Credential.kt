@@ -64,6 +64,9 @@ public sealed interface Credential {
     /**
      * The key management service of a [Recipient.Service].
      *
+     * It is asked at most once per container, for the first recipient that names its key. A service that throws is
+     * contained and opens nothing; a cancellation of the caller passes on.
+     *
      * @property kms the key management service.
      * @constructor Opens with [kms].
      * @since 1.0.0
@@ -80,7 +83,8 @@ public sealed interface Credential {
 
     /**
      * The password of a [Recipient.Password]; the iterations it asks for are checked against the policy and the
-     * limits before any work.
+     * limits before any work, and it costs at most one PBKDF2 per container, which holds at most one password
+     * recipient.
      *
      * @property password the password; the caller keeps and wipes it.
      * @constructor Opens with [password].

@@ -31,9 +31,11 @@ internal class Unlocking(private val crypto: Crypto, private val limits: StreamL
         val aead = header.suite.aead
         StreamRefusal.ensure(crypto.environment.policy.permits(aead, AlgorithmUse.Verify), StreamFailure.Refused)
         StreamRefusal.ensure(crypto.capabilities.supports(aead), StreamFailure.Unsupported)
+        val wrapping = Wrapping(crypto, limits)
+        StreamRefusal.ensure(wrapping.passwords(header.recipients) <= 1, StreamFailure.Malformed)
         val context = KeySchedule.context(crypto = crypto, core = header.core, associatedData = associatedData)
         val wrapContext = Octets.concat(KeySchedule.RECIPIENT_LABEL, header.core)
-        val dataKey = dataKeyOf(header = header, credentials = credentials, context = wrapContext)
+        val dataKey = dataKeyOf(wrapping = wrapping, header = header, credentials = credentials, context = wrapContext)
             ?: refuse(StreamFailure.NotARecipient)
         val schedule = KeySchedule.derive(
             crypto = crypto,
@@ -59,10 +61,14 @@ internal class Unlocking(private val crypto: Crypto, private val limits: StreamL
         return Unlocked(header = header, dataKey = dataKey, schedule = schedule, cipher = cipher)
     }
 
-    private suspend fun dataKeyOf(header: Header, credentials: List<Credential>, context: ByteString): SecretBytes? {
-        val wrapping = Wrapping(crypto, limits)
+    private suspend fun dataKeyOf(
+        wrapping: Wrapping,
+        header: Header,
+        credentials: List<Credential>,
+        context: ByteString,
+    ): SecretBytes? {
         for (credential in credentials) {
-            for (entry in header.recipients) {
+            for (entry in wrapping.candidates(credential, header.recipients)) {
                 val key = wrapping.unwrap(credential = credential, entry = entry, context = context)
                 val fitting = key?.takeIf { found -> found.size == KeySchedule.DATA_KEY_BYTES }
                 if (fitting != null) return fitting

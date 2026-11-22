@@ -61,6 +61,15 @@ private const val DEFAULT_SEGMENT_SIZE: Int = 65_536
  * the platform whether it offers it; a container of a forbidden suite is [StreamFailure.Refused] and one of a missing
  * suite [StreamFailure.Unsupported], never thrown.
  *
+ * The recipient entries are authenticated only after a data key was unwrapped, so their content is chosen by whoever
+ * made the container. To bound the work a hostile container causes, a container holds at most one password recipient
+ * and is [StreamFailure.Malformed] otherwise, every credential is tried only against the entries of its own kind, and
+ * a [Credential.Service] only against the first entry that names its key. Opening a container therefore costs at most
+ * one PBKDF2 per [Credential.Password], with no more iterations than [StreamLimits.maximumIterations] and the policy
+ * allow (10 000 000 at the hard ceiling, 5 000 000 by the default policy), at most one call of the key management
+ * service per [Credential.Service], and at most [StreamLimits.maximumRecipients] AEAD or HPKE openings per
+ * [Credential.Key] or [Credential.Hybrid]. A service that throws is contained and opens nothing.
+ *
  * Decryption writes the plaintext of every segment as soon as it is authentic. When it fails at a later segment, the
  * plaintext written so far must be discarded: only a [Outcome.Success] vouches for the whole container.
  *
@@ -81,7 +90,8 @@ public class Containers(public val crypto: Crypto, public val limits: StreamLimi
      * @param suite the AEAD of the segments; AES-256-GCM by default.
      * @param segmentSize the size of a segment of plaintext, 4 KiB to 8 MiB; 64 KiB by default.
      * @return the seal of the container, for signing it.
-     * @throws IllegalArgumentException if there are no or too many recipients or [segmentSize] is out of range.
+     * @throws IllegalArgumentException if there are no or too many recipients, more than one password recipient, or
+     *   [segmentSize] is out of range.
      * @throws ByteLimitException if the plaintext needs more segments than the limits allow.
      * @since 1.0.0
      */
@@ -93,9 +103,7 @@ public class Containers(public val crypto: Crypto, public val limits: StreamLimi
         suite: StreamSuite = StreamSuite.Aes256Gcm,
         segmentSize: Int = DEFAULT_SEGMENT_SIZE,
     ): ContainerSeal {
-        require(recipients.size in 1..limits.maximumRecipients) {
-            "A container has 1 to ${limits.maximumRecipients} recipients"
-        }
+        checkRecipients(recipients)
         require(segmentSize in HeaderCodec.MINIMUM_SEGMENT..HeaderCodec.MAXIMUM_SEGMENT) {
             "A segment has ${HeaderCodec.MINIMUM_SEGMENT} to ${HeaderCodec.MAXIMUM_SEGMENT} bytes"
         }
@@ -250,7 +258,7 @@ public class Containers(public val crypto: Crypto, public val limits: StreamLimi
      * @param recipients who can open the rewrapped container; at least one.
      * @param associatedData the authenticated context the container was encrypted with.
      * @return the seal of the rewrapped container, or why the container could not be read.
-     * @throws IllegalArgumentException if there are no or too many recipients.
+     * @throws IllegalArgumentException if there are no or too many recipients or more than one password recipient.
      * @since 1.0.0
      */
     public suspend fun rewrap(
@@ -260,9 +268,7 @@ public class Containers(public val crypto: Crypto, public val limits: StreamLimi
         recipients: List<Recipient>,
         associatedData: ByteString = ByteString(),
     ): Outcome<ContainerSeal, StreamFailure> {
-        require(recipients.size in 1..limits.maximumRecipients) {
-            "A container has 1 to ${limits.maximumRecipients} recipients"
-        }
+        checkRecipients(recipients)
         return attempt {
             val header = HeaderCodec.read(source, limits)
             val unlocking = Unlocking(crypto, limits)
@@ -283,7 +289,7 @@ public class Containers(public val crypto: Crypto, public val limits: StreamLimi
      * @param recipients who can open the container.
      * @param associatedData authenticated context; empty by default.
      * @return the container.
-     * @throws IllegalArgumentException if there are no or too many recipients.
+     * @throws IllegalArgumentException if there are no or too many recipients or more than one password recipient.
      * @since 1.0.0
      */
     public suspend fun encrypt(
@@ -334,6 +340,15 @@ public class Containers(public val crypto: Crypto, public val limits: StreamLimi
      * @since 1.0.0
      */
     override fun toString(): String = "Containers($limits)"
+
+    private fun checkRecipients(recipients: List<Recipient>) {
+        require(recipients.size in 1..limits.maximumRecipients) {
+            "A container has 1 to ${limits.maximumRecipients} recipients"
+        }
+        require(recipients.count { recipient -> recipient is Recipient.Password } <= 1) {
+            "A container has at most one password recipient"
+        }
+    }
 
     private suspend fun writeSegments(
         source: ByteSource,

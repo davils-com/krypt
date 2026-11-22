@@ -84,6 +84,8 @@ public sealed interface Recipient {
 
     /**
      * Whoever knows [password]: the data key is encrypted with a key derived by PBKDF2 with SHA-256 and a fresh salt.
+     * A container has at most one password recipient, so that a hostile container cannot multiply the PBKDF2 work of
+     * a reader.
      *
      * @property password the password; the caller keeps and wipes it.
      * @property iterations the iterations of PBKDF2; 600 000 by default.
