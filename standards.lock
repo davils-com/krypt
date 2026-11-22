@@ -552,6 +552,40 @@
             }
         },
         {
+            "id": "rfc:8230",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-cose: PS256, PS384, PS512 and the RSA key type.",
+            "snapshot": {
+                "title": "Using RSA Algorithms with CBOR Object Signing and Encryption (COSE) Messages",
+                "status": "PROPOSED STANDARD",
+                "published": "September 2017",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
+            }
+        },
+        {
+            "id": "rfc:8392",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-cose: CWT claims, creation and validation.",
+            "snapshot": {
+                "title": "CBOR Web Token (CWT)",
+                "status": "PROPOSED STANDARD",
+                "published": "May 2018",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "5710": "HELD",
+                    "5852": "HELD",
+                    "7982": "REPORTED",
+                    "8617": "REPORTED",
+                    "8655": "REPORTED"
+                }
+            }
+        },
+        {
             "id": "rfc:8439",
             "reviewedOn": "2026-11-22",
             "note": "ChaCha20-Poly1305: an AEAD of krypt-primitive where the platform has it.",
@@ -571,6 +605,60 @@
                     "6569": "HELD",
                     "6989": "REJECTED",
                     "7880": "VERIFIED"
+                }
+            }
+        },
+        {
+            "id": "rfc:8949",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-cose: the deterministic CBOR codec.",
+            "snapshot": {
+                "title": "Concise Binary Object Representation (CBOR)",
+                "status": "INTERNET STANDARD",
+                "published": "December 2020",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "8589": "VERIFIED"
+                }
+            }
+        },
+        {
+            "id": "rfc:9052",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-cose: COSE structures, headers, crit and COSE_Key.",
+            "snapshot": {
+                "title": "CBOR Object Signing and Encryption (COSE): Structures and Process",
+                "status": "INTERNET STANDARD",
+                "published": "August 2022",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [
+                    "RFC9338"
+                ],
+                "errata": {
+                    "8623": "REPORTED",
+                    "9219": "REPORTED",
+                    "9225": "VERIFIED"
+                }
+            }
+        },
+        {
+            "id": "rfc:9053",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-cose: COSE algorithms and the COSE_KDF_Context.",
+            "snapshot": {
+                "title": "CBOR Object Signing and Encryption (COSE): Initial Algorithms",
+                "status": "INFORMATIONAL",
+                "published": "August 2022",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [
+                    "RFC9864"
+                ],
+                "errata": {
+                    "8061": "REPORTED"
                 }
             }
         },
@@ -595,6 +683,20 @@
                     "7934": "VERIFIED",
                     "7937": "VERIFIED"
                 }
+            }
+        },
+        {
+            "id": "rfc:9360",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-cose: x5chain and x5t header parameters.",
+            "snapshot": {
+                "title": "CBOR Object Signing and Encryption (COSE): Header Parameters for Carrying and Referencing X.509 Certificates",
+                "status": "PROPOSED STANDARD",
+                "published": "February 2023",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
             }
         },
         {
@@ -639,6 +741,36 @@
                 "title": "Online Certificate Status Protocol (OCSP) Nonce Extension",
                 "status": "PROPOSED STANDARD",
                 "published": "August 2024",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
+            }
+        },
+        {
+            "id": "rfc:9679",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-cose: COSE Key Thumbprints.",
+            "snapshot": {
+                "title": "CBOR Object Signing and Encryption (COSE) Key Thumbprint",
+                "status": "PROPOSED STANDARD",
+                "published": "December 2024",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "8390": "REPORTED"
+                }
+            }
+        },
+        {
+            "id": "rfc:9864",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-cose: fully specified ESP256, ESP384, ESP512, Ed25519 and Ed448.",
+            "snapshot": {
+                "title": "Fully-Specified Algorithms for JSON Object Signing and Encryption (JOSE) and CBOR Object Signing and Encryption (COSE)",
+                "status": "PROPOSED STANDARD",
+                "published": "October 2025",
                 "withdrawn": false,
                 "replacedBy": [],
                 "updatedBy": [],
