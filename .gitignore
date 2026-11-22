@@ -1,0 +1,46 @@
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+.kotlin
+
+### IntelliJ IDEA ###
+*.iws
+*.iml
+*.ipr
+out/
+
+### Eclipse ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
+
+### Secrets ###
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.jks
+*.kdbx
+
+### Tooling ###
+.port/
+.claude/settings.local.json
+*.hprof
+
+# Gradle dependency lock files are deliberately not ignored: they are the record of
+# which versions a build resolves, they are what the Trivy scans read, and Gradle
+# itself writes "This file is expected to be part of source control" into them.
+# The settings lock file is the exception: the settings declare no locking.
+/settings-gradle.lockfile
