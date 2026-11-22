@@ -42,6 +42,7 @@ check:
       - ":krypt-cose:clean"
       - ":krypt-spiffe:clean"
       - ":krypt-testing:clean"
+      - ":krypt-benchmark:clean"
     tasks:
       - ":krypt-core:jvmJar"
       - ":krypt-asn1:jvmJar"

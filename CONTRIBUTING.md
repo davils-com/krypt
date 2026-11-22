@@ -50,6 +50,26 @@ compatibility, waits for the next major version.
 Every public declaration has KDoc with `@since`. Internal and private declarations have none, and there are no other
 comments.
 
+## Benchmarks
+
+`krypt-benchmark` measures the throughput of the `KRYPT/1` container, the encrypted blob store, field encryption,
+blind indexes and, as a baseline, the raw AES-256-GCM and SHA-256 beneath them, with JMH on the JVM. `check` only
+compiles and analyses the benchmarks; running them takes minutes and needs a quiet machine.
+
+```bash
+./gradlew :krypt-benchmark:smokeBenchmark            # short profile: 1 warm-up and 3 iterations of 0.5 s, one fork
+./gradlew :krypt-benchmark:benchmark                 # main profile: 5 warm-ups and 10 iterations of 1 s, two forks
+./gradlew :krypt-benchmark:kreateBenchmarkBaseline   # runs the main profile and records benchmarks/baseline.json
+./gradlew :krypt-benchmark:kreateBenchmarkCheck      # runs the main profile and compares it with the baseline
+```
+
+JMH writes its reports to `krypt-benchmark/build/reports/benchmarks/<profile>`; the comparison lands in
+`krypt-benchmark/build/reports/kreate/benchmark/comparison.md`. The check fails when a benchmark loses more than 10 %
+beyond its measurement error or disappears from the run. Scores are in operations per second; a benchmark over a fixed
+payload reads as bytes per second when multiplied by its size. A baseline holds only on the machine that recorded it,
+so record one before a change and compare after it on the same machine, and commit it only for a machine the team
+shares.
+
 ## Changing a Dependency
 
 Every dependency, the classpath of `build-logic` included, is locked and verified. After changing

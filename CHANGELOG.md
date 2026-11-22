@@ -112,6 +112,11 @@ kollect 1.0.0. The code comes from the security library of an internal Davils pr
   against limits, and test support gains an in-memory ACME server.
 - **Test support**: deterministic and replayed randomness, an audit log, test environments and an in-memory ACME
   server.
+- **Benchmarks**: `krypt-benchmark`, a module that is never published, measures with JMH on the JVM the throughput of
+  the `KRYPT/1` container (encryption, decryption and random access with AES-256-GCM and ChaCha20-Poly1305 at 1 MiB
+  and 64 MiB), the encrypted blob store, field encryption and blind indexes, and the raw AES-256-GCM and SHA-256
+  beneath them. It runs through Kreate's benchmark support with a `main` and a `smoke` profile and a regression gate
+  against a recorded baseline; `check` compiles the benchmarks but never runs them.
 
 ### Security
 

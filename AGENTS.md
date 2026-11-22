@@ -32,7 +32,8 @@ correctness first.
 | `krypt-tls` | `com.davils:krypt-tls` | TLS over JSSE, for the JVM only: the `tls { }` DSL, contexts, engines and socket factories, rotating key and trust managers on the path validation of krypt, revocation, Certificate Transparency, mutual TLS with a peer policy and hot reload of material |
 | `krypt-testing` | `com.davils:krypt-testing` | Test support: deterministic and replayed randomness, audit logs, test environments and an in-memory ACME server |
 | `krypt-bom` | `com.davils:krypt-bom` | The bill of materials of every module |
-| `build-logic` | - | One convention plugin per concern, composed by `krypt.kotlin-library` for a library module, `krypt.jvm-library` for a module only the JVM offers, `krypt.bom` for the BOM and `krypt.root` for the root project; they hold nothing but `plugins { }` and `kreate { }` |
+| `krypt-benchmark` | - | JMH throughput benchmarks of the container, the blob store, field encryption, blind indexes and the raw primitives beneath them, for the JVM; never published |
+| `build-logic` | - | One convention plugin per concern, composed by `krypt.kotlin-library` for a library module, `krypt.jvm-library` for a module only the JVM offers, `krypt.bom` for the BOM, `krypt.benchmark` for the benchmark module and `krypt.root` for the root project; they hold nothing but `plugins { }` and `kreate { }` |
 
 `krypt-core` builds on `com.davils:kore-core`, `com.davils:konfetti-core`, `com.davils:kollect-core`,
 `kotlinx-coroutines-core` and `kotlinx-io-bytestring`; `krypt-asn1` builds on `krypt-core`, `krypt-primitive` on
@@ -163,6 +164,10 @@ passwords, names and every field of every protocol message.
 - A library module applies exactly one plugin, `id("krypt.kotlin-library")` or, for a module only the JVM offers,
   `id("krypt.jvm-library")`, and declares nothing but its description
   and its dependencies; the BOM applies `id("krypt.bom")`.
+- `krypt-benchmark` applies only `id("krypt.benchmark")`. Its benchmarks live in `src/benchmarks/kotlin` and depend
+  on the published modules through `benchmarksImplementation`. It is never published and has no API dump, no BOM
+  entry and no release entry. `check` compiles the benchmarks and runs Detekt over them, but never runs JMH; the
+  commands that do are in `CONTRIBUTING.md`.
 - `build-logic` holds no Kotlin classes, no tasks and no Gradle API calls beyond reading the version catalog. Every
   plugin configures one concern and applies `krypt.base`:
 
@@ -187,6 +192,7 @@ passwords, names and every field of every protocol message.
   | `krypt.changelog` | The changelog check |
   | `krypt.license-header` | The license header check |
   | `krypt.bom` | The Java platform of the BOM and its publication |
+  | `krypt.benchmark` | The unpublished benchmark module on Kotlin/JVM: JMH through Kreate, the `main` and `smoke` profiles and the regression gate |
 
 - Dependencies are declared in `gradle/libs.versions.toml`. Libraries of JetBrains, Kore, konfetti and kollect may be
   added when they are needed; every other dependency needs the approval of a maintainer. krypt depends on no
