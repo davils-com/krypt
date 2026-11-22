@@ -98,6 +98,7 @@ kreate {
                 ":krypt-keystore",
                 ":krypt-ct",
                 ":krypt-ocsp",
+                ":krypt-authority",
                 ":krypt-testing",
             )
         }
