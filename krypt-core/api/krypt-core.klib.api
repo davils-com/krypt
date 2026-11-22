@@ -484,6 +484,13 @@ final class com.davils.krypt.core.audit/AuditEntry { // com.davils.krypt.core.au
     final fun toString(): kotlin/String // com.davils.krypt.core.audit/AuditEntry.toString|toString(){}[0]
 }
 
+final class com.davils.krypt.core.audit/AuditRefusedException : kotlin/IllegalStateException { // com.davils.krypt.core.audit/AuditRefusedException|null[0]
+    constructor <init>(com.davils.krypt.core.audit/AuditAction, kotlin/Throwable? = ...) // com.davils.krypt.core.audit/AuditRefusedException.<init>|<init>(com.davils.krypt.core.audit.AuditAction;kotlin.Throwable?){}[0]
+
+    final val action // com.davils.krypt.core.audit/AuditRefusedException.action|{}action[0]
+        final fun <get-action>(): com.davils.krypt.core.audit/AuditAction // com.davils.krypt.core.audit/AuditRefusedException.action.<get-action>|<get-action>(){}[0]
+}
+
 final class com.davils.krypt.core.io/BufferSink : com.davils.krypt.core.io/ByteSink { // com.davils.krypt.core.io/BufferSink|null[0]
     constructor <init>(kotlin/Int) // com.davils.krypt.core.io/BufferSink.<init>|<init>(kotlin.Int){}[0]
 
@@ -597,6 +604,7 @@ final class com.davils.krypt.core.telemetry/AuditTrail { // com.davils.krypt.cor
         final fun <get-failures>(): kotlin/Long // com.davils.krypt.core.telemetry/AuditTrail.failures.<get-failures>|<get-failures>(){}[0]
 
     final suspend fun record(com.davils.krypt.core.audit/AuditAction, kotlin/String, com.davils.krypt.core.audit/AuditOutcome, kotlin.collections/Map<kotlin/String, kotlin/String> = ...): kotlin/Boolean // com.davils.krypt.core.telemetry/AuditTrail.record|record(com.davils.krypt.core.audit.AuditAction;kotlin.String;com.davils.krypt.core.audit.AuditOutcome;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+    final suspend fun require(com.davils.krypt.core.audit/AuditAction, kotlin/String, com.davils.krypt.core.audit/AuditOutcome = ..., kotlin.collections/Map<kotlin/String, kotlin/String> = ...) // com.davils.krypt.core.telemetry/AuditTrail.require|require(com.davils.krypt.core.audit.AuditAction;kotlin.String;com.davils.krypt.core.audit.AuditOutcome;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
 }
 
 final class com.davils.krypt.core/Environment : com.davils.kore.core.validation/Validatable { // com.davils.krypt.core/Environment|null[0]

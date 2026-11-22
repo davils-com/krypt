@@ -24,6 +24,7 @@ import com.davils.krypt.core.Environment
 import com.davils.krypt.core.audit.AuditAction
 import com.davils.krypt.core.audit.AuditEntry
 import com.davils.krypt.core.audit.AuditOutcome
+import com.davils.krypt.core.audit.AuditRefusedException
 import kotlin.concurrent.atomics.AtomicLong
 import kotlin.concurrent.atomics.ExperimentalAtomicApi
 
@@ -75,5 +76,26 @@ public class AuditTrail(private val environment: Environment) {
         val recorded = attempted { sink.record(entry) }
         recorded.onFailure { failureCount.addAndFetch(1L) }
         return recorded.isSuccess || !environment.isAuditRequired
+    }
+
+    /**
+     * Records an entry for [action] on [subject] and refuses the operation when it could not be recorded and the audit
+     * is required.
+     *
+     * @param action what happened.
+     * @param subject what it happened to.
+     * @param outcome how it ended; [AuditOutcome.Succeeded] by default.
+     * @param attributes further facts.
+     * @throws AuditRefusedException if the entry could not be recorded and the audit is required.
+     * @since 1.0.0
+     */
+    public suspend fun require(
+        action: AuditAction,
+        subject: String,
+        outcome: AuditOutcome = AuditOutcome.Succeeded,
+        attributes: Map<String, String> = emptyMap(),
+    ) {
+        val isRecorded = record(action = action, subject = subject, outcome = outcome, attributes = attributes)
+        if (!isRecorded) throw AuditRefusedException(action)
     }
 }

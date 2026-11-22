@@ -23,7 +23,9 @@ import com.davils.krypt.core.Environment
 import com.davils.krypt.core.audit.AuditAction
 import com.davils.krypt.core.audit.AuditEntry
 import com.davils.krypt.core.audit.AuditOutcome
+import com.davils.krypt.core.audit.AuditRefusedException
 import com.davils.krypt.core.environment
+import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import kotlin.time.Clock
@@ -72,5 +74,18 @@ class AuditTrailTest : FunSpec({
         val required = AuditTrail(environment(failing) { isAuditRequired = true })
         required.record(action = ACTION, subject = SUBJECT, outcome = AuditOutcome.Succeeded) shouldBe false
         required.failures shouldBe 1L
+    }
+
+    test("a required audit that cannot record refuses the operation with an exception") {
+        val failing = environment {
+            audit({ _ -> error("the audit store is down") }, required = true)
+        }
+        val refused = shouldThrow<AuditRefusedException> {
+            AuditTrail(
+                failing,
+            ).require(action = ACTION, subject = SUBJECT)
+        }
+        refused.action shouldBe ACTION
+        AuditTrail(Environment.Default).require(action = ACTION, subject = SUBJECT)
     }
 })
