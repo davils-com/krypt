@@ -55,8 +55,10 @@ public enum class CryptoProfile {
     Cnsa2,
 
     /**
-     * The algorithms FIPS 140-3 approves, and nothing else. The policy also demands a FIPS validated provider on the
-     * JVM; krypt cannot prove the validation of a provider and relies on the one the caller configures.
+     * The algorithms FIPS 140-3 approves, and nothing else. The policy also demands a FIPS validated provider: every
+     * operation is refused unless the environment names a provider, so nothing silently runs on the default providers
+     * of the JVM, and on WebAssembly, where no provider can be named, every operation is refused. krypt cannot prove the
+     * validation of a provider and relies on the one the caller configures.
      *
      * @since 1.0.0
      */

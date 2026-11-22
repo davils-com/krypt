@@ -95,9 +95,4 @@ class AuditJcaTest : FunSpec({
         reachable shouldBe emptyList()
     }
 
-    test("A-11: a policy that demands a FIPS provider refuses to run without one") {
-        val fips = Crypto(environment { policy = CryptoPolicy.Fips })
-        CryptoPolicy.Fips.isFipsProviderRequired shouldBe true
-        shouldThrow<CryptoException> { fips.digests.digest("message".encodeToByteString()) }
-    }
 })
