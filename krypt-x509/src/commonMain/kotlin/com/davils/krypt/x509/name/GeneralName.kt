@@ -21,6 +21,7 @@ import com.davils.kore.core.text.SafeText
 import com.davils.krypt.asn1.ObjectIdentifier
 import com.davils.krypt.core.encoding.Hex
 import com.davils.krypt.x509.internal.IpAddresses
+import com.davils.krypt.x509.internal.OtherNameParts
 import kotlinx.io.bytestring.ByteString
 
 /**
@@ -267,7 +268,9 @@ public sealed interface GeneralName {
      * @property encoded the DER encoding with its context tag.
      * @since 1.0.0
      */
-    public class Other internal constructor(public val encoded: ByteString) : GeneralName {
+    public class Other private constructor(public val encoded: ByteString) : GeneralName {
+        internal constructor(parts: OtherNameParts) : this(parts.encoded)
+
         /**
          * Compares the encoding.
          *

@@ -17,6 +17,7 @@
 package com.davils.krypt.x509.extension
 
 import com.davils.krypt.asn1.ObjectIdentifier
+import com.davils.krypt.x509.internal.ExtensionParts
 import com.davils.krypt.x509.internal.ExtensionReader
 import com.davils.krypt.x509.internal.ExtensionReads
 import com.davils.krypt.x509.internal.ExtensionReads.readAccessDescriptions
@@ -42,7 +43,7 @@ import kotlinx.io.bytestring.ByteString
  * @property all every extension, in the order of its encoding.
  * @since 1.0.0
  */
-public class Extensions internal constructor(public val all: List<Extension>, maximumNames: Int) {
+public class Extensions private constructor(public val all: List<Extension>, maximumNames: Int) {
     private val reads = ExtensionReader(all)
 
     /**
@@ -193,6 +194,8 @@ public class Extensions internal constructor(public val all: List<Extension>, ma
     public val unknownCritical: List<ObjectIdentifier> =
         unknownOf(all)
 
+    internal constructor(parts: ExtensionParts) : this(parts.all, parts.maximumNames)
+
     /**
      * Returns the extension [id].
      *
@@ -228,7 +231,7 @@ public class Extensions internal constructor(public val all: List<Extension>, ma
     override fun toString(): String = "Extensions($all)"
 
     internal companion object {
-        val Empty: Extensions = Extensions(emptyList(), 1)
+        val Empty: Extensions = Extensions(ExtensionParts(emptyList(), 1))
 
         private fun unknownOf(all: List<Extension>): List<ObjectIdentifier> {
             val critical = all.filter { extension -> extension.isCritical }

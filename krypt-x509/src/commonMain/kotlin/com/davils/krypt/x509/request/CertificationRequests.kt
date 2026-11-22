@@ -41,8 +41,10 @@ import com.davils.krypt.x509.X509Limits
 import com.davils.krypt.x509.extension.Extension
 import com.davils.krypt.x509.extension.Extensions
 import com.davils.krypt.x509.internal.CertificateCodec.readExtensionList
+import com.davils.krypt.x509.internal.ExtensionParts
 import com.davils.krypt.x509.internal.ExtensionWrites.writeExtensions
 import com.davils.krypt.x509.internal.NameCodec.readName
+import com.davils.krypt.x509.internal.RequestParts
 import com.davils.krypt.x509.internal.SignatureChecks
 import com.davils.krypt.x509.internal.X509Oids
 import kotlinx.io.bytestring.ByteString
@@ -178,17 +180,18 @@ public class CertificationRequests(public val crypto: Crypto, public val limits:
             readAttributes()
         }
         if (!inner.isExhausted) inner.refuse(DerFailure.InvalidValue, "the end of the request")
-        CertificationRequest(
+        val parts = RequestParts(
             encoded = encoded,
             subject = subject,
             subjectPublicKeyInfo = spki,
             publicKey = crypto.keys.decodePublic(spki).getOrNull(),
-            requestedExtensions = Extensions(attributes.second, limits.maximumNames),
+            requestedExtensions = Extensions(ExtensionParts(attributes.second, limits.maximumNames)),
             attributeTypes = attributes.first,
             signatureAlgorithm = algorithm,
             info = info.encoded,
             signature = signature.bytes,
         )
+        CertificationRequest(parts)
     }
 
     private fun DerReader.readAttributes(): Pair<List<ObjectIdentifier>, List<Extension>> {

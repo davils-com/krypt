@@ -21,6 +21,7 @@ import com.davils.kore.core.text.SafeText
 import com.davils.krypt.asn1.ObjectIdentifier
 import com.davils.krypt.asn1.Tag
 import com.davils.krypt.core.encoding.Hex
+import com.davils.krypt.x509.internal.AttributeParts
 import kotlinx.io.bytestring.ByteString
 
 /**
@@ -33,7 +34,7 @@ import kotlinx.io.bytestring.ByteString
  * @since 1.0.0
  */
 @OptIn(DavilsInternal::class)
-public class AttributeValue internal constructor(
+public class AttributeValue private constructor(
     public val type: ObjectIdentifier,
     public val text: String?,
     public val tag: Tag,
@@ -42,6 +43,13 @@ public class AttributeValue internal constructor(
     private val normalizedText: String? = text?.let { value -> normalize(value) }
 
     internal val normalized: String = normalizedText ?: "#${Hex.encode(encoded)}"
+
+    internal constructor(parts: AttributeParts) : this(
+        type = parts.type,
+        text = parts.text,
+        tag = parts.tag,
+        encoded = parts.encoded,
+    )
 
     /**
      * Compares by RFC 5280: the type, and the value of a string ignoring case and surplus white space, otherwise its

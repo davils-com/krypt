@@ -44,9 +44,9 @@ private const val ASCII_LIMIT: Int = 0x80
 
 internal object NameCodec {
     private val READERS: Map<Int, (DerElement, Int) -> GeneralName> = mapOf(
-        OTHER_NAME to { element, _ -> GeneralName.Other(element.encoded) },
-        X400 to { element, _ -> GeneralName.Other(element.encoded) },
-        EDI_PARTY to { element, _ -> GeneralName.Other(element.encoded) },
+        OTHER_NAME to { element, _ -> GeneralName.Other(OtherNameParts(element.encoded)) },
+        X400 to { element, _ -> GeneralName.Other(OtherNameParts(element.encoded)) },
+        EDI_PARTY to { element, _ -> GeneralName.Other(OtherNameParts(element.encoded)) },
         EMAIL to { element, _ -> GeneralName.Email(ia5(element)) },
         DNS to { element, _ -> GeneralName.Dns(ia5(element)) },
         URI to { element, _ -> GeneralName.Uri(ia5(element)) },
@@ -65,7 +65,7 @@ internal object NameCodec {
             if (names.size >= maximum) inner.refuse(DerFailure.LimitExceeded, "at most $maximum relative names")
             names += inner.readSet { readRelativeName(maximum) }
         }
-        return DistinguishedName(names = names, encoded = element.encoded)
+        return DistinguishedName(NameParts(names = names, encoded = element.encoded))
     }
 
     fun build(names: List<List<Pair<ObjectIdentifier, String>>>): DistinguishedName {
@@ -130,11 +130,11 @@ internal object NameCodec {
                 val type = readObjectIdentifier()
                 val value = readElement()
                 val text = Der.decodeOrNull(value.encoded) { readText() }
-                AttributeValue(type = type, text = text, tag = value.tag, encoded = value.encoded)
+                AttributeValue(AttributeParts(type = type, text = text, tag = value.tag, encoded = value.encoded))
             }
         }
         if (attributes.isEmpty()) refuse(DerFailure.InvalidValue, "at least one attribute")
-        return RelativeName(attributes)
+        return RelativeName(RelativeNameParts(attributes))
     }
 
     private fun DerWriter.writeAttribute(type: ObjectIdentifier, value: String) {

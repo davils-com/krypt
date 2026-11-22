@@ -20,6 +20,7 @@ import com.davils.krypt.asn1.ObjectIdentifier
 import com.davils.krypt.core.algorithm.SignatureAlgorithm
 import com.davils.krypt.primitive.key.PublicKey
 import com.davils.krypt.x509.extension.Extensions
+import com.davils.krypt.x509.internal.RequestParts
 import com.davils.krypt.x509.name.DistinguishedName
 import kotlinx.io.bytestring.ByteString
 
@@ -40,7 +41,7 @@ import kotlinx.io.bytestring.ByteString
  * @property signature the signature.
  * @since 1.0.0
  */
-public class CertificationRequest internal constructor(
+public class CertificationRequest private constructor(
     public val encoded: ByteString,
     public val subject: DistinguishedName,
     public val subjectPublicKeyInfo: ByteString,
@@ -51,6 +52,18 @@ public class CertificationRequest internal constructor(
     public val info: ByteString,
     public val signature: ByteString,
 ) {
+    internal constructor(parts: RequestParts) : this(
+        encoded = parts.encoded,
+        subject = parts.subject,
+        subjectPublicKeyInfo = parts.subjectPublicKeyInfo,
+        publicKey = parts.publicKey,
+        requestedExtensions = parts.requestedExtensions,
+        attributeTypes = parts.attributeTypes,
+        signatureAlgorithm = parts.signatureAlgorithm,
+        info = parts.info,
+        signature = parts.signature,
+    )
+
     /**
      * Compares the encodings.
      *
