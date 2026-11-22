@@ -295,14 +295,17 @@ public final class com/davils/krypt/jose/jwk/JsonWebKeys {
 	public final fun getCrypto ()Lcom/davils/krypt/primitive/Crypto;
 	public final fun getLimits ()Lcom/davils/krypt/jose/JoseLimits;
 	public final fun key (Lcom/davils/krypt/jose/jwk/Jwk;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun members (Lcom/davils/krypt/jose/jwk/Jwk;)Lcom/davils/krypt/jose/JsonValue$Object;
 	public final fun of (Lcom/davils/krypt/primitive/key/PrivateKey;Ljava/lang/String;Lcom/davils/krypt/jose/jwk/KeyUse;Ljava/lang/String;)Lcom/davils/krypt/jose/jwk/Jwk;
 	public final fun of (Lcom/davils/krypt/primitive/key/PublicKey;Ljava/lang/String;Lcom/davils/krypt/jose/jwk/KeyUse;Ljava/lang/String;)Lcom/davils/krypt/jose/jwk/Jwk;
 	public final fun of (Lcom/davils/krypt/primitive/key/SecretKey;Ljava/lang/String;Ljava/lang/String;)Lcom/davils/krypt/jose/jwk/Jwk;
 	public static synthetic fun of$default (Lcom/davils/krypt/jose/jwk/JsonWebKeys;Lcom/davils/krypt/primitive/key/PrivateKey;Ljava/lang/String;Lcom/davils/krypt/jose/jwk/KeyUse;Ljava/lang/String;ILjava/lang/Object;)Lcom/davils/krypt/jose/jwk/Jwk;
 	public static synthetic fun of$default (Lcom/davils/krypt/jose/jwk/JsonWebKeys;Lcom/davils/krypt/primitive/key/PublicKey;Ljava/lang/String;Lcom/davils/krypt/jose/jwk/KeyUse;Ljava/lang/String;ILjava/lang/Object;)Lcom/davils/krypt/jose/jwk/Jwk;
 	public static synthetic fun of$default (Lcom/davils/krypt/jose/jwk/JsonWebKeys;Lcom/davils/krypt/primitive/key/SecretKey;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lcom/davils/krypt/jose/jwk/Jwk;
+	public final fun parse (Ljava/lang/String;)Lcom/davils/kore/core/outcome/Outcome;
 	public final fun privateKey (Lcom/davils/krypt/jose/jwk/Jwk;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public final fun publicKey (Lcom/davils/krypt/jose/jwk/Jwk;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun read (Lcom/davils/krypt/jose/JsonValue$Object;)Lcom/davils/kore/core/outcome/Outcome;
 	public final fun secretKey (Lcom/davils/krypt/jose/jwk/Jwk;)Lcom/davils/kore/core/outcome/Outcome;
 	public final fun thumbprint (Lcom/davils/krypt/jose/jwk/Jwk;Lcom/davils/krypt/core/algorithm/DigestAlgorithm;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static synthetic fun thumbprint$default (Lcom/davils/krypt/jose/jwk/JsonWebKeys;Lcom/davils/krypt/jose/jwk/Jwk;Lcom/davils/krypt/core/algorithm/DigestAlgorithm;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;

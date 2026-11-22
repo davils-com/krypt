@@ -14,8 +14,11 @@
  * limitations under the License.
  */
 
+@file:OptIn(DavilsInternal::class)
+
 package com.davils.krypt.jose.jwk
 
+import com.davils.kore.core.annotation.DavilsInternal
 import com.davils.kore.core.outcome.Outcome
 import com.davils.kore.core.outcome.flatMap
 import com.davils.kore.core.outcome.getOrNull
@@ -74,7 +77,40 @@ public class JsonWebKeys(public val crypto: Crypto, public val limits: JoseLimit
      */
     public fun decode(text: String): Outcome<Jwk, JoseFailure> = objectOf(text).flatMap { json -> read(json) }
 
-    internal fun read(json: JsonValue.Object): Outcome<Jwk, JoseFailure> = decoding { reader.read(json) }
+    /**
+     * Reads a JWK from a parsed JSON object, for the formats of other krypt modules that embed JWKs with members of
+     * their own, such as the SPIFFE bundles of krypt-spiffe. The rules of [decode] apply.
+     *
+     * @param json the object, possibly from an attacker.
+     * @return the key, or why it was refused.
+     * @since 1.0.0
+     */
+    @DavilsInternal
+    public fun read(json: JsonValue.Object): Outcome<Jwk, JoseFailure> = decoding { reader.read(json) }
+
+    /**
+     * Parses a JSON object by the strict and bounded rules of krypt-jose: I-JSON within [limits], no duplicate member.
+     *
+     * @param text the JSON text, possibly from an attacker.
+     * @return the object, or why it was refused.
+     * @since 1.0.0
+     */
+    @DavilsInternal
+    public fun parse(text: String): Outcome<JsonValue.Object, JoseFailure> = objectOf(text)
+
+    /**
+     * Writes [jwk] as a JSON object, for the formats of other krypt modules that add members of their own.
+     *
+     * @param jwk the key.
+     * @return the members of the JWK.
+     * @throws IllegalStateException if [jwk] was destroyed.
+     * @since 1.0.0
+     */
+    @DavilsInternal
+    public fun members(jwk: Jwk): JsonValue.Object {
+        check(!jwk.isDestroyed) { "The JWK was destroyed, so it cannot be written any more" }
+        return JwkWriter.objectOf(jwk)
+    }
 
     /**
      * Reads a JWK set. A key that krypt cannot read, such as one of an unknown type, is left out, as RFC 7517
