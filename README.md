@@ -21,8 +21,9 @@ network, reports through events on [konfetti](https://github.com/davils-com/konf
 | `krypt-ocsp` | `com.davils:krypt-ocsp` | OCSP requests, responses, verification, a revocation checker and a responder |
 | `krypt-ct` | `com.davils:krypt-ct` | Signed certificate timestamps, log lists and a CT policy |
 | `krypt-authority` | `com.davils:krypt-authority` | A certificate authority with profiles, an issuance policy, revocation lists and OCSP status |
+| `krypt-acme` | `com.davils:krypt-acme` | The ACME client logic over a transport of the application: accounts, orders, challenges, revocation and renewal information |
 | `krypt-tls` | `com.davils:krypt-tls` | TLS over JSSE for the JVM only: configured contexts and engines, rotating key and trust managers, revocation, CT, mutual TLS and hot reload |
-| `krypt-testing` | `com.davils:krypt-testing` | Deterministic and replayed randomness, audit logs and test environments |
+| `krypt-testing` | `com.davils:krypt-testing` | Deterministic and replayed randomness, audit logs, test environments and an in-memory ACME server |
 | `krypt-bom` | `com.davils:krypt-bom` | The bill of materials of every module |
 
 krypt is a Kotlin Multiplatform library for `jvm` and `wasmJs`, written for Kotlin 2.4 or newer. On the JVM it
