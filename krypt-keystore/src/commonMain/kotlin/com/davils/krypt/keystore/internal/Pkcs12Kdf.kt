@@ -22,10 +22,13 @@ import com.davils.krypt.core.algorithm.DigestAlgorithm
 import com.davils.krypt.core.policy.AlgorithmUse
 import com.davils.krypt.primitive.Crypto
 import kotlinx.io.bytestring.ByteString
+import kotlinx.io.bytestring.unsafe.UnsafeByteStringApi
+import kotlinx.io.bytestring.unsafe.UnsafeByteStringOperations
 
 private const val MAC_ID: Byte = 3
 private const val BYTE_BITS: Int = 8
 
+@OptIn(UnsafeByteStringApi::class)
 internal object Pkcs12Kdf {
     suspend fun macKey(
         crypto: Crypto,
@@ -42,12 +45,29 @@ internal object Pkcs12Kdf {
         val input = diversifier + stretchedSalt + stretchedPassword
         passwordBytes.fill(0)
         stretchedPassword.fill(0)
-        var current = crypto.digests.digest(data = ByteString(input), algorithm = digest, use = AlgorithmUse.Verify)
-        input.fill(0)
-        repeat(iterations - 1) {
-            current = crypto.digests.digest(data = current, algorithm = digest, use = AlgorithmUse.Verify)
+        var current = try {
+            crypto.digests.digest(
+                data = UnsafeByteStringOperations.wrapUnsafe(input),
+                algorithm = digest,
+                use = AlgorithmUse.Verify,
+            )
+        } finally {
+            input.fill(0)
         }
-        return SecretBytes.copyOf(current)
+        repeat(iterations - 1) {
+            val next = crypto.digests.digest(data = current, algorithm = digest, use = AlgorithmUse.Verify)
+            wipe(current)
+            current = next
+        }
+        return try {
+            SecretBytes.copyOf(current)
+        } finally {
+            wipe(current)
+        }
+    }
+
+    private fun wipe(bytes: ByteString) {
+        UnsafeByteStringOperations.withByteArrayUnsafe(bytes) { array -> array.fill(0) }
     }
 
     private fun bmp(password: SecretText): ByteArray = password.reveal { chars ->
