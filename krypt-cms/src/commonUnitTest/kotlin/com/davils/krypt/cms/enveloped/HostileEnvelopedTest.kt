@@ -41,7 +41,10 @@ import com.davils.krypt.cms.fixture.cms
 import com.davils.krypt.cms.fixture.constructed
 import com.davils.krypt.cms.fixture.contentInfo
 import com.davils.krypt.cms.fixture.crypto
+import com.davils.krypt.cms.fixture.decryptCbc
 import com.davils.krypt.cms.fixture.der
+import com.davils.krypt.cms.fixture.encryptCbc
+import com.davils.krypt.cms.fixture.envelopCbc
 import com.davils.krypt.cms.fixture.enveloped
 import com.davils.krypt.cms.fixture.indefinite
 import com.davils.krypt.cms.fixture.innerParts
@@ -153,7 +156,7 @@ private fun originator(algorithm: ObjectIdentifier, bits: BitString): ByteString
 
 class HostileEnvelopedTest : FunSpec({
     test("broken envelopes are refused") {
-        val envelope = cms.envelop(CONTENT, listOf(Recipient.Kek(KEK_ID, kek())), ContentEncryption.Aes256Cbc)
+        val envelope = cms.envelopCbc(CONTENT, listOf(Recipient.Kek(KEK_ID, kek())), ContentEncryption.Aes256Cbc)
         val base = EnvelopedBase(envelope)
         val encoded = envelope.encoded
         failureOf(truncated(encoded)) shouldBe CmsFailure.Malformed
@@ -176,7 +179,7 @@ class HostileEnvelopedTest : FunSpec({
     }
 
     test("optional parts are read and missing content is reported") {
-        val envelope = cms.envelop(CONTENT, listOf(Recipient.Kek(KEK_ID, kek())), ContentEncryption.Aes256Cbc)
+        val envelope = cms.envelopCbc(CONTENT, listOf(Recipient.Kek(KEK_ID, kek())), ContentEncryption.Aes256Cbc)
         val base = EnvelopedBase(envelope)
         val credential = Credential.Kek(KEK_ID, kek())
         val originatorInfo = tagged(constructed(0), emptyList())
@@ -212,18 +215,18 @@ class HostileEnvelopedTest : FunSpec({
     }
 
     test("encrypted data is read strictly") {
-        val encrypted = cms.encrypt(CONTENT, kek())
+        val encrypted = cms.encryptCbc(CONTENT, kek())
         val parts = innerParts(encrypted.encoded)
         val withAttributes = contentInfo(ContentTypes.EncryptedData, parts.with(0, der { integer(2) }) + attributes(1))
         cms.decodeEncrypted(withAttributes).value().unprotectedAttributes shouldBe listOf(ATTRIBUTE)
         val algorithm = EnvelopedBase.childrenOf(parts[1])[1]
         val detachedInfo = contentInfoOf(type = ContentTypes.Data, algorithm = algorithm, content = null)
         val detached = cms.decodeEncrypted(contentInfo(ContentTypes.EncryptedData, parts.with(1, detachedInfo))).value()
-        cms.decrypt(detached, kek()).failureOrNull() shouldBe CmsFailure.ContentMissing
+        cms.decryptCbc(detached, kek()).failureOrNull() shouldBe CmsFailure.ContentMissing
         val unknownInfo = contentInfoOf(type = ContentTypes.Data, algorithm = oid(UNKNOWN), content = CONTENT)
         val strange = cms.decodeEncrypted(contentInfo(ContentTypes.EncryptedData, parts.with(1, unknownInfo))).value()
         strange.toString().contains("unknown") shouldBe true
-        cms.decrypt(strange, kek()).failureOrNull() shouldBe CmsFailure.AlgorithmNotPermitted
+        cms.decryptCbc(strange, kek()).failureOrNull() shouldBe CmsFailure.AlgorithmNotPermitted
         cms.decodeEncrypted(truncated(encrypted.encoded)).failureOrNull() shouldBe CmsFailure.Malformed
     }
 

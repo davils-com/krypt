@@ -143,3 +143,11 @@ kollect 1.0.0. The code comes from the security library of an internal Davils pr
   bundle without a sequence after one with a sequence; an `x509-svid` key whose `x5c` holds more than one certificate
   refuses the bundle; and Java can no longer construct checked SPIFFE values, `PeerIdentity`, `RotatingTrustManager`
   or `AcmeSession` around their validation.
+- **Message formats hardened after an audit**: CWT validation requires a signature, a MAC or an encryption under a
+  pre-shared key (`isAuthenticationRequired`) and `exp` (`isExpirationRequired`) by default, COSE reads `alg` only from
+  the protected bucket and HMAC keys must be as long as the hash; `Jwt.validate` accepts only the compact
+  serialization, a JWS needs `b64` in `crit` to use an unencoded payload, a JWK keeps `use`, `key_ops` and `alg` on its
+  `JoseKey`, and PBES2 and PWRI derive at most once per password and message; CMS requires signed attributes and
+  authenticated attributes for content other than id-data, binds the content type and tag length of
+  AuthEnvelopedData, verifies time stamps without throwing, and reads or writes AES-CBC only with
+  `isUnauthenticatedCbcAllowed`.

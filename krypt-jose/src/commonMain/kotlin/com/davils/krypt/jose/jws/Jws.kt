@@ -29,6 +29,8 @@ import com.davils.krypt.jose.internal.HeaderRules
 import com.davils.krypt.jose.internal.JwsCodec
 import com.davils.krypt.jose.internal.JwsCrypto
 import com.davils.krypt.jose.internal.JwsVerifier
+import com.davils.krypt.jose.internal.SIGNING
+import com.davils.krypt.jose.internal.isUsable
 import com.davils.krypt.jose.internal.stringsOf
 import com.davils.krypt.jose.internal.text
 import com.davils.krypt.jose.internal.textOrNull
@@ -134,8 +136,9 @@ public class Jws(public val crypto: Crypto, public val limits: JoseLimits = Jose
      * Reads a JWS in the compact or the JSON serialization, without verifying it.
      *
      * The headers must be JSON objects within [limits], every member of a known name must have its type, protected
-     * and unprotected headers share no member, `b64` must be protected and the same for every signature, and a JSON
-     * serialization carries at most [JoseLimits.maximumRecipients] signatures.
+     * and unprotected headers share no member, `b64` must be protected and the same for every signature, a `b64` of
+     * false must be listed in `crit` as RFC 7797 section 6 asks, and a JSON serialization carries at most
+     * [JoseLimits.maximumRecipients] signatures.
      *
      * @param text the serialization, possibly from an attacker.
      * @return the message, or why it was refused.
@@ -198,7 +201,8 @@ public class Jws(public val crypto: Crypto, public val limits: JoseLimits = Jose
     /**
      * Verifies [message] with the key of its `x5c` chain, after [validator] validated the chain by RFC 5280. A
      * signature without `x5c` gives [JoseFailure.UntrustedCertificate], as does a chain that does not validate; a
-     * chain longer than [JoseLimits.maximumCertificates] gives [JoseFailure.LimitExceeded].
+     * chain longer than [JoseLimits.maximumCertificates] gives [JoseFailure.LimitExceeded] before any certificate is
+     * decoded.
      *
      * @param message the decoded message.
      * @param validator the path validator with the trust anchors of the caller.
@@ -238,12 +242,13 @@ public class Jws(public val crypto: Crypto, public val limits: JoseLimits = Jose
     ): Outcome<List<JoseKey>, JoseFailure> {
         val header = signature.header.members
         val encoded = header.stringsOf(HeaderNames.CHAIN).orEmpty()
-        val chain = encoded.mapNotNull { text ->
+        val countFailure = JoseFailure.UntrustedCertificate.takeIf { encoded.isEmpty() }
+            ?: JoseFailure.LimitExceeded.takeIf { encoded.size > limits.maximumCertificates }
+        val counted = encoded.takeIf { countFailure == null }.orEmpty()
+        val chain = counted.mapNotNull { text ->
             Base64Url.decodeStandard(text)?.let { der -> certificates.decode(der).getOrNull() }
         }
-        val failure = JoseFailure.UntrustedCertificate.takeIf { encoded.isEmpty() }
-            ?: JoseFailure.LimitExceeded.takeIf { encoded.size > limits.maximumCertificates }
-            ?: JoseFailure.Malformed.takeIf { chain.size != encoded.size }
+        val failure = countFailure ?: JoseFailure.Malformed.takeIf { chain.size != encoded.size }
         if (failure != null) return Outcome.Failure(failure)
         return validated(chain = chain, validator = validator, parameters = parameters)
     }
@@ -270,6 +275,8 @@ public class Jws(public val crypto: Crypto, public val limits: JoseLimits = Jose
     }
 
     private suspend fun signOne(signer: JwsSigner, payload: ByteString, isEncoded: Boolean): Pair<String, ByteString> {
+        val name = signer.algorithm.algorithmName
+        require(isUsable(signer.key, SIGNING, setOf(name))) { "The key is not for $name" }
         val header = protectedOf(signer = signer, isEncoded = isEncoded).encode()
         val protected = Base64Url.encode(header.encodeToByteArray())
         val payloadInput = when (isEncoded) {

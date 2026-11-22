@@ -30,6 +30,7 @@ import com.davils.krypt.cms.fixture.certificate
 import com.davils.krypt.cms.fixture.checkValue
 import com.davils.krypt.cms.fixture.cms
 import com.davils.krypt.cms.fixture.crypto
+import com.davils.krypt.cms.fixture.encryptCbc
 import com.davils.krypt.cms.fixture.enveloped
 import com.davils.krypt.cms.fixture.value
 import com.davils.krypt.core.LegacyCryptography
@@ -150,7 +151,7 @@ class EnvelopedValuesTest : FunSpec({
             .references shouldBe emptyList()
         cms.decodeEnveloped(AUTH_ENVELOPED_RSA).value().unprotectedAttributes shouldBe emptyList()
         val encrypted = cms.decodeEncrypted(ENCRYPTED).value()
-        val own = cms.encrypt(ByteString(1), key(1))
+        val own = cms.encryptCbc(ByteString(1), key(1))
         checkValue(value = encrypted, same = cms.decodeEncrypted(ENCRYPTED).value(), different = listOf(own)) shouldBe
             "EncryptedData(Aes128Cbc)"
         ContentEncryption.Aes128Gcm.isAuthenticated shouldBe true

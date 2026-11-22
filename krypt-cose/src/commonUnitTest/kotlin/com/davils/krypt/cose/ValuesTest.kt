@@ -45,6 +45,7 @@ class ValuesTest : FunSpec({
         val secret = CoseKey.of(crypto.keys.generateSecret(16), keyId = utf8("kid"))
         val pair = crypto.keys.generate(KeyType.Ed25519)
         val signer = CoseSigner(key = CoseKey.of(pair.privateKey), algorithm = CoseAlgorithm.Ed25519)
+        val macKey = CoseKey.of(crypto.keys.generateSecret(), keyId = utf8("kid"))
         val direct = listOf(CoseRecipientSpec(key = secret, algorithm = CoseAlgorithm.Direct))
         val sign1 = cose.sign1(payload = utf8(CONTENT), signer = signer)
         comparesByValue(
@@ -63,11 +64,11 @@ class ValuesTest : FunSpec({
             same = sign.signatures[0],
             different = cose.sign(payload = utf8(OTHER), signers = listOf(signer)).signatures[0],
         )
-        val mac0 = cose.mac0(payload = utf8(CONTENT), key = secret, algorithm = CoseAlgorithm.Hmac256)
+        val mac0 = cose.mac0(payload = utf8(CONTENT), key = macKey, algorithm = CoseAlgorithm.Hmac256)
         comparesByValue(
             value = mac0,
             same = cose.decodeMac0(mac0.encode()).value(),
-            different = cose.mac0(payload = utf8(OTHER), key = secret, algorithm = CoseAlgorithm.Hmac256),
+            different = cose.mac0(payload = utf8(OTHER), key = macKey, algorithm = CoseAlgorithm.Hmac256),
         )
         val mac = cose.mac(
             payload = utf8(CONTENT),
@@ -79,7 +80,7 @@ class ValuesTest : FunSpec({
         comparesByValue(
             value = mac,
             same = cose.decodeMac(mac.encode()).value(),
-            different = cose.mac0(payload = utf8(CONTENT), key = secret, algorithm = CoseAlgorithm.Hmac256),
+            different = cose.mac0(payload = utf8(CONTENT), key = macKey, algorithm = CoseAlgorithm.Hmac256),
         )
         val encrypt0 = cose.encrypt0(
             plaintext = utf8(CONTENT),

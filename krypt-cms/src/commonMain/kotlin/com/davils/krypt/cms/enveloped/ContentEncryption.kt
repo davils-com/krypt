@@ -20,8 +20,9 @@ package com.davils.krypt.cms.enveloped
  * The content encryption algorithms krypt reads and writes in CMS.
  *
  * AES-CBC serves EnvelopedData and EncryptedData of RFC 5652, which are not authenticated: whoever changes the
- * ciphertext changes the plaintext unnoticed. AES-GCM serves AuthEnvelopedData of RFC 5083 with the parameters of
- * RFC 5084, a nonce of 12 bytes and a tag of 16 bytes; prefer it.
+ * ciphertext changes the plaintext unnoticed, so krypt reads and writes it only with `isUnauthenticatedCbcAllowed`.
+ * AES-GCM serves AuthEnvelopedData of RFC 5083 with the parameters of RFC 5084, a nonce of 12 bytes and a tag of 16
+ * bytes; prefer it.
  *
  * @property keyBytes the size of the content-encryption key.
  * @property isAuthenticated true for AES-GCM, which only AuthEnvelopedData carries.

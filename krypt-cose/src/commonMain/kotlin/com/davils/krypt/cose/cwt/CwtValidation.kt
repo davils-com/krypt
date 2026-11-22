@@ -39,8 +39,8 @@ private const val SUBJECT: String = "cwtValidation"
  * How a CWT is validated by RFC 8392 section 7.2: which algorithms its COSE layers may use, which issuer and audience
  * it must name, which claims it must carry and how far the clocks may differ.
  *
- * Build one with [cwtValidation]. The checks of time apply only to the claims present: a CWT without `exp` never
- * expires unless [requiredClaims] demands it.
+ * Build one with [cwtValidation]. A CWT must carry `exp` unless [isExpirationRequired] is false; the other checks of
+ * time apply only to the claims present.
  *
  * @since 1.0.0
  */
@@ -94,8 +94,42 @@ public class CwtValidation internal constructor(builder: CwtValidationBuilder) :
      */
     public val requiredClaims: Set<CborItem> = builder.required.toSet()
 
+    /**
+     * Whether the CWT must carry the `exp` claim; true by default, as for a JWT. A CWT without `exp` is refused with
+     * [CwtFailure.MissingClaim]. Turn it off only for tokens whose lifetime the application bounds otherwise: a CWT
+     * without `exp` never expires.
+     *
+     * @since 1.0.0
+     */
+    public val isExpirationRequired: Boolean = builder.isExpirationRequired
+
+    /**
+     * Whether a layer of the CWT must authenticate its issuer; true by default. Such a layer is a signature, a MAC or
+     * a content encryption whose key the validator shares with the issuer in advance (a COSE_Encrypt0, or a
+     * COSE_Encrypt with a direct or key wrap recipient), each verified with one of the keys of the validator. A
+     * COSE_Encrypt or COSE_Mac whose key came from an ECDH-ES recipient never counts: anyone who knows the public key
+     * of the recipient can create one, so it hides the claims but says nothing about who wrote them. A CWT without
+     * such a layer is refused with [CwtFailure.Unauthenticated].
+     *
+     * Turn it off only when the claims need no origin, for example when the application authenticates the issuer
+     * through another channel; the claims of an unauthenticated CWT may otherwise come from anyone.
+     *
+     * @since 1.0.0
+     */
+    public val isAuthenticationRequired: Boolean = builder.isAuthenticationRequired
+
     private val values: List<Any?>
-        get() = listOf(algorithms, issuer, audience, skew, at, untaggedType, requiredClaims)
+        get() = listOf(
+            algorithms,
+            issuer,
+            audience,
+            skew,
+            at,
+            untaggedType,
+            requiredClaims,
+            isExpirationRequired,
+            isAuthenticationRequired,
+        )
 
     init {
         validateOrThrow(SUBJECT)
@@ -138,7 +172,8 @@ public class CwtValidation internal constructor(builder: CwtValidationBuilder) :
      */
     override fun toString(): String = "CwtValidation(algorithms=$algorithms, issuer=${quoted(issuer)}, " +
         "audience=${quoted(audience)}, skew=$skew, at=${at ?: CLOCK}, untaggedType=${untaggedType ?: NONE}, " +
-        "requiredClaims=$requiredClaims)"
+        "requiredClaims=$requiredClaims, expirationRequired=$isExpirationRequired, " +
+        "authenticationRequired=$isAuthenticationRequired)"
 
     /**
      * The bound of the skew.

@@ -48,8 +48,10 @@ internal class Permissions(private val crypto: Crypto) {
         unprotectedHeaders: CoseHeaders,
         allowed: Set<CoseAlgorithm>,
     ): CoseAlgorithm? {
-        val item = protectedHeaders[HeaderLabels.ALGORITHM] ?: unprotectedHeaders[HeaderLabels.ALGORITHM]
+        val protectedItem = protectedHeaders[HeaderLabels.ALGORITHM]
+        val item = protectedItem ?: unprotectedHeaders[HeaderLabels.ALGORITHM]
         val algorithm = item?.longOrNull()?.let { id -> CoseAlgorithm.of(id) }
+        ensure(protectedItem != null || algorithm?.kdf == null, CoseFailure.Malformed)
         val candidate = algorithm?.takeIf { found ->
             found in allowed && found.kind == CoseAlgorithmKind.KeyDistribution
         }

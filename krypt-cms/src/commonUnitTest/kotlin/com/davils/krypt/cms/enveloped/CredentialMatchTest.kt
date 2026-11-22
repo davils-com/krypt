@@ -33,6 +33,7 @@ import com.davils.krypt.cms.fixture.certificate
 import com.davils.krypt.cms.fixture.cms
 import com.davils.krypt.cms.fixture.constructed
 import com.davils.krypt.cms.fixture.crypto
+import com.davils.krypt.cms.fixture.decryptCbc
 import com.davils.krypt.cms.fixture.der
 import com.davils.krypt.cms.fixture.enveloped
 import com.davils.krypt.cms.fixture.privateKey
@@ -78,16 +79,16 @@ class CredentialMatchTest : FunSpec({
         cms.refusal(decoded, Credential.Password(SecretText.of("x"))) shouldBe CmsFailure.RecipientNotFound
         val ecKey = privateKey(EC_RECIPIENT_KEY)
         val wrongFamily = Credential.Certified(certificate(RSA_RECIPIENT_CERTIFICATE), ecKey)
-        cms.decrypt(rsaBase.enveloped, wrongFamily).failureOrNull() shouldBe CmsFailure.DecryptionFailed
+        cms.decryptCbc(rsaBase.enveloped, wrongFamily).failureOrNull() shouldBe CmsFailure.DecryptionFailed
         if (crypto.capabilities.supports(KeyType.X25519)) {
             val x25519 = crypto.keys.generate(KeyType.X25519).privateKey
             val wrongScheme = Credential.Certified(certificate(EC_RECIPIENT_CERTIFICATE), x25519)
-            cms.decrypt(cms.decodeEnveloped(ENVELOPED_EC).value(), wrongScheme).failureOrNull() shouldBe
+            cms.decryptCbc(cms.decodeEnveloped(ENVELOPED_EC).value(), wrongScheme).failureOrNull() shouldBe
                 CmsFailure.DecryptionFailed
         }
         if (crypto.capabilities.supports(KemAlgorithm.MlKem768)) {
             val notKem = Credential.Certified(certificate(KEM_RECIPIENT_CERTIFICATE), ecKey)
-            cms.decrypt(cms.decodeEnveloped(ENVELOPED_KEM).value(), notKem).failureOrNull() shouldBe
+            cms.decryptCbc(cms.decodeEnveloped(ENVELOPED_KEM).value(), notKem).failureOrNull() shouldBe
                 CmsFailure.DecryptionFailed
         }
     }
@@ -119,7 +120,7 @@ class CredentialMatchTest : FunSpec({
         }
         if (crypto.capabilities.supports(KemAlgorithm.MlKem768)) {
             val credential = Credential.Certified(certificate(KEM_RECIPIENT_CERTIFICATE), privateKey(KEM_RECIPIENT_KEY))
-            cms.decrypt(base.enveloped, credential).value() shouldBe CONTENT
+            cms.decryptCbc(base.enveloped, credential).value() shouldBe CONTENT
         }
     }
 
@@ -128,6 +129,7 @@ class CredentialMatchTest : FunSpec({
         val odd = SecretBytes.copyOf(ByteArray(ODD_KEY_BYTES) { 2 })
         val recipient = KeyProtection(crypto).protect(Recipient.Kek(ByteString(1), kek()), odd)
         val decoded = cms.decodeEnveloped(base.withRecipients(listOf(recipient))).value()
-        cms.decrypt(decoded, Credential.Kek(ByteString(1), kek())).failureOrNull() shouldBe CmsFailure.DecryptionFailed
+        cms.decryptCbc(decoded, Credential.Kek(ByteString(1), kek())).failureOrNull() shouldBe
+            CmsFailure.DecryptionFailed
     }
 })

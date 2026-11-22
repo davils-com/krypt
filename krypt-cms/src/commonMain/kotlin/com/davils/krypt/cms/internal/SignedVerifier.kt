@@ -21,6 +21,7 @@ import com.davils.krypt.asn1.Der
 import com.davils.krypt.asn1.ObjectIdentifier
 import com.davils.krypt.cms.CmsFailure
 import com.davils.krypt.cms.CmsLimits
+import com.davils.krypt.cms.ContentTypes
 import com.davils.krypt.cms.internal.EssCertId.Companion.readFirstCertId
 import com.davils.krypt.cms.signed.SignatureParameters
 import com.davils.krypt.cms.signed.SignedData
@@ -134,7 +135,9 @@ internal class SignedVerifier(
     }
 
     private suspend fun attributeFailure(signer: SignerInfo, certificate: Certificate, target: Target): CmsFailure? {
-        val signed = signer.parts.signed ?: return null
+        val contentType = target.contentType
+        val isTyped = contentType != null && contentType != ContentTypes.Data
+        val signed = signer.parts.signed ?: return CmsFailure.AttributeMismatch.takeIf { isTyped }
         return signedFailure(
             signed = signed,
             digest = signer.digestAlgorithm,

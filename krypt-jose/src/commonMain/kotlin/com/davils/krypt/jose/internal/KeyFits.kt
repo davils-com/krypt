@@ -18,6 +18,7 @@ package com.davils.krypt.jose.internal
 
 import com.davils.krypt.core.algorithm.KeyFamily
 import com.davils.krypt.jose.JoseKey
+import com.davils.krypt.jose.jwk.KeyOperation
 import com.davils.krypt.primitive.key.PrivateKey
 import com.davils.krypt.primitive.key.PublicKey
 import com.davils.krypt.primitive.key.SecretKey
@@ -32,3 +33,21 @@ internal fun rsaKey(key: JoseKey): PrivateKey? =
 
 internal fun fittingSecret(key: JoseKey, bytes: Int): SecretKey? =
     (key as? JoseKey.Secret)?.let { found -> found.key.takeIf { found.key.bits == bytes * BYTE_BITS } }
+
+internal val SIGNING: Set<KeyOperation> = setOf(KeyOperation.Sign)
+
+internal val VERIFYING: Set<KeyOperation> = setOf(KeyOperation.Verify)
+
+internal val ENCRYPTING: Set<KeyOperation> =
+    setOf(KeyOperation.Encrypt, KeyOperation.WrapKey, KeyOperation.DeriveKey, KeyOperation.DeriveBits)
+
+internal val DECRYPTING: Set<KeyOperation> =
+    setOf(KeyOperation.Decrypt, KeyOperation.UnwrapKey, KeyOperation.DeriveKey, KeyOperation.DeriveBits)
+
+internal fun isUsable(key: JoseKey, operations: Set<KeyOperation>, algorithms: Set<String>): Boolean {
+    val use = key.use
+    val isUseFit = use == null || operations.all { operation -> operation.use == use }
+    val isOperationFit = key.operations.isEmpty() || key.operations.any { operation -> operation in operations }
+    val algorithm = key.algorithm
+    return isUseFit && isOperationFit && (algorithm == null || algorithm in algorithms)
+}

@@ -47,13 +47,18 @@ import kotlinx.io.bytestring.ByteString
  * Every verification and decryption takes the keys to try and an explicit allowlist of algorithms. An algorithm
  * outside the allowlist, unknown to krypt or forbidden by the crypto policy is refused before any key is used; a key
  * is used only for an algorithm that fits its type, curve, `alg` and `key_ops`, and only when its key id matches the
- * `kid` of the message, if both have one. A `crit` parameter that names a label neither krypt nor [criticalLabels]
- * covers refuses the message. Decryption fails with [CoseFailure.DecryptionFailed] for every wrong key, wrapped key or
- * tag, so that it reveals nothing; MAC tags are compared in constant time. Signatures, MACs and additional data cover
- * the protected header parameters as they arrived, so a message read in [CborMode.Relaxed] verifies as it was made.
+ * `kid` of the message, if both have one. The `alg` of a message, a signature and an ECDH-ES recipient is read only
+ * from the protected bucket, as RFC 9052 section 3.1 asks: one in the unprotected bucket refuses the message with
+ * [CoseFailure.Malformed], so that nobody can swap it, for example for a shorter MAC. Only a direct or key wrap
+ * recipient, whose protected bucket must be empty, names it unprotected. A `crit` parameter that names a label
+ * neither krypt nor [criticalLabels] covers refuses the message. Decryption fails with [CoseFailure.DecryptionFailed]
+ * for every wrong key, wrapped key or tag, so that it reveals nothing; MAC tags are compared in constant time.
+ * Signatures, MACs and additional data cover the protected header parameters as they arrived, so a message read in
+ * [CborMode.Relaxed] verifies as it was made.
  *
  * Creation draws every IV, content key and ephemeral key from the environment and throws on misuse, such as a key that
- * does not fit the algorithm. The object holds no key and is safe to share between threads.
+ * does not fit the algorithm or an `alg` among the unprotected header parameters. The object holds no key and is
+ * safe to share between threads.
  *
  * @property crypto the primitives and their policy.
  * @property limits the bounds of reading.
@@ -284,7 +289,7 @@ public class Cose(
      * MACs [payload] as a COSE_Mac0 with the symmetric [key].
      *
      * @param payload the content.
-     * @param key the MAC key.
+     * @param key the MAC key, at least as long as the output of the hash of [algorithm].
      * @param algorithm the MAC algorithm.
      * @param protectedHeaders the protected header parameters; the algorithm is added.
      * @param unprotectedHeaders the unprotected header parameters; the key id of [key] is added.
@@ -354,7 +359,7 @@ public class Cose(
      * Verifies the MAC of [message] with one of the symmetric [keys].
      *
      * @param message the message.
-     * @param keys the keys to try.
+     * @param keys the keys to try; a key shorter than the output of the hash of the MAC is never used.
      * @param algorithms the MAC algorithms accepted.
      * @param externalAad the data the MAC covers that travels apart; none by default.
      * @param detachedPayload the payload if the message carries none.

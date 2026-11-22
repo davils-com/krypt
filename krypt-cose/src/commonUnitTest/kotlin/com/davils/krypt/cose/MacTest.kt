@@ -32,9 +32,6 @@ import com.davils.krypt.cose.fixture.HMAC_ENC_01
 import com.davils.krypt.cose.fixture.HMAC_ENC_02
 import com.davils.krypt.cose.fixture.HMAC_ENC_03
 import com.davils.krypt.cose.fixture.HMAC_ENC_04
-import com.davils.krypt.cose.fixture.MAC0_PASS_02
-import com.davils.krypt.cose.fixture.MAC0_PASS_02_AAD
-import com.davils.krypt.cose.fixture.MAC0_PASS_03
 import com.davils.krypt.cose.fixture.P256_HKDF_256_03
 import com.davils.krypt.cose.fixture.P256_HKDF_256_03_KEY_0
 import com.davils.krypt.cose.fixture.cose
@@ -79,6 +76,8 @@ private suspend fun verifiesMac0(encoded: String, keyHex: String) {
     relaxed.verify(message = message, keys = listOf(key(keyHex)), algorithms = MACS).value() shouldBe utf8(CONTENT)
 }
 
+private const val HMAC_512_KEY_BYTES: Int = 64
+
 class MacTest : FunSpec({
     test("the MAC examples of the COSE working group verify") {
         verifiesMac(encoded = HMAC_01, keyHex = HMAC_01_KEY_0)
@@ -88,15 +87,6 @@ class MacTest : FunSpec({
         verifiesMac0(encoded = HMAC_ENC_01, keyHex = HMAC_01_KEY_0)
         verifiesMac0(encoded = HMAC_ENC_02, keyHex = HMAC_02_KEY_0)
         verifiesMac0(encoded = HMAC_ENC_03, keyHex = HMAC_03_KEY_0)
-        verifiesMac0(encoded = MAC0_PASS_03, keyHex = HMAC_01_KEY_0)
-        val external = relaxed.decodeMac0(hex(MAC0_PASS_02)).value()
-        val outcome1 = relaxed.verify(
-            message = external,
-            keys = listOf(key(HMAC_01_KEY_0)),
-            algorithms = MACS,
-            externalAad = hex(MAC0_PASS_02_AAD),
-        )
-        outcome1.value() shouldBe utf8(CONTENT)
     }
 
     test("a MAC derived by ECDH-ES verifies") {
@@ -174,7 +164,7 @@ class MacTest : FunSpec({
     }
 
     test("MAC0 refuses keys that do not fit and payloads that are missing") {
-        val secret = CoseKey.of(crypto.keys.generateSecret(), keyId = utf8(OUR_SECRET))
+        val secret = CoseKey.of(crypto.keys.generateSecret(HMAC_512_KEY_BYTES), keyId = utf8(OUR_SECRET))
         val message = cose.mac0(
             payload = utf8(CONTENT),
             key = secret,
@@ -215,7 +205,7 @@ class MacTest : FunSpec({
         )
         outcome10.failure() shouldBe
             CoseFailure.KeyNotFound
-        val other = CoseKey.of(crypto.keys.generateSecret(), keyId = utf8(OUR_SECRET))
+        val other = CoseKey.of(crypto.keys.generateSecret(HMAC_512_KEY_BYTES), keyId = utf8(OUR_SECRET))
         val outcome11 = cose.verify(
             message = message,
             keys = listOf(other),
@@ -244,6 +234,18 @@ class MacTest : FunSpec({
         shouldThrow<IllegalArgumentException> {
             cose.mac(payload = utf8(CONTENT), algorithm = CoseAlgorithm.Ed25519, recipients = emptyList())
         }
+    }
+
+    test("an HMAC key shorter than the output of its hash is refused") {
+        val short = CoseKey.of(crypto.keys.generateSecret(), keyId = utf8(OUR_SECRET))
+        shouldThrow<IllegalArgumentException> {
+            cose.mac0(payload = utf8(CONTENT), key = short, algorithm = CoseAlgorithm.Hmac384)
+        }
+        val long = CoseKey.of(crypto.keys.generateSecret(HMAC_512_KEY_BYTES), keyId = utf8(OUR_SECRET))
+        val message = cose.mac0(payload = utf8(CONTENT), key = long, algorithm = CoseAlgorithm.Hmac512)
+        cose.verify(message = message, keys = listOf(long), algorithms = MACS).value() shouldBe utf8(CONTENT)
+        cose.verify(message = message, keys = listOf(short), algorithms = MACS).failure() shouldBe
+            CoseFailure.KeyNotFound
     }
 })
 

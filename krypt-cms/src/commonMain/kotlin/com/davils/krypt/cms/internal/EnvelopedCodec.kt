@@ -135,6 +135,10 @@ internal class EnvelopedCodec(private val limits: CmsLimits) {
             true -> readOctetString()
             false -> ByteString()
         }
+        if (isAuthenticated) checkContentType(content.contentType, authenticated)
+        val encryption = content.algorithm?.encryption
+        val isTagFit = encryption == null || mac.size == Algorithms.tagBytes(encryption)
+        if (!isTagFit) malformed("a tag of the length of the content encryption")
         val unprotectedTag = listOf(FIRST, SECOND)[isAuthenticated.compareTo(false)]
         val unprotected = takeIf {
             isNext(
@@ -154,6 +158,14 @@ internal class EnvelopedCodec(private val limits: CmsLimits) {
             encoded = encoded,
         )
         EnvelopedData(parts)
+    }
+
+    private fun checkContentType(contentType: ObjectIdentifier, authenticated: AttributeSet?) {
+        val declared = authenticated?.let { set -> AttributeCodec.single(set, CmsOids.CONTENT_TYPE) }
+        val isTyped = contentType != ContentTypes.Data
+        if (isTyped && declared == null) malformed("an authenticated content-type attribute for ${contentType.dotted}")
+        val isDeclared = declared == null || declared == Der.encode { objectIdentifier(contentType) }
+        if (!isDeclared) malformed("a content-type attribute of ${contentType.dotted}")
     }
 
     private fun DerReader.readEncryptedContent(isAuthenticated: Boolean): EncryptedContent = readSequence {

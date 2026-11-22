@@ -51,7 +51,8 @@ public class SignerBuilder internal constructor() {
     public var isCertificateIncluded: Boolean = true
 
     /**
-     * False to sign the content directly, without signed attributes; required for Ed448.
+     * False to sign the content directly, without signed attributes; required for Ed448. Only content of type id-data
+     * may be signed so, since RFC 5652 section 5.3 authenticates any other content type as a signed attribute.
      *
      * @since 1.0.0
      */

@@ -60,6 +60,13 @@ internal object KeyFit {
         return secret?.takeIf { found -> isSized && !found.isDestroyed }
     }
 
+    fun macKeyOf(key: CoseKey, algorithm: CoseAlgorithm, operation: CoseKeyOperation): SecretKey? {
+        val secret = secretOf(key = key, algorithm = algorithm, operation = operation, bytes = null)
+        val digest = algorithm.mac.sure().digest
+        val minimumBits = digest.outputBytes * Byte.SIZE_BITS
+        return secret?.takeIf { found -> found.bits >= minimumBits }
+    }
+
     fun isKeyIdFit(key: CoseKey, keyId: ByteString?): Boolean = keyId == null || key.keyId == null || key.keyId == keyId
 
     private fun fits(key: CoseKey, algorithm: CoseAlgorithm, operations: Set<CoseKeyOperation>): Boolean {

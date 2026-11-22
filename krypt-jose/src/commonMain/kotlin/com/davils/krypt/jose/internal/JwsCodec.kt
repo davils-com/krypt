@@ -126,7 +126,12 @@ internal class JwsCodec(private val limits: JoseLimits) {
         false -> ByteString(requireNotNull(utf8OrNull(part)))
     }
 
-    private fun isEncoded(protected: JsonValue.Object): Boolean = protected.bool(HeaderNames.BASE64) != false
+    private fun isEncoded(protected: JsonValue.Object): Boolean {
+        val isEncoded = protected.bool(HeaderNames.BASE64) != false
+        val critical = protected.stringsOf(HeaderNames.CRITICAL).orEmpty()
+        require(isEncoded || HeaderNames.BASE64 in critical)
+        return isEncoded
+    }
 
     private companion object {
         val FLATTENED: List<String> = listOf(SIGNATURE, PROTECTED, HEADER)

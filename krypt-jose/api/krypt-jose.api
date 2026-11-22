@@ -37,7 +37,10 @@ public final class com/davils/krypt/jose/JoseHeader {
 }
 
 public abstract interface class com/davils/krypt/jose/JoseKey {
+	public fun getAlgorithm ()Ljava/lang/String;
 	public abstract fun getKeyId ()Ljava/lang/String;
+	public fun getOperations ()Ljava/util/Set;
+	public fun getUse ()Lcom/davils/krypt/jose/jwk/KeyUse;
 }
 
 public final class com/davils/krypt/jose/JoseKey$Password : com/davils/krypt/jose/JoseKey {
@@ -51,31 +54,40 @@ public final class com/davils/krypt/jose/JoseKey$Password : com/davils/krypt/jos
 }
 
 public final class com/davils/krypt/jose/JoseKey$Private : com/davils/krypt/jose/JoseKey {
-	public fun <init> (Lcom/davils/krypt/primitive/key/PrivateKey;Ljava/lang/String;)V
-	public synthetic fun <init> (Lcom/davils/krypt/primitive/key/PrivateKey;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Lcom/davils/krypt/primitive/key/PrivateKey;Ljava/lang/String;Lcom/davils/krypt/jose/jwk/KeyUse;Ljava/util/Set;Ljava/lang/String;)V
+	public synthetic fun <init> (Lcom/davils/krypt/primitive/key/PrivateKey;Ljava/lang/String;Lcom/davils/krypt/jose/jwk/KeyUse;Ljava/util/Set;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun equals (Ljava/lang/Object;)Z
+	public fun getAlgorithm ()Ljava/lang/String;
 	public final fun getKey ()Lcom/davils/krypt/primitive/key/PrivateKey;
 	public fun getKeyId ()Ljava/lang/String;
+	public fun getOperations ()Ljava/util/Set;
+	public fun getUse ()Lcom/davils/krypt/jose/jwk/KeyUse;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
 
 public final class com/davils/krypt/jose/JoseKey$Public : com/davils/krypt/jose/JoseKey {
-	public fun <init> (Lcom/davils/krypt/primitive/key/PublicKey;Ljava/lang/String;)V
-	public synthetic fun <init> (Lcom/davils/krypt/primitive/key/PublicKey;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Lcom/davils/krypt/primitive/key/PublicKey;Ljava/lang/String;Lcom/davils/krypt/jose/jwk/KeyUse;Ljava/util/Set;Ljava/lang/String;)V
+	public synthetic fun <init> (Lcom/davils/krypt/primitive/key/PublicKey;Ljava/lang/String;Lcom/davils/krypt/jose/jwk/KeyUse;Ljava/util/Set;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun equals (Ljava/lang/Object;)Z
+	public fun getAlgorithm ()Ljava/lang/String;
 	public final fun getKey ()Lcom/davils/krypt/primitive/key/PublicKey;
 	public fun getKeyId ()Ljava/lang/String;
+	public fun getOperations ()Ljava/util/Set;
+	public fun getUse ()Lcom/davils/krypt/jose/jwk/KeyUse;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
 
 public final class com/davils/krypt/jose/JoseKey$Secret : com/davils/krypt/jose/JoseKey {
-	public fun <init> (Lcom/davils/krypt/primitive/key/SecretKey;Ljava/lang/String;)V
-	public synthetic fun <init> (Lcom/davils/krypt/primitive/key/SecretKey;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Lcom/davils/krypt/primitive/key/SecretKey;Ljava/lang/String;Lcom/davils/krypt/jose/jwk/KeyUse;Ljava/util/Set;Ljava/lang/String;)V
+	public synthetic fun <init> (Lcom/davils/krypt/primitive/key/SecretKey;Ljava/lang/String;Lcom/davils/krypt/jose/jwk/KeyUse;Ljava/util/Set;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun equals (Ljava/lang/Object;)Z
+	public fun getAlgorithm ()Ljava/lang/String;
 	public final fun getKey ()Lcom/davils/krypt/primitive/key/SecretKey;
 	public fun getKeyId ()Ljava/lang/String;
+	public fun getOperations ()Ljava/util/Set;
+	public fun getUse ()Lcom/davils/krypt/jose/jwk/KeyUse;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
@@ -209,6 +221,8 @@ public final class com/davils/krypt/jose/jwe/EncryptedKey {
 }
 
 public final class com/davils/krypt/jose/jwe/Jwe {
+	public static final field Companion Lcom/davils/krypt/jose/jwe/Jwe$Companion;
+	public static final field MAXIMUM_PASSWORD_RECIPIENTS I
 	public fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/jose/JoseLimits;Z)V
 	public synthetic fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/jose/JoseLimits;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun decode (Ljava/lang/String;)Lcom/davils/kore/core/outcome/Outcome;
@@ -224,6 +238,9 @@ public final class com/davils/krypt/jose/jwe/Jwe {
 	public final fun getLimits ()Lcom/davils/krypt/jose/JoseLimits;
 	public final fun isPasswordAllowed ()Z
 	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/jose/jwe/Jwe$Companion {
 }
 
 public final class com/davils/krypt/jose/jwe/JweAlgorithm : java/lang/Enum {

@@ -144,9 +144,10 @@ internal class Recipients(
         unprotected: CoseHeaders,
         ciphertext: ByteString,
     ): CoseRecipient {
-        val withAlgorithm = Layers.withAlgorithm(
+        val isProtected = protectedHeaders[HeaderLabels.ALGORITHM] != null
+        val withAlgorithm = unprotected.takeIf { isProtected } ?: Layers.withAlgorithm(
             protectedHeaders = unprotected,
-            unprotectedHeaders = protectedHeaders,
+            unprotectedHeaders = CoseHeaders.Empty,
             algorithm = spec.algorithm,
         )
         val unprotectedHeaders = Layers.withKeyId(

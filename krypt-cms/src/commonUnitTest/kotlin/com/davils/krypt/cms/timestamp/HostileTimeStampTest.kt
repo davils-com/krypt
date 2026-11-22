@@ -28,10 +28,13 @@ import com.davils.krypt.cms.fixture.Identity
 import com.davils.krypt.cms.fixture.NOW
 import com.davils.krypt.cms.fixture.Pki
 import com.davils.krypt.cms.fixture.cms
+import com.davils.krypt.cms.fixture.contentInfo
 import com.davils.krypt.cms.fixture.crypto
 import com.davils.krypt.cms.fixture.der
+import com.davils.krypt.cms.fixture.innerParts
 import com.davils.krypt.cms.fixture.truncated
 import com.davils.krypt.cms.fixture.value
+import com.davils.krypt.cms.fixture.with
 import com.davils.krypt.cms.internal.CmsOids
 import com.davils.krypt.cms.signed.SignatureParameters
 import com.davils.krypt.core.algorithm.DigestAlgorithm
@@ -52,6 +55,7 @@ private const val HASH_BYTES: Int = 32
 private const val EXTENDED_MILLIS: Int = 2
 private const val EXTENDED_MICROS: Int = 3
 private const val EXTENDED_NONCE: Long = 7
+private const val ENCAPSULATED: Int = 2
 private const val DIRECTORY_NAME: Int = 4
 
 private val timeStamps: TimeStamps = TimeStamps(crypto)
@@ -234,11 +238,17 @@ class HostileTimeStampTest : FunSpec({
         val response = timeStamps.decodeResponse(response(0, otherDigest.encoded)).value()
         val mismatch = timeStamps.verify(response, request, SignatureParameters())
         mismatch.failureOrNull() shouldBe CmsFailure.TimeStampMismatch
-        val unsigned = cms.sign(tstInfo(hash = crypto.digests.digest(CONTENT))) {
-            contentType = ContentTypes.TstInfo
-            signer(tsa.signer, tsa.certificate) { isSignedAttributesUsed = false }
+        val imprinted = tstInfo(hash = crypto.digests.digest(CONTENT))
+        val unsigned = cms.sign(imprinted) { signer(tsa.signer, tsa.certificate) { isSignedAttributesUsed = false } }
+        val relabelledInfo = der {
+            sequence {
+                objectIdentifier(ContentTypes.TstInfo)
+                explicit(0) { octetString(imprinted) }
+            }
         }
-        val unsignedToken = timeStamps.decodeToken(unsigned.encoded).value()
+        val parts = innerParts(unsigned.encoded)
+        val relabelled = contentInfo(ContentTypes.SignedData, parts.with(ENCAPSULATED, relabelledInfo))
+        val unsignedToken = timeStamps.decodeToken(relabelled).value()
         timeStamps.verifyToken(unsignedToken, CONTENT).failureOrNull() shouldBe CmsFailure.AttributeMismatch
     }
 

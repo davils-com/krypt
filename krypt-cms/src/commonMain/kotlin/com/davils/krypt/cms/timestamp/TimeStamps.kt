@@ -177,7 +177,10 @@ public class TimeStamps(public val crypto: Crypto, public val limits: CmsLimits 
     }
 
     /**
-     * Verifies that [token] time-stamps [data], as [verify] does for a response.
+     * Verifies that [token] time-stamps [data], as [verify] does for a response. [data] is hashed with the digest of
+     * the imprint for verification, so a digest the crypto policy forbids, or one the platform lacks, gives
+     * [CmsFailure.AlgorithmNotPermitted] instead of an exception; the token, and so its digest, may come from an
+     * attacker.
      *
      * @param token the token.
      * @param data the time-stamped message.
@@ -191,8 +194,7 @@ public class TimeStamps(public val crypto: Crypto, public val limits: CmsLimits 
         parameters: TimeStampParameters = TimeStampParameters(),
     ): Outcome<TimeStampToken, CmsFailure> {
         val digest = token.info.digest ?: return Outcome.Failure(CmsFailure.AlgorithmNotPermitted)
-        val hashed = crypto.digests.digest(data = data, algorithm = digest)
-        return verifier.verify(token = token, digest = digest, hashedMessage = hashed, parameters = parameters)
+        return verifier.verifyData(token = token, digest = digest, data = data, parameters = parameters)
     }
 
     /**
