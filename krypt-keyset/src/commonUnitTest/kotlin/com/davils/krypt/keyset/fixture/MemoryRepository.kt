@@ -21,10 +21,15 @@ import com.davils.krypt.keyset.store.StoredKeyset
 
 internal class MemoryRepository(private var interferences: Int = 0) : KeysetRepository {
     val stored: MutableMap<String, StoredKeyset> = mutableMapOf()
+    var isFailing: Boolean = false
 
-    override suspend fun load(name: String): StoredKeyset? = stored[name]
+    override suspend fun load(name: String): StoredKeyset? {
+        check(!isFailing) { "the repository is down" }
+        return stored[name]
+    }
 
     override suspend fun store(name: String, keyset: StoredKeyset, expectedRevision: Long?): Boolean {
+        check(!isFailing) { "the repository is down" }
         val current = stored[name]?.revision
         val isInterfering = interferences > 0
         interferences--

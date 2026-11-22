@@ -21,7 +21,9 @@ package com.davils.krypt.keyset.store
  * krypt never writes a file itself.
  *
  * A repository sees encrypted key sets only. It must store atomically and compare the revision before it stores, so
- * that two processes that rotate the same key set at once never lose a key.
+ * that two processes that rotate the same key set at once never lose a key. Without a [RevisionLedger], the vault
+ * also trusts it to serve the latest revision and to delete for good: a repository that serves an older revision
+ * brings destroyed and deleted keys back.
  *
  * @since 1.0.0
  */
@@ -39,7 +41,8 @@ public interface KeysetRepository {
      * Stores [keyset] under [name] if the revision stored now is [expectedRevision].
      *
      * @param name the name.
-     * @param keyset the key set to store, whose revision is one more than [expectedRevision].
+     * @param keyset the key set to store, whose revision is one more than [expectedRevision], or, for a new key set,
+     *   one more than the revision the ledger of the vault recorded, 1 without one.
      * @param expectedRevision the revision the caller read, or null if it expects no key set under [name].
      * @return true if it was stored, false if another revision is stored now.
      * @since 1.0.0

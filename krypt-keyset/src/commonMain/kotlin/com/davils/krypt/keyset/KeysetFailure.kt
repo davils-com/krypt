@@ -71,4 +71,20 @@ public enum class KeysetFailure {
      * @since 1.0.0
      */
     Conflict,
+
+    /**
+     * The stored key set is older than the revision the ledger of the vault records: an old or deleted key set was
+     * put back.
+     *
+     * @since 1.0.0
+     */
+    Rollback,
+
+    /**
+     * The repository, the ledger or the key management service failed, so the key set could not be read or stored
+     * now; the failure itself is not passed on.
+     *
+     * @since 1.0.0
+     */
+    Unavailable,
 }
