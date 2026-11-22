@@ -61,7 +61,8 @@ private const val MAC_KEY_BYTES: Int = 32
  * The MAC is checked before anything else is read, so a changed file and a wrong password are both
  * [KeystoreFailure.WrongPassword]. Every iteration count is bounded by the crypto policy or the limits before any
  * work, and the size, the depth and the number of entries are bounded by [limits]. Bags of other types, such as
- * CRLs and secrets, and nested contents are skipped.
+ * CRLs and secrets, and nested contents are skipped. The DER of a file is read strictly, with one exception: the
+ * attributes of a bag may come in any order, because the JDK writes that SET OF unsorted; they are covered by the MAC.
  *
  * @property crypto the primitives.
  * @property limits the limits of reading.
