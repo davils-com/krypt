@@ -123,6 +123,13 @@ class JwsChainTest : FunSpec({
             header = JsonValue.Object.of("x5c" to chainOf(List(JoseLimits.DEFAULT_MAXIMUM_CERTIFICATES + 1) { leaf })),
         )
         jws.chained(long, validator) shouldBe JoseFailure.LimitExceeded
+        val undecodable = List(JoseLimits.DEFAULT_MAXIMUM_CERTIFICATES + 1) { JsonValue.Text("!") }
+        val longGarbage = JwsSigner(
+            key = JoseKey.Private(leafKeys.privateKey),
+            algorithm = JwsAlgorithm.ES256,
+            header = JsonValue.Object.of("x5c" to JsonValue.Array(undecodable)),
+        )
+        jws.chained(longGarbage, validator) shouldBe JoseFailure.LimitExceeded
         val broken = JwsSigner(
             key = JoseKey.Private(leafKeys.privateKey),
             algorithm = JwsAlgorithm.ES256,

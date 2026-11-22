@@ -198,7 +198,8 @@ public class Jws(public val crypto: Crypto, public val limits: JoseLimits = Jose
     /**
      * Verifies [message] with the key of its `x5c` chain, after [validator] validated the chain by RFC 5280. A
      * signature without `x5c` gives [JoseFailure.UntrustedCertificate], as does a chain that does not validate; a
-     * chain longer than [JoseLimits.maximumCertificates] gives [JoseFailure.LimitExceeded].
+     * chain longer than [JoseLimits.maximumCertificates] gives [JoseFailure.LimitExceeded] before any certificate is
+     * decoded.
      *
      * @param message the decoded message.
      * @param validator the path validator with the trust anchors of the caller.
@@ -238,12 +239,13 @@ public class Jws(public val crypto: Crypto, public val limits: JoseLimits = Jose
     ): Outcome<List<JoseKey>, JoseFailure> {
         val header = signature.header.members
         val encoded = header.stringsOf(HeaderNames.CHAIN).orEmpty()
-        val chain = encoded.mapNotNull { text ->
+        val countFailure = JoseFailure.UntrustedCertificate.takeIf { encoded.isEmpty() }
+            ?: JoseFailure.LimitExceeded.takeIf { encoded.size > limits.maximumCertificates }
+        val counted = encoded.takeIf { countFailure == null }.orEmpty()
+        val chain = counted.mapNotNull { text ->
             Base64Url.decodeStandard(text)?.let { der -> certificates.decode(der).getOrNull() }
         }
-        val failure = JoseFailure.UntrustedCertificate.takeIf { encoded.isEmpty() }
-            ?: JoseFailure.LimitExceeded.takeIf { encoded.size > limits.maximumCertificates }
-            ?: JoseFailure.Malformed.takeIf { chain.size != encoded.size }
+        val failure = countFailure ?: JoseFailure.Malformed.takeIf { chain.size != encoded.size }
         if (failure != null) return Outcome.Failure(failure)
         return validated(chain = chain, validator = validator, parameters = parameters)
     }
