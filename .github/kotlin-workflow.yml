@@ -1,0 +1,142 @@
+#
+# Copyright 2026 Davils
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+# What the pipeline of krypt does. Every key overrides a default of
+# actions/plan/defaults.yml in davils-com/kotlin-workflow; a key that is not there stops the run.
+version: 1
+gradle:
+  args: ["--stacktrace"]
+
+check:
+  tasks: [check]
+  reproducible:
+    clean-tasks:
+      - ":krypt-core:clean"
+      - ":krypt-asn1:clean"
+      - ":krypt-primitive:clean"
+      - ":krypt-testing:clean"
+    tasks:
+      - ":krypt-core:jvmJar"
+      - ":krypt-asn1:jvmJar"
+      - ":krypt-primitive:jvmJar"
+      - ":krypt-testing:jvmJar"
+    artifacts:
+      - "krypt-core/build/libs/*.jar"
+      - "krypt-asn1/build/libs/*.jar"
+      - "krypt-primitive/build/libs/*.jar"
+      - "krypt-testing/build/libs/*.jar"
+
+policy:
+  # Scheduling, timers and line breaks differ on Windows, and krypt's race and stress tests run real threads, so
+  # develop, main and a tag run there too.
+  push-develop:
+    stages: [check, snapshot]
+    os: [ubuntu-latest, windows-latest]
+    overrides:
+      check:
+        reproducible: { enabled: true }
+  push-main:
+    os: [ubuntu-latest, windows-latest]
+    overrides:
+      check:
+        reproducible: { enabled: true }
+  tag:
+    os: [ubuntu-latest, windows-latest]
+
+security:
+  gradle:
+    tasks:
+      - "kreateAssurance"
+  dependency-submission:
+    enabled: false
+
+publish:
+  build-tasks: [assemble]
+  tasks:
+    - ":krypt-core:publishAllPublicationsToDavilsRepository"
+    - ":krypt-asn1:publishAllPublicationsToDavilsRepository"
+    - ":krypt-primitive:publishAllPublicationsToDavilsRepository"
+    - ":krypt-testing:publishAllPublicationsToDavilsRepository"
+    - ":krypt-bom:publishAllPublicationsToDavilsRepository"
+
+snapshot:
+  # krypt's own build makes every build without a release tag a snapshot.
+  kreate-snapshot: false
+
+release:
+  publications:
+    discovery: explicit
+    # In upload order: the publication of every target before the multiplatform publication that names them.
+    list:
+      - path: com/davils/krypt-core-jvm
+        artifact: krypt-core-jvm
+        task: ":krypt-core:publishJvmPublicationToDavilsRepository"
+      - path: com/davils/krypt-core-wasm-js
+        artifact: krypt-core-wasm-js
+        task: ":krypt-core:publishWasmJsPublicationToDavilsRepository"
+      - path: com/davils/krypt-core
+        artifact: krypt-core
+        task: ":krypt-core:publishKotlinMultiplatformPublicationToDavilsRepository"
+      - path: com/davils/krypt-asn1-jvm
+        artifact: krypt-asn1-jvm
+        task: ":krypt-asn1:publishJvmPublicationToDavilsRepository"
+      - path: com/davils/krypt-asn1-wasm-js
+        artifact: krypt-asn1-wasm-js
+        task: ":krypt-asn1:publishWasmJsPublicationToDavilsRepository"
+      - path: com/davils/krypt-asn1
+        artifact: krypt-asn1
+        task: ":krypt-asn1:publishKotlinMultiplatformPublicationToDavilsRepository"
+      - path: com/davils/krypt-primitive-jvm
+        artifact: krypt-primitive-jvm
+        task: ":krypt-primitive:publishJvmPublicationToDavilsRepository"
+      - path: com/davils/krypt-primitive-wasm-js
+        artifact: krypt-primitive-wasm-js
+        task: ":krypt-primitive:publishWasmJsPublicationToDavilsRepository"
+      - path: com/davils/krypt-primitive
+        artifact: krypt-primitive
+        task: ":krypt-primitive:publishKotlinMultiplatformPublicationToDavilsRepository"
+      - path: com/davils/krypt-testing-jvm
+        artifact: krypt-testing-jvm
+        task: ":krypt-testing:publishJvmPublicationToDavilsRepository"
+      - path: com/davils/krypt-testing-wasm-js
+        artifact: krypt-testing-wasm-js
+        task: ":krypt-testing:publishWasmJsPublicationToDavilsRepository"
+      - path: com/davils/krypt-testing
+        artifact: krypt-testing
+        task: ":krypt-testing:publishKotlinMultiplatformPublicationToDavilsRepository"
+      - path: com/davils/krypt-bom
+        artifact: krypt-bom
+        task: ":krypt-bom:publishMavenPublicationToDavilsRepository"
+  attest:
+    subjects:
+      - "krypt-core/build/libs/*.jar"
+      - "krypt-core/build/libs/*.klib"
+      - "krypt-asn1/build/libs/*.jar"
+      - "krypt-asn1/build/libs/*.klib"
+      - "krypt-primitive/build/libs/*.jar"
+      - "krypt-primitive/build/libs/*.klib"
+      - "krypt-testing/build/libs/*.jar"
+      - "krypt-testing/build/libs/*.klib"
+  github-release:
+    enabled: false
+
+# How a pull request of Dependabot repairs itself, see CONTRIBUTING.md, "Changing a Dependency".
+dependencies:
+  lock:
+    invocations:
+      - ["kreateResolveAndLockAll", "--write-locks", "--no-configuration-cache"]
+  verification:
+    tasks: [check]

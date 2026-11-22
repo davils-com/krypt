@@ -1,0 +1,19 @@
+# Default owner for everything in the repository.
+*                                     @davils-com/maintainers
+
+# The build's own logic and the published API surface change what consumers get.
+/build-logic/                         @davils-com/maintainers
+/gradle/                              @davils-com/maintainers
+/krypt-core/api/                      @davils-com/maintainers
+/krypt-core/src/jvmMain/java/         @davils-com/maintainers
+/krypt-asn1/api/                      @davils-com/maintainers
+/krypt-asn1/src/jvmMain/java/         @davils-com/maintainers
+/krypt-primitive/api/                 @davils-com/maintainers
+/krypt-primitive/src/jvmMain/java/    @davils-com/maintainers
+
+# Anything that decides what CI trusts or what leaves the build.
+/.github/workflows/                   @davils-com/maintainers
+/.github/kotlin-workflow.yml          @davils-com/maintainers
+/detekt.yaml                          @davils-com/maintainers
+/trivy-secret.yaml                    @davils-com/maintainers
+/SECURITY.md                          @davils-com/maintainers
