@@ -29,6 +29,7 @@ import com.davils.krypt.jose.jwt.JwtValidator
 import com.davils.krypt.jose.jwt.jwtValidator
 import com.davils.krypt.primitive.Crypto
 import com.davils.krypt.spiffe.SpiffeLimits
+import com.davils.krypt.spiffe.internal.CheckedJwtSvid
 import com.davils.krypt.spiffe.internal.TokenReader
 import com.davils.krypt.spiffe.internal.checking
 import com.davils.krypt.spiffe.internal.refuse
@@ -118,7 +119,14 @@ public class JwtSvidValidator(
                 is Outcome.Failure -> refuse(FAILURES[validated.failure] ?: JwtSvidFailure.Malformed)
             }
             val expiresAt = claims.expiresAt ?: refuse(JwtSvidFailure.MissingExpiration)
-            JwtSvid(id = id, audience = claims.audience, expiresAt = expiresAt, claims = claims, token = token)
+            val checked = CheckedJwtSvid(
+                id = id,
+                audience = claims.audience,
+                expiresAt = expiresAt,
+                claims = claims,
+                token = token,
+            )
+            JwtSvid(checked)
         }
     }
 

@@ -17,6 +17,7 @@
 package com.davils.krypt.spiffe
 
 import com.davils.kore.core.outcome.Outcome
+import com.davils.krypt.spiffe.internal.CheckedId
 import com.davils.krypt.spiffe.internal.IdParser
 import com.davils.krypt.x509.name.GeneralName
 
@@ -36,7 +37,7 @@ import com.davils.krypt.x509.name.GeneralName
  * @property path the path, empty or starting with `/`, such as `/ns/prod/sa/api`.
  * @since 1.0.0
  */
-public class SpiffeId internal constructor(public val trustDomain: TrustDomain, public val path: String) :
+public class SpiffeId private constructor(public val trustDomain: TrustDomain, public val path: String) :
     Comparable<SpiffeId> {
     /**
      * The id as text, such as `spiffe://example.org/ns/prod/sa/api`.
@@ -59,6 +60,8 @@ public class SpiffeId internal constructor(public val trustDomain: TrustDomain, 
      * @since 1.0.0
      */
     public val isTrustDomainId: Boolean get() = path.isEmpty()
+
+    internal constructor(checked: CheckedId) : this(trustDomain = checked.trustDomain, path = checked.path)
 
     /**
      * Returns whether this id resides in [trustDomain].
@@ -161,7 +164,7 @@ public class SpiffeId internal constructor(public val trustDomain: TrustDomain, 
             }
             require(failure == null) { "A segment is invalid: ${failure?.name.orEmpty()}" }
             val path = segments.joinToString(separator = "") { segment -> IdParser.SLASH + segment }
-            val id = SpiffeId(trustDomain = trustDomain, path = path)
+            val id = SpiffeId(CheckedId(trustDomain = trustDomain, path = path))
             require(id.text.length <= MAXIMUM_LENGTH) { "A SPIFFE id has at most $MAXIMUM_LENGTH characters" }
             return id
         }

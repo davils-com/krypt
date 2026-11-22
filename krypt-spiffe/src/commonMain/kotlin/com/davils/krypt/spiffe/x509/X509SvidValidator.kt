@@ -23,6 +23,7 @@ import com.davils.kore.core.outcome.map
 import com.davils.krypt.primitive.Crypto
 import com.davils.krypt.spiffe.SpiffeId
 import com.davils.krypt.spiffe.SpiffeLimits
+import com.davils.krypt.spiffe.internal.CheckedX509Svid
 import com.davils.krypt.spiffe.source.BundleSource
 import com.davils.krypt.x509.Certificate
 import com.davils.krypt.x509.X509Limits
@@ -106,7 +107,7 @@ public class X509SvidValidator(
     private fun accepted(id: SpiffeId, validation: PathValidation.Valid): Outcome<ValidatedX509Svid, X509SvidFailure> {
         val path = validation.path + listOfNotNull(validation.anchor.certificate)
         return X509SvidRules.path(path).map { _ ->
-            ValidatedX509Svid(id = id, path = validation.path, anchor = validation.anchor)
+            ValidatedX509Svid(CheckedX509Svid(id = id, path = validation.path, anchor = validation.anchor))
         }
     }
 

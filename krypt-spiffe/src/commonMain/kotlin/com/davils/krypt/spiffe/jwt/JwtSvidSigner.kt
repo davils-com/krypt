@@ -29,6 +29,7 @@ import com.davils.krypt.primitive.Crypto
 import com.davils.krypt.primitive.key.PrivateKey
 import com.davils.krypt.spiffe.SpiffeId
 import com.davils.krypt.spiffe.bundle.JwtAuthority
+import com.davils.krypt.spiffe.internal.CheckedJwtSvid
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.days
 import kotlin.time.Instant
@@ -97,7 +98,14 @@ public class JwtSvidSigner(
             claims.members.forEach { (name, value) -> claim(name = name, value = value) }
         }
         val token = jwt.sign(claims = built, key = JoseKey.Private(key = key, keyId = keyId), algorithm = algorithm)
-        return JwtSvid(id = subject, audience = names, expiresAt = expiresAt, claims = built, token = token)
+        val checked = CheckedJwtSvid(
+            id = subject,
+            audience = names,
+            expiresAt = expiresAt,
+            claims = built,
+            token = token,
+        )
+        return JwtSvid(checked)
     }
 
     /**

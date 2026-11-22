@@ -35,6 +35,7 @@ import com.davils.krypt.spiffe.fixture.foreign
 import com.davils.krypt.spiffe.fixture.idOf
 import com.davils.krypt.spiffe.fixture.value
 import com.davils.krypt.spiffe.fixture.workload
+import com.davils.krypt.spiffe.internal.CheckedX509Svid
 import com.davils.krypt.spiffe.source.BundleSource
 import com.davils.krypt.x509.path.RevocationChecker
 import com.davils.krypt.x509.path.RevocationStatus
@@ -155,7 +156,7 @@ class X509SvidValidatorTest : FunSpec({
         val otherRoot = Authority.root(DOMAIN_ID)
         val rebased = X509SvidValidator(crypto, bundlesOf(otherRoot.certificate, root.certificate))
         val anchor = TrustAnchor.of(otherRoot.certificate)
-        val reanchored = ValidatedX509Svid(id = first.id, path = first.path, anchor = anchor)
+        val reanchored = ValidatedX509Svid(CheckedX509Svid(id = first.id, path = first.path, anchor = anchor))
         reanchored shouldNotBe first
         rebased.validate(leaf.chain).value() shouldBe first
     }
