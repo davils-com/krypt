@@ -21,6 +21,7 @@ import kotlinx.io.bytestring.ByteString
 private const val SEVEN_BITS: Int = 7
 private const val LOW_SEVEN: Int = 0x7F
 private const val CONTINUATION: Int = 0x80
+private const val BYTE_MASK: Int = 0xFF
 private const val FIRST_ARC_FACTOR: Long = 40
 private const val MAXIMUM_FIRST_ARC: Long = 2
 private const val MAXIMUM_ARC_BYTES: Int = 9
@@ -153,7 +154,7 @@ public class ObjectIdentifier private constructor(private val arcList: List<Long
             var bytesInArc = 0
             var isValid = content.size > 0
             for (index in 0 until content.size) {
-                val byte = content[index].toInt()
+                val byte = content[index].toInt() and BYTE_MASK
                 isValid = isValid && !(bytesInArc == 0 && byte == CONTINUATION) && bytesInArc < MAXIMUM_ARC_BYTES
                 current = (current shl SEVEN_BITS) or (byte and LOW_SEVEN).toLong()
                 bytesInArc += 1
