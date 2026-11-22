@@ -87,8 +87,8 @@ class HostilePeerKeysTest : FunSpec({
     test("HPKE opens nothing from an X25519 encapsulation of small order, without an exception") {
         val recipient = crypto.keys.generate(KeyType.X25519)
         val sealed = ByteString(smallOrder.toByteArray() + ByteArray(X25519_BYTES))
-        val opened = crypto.hpke.open(suite = HpkeSuite.X25519Aes256Gcm, recipient = recipient.privateKey, sealed = sealed)
-        opened.shouldBeNull()
+        val suite = HpkeSuite.X25519Aes256Gcm
+        crypto.hpke.open(suite = suite, recipient = recipient.privateKey, sealed = sealed).shouldBeNull()
         val context = crypto.hpke.recipient(
             suite = HpkeSuite.X25519Aes256Gcm,
             recipient = recipient.privateKey,
@@ -125,11 +125,12 @@ class HostilePeerKeysTest : FunSpec({
     test("an agreement with a peer key of small order fails as a krypt failure that hides the platform") {
         val own = crypto.keys.generate(KeyType.X25519)
         val zero = crypto.keys.decodePublic(hex(RfcKeys.X25519_SPKI_PREFIX + "00".repeat(X25519_BYTES)))
-        val refused = shouldThrow<CryptoException> { crypto.agreements.agree(own.privateKey, checkNotNull(zero.getOrNull())) }
+        val peer = checkNotNull(zero.getOrNull())
+        val refused = shouldThrow<CryptoException> { crypto.agreements.agree(own.privateKey, peer) }
         refused.cause.shouldBeNull()
         refused.message shouldBe "The platform refused the key or the input"
         val stranger = crypto.keys.generate(KeyType.X25519)
-        crypto.keys.pair(privateKey = own.privateKey, publicKey = checkNotNull(zero.getOrNull())).shouldBeNull()
+        crypto.keys.pair(privateKey = own.privateKey, publicKey = peer).shouldBeNull()
         crypto.keys.pair(privateKey = own.privateKey, publicKey = stranger.publicKey).shouldBeNull()
     }
 

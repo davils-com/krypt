@@ -212,7 +212,7 @@ public class Crypto(public val environment: Environment = Environment.Default) {
     override fun toString(): String = "Crypto($environment)"
 
     private companion object {
-        const val MISSING_PROVIDER: String = "The policy demands a FIPS validated provider, but the environment names " +
-            "none; set one with provider(...) on the environment"
+        const val MISSING_PROVIDER: String = "The policy demands a FIPS validated provider, but the environment " +
+            "names none; set one with provider(...) on the environment"
     }
 }

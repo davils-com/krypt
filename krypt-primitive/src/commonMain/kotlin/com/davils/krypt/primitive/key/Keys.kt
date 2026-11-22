@@ -90,7 +90,7 @@ public class Keys internal constructor(private val crypto: Crypto) {
      */
     public fun generateSecret(size: Int = DEFAULT_SECRET_BYTES): SecretKey {
         require(size >= SecretKey.MINIMUM_BYTES) { "A symmetric key has at least ${SecretKey.MINIMUM_BYTES} bytes" }
-        return SecretKey(SecretBytes.random(size = size, random = crypto.environment.random))
+        return SecretKey.adopt(SecretBytes.random(size = size, random = crypto.environment.random))
     }
 
     /**

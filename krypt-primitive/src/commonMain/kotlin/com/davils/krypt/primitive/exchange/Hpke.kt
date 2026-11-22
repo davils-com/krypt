@@ -276,7 +276,7 @@ public class Hpke internal constructor(private val crypto: Crypto) {
     ): HpkeCipher? {
         val found = aead ?: return null
         val key = labels.expand(prk = secret, label = "key", info = context, length = found.keyBytes)
-        return HpkeCipher(aead = found, key = SecretKey(key))
+        return HpkeCipher(aead = found, key = SecretKey.adopt(key))
     }
 
     private suspend fun nonceOf(

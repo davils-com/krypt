@@ -165,7 +165,7 @@ internal class JcaBackend(environment: Environment) : Backend {
 
     override suspend fun sign(algorithm: SignatureAlgorithm, key: PrivateKey, data: ByteArray): ByteArray {
         val signature = jca.signature(algorithm)
-        jca.requireUsable(key)
+        key.checkAlive()
         val signed = refusing {
             signature.initSign(jca.privateKey(key), random)
             signature.update(data)
@@ -195,7 +195,7 @@ internal class JcaBackend(environment: Environment) : Backend {
         publicKey: PublicKey,
     ): ByteArray? {
         val agreement = jca.keyAgreement(JcaNames.agreement(algorithm))
-        jca.requireUsable(privateKey)
+        privateKey.checkAlive()
         return refusing {
             agreement.init(jca.privateKey(privateKey), random)
             agreement.doPhase(jca.publicKey(publicKey), true)
@@ -216,7 +216,7 @@ internal class JcaBackend(environment: Environment) : Backend {
         encapsulated: ByteArray,
     ): ByteArray? {
         val kem = jca.kem()
-        jca.requireUsable(privateKey)
+        privateKey.checkAlive()
         return refusing {
             val decapsulator = kem.newDecapsulator(jca.privateKey(privateKey))
             val isSized = encapsulated.size == decapsulator.encapsulationSize()
@@ -244,7 +244,7 @@ internal class JcaBackend(environment: Environment) : Backend {
         data: ByteArray,
     ): ByteArray? {
         val cipher = jca.rsaCipher(algorithm)
-        jca.requireUsable(privateKey)
+        privateKey.checkAlive()
         return refusing {
             cipher.init(Cipher.DECRYPT_MODE, jca.privateKey(privateKey), JcaNames.oaep(algorithm), random)
             cipher.doFinal(data)

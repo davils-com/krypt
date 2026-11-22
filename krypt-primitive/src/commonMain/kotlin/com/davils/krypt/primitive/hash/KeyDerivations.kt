@@ -65,7 +65,8 @@ public class KeyDerivations internal constructor(private val crypto: Crypto) {
     /**
      * The extract step of HKDF: HMAC of [inputKey] keyed with [salt].
      *
-     * @param salt the salt; empty means a string of zeros.
+     * @param salt the salt; empty means a string of zeros as long as the digest. A salt shorter than the digest is
+     *   padded with zeros to its length, which leaves HMAC unchanged.
      * @param inputKey the input keying material.
      * @param algorithm the HKDF; [KdfAlgorithm.HkdfSha256] by default.
      * @return the pseudorandom key.
@@ -79,10 +80,8 @@ public class KeyDerivations internal constructor(private val crypto: Crypto) {
         algorithm: KdfAlgorithm = KdfAlgorithm.HkdfSha256,
     ): SecretBytes {
         val mac = hkdfMac(algorithm)
-        val saltBytes = salt.toByteArray().takeIf { bytes -> bytes.isNotEmpty() } ?: ByteArray(
-            algorithm.digest.outputBytes,
-        )
-        val key = SecretKey(SecretBytes.adopt(saltBytes))
+        val saltBytes = salt.toByteArray().copyOf(maxOf(a = salt.size, b = algorithm.digest.outputBytes))
+        val key = SecretKey.adopt(SecretBytes.adopt(saltBytes))
         val prk = inputKey.reveal { bytes -> crypto.backend.mac(mac, key, bytes) }
         key.destroy()
         return SecretBytes.adopt(prk)
@@ -112,7 +111,7 @@ public class KeyDerivations internal constructor(private val crypto: Crypto) {
             length in 1..MAXIMUM_BLOCKS * hashLength,
         ) { "HKDF derives 1 to ${MAXIMUM_BLOCKS * hashLength} bytes, not $length" }
         require(pseudorandomKey.size >= hashLength) { "The pseudorandom key of HKDF has at least $hashLength bytes" }
-        val key = SecretKey(pseudorandomKey.copy())
+        val key = SecretKey.adopt(pseudorandomKey.copy())
         val output = ByteArray(length)
         var previous = ByteArray(0)
         var written = 0

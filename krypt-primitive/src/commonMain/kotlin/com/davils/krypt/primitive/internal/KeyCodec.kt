@@ -95,7 +95,11 @@ internal object KeyCodec {
 
     fun curveOf(oid: ObjectIdentifier): EllipticCurve? = CURVES[oid]
 
-    fun publicKeyOf(spki: ByteString): Outcome<PublicKey, KeyFailure> {
+    fun publicKeyOf(spki: ByteString): Outcome<PublicKey, KeyFailure> = PublicKey.decode(spki)
+
+    fun privateKeyOf(pkcs8: SecretBytes): Outcome<PrivateKey, KeyFailure> = PrivateKey.decode(pkcs8)
+
+    fun publicPartsOf(spki: ByteString): Outcome<PublicKeyParts, KeyFailure> {
         val parts = Der.decodeOrNull(spki) {
             readSequence {
                 val algorithm = readAlgorithm()
@@ -103,17 +107,11 @@ internal object KeyCodec {
             }
         } ?: return Outcome.Failure(KeyFailure.Malformed)
         return publicInfoOf(algorithm = parts.first, publicKey = parts.second).map { found ->
-            PublicKey(
-                family = found.family,
-                curve = found.curve,
-                bits = found.bits,
-                encoded = spki,
-                raw = parts.second.bytes,
-            )
+            PublicKeyParts(info = found, raw = parts.second.bytes)
         }
     }
 
-    fun privateKeyOf(pkcs8: SecretBytes): Outcome<PrivateKey, KeyFailure> {
+    fun privatePartsOf(pkcs8: SecretBytes): Outcome<PrivateKeyParts, KeyFailure> {
         val parts = pkcs8.reveal { bytes -> Der.decodeOrNull(ByteString(bytes)) { readPrivateKeyInfo() } }
             ?: return Outcome.Failure(KeyFailure.Malformed)
         val isRsa = parts.algorithm.oid == Oids.RSA_ENCRYPTION
@@ -122,16 +120,7 @@ internal object KeyCodec {
         if (isMalformed) return Outcome.Failure(KeyFailure.Malformed)
         val info = infoOf(algorithm = parts.algorithm, modulus = rsa?.first)
         val publicKey = publicOf(parts = parts, rsaPublic = rsa?.second)?.let { spki -> publicKeyOf(spki).getOrNull() }
-        return outcomeOf(info) { found ->
-            PrivateKey(
-                family = found.family,
-                curve = found.curve,
-                bits = found.bits,
-                publicKey = publicKey,
-                pkcs8 = pkcs8.copy(),
-                platformHandle = null,
-            )
-        }
+        return outcomeOf(info) { found -> PrivateKeyParts(info = found, publicKey = publicKey) }
     }
 
     private fun publicInfoOf(algorithm: AlgorithmParts, publicKey: BitString): Outcome<KeyInfo, KeyFailure> {

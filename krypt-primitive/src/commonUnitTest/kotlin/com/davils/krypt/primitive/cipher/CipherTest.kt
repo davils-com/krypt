@@ -59,7 +59,7 @@ private const val CONTEXT: String = "record:1"
 
 class CipherTest : FunSpec({
     test("AES-256-GCM matches NIST test case 16") {
-        val key = SecretKey(secret(GCM_KEY))
+        val key = SecretKey.adopt(secret(GCM_KEY))
         val sealed = crypto.aead.encrypt(
             key = key,
             nonce = hex(GCM_NONCE),
@@ -81,7 +81,7 @@ class CipherTest : FunSpec({
     test("ChaCha20-Poly1305 matches RFC 8439 section 2.8.2 where the platform has it") {
         val isSupported = crypto.capabilities.supports(AeadAlgorithm.ChaCha20Poly1305)
         val sealed = crypto.aead.takeIf { isSupported }?.encrypt(
-            key = SecretKey(secret(CHACHA_KEY)),
+            key = SecretKey.adopt(secret(CHACHA_KEY)),
             nonce = hex(CHACHA_NONCE),
             plaintext = utf8(SUNSCREEN),
             associatedData = hex(CHACHA_AAD),
@@ -119,7 +119,7 @@ class CipherTest : FunSpec({
     }
 
     test("keys and nonces of the wrong length are refused") {
-        val short = SecretKey(secret("00".repeat(SecretKey.MINIMUM_BYTES)))
+        val short = SecretKey.adopt(secret("00".repeat(SecretKey.MINIMUM_BYTES)))
         shouldThrow<IllegalArgumentException> { crypto.aead.seal(key = short, plaintext = utf8(MESSAGE)) }
         shouldThrow<IllegalArgumentException> {
             crypto.aead.encrypt(
@@ -135,7 +135,7 @@ class CipherTest : FunSpec({
     }
 
     test("the AES key wrap matches RFC 3394 section 4.6") {
-        val kek = SecretKey(secret(KEK))
+        val kek = SecretKey.adopt(secret(KEK))
         val wrapped = crypto.keyWraps.wrap(kek = kek, key = secret(WRAPPED_DATA))
         hexOf(wrapped) shouldBe WRAPPED
         crypto.keyWraps.unwrap(kek = kek, wrapped = wrapped)?.let { key -> hexOf(key) } shouldBe WRAPPED_DATA
@@ -145,20 +145,20 @@ class CipherTest : FunSpec({
         shouldThrow<IllegalArgumentException> { crypto.keyWraps.wrap(kek = kek, key = secret("0011")) }
         shouldThrow<IllegalArgumentException> {
             crypto.keyWraps.wrap(
-                kek = SecretKey(secret("00".repeat(SecretKey.MINIMUM_BYTES))),
+                kek = SecretKey.adopt(secret("00".repeat(SecretKey.MINIMUM_BYTES))),
                 key = secret(WRAPPED_DATA),
             )
         }
         shouldThrow<IllegalArgumentException> {
             crypto.keyWraps.unwrap(
-                kek = SecretKey(secret("00".repeat(SecretKey.MINIMUM_BYTES))),
+                kek = SecretKey.adopt(secret("00".repeat(SecretKey.MINIMUM_BYTES))),
                 wrapped = hex(WRAPPED),
             )
         }
     }
 
     test("AES-192 wraps by RFC 3394 section 4.2 and seals with GCM where the platform has it") {
-        val kek = SecretKey(secret(KEK_192))
+        val kek = SecretKey.adopt(secret(KEK_192))
         val isWrapping = crypto.capabilities.supports(KeyWrapAlgorithm.Aes192Kw)
         val wrapped = kek.takeIf { isWrapping }?.let { found ->
             crypto.keyWraps.wrap(kek = found, key = secret(WRAPPED_128), algorithm = KeyWrapAlgorithm.Aes192Kw)

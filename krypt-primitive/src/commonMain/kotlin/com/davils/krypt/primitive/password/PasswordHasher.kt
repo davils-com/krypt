@@ -42,8 +42,9 @@ private const val MAXIMUM_DIGITS: Int = 10
  * New hashes use the iterations the policy demands for new protection; checking accepts what the policy verifies and
  * reports a hash below the current strength as [PasswordVerification.ValidButOutdated], so applications upgrade
  * hashes on the next successful login. A stored string is read strictly: the parameters are exactly `i` and `l` in
- * this order, as canonical decimals without a sign or leading zeros, so every hash has exactly one string. A stored hash that demands more iterations than the policy permits is refused
- * unchecked, so a tampered database cannot stall the server.
+ * this order, as canonical decimals without a sign or leading zeros, so every hash has exactly one string. A stored
+ * hash that demands more iterations than the policy permits is refused unchecked, so a tampered database cannot stall
+ * the server.
  *
  * @since 1.0.0
  */

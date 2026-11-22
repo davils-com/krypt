@@ -36,7 +36,7 @@ import java.security.PrivateKey as JcaPrivateKey
  * @receiver the crypto object whose environment names the provider of [key].
  * @param key the private key.
  * @return the JCA key.
- * @throws IllegalStateException if [key] was destroyed or has neither an encoding nor a handle.
+ * @throws IllegalStateException if [key] was destroyed, or has no encoding and a handle that is no JCA key.
  * @since 1.0.0
  */
 @DavilsInternal
