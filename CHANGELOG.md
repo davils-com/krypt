@@ -112,3 +112,15 @@ kollect 1.0.0. The code comes from the security library of an internal Davils pr
   against limits, and test support gains an in-memory ACME server.
 - **Test support**: deterministic and replayed randomness, an audit log, test environments and an in-memory ACME
   server.
+
+### Security
+
+- **Bulk data and storage** after an audit: the blob store treats its version ledger as the authority, so an old,
+  deleted or rotated-away object put back under any blinded key is a rollback, and a put after a rotation of the names
+  key set works; the key set vault binds the revision and takes an optional `RevisionLedger`, so a destroyed or deleted
+  key does not come back; a container holds at most one password recipient and asks a key management service at most
+  once, which bounds the work a hostile container causes, and `StreamLimits.maximumIterations` has a hard ceiling; a
+  container of a suite the policy forbids is refused instead of thrown; hostile public key sets with a password KDF or
+  AES-192-GCM in their HPKE suite are refused; failures of the store, the ledger, the repository and the key management
+  service become the typed failures `StorageFailure.Unavailable` and `KeysetFailure.Unavailable`; and key sets, keys
+  and their primitives check their invariants however they are built.
