@@ -120,11 +120,19 @@ public object Base64 {
         alphabet: Base64Alphabet,
         padding: Boolean,
     ): Outcome<ByteArray, EncodingFailure> {
-        val tooLong = EncodingFailure.TooLong.takeIf { text.length > MAXIMUM_TEXT_LENGTH }
+        if (text.length > MAXIMUM_TEXT_LENGTH) return Outcome.Failure(EncodingFailure.TooLong)
+        return decodeBounded(text = text, alphabet = alphabet, padding = padding)
+    }
+
+    private fun decodeBounded(
+        text: CharSequence,
+        alphabet: Base64Alphabet,
+        padding: Boolean,
+    ): Outcome<ByteArray, EncodingFailure> {
         val body = bodyLength(text, padding)
         val badPadding = EncodingFailure.InvalidPadding.takeIf { body < 0 }
         val badLength = EncodingFailure.InvalidLength.takeIf { body % GROUP_CHARS == 1 }
-        val failure = tooLong ?: badPadding ?: badLength ?: return decodeBody(
+        val failure = badPadding ?: badLength ?: return decodeBody(
             text = text,
             body = body,
             alphabet = alphabet,
