@@ -87,7 +87,8 @@ internal object Purposes {
     }
 
     private fun suiteOf(kem: KemAlgorithm?, kdf: KdfAlgorithm?, aead: AeadAlgorithm?): HpkeSuite? {
-        if (kem == null || kdf == null || aead == null) return null
+        val isComplete = kem != null && kdf != null && aead != null
+        if (!isComplete || kdf.isPasswordBased || aead == AeadAlgorithm.Aes192Gcm) return null
         return HpkeSuite(kem = kem, kdf = kdf, aead = aead)
     }
 

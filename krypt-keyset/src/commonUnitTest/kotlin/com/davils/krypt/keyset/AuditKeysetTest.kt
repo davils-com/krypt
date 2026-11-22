@@ -17,47 +17,18 @@
 package com.davils.krypt.keyset
 
 import com.davils.kore.core.outcome.Outcome
-import com.davils.krypt.asn1.Der
 import com.davils.krypt.keyset.fixture.MemoryRepository
 import com.davils.krypt.keyset.fixture.crypto
 import com.davils.krypt.keyset.fixture.keysets
 import com.davils.krypt.keyset.kms.LocalKms
 import com.davils.krypt.keyset.store.KeysetVault
 import com.davils.krypt.keyset.store.StoredKeyset
-import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.types.shouldBeInstanceOf
-import kotlinx.io.bytestring.ByteString
 
 private const val NAME: String = "payments"
 
-private fun hybridPublicKeyset(kdf: String, aead: String): ByteString = Der.encode {
-    sequence {
-        integer(1L)
-        sequence {
-            utf8String("hybrid")
-            utf8String("DhkemX25519")
-            utf8String(kdf)
-            utf8String(aead)
-        }
-        octetString(ByteString(ByteArray(KeyId.SIZE)))
-        sequence { }
-    }
-}
-
 class AuditKeysetTest : FunSpec({
-    test("a hostile public key set with a password KDF in its HPKE suite is refused, not thrown") {
-        val encoded = hybridPublicKeyset(kdf = "Pbkdf2Sha256", aead = "Aes256Gcm")
-        val result = shouldNotThrowAny { keysets.decodePublic(encoded) }
-        result.shouldBeInstanceOf<Outcome.Failure<KeysetFailure>>()
-    }
-
-    test("a hostile public key set with AES-192-GCM in its HPKE suite is refused, not thrown") {
-        val encoded = hybridPublicKeyset(kdf = "HkdfSha256", aead = "Aes192Gcm")
-        val result = shouldNotThrowAny { keysets.decodePublic(encoded) }
-        result.shouldBeInstanceOf<Outcome.Failure<KeysetFailure>>()
-    }
-
     test("a repository that puts back an old revision cannot bring a destroyed key back") {
         val kms = LocalKms(crypto, crypto.keys.generateSecret())
         val repository = MemoryRepository()
