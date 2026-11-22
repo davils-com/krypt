@@ -18,6 +18,7 @@ package com.davils.krypt.keystore
 
 import com.davils.kore.core.outcome.Outcome
 import com.davils.krypt.keystore.internal.Chains
+import com.davils.krypt.keystore.internal.IdentityParts
 import com.davils.krypt.primitive.Crypto
 import com.davils.krypt.primitive.key.PrivateKey
 import com.davils.krypt.x509.Certificate
@@ -46,7 +47,9 @@ public class Identities(public val crypto: Crypto) {
     public suspend fun of(privateKey: PrivateKey, certificates: List<Certificate>): Outcome<Identity, IdentityFailure> {
         if (certificates.isEmpty()) return Outcome.Failure(IdentityFailure.NoCertificate)
         val leaf = certificates.firstOrNull { certificate -> isPaired(privateKey, certificate) }
-        val identity = leaf?.let { found -> Identity(privateKey = privateKey, chain = Chains.of(found, certificates)) }
+        val identity = leaf?.let { found ->
+            Identity(IdentityParts(privateKey = privateKey, chain = Chains.of(found, certificates)))
+        }
         return identity?.let { formed -> Outcome.Success(formed) } ?: Outcome.Failure(IdentityFailure.KeyMismatch)
     }
 

@@ -16,6 +16,7 @@
 
 package com.davils.krypt.keystore
 
+import com.davils.krypt.keystore.internal.IdentityParts
 import com.davils.krypt.primitive.key.PrivateKey
 import com.davils.krypt.x509.Certificate
 
@@ -29,7 +30,7 @@ import com.davils.krypt.x509.Certificate
  * @property privateKey the private key.
  * @since 1.0.0
  */
-public class Identity internal constructor(public val privateKey: PrivateKey, chain: List<Certificate>) {
+public class Identity private constructor(public val privateKey: PrivateKey, chain: List<Certificate>) {
     /**
      * The chain, the certificate of the private key first, each followed by its issuer.
      *
@@ -43,6 +44,8 @@ public class Identity internal constructor(public val privateKey: PrivateKey, ch
      * @since 1.0.0
      */
     public val certificate: Certificate get() = chain.first()
+
+    internal constructor(parts: IdentityParts) : this(parts.privateKey, parts.chain)
 
     /**
      * Compares the chains; the private key is proven to belong to the first certificate.

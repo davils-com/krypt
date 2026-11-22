@@ -25,8 +25,9 @@ import kotlin.time.Duration.Companion.days
 import kotlin.time.Instant
 
 private const val AUDIT_NOW: Long = 1_800_000_000L
+private const val PAIR: Int = 2
 
-class AuditJavaReachTest : FunSpec({
+class JavaReachTest : FunSpec({
     test("Java cannot pair a private key with the certificate of another key") {
         val crypto = Crypto()
         val victim = crypto.keys.generate(KeyType.P256)
@@ -37,8 +38,10 @@ class AuditJavaReachTest : FunSpec({
             notBefore = Instant.fromEpochSeconds(AUDIT_NOW)
             notAfter = Instant.fromEpochSeconds(AUDIT_NOW) + 1.days
         }
-        val constructor = Identity::class.java.constructors.firstOrNull()
+        val constructor = Identity::class.java.constructors.firstOrNull { found -> found.parameterCount == PAIR }
         val forged = constructor?.newInstance(other.privateKey, listOf(certificate)) as? Identity
-        forged?.certificate?.publicKey shouldBe null
+        forged shouldBe null
+        val sealed = Identity::class.java.constructors.single()
+        sealed.parameterTypes.single().name shouldBe "com.davils.krypt.keystore.internal.IdentityParts"
     }
 })
