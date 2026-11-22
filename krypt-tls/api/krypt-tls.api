@@ -368,7 +368,8 @@ public final class com/davils/krypt/tls/trust/RevocationCache {
 	public final fun getLifetime-UwyO8pc ()J
 	public final fun getSize ()I
 	public final fun prune (Lkotlin/time/Instant;)I
-	public final fun put (Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/x509/path/RevocationStatus;Lkotlin/time/Instant;)V
+	public final fun put (Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/x509/path/RevocationStatus;Lkotlin/time/Instant;Lkotlin/time/Instant;)V
+	public static synthetic fun put$default (Lcom/davils/krypt/tls/trust/RevocationCache;Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/x509/path/RevocationStatus;Lkotlin/time/Instant;Lkotlin/time/Instant;ILjava/lang/Object;)V
 	public final fun status (Lcom/davils/krypt/x509/Certificate;Lkotlin/time/Instant;)Lcom/davils/krypt/x509/path/RevocationStatus;
 	public fun toString ()Ljava/lang/String;
 }

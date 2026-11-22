@@ -22,6 +22,7 @@ import com.davils.krypt.primitive.Crypto
 import com.davils.krypt.tls.TlsContext
 import com.davils.krypt.tls.TlsRole
 import com.davils.krypt.tls.fixture.Connection
+import com.davils.krypt.tls.fixture.MovableClock
 import com.davils.krypt.tls.fixture.Pki
 import com.davils.krypt.tls.fixture.SERVER_NAME
 import com.davils.krypt.tls.fixture.connect
@@ -30,52 +31,71 @@ import com.davils.krypt.tls.tls
 import com.davils.krypt.x509.path.RevocationListSource
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
-import kotlin.time.Clock
 import kotlin.time.Duration
+import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.minutes
-import kotlin.time.Instant
 
-private fun auditFailureOf(connection: Connection): TrustFailure? =
+private fun failureOf(connection: Connection): TrustFailure? =
     connection.failures.firstNotNullOfOrNull { failure -> TrustFailure.of(failure) }
 
-private class MovableClock : Clock {
-    var offset: Duration = Duration.ZERO
-
-    override fun now(): Instant = Clock.System.now() + offset
+private fun clientOf(pki: Pki, clock: MovableClock, lifetime: Duration, source: RevocationListSource): TlsContext {
+    val timed = Crypto(environment { this.clock = clock })
+    return TlsContext(
+        tls(TlsRole.Client, timed) {
+            trust {
+                anchors = listOf(pki.anchor)
+                revocation = RevocationMode.HardFail
+                revocationListSource = source
+                cache = RevocationCache(lifetime = lifetime)
+            }
+        },
+    )
 }
 
-class AuditRevocationCacheTest : FunSpec({
+class RevocationCacheExpiryTest : FunSpec({
     test("a cached status expires one lifetime after the source decided it, however often handshakes read it") {
         val pki = Pki.create()
         val identity = pki.identity(CertificateProfile.TlsServer, SERVER_NAME)
         val server = TlsContext(serverConfiguration(pki, listOf(identity)))
         val clock = MovableClock()
-        val timed = Crypto(environment { this.clock = clock })
         val lists = mutableListOf(pki.revocationList())
         var fetches = 0
-        val client = TlsContext(
-            tls(TlsRole.Client, timed) {
-                trust {
-                    anchors = listOf(pki.anchor)
-                    revocation = RevocationMode.HardFail
-                    revocationListSource = RevocationListSource { _ ->
-                        fetches += 1
-                        lists.toList()
-                    }
-                    cache = RevocationCache(lifetime = 10.minutes)
-                }
-            },
-        )
+        val source = RevocationListSource { _ ->
+            fetches += 1
+            lists.toList()
+        }
+        val client = clientOf(pki = pki, clock = clock, lifetime = 10.minutes, source = source)
         connect(client, server).isEstablished shouldBe true
-        val fetchedOnce = fetches
         clock.offset = 6.minutes
         connect(client, server).isEstablished shouldBe true
+        fetches shouldBe 1
         pki.revoke(identity)
         lists[0] = pki.revocationList()
         clock.offset = 12.minutes
-        val late = connect(client, server)
-        val failure = auditFailureOf(late)
-        println("AUDIT revocation cache: fetches after first=$fetchedOnce, total=$fetches, failure=$failure")
-        failure shouldBe TrustFailure.Revoked
+        failureOf(connect(client, server)) shouldBe TrustFailure.Revoked
+        fetches shouldBe 2
+    }
+
+    test("a cached status expires at the next update of the revocation list it came from") {
+        val pki = Pki.create()
+        val identity = pki.identity(CertificateProfile.TlsServer, SERVER_NAME)
+        val server = TlsContext(serverConfiguration(pki, listOf(identity)))
+        val clock = MovableClock()
+        val lists = mutableListOf(pki.revocationList(validity = 5.minutes))
+        var fetches = 0
+        val source = RevocationListSource { _ ->
+            fetches += 1
+            lists.toList()
+        }
+        val client = clientOf(pki = pki, clock = clock, lifetime = 1.hours, source = source)
+        connect(client, server).isEstablished shouldBe true
+        clock.offset = 4.minutes
+        connect(client, server).isEstablished shouldBe true
+        fetches shouldBe 1
+        pki.revoke(identity)
+        lists[0] = pki.revocationList()
+        clock.offset = 6.minutes
+        failureOf(connect(client, server)) shouldBe TrustFailure.Revoked
+        fetches shouldBe 2
     }
 })

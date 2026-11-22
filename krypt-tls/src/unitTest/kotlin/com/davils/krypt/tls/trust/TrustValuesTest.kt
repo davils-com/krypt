@@ -82,6 +82,22 @@ class TrustValuesTest : FunSpec({
         TrustFailure.of(deep).shouldBeNull()
     }
 
+    test("a cached status expires at the next update of its answer when that comes before its lifetime") {
+        val pki = Pki.create()
+        val certificate = pki.identity(CertificateProfile.TlsServer, SERVER_NAME).certificate
+        val now = crypto.environment.clock.now()
+        val cache = RevocationCache(lifetime = 1.hours)
+        cache.put(certificate = certificate, status = RevocationStatus.Good, at = now, nextUpdate = now + 10.minutes)
+        cache.status(certificate, now + 9.minutes) shouldBe RevocationStatus.Good
+        cache.status(certificate, now + 10.minutes).shouldBeNull()
+        cache.put(certificate = certificate, status = RevocationStatus.Good, at = now, nextUpdate = now + 2.hours)
+        cache.status(certificate, now + 59.minutes) shouldBe RevocationStatus.Good
+        cache.status(certificate, now + 1.hours).shouldBeNull()
+        cache.put(certificate = certificate, status = RevocationStatus.Revoked, at = now, nextUpdate = now)
+        cache.status(certificate, now).shouldBeNull()
+        cache.size shouldBe 0
+    }
+
     test("the revocation cache keeps statuses for their lifetime and within its capacity") {
         val pki = Pki.create()
         val first = pki.identity(CertificateProfile.TlsServer, SERVER_NAME).certificate

@@ -17,7 +17,6 @@
 package com.davils.krypt.tls.internal
 
 import com.davils.kore.core.outcome.getOrNull
-import com.davils.krypt.ocsp.CertificateStatus
 import com.davils.krypt.ocsp.Ocsp
 import com.davils.krypt.ocsp.OcspIssuer
 import com.davils.krypt.ocsp.OcspParameters
@@ -35,7 +34,7 @@ internal class HandshakeRevocation(
     private val chain: List<Certificate>,
     private val staples: List<ByteString>,
     private val cache: RevocationCache?,
-    private val sources: List<RevocationChecker>,
+    private val sources: RevocationSources,
 ) : RevocationChecker {
     var leafStaple: SingleResponse? = null
         private set
@@ -46,27 +45,26 @@ internal class HandshakeRevocation(
         anchor: TrustAnchor,
         at: Instant,
     ): RevocationStatus {
-        val responseIssuer = issuer?.let { found -> OcspIssuer.of(found) } ?: OcspIssuer.of(anchor)
-        val stapled = stapled(certificate = certificate, issuer = responseIssuer, at = at)
-        val status = stapled ?: cache?.status(certificate, at) ?: sourced(
+        val responder = issuer?.let { found -> OcspIssuer.of(found) } ?: OcspIssuer.of(anchor)
+        val stapled = stapled(certificate = certificate, issuer = responder, at = at)
+        val cached = cache?.status(certificate, at)
+        if (stapled == null && cached != null) return cached
+        val decision = stapled ?: sources.decide(
             certificate = certificate,
             issuer = issuer,
+            responder = responder,
             anchor = anchor,
             at = at,
         )
-        cache?.put(certificate = certificate, status = status, at = at)
-        return status
+        cache?.put(certificate = certificate, status = decision.status, at = at, nextUpdate = decision.nextUpdate)
+        return decision.status
     }
 
-    private suspend fun stapled(certificate: Certificate, issuer: OcspIssuer, at: Instant): RevocationStatus? {
+    private suspend fun stapled(certificate: Certificate, issuer: OcspIssuer, at: Instant): RevocationDecision? {
         val staple = staples.getOrNull(chain.indexOf(certificate))?.takeIf { bytes -> bytes.size > 0 } ?: return null
         val single = verified(staple = staple, certificate = certificate, issuer = issuer, at = at)
         if (single != null && certificate == chain.first()) leafStaple = single
-        return when (single?.status) {
-            CertificateStatus.Good -> RevocationStatus.Good
-            is CertificateStatus.Revoked -> RevocationStatus.Revoked
-            CertificateStatus.Unknown, null -> null
-        }
+        return single?.let { found -> RevocationSources.decisionOf(found) }
     }
 
     private suspend fun verified(
@@ -83,19 +81,5 @@ internal class HandshakeRevocation(
             parameters = OcspParameters(at = at),
         )
         return verification.getOrNull()
-    }
-
-    private suspend fun sourced(
-        certificate: Certificate,
-        issuer: Certificate?,
-        anchor: TrustAnchor,
-        at: Instant,
-    ): RevocationStatus {
-        var status = RevocationStatus.Unknown
-        for (source in sources) {
-            val isOpen = status == RevocationStatus.Unknown
-            if (isOpen) status = source.check(certificate = certificate, issuer = issuer, anchor = anchor, at = at)
-        }
-        return status
     }
 }
