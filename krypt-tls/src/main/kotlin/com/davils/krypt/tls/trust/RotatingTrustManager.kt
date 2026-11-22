@@ -67,7 +67,9 @@ import kotlin.concurrent.atomics.ExperimentalAtomicApi
  *
  * JSSE calls a trust manager synchronously, so the suspending checks run in `runBlocking` on the thread of JSSE; the
  * JCA backend of krypt does not really suspend, but a source of the application that does, such as one that fetches
- * a response, blocks the handshake while it waits. krypt starts no thread and opens no connection of its own.
+ * a response, blocks the handshake while it waits. krypt starts no thread, opens no connection of its own and sets no
+ * timeout: such a source bounds its own time, such as with `withTimeout`, and must never resume on a single-threaded
+ * dispatcher whose thread runs the handshake, or the handshake deadlocks.
  *
  * Safe to share between threads.
  *
