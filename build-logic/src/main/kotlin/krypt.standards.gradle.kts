@@ -94,11 +94,44 @@ kreate {
             rfc(7468) {
                 note = "The textual encoding of PEM: strict reading and writing in krypt-asn1."
             }
+            rfc(7493) {
+                note = "The I-JSON message format: krypt-jose reads and writes JSON without duplicate names, lone " +
+                    "surrogates or noncharacters and with integers a double represents exactly."
+            }
+            rfc(7515) {
+                note = "JSON Web Signature: the compact and JSON serializations, detached payloads and the " +
+                    "verification of krypt-jose with an algorithm allowlist."
+            }
+            rfc(7516) {
+                note = "JSON Web Encryption: the compact and JSON serializations with several recipients, decrypted " +
+                    "with one failure for every wrong key, tag or padding."
+            }
+            rfc(7517) {
+                note = "JSON Web Key and JWK sets: read strictly, written and converted to and from the keys of " +
+                    "krypt by krypt-jose."
+            }
+            rfc(7518) {
+                note = "JSON Web Algorithms: the signature, key management and content encryption algorithms of " +
+                    "krypt-jose, including the Concat KDF of ECDH-ES and AES-CBC with HMAC."
+            }
+            rfc(7519) {
+                note = "JSON Web Token: the claims, signed, encrypted and nested tokens and their validation by " +
+                    "krypt-jose."
+            }
+            rfc(7520) {
+                note = "The JOSE cookbook: the signature and encryption examples krypt-jose checks as known answers."
+            }
             rfc(7633) {
                 note = "The TLS feature extension of X.509, such as OCSP must-staple, read by krypt-x509."
             }
+            rfc(7638) {
+                note = "JWK thumbprints, computed by krypt-jose."
+            }
             rfc(7748) {
                 note = "X25519 and X448: key agreement and the DHKEM of HPKE."
+            }
+            rfc(7797) {
+                note = "Unencoded payloads of a JWS with the b64 header, signed and verified by krypt-jose."
             }
             rfc(7914) {
                 note = "scrypt: named as an encryption of private keys krypt refuses."
@@ -112,12 +145,26 @@ kreate {
             rfc(8032) {
                 note = "EdDSA: Ed25519 and Ed448 signatures."
             }
+            rfc(8037) {
+                note = "Octet key pairs in JOSE: Ed25519, Ed448, X25519 and X448 keys, EdDSA signatures and ECDH-ES " +
+                    "in krypt-jose."
+            }
+            rfc(8259) {
+                note = "JSON: the bounded and strict parser and writer of krypt-jose."
+            }
             rfc(8439) {
                 note = "ChaCha20-Poly1305: an AEAD of krypt-primitive where the platform has it."
+            }
+            rfc(8725) {
+                note = "The JWT best current practice: allowlists, explicit typing and the claim checks of the token " +
+                    "validator of krypt-jose."
             }
             rfc(9180) {
                 note = "HPKE: every mode in common code over the DHKEMs, HKDF and the AEADs, checked against its " +
                     "test vectors."
+            }
+            rfc(9278) {
+                note = "JWK thumbprint URIs, computed by krypt-jose."
             }
             rfc(9525) {
                 note = "Service identity in TLS: the host name and IP address checks of krypt-x509."
@@ -128,6 +175,10 @@ kreate {
             rfc(9654) {
                 note = "The OCSP nonce: 32 to 128 random bytes in a request, 1 to 128 bytes read, echoed by the " +
                     "responder."
+            }
+            rfc(9864) {
+                note = "Fully specified algorithms for JOSE: the Ed25519 and Ed448 signature algorithms of " +
+                    "krypt-jose next to the deprecated EdDSA."
             }
             rfc(9919) {
                 note = "The lightweight OCSP profile: SHA-256 identifiers by default and SHA-1 behind an opt-in, " +
