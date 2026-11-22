@@ -106,6 +106,7 @@ kreate {
                 ":krypt-cose",
                 ":krypt-spiffe",
                 ":krypt-testing",
+                ":krypt-benchmark",
             )
         }
 
