@@ -366,3 +366,8 @@ final class com.davils.krypt.primitive/UnsupportedAlgorithmException : com.davil
 open class com.davils.krypt.primitive/CryptoException : kotlin/RuntimeException { // com.davils.krypt.primitive/CryptoException|null[0]
     constructor <init>(kotlin/String, kotlin/Throwable? = ...) // com.davils.krypt.primitive/CryptoException.<init>|<init>(kotlin.String;kotlin.Throwable?){}[0]
 }
+
+final object com.davils.krypt.primitive.cipher/PasswordEncryption { // com.davils.krypt.primitive.cipher/PasswordEncryption|null[0]
+    final suspend fun decrypt(com.davils.krypt.primitive/Crypto, kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString, com.davils.krypt.core/SecretText): com.davils.kore.core.outcome/Outcome<com.davils.krypt.core/SecretBytes, com.davils.krypt.primitive.key/KeyFailure> // com.davils.krypt.primitive.cipher/PasswordEncryption.decrypt|decrypt(com.davils.krypt.primitive.Crypto;kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString;com.davils.krypt.core.SecretText){}[0]
+    final suspend fun encrypt(com.davils.krypt.primitive/Crypto, com.davils.krypt.core/SecretBytes, com.davils.krypt.core/SecretText, kotlin/Int): kotlin/Pair<kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString> // com.davils.krypt.primitive.cipher/PasswordEncryption.encrypt|encrypt(com.davils.krypt.primitive.Crypto;com.davils.krypt.core.SecretBytes;com.davils.krypt.core.SecretText;kotlin.Int){}[0]
+}

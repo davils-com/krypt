@@ -58,6 +58,26 @@ internal object Pbes2 {
     )
 
     suspend fun encrypt(crypto: Crypto, plaintext: SecretBytes, password: SecretText, iterations: Int): ByteString {
+        val (algorithm, ciphertext) = encryptParts(
+            crypto = crypto,
+            plaintext = plaintext,
+            password = password,
+            iterations = iterations,
+        )
+        return Der.encode {
+            sequence {
+                raw(algorithm)
+                octetString(ciphertext)
+            }
+        }
+    }
+
+    suspend fun encryptParts(
+        crypto: Crypto,
+        plaintext: SecretBytes,
+        password: SecretText,
+        iterations: Int,
+    ): Pair<ByteString, ByteString> {
         val salt = ByteString(crypto.environment.random.bytes(SALT_BYTES))
         val iv = ByteString(crypto.environment.random.bytes(IV_BYTES))
         val key = crypto.derivations.pbkdf2(
@@ -71,25 +91,36 @@ internal object Pbes2 {
                 crypto.backend.aesCbcEncrypt(key = secret, iv = iv.toByteArray(), data = bytes)
             }
         }
-        return Der.encode {
+        val algorithm = Der.encode {
             sequence {
+                objectIdentifier(Oids.PBES2)
                 sequence {
-                    objectIdentifier(Oids.PBES2)
+                    writePbkdf2(salt = salt, iterations = iterations)
                     sequence {
-                        writePbkdf2(salt = salt, iterations = iterations)
-                        sequence {
-                            objectIdentifier(Oids.AES_256_CBC)
-                            octetString(iv)
-                        }
+                        objectIdentifier(Oids.AES_256_CBC)
+                        octetString(iv)
                     }
                 }
-                octetString(ByteString(encrypted))
             }
         }
+        return algorithm to ByteString(encrypted)
     }
 
     suspend fun decrypt(crypto: Crypto, encoded: ByteString, password: SecretText): Outcome<SecretBytes, KeyFailure> {
-        val parameters = Der.decodeOrNull(encoded) { readEncryptedPrivateKeyInfo() }
+        val parts = Der.decodeOrNull(
+            encoded,
+        ) { readSequence { readElement(Tag.Sequence).encoded to readOctetString() } }
+            ?: return Outcome.Failure(KeyFailure.UnsupportedEncryption)
+        return decryptParts(crypto = crypto, algorithm = parts.first, ciphertext = parts.second, password = password)
+    }
+
+    suspend fun decryptParts(
+        crypto: Crypto,
+        algorithm: ByteString,
+        ciphertext: ByteString,
+        password: SecretText,
+    ): Outcome<SecretBytes, KeyFailure> {
+        val parameters = Der.decodeOrNull(algorithm) { readAlgorithm(ciphertext) }
             ?: return Outcome.Failure(KeyFailure.UnsupportedEncryption)
         val policy = crypto.environment.policy
         return when (policy.permitsIterations(parameters.kdf.iterations, AlgorithmUse.Verify)) {
@@ -139,12 +170,9 @@ internal object Pbes2 {
         }
     }
 
-    private fun DerReader.readEncryptedPrivateKeyInfo(): Pbes2Parameters = readSequence {
-        val (kdf, cipher) = readSequence {
-            expect(readObjectIdentifier() == Oids.PBES2, "PBES2")
-            readSequence { readSequence { readPbkdf2() } to readSequence { readCipher() } }
-        }
-        val encrypted = readOctetString()
+    private fun DerReader.readAlgorithm(encrypted: ByteString): Pbes2Parameters = readSequence {
+        expect(readObjectIdentifier() == Oids.PBES2, "PBES2")
+        val (kdf, cipher) = readSequence { readSequence { readPbkdf2() } to readSequence { readCipher() } }
         val keyBytes = kdf.keyBytes ?: cipher.first
         expect(keyBytes == cipher.first, "a key length that fits the cipher")
         Pbes2Parameters(kdf = kdf, keyBytes = keyBytes, iv = cipher.second, encrypted = encrypted)

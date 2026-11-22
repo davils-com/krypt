@@ -77,6 +77,12 @@ public final class com/davils/krypt/primitive/cipher/KeyWraps {
 	public static synthetic fun wrap$default (Lcom/davils/krypt/primitive/cipher/KeyWraps;Lcom/davils/krypt/primitive/key/SecretKey;Lcom/davils/krypt/core/SecretBytes;Lcom/davils/krypt/core/algorithm/KeyWrapAlgorithm;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 }
 
+public final class com/davils/krypt/primitive/cipher/PasswordEncryption {
+	public static final field INSTANCE Lcom/davils/krypt/primitive/cipher/PasswordEncryption;
+	public final fun decrypt (Lcom/davils/krypt/primitive/Crypto;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/SecretText;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun encrypt (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/core/SecretBytes;Lcom/davils/krypt/core/SecretText;ILkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
 public final class com/davils/krypt/primitive/cipher/SealedBox {
 	public static final field Companion Lcom/davils/krypt/primitive/cipher/SealedBox$Companion;
 	public fun <init> (Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;)V
