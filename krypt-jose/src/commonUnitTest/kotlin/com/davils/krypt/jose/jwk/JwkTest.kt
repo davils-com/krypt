@@ -17,6 +17,7 @@
 package com.davils.krypt.jose.jwk
 
 import com.davils.kore.core.outcome.getOrNull
+import com.davils.krypt.core.SecretBytes
 import com.davils.krypt.core.algorithm.DigestAlgorithm
 import com.davils.krypt.core.algorithm.KeyFamily
 import com.davils.krypt.core.algorithm.KeyType
@@ -33,6 +34,7 @@ import com.davils.krypt.jose.fixture.compatible
 import com.davils.krypt.jose.fixture.compatibleKeys
 import com.davils.krypt.jose.fixture.crypto
 import com.davils.krypt.jose.fixture.failure
+import com.davils.krypt.jose.fixture.hex
 import com.davils.krypt.jose.fixture.jwkOf
 import com.davils.krypt.jose.fixture.keys
 import com.davils.krypt.jose.fixture.value
@@ -55,6 +57,7 @@ private const val CRV = "crv"
 private const val KEY_ID = "kid-7"
 
 private const val COORDINATE_BYTES = 32
+private const val EC_PKCS8_WITHOUT_PUBLIC = "3041020100301306072a8648ce3d020106082a8648ce3d030107042730250201010420"
 private const val SIGN = "sign"
 private const val KEY_OPS = "key_ops"
 private const val URN = "urn:ietf:params:oauth:jwk-thumbprint:"
@@ -172,8 +175,12 @@ class JwkTest : FunSpec({
         val cnsa = JsonWebKeys(Crypto(environment { policy = CryptoPolicy.Cnsa2 }))
         cnsa.publicKey(public).failure() shouldBe JoseFailure.InvalidKey
         cnsa.key(jwkOf(Vectors.RFC7515_EC_KEY)).failure() shouldBe JoseFailure.InvalidKey
-        val x25519 = KeyDer.pkcs8(keys.of(crypto.keys.generate(KeyType.X25519).privateKey))
-        val unpaired = checkNotNull(crypto.keys.decodePrivate(x25519).getOrNull())
+        val generated = crypto.keys.generate(KeyType.X25519)
+        val x25519 = KeyDer.pkcs8(keys.of(generated.privateKey))
+        val derived = checkNotNull(crypto.keys.decodePrivate(x25519).getOrNull())
+        derived.publicKey shouldBe generated.publicKey
+        val sec1 = SecretBytes.copyOf(hex(EC_PKCS8_WITHOUT_PUBLIC + "01".repeat(COORDINATE_BYTES)))
+        val unpaired = checkNotNull(crypto.keys.decodePrivate(sec1).getOrNull())
         shouldThrow<IllegalArgumentException> { keys.of(unpaired) }
     }
 
