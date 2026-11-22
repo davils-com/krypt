@@ -22,94 +22,92 @@ import com.davils.kore.core.annotation.DavilsInternal
 import com.davils.kore.core.outcome.getOrNull
 import com.davils.krypt.asn1.BitString
 import com.davils.krypt.asn1.DerWriter
+import com.davils.krypt.asn1.Tag
 import com.davils.krypt.core.algorithm.KeyType
 import com.davils.krypt.x509.extension.ExtensionIds
 import com.davils.krypt.x509.fixture.NOW
 import com.davils.krypt.x509.fixture.certificates
 import com.davils.krypt.x509.fixture.crypto
 import com.davils.krypt.x509.fixture.der
+import com.davils.krypt.x509.fixture.utf8
+import com.davils.krypt.x509.name.DistinguishedName
 import com.davils.krypt.x509.name.distinguishedName
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import kotlinx.io.bytestring.ByteString
 import kotlin.time.Duration.Companion.days
 
-private suspend fun signedWith(body: DerWriter.() -> Unit): ByteString {
+private const val V1: Long = 0L
+private const val V2: Long = 1L
+private const val V3: Long = 2L
+private const val EXTENSIONS: Int = 3
+private const val KEY_ID: String = "key"
+
+private val NAME: DistinguishedName = distinguishedName { commonName("defaults") }
+
+private suspend fun signed(version: (DerWriter.() -> Unit)?, trailer: DerWriter.() -> Unit = {}): ByteString {
     val pair = crypto.keys.generate(KeyType.P256)
     val signer = crypto.signatures.signer(pair.privateKey)
-    val name = distinguishedName { commonName("audit") }
     val algorithm = AlgorithmIdentifiers.encode(signer.algorithm)
+    val key = pair.publicKey.encoded
     val tbs = der {
         sequence {
-            body()
+            version?.let { write -> explicit(0) { write() } }
             integer(1L)
             raw(algorithm)
-            raw(name.encoded)
+            raw(NAME.encoded)
             sequence {
                 time(NOW)
                 time(NOW + 1.days)
             }
-            raw(name.encoded)
-            raw(pair.publicKey.encoded)
+            raw(NAME.encoded)
+            raw(key)
+            trailer()
         }
     }
-    val withExtensions = tbs
-    val signature = signer.sign(withExtensions)
+    val signature = signer.sign(tbs)
     return der {
         sequence {
-            raw(withExtensions)
+            raw(tbs)
             raw(algorithm)
             bitString(BitString(signature))
         }
     }
 }
 
-private suspend fun signedTbs(tbs: ByteString): ByteString {
-    val pair = crypto.keys.generate(KeyType.P256)
-    val signer = crypto.signatures.signer(pair.privateKey)
-    val signature = signer.sign(tbs)
-    return der {
+private fun DerWriter.extensionList(isCritical: Boolean) {
+    explicit(EXTENSIONS) {
         sequence {
-            raw(tbs)
-            raw(AlgorithmIdentifiers.encode(signer.algorithm))
-            bitString(BitString(signature))
+            sequence {
+                objectIdentifier(ExtensionIds.SubjectKeyIdentifier)
+                boolean(isCritical)
+                octetString(der { octetString(utf8(KEY_ID)) })
+            }
         }
     }
 }
 
-class AuditDecodingTest : FunSpec({
+private fun DerWriter.uniqueIdentifier() {
+    bitString(BitString(ByteString(1)), Tag.context(number = 1, isConstructed = false))
+}
+
+class EncodedDefaultsTest : FunSpec({
     test("an explicitly encoded default version is refused") {
-        val encoded = signedWith { explicit(0) { integer(0L) } }
-        certificates.decode(encoded).getOrNull() shouldBe null
+        certificates.decode(signed(version = { integer(V1) })).getOrNull() shouldBe null
+        certificates.decode(signed(version = null)).getOrNull()?.version shouldBe 1
     }
 
     test("an explicitly encoded critical flag of false is refused") {
-        val pair = crypto.keys.generate(KeyType.P256)
-        val name = distinguishedName { commonName("audit") }
-        val algorithm = AlgorithmIdentifiers.encode(crypto.signatures.signer(pair.privateKey).algorithm)
-        val tbs = der {
-            sequence {
-                explicit(0) { integer(2L) }
-                integer(1L)
-                raw(algorithm)
-                raw(name.encoded)
-                sequence {
-                    time(NOW)
-                    time(NOW + 1.days)
-                }
-                raw(name.encoded)
-                raw(pair.publicKey.encoded)
-                explicit(3) {
-                    sequence {
-                        sequence {
-                            objectIdentifier(ExtensionIds.SubjectKeyIdentifier)
-                            boolean(false)
-                            octetString(der { octetString(ByteString(1, 2, 3)) })
-                        }
-                    }
-                }
-            }
-        }
-        certificates.decode(signedTbs(tbs)).getOrNull() shouldBe null
+        val v3: DerWriter.() -> Unit = { integer(V3) }
+        certificates.decode(signed(v3) { extensionList(isCritical = false) }).getOrNull() shouldBe null
+        val critical = certificates.decode(signed(v3) { extensionList(isCritical = true) }).getOrNull()
+        val all = checkNotNull(critical).extensions.all
+        all.single().isCritical shouldBe true
+    }
+
+    test("unique identifiers are refused in version 1 and read in version 2") {
+        certificates.decode(signed(version = null) { uniqueIdentifier() }).getOrNull() shouldBe null
+        val v2 = certificates.decode(signed(version = { integer(V2) }) { uniqueIdentifier() }).getOrNull()
+        v2?.version shouldBe 2
     }
 })

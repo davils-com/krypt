@@ -204,8 +204,8 @@ class RemainingEdgeTest : FunSpec({
             notAfter = NOW
             extensions { add(extension) }
         }
-        issued(extensionWith(ExtensionIds.BasicConstraints, der { sequence { boolean(false) } })).isCa shouldBe false
         listOf(
+            extensionWith(ExtensionIds.BasicConstraints, der { sequence { boolean(false) } }),
             extensionWith(ExtensionIds.CertificatePolicies, der { sequence { } }),
             extensionWith(
                 ExtensionIds.PolicyConstraints,

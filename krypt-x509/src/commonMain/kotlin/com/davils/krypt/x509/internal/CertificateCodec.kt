@@ -83,8 +83,9 @@ internal object CertificateCodec {
             if (extensions.size >= maximum) refuse(DerFailure.LimitExceeded, "at most $maximum extensions")
             extensions += readSequence {
                 val id = readObjectIdentifier()
-                val isCritical = Tag.Boolean.takeIf { tag -> isNext(tag) }?.let { readBoolean() } == true
-                Extension(id = id, isCritical = isCritical, value = readOctetString())
+                val isCritical = Tag.Boolean.takeIf { tag -> isNext(tag) }?.let { readBoolean() }
+                if (isCritical == false) refuse(DerFailure.InvalidValue, "no encoded default of the critical flag")
+                Extension(id = id, isCritical = isCritical == true, value = readOctetString())
             }
         }
         val ids = extensions.map { extension -> extension.id }
@@ -93,7 +94,9 @@ internal object CertificateCodec {
     }
 
     private fun DerReader.readTbs(crypto: Crypto, limits: X509Limits, encoded: ByteString, tbs: ByteString): TbsParts {
-        val version = readOptionalExplicit(VERSION) { readInt(VERSION..V3) } ?: VERSION
+        val encodedVersion = readOptionalExplicit(VERSION) { readInt(VERSION..V3) }
+        if (encodedVersion == VERSION) refuse(DerFailure.InvalidValue, "no encoded default of the version")
+        val version = encodedVersion ?: VERSION
         val serial = readInteger()
         val algorithmElement = readElement(Tag.Sequence)
         val algorithm = Der.decodeOrNull(algorithmElement.encoded) { readSignatureAlgorithm() }
@@ -101,10 +104,13 @@ internal object CertificateCodec {
         val (notBefore, notAfter) = readSequence { readTime() to readTime() }
         val subject = readName(limits.maximumNames)
         val spki = readElement(Tag.Sequence).encoded
-        readOptional(Tag.context(number = ISSUER_UNIQUE_ID, isConstructed = false))
-        readOptional(Tag.context(number = SUBJECT_UNIQUE_ID, isConstructed = false))
+        val issuerId = readOptional(Tag.context(number = ISSUER_UNIQUE_ID, isConstructed = false))
+        val subjectId = readOptional(Tag.context(number = SUBJECT_UNIQUE_ID, isConstructed = false))
         val extensions = readOptionalExplicit(EXTENSIONS) { readExtensionList(limits.maximumExtensions) }
-        val isConsistent = (version == V3 || extensions == null) && serial.magnitude().size <= MAXIMUM_SERIAL_BYTES
+        val hasIds = issuerId != null || subjectId != null
+        val isIdAllowed = !hasIds || version != VERSION
+        val isExtensionAllowed = version == V3 || extensions == null
+        val isConsistent = isIdAllowed && isExtensionAllowed && serial.magnitude().size <= MAXIMUM_SERIAL_BYTES
         if (!isConsistent) refuse(DerFailure.InvalidValue, "a consistent version and serial number")
         return TbsParts(
             encoded = encoded,
@@ -118,7 +124,7 @@ internal object CertificateCodec {
             subject = subject,
             spki = spki,
             publicKey = crypto.keys.decodePublic(spki).getOrNull(),
-            extensions = Extensions(extensions.orEmpty(), limits.maximumNames),
+            extensions = Extensions(ExtensionParts(extensions.orEmpty(), limits.maximumNames)),
             tbs = tbs,
         )
     }
