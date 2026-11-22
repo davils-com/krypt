@@ -1,0 +1,339 @@
+// Klib ABI Dump
+// Targets: [wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.davils:krypt-ocsp>
+final enum class com.davils.krypt.ocsp/OcspFailure : kotlin/Enum<com.davils.krypt.ocsp/OcspFailure> { // com.davils.krypt.ocsp/OcspFailure|null[0]
+    enum entry AlgorithmNotPermitted // com.davils.krypt.ocsp/OcspFailure.AlgorithmNotPermitted|null[0]
+    enum entry BadSignature // com.davils.krypt.ocsp/OcspFailure.BadSignature|null[0]
+    enum entry Malformed // com.davils.krypt.ocsp/OcspFailure.Malformed|null[0]
+    enum entry NonceMismatch // com.davils.krypt.ocsp/OcspFailure.NonceMismatch|null[0]
+    enum entry NotFound // com.davils.krypt.ocsp/OcspFailure.NotFound|null[0]
+    enum entry ResponderError // com.davils.krypt.ocsp/OcspFailure.ResponderError|null[0]
+    enum entry Stale // com.davils.krypt.ocsp/OcspFailure.Stale|null[0]
+    enum entry UnauthorizedResponder // com.davils.krypt.ocsp/OcspFailure.UnauthorizedResponder|null[0]
+
+    final val entries // com.davils.krypt.ocsp/OcspFailure.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.ocsp/OcspFailure> // com.davils.krypt.ocsp/OcspFailure.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.ocsp/OcspFailure // com.davils.krypt.ocsp/OcspFailure.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.ocsp/OcspFailure> // com.davils.krypt.ocsp/OcspFailure.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.ocsp/OcspResponseStatus : kotlin/Enum<com.davils.krypt.ocsp/OcspResponseStatus> { // com.davils.krypt.ocsp/OcspResponseStatus|null[0]
+    enum entry InternalError // com.davils.krypt.ocsp/OcspResponseStatus.InternalError|null[0]
+    enum entry MalformedRequest // com.davils.krypt.ocsp/OcspResponseStatus.MalformedRequest|null[0]
+    enum entry SignatureRequired // com.davils.krypt.ocsp/OcspResponseStatus.SignatureRequired|null[0]
+    enum entry Successful // com.davils.krypt.ocsp/OcspResponseStatus.Successful|null[0]
+    enum entry TryLater // com.davils.krypt.ocsp/OcspResponseStatus.TryLater|null[0]
+    enum entry Unauthorized // com.davils.krypt.ocsp/OcspResponseStatus.Unauthorized|null[0]
+
+    final val code // com.davils.krypt.ocsp/OcspResponseStatus.code|{}code[0]
+        final fun <get-code>(): kotlin/Int // com.davils.krypt.ocsp/OcspResponseStatus.code.<get-code>|<get-code>(){}[0]
+    final val entries // com.davils.krypt.ocsp/OcspResponseStatus.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.ocsp/OcspResponseStatus> // com.davils.krypt.ocsp/OcspResponseStatus.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.ocsp/OcspResponseStatus // com.davils.krypt.ocsp/OcspResponseStatus.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.ocsp/OcspResponseStatus> // com.davils.krypt.ocsp/OcspResponseStatus.values|values#static(){}[0]
+}
+
+abstract fun interface com.davils.krypt.ocsp/OcspResponseSource { // com.davils.krypt.ocsp/OcspResponseSource|null[0]
+    abstract suspend fun response(com.davils.krypt.ocsp/OcspRequest, com.davils.krypt.x509/Certificate, com.davils.krypt.ocsp/OcspIssuer): kotlinx.io.bytestring/ByteString? // com.davils.krypt.ocsp/OcspResponseSource.response|response(com.davils.krypt.ocsp.OcspRequest;com.davils.krypt.x509.Certificate;com.davils.krypt.ocsp.OcspIssuer){}[0]
+
+    final object Companion { // com.davils.krypt.ocsp/OcspResponseSource.Companion|null[0]
+        final fun stapled(com.davils.krypt.x509/Certificate, kotlinx.io.bytestring/ByteString): com.davils.krypt.ocsp/OcspResponseSource // com.davils.krypt.ocsp/OcspResponseSource.Companion.stapled|stapled(com.davils.krypt.x509.Certificate;kotlinx.io.bytestring.ByteString){}[0]
+    }
+}
+
+abstract fun interface com.davils.krypt.ocsp/OcspStatusSource { // com.davils.krypt.ocsp/OcspStatusSource|null[0]
+    abstract suspend fun status(com.davils.krypt.asn1/DerInteger): com.davils.krypt.ocsp/CertificateStatus? // com.davils.krypt.ocsp/OcspStatusSource.status|status(com.davils.krypt.asn1.DerInteger){}[0]
+}
+
+sealed interface com.davils.krypt.ocsp/CertificateStatus { // com.davils.krypt.ocsp/CertificateStatus|null[0]
+    final class Revoked : com.davils.krypt.ocsp/CertificateStatus { // com.davils.krypt.ocsp/CertificateStatus.Revoked|null[0]
+        constructor <init>(kotlin.time/Instant, com.davils.krypt.x509/RevocationReason? = ...) // com.davils.krypt.ocsp/CertificateStatus.Revoked.<init>|<init>(kotlin.time.Instant;com.davils.krypt.x509.RevocationReason?){}[0]
+
+        final val reason // com.davils.krypt.ocsp/CertificateStatus.Revoked.reason|{}reason[0]
+            final fun <get-reason>(): com.davils.krypt.x509/RevocationReason? // com.davils.krypt.ocsp/CertificateStatus.Revoked.reason.<get-reason>|<get-reason>(){}[0]
+        final val revokedAt // com.davils.krypt.ocsp/CertificateStatus.Revoked.revokedAt|{}revokedAt[0]
+            final fun <get-revokedAt>(): kotlin.time/Instant // com.davils.krypt.ocsp/CertificateStatus.Revoked.revokedAt.<get-revokedAt>|<get-revokedAt>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.ocsp/CertificateStatus.Revoked.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.ocsp/CertificateStatus.Revoked.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.ocsp/CertificateStatus.Revoked.toString|toString(){}[0]
+    }
+
+    final object Good : com.davils.krypt.ocsp/CertificateStatus { // com.davils.krypt.ocsp/CertificateStatus.Good|null[0]
+        final fun toString(): kotlin/String // com.davils.krypt.ocsp/CertificateStatus.Good.toString|toString(){}[0]
+    }
+
+    final object Unknown : com.davils.krypt.ocsp/CertificateStatus { // com.davils.krypt.ocsp/CertificateStatus.Unknown|null[0]
+        final fun toString(): kotlin/String // com.davils.krypt.ocsp/CertificateStatus.Unknown.toString|toString(){}[0]
+    }
+}
+
+sealed interface com.davils.krypt.ocsp/ResponderId { // com.davils.krypt.ocsp/ResponderId|null[0]
+    final class ByKey : com.davils.krypt.ocsp/ResponderId { // com.davils.krypt.ocsp/ResponderId.ByKey|null[0]
+        constructor <init>(kotlinx.io.bytestring/ByteString) // com.davils.krypt.ocsp/ResponderId.ByKey.<init>|<init>(kotlinx.io.bytestring.ByteString){}[0]
+
+        final val keyHash // com.davils.krypt.ocsp/ResponderId.ByKey.keyHash|{}keyHash[0]
+            final fun <get-keyHash>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.ocsp/ResponderId.ByKey.keyHash.<get-keyHash>|<get-keyHash>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.ocsp/ResponderId.ByKey.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.ocsp/ResponderId.ByKey.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.ocsp/ResponderId.ByKey.toString|toString(){}[0]
+    }
+
+    final class ByName : com.davils.krypt.ocsp/ResponderId { // com.davils.krypt.ocsp/ResponderId.ByName|null[0]
+        constructor <init>(kotlinx.io.bytestring/ByteString) // com.davils.krypt.ocsp/ResponderId.ByName.<init>|<init>(kotlinx.io.bytestring.ByteString){}[0]
+
+        final val encoded // com.davils.krypt.ocsp/ResponderId.ByName.encoded|{}encoded[0]
+            final fun <get-encoded>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.ocsp/ResponderId.ByName.encoded.<get-encoded>|<get-encoded>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.ocsp/ResponderId.ByName.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.ocsp/ResponderId.ByName.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.ocsp/ResponderId.ByName.toString|toString(){}[0]
+    }
+}
+
+final class com.davils.krypt.ocsp/BasicOcspResponse { // com.davils.krypt.ocsp/BasicOcspResponse|null[0]
+    final val certificates // com.davils.krypt.ocsp/BasicOcspResponse.certificates|{}certificates[0]
+        final fun <get-certificates>(): kotlin.collections/List<com.davils.krypt.x509/Certificate> // com.davils.krypt.ocsp/BasicOcspResponse.certificates.<get-certificates>|<get-certificates>(){}[0]
+    final val nonce // com.davils.krypt.ocsp/BasicOcspResponse.nonce|{}nonce[0]
+        final fun <get-nonce>(): kotlinx.io.bytestring/ByteString? // com.davils.krypt.ocsp/BasicOcspResponse.nonce.<get-nonce>|<get-nonce>(){}[0]
+    final val producedAt // com.davils.krypt.ocsp/BasicOcspResponse.producedAt|{}producedAt[0]
+        final fun <get-producedAt>(): kotlin.time/Instant // com.davils.krypt.ocsp/BasicOcspResponse.producedAt.<get-producedAt>|<get-producedAt>(){}[0]
+    final val responderId // com.davils.krypt.ocsp/BasicOcspResponse.responderId|{}responderId[0]
+        final fun <get-responderId>(): com.davils.krypt.ocsp/ResponderId // com.davils.krypt.ocsp/BasicOcspResponse.responderId.<get-responderId>|<get-responderId>(){}[0]
+    final val responses // com.davils.krypt.ocsp/BasicOcspResponse.responses|{}responses[0]
+        final fun <get-responses>(): kotlin.collections/List<com.davils.krypt.ocsp/SingleResponse> // com.davils.krypt.ocsp/BasicOcspResponse.responses.<get-responses>|<get-responses>(){}[0]
+    final val signature // com.davils.krypt.ocsp/BasicOcspResponse.signature|{}signature[0]
+        final fun <get-signature>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.ocsp/BasicOcspResponse.signature.<get-signature>|<get-signature>(){}[0]
+    final val signatureAlgorithm // com.davils.krypt.ocsp/BasicOcspResponse.signatureAlgorithm|{}signatureAlgorithm[0]
+        final fun <get-signatureAlgorithm>(): com.davils.krypt.core.algorithm/SignatureAlgorithm? // com.davils.krypt.ocsp/BasicOcspResponse.signatureAlgorithm.<get-signatureAlgorithm>|<get-signatureAlgorithm>(){}[0]
+    final val tbs // com.davils.krypt.ocsp/BasicOcspResponse.tbs|{}tbs[0]
+        final fun <get-tbs>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.ocsp/BasicOcspResponse.tbs.<get-tbs>|<get-tbs>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.ocsp/BasicOcspResponse.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.ocsp/BasicOcspResponse.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.ocsp/BasicOcspResponse.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.ocsp/CertId { // com.davils.krypt.ocsp/CertId|null[0]
+    constructor <init>(com.davils.krypt.core.algorithm/DigestAlgorithm, kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString, com.davils.krypt.asn1/DerInteger) // com.davils.krypt.ocsp/CertId.<init>|<init>(com.davils.krypt.core.algorithm.DigestAlgorithm;kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString;com.davils.krypt.asn1.DerInteger){}[0]
+
+    final val hashAlgorithm // com.davils.krypt.ocsp/CertId.hashAlgorithm|{}hashAlgorithm[0]
+        final fun <get-hashAlgorithm>(): com.davils.krypt.core.algorithm/DigestAlgorithm // com.davils.krypt.ocsp/CertId.hashAlgorithm.<get-hashAlgorithm>|<get-hashAlgorithm>(){}[0]
+    final val issuerKeyHash // com.davils.krypt.ocsp/CertId.issuerKeyHash|{}issuerKeyHash[0]
+        final fun <get-issuerKeyHash>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.ocsp/CertId.issuerKeyHash.<get-issuerKeyHash>|<get-issuerKeyHash>(){}[0]
+    final val issuerNameHash // com.davils.krypt.ocsp/CertId.issuerNameHash|{}issuerNameHash[0]
+        final fun <get-issuerNameHash>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.ocsp/CertId.issuerNameHash.<get-issuerNameHash>|<get-issuerNameHash>(){}[0]
+    final val serialNumber // com.davils.krypt.ocsp/CertId.serialNumber|{}serialNumber[0]
+        final fun <get-serialNumber>(): com.davils.krypt.asn1/DerInteger // com.davils.krypt.ocsp/CertId.serialNumber.<get-serialNumber>|<get-serialNumber>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.ocsp/CertId.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.ocsp/CertId.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.ocsp/CertId.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.ocsp/Ocsp { // com.davils.krypt.ocsp/Ocsp|null[0]
+    constructor <init>(com.davils.krypt.primitive/Crypto, com.davils.krypt.ocsp/OcspLimits = ...) // com.davils.krypt.ocsp/Ocsp.<init>|<init>(com.davils.krypt.primitive.Crypto;com.davils.krypt.ocsp.OcspLimits){}[0]
+
+    final val crypto // com.davils.krypt.ocsp/Ocsp.crypto|{}crypto[0]
+        final fun <get-crypto>(): com.davils.krypt.primitive/Crypto // com.davils.krypt.ocsp/Ocsp.crypto.<get-crypto>|<get-crypto>(){}[0]
+    final val limits // com.davils.krypt.ocsp/Ocsp.limits|{}limits[0]
+        final fun <get-limits>(): com.davils.krypt.ocsp/OcspLimits // com.davils.krypt.ocsp/Ocsp.limits.<get-limits>|<get-limits>(){}[0]
+
+    final fun decodeRequest(kotlinx.io.bytestring/ByteString): com.davils.kore.core.outcome/Outcome<com.davils.krypt.ocsp/OcspRequest, com.davils.krypt.ocsp/OcspFailure> // com.davils.krypt.ocsp/Ocsp.decodeRequest|decodeRequest(kotlinx.io.bytestring.ByteString){}[0]
+    final fun decodeResponse(kotlinx.io.bytestring/ByteString): com.davils.kore.core.outcome/Outcome<com.davils.krypt.ocsp/OcspResponse, com.davils.krypt.ocsp/OcspFailure> // com.davils.krypt.ocsp/Ocsp.decodeResponse|decodeResponse(kotlinx.io.bytestring.ByteString){}[0]
+    final fun request(kotlin.collections/List<com.davils.krypt.ocsp/CertId>, kotlin/Int? = ...): com.davils.krypt.ocsp/OcspRequest // com.davils.krypt.ocsp/Ocsp.request|request(kotlin.collections.List<com.davils.krypt.ocsp.CertId>;kotlin.Int?){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.ocsp/Ocsp.toString|toString(){}[0]
+    final suspend fun certId(com.davils.krypt.ocsp/OcspIssuer, com.davils.krypt.asn1/DerInteger, com.davils.krypt.core.algorithm/DigestAlgorithm = ...): com.davils.krypt.ocsp/CertId // com.davils.krypt.ocsp/Ocsp.certId|certId(com.davils.krypt.ocsp.OcspIssuer;com.davils.krypt.asn1.DerInteger;com.davils.krypt.core.algorithm.DigestAlgorithm){}[0]
+    final suspend fun certId(com.davils.krypt.x509/Certificate, com.davils.krypt.ocsp/OcspIssuer, com.davils.krypt.core.algorithm/DigestAlgorithm = ...): com.davils.krypt.ocsp/CertId // com.davils.krypt.ocsp/Ocsp.certId|certId(com.davils.krypt.x509.Certificate;com.davils.krypt.ocsp.OcspIssuer;com.davils.krypt.core.algorithm.DigestAlgorithm){}[0]
+    final suspend fun verify(com.davils.krypt.ocsp/OcspResponse, com.davils.krypt.x509/Certificate, com.davils.krypt.ocsp/OcspIssuer, com.davils.krypt.ocsp/OcspRequest? = ..., com.davils.krypt.ocsp/OcspParameters = ...): com.davils.kore.core.outcome/Outcome<com.davils.krypt.ocsp/SingleResponse, com.davils.krypt.ocsp/OcspFailure> // com.davils.krypt.ocsp/Ocsp.verify|verify(com.davils.krypt.ocsp.OcspResponse;com.davils.krypt.x509.Certificate;com.davils.krypt.ocsp.OcspIssuer;com.davils.krypt.ocsp.OcspRequest?;com.davils.krypt.ocsp.OcspParameters){}[0]
+
+    final object Companion { // com.davils.krypt.ocsp/Ocsp.Companion|null[0]
+        final const val DEFAULT_NONCE_SIZE // com.davils.krypt.ocsp/Ocsp.Companion.DEFAULT_NONCE_SIZE|{}DEFAULT_NONCE_SIZE[0]
+            final fun <get-DEFAULT_NONCE_SIZE>(): kotlin/Int // com.davils.krypt.ocsp/Ocsp.Companion.DEFAULT_NONCE_SIZE.<get-DEFAULT_NONCE_SIZE>|<get-DEFAULT_NONCE_SIZE>(){}[0]
+        final const val MAXIMUM_NONCE_SIZE // com.davils.krypt.ocsp/Ocsp.Companion.MAXIMUM_NONCE_SIZE|{}MAXIMUM_NONCE_SIZE[0]
+            final fun <get-MAXIMUM_NONCE_SIZE>(): kotlin/Int // com.davils.krypt.ocsp/Ocsp.Companion.MAXIMUM_NONCE_SIZE.<get-MAXIMUM_NONCE_SIZE>|<get-MAXIMUM_NONCE_SIZE>(){}[0]
+        final const val MINIMUM_NONCE_SIZE // com.davils.krypt.ocsp/Ocsp.Companion.MINIMUM_NONCE_SIZE|{}MINIMUM_NONCE_SIZE[0]
+            final fun <get-MINIMUM_NONCE_SIZE>(): kotlin/Int // com.davils.krypt.ocsp/Ocsp.Companion.MINIMUM_NONCE_SIZE.<get-MINIMUM_NONCE_SIZE>|<get-MINIMUM_NONCE_SIZE>(){}[0]
+    }
+}
+
+final class com.davils.krypt.ocsp/OcspIssuer { // com.davils.krypt.ocsp/OcspIssuer|null[0]
+    constructor <init>(com.davils.krypt.x509.name/DistinguishedName, com.davils.krypt.primitive.key/PublicKey) // com.davils.krypt.ocsp/OcspIssuer.<init>|<init>(com.davils.krypt.x509.name.DistinguishedName;com.davils.krypt.primitive.key.PublicKey){}[0]
+
+    final val name // com.davils.krypt.ocsp/OcspIssuer.name|{}name[0]
+        final fun <get-name>(): com.davils.krypt.x509.name/DistinguishedName // com.davils.krypt.ocsp/OcspIssuer.name.<get-name>|<get-name>(){}[0]
+    final val publicKey // com.davils.krypt.ocsp/OcspIssuer.publicKey|{}publicKey[0]
+        final fun <get-publicKey>(): com.davils.krypt.primitive.key/PublicKey // com.davils.krypt.ocsp/OcspIssuer.publicKey.<get-publicKey>|<get-publicKey>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.ocsp/OcspIssuer.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.ocsp/OcspIssuer.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.ocsp/OcspIssuer.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.ocsp/OcspIssuer.Companion|null[0]
+        final fun of(com.davils.krypt.x509.path/TrustAnchor): com.davils.krypt.ocsp/OcspIssuer // com.davils.krypt.ocsp/OcspIssuer.Companion.of|of(com.davils.krypt.x509.path.TrustAnchor){}[0]
+        final fun of(com.davils.krypt.x509/Certificate): com.davils.krypt.ocsp/OcspIssuer // com.davils.krypt.ocsp/OcspIssuer.Companion.of|of(com.davils.krypt.x509.Certificate){}[0]
+    }
+}
+
+final class com.davils.krypt.ocsp/OcspLimits { // com.davils.krypt.ocsp/OcspLimits|null[0]
+    constructor <init>(kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ...) // com.davils.krypt.ocsp/OcspLimits.<init>|<init>(kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int){}[0]
+
+    final val maximumBytes // com.davils.krypt.ocsp/OcspLimits.maximumBytes|{}maximumBytes[0]
+        final fun <get-maximumBytes>(): kotlin/Int // com.davils.krypt.ocsp/OcspLimits.maximumBytes.<get-maximumBytes>|<get-maximumBytes>(){}[0]
+    final val maximumCertificates // com.davils.krypt.ocsp/OcspLimits.maximumCertificates|{}maximumCertificates[0]
+        final fun <get-maximumCertificates>(): kotlin/Int // com.davils.krypt.ocsp/OcspLimits.maximumCertificates.<get-maximumCertificates>|<get-maximumCertificates>(){}[0]
+    final val maximumEntries // com.davils.krypt.ocsp/OcspLimits.maximumEntries|{}maximumEntries[0]
+        final fun <get-maximumEntries>(): kotlin/Int // com.davils.krypt.ocsp/OcspLimits.maximumEntries.<get-maximumEntries>|<get-maximumEntries>(){}[0]
+    final val maximumExtensions // com.davils.krypt.ocsp/OcspLimits.maximumExtensions|{}maximumExtensions[0]
+        final fun <get-maximumExtensions>(): kotlin/Int // com.davils.krypt.ocsp/OcspLimits.maximumExtensions.<get-maximumExtensions>|<get-maximumExtensions>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.ocsp/OcspLimits.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.ocsp/OcspLimits.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.ocsp/OcspLimits.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.ocsp/OcspLimits.Companion|null[0]
+        final const val DEFAULT_MAXIMUM_BYTES // com.davils.krypt.ocsp/OcspLimits.Companion.DEFAULT_MAXIMUM_BYTES|{}DEFAULT_MAXIMUM_BYTES[0]
+            final fun <get-DEFAULT_MAXIMUM_BYTES>(): kotlin/Int // com.davils.krypt.ocsp/OcspLimits.Companion.DEFAULT_MAXIMUM_BYTES.<get-DEFAULT_MAXIMUM_BYTES>|<get-DEFAULT_MAXIMUM_BYTES>(){}[0]
+        final const val DEFAULT_MAXIMUM_CERTIFICATES // com.davils.krypt.ocsp/OcspLimits.Companion.DEFAULT_MAXIMUM_CERTIFICATES|{}DEFAULT_MAXIMUM_CERTIFICATES[0]
+            final fun <get-DEFAULT_MAXIMUM_CERTIFICATES>(): kotlin/Int // com.davils.krypt.ocsp/OcspLimits.Companion.DEFAULT_MAXIMUM_CERTIFICATES.<get-DEFAULT_MAXIMUM_CERTIFICATES>|<get-DEFAULT_MAXIMUM_CERTIFICATES>(){}[0]
+        final const val DEFAULT_MAXIMUM_ENTRIES // com.davils.krypt.ocsp/OcspLimits.Companion.DEFAULT_MAXIMUM_ENTRIES|{}DEFAULT_MAXIMUM_ENTRIES[0]
+            final fun <get-DEFAULT_MAXIMUM_ENTRIES>(): kotlin/Int // com.davils.krypt.ocsp/OcspLimits.Companion.DEFAULT_MAXIMUM_ENTRIES.<get-DEFAULT_MAXIMUM_ENTRIES>|<get-DEFAULT_MAXIMUM_ENTRIES>(){}[0]
+        final const val DEFAULT_MAXIMUM_EXTENSIONS // com.davils.krypt.ocsp/OcspLimits.Companion.DEFAULT_MAXIMUM_EXTENSIONS|{}DEFAULT_MAXIMUM_EXTENSIONS[0]
+            final fun <get-DEFAULT_MAXIMUM_EXTENSIONS>(): kotlin/Int // com.davils.krypt.ocsp/OcspLimits.Companion.DEFAULT_MAXIMUM_EXTENSIONS.<get-DEFAULT_MAXIMUM_EXTENSIONS>|<get-DEFAULT_MAXIMUM_EXTENSIONS>(){}[0]
+        final const val HARD_MAXIMUM_BYTES // com.davils.krypt.ocsp/OcspLimits.Companion.HARD_MAXIMUM_BYTES|{}HARD_MAXIMUM_BYTES[0]
+            final fun <get-HARD_MAXIMUM_BYTES>(): kotlin/Int // com.davils.krypt.ocsp/OcspLimits.Companion.HARD_MAXIMUM_BYTES.<get-HARD_MAXIMUM_BYTES>|<get-HARD_MAXIMUM_BYTES>(){}[0]
+        final const val HARD_MAXIMUM_CERTIFICATES // com.davils.krypt.ocsp/OcspLimits.Companion.HARD_MAXIMUM_CERTIFICATES|{}HARD_MAXIMUM_CERTIFICATES[0]
+            final fun <get-HARD_MAXIMUM_CERTIFICATES>(): kotlin/Int // com.davils.krypt.ocsp/OcspLimits.Companion.HARD_MAXIMUM_CERTIFICATES.<get-HARD_MAXIMUM_CERTIFICATES>|<get-HARD_MAXIMUM_CERTIFICATES>(){}[0]
+        final const val HARD_MAXIMUM_ENTRIES // com.davils.krypt.ocsp/OcspLimits.Companion.HARD_MAXIMUM_ENTRIES|{}HARD_MAXIMUM_ENTRIES[0]
+            final fun <get-HARD_MAXIMUM_ENTRIES>(): kotlin/Int // com.davils.krypt.ocsp/OcspLimits.Companion.HARD_MAXIMUM_ENTRIES.<get-HARD_MAXIMUM_ENTRIES>|<get-HARD_MAXIMUM_ENTRIES>(){}[0]
+        final const val HARD_MAXIMUM_EXTENSIONS // com.davils.krypt.ocsp/OcspLimits.Companion.HARD_MAXIMUM_EXTENSIONS|{}HARD_MAXIMUM_EXTENSIONS[0]
+            final fun <get-HARD_MAXIMUM_EXTENSIONS>(): kotlin/Int // com.davils.krypt.ocsp/OcspLimits.Companion.HARD_MAXIMUM_EXTENSIONS.<get-HARD_MAXIMUM_EXTENSIONS>|<get-HARD_MAXIMUM_EXTENSIONS>(){}[0]
+
+        final val Default // com.davils.krypt.ocsp/OcspLimits.Companion.Default|{}Default[0]
+            final fun <get-Default>(): com.davils.krypt.ocsp/OcspLimits // com.davils.krypt.ocsp/OcspLimits.Companion.Default.<get-Default>|<get-Default>(){}[0]
+    }
+}
+
+final class com.davils.krypt.ocsp/OcspParameters { // com.davils.krypt.ocsp/OcspParameters|null[0]
+    constructor <init>(kotlin.time/Instant? = ..., kotlin.time/Duration = ..., kotlin.time/Duration = ..., kotlin/Boolean = ..., kotlin/Boolean = ...) // com.davils.krypt.ocsp/OcspParameters.<init>|<init>(kotlin.time.Instant?;kotlin.time.Duration;kotlin.time.Duration;kotlin.Boolean;kotlin.Boolean){}[0]
+
+    final val at // com.davils.krypt.ocsp/OcspParameters.at|{}at[0]
+        final fun <get-at>(): kotlin.time/Instant? // com.davils.krypt.ocsp/OcspParameters.at.<get-at>|<get-at>(){}[0]
+    final val isNoCheckRequired // com.davils.krypt.ocsp/OcspParameters.isNoCheckRequired|{}isNoCheckRequired[0]
+        final fun <get-isNoCheckRequired>(): kotlin/Boolean // com.davils.krypt.ocsp/OcspParameters.isNoCheckRequired.<get-isNoCheckRequired>|<get-isNoCheckRequired>(){}[0]
+    final val isNonceRequired // com.davils.krypt.ocsp/OcspParameters.isNonceRequired|{}isNonceRequired[0]
+        final fun <get-isNonceRequired>(): kotlin/Boolean // com.davils.krypt.ocsp/OcspParameters.isNonceRequired.<get-isNonceRequired>|<get-isNonceRequired>(){}[0]
+    final val maximumAge // com.davils.krypt.ocsp/OcspParameters.maximumAge|{}maximumAge[0]
+        final fun <get-maximumAge>(): kotlin.time/Duration // com.davils.krypt.ocsp/OcspParameters.maximumAge.<get-maximumAge>|<get-maximumAge>(){}[0]
+    final val skew // com.davils.krypt.ocsp/OcspParameters.skew|{}skew[0]
+        final fun <get-skew>(): kotlin.time/Duration // com.davils.krypt.ocsp/OcspParameters.skew.<get-skew>|<get-skew>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.ocsp/OcspParameters.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.ocsp/OcspParameters.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.ocsp/OcspParameters.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.ocsp/OcspRequest { // com.davils.krypt.ocsp/OcspRequest|null[0]
+    final val certIds // com.davils.krypt.ocsp/OcspRequest.certIds|{}certIds[0]
+        final fun <get-certIds>(): kotlin.collections/List<com.davils.krypt.ocsp/CertId> // com.davils.krypt.ocsp/OcspRequest.certIds.<get-certIds>|<get-certIds>(){}[0]
+    final val encoded // com.davils.krypt.ocsp/OcspRequest.encoded|{}encoded[0]
+        final fun <get-encoded>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.ocsp/OcspRequest.encoded.<get-encoded>|<get-encoded>(){}[0]
+    final val nonce // com.davils.krypt.ocsp/OcspRequest.nonce|{}nonce[0]
+        final fun <get-nonce>(): kotlinx.io.bytestring/ByteString? // com.davils.krypt.ocsp/OcspRequest.nonce.<get-nonce>|<get-nonce>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.ocsp/OcspRequest.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.ocsp/OcspRequest.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.ocsp/OcspRequest.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.ocsp/OcspResponder { // com.davils.krypt.ocsp/OcspResponder|null[0]
+    constructor <init>(com.davils.krypt.ocsp/Ocsp, com.davils.krypt.ocsp/OcspIssuer, com.davils.krypt.primitive.signature/Signer, com.davils.krypt.ocsp/OcspStatusSource, com.davils.krypt.x509/Certificate? = ..., kotlin.time/Duration = ..., com.davils.krypt.ocsp/OcspResponseCache? = ...) // com.davils.krypt.ocsp/OcspResponder.<init>|<init>(com.davils.krypt.ocsp.Ocsp;com.davils.krypt.ocsp.OcspIssuer;com.davils.krypt.primitive.signature.Signer;com.davils.krypt.ocsp.OcspStatusSource;com.davils.krypt.x509.Certificate?;kotlin.time.Duration;com.davils.krypt.ocsp.OcspResponseCache?){}[0]
+
+    final fun errorResponse(com.davils.krypt.ocsp/OcspResponseStatus): kotlinx.io.bytestring/ByteString // com.davils.krypt.ocsp/OcspResponder.errorResponse|errorResponse(com.davils.krypt.ocsp.OcspResponseStatus){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.ocsp/OcspResponder.toString|toString(){}[0]
+    final suspend fun presign(com.davils.krypt.asn1/DerInteger, com.davils.krypt.core.algorithm/DigestAlgorithm = ...): kotlinx.io.bytestring/ByteString // com.davils.krypt.ocsp/OcspResponder.presign|presign(com.davils.krypt.asn1.DerInteger;com.davils.krypt.core.algorithm.DigestAlgorithm){}[0]
+    final suspend fun respond(com.davils.krypt.ocsp/OcspRequest): kotlinx.io.bytestring/ByteString // com.davils.krypt.ocsp/OcspResponder.respond|respond(com.davils.krypt.ocsp.OcspRequest){}[0]
+    final suspend fun respond(kotlinx.io.bytestring/ByteString): kotlinx.io.bytestring/ByteString // com.davils.krypt.ocsp/OcspResponder.respond|respond(kotlinx.io.bytestring.ByteString){}[0]
+    final suspend fun sign(kotlin.collections/List<com.davils.krypt.ocsp/SingleResponse>, kotlinx.io.bytestring/ByteString? = ...): kotlinx.io.bytestring/ByteString // com.davils.krypt.ocsp/OcspResponder.sign|sign(kotlin.collections.List<com.davils.krypt.ocsp.SingleResponse>;kotlinx.io.bytestring.ByteString?){}[0]
+}
+
+final class com.davils.krypt.ocsp/OcspResponse { // com.davils.krypt.ocsp/OcspResponse|null[0]
+    final val basic // com.davils.krypt.ocsp/OcspResponse.basic|{}basic[0]
+        final fun <get-basic>(): com.davils.krypt.ocsp/BasicOcspResponse? // com.davils.krypt.ocsp/OcspResponse.basic.<get-basic>|<get-basic>(){}[0]
+    final val encoded // com.davils.krypt.ocsp/OcspResponse.encoded|{}encoded[0]
+        final fun <get-encoded>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.ocsp/OcspResponse.encoded.<get-encoded>|<get-encoded>(){}[0]
+    final val status // com.davils.krypt.ocsp/OcspResponse.status|{}status[0]
+        final fun <get-status>(): com.davils.krypt.ocsp/OcspResponseStatus // com.davils.krypt.ocsp/OcspResponse.status.<get-status>|<get-status>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.ocsp/OcspResponse.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.ocsp/OcspResponse.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.ocsp/OcspResponse.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.ocsp/OcspResponseCache { // com.davils.krypt.ocsp/OcspResponseCache|null[0]
+    constructor <init>(kotlin/Int = ...) // com.davils.krypt.ocsp/OcspResponseCache.<init>|<init>(kotlin.Int){}[0]
+
+    final val capacity // com.davils.krypt.ocsp/OcspResponseCache.capacity|{}capacity[0]
+        final fun <get-capacity>(): kotlin/Int // com.davils.krypt.ocsp/OcspResponseCache.capacity.<get-capacity>|<get-capacity>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.ocsp/OcspResponseCache.toString|toString(){}[0]
+    final suspend fun clear() // com.davils.krypt.ocsp/OcspResponseCache.clear|clear(){}[0]
+    final suspend fun get(com.davils.krypt.ocsp/CertId, kotlin.time/Instant): kotlinx.io.bytestring/ByteString? // com.davils.krypt.ocsp/OcspResponseCache.get|get(com.davils.krypt.ocsp.CertId;kotlin.time.Instant){}[0]
+    final suspend fun put(com.davils.krypt.ocsp/CertId, kotlinx.io.bytestring/ByteString, kotlin.time/Instant) // com.davils.krypt.ocsp/OcspResponseCache.put|put(com.davils.krypt.ocsp.CertId;kotlinx.io.bytestring.ByteString;kotlin.time.Instant){}[0]
+    final suspend fun size(): kotlin/Int // com.davils.krypt.ocsp/OcspResponseCache.size|size(){}[0]
+
+    final object Companion { // com.davils.krypt.ocsp/OcspResponseCache.Companion|null[0]
+        final const val DEFAULT_CAPACITY // com.davils.krypt.ocsp/OcspResponseCache.Companion.DEFAULT_CAPACITY|{}DEFAULT_CAPACITY[0]
+            final fun <get-DEFAULT_CAPACITY>(): kotlin/Int // com.davils.krypt.ocsp/OcspResponseCache.Companion.DEFAULT_CAPACITY.<get-DEFAULT_CAPACITY>|<get-DEFAULT_CAPACITY>(){}[0]
+        final const val HARD_MAXIMUM_CAPACITY // com.davils.krypt.ocsp/OcspResponseCache.Companion.HARD_MAXIMUM_CAPACITY|{}HARD_MAXIMUM_CAPACITY[0]
+            final fun <get-HARD_MAXIMUM_CAPACITY>(): kotlin/Int // com.davils.krypt.ocsp/OcspResponseCache.Companion.HARD_MAXIMUM_CAPACITY.<get-HARD_MAXIMUM_CAPACITY>|<get-HARD_MAXIMUM_CAPACITY>(){}[0]
+    }
+}
+
+final class com.davils.krypt.ocsp/OcspRevocationChecker : com.davils.krypt.x509.path/RevocationChecker { // com.davils.krypt.ocsp/OcspRevocationChecker|null[0]
+    constructor <init>(com.davils.krypt.ocsp/Ocsp, com.davils.krypt.ocsp/OcspResponseSource, com.davils.krypt.ocsp/OcspParameters = ..., com.davils.krypt.core.algorithm/DigestAlgorithm = ..., kotlin/Int? = ...) // com.davils.krypt.ocsp/OcspRevocationChecker.<init>|<init>(com.davils.krypt.ocsp.Ocsp;com.davils.krypt.ocsp.OcspResponseSource;com.davils.krypt.ocsp.OcspParameters;com.davils.krypt.core.algorithm.DigestAlgorithm;kotlin.Int?){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.ocsp/OcspRevocationChecker.toString|toString(){}[0]
+    final suspend fun check(com.davils.krypt.x509/Certificate, com.davils.krypt.x509/Certificate?, com.davils.krypt.x509.path/TrustAnchor, kotlin.time/Instant): com.davils.krypt.x509.path/RevocationStatus // com.davils.krypt.ocsp/OcspRevocationChecker.check|check(com.davils.krypt.x509.Certificate;com.davils.krypt.x509.Certificate?;com.davils.krypt.x509.path.TrustAnchor;kotlin.time.Instant){}[0]
+}
+
+final class com.davils.krypt.ocsp/SingleResponse { // com.davils.krypt.ocsp/SingleResponse|null[0]
+    constructor <init>(com.davils.krypt.ocsp/CertId, com.davils.krypt.ocsp/CertificateStatus, kotlin.time/Instant, kotlin.time/Instant? = ..., kotlin.collections/List<com.davils.krypt.x509.extension/Extension> = ...) // com.davils.krypt.ocsp/SingleResponse.<init>|<init>(com.davils.krypt.ocsp.CertId;com.davils.krypt.ocsp.CertificateStatus;kotlin.time.Instant;kotlin.time.Instant?;kotlin.collections.List<com.davils.krypt.x509.extension.Extension>){}[0]
+
+    final val certId // com.davils.krypt.ocsp/SingleResponse.certId|{}certId[0]
+        final fun <get-certId>(): com.davils.krypt.ocsp/CertId // com.davils.krypt.ocsp/SingleResponse.certId.<get-certId>|<get-certId>(){}[0]
+    final val extensions // com.davils.krypt.ocsp/SingleResponse.extensions|{}extensions[0]
+        final fun <get-extensions>(): kotlin.collections/List<com.davils.krypt.x509.extension/Extension> // com.davils.krypt.ocsp/SingleResponse.extensions.<get-extensions>|<get-extensions>(){}[0]
+    final val nextUpdate // com.davils.krypt.ocsp/SingleResponse.nextUpdate|{}nextUpdate[0]
+        final fun <get-nextUpdate>(): kotlin.time/Instant? // com.davils.krypt.ocsp/SingleResponse.nextUpdate.<get-nextUpdate>|<get-nextUpdate>(){}[0]
+    final val status // com.davils.krypt.ocsp/SingleResponse.status|{}status[0]
+        final fun <get-status>(): com.davils.krypt.ocsp/CertificateStatus // com.davils.krypt.ocsp/SingleResponse.status.<get-status>|<get-status>(){}[0]
+    final val thisUpdate // com.davils.krypt.ocsp/SingleResponse.thisUpdate|{}thisUpdate[0]
+        final fun <get-thisUpdate>(): kotlin.time/Instant // com.davils.krypt.ocsp/SingleResponse.thisUpdate.<get-thisUpdate>|<get-thisUpdate>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.ocsp/SingleResponse.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.ocsp/SingleResponse.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.ocsp/SingleResponse.toString|toString(){}[0]
+}
+
+final object com.davils.krypt.ocsp/OcspEncodings { // com.davils.krypt.ocsp/OcspEncodings|null[0]
+    final const val MAXIMUM_GET_LENGTH // com.davils.krypt.ocsp/OcspEncodings.MAXIMUM_GET_LENGTH|{}MAXIMUM_GET_LENGTH[0]
+        final fun <get-MAXIMUM_GET_LENGTH>(): kotlin/Int // com.davils.krypt.ocsp/OcspEncodings.MAXIMUM_GET_LENGTH.<get-MAXIMUM_GET_LENGTH>|<get-MAXIMUM_GET_LENGTH>(){}[0]
+    final const val REQUEST_MEDIA_TYPE // com.davils.krypt.ocsp/OcspEncodings.REQUEST_MEDIA_TYPE|{}REQUEST_MEDIA_TYPE[0]
+        final fun <get-REQUEST_MEDIA_TYPE>(): kotlin/String // com.davils.krypt.ocsp/OcspEncodings.REQUEST_MEDIA_TYPE.<get-REQUEST_MEDIA_TYPE>|<get-REQUEST_MEDIA_TYPE>(){}[0]
+    final const val RESPONSE_MEDIA_TYPE // com.davils.krypt.ocsp/OcspEncodings.RESPONSE_MEDIA_TYPE|{}RESPONSE_MEDIA_TYPE[0]
+        final fun <get-RESPONSE_MEDIA_TYPE>(): kotlin/String // com.davils.krypt.ocsp/OcspEncodings.RESPONSE_MEDIA_TYPE.<get-RESPONSE_MEDIA_TYPE>|<get-RESPONSE_MEDIA_TYPE>(){}[0]
+
+    final fun getUrl(kotlin/String, com.davils.krypt.ocsp/OcspRequest): kotlin/String // com.davils.krypt.ocsp/OcspEncodings.getUrl|getUrl(kotlin.String;com.davils.krypt.ocsp.OcspRequest){}[0]
+    final fun isGetSuitable(kotlin/String, com.davils.krypt.ocsp/OcspRequest): kotlin/Boolean // com.davils.krypt.ocsp/OcspEncodings.isGetSuitable|isGetSuitable(kotlin.String;com.davils.krypt.ocsp.OcspRequest){}[0]
+    final fun pathSegment(com.davils.krypt.ocsp/OcspRequest): kotlin/String // com.davils.krypt.ocsp/OcspEncodings.pathSegment|pathSegment(com.davils.krypt.ocsp.OcspRequest){}[0]
+    final fun requestOf(kotlin/String): com.davils.kore.core.outcome/Outcome<kotlinx.io.bytestring/ByteString, com.davils.krypt.ocsp/OcspFailure> // com.davils.krypt.ocsp/OcspEncodings.requestOf|requestOf(kotlin.String){}[0]
+}

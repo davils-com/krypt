@@ -117,6 +117,13 @@ libraries:
       - '**/x509/request/CertificationRequest.kt'
       - '**/x509/internal/PathCheck.kt'
       - '**/x509/name/GeneralName.kt'
+      - '**/ocsp/BasicOcspResponse.kt'
+      - '**/ocsp/CertificateStatus.kt'
+      - '**/ocsp/OcspIssuer.kt'
+      - '**/ocsp/OcspRequest.kt'
+      - '**/ocsp/OcspResponse.kt'
+      - '**/ocsp/ResponderId.kt'
+      - '**/ocsp/internal/ResponseData.kt'
   # The compiler rejects an explicit Unit return type as redundant under warnings as errors.
   LibraryCodeMustSpecifyReturnType:
     active: true
@@ -191,6 +198,13 @@ style:
       - '**/x509/request/CertificationRequest.kt'
       - '**/x509/internal/PathCheck.kt'
       - '**/x509/name/GeneralName.kt'
+      - '**/ocsp/BasicOcspResponse.kt'
+      - '**/ocsp/CertificateStatus.kt'
+      - '**/ocsp/OcspIssuer.kt'
+      - '**/ocsp/OcspRequest.kt'
+      - '**/ocsp/OcspResponse.kt'
+      - '**/ocsp/ResponderId.kt'
+      - '**/ocsp/internal/ResponseData.kt'
   # The compiler rejects an explicit Unit return type as redundant under warnings as errors.
   OptionalUnit:
     active: false

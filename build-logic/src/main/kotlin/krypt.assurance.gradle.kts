@@ -95,6 +95,7 @@ kreate {
                 ":krypt-stream",
                 ":krypt-storage",
                 ":krypt-x509",
+                ":krypt-ocsp",
                 ":krypt-testing",
             )
         }

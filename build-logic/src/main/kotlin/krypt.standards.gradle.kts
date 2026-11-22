@@ -56,6 +56,10 @@ kreate {
             rfc(5869) {
                 note = "HKDF: implemented over HMAC in common code, so both targets derive alike."
             }
+            rfc(6960) {
+                note = "OCSP: requests, strict responses, their verification against the issuer or a delegated " +
+                    "responder, the revocation checker of path validation and the logic of a responder."
+            }
             rfc(6962) {
                 note = "The Merkle tree hashing of manifests and containers, with leaves and nodes hashed apart."
             }
@@ -83,6 +87,14 @@ kreate {
             rfc(9180) {
                 note = "HPKE: every mode in common code over the DHKEMs, HKDF and the AEADs, checked against its " +
                     "test vectors."
+            }
+            rfc(9654) {
+                note = "The OCSP nonce: 32 to 128 random bytes in a request, 1 to 128 bytes read, echoed by the " +
+                    "responder."
+            }
+            rfc(9919) {
+                note = "The lightweight OCSP profile: SHA-256 identifiers by default and SHA-1 behind an opt-in, " +
+                    "GET requests of at most 255 bytes and responders that answer from a cache."
             }
             unicode {
                 note = "Untrusted names, subjects and texts are shown through SafeText of Kore."
