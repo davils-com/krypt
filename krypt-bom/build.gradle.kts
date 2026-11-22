@@ -35,6 +35,7 @@ dependencies {
         api(project(":krypt-x509"))
         api(project(":krypt-keystore"))
         api(project(":krypt-ct"))
+        api(project(":krypt-ocsp"))
         api(project(":krypt-testing"))
     }
 }

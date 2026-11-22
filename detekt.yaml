@@ -123,6 +123,13 @@ libraries:
       - '**/keystore/material/MaterialRead.kt'
       - '**/keystore/pkcs12/CertificateEntry.kt'
       - '**/keystore/pkcs12/KeyEntry.kt'
+      - '**/ocsp/BasicOcspResponse.kt'
+      - '**/ocsp/CertificateStatus.kt'
+      - '**/ocsp/OcspIssuer.kt'
+      - '**/ocsp/OcspRequest.kt'
+      - '**/ocsp/OcspResponse.kt'
+      - '**/ocsp/ResponderId.kt'
+      - '**/ocsp/internal/ResponseData.kt'
   # The compiler rejects an explicit Unit return type as redundant under warnings as errors.
   LibraryCodeMustSpecifyReturnType:
     active: true
@@ -203,6 +210,13 @@ style:
       - '**/keystore/material/MaterialRead.kt'
       - '**/keystore/pkcs12/CertificateEntry.kt'
       - '**/keystore/pkcs12/KeyEntry.kt'
+      - '**/ocsp/BasicOcspResponse.kt'
+      - '**/ocsp/CertificateStatus.kt'
+      - '**/ocsp/OcspIssuer.kt'
+      - '**/ocsp/OcspRequest.kt'
+      - '**/ocsp/OcspResponse.kt'
+      - '**/ocsp/ResponderId.kt'
+      - '**/ocsp/internal/ResponseData.kt'
   # The compiler rejects an explicit Unit return type as redundant under warnings as errors.
   OptionalUnit:
     active: false

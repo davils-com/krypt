@@ -1,0 +1,267 @@
+public final class com/davils/krypt/ocsp/BasicOcspResponse {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCertificates ()Ljava/util/List;
+	public final fun getNonce ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getProducedAt ()Lkotlin/time/Instant;
+	public final fun getResponderId ()Lcom/davils/krypt/ocsp/ResponderId;
+	public final fun getResponses ()Ljava/util/List;
+	public final fun getSignature ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getSignatureAlgorithm ()Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;
+	public final fun getTbs ()Lkotlinx/io/bytestring/ByteString;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/ocsp/CertId {
+	public fun <init> (Lcom/davils/krypt/core/algorithm/DigestAlgorithm;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/asn1/DerInteger;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getHashAlgorithm ()Lcom/davils/krypt/core/algorithm/DigestAlgorithm;
+	public final fun getIssuerKeyHash ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getIssuerNameHash ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getSerialNumber ()Lcom/davils/krypt/asn1/DerInteger;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/davils/krypt/ocsp/CertificateStatus {
+}
+
+public final class com/davils/krypt/ocsp/CertificateStatus$Good : com/davils/krypt/ocsp/CertificateStatus {
+	public static final field INSTANCE Lcom/davils/krypt/ocsp/CertificateStatus$Good;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/ocsp/CertificateStatus$Revoked : com/davils/krypt/ocsp/CertificateStatus {
+	public fun <init> (Lkotlin/time/Instant;Lcom/davils/krypt/x509/RevocationReason;)V
+	public synthetic fun <init> (Lkotlin/time/Instant;Lcom/davils/krypt/x509/RevocationReason;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getReason ()Lcom/davils/krypt/x509/RevocationReason;
+	public final fun getRevokedAt ()Lkotlin/time/Instant;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/ocsp/CertificateStatus$Unknown : com/davils/krypt/ocsp/CertificateStatus {
+	public static final field INSTANCE Lcom/davils/krypt/ocsp/CertificateStatus$Unknown;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/ocsp/Ocsp {
+	public static final field Companion Lcom/davils/krypt/ocsp/Ocsp$Companion;
+	public static final field DEFAULT_NONCE_SIZE I
+	public static final field MAXIMUM_NONCE_SIZE I
+	public static final field MINIMUM_NONCE_SIZE I
+	public fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/ocsp/OcspLimits;)V
+	public synthetic fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/ocsp/OcspLimits;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun certId (Lcom/davils/krypt/ocsp/OcspIssuer;Lcom/davils/krypt/asn1/DerInteger;Lcom/davils/krypt/core/algorithm/DigestAlgorithm;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun certId (Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/ocsp/OcspIssuer;Lcom/davils/krypt/core/algorithm/DigestAlgorithm;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun certId$default (Lcom/davils/krypt/ocsp/Ocsp;Lcom/davils/krypt/ocsp/OcspIssuer;Lcom/davils/krypt/asn1/DerInteger;Lcom/davils/krypt/core/algorithm/DigestAlgorithm;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun certId$default (Lcom/davils/krypt/ocsp/Ocsp;Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/ocsp/OcspIssuer;Lcom/davils/krypt/core/algorithm/DigestAlgorithm;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun decodeRequest (Lkotlinx/io/bytestring/ByteString;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun decodeResponse (Lkotlinx/io/bytestring/ByteString;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun getCrypto ()Lcom/davils/krypt/primitive/Crypto;
+	public final fun getLimits ()Lcom/davils/krypt/ocsp/OcspLimits;
+	public final fun request (Ljava/util/List;Ljava/lang/Integer;)Lcom/davils/krypt/ocsp/OcspRequest;
+	public static synthetic fun request$default (Lcom/davils/krypt/ocsp/Ocsp;Ljava/util/List;Ljava/lang/Integer;ILjava/lang/Object;)Lcom/davils/krypt/ocsp/OcspRequest;
+	public fun toString ()Ljava/lang/String;
+	public final fun verify (Lcom/davils/krypt/ocsp/OcspResponse;Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/ocsp/OcspIssuer;Lcom/davils/krypt/ocsp/OcspRequest;Lcom/davils/krypt/ocsp/OcspParameters;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun verify$default (Lcom/davils/krypt/ocsp/Ocsp;Lcom/davils/krypt/ocsp/OcspResponse;Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/ocsp/OcspIssuer;Lcom/davils/krypt/ocsp/OcspRequest;Lcom/davils/krypt/ocsp/OcspParameters;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/ocsp/Ocsp$Companion {
+}
+
+public final class com/davils/krypt/ocsp/OcspEncodings {
+	public static final field INSTANCE Lcom/davils/krypt/ocsp/OcspEncodings;
+	public static final field MAXIMUM_GET_LENGTH I
+	public static final field REQUEST_MEDIA_TYPE Ljava/lang/String;
+	public static final field RESPONSE_MEDIA_TYPE Ljava/lang/String;
+	public final fun getUrl (Ljava/lang/String;Lcom/davils/krypt/ocsp/OcspRequest;)Ljava/lang/String;
+	public final fun isGetSuitable (Ljava/lang/String;Lcom/davils/krypt/ocsp/OcspRequest;)Z
+	public final fun pathSegment (Lcom/davils/krypt/ocsp/OcspRequest;)Ljava/lang/String;
+	public final fun requestOf (Ljava/lang/String;)Lcom/davils/kore/core/outcome/Outcome;
+}
+
+public final class com/davils/krypt/ocsp/OcspFailure : java/lang/Enum {
+	public static final field AlgorithmNotPermitted Lcom/davils/krypt/ocsp/OcspFailure;
+	public static final field BadSignature Lcom/davils/krypt/ocsp/OcspFailure;
+	public static final field Malformed Lcom/davils/krypt/ocsp/OcspFailure;
+	public static final field NonceMismatch Lcom/davils/krypt/ocsp/OcspFailure;
+	public static final field NotFound Lcom/davils/krypt/ocsp/OcspFailure;
+	public static final field ResponderError Lcom/davils/krypt/ocsp/OcspFailure;
+	public static final field Stale Lcom/davils/krypt/ocsp/OcspFailure;
+	public static final field UnauthorizedResponder Lcom/davils/krypt/ocsp/OcspFailure;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/ocsp/OcspFailure;
+	public static fun values ()[Lcom/davils/krypt/ocsp/OcspFailure;
+}
+
+public final class com/davils/krypt/ocsp/OcspIssuer {
+	public static final field Companion Lcom/davils/krypt/ocsp/OcspIssuer$Companion;
+	public fun <init> (Lcom/davils/krypt/x509/name/DistinguishedName;Lcom/davils/krypt/primitive/key/PublicKey;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getName ()Lcom/davils/krypt/x509/name/DistinguishedName;
+	public final fun getPublicKey ()Lcom/davils/krypt/primitive/key/PublicKey;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/ocsp/OcspIssuer$Companion {
+	public final fun of (Lcom/davils/krypt/x509/Certificate;)Lcom/davils/krypt/ocsp/OcspIssuer;
+	public final fun of (Lcom/davils/krypt/x509/path/TrustAnchor;)Lcom/davils/krypt/ocsp/OcspIssuer;
+}
+
+public final class com/davils/krypt/ocsp/OcspLimits {
+	public static final field Companion Lcom/davils/krypt/ocsp/OcspLimits$Companion;
+	public static final field DEFAULT_MAXIMUM_BYTES I
+	public static final field DEFAULT_MAXIMUM_CERTIFICATES I
+	public static final field DEFAULT_MAXIMUM_ENTRIES I
+	public static final field DEFAULT_MAXIMUM_EXTENSIONS I
+	public static final field HARD_MAXIMUM_BYTES I
+	public static final field HARD_MAXIMUM_CERTIFICATES I
+	public static final field HARD_MAXIMUM_ENTRIES I
+	public static final field HARD_MAXIMUM_EXTENSIONS I
+	public fun <init> ()V
+	public fun <init> (IIII)V
+	public synthetic fun <init> (IIIIILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMaximumBytes ()I
+	public final fun getMaximumCertificates ()I
+	public final fun getMaximumEntries ()I
+	public final fun getMaximumExtensions ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/ocsp/OcspLimits$Companion {
+	public final fun getDefault ()Lcom/davils/krypt/ocsp/OcspLimits;
+}
+
+public final class com/davils/krypt/ocsp/OcspParameters {
+	public fun <init> ()V
+	public synthetic fun <init> (Lkotlin/time/Instant;JJZZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Lkotlin/time/Instant;JJZZLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAt ()Lkotlin/time/Instant;
+	public final fun getMaximumAge-UwyO8pc ()J
+	public final fun getSkew-UwyO8pc ()J
+	public fun hashCode ()I
+	public final fun isNoCheckRequired ()Z
+	public final fun isNonceRequired ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/ocsp/OcspRequest {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCertIds ()Ljava/util/List;
+	public final fun getEncoded ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getNonce ()Lkotlinx/io/bytestring/ByteString;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/ocsp/OcspResponder {
+	public synthetic fun <init> (Lcom/davils/krypt/ocsp/Ocsp;Lcom/davils/krypt/ocsp/OcspIssuer;Lcom/davils/krypt/primitive/signature/Signer;Lcom/davils/krypt/ocsp/OcspStatusSource;Lcom/davils/krypt/x509/Certificate;JLcom/davils/krypt/ocsp/OcspResponseCache;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (Lcom/davils/krypt/ocsp/Ocsp;Lcom/davils/krypt/ocsp/OcspIssuer;Lcom/davils/krypt/primitive/signature/Signer;Lcom/davils/krypt/ocsp/OcspStatusSource;Lcom/davils/krypt/x509/Certificate;JLcom/davils/krypt/ocsp/OcspResponseCache;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun errorResponse (Lcom/davils/krypt/ocsp/OcspResponseStatus;)Lkotlinx/io/bytestring/ByteString;
+	public final fun presign (Lcom/davils/krypt/asn1/DerInteger;Lcom/davils/krypt/core/algorithm/DigestAlgorithm;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun presign$default (Lcom/davils/krypt/ocsp/OcspResponder;Lcom/davils/krypt/asn1/DerInteger;Lcom/davils/krypt/core/algorithm/DigestAlgorithm;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun respond (Lcom/davils/krypt/ocsp/OcspRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun respond (Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun sign (Ljava/util/List;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun sign$default (Lcom/davils/krypt/ocsp/OcspResponder;Ljava/util/List;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/ocsp/OcspResponse {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBasic ()Lcom/davils/krypt/ocsp/BasicOcspResponse;
+	public final fun getEncoded ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getStatus ()Lcom/davils/krypt/ocsp/OcspResponseStatus;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/ocsp/OcspResponseCache {
+	public static final field Companion Lcom/davils/krypt/ocsp/OcspResponseCache$Companion;
+	public static final field DEFAULT_CAPACITY I
+	public static final field HARD_MAXIMUM_CAPACITY I
+	public fun <init> ()V
+	public fun <init> (I)V
+	public synthetic fun <init> (IILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun clear (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun get (Lcom/davils/krypt/ocsp/CertId;Lkotlin/time/Instant;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getCapacity ()I
+	public final fun put (Lcom/davils/krypt/ocsp/CertId;Lkotlinx/io/bytestring/ByteString;Lkotlin/time/Instant;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun size (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/ocsp/OcspResponseCache$Companion {
+}
+
+public abstract interface class com/davils/krypt/ocsp/OcspResponseSource {
+	public static final field Companion Lcom/davils/krypt/ocsp/OcspResponseSource$Companion;
+	public abstract fun response (Lcom/davils/krypt/ocsp/OcspRequest;Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/ocsp/OcspIssuer;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/ocsp/OcspResponseSource$Companion {
+	public final fun stapled (Lcom/davils/krypt/x509/Certificate;Lkotlinx/io/bytestring/ByteString;)Lcom/davils/krypt/ocsp/OcspResponseSource;
+}
+
+public final class com/davils/krypt/ocsp/OcspResponseStatus : java/lang/Enum {
+	public static final field InternalError Lcom/davils/krypt/ocsp/OcspResponseStatus;
+	public static final field MalformedRequest Lcom/davils/krypt/ocsp/OcspResponseStatus;
+	public static final field SignatureRequired Lcom/davils/krypt/ocsp/OcspResponseStatus;
+	public static final field Successful Lcom/davils/krypt/ocsp/OcspResponseStatus;
+	public static final field TryLater Lcom/davils/krypt/ocsp/OcspResponseStatus;
+	public static final field Unauthorized Lcom/davils/krypt/ocsp/OcspResponseStatus;
+	public final fun getCode ()I
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/ocsp/OcspResponseStatus;
+	public static fun values ()[Lcom/davils/krypt/ocsp/OcspResponseStatus;
+}
+
+public final class com/davils/krypt/ocsp/OcspRevocationChecker : com/davils/krypt/x509/path/RevocationChecker {
+	public fun <init> (Lcom/davils/krypt/ocsp/Ocsp;Lcom/davils/krypt/ocsp/OcspResponseSource;Lcom/davils/krypt/ocsp/OcspParameters;Lcom/davils/krypt/core/algorithm/DigestAlgorithm;Ljava/lang/Integer;)V
+	public synthetic fun <init> (Lcom/davils/krypt/ocsp/Ocsp;Lcom/davils/krypt/ocsp/OcspResponseSource;Lcom/davils/krypt/ocsp/OcspParameters;Lcom/davils/krypt/core/algorithm/DigestAlgorithm;Ljava/lang/Integer;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun check (Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/x509/path/TrustAnchor;Lkotlin/time/Instant;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/davils/krypt/ocsp/OcspStatusSource {
+	public abstract fun status (Lcom/davils/krypt/asn1/DerInteger;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class com/davils/krypt/ocsp/ResponderId {
+}
+
+public final class com/davils/krypt/ocsp/ResponderId$ByKey : com/davils/krypt/ocsp/ResponderId {
+	public fun <init> (Lkotlinx/io/bytestring/ByteString;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getKeyHash ()Lkotlinx/io/bytestring/ByteString;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/ocsp/ResponderId$ByName : com/davils/krypt/ocsp/ResponderId {
+	public fun <init> (Lkotlinx/io/bytestring/ByteString;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEncoded ()Lkotlinx/io/bytestring/ByteString;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/ocsp/SingleResponse {
+	public fun <init> (Lcom/davils/krypt/ocsp/CertId;Lcom/davils/krypt/ocsp/CertificateStatus;Lkotlin/time/Instant;Lkotlin/time/Instant;Ljava/util/List;)V
+	public synthetic fun <init> (Lcom/davils/krypt/ocsp/CertId;Lcom/davils/krypt/ocsp/CertificateStatus;Lkotlin/time/Instant;Lkotlin/time/Instant;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCertId ()Lcom/davils/krypt/ocsp/CertId;
+	public final fun getExtensions ()Ljava/util/List;
+	public final fun getNextUpdate ()Lkotlin/time/Instant;
+	public final fun getStatus ()Lcom/davils/krypt/ocsp/CertificateStatus;
+	public final fun getThisUpdate ()Lkotlin/time/Instant;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+

@@ -33,6 +33,7 @@ check:
       - ":krypt-x509:clean"
       - ":krypt-keystore:clean"
       - ":krypt-ct:clean"
+      - ":krypt-ocsp:clean"
       - ":krypt-testing:clean"
     tasks:
       - ":krypt-core:jvmJar"
@@ -44,6 +45,7 @@ check:
       - ":krypt-x509:jvmJar"
       - ":krypt-keystore:jvmJar"
       - ":krypt-ct:jvmJar"
+      - ":krypt-ocsp:jvmJar"
       - ":krypt-testing:jvmJar"
     artifacts:
       - "krypt-core/build/libs/*.jar"
@@ -55,6 +57,7 @@ check:
       - "krypt-x509/build/libs/*.jar"
       - "krypt-keystore/build/libs/*.jar"
       - "krypt-ct/build/libs/*.jar"
+      - "krypt-ocsp/build/libs/*.jar"
       - "krypt-testing/build/libs/*.jar"
 
 policy:
@@ -93,6 +96,7 @@ publish:
     - ":krypt-x509:publishAllPublicationsToDavilsRepository"
     - ":krypt-keystore:publishAllPublicationsToDavilsRepository"
     - ":krypt-ct:publishAllPublicationsToDavilsRepository"
+    - ":krypt-ocsp:publishAllPublicationsToDavilsRepository"
     - ":krypt-testing:publishAllPublicationsToDavilsRepository"
     - ":krypt-bom:publishAllPublicationsToDavilsRepository"
 
@@ -186,6 +190,15 @@ release:
       - path: com/davils/krypt-ct
         artifact: krypt-ct
         task: ":krypt-ct:publishKotlinMultiplatformPublicationToDavilsRepository"
+      - path: com/davils/krypt-ocsp-jvm
+        artifact: krypt-ocsp-jvm
+        task: ":krypt-ocsp:publishJvmPublicationToDavilsRepository"
+      - path: com/davils/krypt-ocsp-wasm-js
+        artifact: krypt-ocsp-wasm-js
+        task: ":krypt-ocsp:publishWasmJsPublicationToDavilsRepository"
+      - path: com/davils/krypt-ocsp
+        artifact: krypt-ocsp
+        task: ":krypt-ocsp:publishKotlinMultiplatformPublicationToDavilsRepository"
       - path: com/davils/krypt-testing-jvm
         artifact: krypt-testing-jvm
         task: ":krypt-testing:publishJvmPublicationToDavilsRepository"
@@ -218,6 +231,8 @@ release:
       - "krypt-keystore/build/libs/*.klib"
       - "krypt-ct/build/libs/*.jar"
       - "krypt-ct/build/libs/*.klib"
+      - "krypt-ocsp/build/libs/*.jar"
+      - "krypt-ocsp/build/libs/*.klib"
       - "krypt-testing/build/libs/*.jar"
       - "krypt-testing/build/libs/*.klib"
   github-release:

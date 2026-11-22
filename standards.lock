@@ -295,6 +295,32 @@
             }
         },
         {
+            "id": "rfc:6960",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-ocsp: requests, responses, verification and the responder.",
+            "snapshot": {
+                "title": "X.509 Internet Public Key Infrastructure Online Certificate Status Protocol - OCSP",
+                "status": "PROPOSED STANDARD",
+                "published": "June 2013",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [
+                    "RFC8954",
+                    "RFC9654"
+                ],
+                "errata": {
+                    "5730": "HELD",
+                    "5891": "VERIFIED",
+                    "5929": "REJECTED",
+                    "6165": "VERIFIED",
+                    "6166": "VERIFIED",
+                    "6167": "VERIFIED",
+                    "7961": "VERIFIED",
+                    "7962": "VERIFIED"
+                }
+            }
+        },
+        {
             "id": "rfc:6962",
             "reviewedOn": "2026-11-22",
             "note": "Reviewed for the PKI modules: krypt-x509, krypt-keystore and krypt-ct.",
@@ -603,6 +629,34 @@
                 "errata": {
                     "7974": "VERIFIED"
                 }
+            }
+        },
+        {
+            "id": "rfc:9654",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-ocsp: requests, responses, verification and the responder.",
+            "snapshot": {
+                "title": "Online Certificate Status Protocol (OCSP) Nonce Extension",
+                "status": "PROPOSED STANDARD",
+                "published": "August 2024",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
+            }
+        },
+        {
+            "id": "rfc:9919",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-ocsp: requests, responses, verification and the responder.",
+            "snapshot": {
+                "title": "The Lightweight Online Certificate Status Protocol (OCSP) Profile for High-Volume Environments",
+                "status": "PROPOSED STANDARD",
+                "published": "July 2026",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
             }
         },
         {

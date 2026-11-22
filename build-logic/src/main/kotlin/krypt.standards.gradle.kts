@@ -76,6 +76,10 @@ kreate {
             rfc(5952) {
                 note = "The canonical text of IPv6 addresses in the IP address names of krypt-x509."
             }
+            rfc(6960) {
+                note = "OCSP: requests, strict responses, their verification against the issuer or a delegated " +
+                    "responder, the revocation checker of path validation and the logic of a responder."
+            }
             rfc(6962) {
                 note = "Certificate Transparency: the timestamps and log lists of krypt-ct, and the Merkle trees of " +
                     "krypt-stream with leaves and nodes hashed apart."
@@ -120,6 +124,14 @@ kreate {
             }
             rfc(9579) {
                 note = "PBMAC1 for PKCS #12: the MAC krypt-keystore writes and one of those it reads."
+            }
+            rfc(9654) {
+                note = "The OCSP nonce: 32 to 128 random bytes in a request, 1 to 128 bytes read, echoed by the " +
+                    "responder."
+            }
+            rfc(9919) {
+                note = "The lightweight OCSP profile: SHA-256 identifiers by default and SHA-1 behind an opt-in, " +
+                    "GET requests of at most 255 bytes and responders that answer from a cache."
             }
             unicode {
                 note = "Untrusted names, subjects and texts are shown through SafeText of Kore."
