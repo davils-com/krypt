@@ -169,7 +169,7 @@ class EnvelopedTest : FunSpec({
     test("the policy bounds passwords and algorithms") {
         val password = Recipient.Password(SecretText.of(SECRET), ITERATIONS)
         shouldThrow<PolicyViolationException> { cms.envelop(CONTENT, listOf(password)) }
-        val enveloped = quick.envelop(CONTENT, listOf(password, Recipient.Password(SecretText.of("x"), ITERATIONS)))
+        val enveloped = quick.envelop(CONTENT, listOf(password, Recipient.Kek(ByteString(1), kek(KEK_BYTES))))
         val strict = Cms(
             Crypto(environment { policy = cryptoPolicy { minimumVerifiedIterations = STRICT_ITERATIONS } }),
         )

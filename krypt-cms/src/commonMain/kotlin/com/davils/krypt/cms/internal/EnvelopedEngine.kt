@@ -76,8 +76,8 @@ internal class EnvelopedEngine(private val crypto: Crypto, private val limits: C
         require(recipients.size in 1..limits.maximumRecipients) {
             "Enveloped data has 1 to ${limits.maximumRecipients} recipients"
         }
-        require(recipients.count { recipient -> recipient is Recipient.Password } <= MAXIMUM_PASSWORDS) {
-            "Enveloped data has at most $MAXIMUM_PASSWORDS password recipients"
+        require(recipients.count { recipient -> recipient is Recipient.Password } <= 1) {
+            "Enveloped data has at most one password recipient"
         }
         val random = crypto.environment.random
         val iv = ByteString(random.bytes(Algorithms.ivBytes(encryption)))

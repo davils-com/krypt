@@ -231,8 +231,7 @@ public class Cms(public val crypto: Crypto, public val limits: CmsLimits = CmsLi
      * nonce of 12 bytes; prefer it. A content type other than id-data is then authenticated as an attribute.
      *
      * @param content the content, at most [CmsLimits.maximumContentBytes].
-     * @param recipients the recipients, 1 to [CmsLimits.maximumRecipients], of which at most
-     *   [CmsLimits.MAXIMUM_PASSWORD_RECIPIENTS] are passwords.
+     * @param recipients the recipients, 1 to [CmsLimits.maximumRecipients], of which at most one is a password.
      * @param encryption the content encryption; AES-256-GCM by default.
      * @param contentType the type of the content.
      * @return the enveloped data.
@@ -282,8 +281,8 @@ public class Cms(public val crypto: Crypto, public val limits: CmsLimits = CmsLi
      *
      * Password recipients derive their key with PBKDF2 within the iterations the policy accepts for verification;
      * HMAC-SHA-1, the default of PBKDF2 that OpenSSL writes, needs a policy that accepts SHA-1 for verification. A
-     * password is tried with the first password recipient only, so one decryption costs at most one derivation of the
-     * most iterations the policy accepts, whatever the number of recipients; a message with more than
+     * password is tried with the first password recipient of the message only, so one decryption costs at most one
+     * derivation of the most iterations the policy accepts, whatever the number of recipients; a message with more than
      * [CmsLimits.MAXIMUM_PASSWORD_RECIPIENTS] password recipients is refused as [CmsFailure.Malformed].
      * ML-KEM recipients work on the JVM only.
      *

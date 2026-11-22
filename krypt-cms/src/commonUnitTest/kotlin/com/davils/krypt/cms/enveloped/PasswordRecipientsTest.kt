@@ -53,6 +53,10 @@ private val alice: SecretText = SecretText.of("alice's password")
 
 private val bob: SecretText = SecretText.of("bob's password")
 
+private val kek: SecretKey = SecretKey.of(SecretBytes.copyOf(ByteArray(KEK_BYTES) { 1 }))
+
+private val identifier: ByteString = "kek".encodeToByteString()
+
 private fun password(text: SecretText): Recipient = Recipient.Password(text, ITERATIONS)
 
 private fun unsigned(bytes: ByteString): List<Int> = bytes.toByteArray().map { byte -> byte.toUByte().toInt() }
@@ -66,26 +70,29 @@ private val derOrder: Comparator<ByteString> = Comparator { first, second ->
 
 class PasswordRecipientsTest : FunSpec({
     test("a message names at most the bound of password recipients") {
-        val bound = List(CmsLimits.MAXIMUM_PASSWORD_RECIPIENTS) { password(alice) }
-        val enveloped = quick.envelop(CONTENT, bound)
+        val enveloped = quick.envelop(CONTENT, listOf(password(alice)))
         quick.decrypt(enveloped, Credential.Password(alice)).value() shouldBe CONTENT
-        shouldThrow<IllegalArgumentException> { quick.envelop(CONTENT, bound + password(alice)) }
+        shouldThrow<IllegalArgumentException> { quick.envelop(CONTENT, listOf(password(alice), password(bob))) }
         val base = EnvelopedBase(enveloped)
-        val recipients = enveloped.recipients.map { recipient -> recipient.encoded }
-        val tooMany = base.withRecipients((recipients + recipients.first()).sortedWith(derOrder))
+        val recipient = enveloped.recipients.single().encoded
+        val bound = base.withRecipients(List(CmsLimits.MAXIMUM_PASSWORD_RECIPIENTS) { recipient })
+        quick.decrypt(quick.decodeEnveloped(bound).value(), Credential.Password(alice)).value() shouldBe CONTENT
+        val tooMany = base.withRecipients(List(CmsLimits.MAXIMUM_PASSWORD_RECIPIENTS + 1) { recipient })
         val decoded = quick.decodeEnveloped(tooMany).value()
         quick.decrypt(decoded, Credential.Password(alice)).failureOrNull() shouldBe CmsFailure.Malformed
-        val kek = SecretKey.of(SecretBytes.copyOf(ByteArray(KEK_BYTES) { 1 }))
-        val identifier = "kek".encodeToByteString()
         quick.decrypt(decoded, Credential.Kek(identifier, kek)).failureOrNull() shouldBe CmsFailure.Malformed
     }
 
     test("a password derives once per message, with the first password recipient") {
-        val enveloped = quick.envelop(CONTENT, listOf(password(alice), password(bob)))
-        quick.decrypt(enveloped, Credential.Password(alice)).value() shouldBe CONTENT
-        quick.decrypt(enveloped, Credential.Password(bob)).failureOrNull() shouldBe CmsFailure.DecryptionFailed
-        val kek = SecretKey.of(SecretBytes.copyOf(ByteArray(KEK_BYTES) { 1 }))
-        val identifier = "kek".encodeToByteString()
+        val enveloped = quick.envelop(CONTENT, listOf(password(alice)))
+        val genuine = enveloped.recipients.single().encoded
+        val bytes = genuine.toByteArray()
+        val last = bytes.last()
+        bytes[bytes.size - 1] = (last - 1).toByte().takeIf { last != 0.toByte() } ?: 1
+        val ordered = listOf(genuine, ByteString(bytes)).sortedWith(derOrder)
+        val both = quick.decodeEnveloped(EnvelopedBase(enveloped).withRecipients(ordered)).value()
+        val isOpened = quick.decrypt(both, Credential.Password(alice)).failureOrNull() == null
+        isOpened shouldBe (ordered.first() == genuine)
         val mixed = quick.envelop(CONTENT, listOf(Recipient.Kek(identifier, kek), password(bob)))
         quick.decrypt(mixed, Credential.Password(bob)).value() shouldBe CONTENT
         quick.decrypt(mixed, Credential.Kek(identifier, kek)).value() shouldBe CONTENT
