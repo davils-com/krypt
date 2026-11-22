@@ -48,7 +48,7 @@ internal fun hexOf(bytes: ByteString): String = Hex.encode(bytes).uppercase()
 
 internal fun utf8(text: String): ByteString = text.encodeToByteString()
 
-internal fun key(encoded: String): CoseKey = checkNotNull(coseKeys.decode(hex(encoded)).getOrNull())
+internal suspend fun key(encoded: String): CoseKey = checkNotNull(coseKeys.decode(hex(encoded)).getOrNull())
 
 internal fun replaying(bytes: String): Crypto = Crypto(
     environment {

@@ -24,16 +24,21 @@ import com.davils.krypt.asn1.DerWriter
 import com.davils.krypt.asn1.ObjectIdentifier
 import com.davils.krypt.asn1.pem.Pem
 import com.davils.krypt.asn1.pem.PemBlock
+import com.davils.krypt.asn1.readRemaining
 import com.davils.krypt.core.SecretBytes
 import com.davils.krypt.core.SecretText
+import com.davils.krypt.core.algorithm.AeadAlgorithm
+import com.davils.krypt.core.algorithm.EllipticCurve
+import com.davils.krypt.core.algorithm.KdfAlgorithm
+import com.davils.krypt.core.algorithm.KemAlgorithm
 import com.davils.krypt.core.algorithm.KeyType
 import com.davils.krypt.primitive.exchange.HpkeSuite
 import com.davils.krypt.primitive.fixture.OpenSslKeys
-import com.davils.krypt.primitive.fixture.RfcKeys
 import com.davils.krypt.primitive.fixture.crypto
 import com.davils.krypt.primitive.fixture.fastCrypto
 import com.davils.krypt.primitive.fixture.hex
 import com.davils.krypt.primitive.fixture.utf8
+import com.davils.krypt.primitive.internal.KeyCodec
 import com.davils.krypt.primitive.key.KeyFailure
 import com.davils.krypt.primitive.password.PasswordVerification
 import io.kotest.assertions.throwables.shouldThrow
@@ -101,11 +106,32 @@ class BoundaryTest : FunSpec({
                 recipient = ed25519.publicKey,
             )
         }
-        val recipient = crypto.keys.generate(KeyType.X25519)
-        val encoding = SecretBytes.copyOf(hex(RfcKeys.X25519_PKCS8_PREFIX + RfcKeys.X25519_ALICE_SECRET))
-        val anonymous = checkNotNull(crypto.keys.decodePrivate(encoding).getOrNull())
+        val recipient = crypto.keys.generate(KeyType.P256)
+        val scalar = checkNotNull(
+            Der.decodeOrNull(hex(OpenSslKeys.EC_SEC1)) {
+                readSequence {
+                    readInteger()
+                    val found = readOctetString()
+                    readRemaining()
+                    found
+                }
+            },
+        )
+        val sec1 = Der.encode {
+            sequence {
+                integer(1L)
+                octetString(scalar)
+            }
+        }
+        val encoding = KeyCodec.pkcs8Of(algorithm = KeyCodec.ecAlgorithm(EllipticCurve.P256), privateKey = sec1)
+        val anonymous = checkNotNull(crypto.keys.decodePrivate(SecretBytes.copyOf(encoding)).getOrNull())
+        val suite = HpkeSuite(
+            kem = KemAlgorithm.DhkemP256,
+            kdf = KdfAlgorithm.HkdfSha256,
+            aead = AeadAlgorithm.Aes128Gcm,
+        )
         shouldThrow<IllegalStateException> {
-            crypto.hpke.sender(suite = HpkeSuite.X25519Aes256Gcm, recipient = recipient.publicKey, sender = anonymous)
+            crypto.hpke.sender(suite = suite, recipient = recipient.publicKey, sender = anonymous)
         }
     }
 

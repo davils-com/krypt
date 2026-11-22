@@ -548,12 +548,12 @@ final class com.davils.krypt.cose.key/CoseKeys { // com.davils.krypt.cose.key/Co
     final val mode // com.davils.krypt.cose.key/CoseKeys.mode|{}mode[0]
         final fun <get-mode>(): com.davils.krypt.cose.cbor/CborMode // com.davils.krypt.cose.key/CoseKeys.mode.<get-mode>|<get-mode>(){}[0]
 
-    final fun decode(kotlinx.io.bytestring/ByteString): com.davils.kore.core.outcome/Outcome<com.davils.krypt.cose.key/CoseKey, com.davils.krypt.cose/CoseFailure> // com.davils.krypt.cose.key/CoseKeys.decode|decode(kotlinx.io.bytestring.ByteString){}[0]
-    final fun decodeSet(kotlinx.io.bytestring/ByteString): com.davils.kore.core.outcome/Outcome<com.davils.krypt.cose.key/CoseKeySet, com.davils.krypt.cose/CoseFailure> // com.davils.krypt.cose.key/CoseKeys.decodeSet|decodeSet(kotlinx.io.bytestring.ByteString){}[0]
     final fun encode(com.davils.krypt.cose.key/CoseKey): kotlinx.io.bytestring/ByteString // com.davils.krypt.cose.key/CoseKeys.encode|encode(com.davils.krypt.cose.key.CoseKey){}[0]
     final fun encodePrivate(com.davils.krypt.cose.key/CoseKey): com.davils.krypt.core/SecretBytes // com.davils.krypt.cose.key/CoseKeys.encodePrivate|encodePrivate(com.davils.krypt.cose.key.CoseKey){}[0]
     final fun encodeSet(com.davils.krypt.cose.key/CoseKeySet): kotlinx.io.bytestring/ByteString // com.davils.krypt.cose.key/CoseKeys.encodeSet|encodeSet(com.davils.krypt.cose.key.CoseKeySet){}[0]
     final fun toString(): kotlin/String // com.davils.krypt.cose.key/CoseKeys.toString|toString(){}[0]
+    final suspend fun decode(kotlinx.io.bytestring/ByteString): com.davils.kore.core.outcome/Outcome<com.davils.krypt.cose.key/CoseKey, com.davils.krypt.cose/CoseFailure> // com.davils.krypt.cose.key/CoseKeys.decode|decode(kotlinx.io.bytestring.ByteString){}[0]
+    final suspend fun decodeSet(kotlinx.io.bytestring/ByteString): com.davils.kore.core.outcome/Outcome<com.davils.krypt.cose.key/CoseKeySet, com.davils.krypt.cose/CoseFailure> // com.davils.krypt.cose.key/CoseKeys.decodeSet|decodeSet(kotlinx.io.bytestring.ByteString){}[0]
     final suspend fun thumbprint(com.davils.krypt.cose.key/CoseKey, com.davils.krypt.core.algorithm/DigestAlgorithm = ...): kotlinx.io.bytestring/ByteString // com.davils.krypt.cose.key/CoseKeys.thumbprint|thumbprint(com.davils.krypt.cose.key.CoseKey;com.davils.krypt.core.algorithm.DigestAlgorithm){}[0]
 }
 

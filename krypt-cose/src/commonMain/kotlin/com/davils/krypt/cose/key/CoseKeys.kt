@@ -59,10 +59,10 @@ public class CoseKeys(
      *
      * @param encoded the CBOR encoding, possibly from an attacker.
      * @return the key, [CoseFailure.Malformed] for a broken structure or [CoseFailure.UnsupportedKey] for a key krypt
-     *   or its policy does not accept.
+     *   or its policy does not accept, including a private key whose public coordinates do not belong to it.
      * @since 1.0.0
      */
-    public fun decode(encoded: ByteString): Outcome<CoseKey, CoseFailure> = CoseException.outcome {
+    public suspend fun decode(encoded: ByteString): Outcome<CoseKey, CoseFailure> = CoseException.outcome {
         val item = present(CborReader.decodeOrNull(encoded, limits.cbor, mode), CoseFailure.Malformed)
         codec.decode(present(item.mapOrNull(), CoseFailure.Malformed))
     }
@@ -74,7 +74,7 @@ public class CoseKeys(
      * @return the keys, or why the set or one of its keys was refused.
      * @since 1.0.0
      */
-    public fun decodeSet(encoded: ByteString): Outcome<CoseKeySet, CoseFailure> = CoseException.outcome {
+    public suspend fun decodeSet(encoded: ByteString): Outcome<CoseKeySet, CoseFailure> = CoseException.outcome {
         val item = present(CborReader.decodeOrNull(encoded, limits.cbor, mode), CoseFailure.Malformed)
         val entries = present(item.itemsOrNull(), CoseFailure.Malformed)
         ensure(entries.size <= limits.maximumKeys, CoseFailure.Malformed)

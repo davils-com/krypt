@@ -41,6 +41,7 @@ import com.davils.krypt.primitive.Crypto
 import com.davils.krypt.primitive.PolicyViolationException
 import com.davils.krypt.primitive.UnsupportedAlgorithmException
 import com.davils.krypt.primitive.internal.KeyCodec
+import com.davils.krypt.primitive.internal.KeyConsistency
 import com.davils.krypt.primitive.internal.KeyProbes
 import com.davils.krypt.primitive.internal.KeyShape
 import com.davils.krypt.primitive.internal.Pbes2
@@ -98,7 +99,7 @@ public class Keys internal constructor(private val crypto: Crypto) {
      * for a signing key, by agreeing with a fresh ephemeral key for a key agreement key and by encapsulating to and
      * decapsulating with the pair for an ML-KEM key.
      *
-     * @param privateKey the private key, whose own public key may be unknown, as in a PKCS #8 file of X25519.
+     * @param privateKey the private key, whose own public key may be unknown, as in a SEC 1 file without one.
      * @param publicKey the public key that should belong to it.
      * @return the pair, whose private key now knows its public key, or null if the keys do not belong together.
      * @throws IllegalArgumentException if the keys are of different families or curves.
@@ -128,14 +129,28 @@ public class Keys internal constructor(private val crypto: Crypto) {
     /**
      * Reads a PKCS #8 PrivateKeyInfo or OneAsymmetricKey.
      *
+     * A public key the encoding carries, as the publicKey of a OneAsymmetricKey, the public key of SEC 1 or the modulus
+     * and exponent of RSA, must belong to the private key: the encodings are compared where they must agree, and the
+     * platform proves the pair with a probe signature, an agreement or an encapsulation, without asking the policy. A
+     * key whose public key does not belong to it is [KeyFailure.Malformed]. For X25519 and X448 the public key is
+     * derived from the private key, so a key without one, as OpenSSL writes it, still knows its public key. A platform
+     * that lacks the algorithm of the key cannot check it; the key then carries no public key.
+     *
      * @param encoded the DER encoding, which the key copies; the caller still owns it.
      * @return the key, or why it was refused.
+     * @throws com.davils.krypt.primitive.CryptoException if the policy demands a FIPS provider the environment does
+     *   not name.
      * @since 1.0.0
      */
-    public fun decodePrivate(encoded: SecretBytes): Outcome<PrivateKey, KeyFailure> =
-        KeyCodec.privateKeyOf(encoded).flatMap { key ->
+    public suspend fun decodePrivate(encoded: SecretBytes): Outcome<PrivateKey, KeyFailure> {
+        val decoded = KeyCodec.privateKeyOf(encoded).flatMap { key ->
             permitted(key = key, shape = KeyShape(family = key.family, bits = key.bits, curve = key.curve))
         }
+        return when (decoded) {
+            is Outcome.Success -> KeyConsistency.checked(crypto = crypto, key = decoded.value)
+            is Outcome.Failure -> decoded
+        }
+    }
 
     /**
      * Returns the PKCS #8 encoding of [key].
@@ -285,13 +300,13 @@ public class Keys internal constructor(private val crypto: Crypto) {
         return decrypt(encrypted = block.bytes, password = found)
     }
 
-    private fun decodePlain(block: PemBlock): Outcome<PrivateKey, KeyFailure> {
+    private suspend fun decodePlain(block: PemBlock): Outcome<PrivateKey, KeyFailure> {
         val converter = PKCS8_CONVERTERS[block.label] ?: { bytes -> bytes }
         val pkcs8 = converter(block.bytes) ?: return Outcome.Failure(KeyFailure.Malformed)
         return SecretBytes.copyOf(pkcs8).use { encoding -> decodePrivate(encoding) }
     }
 
-    private fun decodeDecrypted(encoding: SecretBytes): Outcome<PrivateKey, KeyFailure> = decodePrivate(
+    private suspend fun decodeDecrypted(encoding: SecretBytes): Outcome<PrivateKey, KeyFailure> = decodePrivate(
         encoding,
     ).mapFailure { failure ->
         listOf(

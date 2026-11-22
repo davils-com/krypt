@@ -663,8 +663,8 @@ public final class com/davils/krypt/cose/key/CoseKeyType : java/lang/Enum {
 public final class com/davils/krypt/cose/key/CoseKeys {
 	public fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/cose/CoseLimits;Lcom/davils/krypt/cose/cbor/CborMode;)V
 	public synthetic fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/cose/CoseLimits;Lcom/davils/krypt/cose/cbor/CborMode;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public final fun decode (Lkotlinx/io/bytestring/ByteString;)Lcom/davils/kore/core/outcome/Outcome;
-	public final fun decodeSet (Lkotlinx/io/bytestring/ByteString;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun decode (Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun decodeSet (Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public final fun encode (Lcom/davils/krypt/cose/key/CoseKey;)Lkotlinx/io/bytestring/ByteString;
 	public final fun encodePrivate (Lcom/davils/krypt/cose/key/CoseKey;)Lcom/davils/krypt/core/SecretBytes;
 	public final fun encodeSet (Lcom/davils/krypt/cose/key/CoseKeySet;)Lkotlinx/io/bytestring/ByteString;

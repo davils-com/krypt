@@ -37,8 +37,6 @@ import com.davils.krypt.primitive.key.PrivateKey
 import com.davils.krypt.primitive.key.PublicKey
 import kotlinx.io.bytestring.ByteString
 
-private const val BYTE_BITS: Int = 8
-private const val BYTE_MASK: Int = 0xFF
 private const val ML_DSA_44_BITS: Int = 44
 private const val ML_DSA_65_BITS: Int = 65
 private const val ML_DSA_87_BITS: Int = 87
@@ -60,8 +58,6 @@ private const val ML_DSA_65_PUBLIC: Int = 1_952
 private const val ML_DSA_87_PUBLIC: Int = 2_592
 private const val ML_KEM_768_PUBLIC: Int = 1_184
 private const val ML_KEM_1024_PUBLIC: Int = 1_568
-private const val SMALLEST_EXPONENT_VALUE: Long = 3
-private const val MAXIMUM_EXPONENT_BYTES: Int = 32
 
 internal object KeyCodec {
     private val FIXED: Map<ObjectIdentifier, KeyInfo> = mapOf(
@@ -91,8 +87,6 @@ internal object KeyCodec {
     private val CURVES: Map<ObjectIdentifier, EllipticCurve> =
         EllipticCurve.entries.associateBy { curve -> ObjectIdentifier.of(curve.objectIdentifier) }
 
-    private val SMALLEST_EXPONENT: DerInteger = DerInteger.of(SMALLEST_EXPONENT_VALUE)
-
     fun curveOf(oid: ObjectIdentifier): EllipticCurve? = CURVES[oid]
 
     fun publicKeyOf(spki: ByteString): Outcome<PublicKey, KeyFailure> = PublicKey.decode(spki)
@@ -114,18 +108,25 @@ internal object KeyCodec {
     fun privatePartsOf(pkcs8: SecretBytes): Outcome<PrivateKeyParts, KeyFailure> {
         val parts = pkcs8.reveal { bytes -> Der.decodeOrNull(ByteString(bytes)) { readPrivateKeyInfo() } }
             ?: return Outcome.Failure(KeyFailure.Malformed)
+        return privatePartsOf(parts)
+    }
+
+    private fun privatePartsOf(parts: PrivateParts): Outcome<PrivateKeyParts, KeyFailure> {
         val isRsa = parts.algorithm.oid == Oids.RSA_ENCRYPTION
-        val rsa = parts.privateKey.takeIf { isRsa }?.let { key -> rsaPrivateOf(key) }
-        val isMalformed = isRsa && (rsa == null || !hasNullParameters(parts.algorithm))
-        if (isMalformed) return Outcome.Failure(KeyFailure.Malformed)
+        val rsa = parts.privateKey.takeIf { isRsa }?.let { key -> RsaParameters.privateOf(key) }
+        val isRsaMalformed = isRsa && (rsa == null || !hasNullParameters(parts.algorithm))
+        val claims = publicClaimsOf(parts = parts, rsaPublic = rsa?.second)
+        val spki = claims.firstOrNull()?.let { bits -> spkiOf(algorithm = algorithmOf(parts), publicBits = bits) }
+        val publicKey = spki?.let { encoded -> publicKeyOf(encoded) }
+        val isPublicMalformed = claims.distinct().size > 1 || publicKey is Outcome.Failure
+        if (isRsaMalformed || isPublicMalformed) return Outcome.Failure(KeyFailure.Malformed)
         val info = infoOf(algorithm = parts.algorithm, modulus = rsa?.first)
-        val publicKey = publicOf(parts = parts, rsaPublic = rsa?.second)?.let { spki -> publicKeyOf(spki).getOrNull() }
-        return outcomeOf(info) { found -> PrivateKeyParts(info = found, publicKey = publicKey) }
+        return outcomeOf(info) { found -> PrivateKeyParts(info = found, publicKey = publicKey?.getOrNull()) }
     }
 
     private fun publicInfoOf(algorithm: AlgorithmParts, publicKey: BitString): Outcome<KeyInfo, KeyFailure> {
         val isRsa = algorithm.oid == Oids.RSA_ENCRYPTION
-        val modulus = rsaModulusOf(publicKey.bytes).takeIf { isRsa && hasNullParameters(algorithm) }
+        val modulus = RsaParameters.modulusOf(publicKey.bytes).takeIf { isRsa && hasNullParameters(algorithm) }
         val info = infoOf(algorithm = algorithm, modulus = modulus)
         val isRsaMalformed = isRsa && modulus == null
         val isSized = info == null || hasValidSize(info = info, publicKey = publicKey)
@@ -137,19 +138,6 @@ internal object KeyCodec {
         val parameters = algorithm.parameters
         return parameters?.tag == Tag.Null && parameters.content.size == 0
     }
-
-    private fun isValidRsa(modulus: DerInteger, exponent: DerInteger): Boolean {
-        val isPositive = !modulus.isNegative && !exponent.isNegative
-        return isPositive && isOdd(modulus) && isOdd(exponent) && isExponentInRange(exponent)
-    }
-
-    private fun isOdd(value: DerInteger): Boolean {
-        val bytes = value.bytes
-        return bytes[bytes.size - 1].toInt() and 1 == 1
-    }
-
-    private fun isExponentInRange(exponent: DerInteger): Boolean =
-        exponent >= SMALLEST_EXPONENT && exponent.magnitude().size <= MAXIMUM_EXPONENT_BYTES
 
     private fun hasValidSize(info: KeyInfo, publicKey: BitString): Boolean {
         val size = publicKey.bytes.size
@@ -195,14 +183,14 @@ internal object KeyCodec {
         return Outcome.Success(build(found))
     }
 
-    private fun publicOf(parts: PrivateParts, rsaPublic: BitString?): ByteString? {
+    private fun publicClaimsOf(parts: PrivateParts, rsaPublic: BitString?): List<BitString> {
         val isEc = parts.algorithm.oid == Oids.EC_PUBLIC_KEY
         val ecPublic = parts.privateKey.takeIf { isEc }?.let { key -> ecPublicBitsOf(key) }
-        val bits = parts.publicBits ?: rsaPublic ?: ecPublic
-        val algorithm =
-            parts.algorithm.encoded.takeUnless { parts.algorithm.oid == Oids.RSA_ENCRYPTION } ?: rsaAlgorithm()
-        return bits?.let { found -> spkiOf(algorithm = algorithm, publicBits = found) }
+        return listOfNotNull(parts.publicBits, rsaPublic, ecPublic)
     }
+
+    private fun algorithmOf(parts: PrivateParts): ByteString =
+        parts.algorithm.encoded.takeUnless { parts.algorithm.oid == Oids.RSA_ENCRYPTION } ?: rsaAlgorithm()
 
     private fun infoOf(algorithm: AlgorithmParts, modulus: DerInteger?): KeyInfo? {
         val fixed = FIXED[algorithm.oid]?.takeIf { algorithm.parameters == null }
@@ -214,7 +202,7 @@ internal object KeyCodec {
         }
         val curve = curveOid?.let { oid -> CURVES[oid] }
         val ec = curve?.let { found -> KeyInfo(KeyFamily.Ec, curve = found, bits = found.bits) }
-        val rsa = modulus?.let { found -> KeyInfo(KeyFamily.Rsa, curve = null, bits = bitLength(found)) }
+        val rsa = modulus?.let { found -> KeyInfo(KeyFamily.Rsa, curve = null, bits = RsaParameters.bitLength(found)) }
         return fixed ?: ec ?: rsa
     }
 
@@ -243,33 +231,8 @@ internal object KeyCodec {
         return Der.decodeOrNull(retagged) { readBitString() }
     }
 
-    private fun rsaModulusOf(publicKey: ByteString): DerInteger? = Der.decodeOrNull(publicKey) {
-        readSequence {
-            val modulus = readInteger()
-            modulus.takeIf { isValidRsa(modulus = modulus, exponent = readInteger()) }
-        }
-    }
-
-    private fun rsaPrivateOf(privateKey: ByteString): Pair<DerInteger, BitString>? = Der.decodeOrNull(privateKey) {
-        readSequence {
-            readInt(0..MAXIMUM_VERSION)
-            val modulus = readInteger()
-            val exponent = readInteger()
-            readRemaining()
-            val public = modulus to rsaPublicBits(modulus = modulus, exponent = exponent)
-            public.takeIf { isValidRsa(modulus = modulus, exponent = exponent) }
-        }
-    }
-
-    fun rsaPublicBits(modulus: DerInteger, exponent: DerInteger): BitString {
-        val encoded = Der.encode {
-            sequence {
-                integer(modulus)
-                integer(exponent)
-            }
-        }
-        return BitString(encoded)
-    }
+    fun rsaPublicBits(modulus: DerInteger, exponent: DerInteger): BitString =
+        RsaParameters.publicBits(modulus = modulus, exponent = exponent)
 
     private fun ecPublicBitsOf(privateKey: ByteString): BitString? = Der.decodeOrNull(privateKey) {
         readSequence {
@@ -278,12 +241,5 @@ internal object KeyCodec {
             readOptionalExplicit(0) { readObjectIdentifier() }
             readOptionalExplicit(1) { readBitString() }
         }
-    }
-
-    private fun bitLength(modulus: DerInteger): Int {
-        val magnitude = modulus.magnitude().toByteArray()
-        val lead = magnitude.firstOrNull()?.toInt() ?: 0
-        val leadBits = Int.SIZE_BITS - (lead and BYTE_MASK).countLeadingZeroBits()
-        return (magnitude.size - 1).coerceAtLeast(0) * BYTE_BITS + leadBits
     }
 }
