@@ -45,9 +45,10 @@ import kotlinx.io.bytestring.ByteString
  * tokens, enveloped and authenticated-enveloped data for several kinds of recipients, and encrypted data.
  *
  * Every encoding krypt reads must be strict DER: BER, such as the indefinite lengths and constructed octet strings
- * of streamed messages, is refused as [CmsFailure.Malformed], and so is every SET OF out of DER order. Every
- * structure is read within [limits], checked before any work. The object holds no key and is safe to share between
- * threads.
+ * of streamed messages, is refused as [CmsFailure.Malformed], and so are signed and authenticated attributes out of
+ * DER order. Other sets, such as the certificates, which PKCS #7 producers like the time-stamp authority of OpenSSL
+ * write unsorted, are read in any order; krypt writes every set sorted. Every structure is read within [limits],
+ * checked before any work. The object holds no key and is safe to share between threads.
  *
  * @property crypto the primitives and their policy.
  * @property limits the limits of reading and writing.
