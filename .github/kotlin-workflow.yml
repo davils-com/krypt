@@ -38,6 +38,7 @@ check:
       - ":krypt-jose:clean"
       - ":krypt-tls:clean"
       - ":krypt-cms:clean"
+      - ":krypt-acme:clean"
       - ":krypt-cose:clean"
       - ":krypt-testing:clean"
     tasks:
@@ -55,6 +56,7 @@ check:
       - ":krypt-jose:jvmJar"
       - ":krypt-tls:jar"
       - ":krypt-cms:jvmJar"
+      - ":krypt-acme:jvmJar"
       - ":krypt-cose:jvmJar"
       - ":krypt-testing:jvmJar"
     artifacts:
@@ -72,6 +74,7 @@ check:
       - "krypt-jose/build/libs/*.jar"
       - "krypt-tls/build/libs/*.jar"
       - "krypt-cms/build/libs/*.jar"
+      - "krypt-acme/build/libs/*.jar"
       - "krypt-cose/build/libs/*.jar"
       - "krypt-testing/build/libs/*.jar"
 
@@ -116,6 +119,7 @@ publish:
     - ":krypt-jose:publishAllPublicationsToDavilsRepository"
     - ":krypt-tls:publishAllPublicationsToDavilsRepository"
     - ":krypt-cms:publishAllPublicationsToDavilsRepository"
+    - ":krypt-acme:publishAllPublicationsToDavilsRepository"
     - ":krypt-cose:publishAllPublicationsToDavilsRepository"
     - ":krypt-testing:publishAllPublicationsToDavilsRepository"
     - ":krypt-bom:publishAllPublicationsToDavilsRepository"
@@ -249,6 +253,15 @@ release:
       - path: com/davils/krypt-cms
         artifact: krypt-cms
         task: ":krypt-cms:publishKotlinMultiplatformPublicationToDavilsRepository"
+      - path: com/davils/krypt-acme-jvm
+        artifact: krypt-acme-jvm
+        task: ":krypt-acme:publishJvmPublicationToDavilsRepository"
+      - path: com/davils/krypt-acme-wasm-js
+        artifact: krypt-acme-wasm-js
+        task: ":krypt-acme:publishWasmJsPublicationToDavilsRepository"
+      - path: com/davils/krypt-acme
+        artifact: krypt-acme
+        task: ":krypt-acme:publishKotlinMultiplatformPublicationToDavilsRepository"
       - path: com/davils/krypt-cose-jvm
         artifact: krypt-cose-jvm
         task: ":krypt-cose:publishJvmPublicationToDavilsRepository"
@@ -299,6 +312,8 @@ release:
       - "krypt-tls/build/libs/*.jar"
       - "krypt-cms/build/libs/*.jar"
       - "krypt-cms/build/libs/*.klib"
+      - "krypt-acme/build/libs/*.jar"
+      - "krypt-acme/build/libs/*.klib"
       - "krypt-cose/build/libs/*.jar"
       - "krypt-cose/build/libs/*.klib"
       - "krypt-testing/build/libs/*.jar"

@@ -40,6 +40,7 @@ dependencies {
         api(project(":krypt-jose"))
         api(project(":krypt-tls"))
         api(project(":krypt-cms"))
+        api(project(":krypt-acme"))
         api(project(":krypt-cose"))
         api(project(":krypt-testing"))
     }

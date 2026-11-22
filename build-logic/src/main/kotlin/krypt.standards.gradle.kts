@@ -200,6 +200,9 @@ kreate {
             rfc(8259) {
                 note = "JSON: the bounded and strict parser and writer of krypt-jose."
             }
+            rfc(8288) {
+                note = "Web linking: the bounded parser of the Link fields of krypt-acme for alternate chains."
+            }
             rfc(8392) {
                 note = "CBOR Web Tokens: claims signed, MACed or encrypted by krypt-cose and validated with an " +
                     "allowlist of algorithms, the issuer, the audience, required claims and a clock skew."
@@ -217,9 +220,20 @@ kreate {
             rfc(8446) {
                 note = "TLS 1.3: the default and only version of krypt-tls unless TLS 1.2 is enabled, over JSSE."
             }
+            rfc(8555) {
+                note = "ACME: the client logic of krypt-acme over a transport of the application, with nonces, " +
+                    "accounts, external account binding, key rollover, orders, challenges and revocation."
+            }
             rfc(8725) {
                 note = "The JWT best current practice: allowlists, explicit typing and the claim checks of the token " +
                     "validator of krypt-jose."
+            }
+            rfc(8737) {
+                note = "The tls-alpn-01 challenge: the validation certificate with the acmeIdentifier extension " +
+                    "of krypt-acme."
+            }
+            rfc(8738) {
+                note = "IP identifiers in ACME: orders, authorizations and validation certificates of krypt-acme."
             }
             rfc(8949) {
                 note = "CBOR: the strict, bounded codec of krypt-cose writes the core deterministic encoding and " +
@@ -233,6 +247,9 @@ kreate {
                 note = "COSE algorithms: ECDSA, EdDSA, HMAC, AES-GCM, ChaCha20-Poly1305, direct, AES key wrap and " +
                     "ECDH-ES with HKDF and the COSE_KDF_Context in krypt-cose."
             }
+            rfc(9110) {
+                note = "HTTP semantics: the Retry-After field and its HTTP date, read by krypt-acme."
+            }
             rfc(9180) {
                 note = "HPKE: every mode in common code over the DHKEMs, HKDF and the AEADs, checked against its " +
                     "test vectors."
@@ -242,6 +259,9 @@ kreate {
             }
             rfc(9360) {
                 note = "X.509 in COSE: the x5chain and x5t header parameters of krypt-cose."
+            }
+            rfc(9457) {
+                note = "Problem details: the problem documents of ACME servers, read strictly by krypt-acme."
             }
             rfc(9525) {
                 note = "Service identity in TLS: the host name and IP address checks of krypt-x509, applied by " +
@@ -259,6 +279,10 @@ kreate {
             }
             rfc(9679) {
                 note = "COSE Key Thumbprints: the deterministic hash of the required parameters of a COSE_Key."
+            }
+            rfc(9773) {
+                note = "ACME renewal information: certificate identifiers, suggested windows and replaces in " +
+                    "krypt-acme."
             }
             rfc(9864) {
                 note = "Fully specified algorithms for JOSE: the Ed25519 and Ed448 signature algorithms of " +

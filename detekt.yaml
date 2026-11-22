@@ -149,6 +149,8 @@ libraries:
       - '**/cms/timestamp/TimeStampRequest.kt'
       - '**/cms/timestamp/TimeStampResponse.kt'
       - '**/cms/timestamp/TstInfo.kt'
+      - '**/acme/account/AccountKey.kt'
+      - '**/acme/account/ExternalAccountBinding.kt'
   # The compiler rejects an explicit Unit return type as redundant under warnings as errors.
   LibraryCodeMustSpecifyReturnType:
     active: true
@@ -255,6 +257,8 @@ style:
       - '**/cms/timestamp/TimeStampRequest.kt'
       - '**/cms/timestamp/TimeStampResponse.kt'
       - '**/cms/timestamp/TstInfo.kt'
+      - '**/acme/account/AccountKey.kt'
+      - '**/acme/account/ExternalAccountBinding.kt'
   # The compiler rejects an explicit Unit return type as redundant under warnings as errors.
   OptionalUnit:
     active: false
