@@ -40,6 +40,25 @@
             }
         },
         {
+            "id": "rfc:2986",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for the PKI modules: krypt-x509, krypt-keystore and krypt-ct.",
+            "snapshot": {
+                "title": "PKCS #10: Certification Request Syntax Specification Version 1.7",
+                "status": "INFORMATIONAL",
+                "published": "November 2000",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [
+                    "RFC5967"
+                ],
+                "errata": {
+                    "8328": "VERIFIED",
+                    "8336": "VERIFIED"
+                }
+            }
+        },
+        {
             "id": "rfc:3161",
             "reviewedOn": "2026-11-22",
             "note": "Time-stamp tokens: a signed manifest of krypt-stream carries them as opaque attachments.",
@@ -84,6 +103,29 @@
             }
         },
         {
+            "id": "rfc:4055",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for the PKI modules: krypt-x509, krypt-keystore and krypt-ct.",
+            "snapshot": {
+                "title": "Additional Algorithms and Identifiers for RSA Cryptography for use in the Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile",
+                "status": "PROPOSED STANDARD",
+                "published": "June 2005",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [
+                    "RFC5756"
+                ],
+                "errata": {
+                    "1468": "VERIFIED",
+                    "1676": "VERIFIED",
+                    "1677": "HELD",
+                    "2724": "HELD",
+                    "5199": "HELD",
+                    "5325": "HELD"
+                }
+            }
+        },
+        {
             "id": "rfc:4231",
             "reviewedOn": "2026-11-22",
             "note": "The HMAC-SHA-2 test vectors the MAC tests check against.",
@@ -96,6 +138,46 @@
                 "updatedBy": [],
                 "errata": {
                     "3853": "HELD"
+                }
+            }
+        },
+        {
+            "id": "rfc:4514",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for the PKI modules: krypt-x509, krypt-keystore and krypt-ct.",
+            "snapshot": {
+                "title": "Lightweight Directory Access Protocol (LDAP): String Representation of Distinguished Names",
+                "status": "PROPOSED STANDARD",
+                "published": "June 2006",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "7229": "VERIFIED",
+                    "73": "HELD"
+                }
+            }
+        },
+        {
+            "id": "rfc:4519",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for the PKI modules: krypt-x509, krypt-keystore and krypt-ct.",
+            "snapshot": {
+                "title": "Lightweight Directory Access Protocol (LDAP): Schema for User Applications",
+                "status": "PROPOSED STANDARD",
+                "published": "June 2006",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "1761": "REJECTED",
+                    "6974": "VERIFIED",
+                    "70": "HELD",
+                    "7208": "VERIFIED",
+                    "7209": "VERIFIED",
+                    "7210": "VERIFIED",
+                    "7211": "VERIFIED",
+                    "7212": "VERIFIED"
                 }
             }
         },
@@ -123,7 +205,7 @@
         {
             "id": "rfc:5280",
             "reviewedOn": "2026-11-22",
-            "note": "X.509: the encoding of times in DER and the profile the certificates of krypt follow.",
+            "note": "Reviewed for the PKI modules: krypt-x509, krypt-keystore and krypt-ct.",
             "snapshot": {
                 "title": "Internet X.509 Public Key Infrastructure Certificate and Certificate Revocation List (CRL) Profile",
                 "status": "PROPOSED STANDARD",
@@ -186,9 +268,36 @@
             }
         },
         {
+            "id": "rfc:5952",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for the PKI modules: krypt-x509, krypt-keystore and krypt-ct.",
+            "snapshot": {
+                "title": "A Recommendation for IPv6 Address Text Representation",
+                "status": "PROPOSED STANDARD",
+                "published": "August 2010",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "2498": "VERIFIED",
+                    "2656": "REJECTED",
+                    "2872": "REJECTED",
+                    "3218": "HELD",
+                    "3219": "HELD",
+                    "3884": "REJECTED",
+                    "4483": "REJECTED",
+                    "4900": "REJECTED",
+                    "4985": "REJECTED",
+                    "4986": "REJECTED",
+                    "6272": "HELD",
+                    "8554": "HELD"
+                }
+            }
+        },
+        {
             "id": "rfc:6962",
             "reviewedOn": "2026-11-22",
-            "note": "The Merkle tree hashing of manifests and containers, with leaves and nodes hashed apart.",
+            "note": "Reviewed for the PKI modules: krypt-x509, krypt-keystore and krypt-ct.",
             "snapshot": {
                 "title": "Certificate Transparency",
                 "status": "EXPERIMENTAL",
@@ -206,6 +315,42 @@
             }
         },
         {
+            "id": "rfc:7093",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for the PKI modules: krypt-x509, krypt-keystore and krypt-ct.",
+            "snapshot": {
+                "title": "Additional Methods for Generating Key Identifiers Values",
+                "status": "INFORMATIONAL",
+                "published": "December 2013",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
+            }
+        },
+        {
+            "id": "rfc:7292",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for the PKI modules: krypt-x509, krypt-keystore and krypt-ct.",
+            "snapshot": {
+                "title": "PKCS #12: Personal Information Exchange Syntax v1.1",
+                "status": "INFORMATIONAL",
+                "published": "July 2014",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [
+                    "RFC9579",
+                    "RFC9879"
+                ],
+                "errata": {
+                    "4356": "VERIFIED",
+                    "4832": "REPORTED",
+                    "5795": "VERIFIED",
+                    "7257": "VERIFIED"
+                }
+            }
+        },
+        {
             "id": "rfc:7468",
             "reviewedOn": "2026-11-22",
             "note": "The textual encoding of PEM: strict reading and writing in krypt-asn1.",
@@ -219,6 +364,22 @@
                 "errata": {
                     "4508": "VERIFIED",
                     "7697": "REPORTED"
+                }
+            }
+        },
+        {
+            "id": "rfc:7633",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for the PKI modules: krypt-x509, krypt-keystore and krypt-ct.",
+            "snapshot": {
+                "title": "X.509v3 Transport Layer Security (TLS) Feature Extension",
+                "status": "PROPOSED STANDARD",
+                "published": "October 2015",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "4571": "REJECTED"
                 }
             }
         },
@@ -337,6 +498,34 @@
             }
         },
         {
+            "id": "rfc:822",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for the PKI modules: krypt-x509, krypt-keystore and krypt-ct.",
+            "snapshot": {
+                "title": "STANDARD FOR THE FORMAT OF ARPA INTERNET TEXT MESSAGES",
+                "status": "INTERNET STANDARD",
+                "published": "August 1982",
+                "withdrawn": true,
+                "replacedBy": [
+                    "RFC2822"
+                ],
+                "updatedBy": [
+                    "RFC1123",
+                    "RFC1138",
+                    "RFC1148",
+                    "RFC1327",
+                    "RFC2156"
+                ],
+                "errata": {
+                    "1083": "HELD",
+                    "1899": "VERIFIED",
+                    "3408": "HELD",
+                    "4584": "HELD",
+                    "7573": "REJECTED"
+                }
+            }
+        },
+        {
             "id": "rfc:8439",
             "reviewedOn": "2026-11-22",
             "note": "ChaCha20-Poly1305: an AEAD of krypt-primitive where the platform has it.",
@@ -379,6 +568,40 @@
                     "7933": "HELD",
                     "7934": "VERIFIED",
                     "7937": "VERIFIED"
+                }
+            }
+        },
+        {
+            "id": "rfc:9525",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for the PKI modules: krypt-x509, krypt-keystore and krypt-ct.",
+            "snapshot": {
+                "title": "Service Identity in TLS",
+                "status": "PROPOSED STANDARD",
+                "published": "November 2023",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "8173": "HELD"
+                }
+            }
+        },
+        {
+            "id": "rfc:9579",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for the PKI modules: krypt-x509, krypt-keystore and krypt-ct.",
+            "snapshot": {
+                "title": "Use of Password-Based Message Authentication Code 1 (PBMAC1) in PKCS #12 Syntax",
+                "status": "INFORMATIONAL",
+                "published": "May 2024",
+                "withdrawn": true,
+                "replacedBy": [
+                    "RFC9879"
+                ],
+                "updatedBy": [],
+                "errata": {
+                    "7974": "VERIFIED"
                 }
             }
         },

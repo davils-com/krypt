@@ -30,6 +30,10 @@ kreate {
                 includes.set(setOf("*.md", "krypt-*/src/**"))
             }
 
+            rfc(822) {
+                note = "Internet mail addresses: the syntax of the rfc822Name of X.509, which krypt-x509 checks " +
+                    "strictly."
+            }
             rfc(1421) {
                 note = "PEM with the Proc-Type and DEK-Info headers of OpenSSL: krypt recognises the legacy " +
                     "encryption and refuses it."
@@ -37,30 +41,57 @@ kreate {
             rfc(2104) {
                 note = "HMAC: the MACs of krypt-primitive and the base of HKDF, computed by JCA or WebCrypto."
             }
+            rfc(2986) {
+                note = "PKCS #10: certification requests, built and verified by krypt-x509."
+            }
             rfc(3161) {
                 note = "Time-stamp tokens: a signed manifest of krypt-stream carries them as opaque attachments."
             }
             rfc(3394) {
                 note = "AES key wrap: the key wraps of krypt-primitive."
             }
+            rfc(4055) {
+                note = "RSASSA-PSS and RSAES-OAEP in X.509: the algorithm identifiers and parameters krypt-x509 " +
+                    "reads and writes."
+            }
             rfc(4231) {
                 note = "The HMAC-SHA-2 test vectors the MAC tests check against."
+            }
+            rfc(4514) {
+                note = "The string form of distinguished names, written with escaping by krypt-x509."
+            }
+            rfc(4519) {
+                note = "The LDAP attribute types the distinguished names of krypt-x509 know by name."
             }
             rfc(4648) {
                 note = "Base64 and base64url: strict, constant-time codecs of krypt-core that refuse every " +
                     "non-canonical input."
             }
             rfc(5280) {
-                note = "X.509: the encoding of times in DER and the profile the certificates of krypt follow."
+                note = "X.509: the certificates, requests, CRLs and path validation of krypt-x509 and the times of DER."
             }
             rfc(5869) {
                 note = "HKDF: implemented over HMAC in common code, so both targets derive alike."
             }
+            rfc(5952) {
+                note = "The canonical text of IPv6 addresses in the IP address names of krypt-x509."
+            }
             rfc(6962) {
-                note = "The Merkle tree hashing of manifests and containers, with leaves and nodes hashed apart."
+                note = "Certificate Transparency: the timestamps and log lists of krypt-ct, and the Merkle trees of " +
+                    "krypt-stream with leaves and nodes hashed apart."
+            }
+            rfc(7093) {
+                note = "Key identifiers: krypt-x509 derives them from the SHA-256 of the subject public key."
+            }
+            rfc(7292) {
+                note = "PKCS #12: read and written by krypt-keystore with PBES2 and a MAC, the legacy protection " +
+                    "refused."
             }
             rfc(7468) {
                 note = "The textual encoding of PEM: strict reading and writing in krypt-asn1."
+            }
+            rfc(7633) {
+                note = "The TLS feature extension of X.509, such as OCSP must-staple, read by krypt-x509."
             }
             rfc(7748) {
                 note = "X25519 and X448: key agreement and the DHKEM of HPKE."
@@ -83,6 +114,12 @@ kreate {
             rfc(9180) {
                 note = "HPKE: every mode in common code over the DHKEMs, HKDF and the AEADs, checked against its " +
                     "test vectors."
+            }
+            rfc(9525) {
+                note = "Service identity in TLS: the host name and IP address checks of krypt-x509."
+            }
+            rfc(9579) {
+                note = "PBMAC1 for PKCS #12: the MAC krypt-keystore writes and one of those it reads."
             }
             unicode {
                 note = "Untrusted names, subjects and texts are shown through SafeText of Kore."
