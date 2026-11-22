@@ -78,6 +78,38 @@ internal object Pkcs12Reader {
         readListOf(maximum) { readSequence { readBag() } }
     }
 
+    fun iterationsOf(algorithm: ByteString): Int? = Der.decodeOrNull(algorithm) { readSequence { readIterations() } }
+
+    fun shroudedIterationsOf(encrypted: ByteString): Int? = Der.decodeOrNull(encrypted) {
+        readSequence {
+            val iterations = readSequence { readIterations() }
+            readRemaining()
+            iterations
+        }
+    }
+
+    private fun DerReader.readIterations(): Int {
+        val isPbes2 = readObjectIdentifier() == Pkcs12Oids.PBES2
+        val iterations = when (isPbes2) {
+            true -> readSequence { readPbes2Iterations() }
+            false -> 0
+        }
+        readRemaining()
+        return iterations
+    }
+
+    private fun DerReader.readPbes2Iterations(): Int {
+        val iterations = readSequence {
+            expect(readObjectIdentifier() == Pkcs12Oids.PBKDF2, "PBKDF2")
+            readSequence {
+                readOctetString()
+                readInt(1..Int.MAX_VALUE).also { readRemaining() }
+            }
+        }
+        readRemaining()
+        return iterations
+    }
+
     private fun DerReader.readMacData(): MacParts = readSequence {
         val (algorithm, tag) = readSequence { readElement(Tag.Sequence).encoded to readOctetString() }
         val salt = readOctetString()

@@ -28,7 +28,11 @@ import kotlinx.io.bytestring.ByteString
 
 private const val MINIMUM_SALT: Int = 16
 
-internal class MacChecks(private val crypto: Crypto, private val password: SecretText) {
+internal class MacChecks(
+    private val crypto: Crypto,
+    private val password: SecretText,
+    private val budget: PasswordBudget,
+) {
     suspend fun check(mac: MacParts, data: ByteString, limits: KeystoreLimits) {
         when (mac) {
             is MacParts.Classic -> classic(mac = mac, data = data, limits = limits)
@@ -39,6 +43,7 @@ internal class MacChecks(private val crypto: Crypto, private val password: Secre
     private suspend fun classic(mac: MacParts.Classic, data: ByteString, limits: KeystoreLimits) {
         val digest = KeystoreRefusal.present(mac.digest, KeystoreFailure.Unsupported)
         KeystoreRefusal.ensure(mac.iterations <= limits.maximumMacIterations, KeystoreFailure.Refused)
+        budget.spend(mac.iterations)
         val key = Pkcs12Kdf.macKey(
             crypto = crypto,
             digest = digest,
@@ -57,6 +62,7 @@ internal class MacChecks(private val crypto: Crypto, private val password: Secre
         KeystoreRefusal.ensure(mac.keyBytes >= SecretKey.MINIMUM_BYTES, KeystoreFailure.Refused)
         val isPermitted = crypto.environment.policy.permitsIterations(mac.iterations, AlgorithmUse.Verify)
         KeystoreRefusal.ensure(isPermitted, KeystoreFailure.Refused)
+        budget.spend(mac.iterations)
         val key = crypto.derivations.pbkdf2(
             password = password,
             salt = mac.salt,

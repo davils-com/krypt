@@ -19,6 +19,7 @@ package com.davils.krypt.x509.name
 import com.davils.kore.core.annotation.DavilsInternal
 import com.davils.kore.core.text.SafeText
 import com.davils.krypt.asn1.ObjectIdentifier
+import com.davils.krypt.x509.internal.NameParts
 import kotlinx.io.bytestring.ByteString
 
 /**
@@ -32,7 +33,7 @@ import kotlinx.io.bytestring.ByteString
  * @since 1.0.0
  */
 @OptIn(DavilsInternal::class)
-public class DistinguishedName internal constructor(
+public class DistinguishedName private constructor(
     public val names: List<RelativeName>,
     public val encoded: ByteString,
 ) {
@@ -49,6 +50,8 @@ public class DistinguishedName internal constructor(
      * @since 1.0.0
      */
     public val commonName: String? get() = valuesOf(AttributeTypes.CommonName).lastOrNull()
+
+    internal constructor(parts: NameParts) : this(parts.names, parts.encoded)
 
     /**
      * Returns the text values of [type], most significant first.

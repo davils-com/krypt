@@ -16,6 +16,8 @@
 
 package com.davils.krypt.keystore.material
 
+import com.davils.kore.core.failure.attempted
+import com.davils.kore.core.outcome.Outcome
 import com.davils.krypt.core.SecretText
 import com.davils.krypt.keystore.Identity
 import com.davils.krypt.keystore.pkcs12.KeyEntry
@@ -23,13 +25,15 @@ import com.davils.krypt.keystore.pkcs12.Pkcs12
 import com.davils.krypt.keystore.pkcs12.Pkcs12Store
 import com.davils.krypt.primitive.Crypto
 import com.davils.krypt.x509.Certificates
+import kotlinx.io.bytestring.ByteString
 import kotlinx.io.bytestring.encodeToByteString
 
 /**
  * Writes identities to a [MaterialSink].
  *
- * The private key is always marked as secret, so the sink restricts access before it writes. Exceptions of the sink
- * are not caught.
+ * The private key is always marked as secret, so the sink restricts access before it writes. The sink is foreign
+ * code: a failure it throws is contained and reported as [MaterialFailure.Unavailable], and only the cancellation of
+ * the calling coroutine passes through.
  *
  * @property crypto the primitives.
  * @property sink where the material goes.
@@ -45,6 +49,7 @@ public class MaterialWriter(public val crypto: Crypto, public val sink: Material
      * @param password the password, which may not be empty.
      * @param alias the friendly name of the key, or null.
      * @param iterations the iterations of PBKDF2; the minimum of the crypto policy by default.
+     * @return success, or [MaterialFailure.Unavailable] if the sink failed.
      * @throws IllegalArgumentException if [password] is empty.
      * @throws IllegalStateException if the private key is not extractable or was destroyed.
      * @throws com.davils.krypt.primitive.PolicyViolationException if the policy forbids [iterations].
@@ -56,10 +61,10 @@ public class MaterialWriter(public val crypto: Crypto, public val sink: Material
         password: SecretText,
         alias: String? = null,
         iterations: Int = crypto.environment.policy.minimumIterations,
-    ) {
+    ): Outcome<Unit, MaterialFailure> {
         val store = Pkcs12Store(keys = listOf(KeyEntry(identity = identity, alias = alias)))
         val bytes = Pkcs12(crypto).encode(store = store, password = password, iterations = iterations)
-        sink.write(ref = ref, bytes = bytes, isSecret = true)
+        return write(ref = ref, bytes = bytes, isSecret = true)
     }
 
     /**
@@ -74,6 +79,8 @@ public class MaterialWriter(public val crypto: Crypto, public val sink: Material
      * @param identity the identity.
      * @param password the password of the key, or null for an unencrypted key.
      * @param iterations the iterations of PBKDF2; the minimum of the crypto policy by default.
+     * @return success, or [MaterialFailure.Unavailable] if the sink failed; the chain is not written when the key
+     *   could not be.
      * @throws IllegalArgumentException if [key] equals [certificates].
      * @throws IllegalStateException if the private key is not extractable or was destroyed.
      * @throws com.davils.krypt.primitive.PolicyViolationException if the policy forbids [iterations].
@@ -85,7 +92,7 @@ public class MaterialWriter(public val crypto: Crypto, public val sink: Material
         identity: Identity,
         password: SecretText? = null,
         iterations: Int = crypto.environment.policy.minimumIterations,
-    ) {
+    ): Outcome<Unit, MaterialFailure> {
         require(key != certificates) { "The key and the chain go to different references" }
         val codec = Certificates(crypto)
         val chain = identity.chain.joinToString(separator = "") { certificate -> codec.encodePem(certificate) }
@@ -93,8 +100,9 @@ public class MaterialWriter(public val crypto: Crypto, public val sink: Material
             crypto.keys.encryptPem(key = identity.privateKey, password = secret, iterations = iterations)
         }
         val keyText = encrypted ?: crypto.keys.encodePem(identity.privateKey)
-        sink.write(ref = key, bytes = keyText.encodeToByteString(), isSecret = true)
-        sink.write(ref = certificates, bytes = chain.encodeToByteString(), isSecret = false)
+        val written = write(ref = key, bytes = keyText.encodeToByteString(), isSecret = true)
+        if (written is Outcome.Failure) return written
+        return write(ref = certificates, bytes = chain.encodeToByteString(), isSecret = false)
     }
 
     /**
@@ -104,4 +112,12 @@ public class MaterialWriter(public val crypto: Crypto, public val sink: Material
      * @since 1.0.0
      */
     override fun toString(): String = "MaterialWriter($sink)"
+
+    private suspend fun write(ref: MaterialRef, bytes: ByteString, isSecret: Boolean): Outcome<Unit, MaterialFailure> {
+        val written = attempted { sink.write(ref = ref, bytes = bytes, isSecret = isSecret) }
+        return when (written.isSuccess) {
+            true -> Outcome.Success(Unit)
+            false -> Outcome.Failure(MaterialFailure.Unavailable)
+        }
+    }
 }

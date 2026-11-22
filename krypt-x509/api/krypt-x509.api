@@ -90,25 +90,31 @@ public final class com/davils/krypt/x509/X509Limits {
 	public static final field Companion Lcom/davils/krypt/x509/X509Limits$Companion;
 	public static final field DEFAULT_MAXIMUM_BYTES I
 	public static final field DEFAULT_MAXIMUM_EXTENSIONS I
+	public static final field DEFAULT_MAXIMUM_INTERMEDIATES I
 	public static final field DEFAULT_MAXIMUM_NAMES I
 	public static final field DEFAULT_MAXIMUM_PATH_ATTEMPTS I
 	public static final field DEFAULT_MAXIMUM_PATH_LENGTH I
+	public static final field DEFAULT_MAXIMUM_POLICY_NODES I
 	public static final field DEFAULT_MAXIMUM_REVOKED_ENTRIES I
 	public static final field HARD_MAXIMUM_BYTES I
 	public static final field HARD_MAXIMUM_EXTENSIONS I
+	public static final field HARD_MAXIMUM_INTERMEDIATES I
 	public static final field HARD_MAXIMUM_NAMES I
 	public static final field HARD_MAXIMUM_PATH_ATTEMPTS I
 	public static final field HARD_MAXIMUM_PATH_LENGTH I
+	public static final field HARD_MAXIMUM_POLICY_NODES I
 	public static final field HARD_MAXIMUM_REVOKED_ENTRIES I
 	public fun <init> ()V
-	public fun <init> (IIIIII)V
-	public synthetic fun <init> (IIIIIIILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (IIIIIIII)V
+	public synthetic fun <init> (IIIIIIIIILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getMaximumBytes ()I
 	public final fun getMaximumExtensions ()I
+	public final fun getMaximumIntermediates ()I
 	public final fun getMaximumNames ()I
 	public final fun getMaximumPathAttempts ()I
 	public final fun getMaximumPathLength ()I
+	public final fun getMaximumPolicyNodes ()I
 	public final fun getMaximumRevokedEntries ()I
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
@@ -147,6 +153,7 @@ public final class com/davils/krypt/x509/crl/RevocationList {
 	public final fun getSignatureAlgorithm ()Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;
 	public final fun getTbs ()Lkotlinx/io/bytestring/ByteString;
 	public final fun getThisUpdate ()Lkotlin/time/Instant;
+	public final fun getUnknownCritical ()Ljava/util/List;
 	public fun hashCode ()I
 	public final fun isDelta ()Z
 	public fun toString ()Ljava/lang/String;

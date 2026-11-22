@@ -42,6 +42,7 @@ import kotlinx.io.bytestring.ByteString
 
 private const val UNKNOWN_REASON: Long = 7L
 private const val HOST: String = "example.com"
+private val UNKNOWN: ObjectIdentifier = ObjectIdentifier.of("1.3.6.1.4.1.99999.9")
 
 private val ALGORITHM: ByteString = AlgorithmIdentifiers.encode(SignatureAlgorithm.EcdsaSha256)
 
@@ -106,7 +107,7 @@ class HostileListsTest : FunSpec({
         revocationLists.decodePem("-----BEGIN X509 CRL-----\n!!\n").failureOrNull() shouldBe X509Failure.Malformed
     }
 
-    test("indirect entries and relative point names are read") {
+    test("indirect entries are read and relative point names are refused") {
         val issuer = der { sequence { ia5String(HOST, Tag.context(number = 2, isConstructed = false)) } }
         val indirect = list(body = entry(extension(ExtensionIds.CertificateIssuer, issuer)))
         val outcome114 = revocationLists.decode(
@@ -123,11 +124,22 @@ class HostileListsTest : FunSpec({
                 ) { constructed(Tag.context(number = 1, isConstructed = true)) { sequence { } } }
             },
         )
-        revocationLists
-            .decode(relative)
-            .getOrNull()
-            ?.issuingDistributionPoint
-            ?.names shouldBe emptyList()
+        revocationLists.decode(relative).getOrNull() shouldBe null
         utf8(HOST).size shouldBe HOST.length
+    }
+
+    test("unknown critical extensions of entries are reported") {
+        val critical: DerWriter.() -> Unit = {
+            sequence {
+                sequence {
+                    objectIdentifier(UNKNOWN)
+                    boolean(true)
+                    octetString(der { nullValue() })
+                }
+            }
+        }
+        val decoded = revocationLists.decode(list(body = entry(critical))).getOrNull()
+        decoded?.unknownCritical shouldBe listOf(UNKNOWN)
+        revocationLists.decode(list()).getOrNull()?.unknownCritical shouldBe emptyList()
     }
 })

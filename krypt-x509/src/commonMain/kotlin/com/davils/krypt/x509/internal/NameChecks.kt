@@ -22,6 +22,7 @@ import com.davils.krypt.x509.name.AttributeTypes
 import com.davils.krypt.x509.name.GeneralName
 
 private const val SCHEME: String = "://"
+private const val WILDCARD: String = "*."
 private val HOST_ENDS: CharArray = charArrayOf('/', '?', '#')
 
 internal object NameChecks {
@@ -39,19 +40,50 @@ internal object NameChecks {
     }
 
     fun dnsMatches(name: String, base: String): Boolean {
-        val host = name.lowercase().trimEnd('.')
-        val domain = base.lowercase()
+        val host = hostOf(name)
+        val domain = hostOf(base)
         val isSubdomainOnly = domain.startsWith('.')
         val isExact = host == domain && !isSubdomainOnly
         val isBelow = host.endsWith(listOf(".$domain", domain)[isSubdomainOnly.compareTo(false)])
         return domain.isEmpty() || isExact || isBelow
     }
 
+    private fun hostOf(name: String): String = name.lowercase().trimEnd('.')
+
     private fun isWithin(name: GeneralName, constraint: NameConstraints): Boolean {
         val permitted = constraint.permitted.filter { base -> base::class == name::class }
-        val isPermitted = permitted.isEmpty() || constraint.permitted.any { base -> matches(name, base) }
-        val isExcluded = constraint.excluded.any { base -> matches(name, base) }
+        val isPermitted = permitted.isEmpty() || constraint.permitted.any { base -> covers(name, base) }
+        val isExcluded = constraint.excluded.any { base -> touches(name, base) }
         return isPermitted && !isExcluded
+    }
+
+    private fun covers(name: GeneralName, base: GeneralName): Boolean {
+        val scope = wildcardScopeOf(name)
+        val domain = subtreeOf(base)
+        val isScopeCovered = scope != null && domain != null && dnsMatches(name = scope, base = domain)
+        return listOf(matches(name, base), isScopeCovered)[(scope != null).compareTo(false)]
+    }
+
+    private fun touches(name: GeneralName, base: GeneralName): Boolean {
+        val scope = wildcardScopeOf(name)
+        val domain = subtreeOf(base)
+        val isHost = base is GeneralName.Dns && !base.name.startsWith('.')
+        val parent = domain?.substringAfter(delimiter = '.', missingDelimiterValue = "")
+        val isChildOfScope = isHost && parent == scope
+        val isWithinScope = scope != null && domain != null && dnsMatches(name = scope, base = domain)
+        val isScopeTouched = isWithinScope || isChildOfScope
+        return matches(name, base) || isScopeTouched
+    }
+
+    private fun subtreeOf(base: GeneralName): String? {
+        val dns = base as? GeneralName.Dns ?: return null
+        return hostOf(dns.name).removePrefix(".")
+    }
+
+    private fun wildcardScopeOf(name: GeneralName): String? {
+        val dns = name as? GeneralName.Dns ?: return null
+        val host = hostOf(dns.name)
+        return host.takeIf { found -> found.startsWith(WILDCARD) }?.removePrefix(WILDCARD)
     }
 
     private fun matches(name: GeneralName, base: GeneralName): Boolean = when (name) {
@@ -75,9 +107,9 @@ internal object NameChecks {
     private fun uriMatches(uri: String, base: String): Boolean {
         val authority = uri.substringAfter(delimiter = SCHEME, missingDelimiterValue = "").substringBefore(HOST_ENDS)
         val hostAndPort = authority.substringAfterLast('@')
-        val host = hostAndPort.substringBeforeLast(':').lowercase()
+        val host = hostOf(hostAndPort.substringBeforeLast(':'))
         val isName = host.isNotEmpty() && !host.startsWith('[')
-        val domain = base.lowercase()
+        val domain = hostOf(base)
         val isMatch = listOf(host == domain, host.endsWith(domain))[domain.startsWith('.').compareTo(false)]
         return isName && isMatch
     }

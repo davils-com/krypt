@@ -24,7 +24,13 @@ package com.davils.krypt.x509
  * @property maximumNames how many names a name or an extension holds at most.
  * @property maximumRevokedEntries how many entries a revocation list holds at most.
  * @property maximumPathLength how many certificates a path has at most, the anchor not counted.
- * @property maximumPathAttempts how many candidate issuers path building tries at most.
+ * @property maximumPathAttempts how much work path building spends at most on one validation: every candidate issuer,
+ *   every signature verification and every revocation check counts as one unit, and the search stops when the units
+ *   are spent.
+ * @property maximumIntermediates how many distinct certificates besides the end entity path building considers at
+ *   most; a validation with more is refused.
+ * @property maximumPolicyNodes how many nodes the policy tree of RFC 5280, section 6.1, holds at most; a path whose
+ *   tree grows larger is refused.
  * @constructor Checks the limits against their hard ceilings.
  * @throws IllegalArgumentException if a limit is not positive or exceeds its hard ceiling.
  * @since 1.0.0
@@ -36,6 +42,8 @@ public class X509Limits(
     public val maximumRevokedEntries: Int = DEFAULT_MAXIMUM_REVOKED_ENTRIES,
     public val maximumPathLength: Int = DEFAULT_MAXIMUM_PATH_LENGTH,
     public val maximumPathAttempts: Int = DEFAULT_MAXIMUM_PATH_ATTEMPTS,
+    public val maximumIntermediates: Int = DEFAULT_MAXIMUM_INTERMEDIATES,
+    public val maximumPolicyNodes: Int = DEFAULT_MAXIMUM_POLICY_NODES,
 ) {
     private val values: List<Int>
         get() = listOf(
@@ -45,6 +53,8 @@ public class X509Limits(
             maximumRevokedEntries,
             maximumPathLength,
             maximumPathAttempts,
+            maximumIntermediates,
+            maximumPolicyNodes,
         )
 
     init {
@@ -60,7 +70,13 @@ public class X509Limits(
             "A path has 1 to $HARD_MAXIMUM_PATH_LENGTH certificates"
         }
         require(maximumPathAttempts in 1..HARD_MAXIMUM_PATH_ATTEMPTS) {
-            "Path building tries 1 to $HARD_MAXIMUM_PATH_ATTEMPTS issuers"
+            "Path building spends 1 to $HARD_MAXIMUM_PATH_ATTEMPTS units of work"
+        }
+        require(maximumIntermediates in 1..HARD_MAXIMUM_INTERMEDIATES) {
+            "Path building considers 1 to $HARD_MAXIMUM_INTERMEDIATES intermediates"
+        }
+        require(maximumPolicyNodes in 1..HARD_MAXIMUM_POLICY_NODES) {
+            "A policy tree has 1 to $HARD_MAXIMUM_POLICY_NODES nodes"
         }
     }
 
@@ -89,7 +105,8 @@ public class X509Limits(
      */
     override fun toString(): String = "X509Limits(maximumBytes=$maximumBytes, maximumExtensions=$maximumExtensions, " +
         "maximumNames=$maximumNames, maximumRevokedEntries=$maximumRevokedEntries, " +
-        "maximumPathLength=$maximumPathLength, maximumPathAttempts=$maximumPathAttempts)"
+        "maximumPathLength=$maximumPathLength, maximumPathAttempts=$maximumPathAttempts, " +
+        "maximumIntermediates=$maximumIntermediates, maximumPolicyNodes=$maximumPolicyNodes)"
 
     /**
      * The defaults and the hard ceilings.
@@ -168,18 +185,46 @@ public class X509Limits(
         public const val HARD_MAXIMUM_PATH_LENGTH: Int = 64
 
         /**
-         * The default number of issuers path building tries.
+         * The default units of work of path building.
          *
          * @since 1.0.0
          */
         public const val DEFAULT_MAXIMUM_PATH_ATTEMPTS: Int = 256
 
         /**
-         * The hard ceiling of the number of issuers path building tries.
+         * The hard ceiling of the units of work of path building.
          *
          * @since 1.0.0
          */
         public const val HARD_MAXIMUM_PATH_ATTEMPTS: Int = 65_536
+
+        /**
+         * The default number of intermediates path building considers.
+         *
+         * @since 1.0.0
+         */
+        public const val DEFAULT_MAXIMUM_INTERMEDIATES: Int = 32
+
+        /**
+         * The hard ceiling of the number of intermediates path building considers.
+         *
+         * @since 1.0.0
+         */
+        public const val HARD_MAXIMUM_INTERMEDIATES: Int = 1_024
+
+        /**
+         * The default number of nodes of a policy tree.
+         *
+         * @since 1.0.0
+         */
+        public const val DEFAULT_MAXIMUM_POLICY_NODES: Int = 1_024
+
+        /**
+         * The hard ceiling of the number of nodes of a policy tree.
+         *
+         * @since 1.0.0
+         */
+        public const val HARD_MAXIMUM_POLICY_NODES: Int = 65_536
 
         /**
          * The default limits.

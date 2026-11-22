@@ -19,6 +19,7 @@ package com.davils.krypt.ocsp
 import com.davils.kore.core.outcome.failureOrNull
 import com.davils.kore.core.outcome.getOrNull
 import com.davils.krypt.ocsp.fixture.Scenario
+import com.davils.krypt.ocsp.internal.RequestParts
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import kotlinx.io.bytestring.ByteString
@@ -32,7 +33,7 @@ private val SPECIAL: ByteString = ByteString(byteArrayOf(PLUS_SLASH, ALL_ONES))
 
 class EncodingsTest : FunSpec({
     test("GET requests escape their Base64") {
-        val special = OcspRequest(certIds = emptyList(), nonce = null, encoded = SPECIAL)
+        val special = OcspRequest(RequestParts(certIds = emptyList(), nonce = null, encoded = SPECIAL))
         OcspEncodings.pathSegment(special) shouldBe ESCAPED
         OcspEncodings.getUrl(RESPONDER, special) shouldBe "$RESPONDER/$ESCAPED"
         OcspEncodings.getUrl("$RESPONDER/", special) shouldBe "$RESPONDER/$ESCAPED"

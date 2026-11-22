@@ -17,6 +17,7 @@
 package com.davils.krypt.x509.crl
 
 import com.davils.krypt.asn1.DerInteger
+import com.davils.krypt.asn1.ObjectIdentifier
 import com.davils.krypt.core.algorithm.SignatureAlgorithm
 import com.davils.krypt.x509.extension.Extensions
 import com.davils.krypt.x509.internal.CrlParts
@@ -95,6 +96,14 @@ public class RevocationList internal constructor(parts: CrlParts, public val sig
      * @since 1.0.0
      */
     public val extensions: Extensions = parts.extensions
+
+    /**
+     * The identifiers of the critical extensions of the list and of its entries that krypt does not know; RFC 5280
+     * forbids using a list with one of them, so [com.davils.krypt.x509.path.CrlRevocationChecker] ignores it.
+     *
+     * @since 1.0.0
+     */
+    public val unknownCritical: List<ObjectIdentifier> = parts.unknownCritical
 
     /**
      * The revoked certificates, sorted by serial number.

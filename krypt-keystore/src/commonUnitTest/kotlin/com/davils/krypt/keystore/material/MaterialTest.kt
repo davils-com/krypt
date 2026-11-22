@@ -178,4 +178,28 @@ class MaterialTest : FunSpec({
         IdentitySpec.PemBundle(CHAIN).key shouldBe CHAIN
         IdentitySpec.PemBundle(CHAIN).toString() shouldContain "encrypted=false"
     }
+
+    test("failing sources and sinks are contained") {
+        val (server, _) = identity()
+        val failingSource = MaterialLoader(crypto, MaterialSource { _, _ -> error("source down") })
+        failingSource.certificates(CHAIN).failureOrNull() shouldBe MaterialFailure.Unavailable
+        val failingSink = MaterialWriter(crypto, MaterialSink { _, _, _ -> error("sink down") })
+        val pkcs12 = failingSink.writePkcs12(ref = STORE, identity = server, password = password())
+        pkcs12.failureOrNull() shouldBe MaterialFailure.Unavailable
+        val pem = failingSink.writePem(certificates = CHAIN, key = KEY, identity = server)
+        pem.failureOrNull() shouldBe MaterialFailure.Unavailable
+        val material = MemoryMaterial()
+        var writes = 0
+        val chainFailing = MaterialWriter(crypto) { ref, bytes, isSecret ->
+            writes += 1
+            check(isSecret) { "chain down" }
+            material.write(ref, bytes, isSecret)
+        }
+        val partial = chainFailing.writePem(certificates = CHAIN, key = KEY, identity = server)
+        partial.failureOrNull() shouldBe MaterialFailure.Unavailable
+        writes shouldBe 2
+        material.stored.keys shouldBe setOf(KEY)
+        val complete = MaterialWriter(crypto, material).writePem(certificates = CHAIN, key = KEY, identity = server)
+        complete.getOrNull() shouldBe Unit
+    }
 })

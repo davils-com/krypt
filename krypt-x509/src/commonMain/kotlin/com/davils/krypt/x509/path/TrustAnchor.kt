@@ -24,8 +24,9 @@ import com.davils.krypt.x509.name.DistinguishedName
 /**
  * A trust anchor: a name and a public key the application trusts, usually taken from a root certificate.
  *
- * Only the name, the key and the optional name constraints of an anchor count; the validity and the other extensions
- * of its certificate are not checked, as RFC 5280 prescribes.
+ * Only the name, the key and the optional name constraints of an anchor count when it issues a path; the validity and
+ * the other extensions of its certificate are not checked, as RFC 5280 prescribes. A certificate presented as the end
+ * entity that equals the certificate of an anchor is still checked for its validity, its purpose and its key usage.
  *
  * @property name the name of the anchor.
  * @property publicKey the public key.

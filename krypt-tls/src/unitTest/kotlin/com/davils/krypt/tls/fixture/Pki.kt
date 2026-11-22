@@ -52,7 +52,10 @@ internal class Pki private constructor(
     suspend fun identity(profile: CertificateProfile, vararg names: GeneralName): Identity {
         val pair = crypto.keys.generate(KeyType.P256)
         val request = IssuanceRequest(
-            subject = distinguishedName { commonName(LEAF) },
+            subject = distinguishedName {
+                organization(LEAF)
+                if (names.isEmpty()) commonName(LEAF)
+            },
             publicKey = pair.publicKey,
             profile = profile,
             names = names.toList(),

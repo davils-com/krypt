@@ -23,6 +23,8 @@ package com.davils.krypt.keystore
  * @property maximumEntries how many bags and contents a key store holds at most.
  * @property maximumMacIterations the most iterations the classic MAC of a PKCS #12 file may ask for; the iterations
  *   of PBKDF2 are bounded by the crypto policy.
+ * @property maximumPasswordIterations the most iterations all password derivations of one PKCS #12 file may ask for
+ *   together: the MAC, every encrypted content and every shrouded key.
  * @constructor Checks the limits against their hard ceilings.
  * @throws IllegalArgumentException if a limit is not positive or exceeds its hard ceiling.
  * @since 1.0.0
@@ -31,12 +33,16 @@ public class KeystoreLimits(
     public val maximumBytes: Int = DEFAULT_MAXIMUM_BYTES,
     public val maximumEntries: Int = DEFAULT_MAXIMUM_ENTRIES,
     public val maximumMacIterations: Int = DEFAULT_MAXIMUM_MAC_ITERATIONS,
+    public val maximumPasswordIterations: Int = DEFAULT_MAXIMUM_PASSWORD_ITERATIONS,
 ) {
     init {
         require(maximumBytes in 1..HARD_MAXIMUM_BYTES) { "A key store has 1 to $HARD_MAXIMUM_BYTES bytes" }
         require(maximumEntries in 1..HARD_MAXIMUM_ENTRIES) { "A key store has 1 to $HARD_MAXIMUM_ENTRIES entries" }
         require(maximumMacIterations in 1..HARD_MAXIMUM_MAC_ITERATIONS) {
             "A MAC asks for 1 to $HARD_MAXIMUM_MAC_ITERATIONS iterations"
+        }
+        require(maximumPasswordIterations in 1..HARD_MAXIMUM_PASSWORD_ITERATIONS) {
+            "A key store asks for 1 to $HARD_MAXIMUM_PASSWORD_ITERATIONS iterations"
         }
     }
 
@@ -64,9 +70,10 @@ public class KeystoreLimits(
      * @since 1.0.0
      */
     override fun toString(): String = "KeystoreLimits(maximumBytes=$maximumBytes, maximumEntries=$maximumEntries, " +
-        "maximumMacIterations=$maximumMacIterations)"
+        "maximumMacIterations=$maximumMacIterations, maximumPasswordIterations=$maximumPasswordIterations)"
 
-    private fun values(): List<Int> = listOf(maximumBytes, maximumEntries, maximumMacIterations)
+    private fun values(): List<Int> =
+        listOf(maximumBytes, maximumEntries, maximumMacIterations, maximumPasswordIterations)
 
     /**
      * The defaults and the hard ceilings.
@@ -115,6 +122,21 @@ public class KeystoreLimits(
          * @since 1.0.0
          */
         public const val HARD_MAXIMUM_MAC_ITERATIONS: Int = 10_000_000
+
+        /**
+         * The default iterations of all password derivations of one file: about 33 derivations at the minimum of the
+         * modern policy.
+         *
+         * @since 1.0.0
+         */
+        public const val DEFAULT_MAXIMUM_PASSWORD_ITERATIONS: Int = 20_000_000
+
+        /**
+         * The hard ceiling of the iterations of all password derivations of one file.
+         *
+         * @since 1.0.0
+         */
+        public const val HARD_MAXIMUM_PASSWORD_ITERATIONS: Int = 1_000_000_000
 
         /**
          * The default limits.

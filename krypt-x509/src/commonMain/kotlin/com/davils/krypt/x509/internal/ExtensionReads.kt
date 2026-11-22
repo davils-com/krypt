@@ -76,7 +76,9 @@ internal object ExtensionReads {
     )
 
     fun DerReader.readBasicConstraints(): BasicConstraints = readSequence {
-        val isCa = Tag.Boolean.takeIf { tag -> isNext(tag) }?.let { readBoolean() } == true
+        val isEncodedCa = Tag.Boolean.takeIf { tag -> isNext(tag) }?.let { readBoolean() }
+        if (isEncodedCa == false) refuse(DerFailure.InvalidValue, "no encoded default of the authority flag")
+        val isCa = isEncodedCa == true
         val pathLength = Tag.Integer.takeIf { tag -> isNext(tag) }?.let { readInt(0..Int.MAX_VALUE) }
         if (pathLength != null && !isCa) refuse(DerFailure.InvalidValue, "a path length of an authority only")
         BasicConstraints(isCa = isCa, pathLength = pathLength)

@@ -18,6 +18,8 @@ package com.davils.krypt.x509.path
 
 import com.davils.krypt.asn1.ObjectIdentifier
 import com.davils.krypt.x509.Certificate
+import com.davils.krypt.x509.internal.PathRefusal
+import com.davils.krypt.x509.internal.ValidPath
 
 /**
  * The result of a path validation.
@@ -35,16 +37,33 @@ public sealed interface PathValidation {
     /**
      * A valid path.
      *
-     * @property path the certificates, the end entity first, the anchor not included.
-     * @property anchor the trust anchor.
-     * @property policies the certificate policies the path is valid for, or an empty set if it is valid for none.
+     * Only [PathValidator] creates one: its constructor takes a type of an internal package that the Java module does
+     * not export, so the result cannot be forged.
+     *
      * @since 1.0.0
      */
-    public class Valid internal constructor(
-        public val path: List<Certificate>,
-        public val anchor: TrustAnchor,
-        public val policies: Set<ObjectIdentifier>,
-    ) : PathValidation {
+    public class Valid internal constructor(parts: ValidPath) : PathValidation {
+        /**
+         * The certificates, the end entity first, the anchor not included.
+         *
+         * @since 1.0.0
+         */
+        public val path: List<Certificate> = parts.path
+
+        /**
+         * The trust anchor.
+         *
+         * @since 1.0.0
+         */
+        public val anchor: TrustAnchor = parts.anchor
+
+        /**
+         * The certificate policies the path is valid for, or an empty set if it is valid for none.
+         *
+         * @since 1.0.0
+         */
+        public val policies: Set<ObjectIdentifier> = parts.policies
+
         override val isValid: Boolean get() = true
 
         /**
@@ -59,14 +78,25 @@ public sealed interface PathValidation {
     /**
      * An invalid path.
      *
-     * @property failure why, for the path that came closest to an anchor.
-     * @property certificate the certificate that failed, or the end entity if no path was found.
+     * Only [PathValidator] creates one, like [Valid].
+     *
      * @since 1.0.0
      */
-    public class Invalid internal constructor(
-        public val failure: PathFailure,
-        public val certificate: Certificate,
-    ) : PathValidation {
+    public class Invalid internal constructor(refusal: PathRefusal) : PathValidation {
+        /**
+         * Why, for the path that came closest to an anchor.
+         *
+         * @since 1.0.0
+         */
+        public val failure: PathFailure = refusal.failure
+
+        /**
+         * The certificate that failed, or the end entity if no path was found.
+         *
+         * @since 1.0.0
+         */
+        public val certificate: Certificate = refusal.certificate
+
         override val isValid: Boolean get() = false
 
         /**

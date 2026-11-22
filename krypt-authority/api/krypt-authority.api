@@ -2,8 +2,8 @@ public final class com/davils/krypt/authority/CertificateAuthority {
 	public static final field Companion Lcom/davils/krypt/authority/CertificateAuthority$Companion;
 	public fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/primitive/signature/Signer;Lcom/davils/krypt/authority/store/AuthorityRepository;Lcom/davils/krypt/authority/policy/IssuancePolicy;)V
 	public synthetic fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/primitive/signature/Signer;Lcom/davils/krypt/authority/store/AuthorityRepository;Lcom/davils/krypt/authority/policy/IssuancePolicy;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public final fun deltaRevocationList-8Mi8wO0 (Lcom/davils/krypt/x509/crl/RevocationList;JLkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public static synthetic fun deltaRevocationList-8Mi8wO0$default (Lcom/davils/krypt/authority/CertificateAuthority;Lcom/davils/krypt/x509/crl/RevocationList;JLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun deltaRevocationList-vLdBGDU (Lcom/davils/krypt/x509/crl/RevocationList;JJLkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun deltaRevocationList-vLdBGDU$default (Lcom/davils/krypt/authority/CertificateAuthority;Lcom/davils/krypt/x509/crl/RevocationList;JJLkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 	public final fun enroll-BZiP2OM (Lcom/davils/krypt/x509/request/CertificationRequest;Lcom/davils/krypt/authority/profile/CertificateProfile;Lkotlin/time/Duration;Lcom/davils/krypt/x509/extension/NameConstraints;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static synthetic fun enroll-BZiP2OM$default (Lcom/davils/krypt/authority/CertificateAuthority;Lcom/davils/krypt/x509/request/CertificationRequest;Lcom/davils/krypt/authority/profile/CertificateProfile;Lkotlin/time/Duration;Lcom/davils/krypt/x509/extension/NameConstraints;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 	public final fun getCertificate ()Lcom/davils/krypt/x509/Certificate;
@@ -23,6 +23,7 @@ public final class com/davils/krypt/authority/CertificateAuthority {
 public final class com/davils/krypt/authority/CertificateAuthority$Companion {
 	public final fun createRoot-gwCluXo (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/primitive/signature/Signer;Lcom/davils/krypt/x509/name/DistinguishedName;JLjava/lang/Integer;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static synthetic fun createRoot-gwCluXo$default (Lcom/davils/krypt/authority/CertificateAuthority$Companion;Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/primitive/signature/Signer;Lcom/davils/krypt/x509/name/DistinguishedName;JLjava/lang/Integer;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun getDEFAULT_OVERLAP-UwyO8pc ()J
 }
 
 public final class com/davils/krypt/authority/IssuanceFailure : java/lang/Enum {
@@ -30,6 +31,7 @@ public final class com/davils/krypt/authority/IssuanceFailure : java/lang/Enum {
 	public static final field KeyNotPermitted Lcom/davils/krypt/authority/IssuanceFailure;
 	public static final field NameNotPermitted Lcom/davils/krypt/authority/IssuanceFailure;
 	public static final field ProfileNotPermitted Lcom/davils/krypt/authority/IssuanceFailure;
+	public static final field RepositoryUnavailable Lcom/davils/krypt/authority/IssuanceFailure;
 	public static final field SerialConflict Lcom/davils/krypt/authority/IssuanceFailure;
 	public static final field ValidityNotPermitted Lcom/davils/krypt/authority/IssuanceFailure;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
@@ -54,6 +56,7 @@ public final class com/davils/krypt/authority/IssuanceRequest {
 public final class com/davils/krypt/authority/RevocationFailure : java/lang/Enum {
 	public static final field AlreadyRevoked Lcom/davils/krypt/authority/RevocationFailure;
 	public static final field ReasonNotPermitted Lcom/davils/krypt/authority/RevocationFailure;
+	public static final field RepositoryUnavailable Lcom/davils/krypt/authority/RevocationFailure;
 	public static final field UnknownCertificate Lcom/davils/krypt/authority/RevocationFailure;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/authority/RevocationFailure;
@@ -66,11 +69,13 @@ public final class com/davils/krypt/authority/policy/IssuancePolicy : com/davils
 	public final fun getCrlUrls ()Ljava/util/List;
 	public final fun getDnsDomains ()Ljava/util/List;
 	public final fun getEmailDomains ()Ljava/util/List;
+	public final fun getFixedAttributes ()Ljava/util/Map;
 	public final fun getIssuerUrls ()Ljava/util/List;
 	public final fun getKeyFamilies ()Ljava/util/Set;
 	public final fun getMaximumValidity-UwyO8pc ()J
 	public final fun getOcspUrls ()Ljava/util/List;
 	public final fun getPolicies ()Ljava/util/List;
+	public final fun getSubjectAttributes ()Ljava/util/Set;
 	public final fun getUriPrefixes ()Ljava/util/List;
 	public final fun isIpAddressAllowed ()Z
 	public final fun isWildcardAllowed ()Z
@@ -87,6 +92,7 @@ public final class com/davils/krypt/authority/policy/IssuancePolicyBuilder : com
 	public final fun crlUrls ([Ljava/lang/String;)V
 	public final fun dnsDomains ([Ljava/lang/String;)V
 	public final fun emailDomains ([Ljava/lang/String;)V
+	public final fun fixedAttribute (Lcom/davils/krypt/asn1/ObjectIdentifier;Ljava/lang/String;)V
 	public final fun getBackdate-UwyO8pc ()J
 	public final fun getMaximumValidity-UwyO8pc ()J
 	public final fun isIpAddressAllowed ()Z
@@ -99,6 +105,7 @@ public final class com/davils/krypt/authority/policy/IssuancePolicyBuilder : com
 	public final fun setIpAddressAllowed (Z)V
 	public final fun setMaximumValidity-LRDsOJo (J)V
 	public final fun setWildcardAllowed (Z)V
+	public final fun subjectAttributes ([Lcom/davils/krypt/asn1/ObjectIdentifier;)V
 	public final fun uriPrefixes ([Ljava/lang/String;)V
 }
 

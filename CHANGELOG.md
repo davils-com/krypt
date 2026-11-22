@@ -115,6 +115,17 @@ kollect 1.0.0. The code comes from the security library of an internal Davils pr
 
 ### Security
 
+- **PKI hardening** (X.509, key stores, OCSP, CT, authority): path building is bounded in work, deduplicates and
+  orders its candidates and refuses more than `maximumIntermediates`; certificate policies run through the policy
+  tree of RFC 5280 within `maximumPolicyNodes`; a revocation list counts only where its distribution point covers
+  the certificate, a revocation in any applicable list wins, and lists with unknown critical extensions are not used;
+  name constraints cover every name a wildcard stands for and ignore trailing dots; a trust anchor as the end entity
+  is checked for validity, purpose and key usage, and the key usage of every end entity must suit `serverAuth` and
+  `clientAuth`; explicitly encoded DER defaults are refused; the password work of a PKCS #12 file is bounded by
+  `maximumPasswordIterations`; sources, sinks and repositories of the application are contained; the authority
+  checks the subject of a request against `subjectAttributes` and `fixedAttribute` of its policy, validates DNS
+  names, wildcards and URI prefixes strictly and lets delta lists reach back `DEFAULT_OVERLAP`; and the
+  constructors of decoded values and results are no longer reachable from Java.
 - **Core, ASN.1 and primitives hardened after an audit**: a refusal of JCA or WebCrypto for a key or an input, such as
   an HPKE encapsulation of small order or an RSA key JCA does not take, is the documented failure (null,
   `Verification.Invalid` or a `CryptoException` without the message of the platform), never an exception of the

@@ -62,7 +62,7 @@ internal object RequestCodec {
         }
         readOptionalExplicit(SIGNATURE) { readElement(Tag.Sequence) }
         if (certIds.isEmpty()) refuse(DerFailure.InvalidValue, "at least one certificate")
-        OcspRequest(certIds = certIds, nonce = nonce, encoded = encoded)
+        OcspRequest(RequestParts(certIds = certIds, nonce = nonce, encoded = encoded))
     }
 
     private fun DerReader.readSingleRequest(limits: OcspLimits): CertId = readSequence {

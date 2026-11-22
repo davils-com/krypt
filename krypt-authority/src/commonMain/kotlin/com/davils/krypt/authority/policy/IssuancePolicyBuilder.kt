@@ -49,6 +49,10 @@ public class IssuancePolicyBuilder internal constructor() : ValidatingBuilder<Is
 
     internal val policies: MutableList<ObjectIdentifier> = mutableListOf()
 
+    internal val subjectAttributes: MutableSet<ObjectIdentifier> = IssuancePolicy.DEFAULT_ATTRIBUTES.toMutableSet()
+
+    internal val fixedAttributes: MutableMap<ObjectIdentifier, String> = mutableMapOf()
+
     /**
      * See [IssuancePolicy.maximumValidity]; 397 days by default.
      *
@@ -180,6 +184,31 @@ public class IssuancePolicyBuilder internal constructor() : ValidatingBuilder<Is
     public fun policies(vararg ids: ObjectIdentifier) {
         checkOpen()
         policies += ids
+    }
+
+    /**
+     * Permits the attribute types [types] in the subject, and no others; see [IssuancePolicy.subjectAttributes].
+     *
+     * @param types the attribute types, such as [com.davils.krypt.x509.name.AttributeTypes.CommonName].
+     * @since 1.0.0
+     */
+    public fun subjectAttributes(vararg types: ObjectIdentifier) {
+        checkOpen()
+        subjectAttributes.clear()
+        subjectAttributes += types
+    }
+
+    /**
+     * Requires the attribute [type] of the subject, when present, to have [value]; see
+     * [IssuancePolicy.fixedAttributes].
+     *
+     * @param type the attribute type, such as [com.davils.krypt.x509.name.AttributeTypes.Organization].
+     * @param value the value it must have.
+     * @since 1.0.0
+     */
+    public fun fixedAttribute(type: ObjectIdentifier, value: String) {
+        checkOpen()
+        fixedAttributes[type] = value
     }
 
     override fun assemble(): IssuancePolicy = IssuancePolicy(this)

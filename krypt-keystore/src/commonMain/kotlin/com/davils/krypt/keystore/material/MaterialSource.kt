@@ -26,9 +26,9 @@ public fun interface MaterialSource {
     /**
      * Reads the material under [ref].
      *
-     * A source should stop reading past [maximumBytes] and may answer with more, which krypt then refuses. Exceptions
-     * are not caught by krypt: a source reports what it can as [MaterialRead.Missing] or
-     * [MaterialRead.Unavailable].
+     * A source should stop reading past [maximumBytes] and may answer with more, which krypt then refuses. A source
+     * reports what it can as [MaterialRead.Missing] or [MaterialRead.Unavailable]; a failure it throws is contained by
+     * krypt and counts as [MaterialRead.Unavailable].
      *
      * @param ref the reference.
      * @param maximumBytes the most bytes krypt accepts.

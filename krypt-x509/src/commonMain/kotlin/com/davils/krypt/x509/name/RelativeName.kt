@@ -16,15 +16,19 @@
 
 package com.davils.krypt.x509.name
 
+import com.davils.krypt.x509.internal.RelativeNameParts
+
 /**
  * One relative distinguished name: one attribute, or several for a multi-valued name such as `CN=Ada+UID=42`.
  *
  * @property attributes the attributes, in the order of their encoding.
  * @since 1.0.0
  */
-public class RelativeName internal constructor(public val attributes: List<AttributeValue>) {
+public class RelativeName private constructor(public val attributes: List<AttributeValue>) {
     private val sorted: List<String>
         get() = attributes.map { attribute -> "${attribute.type.dotted}=${attribute.normalized}" }.sorted()
+
+    internal constructor(parts: RelativeNameParts) : this(parts.attributes)
 
     /**
      * Compares the attributes as a set, by RFC 5280.

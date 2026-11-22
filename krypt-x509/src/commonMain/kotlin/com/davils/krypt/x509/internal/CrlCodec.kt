@@ -23,6 +23,7 @@ import com.davils.krypt.asn1.Der
 import com.davils.krypt.asn1.DerFailure
 import com.davils.krypt.asn1.DerReader
 import com.davils.krypt.asn1.DerWriter
+import com.davils.krypt.asn1.ObjectIdentifier
 import com.davils.krypt.asn1.Tag
 import com.davils.krypt.asn1.readGeneralizedTime
 import com.davils.krypt.asn1.readInt
@@ -44,7 +45,6 @@ import com.davils.krypt.x509.internal.ExtensionReads.bitStringOf
 import com.davils.krypt.x509.internal.ExtensionWrites.writeExtensions
 import com.davils.krypt.x509.internal.NameCodec.readGeneralNames
 import com.davils.krypt.x509.internal.NameCodec.readName
-import com.davils.krypt.x509.name.GeneralName
 import kotlinx.io.bytestring.ByteString
 
 private const val V2: Int = 1
@@ -59,6 +59,19 @@ private const val FULL_NAME: Int = 0
 private const val MAXIMUM_REASON: Int = 10
 private val TRUE: ByteString = ByteString(-1)
 private val TIMES: Set<Tag> = setOf(Tag.UtcTime, Tag.GeneralizedTime)
+private val KNOWN_LIST: Set<ObjectIdentifier> = setOf(
+    ExtensionIds.CrlNumber,
+    ExtensionIds.DeltaCrlIndicator,
+    ExtensionIds.IssuingDistributionPoint,
+    ExtensionIds.AuthorityKeyIdentifier,
+    ExtensionIds.IssuerAlternativeName,
+    ExtensionIds.FreshestCrl,
+)
+private val KNOWN_ENTRY: Set<ObjectIdentifier> = setOf(
+    ExtensionIds.ReasonCode,
+    ExtensionIds.InvalidityDate,
+    ExtensionIds.CertificateIssuer,
+)
 
 internal object CrlCodec {
     fun DerReader.readRevocationList(encoded: ByteString, limits: X509Limits): RevocationList = readSequence {
@@ -75,7 +88,14 @@ internal object CrlCodec {
         val isTime = inner.peekTag() in TIMES
         val nextUpdate = inner.takeIf { isTime }?.readTime()
         val entryList = inner.readOptional(Tag.Sequence)
-        val entries = entryList?.let { element -> entriesOf(element.reader(), limits) }.orEmpty()
+        val unknown = mutableListOf<ObjectIdentifier>()
+        val entries = entryList?.let { element ->
+            entriesOf(
+                reader = element.reader(),
+                limits = limits,
+                unknown = unknown,
+            )
+        }
         val extensionList = inner.readOptionalExplicit(CRL_EXTENSIONS) { readExtensionList(limits.maximumExtensions) }
         val extensions = extensionList.orEmpty()
         if (!inner.isExhausted) inner.refuse(DerFailure.InvalidValue, "the end of the list")
@@ -91,8 +111,13 @@ internal object CrlCodec {
             issuingDistributionPoint = reader.read(
                 ExtensionIds.IssuingDistributionPoint,
             ) { readIssuingPoint(limits.maximumNames) },
-            extensions = Extensions(extensions, limits.maximumNames),
-            entries = entries.sortedWith { first, second -> first.serialNumber.compareTo(second.serialNumber) },
+            extensions = Extensions(ExtensionParts(extensions, limits.maximumNames)),
+            unknownCritical = (unknownOf(extensions, KNOWN_LIST) + unknown).distinct(),
+            entries = entries.orEmpty().sortedWith { first, second ->
+                first.serialNumber.compareTo(
+                    second.serialNumber,
+                )
+            },
             tbs = tbs.encoded,
         )
         RevocationList(parts, signature.bytes)
@@ -174,7 +199,16 @@ internal object CrlCodec {
         }
     }
 
-    private fun entriesOf(reader: DerReader, limits: X509Limits): List<RevokedCertificate> {
+    private fun unknownOf(extensions: List<Extension>, known: Set<ObjectIdentifier>): List<ObjectIdentifier> {
+        val critical = extensions.filter { extension -> extension.isCritical }
+        return critical.map { extension -> extension.id }.filter { id -> id !in known }
+    }
+
+    private fun entriesOf(
+        reader: DerReader,
+        limits: X509Limits,
+        unknown: MutableList<ObjectIdentifier>,
+    ): List<RevokedCertificate> {
         val entries = mutableListOf<RevokedCertificate>()
         while (!reader.isExhausted) {
             if (entries.size >= limits.maximumRevokedEntries) {
@@ -183,17 +217,18 @@ internal object CrlCodec {
                     "at most ${limits.maximumRevokedEntries} entries",
                 )
             }
-            entries += reader.readSequence { readEntry(limits) }
+            entries += reader.readSequence { readEntry(limits = limits, unknown = unknown) }
         }
         if (entries.isEmpty()) reader.refuse(DerFailure.InvalidValue, "at least one entry")
         return entries
     }
 
-    private fun DerReader.readEntry(limits: X509Limits): RevokedCertificate {
+    private fun DerReader.readEntry(limits: X509Limits, unknown: MutableList<ObjectIdentifier>): RevokedCertificate {
         val serial = readInteger()
         val revokedAt = readTime()
         val element = readOptional(Tag.Sequence)
         val extensions = element?.let { found -> entryExtensions(found.encoded, limits) }.orEmpty()
+        unknown += unknownOf(extensions, KNOWN_ENTRY)
         val reader = ExtensionReader(extensions)
         val code = reader.read(ExtensionIds.ReasonCode) { readInt(0..MAXIMUM_REASON, Tag.Enumerated) }
         val reason = code?.let { found ->
@@ -224,7 +259,7 @@ internal object CrlCodec {
         val names = readOptionalExplicit(POINT) {
             val full = readOptional(Tag.context(number = FULL_NAME, isConstructed = true))
             val fullNames = full?.let { element -> ExtensionReads.namesOf(element.reader(), maximum) }
-            fullNames ?: emptyList<GeneralName>().also { readElement() }
+            fullNames ?: refuse(DerFailure.InvalidValue, "a full name of the distribution point")
         }
         val isUserOnly = readFlag(ONLY_USER)
         val isCaOnly = readFlag(ONLY_CA)

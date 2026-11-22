@@ -30,7 +30,7 @@ public fun interface MaterialSink {
      *
      * A sink writes atomically, so a reader sees the old or the new material, never a part, and restricts access to
      * secret material before the first byte is written, for example by creating a file with the permissions of its
-     * owner only. Exceptions are not caught by krypt.
+     * owner only. A failure it throws is contained by krypt and reported as [MaterialFailure.Unavailable].
      *
      * @param ref the reference.
      * @param bytes the material.

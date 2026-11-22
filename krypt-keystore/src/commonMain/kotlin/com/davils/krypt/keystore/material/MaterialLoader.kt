@@ -16,6 +16,7 @@
 
 package com.davils.krypt.keystore.material
 
+import com.davils.kore.core.failure.attempted
 import com.davils.kore.core.outcome.Outcome
 import com.davils.krypt.asn1.pem.Pem
 import com.davils.krypt.asn1.pem.PemBlock
@@ -43,8 +44,13 @@ private val KEY_LABELS: Set<String> =
  * Loads identities, certificates and trust anchors from a [MaterialSource].
  *
  * Every read is bounded by [KeystoreLimits.maximumBytes], every failure is a [MaterialFailure], and nothing is
- * cached: load again to pick up a change. Exceptions of the source are not caught. A loader is safe to share between
- * coroutines.
+ * cached: load again to pick up a change. The source is foreign code: a failure it throws is contained and reported
+ * as [MaterialFailure.Unavailable], and only the cancellation of the calling coroutine passes through. A loader is
+ * safe to share between coroutines.
+ *
+ * The material arrives as a [ByteString], which krypt cannot wipe, and a private key in PEM passes through a
+ * `String` on its way to the key decoder, which no platform can wipe either: PEM is text, and the decoders of PEM
+ * take text. Where a copy of a key in memory matters, keep keys in PKCS #12, which never passes through a `String`.
  *
  * @property crypto the primitives.
  * @property source where the material lies.
@@ -157,7 +163,12 @@ public class MaterialLoader(
         return Pem.decode(bytes.toByteArray().decodeToString()).orMalformed()
     }
 
-    private suspend fun read(ref: MaterialRef): ByteString = when (val read = source.read(ref, limits.maximumBytes)) {
+    private suspend fun read(ref: MaterialRef): ByteString {
+        val attempt = attempted { source.read(ref, limits.maximumBytes) }
+        return readOf(attempt.getOrNull() ?: MaterialRead.Unavailable)
+    }
+
+    private fun readOf(read: MaterialRead): ByteString = when (read) {
         is MaterialRead.Found -> sized(read.bytes)
         MaterialRead.Missing -> throw MaterialRefusal(MaterialFailure.Missing)
         MaterialRead.Unavailable -> throw MaterialRefusal(MaterialFailure.Unavailable)
