@@ -20,17 +20,32 @@ import com.davils.kore.core.validation.Validatable
 import com.davils.kore.core.validation.ValidationScope
 import com.davils.kore.core.validation.inRange
 import com.davils.kore.core.validation.positive
+import com.davils.kore.core.validation.validateOrThrow
 import com.davils.krypt.asn1.ObjectIdentifier
 import com.davils.krypt.core.algorithm.KeyFamily
+import com.davils.krypt.x509.name.AttributeTypes
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.minutes
+
+private const val SUBJECT: String = "issuancePolicy"
 
 /**
  * What a certificate authority may issue beyond its profiles: the longest validity, how far it backdates, which
  * names and keys it accepts and where its revocation information lies.
  *
  * Create it with [issuancePolicy]; [Default] permits every name and every signing key for 397 days at most.
+ *
+ * The subject of a certificate is held to the policy as well as its alternative names: it may hold only attributes of
+ * [subjectAttributes], never an email address (which belongs into the alternative names), an attribute of
+ * [fixedAttributes] only with its fixed value, and a common name only if it equals one of the alternative names of
+ * the certificate or, for a certificate without alternative names, if it passes the rules of its kind: a common name
+ * with `://` is checked as a URI, one with `@` as an email address and one with a dot and no white space as a DNS
+ * name; any other common name, such as the name of a person or of a code signer, is accepted.
+ *
+ * DNS names must be names in A-labels of letters, digits and hyphens, with labels of 1 to 63 characters and at most
+ * 253 characters in all; a wildcard is only a whole leftmost label `*` followed by at least two labels. A URI prefix
+ * matches a URI that equals it or continues it at a `/`.
  *
  * @since 1.0.0
  */
@@ -120,6 +135,25 @@ public class IssuancePolicy internal constructor(builder: IssuancePolicyBuilder)
     public val policies: List<ObjectIdentifier> = builder.policies.toList()
 
     /**
+     * The attribute types the subject may hold; by default the common name, the organization and its unit, the
+     * country, the state, the locality and the serial number. An email address is refused whatever this says.
+     *
+     * @since 1.0.0
+     */
+    public val subjectAttributes: Set<ObjectIdentifier> = builder.subjectAttributes.toSet()
+
+    /**
+     * The values attributes of the subject must have when they are present, such as `O` = `Example Ltd`.
+     *
+     * @since 1.0.0
+     */
+    public val fixedAttributes: Map<ObjectIdentifier, String> = builder.fixedAttributes.toMap()
+
+    init {
+        validateOrThrow(SUBJECT)
+    }
+
+    /**
      * Checks that the validity is positive and the backdate lies between zero and a day.
      *
      * @receiver the validation that collects the violations.
@@ -150,6 +184,16 @@ public class IssuancePolicy internal constructor(builder: IssuancePolicyBuilder)
         internal val DEFAULT_BACKDATE: Duration = 5.minutes
 
         internal const val DEFAULT_DAYS: Int = 397
+
+        internal val DEFAULT_ATTRIBUTES: Set<ObjectIdentifier> = setOf(
+            AttributeTypes.CommonName,
+            AttributeTypes.Organization,
+            AttributeTypes.OrganizationalUnit,
+            AttributeTypes.Country,
+            AttributeTypes.State,
+            AttributeTypes.Locality,
+            AttributeTypes.SerialNumber,
+        )
 
         /**
          * Every name and every signing key, for 397 days at most and backdated five minutes.

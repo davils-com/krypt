@@ -27,6 +27,7 @@ import com.davils.krypt.core.algorithm.KeyType
 import com.davils.krypt.core.environment
 import com.davils.krypt.primitive.Crypto
 import com.davils.krypt.x509.Certificate
+import com.davils.krypt.x509.name.DistinguishedName
 import com.davils.krypt.x509.name.GeneralName
 import com.davils.krypt.x509.name.distinguishedName
 import kotlin.time.Clock
@@ -79,12 +80,21 @@ internal suspend fun serverRequest(
     profile: CertificateProfile = CertificateProfile.TlsServer,
 ): IssuanceRequest {
     val pair = crypto.keys.generate(type)
+    val commonName = textOf(name)
     return IssuanceRequest(
-        subject = distinguishedName { commonName(HOST) },
+        subject = commonName?.let { text -> distinguishedName { commonName(text) } } ?: DistinguishedName.Empty,
         publicKey = pair.publicKey,
         profile = profile,
         names = listOf(name),
     )
+}
+
+internal fun textOf(name: GeneralName): String? = when (name) {
+    is GeneralName.Dns -> name.name
+    is GeneralName.Email -> name.address
+    is GeneralName.Uri -> name.uri
+    is GeneralName.IpAddress -> name.toString().removePrefix("IP:")
+    is GeneralName.Directory, is GeneralName.RegisteredId, is GeneralName.Other -> null
 }
 
 internal suspend fun CertificateAuthority.issued(request: IssuanceRequest): Certificate =

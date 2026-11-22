@@ -31,6 +31,9 @@ internal class RequestChecks(private val authority: Certificate, private val pol
         IssuanceFailure.InvalidRequest.takeIf { request.nameConstraints != null && !request.profile.isCa },
         IssuanceFailure.ProfileNotPermitted.takeUnless { isProfilePermitted(request) },
         IssuanceFailure.NameNotPermitted.takeUnless { areNamesPermitted(request) },
+        IssuanceFailure.NameNotPermitted.takeUnless {
+            SubjectRules.isPermitted(subject = request.subject, names = request.names, policy = policy)
+        },
         IssuanceFailure.ValidityNotPermitted.takeUnless { isValidityPermitted(request, at) },
     ).firstOrNull { failure -> failure != null }
 
