@@ -115,17 +115,6 @@ kollect 1.0.0. The code comes from the security library of an internal Davils pr
 
 ### Security
 
-- **PKI hardening** (X.509, key stores, OCSP, CT, authority): path building is bounded in work, deduplicates and
-  orders its candidates and refuses more than `maximumIntermediates`; certificate policies run through the policy
-  tree of RFC 5280 within `maximumPolicyNodes`; a revocation list counts only where its distribution point covers
-  the certificate, a revocation in any applicable list wins, and lists with unknown critical extensions are not used;
-  name constraints cover every name a wildcard stands for and ignore trailing dots; a trust anchor as the end entity
-  is checked for validity, purpose and key usage, and the key usage of every end entity must suit `serverAuth` and
-  `clientAuth`; explicitly encoded DER defaults are refused; the password work of a PKCS #12 file is bounded by
-  `maximumPasswordIterations`; sources, sinks and repositories of the application are contained; the authority
-  checks the subject of a request against `subjectAttributes` and `fixedAttribute` of its policy, validates DNS
-  names, wildcards and URI prefixes strictly and lets delta lists reach back `DEFAULT_OVERLAP`; and the
-  constructors of decoded values and results are no longer reachable from Java.
 - **Core, ASN.1 and primitives hardened after an audit**: a refusal of JCA or WebCrypto for a key or an input, such as
   an HPKE encapsulation of small order or an RSA key JCA does not take, is the documented failure (null,
   `Verification.Invalid` or a `CryptoException` without the message of the platform), never an exception of the
@@ -146,14 +135,17 @@ kollect 1.0.0. The code comes from the security library of an internal Davils pr
   AES-192-GCM in their HPKE suite are refused; failures of the store, the ledger, the repository and the key management
   service become the typed failures `StorageFailure.Unavailable` and `KeysetFailure.Unavailable`; and key sets, keys
   and their primitives check their invariants however they are built.
-- **Identity and transport**: a cached revocation status in krypt-tls keeps the expiry it got when its source decided
-  it, capped at the `nextUpdate` of the OCSP response or revocation list, so later handshakes no longer extend it;
-  every `SpiffeAuthorizer` takes the bundles and binds a SPIFFE id to the bundle of its own trust domain; a path to an
-  anchor of the JDK must also pass the PKIX trust manager of the JDK, so its CA distrust policies and disabled
-  algorithms keep applying; `X509Source` keeps a high-water mark of `spiffe_sequence` per trust domain and refuses a
-  bundle without a sequence after one with a sequence; an `x509-svid` key whose `x5c` holds more than one certificate
-  refuses the bundle; and Java can no longer construct checked SPIFFE values, `PeerIdentity`, `RotatingTrustManager`
-  or `AcmeSession` around their validation.
+- **PKI hardening** (X.509, key stores, OCSP, CT, authority): path building is bounded in work, deduplicates and
+  orders its candidates and refuses more than `maximumIntermediates`; certificate policies run through the policy
+  tree of RFC 5280 within `maximumPolicyNodes`; a revocation list counts only where its distribution point covers
+  the certificate, a revocation in any applicable list wins, and lists with unknown critical extensions are not used;
+  name constraints cover every name a wildcard stands for and ignore trailing dots; a trust anchor as the end entity
+  is checked for validity, purpose and key usage, and the key usage of every end entity must suit `serverAuth` and
+  `clientAuth`; explicitly encoded DER defaults are refused; the password work of a PKCS #12 file is bounded by
+  `maximumPasswordIterations`; sources, sinks and repositories of the application are contained; the authority
+  checks the subject of a request against `subjectAttributes` and `fixedAttribute` of its policy, validates DNS
+  names, wildcards and URI prefixes strictly and lets delta lists reach back `DEFAULT_OVERLAP`; and the
+  constructors of decoded values and results are no longer reachable from Java.
 - **Message formats hardened after an audit**: CWT validation requires a signature, a MAC or an encryption under a
   pre-shared key (`isAuthenticationRequired`) and `exp` (`isExpirationRequired`) by default, COSE reads `alg` only from
   the protected bucket and HMAC keys must be as long as the hash; `Jwt.validate` accepts only the compact
@@ -162,3 +154,11 @@ kollect 1.0.0. The code comes from the security library of an internal Davils pr
   authenticated attributes for content other than id-data, binds the content type and tag length of
   AuthEnvelopedData, verifies time stamps without throwing, and reads or writes AES-CBC only with
   `isUnauthenticatedCbcAllowed`.
+- **Identity and transport**: a cached revocation status in krypt-tls keeps the expiry it got when its source decided
+  it, capped at the `nextUpdate` of the OCSP response or revocation list, so later handshakes no longer extend it;
+  every `SpiffeAuthorizer` takes the bundles and binds a SPIFFE id to the bundle of its own trust domain; a path to an
+  anchor of the JDK must also pass the PKIX trust manager of the JDK, so its CA distrust policies and disabled
+  algorithms keep applying; `X509Source` keeps a high-water mark of `spiffe_sequence` per trust domain and refuses a
+  bundle without a sequence after one with a sequence; an `x509-svid` key whose `x5c` holds more than one certificate
+  refuses the bundle; and Java can no longer construct checked SPIFFE values, `PeerIdentity`, `RotatingTrustManager`
+  or `AcmeSession` around their validation.
