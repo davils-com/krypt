@@ -300,6 +300,13 @@ public class AcmeSession private constructor(
      * Polls [order] while it is [AcmeStatus.Pending] or [AcmeStatus.Processing], waiting as long as the
      * `Retry-After` of each response asks or [interval] where none does.
      *
+     * The server decides how long each wait lasts: the wait before each poll is the `Retry-After` of the last
+     * response, at most [AcmeLimits.maximumRetryAfter] of the limits of the [client] (one day by default), or
+     * [interval] where the response has none, and each poll is one request over the transport of the application,
+     * which bounds its duration. One call polls at most [maximumPolls] times, so it waits at most [maximumPolls] times
+     * the longer of the two, up to 30 days with the defaults, and has no overall deadline of its own: bound the total
+     * time with `withTimeout` of kotlinx.coroutines, which cancels the wait and the poll in progress.
+     *
      * @param order the order.
      * @param maximumPolls how often to poll at most, 1 to 1000.
      * @param interval the wait without a `Retry-After`; one second by default.
@@ -328,6 +335,13 @@ public class AcmeSession private constructor(
     /**
      * Polls [authorization] while it is [AcmeStatus.Pending], waiting as long as the `Retry-After` of each response
      * asks or [interval] where none does.
+     *
+     * The server decides how long each wait lasts: the wait before each poll is the `Retry-After` of the last
+     * response, at most [AcmeLimits.maximumRetryAfter] of the limits of the [client] (one day by default), or
+     * [interval] where the response has none, and each poll is one request over the transport of the application,
+     * which bounds its duration. One call polls at most [maximumPolls] times, so it waits at most [maximumPolls] times
+     * the longer of the two, up to 30 days with the defaults, and has no overall deadline of its own: bound the total
+     * time with `withTimeout` of kotlinx.coroutines, which cancels the wait and the poll in progress.
      *
      * @param authorization the authorization.
      * @param maximumPolls how often to poll at most, 1 to 1000.
