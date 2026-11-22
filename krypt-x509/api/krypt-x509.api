@@ -1,0 +1,678 @@
+public final class com/davils/krypt/x509/AlgorithmIdentifiers {
+	public static final field INSTANCE Lcom/davils/krypt/x509/AlgorithmIdentifiers;
+	public final fun encode (Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;)Lkotlinx/io/bytestring/ByteString;
+	public final fun readSignatureAlgorithm (Lcom/davils/krypt/asn1/DerReader;)Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;
+	public final fun writeSignatureAlgorithm (Lcom/davils/krypt/asn1/DerWriter;Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;)V
+}
+
+public final class com/davils/krypt/x509/Certificate {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEncoded ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getExtensions ()Lcom/davils/krypt/x509/extension/Extensions;
+	public final fun getIssuer ()Lcom/davils/krypt/x509/name/DistinguishedName;
+	public final fun getNotAfter ()Lkotlin/time/Instant;
+	public final fun getNotBefore ()Lkotlin/time/Instant;
+	public final fun getPublicKey ()Lcom/davils/krypt/primitive/key/PublicKey;
+	public final fun getSerialNumber ()Lcom/davils/krypt/asn1/DerInteger;
+	public final fun getSignature ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getSignatureAlgorithm ()Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;
+	public final fun getSubject ()Lcom/davils/krypt/x509/name/DistinguishedName;
+	public final fun getSubjectPublicKeyInfo ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getTbs ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getVersion ()I
+	public fun hashCode ()I
+	public final fun isCa ()Z
+	public final fun isSelfIssued ()Z
+	public final fun isValidAt (Lkotlin/time/Instant;)Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/x509/CertificateBuilder {
+	public final fun extensions (Lkotlin/jvm/functions/Function1;)V
+	public final fun getIssuer ()Lcom/davils/krypt/x509/name/DistinguishedName;
+	public final fun getNotAfter ()Lkotlin/time/Instant;
+	public final fun getNotBefore ()Lkotlin/time/Instant;
+	public final fun getPublicKey ()Lcom/davils/krypt/primitive/key/PublicKey;
+	public final fun getSerialNumber ()Lcom/davils/krypt/asn1/DerInteger;
+	public final fun getSubject ()Lcom/davils/krypt/x509/name/DistinguishedName;
+	public final fun setIssuer (Lcom/davils/krypt/x509/name/DistinguishedName;)V
+	public final fun setNotAfter (Lkotlin/time/Instant;)V
+	public final fun setNotBefore (Lkotlin/time/Instant;)V
+	public final fun setPublicKey (Lcom/davils/krypt/primitive/key/PublicKey;)V
+	public final fun setSerialNumber (Lcom/davils/krypt/asn1/DerInteger;)V
+	public final fun setSubject (Lcom/davils/krypt/x509/name/DistinguishedName;)V
+	public final fun subject (Lkotlin/jvm/functions/Function1;)V
+}
+
+public final class com/davils/krypt/x509/Certificates {
+	public fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/x509/X509Limits;)V
+	public synthetic fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/x509/X509Limits;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun decode (Lkotlinx/io/bytestring/ByteString;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun decodePem (Ljava/lang/String;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun encodePem (Lcom/davils/krypt/x509/Certificate;)Ljava/lang/String;
+	public final fun fingerprint (Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/core/algorithm/DigestAlgorithm;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun fingerprint$default (Lcom/davils/krypt/x509/Certificates;Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/core/algorithm/DigestAlgorithm;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public final fun getCrypto ()Lcom/davils/krypt/primitive/Crypto;
+	public final fun getLimits ()Lcom/davils/krypt/x509/X509Limits;
+	public final fun issue (Lcom/davils/krypt/primitive/signature/Signer;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun keyIdentifier (Lcom/davils/krypt/primitive/key/PublicKey;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun toString ()Ljava/lang/String;
+	public final fun verifySignature (Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/primitive/key/PublicKey;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/x509/RevocationReason : java/lang/Enum {
+	public static final field AaCompromise Lcom/davils/krypt/x509/RevocationReason;
+	public static final field AffiliationChanged Lcom/davils/krypt/x509/RevocationReason;
+	public static final field CaCompromise Lcom/davils/krypt/x509/RevocationReason;
+	public static final field CertificateHold Lcom/davils/krypt/x509/RevocationReason;
+	public static final field CessationOfOperation Lcom/davils/krypt/x509/RevocationReason;
+	public static final field KeyCompromise Lcom/davils/krypt/x509/RevocationReason;
+	public static final field PrivilegeWithdrawn Lcom/davils/krypt/x509/RevocationReason;
+	public static final field RemoveFromCrl Lcom/davils/krypt/x509/RevocationReason;
+	public static final field Superseded Lcom/davils/krypt/x509/RevocationReason;
+	public static final field Unspecified Lcom/davils/krypt/x509/RevocationReason;
+	public final fun getBit ()Ljava/lang/Integer;
+	public final fun getCode ()I
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/x509/RevocationReason;
+	public static fun values ()[Lcom/davils/krypt/x509/RevocationReason;
+}
+
+public final class com/davils/krypt/x509/X509Failure : java/lang/Enum {
+	public static final field Malformed Lcom/davils/krypt/x509/X509Failure;
+	public static final field Unsupported Lcom/davils/krypt/x509/X509Failure;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/x509/X509Failure;
+	public static fun values ()[Lcom/davils/krypt/x509/X509Failure;
+}
+
+public final class com/davils/krypt/x509/X509Limits {
+	public static final field Companion Lcom/davils/krypt/x509/X509Limits$Companion;
+	public static final field DEFAULT_MAXIMUM_BYTES I
+	public static final field DEFAULT_MAXIMUM_EXTENSIONS I
+	public static final field DEFAULT_MAXIMUM_NAMES I
+	public static final field DEFAULT_MAXIMUM_PATH_ATTEMPTS I
+	public static final field DEFAULT_MAXIMUM_PATH_LENGTH I
+	public static final field DEFAULT_MAXIMUM_REVOKED_ENTRIES I
+	public static final field HARD_MAXIMUM_BYTES I
+	public static final field HARD_MAXIMUM_EXTENSIONS I
+	public static final field HARD_MAXIMUM_NAMES I
+	public static final field HARD_MAXIMUM_PATH_ATTEMPTS I
+	public static final field HARD_MAXIMUM_PATH_LENGTH I
+	public static final field HARD_MAXIMUM_REVOKED_ENTRIES I
+	public fun <init> ()V
+	public fun <init> (IIIIII)V
+	public synthetic fun <init> (IIIIIIILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getMaximumBytes ()I
+	public final fun getMaximumExtensions ()I
+	public final fun getMaximumNames ()I
+	public final fun getMaximumPathAttempts ()I
+	public final fun getMaximumPathLength ()I
+	public final fun getMaximumRevokedEntries ()I
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/x509/X509Limits$Companion {
+	public final fun getDefault ()Lcom/davils/krypt/x509/X509Limits;
+}
+
+public final class com/davils/krypt/x509/crl/IssuingDistributionPoint {
+	public fun <init> ()V
+	public fun <init> (Ljava/util/List;ZZLjava/util/Set;Z)V
+	public synthetic fun <init> (Ljava/util/List;ZZLjava/util/Set;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getNames ()Ljava/util/List;
+	public final fun getOnlySomeReasons ()Ljava/util/Set;
+	public fun hashCode ()I
+	public final fun isCaOnly ()Z
+	public final fun isIndirect ()Z
+	public final fun isUserOnly ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/x509/crl/RevocationList {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun find (Lcom/davils/krypt/asn1/DerInteger;)Lcom/davils/krypt/x509/crl/RevokedCertificate;
+	public final fun getDeltaOf ()Lcom/davils/krypt/asn1/DerInteger;
+	public final fun getEncoded ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getEntries ()Ljava/util/List;
+	public final fun getExtensions ()Lcom/davils/krypt/x509/extension/Extensions;
+	public final fun getIssuer ()Lcom/davils/krypt/x509/name/DistinguishedName;
+	public final fun getIssuingDistributionPoint ()Lcom/davils/krypt/x509/crl/IssuingDistributionPoint;
+	public final fun getNextUpdate ()Lkotlin/time/Instant;
+	public final fun getNumber ()Lcom/davils/krypt/asn1/DerInteger;
+	public final fun getSignature ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getSignatureAlgorithm ()Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;
+	public final fun getTbs ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getThisUpdate ()Lkotlin/time/Instant;
+	public fun hashCode ()I
+	public final fun isDelta ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/x509/crl/RevocationListBuilder {
+	public final fun extensions (Lkotlin/jvm/functions/Function1;)V
+	public final fun getDeltaOf ()Lcom/davils/krypt/asn1/DerInteger;
+	public final fun getIssuer ()Lcom/davils/krypt/x509/name/DistinguishedName;
+	public final fun getIssuingDistributionPoint ()Lcom/davils/krypt/x509/crl/IssuingDistributionPoint;
+	public final fun getNextUpdate ()Lkotlin/time/Instant;
+	public final fun getNumber ()Lcom/davils/krypt/asn1/DerInteger;
+	public final fun getThisUpdate ()Lkotlin/time/Instant;
+	public final fun revoke (Lcom/davils/krypt/asn1/DerInteger;Lkotlin/time/Instant;Lcom/davils/krypt/x509/RevocationReason;Lkotlin/time/Instant;)V
+	public static synthetic fun revoke$default (Lcom/davils/krypt/x509/crl/RevocationListBuilder;Lcom/davils/krypt/asn1/DerInteger;Lkotlin/time/Instant;Lcom/davils/krypt/x509/RevocationReason;Lkotlin/time/Instant;ILjava/lang/Object;)V
+	public final fun setDeltaOf (Lcom/davils/krypt/asn1/DerInteger;)V
+	public final fun setIssuer (Lcom/davils/krypt/x509/name/DistinguishedName;)V
+	public final fun setIssuingDistributionPoint (Lcom/davils/krypt/x509/crl/IssuingDistributionPoint;)V
+	public final fun setNextUpdate (Lkotlin/time/Instant;)V
+	public final fun setNumber (Lcom/davils/krypt/asn1/DerInteger;)V
+	public final fun setThisUpdate (Lkotlin/time/Instant;)V
+}
+
+public final class com/davils/krypt/x509/crl/RevocationLists {
+	public fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/x509/X509Limits;)V
+	public synthetic fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/x509/X509Limits;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun decode (Lkotlinx/io/bytestring/ByteString;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun decodePem (Ljava/lang/String;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun encodePem (Lcom/davils/krypt/x509/crl/RevocationList;)Ljava/lang/String;
+	public final fun getCrypto ()Lcom/davils/krypt/primitive/Crypto;
+	public final fun getLimits ()Lcom/davils/krypt/x509/X509Limits;
+	public final fun issue (Lcom/davils/krypt/primitive/signature/Signer;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun toString ()Ljava/lang/String;
+	public final fun verifySignature (Lcom/davils/krypt/x509/crl/RevocationList;Lcom/davils/krypt/primitive/key/PublicKey;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/x509/crl/RevokedCertificate {
+	public fun <init> (Lcom/davils/krypt/asn1/DerInteger;Lkotlin/time/Instant;Lcom/davils/krypt/x509/RevocationReason;Lkotlin/time/Instant;Ljava/util/List;)V
+	public synthetic fun <init> (Lcom/davils/krypt/asn1/DerInteger;Lkotlin/time/Instant;Lcom/davils/krypt/x509/RevocationReason;Lkotlin/time/Instant;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCertificateIssuer ()Ljava/util/List;
+	public final fun getInvalidAt ()Lkotlin/time/Instant;
+	public final fun getReason ()Lcom/davils/krypt/x509/RevocationReason;
+	public final fun getRevokedAt ()Lkotlin/time/Instant;
+	public final fun getSerialNumber ()Lcom/davils/krypt/asn1/DerInteger;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/x509/extension/AccessDescription {
+	public fun <init> (Lcom/davils/krypt/asn1/ObjectIdentifier;Lcom/davils/krypt/x509/name/GeneralName;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getLocation ()Lcom/davils/krypt/x509/name/GeneralName;
+	public final fun getMethod ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/x509/extension/AuthorityKeyIdentifier {
+	public fun <init> (Lkotlinx/io/bytestring/ByteString;Ljava/util/List;Lcom/davils/krypt/asn1/DerInteger;)V
+	public synthetic fun <init> (Lkotlinx/io/bytestring/ByteString;Ljava/util/List;Lcom/davils/krypt/asn1/DerInteger;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getIssuer ()Ljava/util/List;
+	public final fun getKeyIdentifier ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getSerialNumber ()Lcom/davils/krypt/asn1/DerInteger;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/x509/extension/BasicConstraints {
+	public fun <init> (ZLjava/lang/Integer;)V
+	public synthetic fun <init> (ZLjava/lang/Integer;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getPathLength ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public final fun isCa ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/x509/extension/DistributionPoint {
+	public fun <init> (Ljava/util/List;Ljava/util/Set;Ljava/util/List;)V
+	public synthetic fun <init> (Ljava/util/List;Ljava/util/Set;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCrlIssuer ()Ljava/util/List;
+	public final fun getNames ()Ljava/util/List;
+	public final fun getReasons ()Ljava/util/Set;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/x509/extension/Extension {
+	public fun <init> (Lcom/davils/krypt/asn1/ObjectIdentifier;ZLkotlinx/io/bytestring/ByteString;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getValue ()Lkotlinx/io/bytestring/ByteString;
+	public fun hashCode ()I
+	public final fun isCritical ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/x509/extension/ExtensionIds {
+	public static final field INSTANCE Lcom/davils/krypt/x509/extension/ExtensionIds;
+	public final fun getAuthorityInformationAccess ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getAuthorityKeyIdentifier ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getBasicConstraints ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getCertificateIssuer ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getCertificatePolicies ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getCrlDistributionPoints ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getCrlNumber ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getDeltaCrlIndicator ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getExtendedKeyUsage ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getFreshestCrl ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getInhibitAnyPolicy ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getInvalidityDate ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getIssuerAlternativeName ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getIssuingDistributionPoint ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getKeyUsage ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getNameConstraints ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getOcspNoCheck ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getPolicyConstraints ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getPolicyMappings ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getPrecertificatePoison ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getReasonCode ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getSignedCertificateTimestamps ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getSubjectAlternativeName ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getSubjectInformationAccess ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getSubjectKeyIdentifier ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getTlsFeature ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+}
+
+public final class com/davils/krypt/x509/extension/Extensions {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun get (Lcom/davils/krypt/asn1/ObjectIdentifier;)Lcom/davils/krypt/x509/extension/Extension;
+	public final fun getAll ()Ljava/util/List;
+	public final fun getAuthorityInformationAccess ()Ljava/util/List;
+	public final fun getAuthorityKeyIdentifier ()Lcom/davils/krypt/x509/extension/AuthorityKeyIdentifier;
+	public final fun getBasicConstraints ()Lcom/davils/krypt/x509/extension/BasicConstraints;
+	public final fun getCertificatePolicies ()Ljava/util/List;
+	public final fun getCrlDistributionPoints ()Ljava/util/List;
+	public final fun getExtendedKeyUsage ()Ljava/util/List;
+	public final fun getFreshestCrl ()Ljava/util/List;
+	public final fun getInhibitAnyPolicy ()Ljava/lang/Integer;
+	public final fun getIssuerAlternativeNames ()Ljava/util/List;
+	public final fun getKeyUsage ()Ljava/util/Set;
+	public final fun getNameConstraints ()Lcom/davils/krypt/x509/extension/NameConstraints;
+	public final fun getPolicyConstraints ()Lcom/davils/krypt/x509/extension/PolicyConstraints;
+	public final fun getPolicyMappings ()Ljava/util/List;
+	public final fun getSubjectAlternativeNames ()Ljava/util/List;
+	public final fun getSubjectInformationAccess ()Ljava/util/List;
+	public final fun getSubjectKeyIdentifier ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getTlsFeatures ()Ljava/util/Set;
+	public final fun getUnknownCritical ()Ljava/util/List;
+	public fun hashCode ()I
+	public final fun isOcspNoCheck ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/x509/extension/ExtensionsBuilder {
+	public final fun add (Lcom/davils/krypt/x509/extension/Extension;)V
+	public final fun authorityInformationAccess (Ljava/util/List;)V
+	public final fun authorityKeyIdentifier (Lkotlinx/io/bytestring/ByteString;)V
+	public final fun basicConstraints (ZLjava/lang/Integer;Z)V
+	public static synthetic fun basicConstraints$default (Lcom/davils/krypt/x509/extension/ExtensionsBuilder;ZLjava/lang/Integer;ZILjava/lang/Object;)V
+	public final fun certificatePolicies (Ljava/util/List;Z)V
+	public static synthetic fun certificatePolicies$default (Lcom/davils/krypt/x509/extension/ExtensionsBuilder;Ljava/util/List;ZILjava/lang/Object;)V
+	public final fun crlDistributionPoints (Ljava/util/List;)V
+	public final fun extendedKeyUsage (Ljava/util/List;Z)V
+	public static synthetic fun extendedKeyUsage$default (Lcom/davils/krypt/x509/extension/ExtensionsBuilder;Ljava/util/List;ZILjava/lang/Object;)V
+	public final fun keyUsage (Ljava/util/Set;Z)V
+	public static synthetic fun keyUsage$default (Lcom/davils/krypt/x509/extension/ExtensionsBuilder;Ljava/util/Set;ZILjava/lang/Object;)V
+	public final fun mustStaple ()V
+	public final fun nameConstraints (Lcom/davils/krypt/x509/extension/NameConstraints;Z)V
+	public static synthetic fun nameConstraints$default (Lcom/davils/krypt/x509/extension/ExtensionsBuilder;Lcom/davils/krypt/x509/extension/NameConstraints;ZILjava/lang/Object;)V
+	public final fun ocspNoCheck ()V
+	public final fun policyConstraints (Lcom/davils/krypt/x509/extension/PolicyConstraints;Z)V
+	public static synthetic fun policyConstraints$default (Lcom/davils/krypt/x509/extension/ExtensionsBuilder;Lcom/davils/krypt/x509/extension/PolicyConstraints;ZILjava/lang/Object;)V
+	public final fun subjectAlternativeNames (Ljava/util/List;Z)V
+	public static synthetic fun subjectAlternativeNames$default (Lcom/davils/krypt/x509/extension/ExtensionsBuilder;Ljava/util/List;ZILjava/lang/Object;)V
+	public final fun subjectKeyIdentifier (Lkotlinx/io/bytestring/ByteString;)V
+}
+
+public final class com/davils/krypt/x509/extension/KeyPurposes {
+	public static final field INSTANCE Lcom/davils/krypt/x509/extension/KeyPurposes;
+	public final fun getAny ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getAnyPolicy ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getCaIssuersAccess ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getClientAuth ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getCodeSigning ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getEmailProtection ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getOcspAccess ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getOcspSigning ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getServerAuth ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getTimeStamping ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+}
+
+public final class com/davils/krypt/x509/extension/KeyUsage : java/lang/Enum {
+	public static final field ContentCommitment Lcom/davils/krypt/x509/extension/KeyUsage;
+	public static final field CrlSign Lcom/davils/krypt/x509/extension/KeyUsage;
+	public static final field DataEncipherment Lcom/davils/krypt/x509/extension/KeyUsage;
+	public static final field DecipherOnly Lcom/davils/krypt/x509/extension/KeyUsage;
+	public static final field DigitalSignature Lcom/davils/krypt/x509/extension/KeyUsage;
+	public static final field EncipherOnly Lcom/davils/krypt/x509/extension/KeyUsage;
+	public static final field KeyAgreement Lcom/davils/krypt/x509/extension/KeyUsage;
+	public static final field KeyCertSign Lcom/davils/krypt/x509/extension/KeyUsage;
+	public static final field KeyEncipherment Lcom/davils/krypt/x509/extension/KeyUsage;
+	public final fun getBit ()I
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/x509/extension/KeyUsage;
+	public static fun values ()[Lcom/davils/krypt/x509/extension/KeyUsage;
+}
+
+public final class com/davils/krypt/x509/extension/NameConstraints {
+	public fun <init> ()V
+	public fun <init> (Ljava/util/List;Ljava/util/List;)V
+	public synthetic fun <init> (Ljava/util/List;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getExcluded ()Ljava/util/List;
+	public final fun getPermitted ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/x509/extension/PolicyConstraints {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/Integer;Ljava/lang/Integer;)V
+	public synthetic fun <init> (Ljava/lang/Integer;Ljava/lang/Integer;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getInhibitPolicyMapping ()Ljava/lang/Integer;
+	public final fun getRequireExplicitPolicy ()Ljava/lang/Integer;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/x509/extension/PolicyMapping {
+	public fun <init> (Lcom/davils/krypt/asn1/ObjectIdentifier;Lcom/davils/krypt/asn1/ObjectIdentifier;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getIssuerPolicy ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getSubjectPolicy ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/x509/name/AttributeTypes {
+	public static final field INSTANCE Lcom/davils/krypt/x509/name/AttributeTypes;
+	public final fun getCommonName ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getCountry ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getDomainComponent ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getEmailAddress ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getLocality ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getOrganization ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getOrganizationIdentifier ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getOrganizationalUnit ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getSerialNumber ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getState ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getStreet ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public final fun getUserId ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+}
+
+public final class com/davils/krypt/x509/name/AttributeValue {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEncoded ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getTag ()Lcom/davils/krypt/asn1/Tag;
+	public final fun getText ()Ljava/lang/String;
+	public final fun getType ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/x509/name/DistinguishedName {
+	public static final field Companion Lcom/davils/krypt/x509/name/DistinguishedName$Companion;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCommonName ()Ljava/lang/String;
+	public final fun getEncoded ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getNames ()Ljava/util/List;
+	public fun hashCode ()I
+	public final fun isEmpty ()Z
+	public final fun isPrefixOf (Lcom/davils/krypt/x509/name/DistinguishedName;)Z
+	public final fun rfc4514 ()Ljava/lang/String;
+	public fun toString ()Ljava/lang/String;
+	public final fun valuesOf (Lcom/davils/krypt/asn1/ObjectIdentifier;)Ljava/util/List;
+}
+
+public final class com/davils/krypt/x509/name/DistinguishedName$Companion {
+	public final fun getEmpty ()Lcom/davils/krypt/x509/name/DistinguishedName;
+}
+
+public final class com/davils/krypt/x509/name/DistinguishedNameBuilder {
+	public final fun attribute (Lcom/davils/krypt/asn1/ObjectIdentifier;Ljava/lang/String;)V
+	public final fun commonName (Ljava/lang/String;)V
+	public final fun country (Ljava/lang/String;)V
+	public final fun domainComponent (Ljava/lang/String;)V
+	public final fun multiValued (Ljava/util/List;)V
+	public final fun organization (Ljava/lang/String;)V
+	public final fun organizationalUnit (Ljava/lang/String;)V
+}
+
+public abstract interface class com/davils/krypt/x509/name/GeneralName {
+}
+
+public final class com/davils/krypt/x509/name/GeneralName$Directory : com/davils/krypt/x509/name/GeneralName {
+	public fun <init> (Lcom/davils/krypt/x509/name/DistinguishedName;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getName ()Lcom/davils/krypt/x509/name/DistinguishedName;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/x509/name/GeneralName$Dns : com/davils/krypt/x509/name/GeneralName {
+	public fun <init> (Ljava/lang/String;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getName ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/x509/name/GeneralName$Email : com/davils/krypt/x509/name/GeneralName {
+	public fun <init> (Ljava/lang/String;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAddress ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/x509/name/GeneralName$IpAddress : com/davils/krypt/x509/name/GeneralName {
+	public static final field Companion Lcom/davils/krypt/x509/name/GeneralName$IpAddress$Companion;
+	public fun <init> (Lkotlinx/io/bytestring/ByteString;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getBytes ()Lkotlinx/io/bytestring/ByteString;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/x509/name/GeneralName$IpAddress$Companion {
+	public final fun parseOrNull (Ljava/lang/String;)Lcom/davils/krypt/x509/name/GeneralName$IpAddress;
+}
+
+public final class com/davils/krypt/x509/name/GeneralName$Other : com/davils/krypt/x509/name/GeneralName {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getEncoded ()Lkotlinx/io/bytestring/ByteString;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/x509/name/GeneralName$RegisteredId : com/davils/krypt/x509/name/GeneralName {
+	public fun <init> (Lcom/davils/krypt/asn1/ObjectIdentifier;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getId ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/x509/name/GeneralName$Uri : com/davils/krypt/x509/name/GeneralName {
+	public fun <init> (Ljava/lang/String;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getUri ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/x509/name/NamesKt {
+	public static final fun distinguishedName (Lkotlin/jvm/functions/Function1;)Lcom/davils/krypt/x509/name/DistinguishedName;
+}
+
+public final class com/davils/krypt/x509/name/RelativeName {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAttributes ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/x509/path/CrlRevocationChecker : com/davils/krypt/x509/path/RevocationChecker {
+	public fun <init> (Lcom/davils/krypt/x509/crl/RevocationLists;Lcom/davils/krypt/x509/path/RevocationListSource;)V
+	public fun check (Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/x509/path/TrustAnchor;Lkotlin/time/Instant;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/x509/path/PathFailure : java/lang/Enum {
+	public static final field AlgorithmNotPermitted Lcom/davils/krypt/x509/path/PathFailure;
+	public static final field BadSignature Lcom/davils/krypt/x509/path/PathFailure;
+	public static final field Expired Lcom/davils/krypt/x509/path/PathFailure;
+	public static final field KeyUsage Lcom/davils/krypt/x509/path/PathFailure;
+	public static final field NameConstraints Lcom/davils/krypt/x509/path/PathFailure;
+	public static final field NoTrustedPath Lcom/davils/krypt/x509/path/PathFailure;
+	public static final field NotAnAuthority Lcom/davils/krypt/x509/path/PathFailure;
+	public static final field PathTooLong Lcom/davils/krypt/x509/path/PathFailure;
+	public static final field Policy Lcom/davils/krypt/x509/path/PathFailure;
+	public static final field Purpose Lcom/davils/krypt/x509/path/PathFailure;
+	public static final field RevocationUnknown Lcom/davils/krypt/x509/path/PathFailure;
+	public static final field Revoked Lcom/davils/krypt/x509/path/PathFailure;
+	public static final field UnknownCriticalExtension Lcom/davils/krypt/x509/path/PathFailure;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/x509/path/PathFailure;
+	public static fun values ()[Lcom/davils/krypt/x509/path/PathFailure;
+}
+
+public abstract interface class com/davils/krypt/x509/path/PathValidation {
+	public abstract fun isValid ()Z
+}
+
+public final class com/davils/krypt/x509/path/PathValidation$Invalid : com/davils/krypt/x509/path/PathValidation {
+	public final fun getCertificate ()Lcom/davils/krypt/x509/Certificate;
+	public final fun getFailure ()Lcom/davils/krypt/x509/path/PathFailure;
+	public fun isValid ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/x509/path/PathValidation$Valid : com/davils/krypt/x509/path/PathValidation {
+	public final fun getAnchor ()Lcom/davils/krypt/x509/path/TrustAnchor;
+	public final fun getPath ()Ljava/util/List;
+	public final fun getPolicies ()Ljava/util/Set;
+	public fun isValid ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/x509/path/PathValidator {
+	public fun <init> (Lcom/davils/krypt/primitive/Crypto;Ljava/util/List;Lcom/davils/krypt/x509/path/RevocationChecker;Lcom/davils/krypt/x509/X509Limits;)V
+	public synthetic fun <init> (Lcom/davils/krypt/primitive/Crypto;Ljava/util/List;Lcom/davils/krypt/x509/path/RevocationChecker;Lcom/davils/krypt/x509/X509Limits;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getAnchors ()Ljava/util/List;
+	public final fun getCrypto ()Lcom/davils/krypt/primitive/Crypto;
+	public final fun getLimits ()Lcom/davils/krypt/x509/X509Limits;
+	public fun toString ()Ljava/lang/String;
+	public final fun validate (Lcom/davils/krypt/x509/Certificate;Ljava/util/List;Lcom/davils/krypt/x509/path/ValidationParameters;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun validate$default (Lcom/davils/krypt/x509/path/PathValidator;Lcom/davils/krypt/x509/Certificate;Ljava/util/List;Lcom/davils/krypt/x509/path/ValidationParameters;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/x509/path/PinSet {
+	public static final field Companion Lcom/davils/krypt/x509/path/PinSet$Companion;
+	public fun <init> (Ljava/util/Set;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getPins ()Ljava/util/Set;
+	public fun hashCode ()I
+	public final fun matches (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/x509/path/PathValidation$Valid;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/x509/path/PinSet$Companion {
+	public final fun of (Lcom/davils/krypt/primitive/Crypto;Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class com/davils/krypt/x509/path/RevocationChecker {
+	public abstract fun check (Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/x509/path/TrustAnchor;Lkotlin/time/Instant;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class com/davils/krypt/x509/path/RevocationListSource {
+	public abstract fun revocationLists (Lcom/davils/krypt/x509/Certificate;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/x509/path/RevocationStatus : java/lang/Enum {
+	public static final field Good Lcom/davils/krypt/x509/path/RevocationStatus;
+	public static final field Revoked Lcom/davils/krypt/x509/path/RevocationStatus;
+	public static final field Unknown Lcom/davils/krypt/x509/path/RevocationStatus;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/x509/path/RevocationStatus;
+	public static fun values ()[Lcom/davils/krypt/x509/path/RevocationStatus;
+}
+
+public final class com/davils/krypt/x509/path/ServiceIdentity {
+	public static final field INSTANCE Lcom/davils/krypt/x509/path/ServiceIdentity;
+	public final fun matches (Lcom/davils/krypt/x509/Certificate;Ljava/lang/String;)Z
+}
+
+public final class com/davils/krypt/x509/path/TrustAnchor {
+	public static final field Companion Lcom/davils/krypt/x509/path/TrustAnchor$Companion;
+	public fun <init> (Lcom/davils/krypt/x509/name/DistinguishedName;Lcom/davils/krypt/primitive/key/PublicKey;Lcom/davils/krypt/x509/extension/NameConstraints;Lcom/davils/krypt/x509/Certificate;)V
+	public synthetic fun <init> (Lcom/davils/krypt/x509/name/DistinguishedName;Lcom/davils/krypt/primitive/key/PublicKey;Lcom/davils/krypt/x509/extension/NameConstraints;Lcom/davils/krypt/x509/Certificate;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCertificate ()Lcom/davils/krypt/x509/Certificate;
+	public final fun getName ()Lcom/davils/krypt/x509/name/DistinguishedName;
+	public final fun getNameConstraints ()Lcom/davils/krypt/x509/extension/NameConstraints;
+	public final fun getPublicKey ()Lcom/davils/krypt/primitive/key/PublicKey;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/x509/path/TrustAnchor$Companion {
+	public final fun of (Lcom/davils/krypt/x509/Certificate;)Lcom/davils/krypt/x509/path/TrustAnchor;
+}
+
+public final class com/davils/krypt/x509/path/ValidationParameters {
+	public fun <init> ()V
+	public fun <init> (Lkotlin/time/Instant;Lcom/davils/krypt/asn1/ObjectIdentifier;Ljava/util/Set;ZZZZ)V
+	public synthetic fun <init> (Lkotlin/time/Instant;Lcom/davils/krypt/asn1/ObjectIdentifier;Ljava/util/Set;ZZZZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAt ()Lkotlin/time/Instant;
+	public final fun getInitialPolicies ()Ljava/util/Set;
+	public final fun getPurpose ()Lcom/davils/krypt/asn1/ObjectIdentifier;
+	public fun hashCode ()I
+	public final fun isAnyPolicyInhibited ()Z
+	public final fun isExplicitPolicyRequired ()Z
+	public final fun isPolicyMappingInhibited ()Z
+	public final fun isRevocationRequired ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/x509/request/CertificationRequest {
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAttributeTypes ()Ljava/util/List;
+	public final fun getEncoded ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getInfo ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getPublicKey ()Lcom/davils/krypt/primitive/key/PublicKey;
+	public final fun getRequestedExtensions ()Lcom/davils/krypt/x509/extension/Extensions;
+	public final fun getSignature ()Lkotlinx/io/bytestring/ByteString;
+	public final fun getSignatureAlgorithm ()Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;
+	public final fun getSubject ()Lcom/davils/krypt/x509/name/DistinguishedName;
+	public final fun getSubjectPublicKeyInfo ()Lkotlinx/io/bytestring/ByteString;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/x509/request/CertificationRequestBuilder {
+	public final fun extensions (Lkotlin/jvm/functions/Function1;)V
+	public final fun getSubject ()Lcom/davils/krypt/x509/name/DistinguishedName;
+	public final fun setSubject (Lcom/davils/krypt/x509/name/DistinguishedName;)V
+	public final fun subject (Lkotlin/jvm/functions/Function1;)V
+}
+
+public final class com/davils/krypt/x509/request/CertificationRequests {
+	public fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/x509/X509Limits;)V
+	public synthetic fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/x509/X509Limits;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun create (Lcom/davils/krypt/primitive/signature/Signer;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun decode (Lkotlinx/io/bytestring/ByteString;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun decodePem (Ljava/lang/String;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun encodePem (Lcom/davils/krypt/x509/request/CertificationRequest;)Ljava/lang/String;
+	public final fun getCrypto ()Lcom/davils/krypt/primitive/Crypto;
+	public final fun getLimits ()Lcom/davils/krypt/x509/X509Limits;
+	public fun toString ()Ljava/lang/String;
+	public final fun verify (Lcom/davils/krypt/x509/request/CertificationRequest;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+

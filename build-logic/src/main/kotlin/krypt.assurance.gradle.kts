@@ -94,6 +94,7 @@ kreate {
                 ":krypt-keyset",
                 ":krypt-stream",
                 ":krypt-storage",
+                ":krypt-x509",
                 ":krypt-testing",
             )
         }

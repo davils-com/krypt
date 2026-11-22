@@ -32,6 +32,7 @@ dependencies {
         api(project(":krypt-keyset"))
         api(project(":krypt-stream"))
         api(project(":krypt-storage"))
+        api(project(":krypt-x509"))
         api(project(":krypt-testing"))
     }
 }

@@ -1,0 +1,936 @@
+// Klib ABI Dump
+// Targets: [wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.davils:krypt-x509>
+final enum class com.davils.krypt.x509.extension/KeyUsage : kotlin/Enum<com.davils.krypt.x509.extension/KeyUsage> { // com.davils.krypt.x509.extension/KeyUsage|null[0]
+    enum entry ContentCommitment // com.davils.krypt.x509.extension/KeyUsage.ContentCommitment|null[0]
+    enum entry CrlSign // com.davils.krypt.x509.extension/KeyUsage.CrlSign|null[0]
+    enum entry DataEncipherment // com.davils.krypt.x509.extension/KeyUsage.DataEncipherment|null[0]
+    enum entry DecipherOnly // com.davils.krypt.x509.extension/KeyUsage.DecipherOnly|null[0]
+    enum entry DigitalSignature // com.davils.krypt.x509.extension/KeyUsage.DigitalSignature|null[0]
+    enum entry EncipherOnly // com.davils.krypt.x509.extension/KeyUsage.EncipherOnly|null[0]
+    enum entry KeyAgreement // com.davils.krypt.x509.extension/KeyUsage.KeyAgreement|null[0]
+    enum entry KeyCertSign // com.davils.krypt.x509.extension/KeyUsage.KeyCertSign|null[0]
+    enum entry KeyEncipherment // com.davils.krypt.x509.extension/KeyUsage.KeyEncipherment|null[0]
+
+    final val bit // com.davils.krypt.x509.extension/KeyUsage.bit|{}bit[0]
+        final fun <get-bit>(): kotlin/Int // com.davils.krypt.x509.extension/KeyUsage.bit.<get-bit>|<get-bit>(){}[0]
+    final val entries // com.davils.krypt.x509.extension/KeyUsage.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.x509.extension/KeyUsage> // com.davils.krypt.x509.extension/KeyUsage.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.x509.extension/KeyUsage // com.davils.krypt.x509.extension/KeyUsage.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.x509.extension/KeyUsage> // com.davils.krypt.x509.extension/KeyUsage.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.x509.path/PathFailure : kotlin/Enum<com.davils.krypt.x509.path/PathFailure> { // com.davils.krypt.x509.path/PathFailure|null[0]
+    enum entry AlgorithmNotPermitted // com.davils.krypt.x509.path/PathFailure.AlgorithmNotPermitted|null[0]
+    enum entry BadSignature // com.davils.krypt.x509.path/PathFailure.BadSignature|null[0]
+    enum entry Expired // com.davils.krypt.x509.path/PathFailure.Expired|null[0]
+    enum entry KeyUsage // com.davils.krypt.x509.path/PathFailure.KeyUsage|null[0]
+    enum entry NameConstraints // com.davils.krypt.x509.path/PathFailure.NameConstraints|null[0]
+    enum entry NoTrustedPath // com.davils.krypt.x509.path/PathFailure.NoTrustedPath|null[0]
+    enum entry NotAnAuthority // com.davils.krypt.x509.path/PathFailure.NotAnAuthority|null[0]
+    enum entry PathTooLong // com.davils.krypt.x509.path/PathFailure.PathTooLong|null[0]
+    enum entry Policy // com.davils.krypt.x509.path/PathFailure.Policy|null[0]
+    enum entry Purpose // com.davils.krypt.x509.path/PathFailure.Purpose|null[0]
+    enum entry RevocationUnknown // com.davils.krypt.x509.path/PathFailure.RevocationUnknown|null[0]
+    enum entry Revoked // com.davils.krypt.x509.path/PathFailure.Revoked|null[0]
+    enum entry UnknownCriticalExtension // com.davils.krypt.x509.path/PathFailure.UnknownCriticalExtension|null[0]
+
+    final val entries // com.davils.krypt.x509.path/PathFailure.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.x509.path/PathFailure> // com.davils.krypt.x509.path/PathFailure.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.x509.path/PathFailure // com.davils.krypt.x509.path/PathFailure.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.x509.path/PathFailure> // com.davils.krypt.x509.path/PathFailure.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.x509.path/RevocationStatus : kotlin/Enum<com.davils.krypt.x509.path/RevocationStatus> { // com.davils.krypt.x509.path/RevocationStatus|null[0]
+    enum entry Good // com.davils.krypt.x509.path/RevocationStatus.Good|null[0]
+    enum entry Revoked // com.davils.krypt.x509.path/RevocationStatus.Revoked|null[0]
+    enum entry Unknown // com.davils.krypt.x509.path/RevocationStatus.Unknown|null[0]
+
+    final val entries // com.davils.krypt.x509.path/RevocationStatus.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.x509.path/RevocationStatus> // com.davils.krypt.x509.path/RevocationStatus.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.x509.path/RevocationStatus // com.davils.krypt.x509.path/RevocationStatus.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.x509.path/RevocationStatus> // com.davils.krypt.x509.path/RevocationStatus.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.x509/RevocationReason : kotlin/Enum<com.davils.krypt.x509/RevocationReason> { // com.davils.krypt.x509/RevocationReason|null[0]
+    enum entry AaCompromise // com.davils.krypt.x509/RevocationReason.AaCompromise|null[0]
+    enum entry AffiliationChanged // com.davils.krypt.x509/RevocationReason.AffiliationChanged|null[0]
+    enum entry CaCompromise // com.davils.krypt.x509/RevocationReason.CaCompromise|null[0]
+    enum entry CertificateHold // com.davils.krypt.x509/RevocationReason.CertificateHold|null[0]
+    enum entry CessationOfOperation // com.davils.krypt.x509/RevocationReason.CessationOfOperation|null[0]
+    enum entry KeyCompromise // com.davils.krypt.x509/RevocationReason.KeyCompromise|null[0]
+    enum entry PrivilegeWithdrawn // com.davils.krypt.x509/RevocationReason.PrivilegeWithdrawn|null[0]
+    enum entry RemoveFromCrl // com.davils.krypt.x509/RevocationReason.RemoveFromCrl|null[0]
+    enum entry Superseded // com.davils.krypt.x509/RevocationReason.Superseded|null[0]
+    enum entry Unspecified // com.davils.krypt.x509/RevocationReason.Unspecified|null[0]
+
+    final val bit // com.davils.krypt.x509/RevocationReason.bit|{}bit[0]
+        final fun <get-bit>(): kotlin/Int? // com.davils.krypt.x509/RevocationReason.bit.<get-bit>|<get-bit>(){}[0]
+    final val code // com.davils.krypt.x509/RevocationReason.code|{}code[0]
+        final fun <get-code>(): kotlin/Int // com.davils.krypt.x509/RevocationReason.code.<get-code>|<get-code>(){}[0]
+    final val entries // com.davils.krypt.x509/RevocationReason.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.x509/RevocationReason> // com.davils.krypt.x509/RevocationReason.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.x509/RevocationReason // com.davils.krypt.x509/RevocationReason.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.x509/RevocationReason> // com.davils.krypt.x509/RevocationReason.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.x509/X509Failure : kotlin/Enum<com.davils.krypt.x509/X509Failure> { // com.davils.krypt.x509/X509Failure|null[0]
+    enum entry Malformed // com.davils.krypt.x509/X509Failure.Malformed|null[0]
+    enum entry Unsupported // com.davils.krypt.x509/X509Failure.Unsupported|null[0]
+
+    final val entries // com.davils.krypt.x509/X509Failure.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.x509/X509Failure> // com.davils.krypt.x509/X509Failure.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.x509/X509Failure // com.davils.krypt.x509/X509Failure.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.x509/X509Failure> // com.davils.krypt.x509/X509Failure.values|values#static(){}[0]
+}
+
+abstract fun interface com.davils.krypt.x509.path/RevocationChecker { // com.davils.krypt.x509.path/RevocationChecker|null[0]
+    abstract suspend fun check(com.davils.krypt.x509/Certificate, com.davils.krypt.x509/Certificate?, com.davils.krypt.x509.path/TrustAnchor, kotlin.time/Instant): com.davils.krypt.x509.path/RevocationStatus // com.davils.krypt.x509.path/RevocationChecker.check|check(com.davils.krypt.x509.Certificate;com.davils.krypt.x509.Certificate?;com.davils.krypt.x509.path.TrustAnchor;kotlin.time.Instant){}[0]
+}
+
+abstract fun interface com.davils.krypt.x509.path/RevocationListSource { // com.davils.krypt.x509.path/RevocationListSource|null[0]
+    abstract suspend fun revocationLists(com.davils.krypt.x509/Certificate): kotlin.collections/List<com.davils.krypt.x509.crl/RevocationList> // com.davils.krypt.x509.path/RevocationListSource.revocationLists|revocationLists(com.davils.krypt.x509.Certificate){}[0]
+}
+
+sealed interface com.davils.krypt.x509.name/GeneralName { // com.davils.krypt.x509.name/GeneralName|null[0]
+    final class Directory : com.davils.krypt.x509.name/GeneralName { // com.davils.krypt.x509.name/GeneralName.Directory|null[0]
+        constructor <init>(com.davils.krypt.x509.name/DistinguishedName) // com.davils.krypt.x509.name/GeneralName.Directory.<init>|<init>(com.davils.krypt.x509.name.DistinguishedName){}[0]
+
+        final val name // com.davils.krypt.x509.name/GeneralName.Directory.name|{}name[0]
+            final fun <get-name>(): com.davils.krypt.x509.name/DistinguishedName // com.davils.krypt.x509.name/GeneralName.Directory.name.<get-name>|<get-name>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.x509.name/GeneralName.Directory.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.x509.name/GeneralName.Directory.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.x509.name/GeneralName.Directory.toString|toString(){}[0]
+    }
+
+    final class Dns : com.davils.krypt.x509.name/GeneralName { // com.davils.krypt.x509.name/GeneralName.Dns|null[0]
+        constructor <init>(kotlin/String) // com.davils.krypt.x509.name/GeneralName.Dns.<init>|<init>(kotlin.String){}[0]
+
+        final val name // com.davils.krypt.x509.name/GeneralName.Dns.name|{}name[0]
+            final fun <get-name>(): kotlin/String // com.davils.krypt.x509.name/GeneralName.Dns.name.<get-name>|<get-name>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.x509.name/GeneralName.Dns.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.x509.name/GeneralName.Dns.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.x509.name/GeneralName.Dns.toString|toString(){}[0]
+    }
+
+    final class Email : com.davils.krypt.x509.name/GeneralName { // com.davils.krypt.x509.name/GeneralName.Email|null[0]
+        constructor <init>(kotlin/String) // com.davils.krypt.x509.name/GeneralName.Email.<init>|<init>(kotlin.String){}[0]
+
+        final val address // com.davils.krypt.x509.name/GeneralName.Email.address|{}address[0]
+            final fun <get-address>(): kotlin/String // com.davils.krypt.x509.name/GeneralName.Email.address.<get-address>|<get-address>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.x509.name/GeneralName.Email.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.x509.name/GeneralName.Email.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.x509.name/GeneralName.Email.toString|toString(){}[0]
+    }
+
+    final class IpAddress : com.davils.krypt.x509.name/GeneralName { // com.davils.krypt.x509.name/GeneralName.IpAddress|null[0]
+        constructor <init>(kotlinx.io.bytestring/ByteString) // com.davils.krypt.x509.name/GeneralName.IpAddress.<init>|<init>(kotlinx.io.bytestring.ByteString){}[0]
+
+        final val bytes // com.davils.krypt.x509.name/GeneralName.IpAddress.bytes|{}bytes[0]
+            final fun <get-bytes>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.x509.name/GeneralName.IpAddress.bytes.<get-bytes>|<get-bytes>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.x509.name/GeneralName.IpAddress.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.x509.name/GeneralName.IpAddress.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.x509.name/GeneralName.IpAddress.toString|toString(){}[0]
+
+        final object Companion { // com.davils.krypt.x509.name/GeneralName.IpAddress.Companion|null[0]
+            final fun parseOrNull(kotlin/String): com.davils.krypt.x509.name/GeneralName.IpAddress? // com.davils.krypt.x509.name/GeneralName.IpAddress.Companion.parseOrNull|parseOrNull(kotlin.String){}[0]
+        }
+    }
+
+    final class Other : com.davils.krypt.x509.name/GeneralName { // com.davils.krypt.x509.name/GeneralName.Other|null[0]
+        final val encoded // com.davils.krypt.x509.name/GeneralName.Other.encoded|{}encoded[0]
+            final fun <get-encoded>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.x509.name/GeneralName.Other.encoded.<get-encoded>|<get-encoded>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.x509.name/GeneralName.Other.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.x509.name/GeneralName.Other.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.x509.name/GeneralName.Other.toString|toString(){}[0]
+    }
+
+    final class RegisteredId : com.davils.krypt.x509.name/GeneralName { // com.davils.krypt.x509.name/GeneralName.RegisteredId|null[0]
+        constructor <init>(com.davils.krypt.asn1/ObjectIdentifier) // com.davils.krypt.x509.name/GeneralName.RegisteredId.<init>|<init>(com.davils.krypt.asn1.ObjectIdentifier){}[0]
+
+        final val id // com.davils.krypt.x509.name/GeneralName.RegisteredId.id|{}id[0]
+            final fun <get-id>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.name/GeneralName.RegisteredId.id.<get-id>|<get-id>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.x509.name/GeneralName.RegisteredId.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.x509.name/GeneralName.RegisteredId.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.x509.name/GeneralName.RegisteredId.toString|toString(){}[0]
+    }
+
+    final class Uri : com.davils.krypt.x509.name/GeneralName { // com.davils.krypt.x509.name/GeneralName.Uri|null[0]
+        constructor <init>(kotlin/String) // com.davils.krypt.x509.name/GeneralName.Uri.<init>|<init>(kotlin.String){}[0]
+
+        final val uri // com.davils.krypt.x509.name/GeneralName.Uri.uri|{}uri[0]
+            final fun <get-uri>(): kotlin/String // com.davils.krypt.x509.name/GeneralName.Uri.uri.<get-uri>|<get-uri>(){}[0]
+
+        final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.x509.name/GeneralName.Uri.equals|equals(kotlin.Any?){}[0]
+        final fun hashCode(): kotlin/Int // com.davils.krypt.x509.name/GeneralName.Uri.hashCode|hashCode(){}[0]
+        final fun toString(): kotlin/String // com.davils.krypt.x509.name/GeneralName.Uri.toString|toString(){}[0]
+    }
+}
+
+sealed interface com.davils.krypt.x509.path/PathValidation { // com.davils.krypt.x509.path/PathValidation|null[0]
+    abstract val isValid // com.davils.krypt.x509.path/PathValidation.isValid|{}isValid[0]
+        abstract fun <get-isValid>(): kotlin/Boolean // com.davils.krypt.x509.path/PathValidation.isValid.<get-isValid>|<get-isValid>(){}[0]
+
+    final class Invalid : com.davils.krypt.x509.path/PathValidation { // com.davils.krypt.x509.path/PathValidation.Invalid|null[0]
+        final val certificate // com.davils.krypt.x509.path/PathValidation.Invalid.certificate|{}certificate[0]
+            final fun <get-certificate>(): com.davils.krypt.x509/Certificate // com.davils.krypt.x509.path/PathValidation.Invalid.certificate.<get-certificate>|<get-certificate>(){}[0]
+        final val failure // com.davils.krypt.x509.path/PathValidation.Invalid.failure|{}failure[0]
+            final fun <get-failure>(): com.davils.krypt.x509.path/PathFailure // com.davils.krypt.x509.path/PathValidation.Invalid.failure.<get-failure>|<get-failure>(){}[0]
+        final val isValid // com.davils.krypt.x509.path/PathValidation.Invalid.isValid|{}isValid[0]
+            final fun <get-isValid>(): kotlin/Boolean // com.davils.krypt.x509.path/PathValidation.Invalid.isValid.<get-isValid>|<get-isValid>(){}[0]
+
+        final fun toString(): kotlin/String // com.davils.krypt.x509.path/PathValidation.Invalid.toString|toString(){}[0]
+    }
+
+    final class Valid : com.davils.krypt.x509.path/PathValidation { // com.davils.krypt.x509.path/PathValidation.Valid|null[0]
+        final val anchor // com.davils.krypt.x509.path/PathValidation.Valid.anchor|{}anchor[0]
+            final fun <get-anchor>(): com.davils.krypt.x509.path/TrustAnchor // com.davils.krypt.x509.path/PathValidation.Valid.anchor.<get-anchor>|<get-anchor>(){}[0]
+        final val isValid // com.davils.krypt.x509.path/PathValidation.Valid.isValid|{}isValid[0]
+            final fun <get-isValid>(): kotlin/Boolean // com.davils.krypt.x509.path/PathValidation.Valid.isValid.<get-isValid>|<get-isValid>(){}[0]
+        final val path // com.davils.krypt.x509.path/PathValidation.Valid.path|{}path[0]
+            final fun <get-path>(): kotlin.collections/List<com.davils.krypt.x509/Certificate> // com.davils.krypt.x509.path/PathValidation.Valid.path.<get-path>|<get-path>(){}[0]
+        final val policies // com.davils.krypt.x509.path/PathValidation.Valid.policies|{}policies[0]
+            final fun <get-policies>(): kotlin.collections/Set<com.davils.krypt.asn1/ObjectIdentifier> // com.davils.krypt.x509.path/PathValidation.Valid.policies.<get-policies>|<get-policies>(){}[0]
+
+        final fun toString(): kotlin/String // com.davils.krypt.x509.path/PathValidation.Valid.toString|toString(){}[0]
+    }
+}
+
+final class com.davils.krypt.x509.crl/IssuingDistributionPoint { // com.davils.krypt.x509.crl/IssuingDistributionPoint|null[0]
+    constructor <init>(kotlin.collections/List<com.davils.krypt.x509.name/GeneralName> = ..., kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin.collections/Set<com.davils.krypt.x509/RevocationReason>? = ..., kotlin/Boolean = ...) // com.davils.krypt.x509.crl/IssuingDistributionPoint.<init>|<init>(kotlin.collections.List<com.davils.krypt.x509.name.GeneralName>;kotlin.Boolean;kotlin.Boolean;kotlin.collections.Set<com.davils.krypt.x509.RevocationReason>?;kotlin.Boolean){}[0]
+
+    final val isCaOnly // com.davils.krypt.x509.crl/IssuingDistributionPoint.isCaOnly|{}isCaOnly[0]
+        final fun <get-isCaOnly>(): kotlin/Boolean // com.davils.krypt.x509.crl/IssuingDistributionPoint.isCaOnly.<get-isCaOnly>|<get-isCaOnly>(){}[0]
+    final val isIndirect // com.davils.krypt.x509.crl/IssuingDistributionPoint.isIndirect|{}isIndirect[0]
+        final fun <get-isIndirect>(): kotlin/Boolean // com.davils.krypt.x509.crl/IssuingDistributionPoint.isIndirect.<get-isIndirect>|<get-isIndirect>(){}[0]
+    final val isUserOnly // com.davils.krypt.x509.crl/IssuingDistributionPoint.isUserOnly|{}isUserOnly[0]
+        final fun <get-isUserOnly>(): kotlin/Boolean // com.davils.krypt.x509.crl/IssuingDistributionPoint.isUserOnly.<get-isUserOnly>|<get-isUserOnly>(){}[0]
+    final val names // com.davils.krypt.x509.crl/IssuingDistributionPoint.names|{}names[0]
+        final fun <get-names>(): kotlin.collections/List<com.davils.krypt.x509.name/GeneralName> // com.davils.krypt.x509.crl/IssuingDistributionPoint.names.<get-names>|<get-names>(){}[0]
+    final val onlySomeReasons // com.davils.krypt.x509.crl/IssuingDistributionPoint.onlySomeReasons|{}onlySomeReasons[0]
+        final fun <get-onlySomeReasons>(): kotlin.collections/Set<com.davils.krypt.x509/RevocationReason>? // com.davils.krypt.x509.crl/IssuingDistributionPoint.onlySomeReasons.<get-onlySomeReasons>|<get-onlySomeReasons>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.x509.crl/IssuingDistributionPoint.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.x509.crl/IssuingDistributionPoint.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.x509.crl/IssuingDistributionPoint.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.x509.crl/RevocationList { // com.davils.krypt.x509.crl/RevocationList|null[0]
+    final val deltaOf // com.davils.krypt.x509.crl/RevocationList.deltaOf|{}deltaOf[0]
+        final fun <get-deltaOf>(): com.davils.krypt.asn1/DerInteger? // com.davils.krypt.x509.crl/RevocationList.deltaOf.<get-deltaOf>|<get-deltaOf>(){}[0]
+    final val encoded // com.davils.krypt.x509.crl/RevocationList.encoded|{}encoded[0]
+        final fun <get-encoded>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.x509.crl/RevocationList.encoded.<get-encoded>|<get-encoded>(){}[0]
+    final val entries // com.davils.krypt.x509.crl/RevocationList.entries|{}entries[0]
+        final fun <get-entries>(): kotlin.collections/List<com.davils.krypt.x509.crl/RevokedCertificate> // com.davils.krypt.x509.crl/RevocationList.entries.<get-entries>|<get-entries>(){}[0]
+    final val extensions // com.davils.krypt.x509.crl/RevocationList.extensions|{}extensions[0]
+        final fun <get-extensions>(): com.davils.krypt.x509.extension/Extensions // com.davils.krypt.x509.crl/RevocationList.extensions.<get-extensions>|<get-extensions>(){}[0]
+    final val isDelta // com.davils.krypt.x509.crl/RevocationList.isDelta|{}isDelta[0]
+        final fun <get-isDelta>(): kotlin/Boolean // com.davils.krypt.x509.crl/RevocationList.isDelta.<get-isDelta>|<get-isDelta>(){}[0]
+    final val issuer // com.davils.krypt.x509.crl/RevocationList.issuer|{}issuer[0]
+        final fun <get-issuer>(): com.davils.krypt.x509.name/DistinguishedName // com.davils.krypt.x509.crl/RevocationList.issuer.<get-issuer>|<get-issuer>(){}[0]
+    final val issuingDistributionPoint // com.davils.krypt.x509.crl/RevocationList.issuingDistributionPoint|{}issuingDistributionPoint[0]
+        final fun <get-issuingDistributionPoint>(): com.davils.krypt.x509.crl/IssuingDistributionPoint? // com.davils.krypt.x509.crl/RevocationList.issuingDistributionPoint.<get-issuingDistributionPoint>|<get-issuingDistributionPoint>(){}[0]
+    final val nextUpdate // com.davils.krypt.x509.crl/RevocationList.nextUpdate|{}nextUpdate[0]
+        final fun <get-nextUpdate>(): kotlin.time/Instant? // com.davils.krypt.x509.crl/RevocationList.nextUpdate.<get-nextUpdate>|<get-nextUpdate>(){}[0]
+    final val number // com.davils.krypt.x509.crl/RevocationList.number|{}number[0]
+        final fun <get-number>(): com.davils.krypt.asn1/DerInteger? // com.davils.krypt.x509.crl/RevocationList.number.<get-number>|<get-number>(){}[0]
+    final val signature // com.davils.krypt.x509.crl/RevocationList.signature|{}signature[0]
+        final fun <get-signature>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.x509.crl/RevocationList.signature.<get-signature>|<get-signature>(){}[0]
+    final val signatureAlgorithm // com.davils.krypt.x509.crl/RevocationList.signatureAlgorithm|{}signatureAlgorithm[0]
+        final fun <get-signatureAlgorithm>(): com.davils.krypt.core.algorithm/SignatureAlgorithm? // com.davils.krypt.x509.crl/RevocationList.signatureAlgorithm.<get-signatureAlgorithm>|<get-signatureAlgorithm>(){}[0]
+    final val tbs // com.davils.krypt.x509.crl/RevocationList.tbs|{}tbs[0]
+        final fun <get-tbs>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.x509.crl/RevocationList.tbs.<get-tbs>|<get-tbs>(){}[0]
+    final val thisUpdate // com.davils.krypt.x509.crl/RevocationList.thisUpdate|{}thisUpdate[0]
+        final fun <get-thisUpdate>(): kotlin.time/Instant // com.davils.krypt.x509.crl/RevocationList.thisUpdate.<get-thisUpdate>|<get-thisUpdate>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.x509.crl/RevocationList.equals|equals(kotlin.Any?){}[0]
+    final fun find(com.davils.krypt.asn1/DerInteger): com.davils.krypt.x509.crl/RevokedCertificate? // com.davils.krypt.x509.crl/RevocationList.find|find(com.davils.krypt.asn1.DerInteger){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.x509.crl/RevocationList.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.x509.crl/RevocationList.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.x509.crl/RevocationListBuilder { // com.davils.krypt.x509.crl/RevocationListBuilder|null[0]
+    final var deltaOf // com.davils.krypt.x509.crl/RevocationListBuilder.deltaOf|{}deltaOf[0]
+        final fun <get-deltaOf>(): com.davils.krypt.asn1/DerInteger? // com.davils.krypt.x509.crl/RevocationListBuilder.deltaOf.<get-deltaOf>|<get-deltaOf>(){}[0]
+        final fun <set-deltaOf>(com.davils.krypt.asn1/DerInteger?) // com.davils.krypt.x509.crl/RevocationListBuilder.deltaOf.<set-deltaOf>|<set-deltaOf>(com.davils.krypt.asn1.DerInteger?){}[0]
+    final var issuer // com.davils.krypt.x509.crl/RevocationListBuilder.issuer|{}issuer[0]
+        final fun <get-issuer>(): com.davils.krypt.x509.name/DistinguishedName? // com.davils.krypt.x509.crl/RevocationListBuilder.issuer.<get-issuer>|<get-issuer>(){}[0]
+        final fun <set-issuer>(com.davils.krypt.x509.name/DistinguishedName?) // com.davils.krypt.x509.crl/RevocationListBuilder.issuer.<set-issuer>|<set-issuer>(com.davils.krypt.x509.name.DistinguishedName?){}[0]
+    final var issuingDistributionPoint // com.davils.krypt.x509.crl/RevocationListBuilder.issuingDistributionPoint|{}issuingDistributionPoint[0]
+        final fun <get-issuingDistributionPoint>(): com.davils.krypt.x509.crl/IssuingDistributionPoint? // com.davils.krypt.x509.crl/RevocationListBuilder.issuingDistributionPoint.<get-issuingDistributionPoint>|<get-issuingDistributionPoint>(){}[0]
+        final fun <set-issuingDistributionPoint>(com.davils.krypt.x509.crl/IssuingDistributionPoint?) // com.davils.krypt.x509.crl/RevocationListBuilder.issuingDistributionPoint.<set-issuingDistributionPoint>|<set-issuingDistributionPoint>(com.davils.krypt.x509.crl.IssuingDistributionPoint?){}[0]
+    final var nextUpdate // com.davils.krypt.x509.crl/RevocationListBuilder.nextUpdate|{}nextUpdate[0]
+        final fun <get-nextUpdate>(): kotlin.time/Instant? // com.davils.krypt.x509.crl/RevocationListBuilder.nextUpdate.<get-nextUpdate>|<get-nextUpdate>(){}[0]
+        final fun <set-nextUpdate>(kotlin.time/Instant?) // com.davils.krypt.x509.crl/RevocationListBuilder.nextUpdate.<set-nextUpdate>|<set-nextUpdate>(kotlin.time.Instant?){}[0]
+    final var number // com.davils.krypt.x509.crl/RevocationListBuilder.number|{}number[0]
+        final fun <get-number>(): com.davils.krypt.asn1/DerInteger? // com.davils.krypt.x509.crl/RevocationListBuilder.number.<get-number>|<get-number>(){}[0]
+        final fun <set-number>(com.davils.krypt.asn1/DerInteger?) // com.davils.krypt.x509.crl/RevocationListBuilder.number.<set-number>|<set-number>(com.davils.krypt.asn1.DerInteger?){}[0]
+    final var thisUpdate // com.davils.krypt.x509.crl/RevocationListBuilder.thisUpdate|{}thisUpdate[0]
+        final fun <get-thisUpdate>(): kotlin.time/Instant? // com.davils.krypt.x509.crl/RevocationListBuilder.thisUpdate.<get-thisUpdate>|<get-thisUpdate>(){}[0]
+        final fun <set-thisUpdate>(kotlin.time/Instant?) // com.davils.krypt.x509.crl/RevocationListBuilder.thisUpdate.<set-thisUpdate>|<set-thisUpdate>(kotlin.time.Instant?){}[0]
+
+    final fun extensions(kotlin/Function1<com.davils.krypt.x509.extension/ExtensionsBuilder, kotlin/Unit>) // com.davils.krypt.x509.crl/RevocationListBuilder.extensions|extensions(kotlin.Function1<com.davils.krypt.x509.extension.ExtensionsBuilder,kotlin.Unit>){}[0]
+    final fun revoke(com.davils.krypt.asn1/DerInteger, kotlin.time/Instant, com.davils.krypt.x509/RevocationReason? = ..., kotlin.time/Instant? = ...) // com.davils.krypt.x509.crl/RevocationListBuilder.revoke|revoke(com.davils.krypt.asn1.DerInteger;kotlin.time.Instant;com.davils.krypt.x509.RevocationReason?;kotlin.time.Instant?){}[0]
+}
+
+final class com.davils.krypt.x509.crl/RevocationLists { // com.davils.krypt.x509.crl/RevocationLists|null[0]
+    constructor <init>(com.davils.krypt.primitive/Crypto, com.davils.krypt.x509/X509Limits = ...) // com.davils.krypt.x509.crl/RevocationLists.<init>|<init>(com.davils.krypt.primitive.Crypto;com.davils.krypt.x509.X509Limits){}[0]
+
+    final val crypto // com.davils.krypt.x509.crl/RevocationLists.crypto|{}crypto[0]
+        final fun <get-crypto>(): com.davils.krypt.primitive/Crypto // com.davils.krypt.x509.crl/RevocationLists.crypto.<get-crypto>|<get-crypto>(){}[0]
+    final val limits // com.davils.krypt.x509.crl/RevocationLists.limits|{}limits[0]
+        final fun <get-limits>(): com.davils.krypt.x509/X509Limits // com.davils.krypt.x509.crl/RevocationLists.limits.<get-limits>|<get-limits>(){}[0]
+
+    final fun decode(kotlinx.io.bytestring/ByteString): com.davils.kore.core.outcome/Outcome<com.davils.krypt.x509.crl/RevocationList, com.davils.krypt.x509/X509Failure> // com.davils.krypt.x509.crl/RevocationLists.decode|decode(kotlinx.io.bytestring.ByteString){}[0]
+    final fun decodePem(kotlin/String): com.davils.kore.core.outcome/Outcome<com.davils.krypt.x509.crl/RevocationList, com.davils.krypt.x509/X509Failure> // com.davils.krypt.x509.crl/RevocationLists.decodePem|decodePem(kotlin.String){}[0]
+    final fun encodePem(com.davils.krypt.x509.crl/RevocationList): kotlin/String // com.davils.krypt.x509.crl/RevocationLists.encodePem|encodePem(com.davils.krypt.x509.crl.RevocationList){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.x509.crl/RevocationLists.toString|toString(){}[0]
+    final suspend fun issue(com.davils.krypt.primitive.signature/Signer, kotlin/Function1<com.davils.krypt.x509.crl/RevocationListBuilder, kotlin/Unit>): com.davils.krypt.x509.crl/RevocationList // com.davils.krypt.x509.crl/RevocationLists.issue|issue(com.davils.krypt.primitive.signature.Signer;kotlin.Function1<com.davils.krypt.x509.crl.RevocationListBuilder,kotlin.Unit>){}[0]
+    final suspend fun verifySignature(com.davils.krypt.x509.crl/RevocationList, com.davils.krypt.primitive.key/PublicKey): com.davils.krypt.primitive/Verification // com.davils.krypt.x509.crl/RevocationLists.verifySignature|verifySignature(com.davils.krypt.x509.crl.RevocationList;com.davils.krypt.primitive.key.PublicKey){}[0]
+}
+
+final class com.davils.krypt.x509.crl/RevokedCertificate { // com.davils.krypt.x509.crl/RevokedCertificate|null[0]
+    constructor <init>(com.davils.krypt.asn1/DerInteger, kotlin.time/Instant, com.davils.krypt.x509/RevocationReason? = ..., kotlin.time/Instant? = ..., kotlin.collections/List<com.davils.krypt.x509.name/GeneralName> = ...) // com.davils.krypt.x509.crl/RevokedCertificate.<init>|<init>(com.davils.krypt.asn1.DerInteger;kotlin.time.Instant;com.davils.krypt.x509.RevocationReason?;kotlin.time.Instant?;kotlin.collections.List<com.davils.krypt.x509.name.GeneralName>){}[0]
+
+    final val certificateIssuer // com.davils.krypt.x509.crl/RevokedCertificate.certificateIssuer|{}certificateIssuer[0]
+        final fun <get-certificateIssuer>(): kotlin.collections/List<com.davils.krypt.x509.name/GeneralName> // com.davils.krypt.x509.crl/RevokedCertificate.certificateIssuer.<get-certificateIssuer>|<get-certificateIssuer>(){}[0]
+    final val invalidAt // com.davils.krypt.x509.crl/RevokedCertificate.invalidAt|{}invalidAt[0]
+        final fun <get-invalidAt>(): kotlin.time/Instant? // com.davils.krypt.x509.crl/RevokedCertificate.invalidAt.<get-invalidAt>|<get-invalidAt>(){}[0]
+    final val reason // com.davils.krypt.x509.crl/RevokedCertificate.reason|{}reason[0]
+        final fun <get-reason>(): com.davils.krypt.x509/RevocationReason? // com.davils.krypt.x509.crl/RevokedCertificate.reason.<get-reason>|<get-reason>(){}[0]
+    final val revokedAt // com.davils.krypt.x509.crl/RevokedCertificate.revokedAt|{}revokedAt[0]
+        final fun <get-revokedAt>(): kotlin.time/Instant // com.davils.krypt.x509.crl/RevokedCertificate.revokedAt.<get-revokedAt>|<get-revokedAt>(){}[0]
+    final val serialNumber // com.davils.krypt.x509.crl/RevokedCertificate.serialNumber|{}serialNumber[0]
+        final fun <get-serialNumber>(): com.davils.krypt.asn1/DerInteger // com.davils.krypt.x509.crl/RevokedCertificate.serialNumber.<get-serialNumber>|<get-serialNumber>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.x509.crl/RevokedCertificate.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.x509.crl/RevokedCertificate.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.x509.crl/RevokedCertificate.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.x509.extension/AccessDescription { // com.davils.krypt.x509.extension/AccessDescription|null[0]
+    constructor <init>(com.davils.krypt.asn1/ObjectIdentifier, com.davils.krypt.x509.name/GeneralName) // com.davils.krypt.x509.extension/AccessDescription.<init>|<init>(com.davils.krypt.asn1.ObjectIdentifier;com.davils.krypt.x509.name.GeneralName){}[0]
+
+    final val location // com.davils.krypt.x509.extension/AccessDescription.location|{}location[0]
+        final fun <get-location>(): com.davils.krypt.x509.name/GeneralName // com.davils.krypt.x509.extension/AccessDescription.location.<get-location>|<get-location>(){}[0]
+    final val method // com.davils.krypt.x509.extension/AccessDescription.method|{}method[0]
+        final fun <get-method>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/AccessDescription.method.<get-method>|<get-method>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.x509.extension/AccessDescription.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.x509.extension/AccessDescription.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.x509.extension/AccessDescription.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.x509.extension/AuthorityKeyIdentifier { // com.davils.krypt.x509.extension/AuthorityKeyIdentifier|null[0]
+    constructor <init>(kotlinx.io.bytestring/ByteString?, kotlin.collections/List<com.davils.krypt.x509.name/GeneralName> = ..., com.davils.krypt.asn1/DerInteger? = ...) // com.davils.krypt.x509.extension/AuthorityKeyIdentifier.<init>|<init>(kotlinx.io.bytestring.ByteString?;kotlin.collections.List<com.davils.krypt.x509.name.GeneralName>;com.davils.krypt.asn1.DerInteger?){}[0]
+
+    final val issuer // com.davils.krypt.x509.extension/AuthorityKeyIdentifier.issuer|{}issuer[0]
+        final fun <get-issuer>(): kotlin.collections/List<com.davils.krypt.x509.name/GeneralName> // com.davils.krypt.x509.extension/AuthorityKeyIdentifier.issuer.<get-issuer>|<get-issuer>(){}[0]
+    final val keyIdentifier // com.davils.krypt.x509.extension/AuthorityKeyIdentifier.keyIdentifier|{}keyIdentifier[0]
+        final fun <get-keyIdentifier>(): kotlinx.io.bytestring/ByteString? // com.davils.krypt.x509.extension/AuthorityKeyIdentifier.keyIdentifier.<get-keyIdentifier>|<get-keyIdentifier>(){}[0]
+    final val serialNumber // com.davils.krypt.x509.extension/AuthorityKeyIdentifier.serialNumber|{}serialNumber[0]
+        final fun <get-serialNumber>(): com.davils.krypt.asn1/DerInteger? // com.davils.krypt.x509.extension/AuthorityKeyIdentifier.serialNumber.<get-serialNumber>|<get-serialNumber>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.x509.extension/AuthorityKeyIdentifier.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.x509.extension/AuthorityKeyIdentifier.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.x509.extension/AuthorityKeyIdentifier.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.x509.extension/BasicConstraints { // com.davils.krypt.x509.extension/BasicConstraints|null[0]
+    constructor <init>(kotlin/Boolean, kotlin/Int? = ...) // com.davils.krypt.x509.extension/BasicConstraints.<init>|<init>(kotlin.Boolean;kotlin.Int?){}[0]
+
+    final val isCa // com.davils.krypt.x509.extension/BasicConstraints.isCa|{}isCa[0]
+        final fun <get-isCa>(): kotlin/Boolean // com.davils.krypt.x509.extension/BasicConstraints.isCa.<get-isCa>|<get-isCa>(){}[0]
+    final val pathLength // com.davils.krypt.x509.extension/BasicConstraints.pathLength|{}pathLength[0]
+        final fun <get-pathLength>(): kotlin/Int? // com.davils.krypt.x509.extension/BasicConstraints.pathLength.<get-pathLength>|<get-pathLength>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.x509.extension/BasicConstraints.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.x509.extension/BasicConstraints.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.x509.extension/BasicConstraints.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.x509.extension/DistributionPoint { // com.davils.krypt.x509.extension/DistributionPoint|null[0]
+    constructor <init>(kotlin.collections/List<com.davils.krypt.x509.name/GeneralName>, kotlin.collections/Set<com.davils.krypt.x509/RevocationReason>? = ..., kotlin.collections/List<com.davils.krypt.x509.name/GeneralName> = ...) // com.davils.krypt.x509.extension/DistributionPoint.<init>|<init>(kotlin.collections.List<com.davils.krypt.x509.name.GeneralName>;kotlin.collections.Set<com.davils.krypt.x509.RevocationReason>?;kotlin.collections.List<com.davils.krypt.x509.name.GeneralName>){}[0]
+
+    final val crlIssuer // com.davils.krypt.x509.extension/DistributionPoint.crlIssuer|{}crlIssuer[0]
+        final fun <get-crlIssuer>(): kotlin.collections/List<com.davils.krypt.x509.name/GeneralName> // com.davils.krypt.x509.extension/DistributionPoint.crlIssuer.<get-crlIssuer>|<get-crlIssuer>(){}[0]
+    final val names // com.davils.krypt.x509.extension/DistributionPoint.names|{}names[0]
+        final fun <get-names>(): kotlin.collections/List<com.davils.krypt.x509.name/GeneralName> // com.davils.krypt.x509.extension/DistributionPoint.names.<get-names>|<get-names>(){}[0]
+    final val reasons // com.davils.krypt.x509.extension/DistributionPoint.reasons|{}reasons[0]
+        final fun <get-reasons>(): kotlin.collections/Set<com.davils.krypt.x509/RevocationReason>? // com.davils.krypt.x509.extension/DistributionPoint.reasons.<get-reasons>|<get-reasons>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.x509.extension/DistributionPoint.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.x509.extension/DistributionPoint.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.x509.extension/DistributionPoint.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.x509.extension/Extension { // com.davils.krypt.x509.extension/Extension|null[0]
+    constructor <init>(com.davils.krypt.asn1/ObjectIdentifier, kotlin/Boolean, kotlinx.io.bytestring/ByteString) // com.davils.krypt.x509.extension/Extension.<init>|<init>(com.davils.krypt.asn1.ObjectIdentifier;kotlin.Boolean;kotlinx.io.bytestring.ByteString){}[0]
+
+    final val id // com.davils.krypt.x509.extension/Extension.id|{}id[0]
+        final fun <get-id>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/Extension.id.<get-id>|<get-id>(){}[0]
+    final val isCritical // com.davils.krypt.x509.extension/Extension.isCritical|{}isCritical[0]
+        final fun <get-isCritical>(): kotlin/Boolean // com.davils.krypt.x509.extension/Extension.isCritical.<get-isCritical>|<get-isCritical>(){}[0]
+    final val value // com.davils.krypt.x509.extension/Extension.value|{}value[0]
+        final fun <get-value>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.x509.extension/Extension.value.<get-value>|<get-value>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.x509.extension/Extension.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.x509.extension/Extension.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.x509.extension/Extension.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.x509.extension/Extensions { // com.davils.krypt.x509.extension/Extensions|null[0]
+    final val all // com.davils.krypt.x509.extension/Extensions.all|{}all[0]
+        final fun <get-all>(): kotlin.collections/List<com.davils.krypt.x509.extension/Extension> // com.davils.krypt.x509.extension/Extensions.all.<get-all>|<get-all>(){}[0]
+    final val authorityInformationAccess // com.davils.krypt.x509.extension/Extensions.authorityInformationAccess|{}authorityInformationAccess[0]
+        final fun <get-authorityInformationAccess>(): kotlin.collections/List<com.davils.krypt.x509.extension/AccessDescription> // com.davils.krypt.x509.extension/Extensions.authorityInformationAccess.<get-authorityInformationAccess>|<get-authorityInformationAccess>(){}[0]
+    final val authorityKeyIdentifier // com.davils.krypt.x509.extension/Extensions.authorityKeyIdentifier|{}authorityKeyIdentifier[0]
+        final fun <get-authorityKeyIdentifier>(): com.davils.krypt.x509.extension/AuthorityKeyIdentifier? // com.davils.krypt.x509.extension/Extensions.authorityKeyIdentifier.<get-authorityKeyIdentifier>|<get-authorityKeyIdentifier>(){}[0]
+    final val basicConstraints // com.davils.krypt.x509.extension/Extensions.basicConstraints|{}basicConstraints[0]
+        final fun <get-basicConstraints>(): com.davils.krypt.x509.extension/BasicConstraints? // com.davils.krypt.x509.extension/Extensions.basicConstraints.<get-basicConstraints>|<get-basicConstraints>(){}[0]
+    final val certificatePolicies // com.davils.krypt.x509.extension/Extensions.certificatePolicies|{}certificatePolicies[0]
+        final fun <get-certificatePolicies>(): kotlin.collections/List<com.davils.krypt.asn1/ObjectIdentifier>? // com.davils.krypt.x509.extension/Extensions.certificatePolicies.<get-certificatePolicies>|<get-certificatePolicies>(){}[0]
+    final val crlDistributionPoints // com.davils.krypt.x509.extension/Extensions.crlDistributionPoints|{}crlDistributionPoints[0]
+        final fun <get-crlDistributionPoints>(): kotlin.collections/List<com.davils.krypt.x509.extension/DistributionPoint> // com.davils.krypt.x509.extension/Extensions.crlDistributionPoints.<get-crlDistributionPoints>|<get-crlDistributionPoints>(){}[0]
+    final val extendedKeyUsage // com.davils.krypt.x509.extension/Extensions.extendedKeyUsage|{}extendedKeyUsage[0]
+        final fun <get-extendedKeyUsage>(): kotlin.collections/List<com.davils.krypt.asn1/ObjectIdentifier>? // com.davils.krypt.x509.extension/Extensions.extendedKeyUsage.<get-extendedKeyUsage>|<get-extendedKeyUsage>(){}[0]
+    final val freshestCrl // com.davils.krypt.x509.extension/Extensions.freshestCrl|{}freshestCrl[0]
+        final fun <get-freshestCrl>(): kotlin.collections/List<com.davils.krypt.x509.extension/DistributionPoint> // com.davils.krypt.x509.extension/Extensions.freshestCrl.<get-freshestCrl>|<get-freshestCrl>(){}[0]
+    final val inhibitAnyPolicy // com.davils.krypt.x509.extension/Extensions.inhibitAnyPolicy|{}inhibitAnyPolicy[0]
+        final fun <get-inhibitAnyPolicy>(): kotlin/Int? // com.davils.krypt.x509.extension/Extensions.inhibitAnyPolicy.<get-inhibitAnyPolicy>|<get-inhibitAnyPolicy>(){}[0]
+    final val isOcspNoCheck // com.davils.krypt.x509.extension/Extensions.isOcspNoCheck|{}isOcspNoCheck[0]
+        final fun <get-isOcspNoCheck>(): kotlin/Boolean // com.davils.krypt.x509.extension/Extensions.isOcspNoCheck.<get-isOcspNoCheck>|<get-isOcspNoCheck>(){}[0]
+    final val issuerAlternativeNames // com.davils.krypt.x509.extension/Extensions.issuerAlternativeNames|{}issuerAlternativeNames[0]
+        final fun <get-issuerAlternativeNames>(): kotlin.collections/List<com.davils.krypt.x509.name/GeneralName> // com.davils.krypt.x509.extension/Extensions.issuerAlternativeNames.<get-issuerAlternativeNames>|<get-issuerAlternativeNames>(){}[0]
+    final val keyUsage // com.davils.krypt.x509.extension/Extensions.keyUsage|{}keyUsage[0]
+        final fun <get-keyUsage>(): kotlin.collections/Set<com.davils.krypt.x509.extension/KeyUsage>? // com.davils.krypt.x509.extension/Extensions.keyUsage.<get-keyUsage>|<get-keyUsage>(){}[0]
+    final val nameConstraints // com.davils.krypt.x509.extension/Extensions.nameConstraints|{}nameConstraints[0]
+        final fun <get-nameConstraints>(): com.davils.krypt.x509.extension/NameConstraints? // com.davils.krypt.x509.extension/Extensions.nameConstraints.<get-nameConstraints>|<get-nameConstraints>(){}[0]
+    final val policyConstraints // com.davils.krypt.x509.extension/Extensions.policyConstraints|{}policyConstraints[0]
+        final fun <get-policyConstraints>(): com.davils.krypt.x509.extension/PolicyConstraints? // com.davils.krypt.x509.extension/Extensions.policyConstraints.<get-policyConstraints>|<get-policyConstraints>(){}[0]
+    final val policyMappings // com.davils.krypt.x509.extension/Extensions.policyMappings|{}policyMappings[0]
+        final fun <get-policyMappings>(): kotlin.collections/List<com.davils.krypt.x509.extension/PolicyMapping> // com.davils.krypt.x509.extension/Extensions.policyMappings.<get-policyMappings>|<get-policyMappings>(){}[0]
+    final val subjectAlternativeNames // com.davils.krypt.x509.extension/Extensions.subjectAlternativeNames|{}subjectAlternativeNames[0]
+        final fun <get-subjectAlternativeNames>(): kotlin.collections/List<com.davils.krypt.x509.name/GeneralName> // com.davils.krypt.x509.extension/Extensions.subjectAlternativeNames.<get-subjectAlternativeNames>|<get-subjectAlternativeNames>(){}[0]
+    final val subjectInformationAccess // com.davils.krypt.x509.extension/Extensions.subjectInformationAccess|{}subjectInformationAccess[0]
+        final fun <get-subjectInformationAccess>(): kotlin.collections/List<com.davils.krypt.x509.extension/AccessDescription> // com.davils.krypt.x509.extension/Extensions.subjectInformationAccess.<get-subjectInformationAccess>|<get-subjectInformationAccess>(){}[0]
+    final val subjectKeyIdentifier // com.davils.krypt.x509.extension/Extensions.subjectKeyIdentifier|{}subjectKeyIdentifier[0]
+        final fun <get-subjectKeyIdentifier>(): kotlinx.io.bytestring/ByteString? // com.davils.krypt.x509.extension/Extensions.subjectKeyIdentifier.<get-subjectKeyIdentifier>|<get-subjectKeyIdentifier>(){}[0]
+    final val tlsFeatures // com.davils.krypt.x509.extension/Extensions.tlsFeatures|{}tlsFeatures[0]
+        final fun <get-tlsFeatures>(): kotlin.collections/Set<kotlin/Int> // com.davils.krypt.x509.extension/Extensions.tlsFeatures.<get-tlsFeatures>|<get-tlsFeatures>(){}[0]
+    final val unknownCritical // com.davils.krypt.x509.extension/Extensions.unknownCritical|{}unknownCritical[0]
+        final fun <get-unknownCritical>(): kotlin.collections/List<com.davils.krypt.asn1/ObjectIdentifier> // com.davils.krypt.x509.extension/Extensions.unknownCritical.<get-unknownCritical>|<get-unknownCritical>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.x509.extension/Extensions.equals|equals(kotlin.Any?){}[0]
+    final fun get(com.davils.krypt.asn1/ObjectIdentifier): com.davils.krypt.x509.extension/Extension? // com.davils.krypt.x509.extension/Extensions.get|get(com.davils.krypt.asn1.ObjectIdentifier){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.x509.extension/Extensions.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.x509.extension/Extensions.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.x509.extension/ExtensionsBuilder { // com.davils.krypt.x509.extension/ExtensionsBuilder|null[0]
+    final fun add(com.davils.krypt.x509.extension/Extension) // com.davils.krypt.x509.extension/ExtensionsBuilder.add|add(com.davils.krypt.x509.extension.Extension){}[0]
+    final fun authorityInformationAccess(kotlin.collections/List<com.davils.krypt.x509.extension/AccessDescription>) // com.davils.krypt.x509.extension/ExtensionsBuilder.authorityInformationAccess|authorityInformationAccess(kotlin.collections.List<com.davils.krypt.x509.extension.AccessDescription>){}[0]
+    final fun authorityKeyIdentifier(kotlinx.io.bytestring/ByteString) // com.davils.krypt.x509.extension/ExtensionsBuilder.authorityKeyIdentifier|authorityKeyIdentifier(kotlinx.io.bytestring.ByteString){}[0]
+    final fun basicConstraints(kotlin/Boolean, kotlin/Int? = ..., kotlin/Boolean = ...) // com.davils.krypt.x509.extension/ExtensionsBuilder.basicConstraints|basicConstraints(kotlin.Boolean;kotlin.Int?;kotlin.Boolean){}[0]
+    final fun certificatePolicies(kotlin.collections/List<com.davils.krypt.asn1/ObjectIdentifier>, kotlin/Boolean = ...) // com.davils.krypt.x509.extension/ExtensionsBuilder.certificatePolicies|certificatePolicies(kotlin.collections.List<com.davils.krypt.asn1.ObjectIdentifier>;kotlin.Boolean){}[0]
+    final fun crlDistributionPoints(kotlin.collections/List<com.davils.krypt.x509.extension/DistributionPoint>) // com.davils.krypt.x509.extension/ExtensionsBuilder.crlDistributionPoints|crlDistributionPoints(kotlin.collections.List<com.davils.krypt.x509.extension.DistributionPoint>){}[0]
+    final fun extendedKeyUsage(kotlin.collections/List<com.davils.krypt.asn1/ObjectIdentifier>, kotlin/Boolean = ...) // com.davils.krypt.x509.extension/ExtensionsBuilder.extendedKeyUsage|extendedKeyUsage(kotlin.collections.List<com.davils.krypt.asn1.ObjectIdentifier>;kotlin.Boolean){}[0]
+    final fun keyUsage(kotlin.collections/Set<com.davils.krypt.x509.extension/KeyUsage>, kotlin/Boolean = ...) // com.davils.krypt.x509.extension/ExtensionsBuilder.keyUsage|keyUsage(kotlin.collections.Set<com.davils.krypt.x509.extension.KeyUsage>;kotlin.Boolean){}[0]
+    final fun mustStaple() // com.davils.krypt.x509.extension/ExtensionsBuilder.mustStaple|mustStaple(){}[0]
+    final fun nameConstraints(com.davils.krypt.x509.extension/NameConstraints, kotlin/Boolean = ...) // com.davils.krypt.x509.extension/ExtensionsBuilder.nameConstraints|nameConstraints(com.davils.krypt.x509.extension.NameConstraints;kotlin.Boolean){}[0]
+    final fun ocspNoCheck() // com.davils.krypt.x509.extension/ExtensionsBuilder.ocspNoCheck|ocspNoCheck(){}[0]
+    final fun policyConstraints(com.davils.krypt.x509.extension/PolicyConstraints, kotlin/Boolean = ...) // com.davils.krypt.x509.extension/ExtensionsBuilder.policyConstraints|policyConstraints(com.davils.krypt.x509.extension.PolicyConstraints;kotlin.Boolean){}[0]
+    final fun subjectAlternativeNames(kotlin.collections/List<com.davils.krypt.x509.name/GeneralName>, kotlin/Boolean = ...) // com.davils.krypt.x509.extension/ExtensionsBuilder.subjectAlternativeNames|subjectAlternativeNames(kotlin.collections.List<com.davils.krypt.x509.name.GeneralName>;kotlin.Boolean){}[0]
+    final fun subjectKeyIdentifier(kotlinx.io.bytestring/ByteString) // com.davils.krypt.x509.extension/ExtensionsBuilder.subjectKeyIdentifier|subjectKeyIdentifier(kotlinx.io.bytestring.ByteString){}[0]
+}
+
+final class com.davils.krypt.x509.extension/NameConstraints { // com.davils.krypt.x509.extension/NameConstraints|null[0]
+    constructor <init>(kotlin.collections/List<com.davils.krypt.x509.name/GeneralName> = ..., kotlin.collections/List<com.davils.krypt.x509.name/GeneralName> = ...) // com.davils.krypt.x509.extension/NameConstraints.<init>|<init>(kotlin.collections.List<com.davils.krypt.x509.name.GeneralName>;kotlin.collections.List<com.davils.krypt.x509.name.GeneralName>){}[0]
+
+    final val excluded // com.davils.krypt.x509.extension/NameConstraints.excluded|{}excluded[0]
+        final fun <get-excluded>(): kotlin.collections/List<com.davils.krypt.x509.name/GeneralName> // com.davils.krypt.x509.extension/NameConstraints.excluded.<get-excluded>|<get-excluded>(){}[0]
+    final val permitted // com.davils.krypt.x509.extension/NameConstraints.permitted|{}permitted[0]
+        final fun <get-permitted>(): kotlin.collections/List<com.davils.krypt.x509.name/GeneralName> // com.davils.krypt.x509.extension/NameConstraints.permitted.<get-permitted>|<get-permitted>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.x509.extension/NameConstraints.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.x509.extension/NameConstraints.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.x509.extension/NameConstraints.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.x509.extension/PolicyConstraints { // com.davils.krypt.x509.extension/PolicyConstraints|null[0]
+    constructor <init>(kotlin/Int? = ..., kotlin/Int? = ...) // com.davils.krypt.x509.extension/PolicyConstraints.<init>|<init>(kotlin.Int?;kotlin.Int?){}[0]
+
+    final val inhibitPolicyMapping // com.davils.krypt.x509.extension/PolicyConstraints.inhibitPolicyMapping|{}inhibitPolicyMapping[0]
+        final fun <get-inhibitPolicyMapping>(): kotlin/Int? // com.davils.krypt.x509.extension/PolicyConstraints.inhibitPolicyMapping.<get-inhibitPolicyMapping>|<get-inhibitPolicyMapping>(){}[0]
+    final val requireExplicitPolicy // com.davils.krypt.x509.extension/PolicyConstraints.requireExplicitPolicy|{}requireExplicitPolicy[0]
+        final fun <get-requireExplicitPolicy>(): kotlin/Int? // com.davils.krypt.x509.extension/PolicyConstraints.requireExplicitPolicy.<get-requireExplicitPolicy>|<get-requireExplicitPolicy>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.x509.extension/PolicyConstraints.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.x509.extension/PolicyConstraints.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.x509.extension/PolicyConstraints.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.x509.extension/PolicyMapping { // com.davils.krypt.x509.extension/PolicyMapping|null[0]
+    constructor <init>(com.davils.krypt.asn1/ObjectIdentifier, com.davils.krypt.asn1/ObjectIdentifier) // com.davils.krypt.x509.extension/PolicyMapping.<init>|<init>(com.davils.krypt.asn1.ObjectIdentifier;com.davils.krypt.asn1.ObjectIdentifier){}[0]
+
+    final val issuerPolicy // com.davils.krypt.x509.extension/PolicyMapping.issuerPolicy|{}issuerPolicy[0]
+        final fun <get-issuerPolicy>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/PolicyMapping.issuerPolicy.<get-issuerPolicy>|<get-issuerPolicy>(){}[0]
+    final val subjectPolicy // com.davils.krypt.x509.extension/PolicyMapping.subjectPolicy|{}subjectPolicy[0]
+        final fun <get-subjectPolicy>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/PolicyMapping.subjectPolicy.<get-subjectPolicy>|<get-subjectPolicy>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.x509.extension/PolicyMapping.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.x509.extension/PolicyMapping.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.x509.extension/PolicyMapping.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.x509.name/AttributeValue { // com.davils.krypt.x509.name/AttributeValue|null[0]
+    final val encoded // com.davils.krypt.x509.name/AttributeValue.encoded|{}encoded[0]
+        final fun <get-encoded>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.x509.name/AttributeValue.encoded.<get-encoded>|<get-encoded>(){}[0]
+    final val tag // com.davils.krypt.x509.name/AttributeValue.tag|{}tag[0]
+        final fun <get-tag>(): com.davils.krypt.asn1/Tag // com.davils.krypt.x509.name/AttributeValue.tag.<get-tag>|<get-tag>(){}[0]
+    final val text // com.davils.krypt.x509.name/AttributeValue.text|{}text[0]
+        final fun <get-text>(): kotlin/String? // com.davils.krypt.x509.name/AttributeValue.text.<get-text>|<get-text>(){}[0]
+    final val type // com.davils.krypt.x509.name/AttributeValue.type|{}type[0]
+        final fun <get-type>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.name/AttributeValue.type.<get-type>|<get-type>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.x509.name/AttributeValue.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.x509.name/AttributeValue.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.x509.name/AttributeValue.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.x509.name/DistinguishedName { // com.davils.krypt.x509.name/DistinguishedName|null[0]
+    final val commonName // com.davils.krypt.x509.name/DistinguishedName.commonName|{}commonName[0]
+        final fun <get-commonName>(): kotlin/String? // com.davils.krypt.x509.name/DistinguishedName.commonName.<get-commonName>|<get-commonName>(){}[0]
+    final val encoded // com.davils.krypt.x509.name/DistinguishedName.encoded|{}encoded[0]
+        final fun <get-encoded>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.x509.name/DistinguishedName.encoded.<get-encoded>|<get-encoded>(){}[0]
+    final val isEmpty // com.davils.krypt.x509.name/DistinguishedName.isEmpty|{}isEmpty[0]
+        final fun <get-isEmpty>(): kotlin/Boolean // com.davils.krypt.x509.name/DistinguishedName.isEmpty.<get-isEmpty>|<get-isEmpty>(){}[0]
+    final val names // com.davils.krypt.x509.name/DistinguishedName.names|{}names[0]
+        final fun <get-names>(): kotlin.collections/List<com.davils.krypt.x509.name/RelativeName> // com.davils.krypt.x509.name/DistinguishedName.names.<get-names>|<get-names>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.x509.name/DistinguishedName.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.x509.name/DistinguishedName.hashCode|hashCode(){}[0]
+    final fun isPrefixOf(com.davils.krypt.x509.name/DistinguishedName): kotlin/Boolean // com.davils.krypt.x509.name/DistinguishedName.isPrefixOf|isPrefixOf(com.davils.krypt.x509.name.DistinguishedName){}[0]
+    final fun rfc4514(): kotlin/String // com.davils.krypt.x509.name/DistinguishedName.rfc4514|rfc4514(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.x509.name/DistinguishedName.toString|toString(){}[0]
+    final fun valuesOf(com.davils.krypt.asn1/ObjectIdentifier): kotlin.collections/List<kotlin/String> // com.davils.krypt.x509.name/DistinguishedName.valuesOf|valuesOf(com.davils.krypt.asn1.ObjectIdentifier){}[0]
+
+    final object Companion { // com.davils.krypt.x509.name/DistinguishedName.Companion|null[0]
+        final val Empty // com.davils.krypt.x509.name/DistinguishedName.Companion.Empty|{}Empty[0]
+            final fun <get-Empty>(): com.davils.krypt.x509.name/DistinguishedName // com.davils.krypt.x509.name/DistinguishedName.Companion.Empty.<get-Empty>|<get-Empty>(){}[0]
+    }
+}
+
+final class com.davils.krypt.x509.name/DistinguishedNameBuilder { // com.davils.krypt.x509.name/DistinguishedNameBuilder|null[0]
+    final fun attribute(com.davils.krypt.asn1/ObjectIdentifier, kotlin/String) // com.davils.krypt.x509.name/DistinguishedNameBuilder.attribute|attribute(com.davils.krypt.asn1.ObjectIdentifier;kotlin.String){}[0]
+    final fun commonName(kotlin/String) // com.davils.krypt.x509.name/DistinguishedNameBuilder.commonName|commonName(kotlin.String){}[0]
+    final fun country(kotlin/String) // com.davils.krypt.x509.name/DistinguishedNameBuilder.country|country(kotlin.String){}[0]
+    final fun domainComponent(kotlin/String) // com.davils.krypt.x509.name/DistinguishedNameBuilder.domainComponent|domainComponent(kotlin.String){}[0]
+    final fun multiValued(kotlin.collections/List<kotlin/Pair<com.davils.krypt.asn1/ObjectIdentifier, kotlin/String>>) // com.davils.krypt.x509.name/DistinguishedNameBuilder.multiValued|multiValued(kotlin.collections.List<kotlin.Pair<com.davils.krypt.asn1.ObjectIdentifier,kotlin.String>>){}[0]
+    final fun organization(kotlin/String) // com.davils.krypt.x509.name/DistinguishedNameBuilder.organization|organization(kotlin.String){}[0]
+    final fun organizationalUnit(kotlin/String) // com.davils.krypt.x509.name/DistinguishedNameBuilder.organizationalUnit|organizationalUnit(kotlin.String){}[0]
+}
+
+final class com.davils.krypt.x509.name/RelativeName { // com.davils.krypt.x509.name/RelativeName|null[0]
+    final val attributes // com.davils.krypt.x509.name/RelativeName.attributes|{}attributes[0]
+        final fun <get-attributes>(): kotlin.collections/List<com.davils.krypt.x509.name/AttributeValue> // com.davils.krypt.x509.name/RelativeName.attributes.<get-attributes>|<get-attributes>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.x509.name/RelativeName.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.x509.name/RelativeName.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.x509.name/RelativeName.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.x509.path/CrlRevocationChecker : com.davils.krypt.x509.path/RevocationChecker { // com.davils.krypt.x509.path/CrlRevocationChecker|null[0]
+    constructor <init>(com.davils.krypt.x509.crl/RevocationLists, com.davils.krypt.x509.path/RevocationListSource) // com.davils.krypt.x509.path/CrlRevocationChecker.<init>|<init>(com.davils.krypt.x509.crl.RevocationLists;com.davils.krypt.x509.path.RevocationListSource){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.x509.path/CrlRevocationChecker.toString|toString(){}[0]
+    final suspend fun check(com.davils.krypt.x509/Certificate, com.davils.krypt.x509/Certificate?, com.davils.krypt.x509.path/TrustAnchor, kotlin.time/Instant): com.davils.krypt.x509.path/RevocationStatus // com.davils.krypt.x509.path/CrlRevocationChecker.check|check(com.davils.krypt.x509.Certificate;com.davils.krypt.x509.Certificate?;com.davils.krypt.x509.path.TrustAnchor;kotlin.time.Instant){}[0]
+}
+
+final class com.davils.krypt.x509.path/PathValidator { // com.davils.krypt.x509.path/PathValidator|null[0]
+    constructor <init>(com.davils.krypt.primitive/Crypto, kotlin.collections/List<com.davils.krypt.x509.path/TrustAnchor>, com.davils.krypt.x509.path/RevocationChecker? = ..., com.davils.krypt.x509/X509Limits = ...) // com.davils.krypt.x509.path/PathValidator.<init>|<init>(com.davils.krypt.primitive.Crypto;kotlin.collections.List<com.davils.krypt.x509.path.TrustAnchor>;com.davils.krypt.x509.path.RevocationChecker?;com.davils.krypt.x509.X509Limits){}[0]
+
+    final val anchors // com.davils.krypt.x509.path/PathValidator.anchors|{}anchors[0]
+        final fun <get-anchors>(): kotlin.collections/List<com.davils.krypt.x509.path/TrustAnchor> // com.davils.krypt.x509.path/PathValidator.anchors.<get-anchors>|<get-anchors>(){}[0]
+    final val crypto // com.davils.krypt.x509.path/PathValidator.crypto|{}crypto[0]
+        final fun <get-crypto>(): com.davils.krypt.primitive/Crypto // com.davils.krypt.x509.path/PathValidator.crypto.<get-crypto>|<get-crypto>(){}[0]
+    final val limits // com.davils.krypt.x509.path/PathValidator.limits|{}limits[0]
+        final fun <get-limits>(): com.davils.krypt.x509/X509Limits // com.davils.krypt.x509.path/PathValidator.limits.<get-limits>|<get-limits>(){}[0]
+
+    final fun toString(): kotlin/String // com.davils.krypt.x509.path/PathValidator.toString|toString(){}[0]
+    final suspend fun validate(com.davils.krypt.x509/Certificate, kotlin.collections/List<com.davils.krypt.x509/Certificate> = ..., com.davils.krypt.x509.path/ValidationParameters = ...): com.davils.krypt.x509.path/PathValidation // com.davils.krypt.x509.path/PathValidator.validate|validate(com.davils.krypt.x509.Certificate;kotlin.collections.List<com.davils.krypt.x509.Certificate>;com.davils.krypt.x509.path.ValidationParameters){}[0]
+}
+
+final class com.davils.krypt.x509.path/PinSet { // com.davils.krypt.x509.path/PinSet|null[0]
+    constructor <init>(kotlin.collections/Set<kotlinx.io.bytestring/ByteString>) // com.davils.krypt.x509.path/PinSet.<init>|<init>(kotlin.collections.Set<kotlinx.io.bytestring.ByteString>){}[0]
+
+    final val pins // com.davils.krypt.x509.path/PinSet.pins|{}pins[0]
+        final fun <get-pins>(): kotlin.collections/Set<kotlinx.io.bytestring/ByteString> // com.davils.krypt.x509.path/PinSet.pins.<get-pins>|<get-pins>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.x509.path/PinSet.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.x509.path/PinSet.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.x509.path/PinSet.toString|toString(){}[0]
+    final suspend fun matches(com.davils.krypt.primitive/Crypto, com.davils.krypt.x509.path/PathValidation.Valid): kotlin/Boolean // com.davils.krypt.x509.path/PinSet.matches|matches(com.davils.krypt.primitive.Crypto;com.davils.krypt.x509.path.PathValidation.Valid){}[0]
+
+    final object Companion { // com.davils.krypt.x509.path/PinSet.Companion|null[0]
+        final suspend fun of(com.davils.krypt.primitive/Crypto, kotlin.collections/List<com.davils.krypt.x509/Certificate>): com.davils.krypt.x509.path/PinSet // com.davils.krypt.x509.path/PinSet.Companion.of|of(com.davils.krypt.primitive.Crypto;kotlin.collections.List<com.davils.krypt.x509.Certificate>){}[0]
+    }
+}
+
+final class com.davils.krypt.x509.path/TrustAnchor { // com.davils.krypt.x509.path/TrustAnchor|null[0]
+    constructor <init>(com.davils.krypt.x509.name/DistinguishedName, com.davils.krypt.primitive.key/PublicKey, com.davils.krypt.x509.extension/NameConstraints? = ..., com.davils.krypt.x509/Certificate? = ...) // com.davils.krypt.x509.path/TrustAnchor.<init>|<init>(com.davils.krypt.x509.name.DistinguishedName;com.davils.krypt.primitive.key.PublicKey;com.davils.krypt.x509.extension.NameConstraints?;com.davils.krypt.x509.Certificate?){}[0]
+
+    final val certificate // com.davils.krypt.x509.path/TrustAnchor.certificate|{}certificate[0]
+        final fun <get-certificate>(): com.davils.krypt.x509/Certificate? // com.davils.krypt.x509.path/TrustAnchor.certificate.<get-certificate>|<get-certificate>(){}[0]
+    final val name // com.davils.krypt.x509.path/TrustAnchor.name|{}name[0]
+        final fun <get-name>(): com.davils.krypt.x509.name/DistinguishedName // com.davils.krypt.x509.path/TrustAnchor.name.<get-name>|<get-name>(){}[0]
+    final val nameConstraints // com.davils.krypt.x509.path/TrustAnchor.nameConstraints|{}nameConstraints[0]
+        final fun <get-nameConstraints>(): com.davils.krypt.x509.extension/NameConstraints? // com.davils.krypt.x509.path/TrustAnchor.nameConstraints.<get-nameConstraints>|<get-nameConstraints>(){}[0]
+    final val publicKey // com.davils.krypt.x509.path/TrustAnchor.publicKey|{}publicKey[0]
+        final fun <get-publicKey>(): com.davils.krypt.primitive.key/PublicKey // com.davils.krypt.x509.path/TrustAnchor.publicKey.<get-publicKey>|<get-publicKey>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.x509.path/TrustAnchor.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.x509.path/TrustAnchor.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.x509.path/TrustAnchor.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.x509.path/TrustAnchor.Companion|null[0]
+        final fun of(com.davils.krypt.x509/Certificate): com.davils.krypt.x509.path/TrustAnchor // com.davils.krypt.x509.path/TrustAnchor.Companion.of|of(com.davils.krypt.x509.Certificate){}[0]
+    }
+}
+
+final class com.davils.krypt.x509.path/ValidationParameters { // com.davils.krypt.x509.path/ValidationParameters|null[0]
+    constructor <init>(kotlin.time/Instant? = ..., com.davils.krypt.asn1/ObjectIdentifier? = ..., kotlin.collections/Set<com.davils.krypt.asn1/ObjectIdentifier> = ..., kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin/Boolean = ..., kotlin/Boolean = ...) // com.davils.krypt.x509.path/ValidationParameters.<init>|<init>(kotlin.time.Instant?;com.davils.krypt.asn1.ObjectIdentifier?;kotlin.collections.Set<com.davils.krypt.asn1.ObjectIdentifier>;kotlin.Boolean;kotlin.Boolean;kotlin.Boolean;kotlin.Boolean){}[0]
+
+    final val at // com.davils.krypt.x509.path/ValidationParameters.at|{}at[0]
+        final fun <get-at>(): kotlin.time/Instant? // com.davils.krypt.x509.path/ValidationParameters.at.<get-at>|<get-at>(){}[0]
+    final val initialPolicies // com.davils.krypt.x509.path/ValidationParameters.initialPolicies|{}initialPolicies[0]
+        final fun <get-initialPolicies>(): kotlin.collections/Set<com.davils.krypt.asn1/ObjectIdentifier> // com.davils.krypt.x509.path/ValidationParameters.initialPolicies.<get-initialPolicies>|<get-initialPolicies>(){}[0]
+    final val isAnyPolicyInhibited // com.davils.krypt.x509.path/ValidationParameters.isAnyPolicyInhibited|{}isAnyPolicyInhibited[0]
+        final fun <get-isAnyPolicyInhibited>(): kotlin/Boolean // com.davils.krypt.x509.path/ValidationParameters.isAnyPolicyInhibited.<get-isAnyPolicyInhibited>|<get-isAnyPolicyInhibited>(){}[0]
+    final val isExplicitPolicyRequired // com.davils.krypt.x509.path/ValidationParameters.isExplicitPolicyRequired|{}isExplicitPolicyRequired[0]
+        final fun <get-isExplicitPolicyRequired>(): kotlin/Boolean // com.davils.krypt.x509.path/ValidationParameters.isExplicitPolicyRequired.<get-isExplicitPolicyRequired>|<get-isExplicitPolicyRequired>(){}[0]
+    final val isPolicyMappingInhibited // com.davils.krypt.x509.path/ValidationParameters.isPolicyMappingInhibited|{}isPolicyMappingInhibited[0]
+        final fun <get-isPolicyMappingInhibited>(): kotlin/Boolean // com.davils.krypt.x509.path/ValidationParameters.isPolicyMappingInhibited.<get-isPolicyMappingInhibited>|<get-isPolicyMappingInhibited>(){}[0]
+    final val isRevocationRequired // com.davils.krypt.x509.path/ValidationParameters.isRevocationRequired|{}isRevocationRequired[0]
+        final fun <get-isRevocationRequired>(): kotlin/Boolean // com.davils.krypt.x509.path/ValidationParameters.isRevocationRequired.<get-isRevocationRequired>|<get-isRevocationRequired>(){}[0]
+    final val purpose // com.davils.krypt.x509.path/ValidationParameters.purpose|{}purpose[0]
+        final fun <get-purpose>(): com.davils.krypt.asn1/ObjectIdentifier? // com.davils.krypt.x509.path/ValidationParameters.purpose.<get-purpose>|<get-purpose>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.x509.path/ValidationParameters.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.x509.path/ValidationParameters.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.x509.path/ValidationParameters.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.x509.request/CertificationRequest { // com.davils.krypt.x509.request/CertificationRequest|null[0]
+    final val attributeTypes // com.davils.krypt.x509.request/CertificationRequest.attributeTypes|{}attributeTypes[0]
+        final fun <get-attributeTypes>(): kotlin.collections/List<com.davils.krypt.asn1/ObjectIdentifier> // com.davils.krypt.x509.request/CertificationRequest.attributeTypes.<get-attributeTypes>|<get-attributeTypes>(){}[0]
+    final val encoded // com.davils.krypt.x509.request/CertificationRequest.encoded|{}encoded[0]
+        final fun <get-encoded>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.x509.request/CertificationRequest.encoded.<get-encoded>|<get-encoded>(){}[0]
+    final val info // com.davils.krypt.x509.request/CertificationRequest.info|{}info[0]
+        final fun <get-info>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.x509.request/CertificationRequest.info.<get-info>|<get-info>(){}[0]
+    final val publicKey // com.davils.krypt.x509.request/CertificationRequest.publicKey|{}publicKey[0]
+        final fun <get-publicKey>(): com.davils.krypt.primitive.key/PublicKey? // com.davils.krypt.x509.request/CertificationRequest.publicKey.<get-publicKey>|<get-publicKey>(){}[0]
+    final val requestedExtensions // com.davils.krypt.x509.request/CertificationRequest.requestedExtensions|{}requestedExtensions[0]
+        final fun <get-requestedExtensions>(): com.davils.krypt.x509.extension/Extensions // com.davils.krypt.x509.request/CertificationRequest.requestedExtensions.<get-requestedExtensions>|<get-requestedExtensions>(){}[0]
+    final val signature // com.davils.krypt.x509.request/CertificationRequest.signature|{}signature[0]
+        final fun <get-signature>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.x509.request/CertificationRequest.signature.<get-signature>|<get-signature>(){}[0]
+    final val signatureAlgorithm // com.davils.krypt.x509.request/CertificationRequest.signatureAlgorithm|{}signatureAlgorithm[0]
+        final fun <get-signatureAlgorithm>(): com.davils.krypt.core.algorithm/SignatureAlgorithm? // com.davils.krypt.x509.request/CertificationRequest.signatureAlgorithm.<get-signatureAlgorithm>|<get-signatureAlgorithm>(){}[0]
+    final val subject // com.davils.krypt.x509.request/CertificationRequest.subject|{}subject[0]
+        final fun <get-subject>(): com.davils.krypt.x509.name/DistinguishedName // com.davils.krypt.x509.request/CertificationRequest.subject.<get-subject>|<get-subject>(){}[0]
+    final val subjectPublicKeyInfo // com.davils.krypt.x509.request/CertificationRequest.subjectPublicKeyInfo|{}subjectPublicKeyInfo[0]
+        final fun <get-subjectPublicKeyInfo>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.x509.request/CertificationRequest.subjectPublicKeyInfo.<get-subjectPublicKeyInfo>|<get-subjectPublicKeyInfo>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.x509.request/CertificationRequest.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.x509.request/CertificationRequest.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.x509.request/CertificationRequest.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.x509.request/CertificationRequestBuilder { // com.davils.krypt.x509.request/CertificationRequestBuilder|null[0]
+    final var subject // com.davils.krypt.x509.request/CertificationRequestBuilder.subject|{}subject[0]
+        final fun <get-subject>(): com.davils.krypt.x509.name/DistinguishedName // com.davils.krypt.x509.request/CertificationRequestBuilder.subject.<get-subject>|<get-subject>(){}[0]
+        final fun <set-subject>(com.davils.krypt.x509.name/DistinguishedName) // com.davils.krypt.x509.request/CertificationRequestBuilder.subject.<set-subject>|<set-subject>(com.davils.krypt.x509.name.DistinguishedName){}[0]
+
+    final fun extensions(kotlin/Function1<com.davils.krypt.x509.extension/ExtensionsBuilder, kotlin/Unit>) // com.davils.krypt.x509.request/CertificationRequestBuilder.extensions|extensions(kotlin.Function1<com.davils.krypt.x509.extension.ExtensionsBuilder,kotlin.Unit>){}[0]
+    final fun subject(kotlin/Function1<com.davils.krypt.x509.name/DistinguishedNameBuilder, kotlin/Unit>) // com.davils.krypt.x509.request/CertificationRequestBuilder.subject|subject(kotlin.Function1<com.davils.krypt.x509.name.DistinguishedNameBuilder,kotlin.Unit>){}[0]
+}
+
+final class com.davils.krypt.x509.request/CertificationRequests { // com.davils.krypt.x509.request/CertificationRequests|null[0]
+    constructor <init>(com.davils.krypt.primitive/Crypto, com.davils.krypt.x509/X509Limits = ...) // com.davils.krypt.x509.request/CertificationRequests.<init>|<init>(com.davils.krypt.primitive.Crypto;com.davils.krypt.x509.X509Limits){}[0]
+
+    final val crypto // com.davils.krypt.x509.request/CertificationRequests.crypto|{}crypto[0]
+        final fun <get-crypto>(): com.davils.krypt.primitive/Crypto // com.davils.krypt.x509.request/CertificationRequests.crypto.<get-crypto>|<get-crypto>(){}[0]
+    final val limits // com.davils.krypt.x509.request/CertificationRequests.limits|{}limits[0]
+        final fun <get-limits>(): com.davils.krypt.x509/X509Limits // com.davils.krypt.x509.request/CertificationRequests.limits.<get-limits>|<get-limits>(){}[0]
+
+    final fun decode(kotlinx.io.bytestring/ByteString): com.davils.kore.core.outcome/Outcome<com.davils.krypt.x509.request/CertificationRequest, com.davils.krypt.x509/X509Failure> // com.davils.krypt.x509.request/CertificationRequests.decode|decode(kotlinx.io.bytestring.ByteString){}[0]
+    final fun decodePem(kotlin/String): com.davils.kore.core.outcome/Outcome<com.davils.krypt.x509.request/CertificationRequest, com.davils.krypt.x509/X509Failure> // com.davils.krypt.x509.request/CertificationRequests.decodePem|decodePem(kotlin.String){}[0]
+    final fun encodePem(com.davils.krypt.x509.request/CertificationRequest): kotlin/String // com.davils.krypt.x509.request/CertificationRequests.encodePem|encodePem(com.davils.krypt.x509.request.CertificationRequest){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.x509.request/CertificationRequests.toString|toString(){}[0]
+    final suspend fun create(com.davils.krypt.primitive.signature/Signer, kotlin/Function1<com.davils.krypt.x509.request/CertificationRequestBuilder, kotlin/Unit>): com.davils.krypt.x509.request/CertificationRequest // com.davils.krypt.x509.request/CertificationRequests.create|create(com.davils.krypt.primitive.signature.Signer;kotlin.Function1<com.davils.krypt.x509.request.CertificationRequestBuilder,kotlin.Unit>){}[0]
+    final suspend fun verify(com.davils.krypt.x509.request/CertificationRequest): com.davils.krypt.primitive/Verification // com.davils.krypt.x509.request/CertificationRequests.verify|verify(com.davils.krypt.x509.request.CertificationRequest){}[0]
+}
+
+final class com.davils.krypt.x509/Certificate { // com.davils.krypt.x509/Certificate|null[0]
+    final val encoded // com.davils.krypt.x509/Certificate.encoded|{}encoded[0]
+        final fun <get-encoded>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.x509/Certificate.encoded.<get-encoded>|<get-encoded>(){}[0]
+    final val extensions // com.davils.krypt.x509/Certificate.extensions|{}extensions[0]
+        final fun <get-extensions>(): com.davils.krypt.x509.extension/Extensions // com.davils.krypt.x509/Certificate.extensions.<get-extensions>|<get-extensions>(){}[0]
+    final val isCa // com.davils.krypt.x509/Certificate.isCa|{}isCa[0]
+        final fun <get-isCa>(): kotlin/Boolean // com.davils.krypt.x509/Certificate.isCa.<get-isCa>|<get-isCa>(){}[0]
+    final val isSelfIssued // com.davils.krypt.x509/Certificate.isSelfIssued|{}isSelfIssued[0]
+        final fun <get-isSelfIssued>(): kotlin/Boolean // com.davils.krypt.x509/Certificate.isSelfIssued.<get-isSelfIssued>|<get-isSelfIssued>(){}[0]
+    final val issuer // com.davils.krypt.x509/Certificate.issuer|{}issuer[0]
+        final fun <get-issuer>(): com.davils.krypt.x509.name/DistinguishedName // com.davils.krypt.x509/Certificate.issuer.<get-issuer>|<get-issuer>(){}[0]
+    final val notAfter // com.davils.krypt.x509/Certificate.notAfter|{}notAfter[0]
+        final fun <get-notAfter>(): kotlin.time/Instant // com.davils.krypt.x509/Certificate.notAfter.<get-notAfter>|<get-notAfter>(){}[0]
+    final val notBefore // com.davils.krypt.x509/Certificate.notBefore|{}notBefore[0]
+        final fun <get-notBefore>(): kotlin.time/Instant // com.davils.krypt.x509/Certificate.notBefore.<get-notBefore>|<get-notBefore>(){}[0]
+    final val publicKey // com.davils.krypt.x509/Certificate.publicKey|{}publicKey[0]
+        final fun <get-publicKey>(): com.davils.krypt.primitive.key/PublicKey? // com.davils.krypt.x509/Certificate.publicKey.<get-publicKey>|<get-publicKey>(){}[0]
+    final val serialNumber // com.davils.krypt.x509/Certificate.serialNumber|{}serialNumber[0]
+        final fun <get-serialNumber>(): com.davils.krypt.asn1/DerInteger // com.davils.krypt.x509/Certificate.serialNumber.<get-serialNumber>|<get-serialNumber>(){}[0]
+    final val signature // com.davils.krypt.x509/Certificate.signature|{}signature[0]
+        final fun <get-signature>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.x509/Certificate.signature.<get-signature>|<get-signature>(){}[0]
+    final val signatureAlgorithm // com.davils.krypt.x509/Certificate.signatureAlgorithm|{}signatureAlgorithm[0]
+        final fun <get-signatureAlgorithm>(): com.davils.krypt.core.algorithm/SignatureAlgorithm? // com.davils.krypt.x509/Certificate.signatureAlgorithm.<get-signatureAlgorithm>|<get-signatureAlgorithm>(){}[0]
+    final val subject // com.davils.krypt.x509/Certificate.subject|{}subject[0]
+        final fun <get-subject>(): com.davils.krypt.x509.name/DistinguishedName // com.davils.krypt.x509/Certificate.subject.<get-subject>|<get-subject>(){}[0]
+    final val subjectPublicKeyInfo // com.davils.krypt.x509/Certificate.subjectPublicKeyInfo|{}subjectPublicKeyInfo[0]
+        final fun <get-subjectPublicKeyInfo>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.x509/Certificate.subjectPublicKeyInfo.<get-subjectPublicKeyInfo>|<get-subjectPublicKeyInfo>(){}[0]
+    final val tbs // com.davils.krypt.x509/Certificate.tbs|{}tbs[0]
+        final fun <get-tbs>(): kotlinx.io.bytestring/ByteString // com.davils.krypt.x509/Certificate.tbs.<get-tbs>|<get-tbs>(){}[0]
+    final val version // com.davils.krypt.x509/Certificate.version|{}version[0]
+        final fun <get-version>(): kotlin/Int // com.davils.krypt.x509/Certificate.version.<get-version>|<get-version>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.x509/Certificate.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.x509/Certificate.hashCode|hashCode(){}[0]
+    final fun isValidAt(kotlin.time/Instant): kotlin/Boolean // com.davils.krypt.x509/Certificate.isValidAt|isValidAt(kotlin.time.Instant){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.x509/Certificate.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.x509/CertificateBuilder { // com.davils.krypt.x509/CertificateBuilder|null[0]
+    final var issuer // com.davils.krypt.x509/CertificateBuilder.issuer|{}issuer[0]
+        final fun <get-issuer>(): com.davils.krypt.x509.name/DistinguishedName? // com.davils.krypt.x509/CertificateBuilder.issuer.<get-issuer>|<get-issuer>(){}[0]
+        final fun <set-issuer>(com.davils.krypt.x509.name/DistinguishedName?) // com.davils.krypt.x509/CertificateBuilder.issuer.<set-issuer>|<set-issuer>(com.davils.krypt.x509.name.DistinguishedName?){}[0]
+    final var notAfter // com.davils.krypt.x509/CertificateBuilder.notAfter|{}notAfter[0]
+        final fun <get-notAfter>(): kotlin.time/Instant? // com.davils.krypt.x509/CertificateBuilder.notAfter.<get-notAfter>|<get-notAfter>(){}[0]
+        final fun <set-notAfter>(kotlin.time/Instant?) // com.davils.krypt.x509/CertificateBuilder.notAfter.<set-notAfter>|<set-notAfter>(kotlin.time.Instant?){}[0]
+    final var notBefore // com.davils.krypt.x509/CertificateBuilder.notBefore|{}notBefore[0]
+        final fun <get-notBefore>(): kotlin.time/Instant? // com.davils.krypt.x509/CertificateBuilder.notBefore.<get-notBefore>|<get-notBefore>(){}[0]
+        final fun <set-notBefore>(kotlin.time/Instant?) // com.davils.krypt.x509/CertificateBuilder.notBefore.<set-notBefore>|<set-notBefore>(kotlin.time.Instant?){}[0]
+    final var publicKey // com.davils.krypt.x509/CertificateBuilder.publicKey|{}publicKey[0]
+        final fun <get-publicKey>(): com.davils.krypt.primitive.key/PublicKey? // com.davils.krypt.x509/CertificateBuilder.publicKey.<get-publicKey>|<get-publicKey>(){}[0]
+        final fun <set-publicKey>(com.davils.krypt.primitive.key/PublicKey?) // com.davils.krypt.x509/CertificateBuilder.publicKey.<set-publicKey>|<set-publicKey>(com.davils.krypt.primitive.key.PublicKey?){}[0]
+    final var serialNumber // com.davils.krypt.x509/CertificateBuilder.serialNumber|{}serialNumber[0]
+        final fun <get-serialNumber>(): com.davils.krypt.asn1/DerInteger? // com.davils.krypt.x509/CertificateBuilder.serialNumber.<get-serialNumber>|<get-serialNumber>(){}[0]
+        final fun <set-serialNumber>(com.davils.krypt.asn1/DerInteger?) // com.davils.krypt.x509/CertificateBuilder.serialNumber.<set-serialNumber>|<set-serialNumber>(com.davils.krypt.asn1.DerInteger?){}[0]
+    final var subject // com.davils.krypt.x509/CertificateBuilder.subject|{}subject[0]
+        final fun <get-subject>(): com.davils.krypt.x509.name/DistinguishedName // com.davils.krypt.x509/CertificateBuilder.subject.<get-subject>|<get-subject>(){}[0]
+        final fun <set-subject>(com.davils.krypt.x509.name/DistinguishedName) // com.davils.krypt.x509/CertificateBuilder.subject.<set-subject>|<set-subject>(com.davils.krypt.x509.name.DistinguishedName){}[0]
+
+    final fun extensions(kotlin/Function1<com.davils.krypt.x509.extension/ExtensionsBuilder, kotlin/Unit>) // com.davils.krypt.x509/CertificateBuilder.extensions|extensions(kotlin.Function1<com.davils.krypt.x509.extension.ExtensionsBuilder,kotlin.Unit>){}[0]
+    final fun subject(kotlin/Function1<com.davils.krypt.x509.name/DistinguishedNameBuilder, kotlin/Unit>) // com.davils.krypt.x509/CertificateBuilder.subject|subject(kotlin.Function1<com.davils.krypt.x509.name.DistinguishedNameBuilder,kotlin.Unit>){}[0]
+}
+
+final class com.davils.krypt.x509/Certificates { // com.davils.krypt.x509/Certificates|null[0]
+    constructor <init>(com.davils.krypt.primitive/Crypto, com.davils.krypt.x509/X509Limits = ...) // com.davils.krypt.x509/Certificates.<init>|<init>(com.davils.krypt.primitive.Crypto;com.davils.krypt.x509.X509Limits){}[0]
+
+    final val crypto // com.davils.krypt.x509/Certificates.crypto|{}crypto[0]
+        final fun <get-crypto>(): com.davils.krypt.primitive/Crypto // com.davils.krypt.x509/Certificates.crypto.<get-crypto>|<get-crypto>(){}[0]
+    final val limits // com.davils.krypt.x509/Certificates.limits|{}limits[0]
+        final fun <get-limits>(): com.davils.krypt.x509/X509Limits // com.davils.krypt.x509/Certificates.limits.<get-limits>|<get-limits>(){}[0]
+
+    final fun decode(kotlinx.io.bytestring/ByteString): com.davils.kore.core.outcome/Outcome<com.davils.krypt.x509/Certificate, com.davils.krypt.x509/X509Failure> // com.davils.krypt.x509/Certificates.decode|decode(kotlinx.io.bytestring.ByteString){}[0]
+    final fun decodePem(kotlin/String): com.davils.kore.core.outcome/Outcome<kotlin.collections/List<com.davils.krypt.x509/Certificate>, com.davils.krypt.x509/X509Failure> // com.davils.krypt.x509/Certificates.decodePem|decodePem(kotlin.String){}[0]
+    final fun encodePem(com.davils.krypt.x509/Certificate): kotlin/String // com.davils.krypt.x509/Certificates.encodePem|encodePem(com.davils.krypt.x509.Certificate){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.x509/Certificates.toString|toString(){}[0]
+    final suspend fun fingerprint(com.davils.krypt.x509/Certificate, com.davils.krypt.core.algorithm/DigestAlgorithm = ...): kotlinx.io.bytestring/ByteString // com.davils.krypt.x509/Certificates.fingerprint|fingerprint(com.davils.krypt.x509.Certificate;com.davils.krypt.core.algorithm.DigestAlgorithm){}[0]
+    final suspend fun issue(com.davils.krypt.primitive.signature/Signer, kotlin/Function1<com.davils.krypt.x509/CertificateBuilder, kotlin/Unit>): com.davils.krypt.x509/Certificate // com.davils.krypt.x509/Certificates.issue|issue(com.davils.krypt.primitive.signature.Signer;kotlin.Function1<com.davils.krypt.x509.CertificateBuilder,kotlin.Unit>){}[0]
+    final suspend fun keyIdentifier(com.davils.krypt.primitive.key/PublicKey): kotlinx.io.bytestring/ByteString // com.davils.krypt.x509/Certificates.keyIdentifier|keyIdentifier(com.davils.krypt.primitive.key.PublicKey){}[0]
+    final suspend fun verifySignature(com.davils.krypt.x509/Certificate, com.davils.krypt.primitive.key/PublicKey): com.davils.krypt.primitive/Verification // com.davils.krypt.x509/Certificates.verifySignature|verifySignature(com.davils.krypt.x509.Certificate;com.davils.krypt.primitive.key.PublicKey){}[0]
+}
+
+final class com.davils.krypt.x509/X509Limits { // com.davils.krypt.x509/X509Limits|null[0]
+    constructor <init>(kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ..., kotlin/Int = ...) // com.davils.krypt.x509/X509Limits.<init>|<init>(kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int;kotlin.Int){}[0]
+
+    final val maximumBytes // com.davils.krypt.x509/X509Limits.maximumBytes|{}maximumBytes[0]
+        final fun <get-maximumBytes>(): kotlin/Int // com.davils.krypt.x509/X509Limits.maximumBytes.<get-maximumBytes>|<get-maximumBytes>(){}[0]
+    final val maximumExtensions // com.davils.krypt.x509/X509Limits.maximumExtensions|{}maximumExtensions[0]
+        final fun <get-maximumExtensions>(): kotlin/Int // com.davils.krypt.x509/X509Limits.maximumExtensions.<get-maximumExtensions>|<get-maximumExtensions>(){}[0]
+    final val maximumNames // com.davils.krypt.x509/X509Limits.maximumNames|{}maximumNames[0]
+        final fun <get-maximumNames>(): kotlin/Int // com.davils.krypt.x509/X509Limits.maximumNames.<get-maximumNames>|<get-maximumNames>(){}[0]
+    final val maximumPathAttempts // com.davils.krypt.x509/X509Limits.maximumPathAttempts|{}maximumPathAttempts[0]
+        final fun <get-maximumPathAttempts>(): kotlin/Int // com.davils.krypt.x509/X509Limits.maximumPathAttempts.<get-maximumPathAttempts>|<get-maximumPathAttempts>(){}[0]
+    final val maximumPathLength // com.davils.krypt.x509/X509Limits.maximumPathLength|{}maximumPathLength[0]
+        final fun <get-maximumPathLength>(): kotlin/Int // com.davils.krypt.x509/X509Limits.maximumPathLength.<get-maximumPathLength>|<get-maximumPathLength>(){}[0]
+    final val maximumRevokedEntries // com.davils.krypt.x509/X509Limits.maximumRevokedEntries|{}maximumRevokedEntries[0]
+        final fun <get-maximumRevokedEntries>(): kotlin/Int // com.davils.krypt.x509/X509Limits.maximumRevokedEntries.<get-maximumRevokedEntries>|<get-maximumRevokedEntries>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.x509/X509Limits.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.x509/X509Limits.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.x509/X509Limits.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.x509/X509Limits.Companion|null[0]
+        final const val DEFAULT_MAXIMUM_BYTES // com.davils.krypt.x509/X509Limits.Companion.DEFAULT_MAXIMUM_BYTES|{}DEFAULT_MAXIMUM_BYTES[0]
+            final fun <get-DEFAULT_MAXIMUM_BYTES>(): kotlin/Int // com.davils.krypt.x509/X509Limits.Companion.DEFAULT_MAXIMUM_BYTES.<get-DEFAULT_MAXIMUM_BYTES>|<get-DEFAULT_MAXIMUM_BYTES>(){}[0]
+        final const val DEFAULT_MAXIMUM_EXTENSIONS // com.davils.krypt.x509/X509Limits.Companion.DEFAULT_MAXIMUM_EXTENSIONS|{}DEFAULT_MAXIMUM_EXTENSIONS[0]
+            final fun <get-DEFAULT_MAXIMUM_EXTENSIONS>(): kotlin/Int // com.davils.krypt.x509/X509Limits.Companion.DEFAULT_MAXIMUM_EXTENSIONS.<get-DEFAULT_MAXIMUM_EXTENSIONS>|<get-DEFAULT_MAXIMUM_EXTENSIONS>(){}[0]
+        final const val DEFAULT_MAXIMUM_NAMES // com.davils.krypt.x509/X509Limits.Companion.DEFAULT_MAXIMUM_NAMES|{}DEFAULT_MAXIMUM_NAMES[0]
+            final fun <get-DEFAULT_MAXIMUM_NAMES>(): kotlin/Int // com.davils.krypt.x509/X509Limits.Companion.DEFAULT_MAXIMUM_NAMES.<get-DEFAULT_MAXIMUM_NAMES>|<get-DEFAULT_MAXIMUM_NAMES>(){}[0]
+        final const val DEFAULT_MAXIMUM_PATH_ATTEMPTS // com.davils.krypt.x509/X509Limits.Companion.DEFAULT_MAXIMUM_PATH_ATTEMPTS|{}DEFAULT_MAXIMUM_PATH_ATTEMPTS[0]
+            final fun <get-DEFAULT_MAXIMUM_PATH_ATTEMPTS>(): kotlin/Int // com.davils.krypt.x509/X509Limits.Companion.DEFAULT_MAXIMUM_PATH_ATTEMPTS.<get-DEFAULT_MAXIMUM_PATH_ATTEMPTS>|<get-DEFAULT_MAXIMUM_PATH_ATTEMPTS>(){}[0]
+        final const val DEFAULT_MAXIMUM_PATH_LENGTH // com.davils.krypt.x509/X509Limits.Companion.DEFAULT_MAXIMUM_PATH_LENGTH|{}DEFAULT_MAXIMUM_PATH_LENGTH[0]
+            final fun <get-DEFAULT_MAXIMUM_PATH_LENGTH>(): kotlin/Int // com.davils.krypt.x509/X509Limits.Companion.DEFAULT_MAXIMUM_PATH_LENGTH.<get-DEFAULT_MAXIMUM_PATH_LENGTH>|<get-DEFAULT_MAXIMUM_PATH_LENGTH>(){}[0]
+        final const val DEFAULT_MAXIMUM_REVOKED_ENTRIES // com.davils.krypt.x509/X509Limits.Companion.DEFAULT_MAXIMUM_REVOKED_ENTRIES|{}DEFAULT_MAXIMUM_REVOKED_ENTRIES[0]
+            final fun <get-DEFAULT_MAXIMUM_REVOKED_ENTRIES>(): kotlin/Int // com.davils.krypt.x509/X509Limits.Companion.DEFAULT_MAXIMUM_REVOKED_ENTRIES.<get-DEFAULT_MAXIMUM_REVOKED_ENTRIES>|<get-DEFAULT_MAXIMUM_REVOKED_ENTRIES>(){}[0]
+        final const val HARD_MAXIMUM_BYTES // com.davils.krypt.x509/X509Limits.Companion.HARD_MAXIMUM_BYTES|{}HARD_MAXIMUM_BYTES[0]
+            final fun <get-HARD_MAXIMUM_BYTES>(): kotlin/Int // com.davils.krypt.x509/X509Limits.Companion.HARD_MAXIMUM_BYTES.<get-HARD_MAXIMUM_BYTES>|<get-HARD_MAXIMUM_BYTES>(){}[0]
+        final const val HARD_MAXIMUM_EXTENSIONS // com.davils.krypt.x509/X509Limits.Companion.HARD_MAXIMUM_EXTENSIONS|{}HARD_MAXIMUM_EXTENSIONS[0]
+            final fun <get-HARD_MAXIMUM_EXTENSIONS>(): kotlin/Int // com.davils.krypt.x509/X509Limits.Companion.HARD_MAXIMUM_EXTENSIONS.<get-HARD_MAXIMUM_EXTENSIONS>|<get-HARD_MAXIMUM_EXTENSIONS>(){}[0]
+        final const val HARD_MAXIMUM_NAMES // com.davils.krypt.x509/X509Limits.Companion.HARD_MAXIMUM_NAMES|{}HARD_MAXIMUM_NAMES[0]
+            final fun <get-HARD_MAXIMUM_NAMES>(): kotlin/Int // com.davils.krypt.x509/X509Limits.Companion.HARD_MAXIMUM_NAMES.<get-HARD_MAXIMUM_NAMES>|<get-HARD_MAXIMUM_NAMES>(){}[0]
+        final const val HARD_MAXIMUM_PATH_ATTEMPTS // com.davils.krypt.x509/X509Limits.Companion.HARD_MAXIMUM_PATH_ATTEMPTS|{}HARD_MAXIMUM_PATH_ATTEMPTS[0]
+            final fun <get-HARD_MAXIMUM_PATH_ATTEMPTS>(): kotlin/Int // com.davils.krypt.x509/X509Limits.Companion.HARD_MAXIMUM_PATH_ATTEMPTS.<get-HARD_MAXIMUM_PATH_ATTEMPTS>|<get-HARD_MAXIMUM_PATH_ATTEMPTS>(){}[0]
+        final const val HARD_MAXIMUM_PATH_LENGTH // com.davils.krypt.x509/X509Limits.Companion.HARD_MAXIMUM_PATH_LENGTH|{}HARD_MAXIMUM_PATH_LENGTH[0]
+            final fun <get-HARD_MAXIMUM_PATH_LENGTH>(): kotlin/Int // com.davils.krypt.x509/X509Limits.Companion.HARD_MAXIMUM_PATH_LENGTH.<get-HARD_MAXIMUM_PATH_LENGTH>|<get-HARD_MAXIMUM_PATH_LENGTH>(){}[0]
+        final const val HARD_MAXIMUM_REVOKED_ENTRIES // com.davils.krypt.x509/X509Limits.Companion.HARD_MAXIMUM_REVOKED_ENTRIES|{}HARD_MAXIMUM_REVOKED_ENTRIES[0]
+            final fun <get-HARD_MAXIMUM_REVOKED_ENTRIES>(): kotlin/Int // com.davils.krypt.x509/X509Limits.Companion.HARD_MAXIMUM_REVOKED_ENTRIES.<get-HARD_MAXIMUM_REVOKED_ENTRIES>|<get-HARD_MAXIMUM_REVOKED_ENTRIES>(){}[0]
+
+        final val Default // com.davils.krypt.x509/X509Limits.Companion.Default|{}Default[0]
+            final fun <get-Default>(): com.davils.krypt.x509/X509Limits // com.davils.krypt.x509/X509Limits.Companion.Default.<get-Default>|<get-Default>(){}[0]
+    }
+}
+
+final object com.davils.krypt.x509.extension/ExtensionIds { // com.davils.krypt.x509.extension/ExtensionIds|null[0]
+    final val AuthorityInformationAccess // com.davils.krypt.x509.extension/ExtensionIds.AuthorityInformationAccess|{}AuthorityInformationAccess[0]
+        final fun <get-AuthorityInformationAccess>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/ExtensionIds.AuthorityInformationAccess.<get-AuthorityInformationAccess>|<get-AuthorityInformationAccess>(){}[0]
+    final val AuthorityKeyIdentifier // com.davils.krypt.x509.extension/ExtensionIds.AuthorityKeyIdentifier|{}AuthorityKeyIdentifier[0]
+        final fun <get-AuthorityKeyIdentifier>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/ExtensionIds.AuthorityKeyIdentifier.<get-AuthorityKeyIdentifier>|<get-AuthorityKeyIdentifier>(){}[0]
+    final val BasicConstraints // com.davils.krypt.x509.extension/ExtensionIds.BasicConstraints|{}BasicConstraints[0]
+        final fun <get-BasicConstraints>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/ExtensionIds.BasicConstraints.<get-BasicConstraints>|<get-BasicConstraints>(){}[0]
+    final val CertificateIssuer // com.davils.krypt.x509.extension/ExtensionIds.CertificateIssuer|{}CertificateIssuer[0]
+        final fun <get-CertificateIssuer>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/ExtensionIds.CertificateIssuer.<get-CertificateIssuer>|<get-CertificateIssuer>(){}[0]
+    final val CertificatePolicies // com.davils.krypt.x509.extension/ExtensionIds.CertificatePolicies|{}CertificatePolicies[0]
+        final fun <get-CertificatePolicies>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/ExtensionIds.CertificatePolicies.<get-CertificatePolicies>|<get-CertificatePolicies>(){}[0]
+    final val CrlDistributionPoints // com.davils.krypt.x509.extension/ExtensionIds.CrlDistributionPoints|{}CrlDistributionPoints[0]
+        final fun <get-CrlDistributionPoints>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/ExtensionIds.CrlDistributionPoints.<get-CrlDistributionPoints>|<get-CrlDistributionPoints>(){}[0]
+    final val CrlNumber // com.davils.krypt.x509.extension/ExtensionIds.CrlNumber|{}CrlNumber[0]
+        final fun <get-CrlNumber>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/ExtensionIds.CrlNumber.<get-CrlNumber>|<get-CrlNumber>(){}[0]
+    final val DeltaCrlIndicator // com.davils.krypt.x509.extension/ExtensionIds.DeltaCrlIndicator|{}DeltaCrlIndicator[0]
+        final fun <get-DeltaCrlIndicator>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/ExtensionIds.DeltaCrlIndicator.<get-DeltaCrlIndicator>|<get-DeltaCrlIndicator>(){}[0]
+    final val ExtendedKeyUsage // com.davils.krypt.x509.extension/ExtensionIds.ExtendedKeyUsage|{}ExtendedKeyUsage[0]
+        final fun <get-ExtendedKeyUsage>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/ExtensionIds.ExtendedKeyUsage.<get-ExtendedKeyUsage>|<get-ExtendedKeyUsage>(){}[0]
+    final val FreshestCrl // com.davils.krypt.x509.extension/ExtensionIds.FreshestCrl|{}FreshestCrl[0]
+        final fun <get-FreshestCrl>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/ExtensionIds.FreshestCrl.<get-FreshestCrl>|<get-FreshestCrl>(){}[0]
+    final val InhibitAnyPolicy // com.davils.krypt.x509.extension/ExtensionIds.InhibitAnyPolicy|{}InhibitAnyPolicy[0]
+        final fun <get-InhibitAnyPolicy>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/ExtensionIds.InhibitAnyPolicy.<get-InhibitAnyPolicy>|<get-InhibitAnyPolicy>(){}[0]
+    final val InvalidityDate // com.davils.krypt.x509.extension/ExtensionIds.InvalidityDate|{}InvalidityDate[0]
+        final fun <get-InvalidityDate>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/ExtensionIds.InvalidityDate.<get-InvalidityDate>|<get-InvalidityDate>(){}[0]
+    final val IssuerAlternativeName // com.davils.krypt.x509.extension/ExtensionIds.IssuerAlternativeName|{}IssuerAlternativeName[0]
+        final fun <get-IssuerAlternativeName>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/ExtensionIds.IssuerAlternativeName.<get-IssuerAlternativeName>|<get-IssuerAlternativeName>(){}[0]
+    final val IssuingDistributionPoint // com.davils.krypt.x509.extension/ExtensionIds.IssuingDistributionPoint|{}IssuingDistributionPoint[0]
+        final fun <get-IssuingDistributionPoint>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/ExtensionIds.IssuingDistributionPoint.<get-IssuingDistributionPoint>|<get-IssuingDistributionPoint>(){}[0]
+    final val KeyUsage // com.davils.krypt.x509.extension/ExtensionIds.KeyUsage|{}KeyUsage[0]
+        final fun <get-KeyUsage>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/ExtensionIds.KeyUsage.<get-KeyUsage>|<get-KeyUsage>(){}[0]
+    final val NameConstraints // com.davils.krypt.x509.extension/ExtensionIds.NameConstraints|{}NameConstraints[0]
+        final fun <get-NameConstraints>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/ExtensionIds.NameConstraints.<get-NameConstraints>|<get-NameConstraints>(){}[0]
+    final val OcspNoCheck // com.davils.krypt.x509.extension/ExtensionIds.OcspNoCheck|{}OcspNoCheck[0]
+        final fun <get-OcspNoCheck>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/ExtensionIds.OcspNoCheck.<get-OcspNoCheck>|<get-OcspNoCheck>(){}[0]
+    final val PolicyConstraints // com.davils.krypt.x509.extension/ExtensionIds.PolicyConstraints|{}PolicyConstraints[0]
+        final fun <get-PolicyConstraints>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/ExtensionIds.PolicyConstraints.<get-PolicyConstraints>|<get-PolicyConstraints>(){}[0]
+    final val PolicyMappings // com.davils.krypt.x509.extension/ExtensionIds.PolicyMappings|{}PolicyMappings[0]
+        final fun <get-PolicyMappings>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/ExtensionIds.PolicyMappings.<get-PolicyMappings>|<get-PolicyMappings>(){}[0]
+    final val PrecertificatePoison // com.davils.krypt.x509.extension/ExtensionIds.PrecertificatePoison|{}PrecertificatePoison[0]
+        final fun <get-PrecertificatePoison>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/ExtensionIds.PrecertificatePoison.<get-PrecertificatePoison>|<get-PrecertificatePoison>(){}[0]
+    final val ReasonCode // com.davils.krypt.x509.extension/ExtensionIds.ReasonCode|{}ReasonCode[0]
+        final fun <get-ReasonCode>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/ExtensionIds.ReasonCode.<get-ReasonCode>|<get-ReasonCode>(){}[0]
+    final val SignedCertificateTimestamps // com.davils.krypt.x509.extension/ExtensionIds.SignedCertificateTimestamps|{}SignedCertificateTimestamps[0]
+        final fun <get-SignedCertificateTimestamps>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/ExtensionIds.SignedCertificateTimestamps.<get-SignedCertificateTimestamps>|<get-SignedCertificateTimestamps>(){}[0]
+    final val SubjectAlternativeName // com.davils.krypt.x509.extension/ExtensionIds.SubjectAlternativeName|{}SubjectAlternativeName[0]
+        final fun <get-SubjectAlternativeName>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/ExtensionIds.SubjectAlternativeName.<get-SubjectAlternativeName>|<get-SubjectAlternativeName>(){}[0]
+    final val SubjectInformationAccess // com.davils.krypt.x509.extension/ExtensionIds.SubjectInformationAccess|{}SubjectInformationAccess[0]
+        final fun <get-SubjectInformationAccess>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/ExtensionIds.SubjectInformationAccess.<get-SubjectInformationAccess>|<get-SubjectInformationAccess>(){}[0]
+    final val SubjectKeyIdentifier // com.davils.krypt.x509.extension/ExtensionIds.SubjectKeyIdentifier|{}SubjectKeyIdentifier[0]
+        final fun <get-SubjectKeyIdentifier>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/ExtensionIds.SubjectKeyIdentifier.<get-SubjectKeyIdentifier>|<get-SubjectKeyIdentifier>(){}[0]
+    final val TlsFeature // com.davils.krypt.x509.extension/ExtensionIds.TlsFeature|{}TlsFeature[0]
+        final fun <get-TlsFeature>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/ExtensionIds.TlsFeature.<get-TlsFeature>|<get-TlsFeature>(){}[0]
+}
+
+final object com.davils.krypt.x509.extension/KeyPurposes { // com.davils.krypt.x509.extension/KeyPurposes|null[0]
+    final val Any // com.davils.krypt.x509.extension/KeyPurposes.Any|{}Any[0]
+        final fun <get-Any>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/KeyPurposes.Any.<get-Any>|<get-Any>(){}[0]
+    final val AnyPolicy // com.davils.krypt.x509.extension/KeyPurposes.AnyPolicy|{}AnyPolicy[0]
+        final fun <get-AnyPolicy>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/KeyPurposes.AnyPolicy.<get-AnyPolicy>|<get-AnyPolicy>(){}[0]
+    final val CaIssuersAccess // com.davils.krypt.x509.extension/KeyPurposes.CaIssuersAccess|{}CaIssuersAccess[0]
+        final fun <get-CaIssuersAccess>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/KeyPurposes.CaIssuersAccess.<get-CaIssuersAccess>|<get-CaIssuersAccess>(){}[0]
+    final val ClientAuth // com.davils.krypt.x509.extension/KeyPurposes.ClientAuth|{}ClientAuth[0]
+        final fun <get-ClientAuth>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/KeyPurposes.ClientAuth.<get-ClientAuth>|<get-ClientAuth>(){}[0]
+    final val CodeSigning // com.davils.krypt.x509.extension/KeyPurposes.CodeSigning|{}CodeSigning[0]
+        final fun <get-CodeSigning>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/KeyPurposes.CodeSigning.<get-CodeSigning>|<get-CodeSigning>(){}[0]
+    final val EmailProtection // com.davils.krypt.x509.extension/KeyPurposes.EmailProtection|{}EmailProtection[0]
+        final fun <get-EmailProtection>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/KeyPurposes.EmailProtection.<get-EmailProtection>|<get-EmailProtection>(){}[0]
+    final val OcspAccess // com.davils.krypt.x509.extension/KeyPurposes.OcspAccess|{}OcspAccess[0]
+        final fun <get-OcspAccess>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/KeyPurposes.OcspAccess.<get-OcspAccess>|<get-OcspAccess>(){}[0]
+    final val OcspSigning // com.davils.krypt.x509.extension/KeyPurposes.OcspSigning|{}OcspSigning[0]
+        final fun <get-OcspSigning>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/KeyPurposes.OcspSigning.<get-OcspSigning>|<get-OcspSigning>(){}[0]
+    final val ServerAuth // com.davils.krypt.x509.extension/KeyPurposes.ServerAuth|{}ServerAuth[0]
+        final fun <get-ServerAuth>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/KeyPurposes.ServerAuth.<get-ServerAuth>|<get-ServerAuth>(){}[0]
+    final val TimeStamping // com.davils.krypt.x509.extension/KeyPurposes.TimeStamping|{}TimeStamping[0]
+        final fun <get-TimeStamping>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.extension/KeyPurposes.TimeStamping.<get-TimeStamping>|<get-TimeStamping>(){}[0]
+}
+
+final object com.davils.krypt.x509.name/AttributeTypes { // com.davils.krypt.x509.name/AttributeTypes|null[0]
+    final val CommonName // com.davils.krypt.x509.name/AttributeTypes.CommonName|{}CommonName[0]
+        final fun <get-CommonName>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.name/AttributeTypes.CommonName.<get-CommonName>|<get-CommonName>(){}[0]
+    final val Country // com.davils.krypt.x509.name/AttributeTypes.Country|{}Country[0]
+        final fun <get-Country>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.name/AttributeTypes.Country.<get-Country>|<get-Country>(){}[0]
+    final val DomainComponent // com.davils.krypt.x509.name/AttributeTypes.DomainComponent|{}DomainComponent[0]
+        final fun <get-DomainComponent>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.name/AttributeTypes.DomainComponent.<get-DomainComponent>|<get-DomainComponent>(){}[0]
+    final val EmailAddress // com.davils.krypt.x509.name/AttributeTypes.EmailAddress|{}EmailAddress[0]
+        final fun <get-EmailAddress>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.name/AttributeTypes.EmailAddress.<get-EmailAddress>|<get-EmailAddress>(){}[0]
+    final val Locality // com.davils.krypt.x509.name/AttributeTypes.Locality|{}Locality[0]
+        final fun <get-Locality>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.name/AttributeTypes.Locality.<get-Locality>|<get-Locality>(){}[0]
+    final val Organization // com.davils.krypt.x509.name/AttributeTypes.Organization|{}Organization[0]
+        final fun <get-Organization>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.name/AttributeTypes.Organization.<get-Organization>|<get-Organization>(){}[0]
+    final val OrganizationIdentifier // com.davils.krypt.x509.name/AttributeTypes.OrganizationIdentifier|{}OrganizationIdentifier[0]
+        final fun <get-OrganizationIdentifier>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.name/AttributeTypes.OrganizationIdentifier.<get-OrganizationIdentifier>|<get-OrganizationIdentifier>(){}[0]
+    final val OrganizationalUnit // com.davils.krypt.x509.name/AttributeTypes.OrganizationalUnit|{}OrganizationalUnit[0]
+        final fun <get-OrganizationalUnit>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.name/AttributeTypes.OrganizationalUnit.<get-OrganizationalUnit>|<get-OrganizationalUnit>(){}[0]
+    final val SerialNumber // com.davils.krypt.x509.name/AttributeTypes.SerialNumber|{}SerialNumber[0]
+        final fun <get-SerialNumber>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.name/AttributeTypes.SerialNumber.<get-SerialNumber>|<get-SerialNumber>(){}[0]
+    final val State // com.davils.krypt.x509.name/AttributeTypes.State|{}State[0]
+        final fun <get-State>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.name/AttributeTypes.State.<get-State>|<get-State>(){}[0]
+    final val Street // com.davils.krypt.x509.name/AttributeTypes.Street|{}Street[0]
+        final fun <get-Street>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.name/AttributeTypes.Street.<get-Street>|<get-Street>(){}[0]
+    final val UserId // com.davils.krypt.x509.name/AttributeTypes.UserId|{}UserId[0]
+        final fun <get-UserId>(): com.davils.krypt.asn1/ObjectIdentifier // com.davils.krypt.x509.name/AttributeTypes.UserId.<get-UserId>|<get-UserId>(){}[0]
+}
+
+final object com.davils.krypt.x509.path/ServiceIdentity { // com.davils.krypt.x509.path/ServiceIdentity|null[0]
+    final fun matches(com.davils.krypt.x509/Certificate, kotlin/String): kotlin/Boolean // com.davils.krypt.x509.path/ServiceIdentity.matches|matches(com.davils.krypt.x509.Certificate;kotlin.String){}[0]
+}
+
+final object com.davils.krypt.x509/AlgorithmIdentifiers { // com.davils.krypt.x509/AlgorithmIdentifiers|null[0]
+    final fun (com.davils.krypt.asn1/DerReader).readSignatureAlgorithm(): com.davils.krypt.core.algorithm/SignatureAlgorithm? // com.davils.krypt.x509/AlgorithmIdentifiers.readSignatureAlgorithm|readSignatureAlgorithm@com.davils.krypt.asn1.DerReader(){}[0]
+    final fun (com.davils.krypt.asn1/DerWriter).writeSignatureAlgorithm(com.davils.krypt.core.algorithm/SignatureAlgorithm) // com.davils.krypt.x509/AlgorithmIdentifiers.writeSignatureAlgorithm|writeSignatureAlgorithm@com.davils.krypt.asn1.DerWriter(com.davils.krypt.core.algorithm.SignatureAlgorithm){}[0]
+    final fun encode(com.davils.krypt.core.algorithm/SignatureAlgorithm): kotlinx.io.bytestring/ByteString // com.davils.krypt.x509/AlgorithmIdentifiers.encode|encode(com.davils.krypt.core.algorithm.SignatureAlgorithm){}[0]
+}
+
+final fun com.davils.krypt.x509.name/distinguishedName(kotlin/Function1<com.davils.krypt.x509.name/DistinguishedNameBuilder, kotlin/Unit>): com.davils.krypt.x509.name/DistinguishedName // com.davils.krypt.x509.name/distinguishedName|distinguishedName(kotlin.Function1<com.davils.krypt.x509.name.DistinguishedNameBuilder,kotlin.Unit>){}[0]
