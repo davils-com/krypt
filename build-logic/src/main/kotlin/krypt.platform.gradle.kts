@@ -38,16 +38,22 @@ kreate {
             jvmDefault = JvmDefaultMode.NO_COMPATIBILITY
         }
 
-        multiplatform {
-            targets {
-                jvm = true
-                wasmJs = setOf(WebEnvironment.NODE)
-            }
-        }
-
         jvm {
             moduleName = kryptModuleName
             javaWarningsAsErrors = true
+        }
+    }
+}
+
+pluginManager.withPlugin("org.jetbrains.kotlin.multiplatform") {
+    kreate {
+        platform {
+            multiplatform {
+                targets {
+                    jvm = true
+                    wasmJs = setOf(WebEnvironment.NODE)
+                }
+            }
         }
     }
 }

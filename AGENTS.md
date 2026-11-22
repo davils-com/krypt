@@ -26,7 +26,7 @@ correctness first.
 | `krypt-authority` | `com.davils:krypt-authority` | A stateless certificate authority: roots and intermediates behind a signer, profiles, an issuance policy, revocation lists and the status of an OCSP responder |
 | `krypt-testing` | `com.davils:krypt-testing` | Test support: deterministic and replayed randomness, audit logs and test environments |
 | `krypt-bom` | `com.davils:krypt-bom` | The bill of materials of every module |
-| `build-logic` | - | One convention plugin per concern, composed by `krypt.kotlin-library` for a library module, `krypt.bom` for the BOM and `krypt.root` for the root project; they hold nothing but `plugins { }` and `kreate { }` |
+| `build-logic` | - | One convention plugin per concern, composed by `krypt.kotlin-library` for a library module, `krypt.jvm-library` for a module only the JVM offers, `krypt.bom` for the BOM and `krypt.root` for the root project; they hold nothing but `plugins { }` and `kreate { }` |
 
 `krypt-core` builds on `com.davils:kore-core`, `com.davils:konfetti-core`, `com.davils:kollect-core`,
 `kotlinx-coroutines-core` and `kotlinx-io-bytestring`; `krypt-asn1` builds on `krypt-core`, `krypt-primitive` on
@@ -153,7 +153,8 @@ passwords, names and every field of every protocol message.
 
 ## Build
 
-- A library module applies exactly one plugin, `id("krypt.kotlin-library")`, and declares nothing but its description
+- A library module applies exactly one plugin, `id("krypt.kotlin-library")` or, for a module only the JVM offers,
+  `id("krypt.jvm-library")`, and declares nothing but its description
   and its dependencies; the BOM applies `id("krypt.bom")`.
 - `build-logic` holds no Kotlin classes, no tasks and no Gradle API calls beyond reading the version catalog. Every
   plugin configures one concern and applies `krypt.base`:
