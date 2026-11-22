@@ -127,9 +127,12 @@ public final class com/davils/krypt/asn1/DerReadsKt {
 	public static synthetic fun readGeneralizedTime$default (Lcom/davils/krypt/asn1/DerReader;Lcom/davils/krypt/asn1/Tag;ILjava/lang/Object;)Lkotlin/time/Instant;
 	public static final fun readInt (Lcom/davils/krypt/asn1/DerReader;Lkotlin/ranges/IntRange;Lcom/davils/krypt/asn1/Tag;)I
 	public static synthetic fun readInt$default (Lcom/davils/krypt/asn1/DerReader;Lkotlin/ranges/IntRange;Lcom/davils/krypt/asn1/Tag;ILjava/lang/Object;)I
+	public static final fun readListInAnyOrder (Lcom/davils/krypt/asn1/DerReader;ILcom/davils/krypt/asn1/Tag;Lkotlin/jvm/functions/Function1;)Ljava/util/List;
+	public static synthetic fun readListInAnyOrder$default (Lcom/davils/krypt/asn1/DerReader;ILcom/davils/krypt/asn1/Tag;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Ljava/util/List;
 	public static final fun readListOf (Lcom/davils/krypt/asn1/DerReader;ILcom/davils/krypt/asn1/Tag;Lkotlin/jvm/functions/Function1;)Ljava/util/List;
 	public static synthetic fun readListOf$default (Lcom/davils/krypt/asn1/DerReader;ILcom/davils/krypt/asn1/Tag;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Ljava/util/List;
 	public static final fun readRemaining (Lcom/davils/krypt/asn1/DerReader;)Ljava/util/List;
+	public static final fun readSetInAnyOrder (Lcom/davils/krypt/asn1/DerReader;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
 	public static final fun readText (Lcom/davils/krypt/asn1/DerReader;Lcom/davils/krypt/asn1/Tag;Lcom/davils/krypt/asn1/Tag;)Ljava/lang/String;
 	public static synthetic fun readText$default (Lcom/davils/krypt/asn1/DerReader;Lcom/davils/krypt/asn1/Tag;Lcom/davils/krypt/asn1/Tag;ILjava/lang/Object;)Ljava/lang/String;
 	public static final fun readTime (Lcom/davils/krypt/asn1/DerReader;)Lkotlin/time/Instant;

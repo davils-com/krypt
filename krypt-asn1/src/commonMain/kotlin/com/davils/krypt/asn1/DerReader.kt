@@ -157,15 +157,19 @@ public class DerReader internal constructor(
     public fun <T> readSequence(block: DerReader.() -> T): T = readConstructed(Tag.Sequence, block)
 
     /**
-     * Reads a SET and its content with [block], in the order the elements were encoded.
+     * Reads a SET OF and its content with [block], in the order the elements were encoded, which DER requires to be
+     * ascending by their encodings (X.690 §11.6); equal elements may follow each other.
      *
      * @param T the result of [block].
      * @param block reads the content; it must read every element.
      * @return what [block] returns.
-     * @throws DerException if the SET is missing, malformed or not fully read.
+     * @throws DerException if the SET is missing, malformed, not sorted or not fully read.
      * @since 1.0.0
      */
-    public fun <T> readSet(block: DerReader.() -> T): T = readConstructed(Tag.Set, block)
+    public fun <T> readSet(block: DerReader.() -> T): T = readConstructed(Tag.Set) {
+        checkSorted()
+        block()
+    }
 
     /**
      * Reads the explicitly tagged element `[number]` and its content with [block].
@@ -313,6 +317,24 @@ public class DerReader internal constructor(
         if (!isExhausted) throw DerException(DerFailure.TrailingData, "the end of the structure")
     }
 
+    internal fun checkSorted() {
+        var previous = IntRange.EMPTY
+        var at = position
+        while (at < end) {
+            val (_, afterTag) = tagAt(at)
+            val (length, afterLength) = lengthAt(afterTag)
+            ensure(isValid = length <= end - afterLength, failure = DerFailure.Truncated, detail = "a SET element")
+            val current = at until afterLength + length
+            ensure(
+                isValid = previous.isEmpty() || !isAfter(input = input, first = previous, second = current),
+                failure = DerFailure.NonCanonicalValue,
+                detail = "a SET OF sorted by the encodings of its elements",
+            )
+            previous = current
+            at = afterLength + length
+        }
+    }
+
     private fun tagAt(at: Int): Pair<Tag, Int> {
         val first = input[at].toInt() and BYTE_MASK
         val tagClass = TagClass.entries[first shr CLASS_SHIFT]
@@ -365,4 +387,16 @@ public class DerReader internal constructor(
     private fun ensure(isValid: Boolean, failure: DerFailure, detail: String) {
         if (!isValid) throw DerException(failure, detail)
     }
+}
+
+private fun isAfter(input: ByteArray, first: IntRange, second: IntRange): Boolean {
+    val firstSize = first.last - first.first + 1
+    val secondSize = second.last - second.first + 1
+    val shared = minOf(a = firstSize, b = secondSize)
+    var index = 0
+    while (index < shared && input[first.first + index] == input[second.first + index]) index += 1
+    if (index == shared) return firstSize > secondSize
+    val firstOctet = input[first.first + index].toInt() and BYTE_MASK
+    val secondOctet = input[second.first + index].toInt() and BYTE_MASK
+    return firstOctet > secondOctet
 }
