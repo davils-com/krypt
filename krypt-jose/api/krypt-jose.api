@@ -209,6 +209,8 @@ public final class com/davils/krypt/jose/jwe/EncryptedKey {
 }
 
 public final class com/davils/krypt/jose/jwe/Jwe {
+	public static final field Companion Lcom/davils/krypt/jose/jwe/Jwe$Companion;
+	public static final field MAXIMUM_PASSWORD_RECIPIENTS I
 	public fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/jose/JoseLimits;Z)V
 	public synthetic fun <init> (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/jose/JoseLimits;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun decode (Ljava/lang/String;)Lcom/davils/kore/core/outcome/Outcome;
@@ -224,6 +226,9 @@ public final class com/davils/krypt/jose/jwe/Jwe {
 	public final fun getLimits ()Lcom/davils/krypt/jose/JoseLimits;
 	public final fun isPasswordAllowed ()Z
 	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/jose/jwe/Jwe$Companion {
 }
 
 public final class com/davils/krypt/jose/jwe/JweAlgorithm : java/lang/Enum {

@@ -51,10 +51,14 @@ import kotlinx.io.bytestring.ByteString
  * Decryption follows RFC 8725: the caller names the acceptable key management algorithms and content encryptions and
  * the keys; `zip` is refused, a `crit` entry the caller does not understand is refused, a message has at most
  * [JoseLimits.maximumRecipients] recipients and PBES2 at most [JoseLimits.maximumIterations] iterations within the
- * bounds of the crypto policy, checked before any work. A wrong key, a wrong tag and a wrong padding all give
- * [JoseFailure.DecryptionFailed]: when a content key cannot be recovered, a random one takes its place, so the
- * failure only shows at the tag, as RFC 7516 recommends. With AES-CBC and HMAC the tag is checked in constant time
- * before anything is decrypted.
+ * bounds of the crypto policy, checked before any work. A message with more than [MAXIMUM_PASSWORD_RECIPIENTS]
+ * PBES2 recipients is refused, and each password key derives at most once per message: it is tried with the first
+ * PBES2 recipient whose `kid` it fits and skipped for the others. The worst case of one decryption is therefore one
+ * PBKDF2 derivation of [JoseLimits.maximumIterations] iterations per password key, whatever the number of
+ * recipients; give several password keys only when you accept that cost. A wrong key, a wrong tag and a wrong
+ * padding all give [JoseFailure.DecryptionFailed]: when a content key cannot be recovered, a random one takes its
+ * place, so the failure only shows at the tag, as RFC 7516 recommends. With AES-CBC and HMAC the tag is checked in
+ * constant time before anything is decrypted.
  *
  * PBES2 with a password is only possible when [isPasswordAllowed] is set; a password is a weak key.
  *
@@ -199,7 +203,7 @@ public class Jwe(
      *
      * @param message the decoded message.
      * @param keys the keys to try: private keys, symmetric keys and, with [isPasswordAllowed], passwords; a key with a
-     *   key id is only tried for a matching `kid`.
+     *   key id is only tried for a matching `kid`, and a password only with the first PBES2 recipient it fits.
      * @param algorithms the acceptable key management algorithms.
      * @param encryptions the acceptable content encryptions.
      * @param critical the `crit` extensions the caller understands and processes itself.
@@ -213,9 +217,11 @@ public class Jwe(
         encryptions: Set<JweEncryption>,
         critical: Set<String> = emptySet(),
     ): Outcome<DecryptedJwe, JoseFailure> {
-        val failures = ArrayList<JoseFailure>()
-        for (recipient in message.recipients) {
-            val request = Request(
+        val passwordRecipients = message.recipients.count { recipient -> isPasswordRecipient(message, recipient) }
+        val isBounded = passwordRecipients <= MAXIMUM_PASSWORD_RECIPIENTS
+        if (!isBounded) return Outcome.Failure(JoseFailure.LimitExceeded)
+        val requests = message.recipients.map { recipient ->
+            Request(
                 message = message,
                 recipient = recipient,
                 keys = keys,
@@ -223,14 +229,8 @@ public class Jwe(
                 encryptions = encryptions,
                 critical = critical,
             )
-            when (val outcome = attempt { decryptFor(request) }) {
-                is Outcome.Success -> return outcome
-                is Outcome.Failure -> failures += outcome.failure
-            }
         }
-        val isDecryptionFailed = JoseFailure.DecryptionFailed in failures
-        val failure = JoseFailure.DecryptionFailed.takeIf { isDecryptionFailed } ?: failures.first()
-        return Outcome.Failure(failure)
+        return decryptAny(requests)
     }
 
     /**
@@ -262,7 +262,24 @@ public class Jwe(
      */
     override fun toString(): String = "Jwe($limits, passwordAllowed=$isPasswordAllowed)"
 
-    private suspend fun decryptFor(request: Request): Outcome<DecryptedJwe, JoseFailure> {
+    private suspend fun decryptAny(requests: List<Request>): Outcome<DecryptedJwe, JoseFailure> {
+        val failures = ArrayList<JoseFailure>()
+        val derived = ArrayList<JoseKey>()
+        for (request in requests) {
+            when (val outcome = attempt { decryptFor(request, derived) }) {
+                is Outcome.Success -> return outcome
+                is Outcome.Failure -> failures += outcome.failure
+            }
+        }
+        val isDecryptionFailed = JoseFailure.DecryptionFailed in failures
+        val failure = JoseFailure.DecryptionFailed.takeIf { isDecryptionFailed } ?: failures.first()
+        return Outcome.Failure(failure)
+    }
+
+    private suspend fun decryptFor(
+        request: Request,
+        derived: MutableList<JoseKey>,
+    ): Outcome<DecryptedJwe, JoseFailure> {
         val message = request.message
         val header = merged(listOf(message.protectedHeader, message.sharedHeader, request.recipient.header))
         val algorithm = JweAlgorithm.of(header.textOf(HeaderNames.ALGORITHM).orEmpty())
@@ -282,6 +299,7 @@ public class Jwe(
         if (failure != null) return Outcome.Failure(failure)
         return prepared(
             request = request,
+            derived = derived,
             header = header,
             algorithm = invariant(algorithm),
             encryption = invariant(encryption),
@@ -290,27 +308,44 @@ public class Jwe(
 
     private suspend fun prepared(
         request: Request,
+        derived: MutableList<JoseKey>,
         header: JsonValue.Object,
         algorithm: JweAlgorithm,
         encryption: JweEncryption,
     ): Outcome<DecryptedJwe, JoseFailure> {
         val encryptedKey = request.recipient.encryptedKey
         return decoding { management.prepare(algorithm, header, encryptedKey) }.flatMap { parts ->
-            withKeys(request = request, header = header, algorithm = algorithm, encryption = encryption, parts = parts)
+            val usable = usableKeys(request = request, header = header, algorithm = algorithm, derived = derived)
+            val bound = Bound(request = request, header = header, algorithm = algorithm, encryption = encryption)
+            withKeys(bound = bound, keys = usable, parts = parts)
         }
     }
 
-    private suspend fun withKeys(
+    private fun usableKeys(
         request: Request,
         header: JsonValue.Object,
         algorithm: JweAlgorithm,
-        encryption: JweEncryption,
+        derived: MutableList<JoseKey>,
+    ): List<JoseKey> {
+        val keyId = header.textOf(HeaderNames.KEY_ID)
+        val fitting = request.keys.filter { key -> key.keyId == null || keyId == null || key.keyId == keyId }
+        if (algorithm.kdf == null) return fitting
+        val passwords = fitting.filterIsInstance<JoseKey.Password>().filterNot { key -> key in derived }
+        derived += passwords
+        return passwords
+    }
+
+    private suspend fun withKeys(
+        bound: Bound,
+        keys: List<JoseKey>,
         parts: RecipientParts,
     ): Outcome<DecryptedJwe, JoseFailure> {
-        val keyId = header.textOf(HeaderNames.KEY_ID)
+        val request = bound.request
+        val algorithm = bound.algorithm
+        val encryption = bound.encryption
         var isFitted = false
         var result: DecryptedJwe? = null
-        for (key in request.keys.filter { key -> key.keyId == null || keyId == null || key.keyId == keyId }) {
+        for (key in keys) {
             if (result == null) {
                 val attempt = Attempt(
                     algorithm = algorithm,
@@ -325,7 +360,7 @@ public class Jwe(
                 result = plaintext?.let { found ->
                     DecryptedJwe(
                         plaintext = found,
-                        header = JoseHeader(header),
+                        header = JoseHeader(bound.header),
                         algorithm = algorithm,
                         encryption = encryption,
                         key = key,
@@ -338,6 +373,12 @@ public class Jwe(
             false -> JoseFailure.KeyNotFound
         }
         return result?.let { found -> Outcome.Success(found) } ?: Outcome.Failure(failure)
+    }
+
+    private fun isPasswordRecipient(message: JweMessage, recipient: EncryptedKey): Boolean {
+        val header = merged(listOf(message.protectedHeader, message.sharedHeader, recipient.header))
+        val algorithm = JweAlgorithm.of(header.textOf(HeaderNames.ALGORITHM).orEmpty())
+        return algorithm?.kdf != null
     }
 
     private suspend fun open(message: JweMessage, encryption: JweEncryption, unwrapped: Unwrapped): ByteString? {
@@ -433,17 +474,37 @@ public class Jwe(
         val critical: Set<String>,
     )
 
-    private companion object {
-        const val PROTECTED: String = "protected"
-        const val SHARED: String = "unprotected"
-        const val HEADER: String = "header"
-        const val RECIPIENTS: String = "recipients"
-        const val ENCRYPTED_KEY: String = "encrypted_key"
-        const val ADDITIONAL_DATA: String = "aad"
-        const val IV: String = "iv"
-        const val CIPHERTEXT: String = "ciphertext"
-        const val TAG: String = "tag"
-        val GENERATED: List<String> = listOf(
+    private data class Bound(
+        val request: Request,
+        val header: JsonValue.Object,
+        val algorithm: JweAlgorithm,
+        val encryption: JweEncryption,
+    )
+
+    /**
+     * The bound of password recipients.
+     *
+     * @since 1.0.0
+     */
+    public companion object {
+        /**
+         * The most PBES2 recipients a message may have when it is decrypted: 4. A message with more is refused with
+         * [JoseFailure.LimitExceeded] before any key is derived.
+         *
+         * @since 1.0.0
+         */
+        public const val MAXIMUM_PASSWORD_RECIPIENTS: Int = 4
+
+        private const val PROTECTED: String = "protected"
+        private const val SHARED: String = "unprotected"
+        private const val HEADER: String = "header"
+        private const val RECIPIENTS: String = "recipients"
+        private const val ENCRYPTED_KEY: String = "encrypted_key"
+        private const val ADDITIONAL_DATA: String = "aad"
+        private const val IV: String = "iv"
+        private const val CIPHERTEXT: String = "ciphertext"
+        private const val TAG: String = "tag"
+        private val GENERATED: List<String> = listOf(
             HeaderNames.ALGORITHM,
             HeaderNames.ENCRYPTION,
             HeaderNames.COMPRESSION,
