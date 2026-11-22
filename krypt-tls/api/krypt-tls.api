@@ -274,12 +274,9 @@ public final class com/davils/krypt/tls/peer/SpiffeAuthorizer : com/davils/krypt
 }
 
 public final class com/davils/krypt/tls/peer/SpiffeAuthorizer$Companion {
-	public final fun ids ([Lcom/davils/krypt/spiffe/SpiffeId;Lcom/davils/krypt/spiffe/source/BundleSource;)Lcom/davils/krypt/tls/peer/SpiffeAuthorizer;
-	public static synthetic fun ids$default (Lcom/davils/krypt/tls/peer/SpiffeAuthorizer$Companion;[Lcom/davils/krypt/spiffe/SpiffeId;Lcom/davils/krypt/spiffe/source/BundleSource;ILjava/lang/Object;)Lcom/davils/krypt/tls/peer/SpiffeAuthorizer;
+	public final fun ids (Lcom/davils/krypt/spiffe/source/BundleSource;[Lcom/davils/krypt/spiffe/SpiffeId;)Lcom/davils/krypt/tls/peer/SpiffeAuthorizer;
 	public final fun matching (Lcom/davils/krypt/spiffe/source/BundleSource;Lkotlin/jvm/functions/Function2;)Lcom/davils/krypt/tls/peer/SpiffeAuthorizer;
-	public static synthetic fun matching$default (Lcom/davils/krypt/tls/peer/SpiffeAuthorizer$Companion;Lcom/davils/krypt/spiffe/source/BundleSource;Lkotlin/jvm/functions/Function2;ILjava/lang/Object;)Lcom/davils/krypt/tls/peer/SpiffeAuthorizer;
-	public final fun trustDomains ([Lcom/davils/krypt/spiffe/TrustDomain;Lcom/davils/krypt/spiffe/source/BundleSource;)Lcom/davils/krypt/tls/peer/SpiffeAuthorizer;
-	public static synthetic fun trustDomains$default (Lcom/davils/krypt/tls/peer/SpiffeAuthorizer$Companion;[Lcom/davils/krypt/spiffe/TrustDomain;Lcom/davils/krypt/spiffe/source/BundleSource;ILjava/lang/Object;)Lcom/davils/krypt/tls/peer/SpiffeAuthorizer;
+	public final fun trustDomains (Lcom/davils/krypt/spiffe/source/BundleSource;[Lcom/davils/krypt/spiffe/TrustDomain;)Lcom/davils/krypt/tls/peer/SpiffeAuthorizer;
 }
 
 public final class com/davils/krypt/tls/reload/CertificateExpiry {

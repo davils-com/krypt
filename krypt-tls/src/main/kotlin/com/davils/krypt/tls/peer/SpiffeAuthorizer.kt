@@ -31,9 +31,14 @@ import com.davils.krypt.x509.path.TrustAnchor
  * exactly one URI, a SPIFFE id with a path, is no authority and has a critical key usage with `digitalSignature` and
  * without `keyCertSign` and `cRLSign`; every signing certificate is an authority with `keyCertSign` and names at most
  * the id of the trust domain of the leaf. The id must then be one of [ids], reside in one of [trustDomains], or be
- * accepted by the predicate. With a bundle source, the anchor the trust manager validated the path to must also be an
- * X.509 authority of the bundle of the trust domain of the id, so that a trust domain whose authorities the trust
- * manager trusts can never vouch for the ids of another, as SPIFFE federation demands.
+ * accepted by the predicate. Finally, the anchor the trust manager validated the path to must be an X.509 authority
+ * of the bundle the bundle source holds for the trust domain of the id, as section 5.2 of the X.509-SVID
+ * specification demands. The trust manager validates against the union of all its anchors, so this binding is what
+ * keeps a federated trust domain, or any other authority the trust manager trusts, from vouching for the ids of
+ * another trust domain. Every factory therefore takes the bundles; a deployment with a single trust domain passes
+ * a [com.davils.krypt.spiffe.bundle.BundleSet] with the one bundle of its trust domain, whose X.509 authorities are
+ * the anchors of its trust manager. A trust domain the source holds no bundle for, or whose bundle the source fails
+ * to give, denies the peer.
  *
  * The predicate and the bundle source are foreign code: a failure of either is contained and denies the peer. Safe to
  * share between threads.
@@ -46,7 +51,7 @@ public class SpiffeAuthorizer private constructor(
     public val ids: Set<SpiffeId>,
     public val trustDomains: Set<TrustDomain>,
     private val predicate: (suspend (SpiffeId) -> Boolean)?,
-    private val bundles: BundleSource?,
+    private val bundles: BundleSource,
 ) : PeerAuthorizer {
     init {
         val count = ids.size + trustDomains.size
@@ -60,7 +65,7 @@ public class SpiffeAuthorizer private constructor(
      *
      * @param peer the validated identity.
      * @return [Authorization.Granted] if the peer presents an X.509-SVID with an allowed id, anchored in the bundle of
-     *   its trust domain when a bundle source is set.
+     *   its trust domain.
      * @since 1.0.0
      */
     override suspend fun authorize(peer: PeerIdentity): Authorization {
@@ -71,13 +76,13 @@ public class SpiffeAuthorizer private constructor(
     }
 
     /**
-     * Shows the number of ids and trust domains and whether a predicate and a bundle source are set.
+     * Shows the number of ids and trust domains and whether a predicate is set.
      *
      * @return the authorizer as text.
      * @since 1.0.0
      */
     override fun toString(): String = "SpiffeAuthorizer(ids=${ids.size}, trustDomains=${trustDomains.size}, " +
-        "predicate=${predicate != null}, bundles=${bundles != null})"
+        "predicate=${predicate != null})"
 
     private suspend fun isAllowed(id: SpiffeId): Boolean {
         val isListed = id in ids || id.trustDomain in trustDomains
@@ -90,8 +95,7 @@ public class SpiffeAuthorizer private constructor(
     }
 
     private suspend fun isAnchored(id: SpiffeId, anchor: TrustAnchor): Boolean {
-        val source = bundles ?: return true
-        val bundle = attempted { source.bundle(id.trustDomain) }.getOrNull()
+        val bundle = attempted { bundles.bundle(id.trustDomain) }.getOrNull()
         val anchors = bundle?.trustAnchors().orEmpty()
         return anchor in anchors
     }
@@ -105,30 +109,33 @@ public class SpiffeAuthorizer private constructor(
         private val DECISIONS: List<Authorization> = listOf(Authorization.Denied, Authorization.Granted)
 
         /**
-         * Allows exactly [ids].
+         * Allows exactly [ids], each anchored in the bundle of its trust domain.
          *
+         * @param bundles the bundles, such as an [com.davils.krypt.spiffe.source.X509Source] or a
+         *   [com.davils.krypt.spiffe.bundle.BundleSet]; the anchor of a peer must be an X.509 authority of the bundle
+         *   of the trust domain of its id.
          * @param ids the SPIFFE ids, such as `spiffe://example.org/ns/prod/sa/api`.
-         * @param bundles the bundles the anchor of a peer must belong to, or null to trust the trust manager alone.
          * @return the authorizer.
          * @throws IllegalArgumentException if [ids] is empty or holds more than [PeerPolicy.HARD_MAXIMUM_RULES] ids.
          * @since 1.0.0
          */
-        public fun ids(vararg ids: SpiffeId, bundles: BundleSource? = null): SpiffeAuthorizer {
+        public fun ids(bundles: BundleSource, vararg ids: SpiffeId): SpiffeAuthorizer {
             require(ids.isNotEmpty()) { "A SPIFFE authorizer allows at least one id" }
             return SpiffeAuthorizer(ids = ids.toSet(), trustDomains = emptySet(), predicate = null, bundles = bundles)
         }
 
         /**
-         * Allows every id of [trustDomains].
+         * Allows every id of [trustDomains], anchored in the bundle of its trust domain.
          *
+         * @param bundles the bundles; the anchor of a peer must be an X.509 authority of the bundle of the trust domain
+         *   of its id.
          * @param trustDomains the trust domains, such as `example.org`.
-         * @param bundles the bundles the anchor of a peer must belong to, or null to trust the trust manager alone.
          * @return the authorizer.
          * @throws IllegalArgumentException if [trustDomains] is empty or holds more than
          *   [PeerPolicy.HARD_MAXIMUM_RULES] trust domains.
          * @since 1.0.0
          */
-        public fun trustDomains(vararg trustDomains: TrustDomain, bundles: BundleSource? = null): SpiffeAuthorizer {
+        public fun trustDomains(bundles: BundleSource, vararg trustDomains: TrustDomain): SpiffeAuthorizer {
             require(trustDomains.isNotEmpty()) { "A SPIFFE authorizer allows at least one trust domain" }
             return SpiffeAuthorizer(
                 ids = emptySet(),
@@ -139,17 +146,15 @@ public class SpiffeAuthorizer private constructor(
         }
 
         /**
-         * Allows every id [predicate] accepts.
+         * Allows every id [predicate] accepts, anchored in the bundle of its trust domain.
          *
-         * @param bundles the bundles the anchor of a peer must belong to, or null to trust the trust manager alone.
+         * @param bundles the bundles; the anchor of a peer must be an X.509 authority of the bundle of the trust domain
+         *   of its id.
          * @param predicate decides about the SPIFFE id of a peer; a failure denies the peer.
          * @return the authorizer.
          * @since 1.0.0
          */
-        public fun matching(
-            bundles: BundleSource? = null,
-            predicate: suspend (SpiffeId) -> Boolean,
-        ): SpiffeAuthorizer =
+        public fun matching(bundles: BundleSource, predicate: suspend (SpiffeId) -> Boolean): SpiffeAuthorizer =
             SpiffeAuthorizer(ids = emptySet(), trustDomains = emptySet(), predicate = predicate, bundles = bundles)
     }
 }
