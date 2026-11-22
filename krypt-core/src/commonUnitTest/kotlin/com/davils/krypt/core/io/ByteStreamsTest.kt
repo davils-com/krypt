@@ -50,6 +50,11 @@ class ByteStreamsTest : FunSpec({
         failure.maximum shouldBe 2L
     }
 
+    test("read all with the largest limit reads a short source without overflowing the chunk size") {
+        val source = ByteString(bytes(THREE_BYTES))
+        source.asByteSource().readAll(maximum = Int.MAX_VALUE) shouldBe source
+    }
+
     test("a flow carries the source in chunks") {
         val source = ByteString(bytes("0102030405")).asByteSource()
         val flow = source.asFlow(chunkSize = 2)
