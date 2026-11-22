@@ -95,6 +95,17 @@ public class CwtValidationBuilder internal constructor() : ValidatingBuilder<Cwt
         }
 
     /**
+     * See [CwtValidation.isAuthenticationRequired]; true by default.
+     *
+     * @since 1.0.0
+     */
+    public var isAuthenticationRequired: Boolean = true
+        set(value) {
+            checkOpen()
+            field = value
+        }
+
+    /**
      * Accepts [algorithms] for every COSE layer of the CWT, in addition to the ones accepted already.
      *
      * @param algorithms the algorithms: signature, MAC, content encryption and key distribution algorithms alike.

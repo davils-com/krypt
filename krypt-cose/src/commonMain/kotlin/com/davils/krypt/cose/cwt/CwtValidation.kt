@@ -94,8 +94,23 @@ public class CwtValidation internal constructor(builder: CwtValidationBuilder) :
      */
     public val requiredClaims: Set<CborItem> = builder.required.toSet()
 
+    /**
+     * Whether a layer of the CWT must authenticate its issuer; true by default. Such a layer is a signature, a MAC or
+     * a content encryption whose key the validator shares with the issuer in advance (a COSE_Encrypt0, or a
+     * COSE_Encrypt with a direct or key wrap recipient), each verified with one of the keys of the validator. A
+     * COSE_Encrypt or COSE_Mac whose key came from an ECDH-ES recipient never counts: anyone who knows the public key
+     * of the recipient can create one, so it hides the claims but says nothing about who wrote them. A CWT without
+     * such a layer is refused with [CwtFailure.Unauthenticated].
+     *
+     * Turn it off only when the claims need no origin, for example when the application authenticates the issuer
+     * through another channel; the claims of an unauthenticated CWT may otherwise come from anyone.
+     *
+     * @since 1.0.0
+     */
+    public val isAuthenticationRequired: Boolean = builder.isAuthenticationRequired
+
     private val values: List<Any?>
-        get() = listOf(algorithms, issuer, audience, skew, at, untaggedType, requiredClaims)
+        get() = listOf(algorithms, issuer, audience, skew, at, untaggedType, requiredClaims, isAuthenticationRequired)
 
     init {
         validateOrThrow(SUBJECT)
@@ -138,7 +153,7 @@ public class CwtValidation internal constructor(builder: CwtValidationBuilder) :
      */
     override fun toString(): String = "CwtValidation(algorithms=$algorithms, issuer=${quoted(issuer)}, " +
         "audience=${quoted(audience)}, skew=$skew, at=${at ?: CLOCK}, untaggedType=${untaggedType ?: NONE}, " +
-        "requiredClaims=$requiredClaims)"
+        "requiredClaims=$requiredClaims, authenticationRequired=$isAuthenticationRequired)"
 
     /**
      * The bound of the skew.

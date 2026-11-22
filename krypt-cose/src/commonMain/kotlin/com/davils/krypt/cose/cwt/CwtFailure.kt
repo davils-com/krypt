@@ -80,6 +80,14 @@ public enum class CwtFailure {
     DecryptionFailed,
 
     /**
+     * No layer of the CWT authenticates its issuer, for example because its only protection is an encryption to an
+     * ECDH-ES recipient; see [CwtValidation.isAuthenticationRequired].
+     *
+     * @since 1.0.0
+     */
+    Unauthenticated,
+
+    /**
      * The expiration time has passed, beyond the clock skew.
      *
      * @since 1.0.0

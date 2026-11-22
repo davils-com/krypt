@@ -531,6 +531,7 @@ public final class com/davils/krypt/cose/cwt/CwtFailure : java/lang/Enum {
 	public static final field Malformed Lcom/davils/krypt/cose/cwt/CwtFailure;
 	public static final field MissingClaim Lcom/davils/krypt/cose/cwt/CwtFailure;
 	public static final field NotYetValid Lcom/davils/krypt/cose/cwt/CwtFailure;
+	public static final field Unauthenticated Lcom/davils/krypt/cose/cwt/CwtFailure;
 	public static final field UnknownCritical Lcom/davils/krypt/cose/cwt/CwtFailure;
 	public static final field UnsupportedKey Lcom/davils/krypt/cose/cwt/CwtFailure;
 	public static final field WrongAudience Lcom/davils/krypt/cose/cwt/CwtFailure;
@@ -551,6 +552,7 @@ public final class com/davils/krypt/cose/cwt/CwtValidation : com/davils/kore/cor
 	public final fun getSkew-UwyO8pc ()J
 	public final fun getUntaggedType ()Lcom/davils/krypt/cose/CoseMessageType;
 	public fun hashCode ()I
+	public final fun isAuthenticationRequired ()Z
 	public fun toString ()Ljava/lang/String;
 	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
 }
@@ -567,10 +569,12 @@ public final class com/davils/krypt/cose/cwt/CwtValidationBuilder : com/davils/k
 	public final fun getIssuer ()Ljava/lang/String;
 	public final fun getSkew-UwyO8pc ()J
 	public final fun getUntaggedType ()Lcom/davils/krypt/cose/CoseMessageType;
+	public final fun isAuthenticationRequired ()Z
 	public final fun require (Lcom/davils/krypt/cose/cbor/CborItem;)V
 	public final fun require ([J)V
 	public final fun setAt (Lkotlin/time/Instant;)V
 	public final fun setAudience (Ljava/lang/String;)V
+	public final fun setAuthenticationRequired (Z)V
 	public final fun setIssuer (Ljava/lang/String;)V
 	public final fun setSkew-LRDsOJo (J)V
 	public final fun setUntaggedType (Lcom/davils/krypt/cose/CoseMessageType;)V
