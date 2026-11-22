@@ -140,6 +140,8 @@ internal object Algorithms {
         }
     }
 
+    fun tagBytes(encryption: ContentEncryption): Int = GCM_TAG_BYTES.takeIf { encryption.isAuthenticated } ?: 0
+
     fun ivBytes(encryption: ContentEncryption): Int =
         listOf(CBC_IV_BYTES, GCM_NONCE_BYTES)[encryption.isAuthenticated.compareTo(false)]
 

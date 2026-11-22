@@ -266,7 +266,9 @@ public class Cms(public val crypto: Crypto, public val limits: CmsLimits = CmsLi
      * The originator information is skipped. Recipients of a kind or with algorithms krypt does not know are kept
      * and reported as unusable when decrypting. As RFC 5083 section 2.1 asks, authenticated-enveloped data of a
      * content type other than id-data must carry authenticated attributes, and their content-type attribute must
-     * name the content type of the encrypted content, which nothing else authenticates.
+     * name the content type of the encrypted content, which nothing else authenticates. Its tag must have the length
+     * of the content encryption: 16 bytes for AES-GCM, the only length krypt accepts in the GCM parameters of
+     * RFC 5084.
      *
      * @param encoded the encoding, possibly from an attacker.
      * @return the enveloped data, or [CmsFailure.Malformed].

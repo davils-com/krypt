@@ -31,8 +31,12 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
 import kotlinx.io.bytestring.ByteString
 import kotlinx.io.bytestring.encodeToByteString
+import kotlinx.io.bytestring.indexOf
 
 private const val KEK_BYTES: Int = 32
+private const val HEADER_BYTES: Int = 2
+private const val MAC_FIELD_BYTES: Int = 18
+private const val OCTET_STRING: Byte = 0x04
 
 private val identifier: ByteString = "kek".encodeToByteString()
 
@@ -64,5 +68,22 @@ class AuthenticatedEnvelopedTest : FunSpec({
         cms.decodeEnveloped(plain.encoded).value().contentType shouldBe ContentTypes.Data
         val typed = relabelled(plain.encoded, from = ContentTypes.Data, to = ContentTypes.SignedData)
         cms.decodeEnveloped(typed).failureOrNull() shouldBe CmsFailure.Malformed
+    }
+
+    test("the tag of authenticated enveloped data has the 16 bytes of AES-GCM") {
+        val enveloped = cms.envelop(CONTENT, listOf(Recipient.Kek(identifier, kek())), ContentEncryption.Aes256Gcm)
+        val bytes = enveloped.encoded.toByteArray()
+        val contentInfo = ByteString(bytes).indexOf(oid(ContentTypes.Data)) - HEADER_BYTES
+        val macStart = bytes.size - MAC_FIELD_BYTES
+        val ciphertextStart = macStart - CONTENT.size - HEADER_BYTES
+        val moved = bytes.copyOf()
+        moved[contentInfo + 1] = (bytes[contentInfo + 1] + 1).toByte()
+        moved[ciphertextStart + 1] = (CONTENT.size + 1).toByte()
+        moved[macStart] = bytes[macStart + HEADER_BYTES]
+        moved[macStart + 1] = OCTET_STRING
+        moved[macStart + HEADER_BYTES] = (MAC_FIELD_BYTES - HEADER_BYTES - 1).toByte()
+        cms.decodeEnveloped(ByteString(moved)).failureOrNull() shouldBe CmsFailure.Malformed
+        val genuine = cms.decodeEnveloped(enveloped.encoded).value()
+        genuine.encryptedContent?.size shouldBe CONTENT.size
     }
 })

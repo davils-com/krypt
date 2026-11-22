@@ -136,6 +136,9 @@ internal class EnvelopedCodec(private val limits: CmsLimits) {
             false -> ByteString()
         }
         if (isAuthenticated) checkContentType(content.contentType, authenticated)
+        val encryption = content.algorithm?.encryption
+        val isTagFit = encryption == null || mac.size == Algorithms.tagBytes(encryption)
+        if (!isTagFit) malformed("a tag of the length of the content encryption")
         val unprotectedTag = listOf(FIRST, SECOND)[isAuthenticated.compareTo(false)]
         val unprotected = takeIf {
             isNext(

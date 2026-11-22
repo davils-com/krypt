@@ -60,25 +60,6 @@ private fun oid(value: ObjectIdentifier): ByteString = der { objectIdentifier(va
 private fun kek(): SecretKey = SecretKey.of(SecretBytes.copyOf(ByteArray(KEK_BYTES) { 1 }))
 
 class AuditCmsTest : FunSpec({
-    test("the tag of authenticated enveloped data has exactly 16 bytes") {
-        val identifier = "kek".encodeToByteString()
-        val enveloped = cms.envelop(CONTENT, listOf(Recipient.Kek(identifier, kek())), ContentEncryption.Aes256Gcm)
-        val bytes = enveloped.encoded.toByteArray()
-        val dataOid = oid(ContentTypes.Data).toByteArray()
-        val contentInfo = ByteString(bytes).indexOf(ByteString(dataOid)) - 2
-        val macStart = bytes.size - MAC_BYTES
-        val ciphertextStart = macStart - CONTENT.size - 2
-        val moved = bytes.copyOf()
-        moved[contentInfo + 1] = (bytes[contentInfo + 1] + 1).toByte()
-        moved[ciphertextStart + 1] = (CONTENT.size + 1).toByte()
-        moved[macStart] = bytes[macStart + 2]
-        moved[macStart + 1] = 0x04
-        moved[macStart + 2] = (MAC_BYTES - 3).toByte()
-        val decoded = cms.decodeEnveloped(ByteString(moved)).value()
-        decoded.encryptedContent?.size shouldBe CONTENT.size + 1
-        cms.decrypt(decoded, Credential.Kek(identifier, kek())).failureOrNull() shouldNotBe null
-    }
-
     test("verifying a time-stamp token whose imprint digest the policy forbids gives a failure, not an exception") {
         val pki = Pki.create()
         val tsa = pki.authority()
