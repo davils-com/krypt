@@ -62,4 +62,11 @@ kollect 1.0.0. The code comes from the security library of an internal Davils pr
   an issuance policy for names, keys and validity, enrollment by request, 159-bit random serial numbers, revocation
   with full and delta lists, the status source of an OCSP responder, a repository of the application and an audit
   of every issuance and revocation.
+- **CMS**: signed data of RFC 5652 with ECDSA, RSA-PSS, RSA PKCS #1, Ed25519, Ed448 and ML-DSA through a `Signer`,
+  attached or detached, signed attributes with the ESS signing-certificate-v2, several signers, countersignatures,
+  certificates and revocation lists, and its verification with a path validator; enveloped and authenticated-enveloped
+  data with AES-CBC and AES-GCM for RSA-OAEP, ECDH, X25519, X448, key-encryption-key, password and ML-KEM recipients,
+  with one failure for every wrong key; encrypted data; and RFC 3161 time stamps with requests, verified responses,
+  the logic of an authority and signature time stamps. Every message is read as strict DER within limits. PBKDF2 with
+  HMAC-SHA-1 of krypt-primitive reads the password recipients OpenSSL writes, behind `@LegacyCryptography`.
 - **Test support**: deterministic and replayed randomness, an audit log and test environments.
