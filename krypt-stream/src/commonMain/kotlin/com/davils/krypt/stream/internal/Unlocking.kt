@@ -18,6 +18,7 @@ package com.davils.krypt.stream.internal
 
 import com.davils.krypt.core.ConstantTime
 import com.davils.krypt.core.SecretBytes
+import com.davils.krypt.core.policy.AlgorithmUse
 import com.davils.krypt.primitive.Crypto
 import com.davils.krypt.stream.Credential
 import com.davils.krypt.stream.StreamFailure
@@ -27,6 +28,9 @@ import kotlinx.io.bytestring.ByteString
 
 internal class Unlocking(private val crypto: Crypto, private val limits: StreamLimits) {
     suspend fun unlock(header: Header, credentials: List<Credential>, associatedData: ByteString): Unlocked {
+        val aead = header.suite.aead
+        StreamRefusal.ensure(crypto.environment.policy.permits(aead, AlgorithmUse.Verify), StreamFailure.Refused)
+        StreamRefusal.ensure(crypto.capabilities.supports(aead), StreamFailure.Unsupported)
         val context = KeySchedule.context(crypto = crypto, core = header.core, associatedData = associatedData)
         val wrapContext = Octets.concat(KeySchedule.RECIPIENT_LABEL, header.core)
         val dataKey = dataKeyOf(header = header, credentials = credentials, context = wrapContext)

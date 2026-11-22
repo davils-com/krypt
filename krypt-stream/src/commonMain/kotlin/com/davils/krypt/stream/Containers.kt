@@ -27,6 +27,7 @@ import com.davils.krypt.core.io.ByteSink
 import com.davils.krypt.core.io.ByteSource
 import com.davils.krypt.core.io.asByteSource
 import com.davils.krypt.primitive.Crypto
+import com.davils.krypt.primitive.PolicyViolationException
 import com.davils.krypt.stream.internal.Chunks
 import com.davils.krypt.stream.internal.Header
 import com.davils.krypt.stream.internal.HeaderCodec
@@ -55,6 +56,10 @@ private const val DEFAULT_SEGMENT_SIZE: Int = 65_536
  * header and the associated data are bound to every segment and a data key that opens one recipient but not another
  * is refused. The segments follow the STREAM construction: each segment is sealed with a nonce of the prefix, its
  * index and a flag for the last segment, so truncation, reordering and appended data are detected.
+ *
+ * Before any key is unwrapped, decryption asks the crypto policy whether it permits the suite of the container and
+ * the platform whether it offers it; a container of a forbidden suite is [StreamFailure.Refused] and one of a missing
+ * suite [StreamFailure.Unsupported], never thrown.
  *
  * Decryption writes the plaintext of every segment as soon as it is authentic. When it fails at a later segment, the
  * plaintext written so far must be discarded: only a [Outcome.Success] vouches for the whole container.
@@ -418,5 +423,7 @@ public class Containers(public val crypto: Crypto, public val limits: StreamLimi
         Outcome.Success(block())
     } catch (refusal: StreamRefusal) {
         Outcome.Failure(refusal.failure)
+    } catch (ignored: PolicyViolationException) {
+        Outcome.Failure(StreamFailure.Refused)
     }
 }

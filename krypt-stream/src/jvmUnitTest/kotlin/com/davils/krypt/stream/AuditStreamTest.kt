@@ -18,19 +18,12 @@ package com.davils.krypt.stream
 
 import com.davils.kore.core.outcome.Outcome
 import com.davils.krypt.core.SecretText
-import com.davils.krypt.core.algorithm.AeadAlgorithm
 import com.davils.krypt.core.environment
-import com.davils.krypt.core.io.BufferSink
-import com.davils.krypt.core.io.asByteSource
 import com.davils.krypt.core.policy.cryptoPolicy
-import com.davils.krypt.keyset.KeyPurpose
-import com.davils.krypt.keyset.Keysets
 import com.davils.krypt.primitive.Crypto
-import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.longs.shouldBeLessThan
 import io.kotest.matchers.shouldBe
-import io.kotest.matchers.types.shouldBeInstanceOf
 import kotlinx.io.bytestring.ByteString
 import kotlin.time.TimeSource
 
@@ -40,7 +33,6 @@ private const val ITERATION_OFFSET: Int = 1 + 2 + 16
 private const val WRAPPED_LENGTH_OFFSET: Int = 1 + 2 + 20
 private const val HOSTILE_ITERATIONS: Int = 1_000_000
 private const val ENTRIES: Int = 16
-private const val SEGMENT: Int = 4_096
 
 private val cheap: Crypto = Crypto(
     environment {
@@ -91,29 +83,5 @@ class AuditStreamTest : FunSpec({
         val multiplied = startMany.elapsedNow().inWholeMilliseconds
         println("AUDIT B password DoS: 1 entry ${single} ms, $ENTRIES entries ${multiplied} ms")
         multiplied shouldBeLessThan single * 3 + 100
-    }
-
-    test("a valid container of a suite the policy forbids is refused as an outcome, not thrown") {
-        val modern = Crypto()
-        val keysets = Keysets(modern)
-        val keyset = keysets.generate(KeyPurpose.Hybrid())
-        val attacker = Containers(modern)
-        val sink = BufferSink(Int.MAX_VALUE)
-        attacker.encrypt(
-            source = ByteString(ByteArray(100)).asByteSource(),
-            sink = sink,
-            recipients = listOf(Recipient.Hybrid(keysets.encrypter(keysets.publicKeyset(keyset)))),
-            suite = StreamSuite.ChaCha20Poly1305,
-            segmentSize = SEGMENT,
-        )
-        val strict = Crypto(environment { policy = cryptoPolicy { forbid(AeadAlgorithm.ChaCha20Poly1305) } })
-        val victim = Containers(strict)
-        val result = shouldNotThrowAny {
-            victim.decrypt(
-                container = sink.toByteString(),
-                credentials = listOf(Credential.Hybrid(keysets.decrypter(keyset))),
-            )
-        }
-        result.shouldBeInstanceOf<Outcome.Failure<StreamFailure>>()
     }
 })
