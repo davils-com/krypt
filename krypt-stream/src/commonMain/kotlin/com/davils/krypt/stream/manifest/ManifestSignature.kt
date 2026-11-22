@@ -23,7 +23,8 @@ import kotlinx.io.bytestring.ByteString
  *
  * @property signature the signature of a key set, which names its key.
  * @property countersigns the index of the signature this one countersigns, or null if it signs the manifest.
- * @property timestamp an opaque time-stamp token over the signature, such as one of RFC 3161, or null.
+ * @property timestamp an opaque time-stamp token over the signature, such as one of RFC 3161, or null; krypt never
+ *   verifies it, so a caller that relies on it verifies it and its message imprint itself.
  * @constructor Holds [signature].
  * @throws IllegalArgumentException if [countersigns] is negative.
  * @since 1.0.0
