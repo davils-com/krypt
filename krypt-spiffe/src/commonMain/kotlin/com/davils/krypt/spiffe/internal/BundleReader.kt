@@ -102,7 +102,9 @@ internal class BundleReader(private val keys: JsonWebKeys, private val limits: S
         val isIgnored = chain == null || (chain is JsonValue.Array && chain.items.isEmpty())
         if (isIgnored) return null
         return jwkOf(entry)?.let { jwk ->
-            val certificate = jwk.certificates.first()
+            val certificates = jwk.certificates
+            refuseUnless(certificates.size == 1, BundleFailure.InvalidKey)
+            val certificate = certificates.first()
             refuseUnless(certificate.publicKey != null, BundleFailure.InvalidKey)
             certificate
         }

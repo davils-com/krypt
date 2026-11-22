@@ -30,15 +30,19 @@ import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
 
-class AuditBundleStrictnessTest : FunSpec({
+class X509AuthorityChainTest : FunSpec({
     test("an X.509 authority whose x5c holds more than one certificate is refused") {
         val root = Authority.root(DOMAIN_ID)
         val other = Authority.root(DOMAIN_ID)
         val publicKey = root.certificate.publicKey.shouldNotBeNull()
         val text = bundleOf(entry(jwkOf(publicKey), X509_USE, chainOf(root.certificate, other.certificate)))
-        val decoded = codec.decode(domain, text)
-        println("AUDIT x5c with two certificates: $decoded")
-        decoded.failure() shouldBe BundleFailure.InvalidKey
+        codec.decode(domain, text).failure() shouldBe BundleFailure.InvalidKey
+    }
+
+    test("an X.509 authority whose x5c holds exactly one certificate is read") {
+        val root = Authority.root(DOMAIN_ID)
+        val publicKey = root.certificate.publicKey.shouldNotBeNull()
+        val text = bundleOf(entry(jwkOf(publicKey), X509_USE, chainOf(root.certificate)))
+        codec.decode(domain, text).failure() shouldBe null
     }
 })
-

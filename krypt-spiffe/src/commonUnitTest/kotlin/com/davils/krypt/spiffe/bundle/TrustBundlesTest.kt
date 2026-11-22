@@ -137,8 +137,6 @@ class TrustBundlesTest : FunSpec({
         codec.read(bundleOf(ignored)).isEmpty shouldBe true
         val other = bundleOf(x509Entry(root.certificate), extra = listOf(member(name = "other", value = "{}")))
         codec.read(other).x509Authorities shouldBe listOf(root.certificate)
-        val chained = entry(jwk, X509_USE, chainOf(root.certificate, Authority.root().certificate))
-        codec.read(bundleOf(chained)).x509Authorities shouldBe listOf(root.certificate)
     }
 
     test("invalid keys of a known use refuse the whole bundle") {
