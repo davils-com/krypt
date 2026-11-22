@@ -181,6 +181,14 @@ public final class com/davils/krypt/jose/JsonValue$Text : com/davils/krypt/jose/
 	public fun toString ()Ljava/lang/String;
 }
 
+public final class com/davils/krypt/jose/StrictJson {
+	public static final field INSTANCE Lcom/davils/krypt/jose/StrictJson;
+	public final fun decode (Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/jose/JoseLimits;)Lcom/davils/kore/core/outcome/Outcome;
+	public static synthetic fun decode$default (Lcom/davils/krypt/jose/StrictJson;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/jose/JoseLimits;ILjava/lang/Object;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun decodeObject (Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/jose/JoseLimits;)Lcom/davils/kore/core/outcome/Outcome;
+	public static synthetic fun decodeObject$default (Lcom/davils/krypt/jose/StrictJson;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/jose/JoseLimits;ILjava/lang/Object;)Lcom/davils/kore/core/outcome/Outcome;
+}
+
 public final class com/davils/krypt/jose/jwe/DecryptedJwe {
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getAlgorithm ()Lcom/davils/krypt/jose/jwe/JweAlgorithm;
