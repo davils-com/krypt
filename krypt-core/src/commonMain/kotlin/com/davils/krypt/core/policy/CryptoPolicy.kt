@@ -117,7 +117,8 @@ public class CryptoPolicy internal constructor(builder: CryptoPolicyBuilder) : V
     public val maximumIterations: Int = builder.maximumIterations
 
     /**
-     * Tells whether the policy demands a FIPS validated provider, which the [CryptoProfile.Fips] profile does.
+     * Tells whether the policy demands a FIPS validated provider, which the [CryptoProfile.Fips] profile does. The
+     * primitives of krypt then refuse every operation in an environment that names no provider.
      *
      * @since 1.0.0
      */

@@ -21,6 +21,7 @@ import com.davils.krypt.core.algorithm.AsymmetricEncryptionAlgorithm
 import com.davils.krypt.core.algorithm.KeyFamily
 import com.davils.krypt.core.policy.AlgorithmUse
 import com.davils.krypt.primitive.Crypto
+import com.davils.krypt.primitive.internal.requireSupported
 import com.davils.krypt.primitive.key.PrivateKey
 import com.davils.krypt.primitive.key.PublicKey
 import kotlinx.io.bytestring.ByteString
@@ -42,6 +43,9 @@ public class AsymmetricEncryptions internal constructor(private val crypto: Cryp
      * @return the ciphertext.
      * @throws IllegalArgumentException if [publicKey] is no RSA key.
      * @throws com.davils.krypt.primitive.PolicyViolationException if the policy forbids [algorithm] or the key size.
+     * @throws com.davils.krypt.primitive.UnsupportedAlgorithmException if the platform lacks [algorithm].
+     * @throws com.davils.krypt.primitive.CryptoException if the platform refuses the key or [plaintext] is too long
+     *   for it; the exception carries nothing of the failure of the platform.
      * @since 1.0.0
      */
     public suspend fun encrypt(
@@ -52,6 +56,7 @@ public class AsymmetricEncryptions internal constructor(private val crypto: Cryp
         require(publicKey.family == KeyFamily.Rsa) { "RSA encryption needs an RSA key, not ${publicKey.family}" }
         crypto.permit(algorithm, AlgorithmUse.Protect)
         crypto.permitKey(publicKey, AlgorithmUse.Protect)
+        crypto.requireSupported(algorithm)
         return ByteString(crypto.backend.encrypt(algorithm, publicKey, plaintext.toByteArray()))
     }
 
@@ -61,9 +66,12 @@ public class AsymmetricEncryptions internal constructor(private val crypto: Cryp
      * @param privateKey an RSA private key.
      * @param ciphertext the ciphertext.
      * @param algorithm the scheme; [AsymmetricEncryptionAlgorithm.RsaOaepSha256] by default.
-     * @return the plaintext, or null if the ciphertext does not decrypt under this key.
+     * @return the plaintext, or null if the ciphertext does not decrypt under this key or the platform refuses the
+     *   key.
      * @throws IllegalArgumentException if [privateKey] is no RSA key.
+     * @throws IllegalStateException if [privateKey] was destroyed.
      * @throws com.davils.krypt.primitive.PolicyViolationException if the policy forbids [algorithm] or the key size.
+     * @throws com.davils.krypt.primitive.UnsupportedAlgorithmException if the platform lacks [algorithm].
      * @since 1.0.0
      */
     public suspend fun decrypt(
@@ -74,6 +82,7 @@ public class AsymmetricEncryptions internal constructor(private val crypto: Cryp
         require(privateKey.family == KeyFamily.Rsa) { "RSA decryption needs an RSA key, not ${privateKey.family}" }
         crypto.permit(algorithm, AlgorithmUse.Verify)
         crypto.permitKey(privateKey, AlgorithmUse.Verify)
+        crypto.requireSupported(algorithm)
         val plaintext = crypto.backend.decrypt(algorithm, privateKey, ciphertext.toByteArray())
         return plaintext?.let { plain -> SecretBytes.adopt(plain) }
     }

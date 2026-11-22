@@ -32,7 +32,7 @@ internal interface AsymmetricEngine {
 
     suspend fun verify(algorithm: SignatureAlgorithm, key: PublicKey, data: ByteArray, signature: ByteArray): Boolean
 
-    suspend fun agree(algorithm: KeyAgreementAlgorithm, privateKey: PrivateKey, publicKey: PublicKey): ByteArray
+    suspend fun agree(algorithm: KeyAgreementAlgorithm, privateKey: PrivateKey, publicKey: PublicKey): ByteArray?
 
     suspend fun encapsulate(algorithm: KemAlgorithm, publicKey: PublicKey): Pair<ByteArray, ByteArray>
 

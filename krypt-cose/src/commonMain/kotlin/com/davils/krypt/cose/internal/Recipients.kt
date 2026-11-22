@@ -266,7 +266,7 @@ internal class Recipients(
         }
     }
 
-    private fun ephemeralOf(recipient: CoseRecipient): CoseKey? {
+    private suspend fun ephemeralOf(recipient: CoseRecipient): CoseKey? {
         val item = recipient.protectedHeaders[HeaderLabels.EPHEMERAL_KEY]
             ?: recipient.unprotectedHeaders[HeaderLabels.EPHEMERAL_KEY]
         val map = (item ?: return null).mapOrNull().sure()

@@ -23,6 +23,7 @@ import com.davils.krypt.core.algorithm.MacAlgorithm
 import com.davils.krypt.core.policy.AlgorithmUse
 import com.davils.krypt.primitive.Crypto
 import com.davils.krypt.primitive.PolicyViolationException
+import com.davils.krypt.primitive.internal.requireWellFormed
 import com.davils.krypt.primitive.key.SecretKey
 import kotlinx.io.bytestring.ByteString
 
@@ -64,7 +65,8 @@ public class KeyDerivations internal constructor(private val crypto: Crypto) {
     /**
      * The extract step of HKDF: HMAC of [inputKey] keyed with [salt].
      *
-     * @param salt the salt; empty means a string of zeros.
+     * @param salt the salt; empty means a string of zeros as long as the digest. A salt shorter than the digest is
+     *   padded with zeros to its length, which leaves HMAC unchanged.
      * @param inputKey the input keying material.
      * @param algorithm the HKDF; [KdfAlgorithm.HkdfSha256] by default.
      * @return the pseudorandom key.
@@ -78,10 +80,8 @@ public class KeyDerivations internal constructor(private val crypto: Crypto) {
         algorithm: KdfAlgorithm = KdfAlgorithm.HkdfSha256,
     ): SecretBytes {
         val mac = hkdfMac(algorithm)
-        val saltBytes = salt.toByteArray().takeIf { bytes -> bytes.isNotEmpty() } ?: ByteArray(
-            algorithm.digest.outputBytes,
-        )
-        val key = SecretKey(SecretBytes.adopt(saltBytes))
+        val saltBytes = salt.toByteArray().copyOf(maxOf(a = salt.size, b = algorithm.digest.outputBytes))
+        val key = SecretKey.adopt(SecretBytes.adopt(saltBytes))
         val prk = inputKey.reveal { bytes -> crypto.backend.mac(mac, key, bytes) }
         key.destroy()
         return SecretBytes.adopt(prk)
@@ -111,7 +111,7 @@ public class KeyDerivations internal constructor(private val crypto: Crypto) {
             length in 1..MAXIMUM_BLOCKS * hashLength,
         ) { "HKDF derives 1 to ${MAXIMUM_BLOCKS * hashLength} bytes, not $length" }
         require(pseudorandomKey.size >= hashLength) { "The pseudorandom key of HKDF has at least $hashLength bytes" }
-        val key = SecretKey(pseudorandomKey.copy())
+        val key = SecretKey.adopt(pseudorandomKey.copy())
         val output = ByteArray(length)
         var previous = ByteArray(0)
         var written = 0
@@ -133,15 +133,16 @@ public class KeyDerivations internal constructor(private val crypto: Crypto) {
     /**
      * Derives [length] bytes from [password] with PBKDF2.
      *
-     * @param password the password, encoded in UTF-8.
+     * @param password the password, encoded in UTF-8; it must not hold an unpaired UTF-16 surrogate, so that it has
+     *   exactly one encoding and derives the same key on every platform.
      * @param salt the salt, at least 16 random bytes.
      * @param iterations the iteration count, within the bounds of the policy for [use].
      * @param length the number of bytes, from 16 to 1,024.
      * @param algorithm the PBKDF2; [KdfAlgorithm.Pbkdf2Sha256] by default.
      * @param use [AlgorithmUse.Protect] for a new derivation, [AlgorithmUse.Verify] to repeat a stored one.
      * @return the derived key.
-     * @throws IllegalArgumentException if [algorithm] is not a PBKDF2, the salt is too short or [length] is out of
-     *   range.
+     * @throws IllegalArgumentException if [algorithm] is not a PBKDF2, the salt is too short, [length] is out of
+     *   range or [password] holds an unpaired surrogate.
      * @throws com.davils.krypt.primitive.PolicyViolationException if the policy forbids [algorithm] or the count.
      * @since 1.0.0
      */
@@ -156,6 +157,7 @@ public class KeyDerivations internal constructor(private val crypto: Crypto) {
         require(algorithm.isPasswordBased) { "${algorithm.algorithmName} is not a password derivation" }
         require(salt.size >= MINIMUM_SALT) { "A PBKDF2 salt has at least $MINIMUM_SALT bytes" }
         require(length in SecretKey.MINIMUM_BYTES..MAXIMUM_LENGTH) { "PBKDF2 derives 16 to $MAXIMUM_LENGTH bytes" }
+        requireWellFormed(password)
         crypto.permit(algorithm, use)
         if (!crypto.environment.policy.permitsIterations(
                 iterations,

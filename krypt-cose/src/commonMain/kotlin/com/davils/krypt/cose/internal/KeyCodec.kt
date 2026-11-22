@@ -37,7 +37,7 @@ import com.davils.krypt.primitive.key.SecretKey
 import kotlinx.io.bytestring.ByteString
 
 internal class KeyCodec(private val crypto: Crypto) {
-    fun decode(map: CborMap): CoseKey {
+    suspend fun decode(map: CborMap): CoseKey {
         val typeId = present(map[LABEL_TYPE], CoseFailure.Malformed)
         val type = CoseKeyType.entries.firstOrNull { candidate -> typeId.longOrNull() == candidate.id }
         val algorithmItem = map[LABEL_ALGORITHM]
@@ -82,7 +82,7 @@ internal class KeyCodec(private val crypto: Crypto) {
         CoseKeyType.Symmetric -> symmetricMaterial(key)
     }
 
-    private fun okp(map: CborMap, parts: KeyParts): CoseKey {
+    private suspend fun okp(map: CborMap, parts: KeyParts): CoseKey {
         val curve = curveOf(map, CoseKeyType.Okp)
         val x = sizedBytes(map, LABEL_X, curve.size)
         val d = sizedBytes(map, LABEL_OKP_D, curve.size)
@@ -92,7 +92,7 @@ internal class KeyCodec(private val crypto: Crypto) {
         return parts.assemble(curve = curve, publicKey = publicKey, privateKey = privateKey, secretKey = null)
     }
 
-    private fun ec2(map: CborMap, parts: KeyParts): CoseKey {
+    private suspend fun ec2(map: CborMap, parts: KeyParts): CoseKey {
         val curve = curveOf(map, CoseKeyType.Ec2)
         ensure(map[LABEL_Y]?.simpleOrNull() == null, CoseFailure.UnsupportedKey)
         val coordinates = listOfNotNull(sizedBytes(map, LABEL_X, curve.size), sizedBytes(map, LABEL_Y, curve.size))
@@ -104,7 +104,7 @@ internal class KeyCodec(private val crypto: Crypto) {
         return parts.assemble(curve = curve, publicKey = publicKey, privateKey = privateKey, secretKey = null)
     }
 
-    private fun rsa(map: CborMap, parts: KeyParts): CoseKey {
+    private suspend fun rsa(map: CborMap, parts: KeyParts): CoseKey {
         ensure(map[LABEL_RSA_OTHER] == null, CoseFailure.UnsupportedKey)
         val modulus = present(sizedBytes(map, LABEL_RSA_N, null), CoseFailure.Malformed)
         val exponent = present(sizedBytes(map, LABEL_RSA_E, null), CoseFailure.Malformed)
@@ -175,7 +175,7 @@ internal class KeyCodec(private val crypto: Crypto) {
     private fun publicOf(spki: ByteString): PublicKey =
         present(crypto.keys.decodePublic(spki).getOrNull(), CoseFailure.UnsupportedKey)
 
-    private fun privateOf(pkcs8: SecretBytes): PrivateKey = pkcs8.use { encoding ->
+    private suspend fun privateOf(pkcs8: SecretBytes): PrivateKey = pkcs8.use { encoding ->
         present(crypto.keys.decodePrivate(encoding).getOrNull(), CoseFailure.UnsupportedKey)
     }
 

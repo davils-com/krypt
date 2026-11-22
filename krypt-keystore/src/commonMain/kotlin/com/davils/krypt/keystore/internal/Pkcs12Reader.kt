@@ -23,6 +23,7 @@ import com.davils.krypt.asn1.DerReader
 import com.davils.krypt.asn1.ObjectIdentifier
 import com.davils.krypt.asn1.Tag
 import com.davils.krypt.asn1.readInt
+import com.davils.krypt.asn1.readListInAnyOrder
 import com.davils.krypt.asn1.readListOf
 import com.davils.krypt.asn1.readRemaining
 import com.davils.krypt.asn1.readText
@@ -147,7 +148,7 @@ internal object Pkcs12Reader {
         val reader = VALUE_READERS[type] ?: { skipped() }
         val value = readExplicit(0) { reader() }
         val attributes = Tag.Set.takeIf { set -> isNext(set) }?.let {
-            readListOf(MAXIMUM_ATTRIBUTES, Tag.Set) { readSequence { readAttribute() } }
+            readListInAnyOrder(MAXIMUM_ATTRIBUTES, Tag.Set) { readSequence { readAttribute() } }
         }
         val merged = attributes.orEmpty().fold(BagAttributes()) { all, attribute ->
             merged(first = all, second = attribute)

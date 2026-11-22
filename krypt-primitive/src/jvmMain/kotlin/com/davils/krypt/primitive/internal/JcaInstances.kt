@@ -169,9 +169,7 @@ internal class JcaInstances(private val provider: Provider?) {
     }
 
     private fun decodePrivate(key: PrivateKey): JcaPrivateKey {
-        val encoding: SecretBytes = checkNotNull(
-            key.encodingOrNull(),
-        ) { "The private key has neither an encoding nor a handle" }
+        val encoding: SecretBytes = checkNotNull(key.encodingOrNull()) { "The private key has no encoding" }
         val factory = keyFactory(JcaNames.keyFactory(key.family))
         return encoding.reveal { bytes ->
             val spec = PKCS8EncodedKeySpec(bytes)

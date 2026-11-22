@@ -26,6 +26,7 @@ import com.davils.krypt.core.algorithm.DigestAlgorithm
 import com.davils.krypt.core.policy.AlgorithmUse
 import com.davils.krypt.primitive.Crypto
 import com.davils.krypt.primitive.PolicyViolationException
+import com.davils.krypt.primitive.internal.requireWellFormed
 import kotlinx.io.bytestring.ByteString
 
 private const val MINIMUM_SALT: Int = 8
@@ -46,12 +47,13 @@ public object LegacyDerivations {
      * The policy must accept SHA-1 for verification and [iterations] as verified iterations.
      *
      * @param crypto the primitives and their policy.
-     * @param password the password.
+     * @param password the password, without an unpaired UTF-16 surrogate.
      * @param salt the salt, at least 8 bytes.
      * @param iterations the iteration count.
      * @param length the size of the derived key, 16 to 1024 bytes.
      * @return the derived key.
-     * @throws IllegalArgumentException if the salt or the length is out of range.
+     * @throws IllegalArgumentException if the salt or the length is out of range or [password] holds an unpaired
+     *   surrogate.
      * @throws PolicyViolationException if the policy refuses SHA-1 or the iteration count.
      * @since 1.0.0
      */
@@ -65,6 +67,7 @@ public object LegacyDerivations {
     ): SecretBytes {
         require(salt.size >= MINIMUM_SALT) { "A PBKDF2 salt has at least $MINIMUM_SALT bytes" }
         require(length in MINIMUM_LENGTH..MAXIMUM_LENGTH) { "PBKDF2 derives $MINIMUM_LENGTH to $MAXIMUM_LENGTH bytes" }
+        requireWellFormed(password)
         crypto.permit(DigestAlgorithm.Sha1, AlgorithmUse.Verify)
         val policy = crypto.environment.policy
         if (!policy.permitsIterations(iterations, AlgorithmUse.Verify)) {

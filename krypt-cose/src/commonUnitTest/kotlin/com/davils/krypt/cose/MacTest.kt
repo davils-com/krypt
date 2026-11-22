@@ -64,7 +64,7 @@ private val MACS: Set<CoseAlgorithm> = setOf(
 )
 private const val OUR_SECRET: String = "our-secret"
 
-private fun anonymous(encoded: String): CoseKey {
+private suspend fun anonymous(encoded: String): CoseKey {
     val found = key(encoded)
     return CoseKey.of(secretKey = checkNotNull(found.secretKey))
 }

@@ -80,7 +80,7 @@ class HashTest : FunSpec({
     }
 
     test("HMAC-SHA-256 matches RFC 4231 test case 1 and verifies in constant time") {
-        val key = SecretKey(secret("0b".repeat(20)))
+        val key = SecretKey.adopt(secret("0b".repeat(20)))
         val tag = crypto.macs.mac(key = key, data = utf8(HI_THERE))
         hexOf(tag) shouldBe "b0344c61d8db38535ca8afceaf0bf12b881dc200c9833da726e9376c2e32cff7"
         crypto.macs.verify(key = key, data = utf8(HI_THERE), tag = tag) shouldBe Verification.Valid

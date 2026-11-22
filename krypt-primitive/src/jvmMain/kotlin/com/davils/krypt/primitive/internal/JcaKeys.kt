@@ -26,7 +26,7 @@ import java.security.PublicKey as JcaPublicKey
 
 internal object JcaKeys {
     private fun parse(encoding: SecretBytes): PrivateKey? = encoding.use { owned ->
-        val decoded = KeyCodec.privateKeyOf(owned)
+        val decoded = PrivateKey.decode(owned)
         decoded.getOrNull()
     }
 
@@ -36,14 +36,9 @@ internal object JcaKeys {
         public.handle = publicKey
         val encoded: ByteArray? = privateKey.encoded
         val parsed = encoded?.let { bytes -> parse(SecretBytes.adopt(bytes)) }
-        val private = PrivateKey(
-            family = public.family,
-            curve = public.curve,
-            bits = public.bits,
-            publicKey = public,
-            pkcs8 = parsed?.encodingOrNull()?.copy(),
-            platformHandle = privateKey,
-        )
+        val private = parsed?.withPublic(public)
+            ?: PrivateKey.ofPlatform(publicKey = public, platformHandle = privateKey)
+        private.handle = privateKey
         parsed?.destroy()
         return KeyPair(publicKey = public, privateKey = private)
     }

@@ -48,7 +48,7 @@ internal object WebCryptoKeys {
         val imported = encoding.reveal { bytes ->
             JsBytes.withJs(
                 bytes,
-            ) { raw -> importOf(format = "pkcs8", data = raw, import = import) }
+            ) { raw -> importRaw(format = "pkcs8", data = raw, import = import) }
         }
         cache[import.name] = imported
         return imported
@@ -61,13 +61,16 @@ internal object WebCryptoKeys {
         if (cached != null) return cached
         val imported = JsBytes.withJs(
             key.encoded.toByteArray(),
-        ) { raw -> importOf(format = "spki", data = raw, import = import) }
+        ) { raw -> importRaw(format = "spki", data = raw, import = import) }
         cache[import.name] = imported
         return imported
     }
 
-    private suspend fun importOf(format: String, data: JsAny, import: KeyImport): JsAny = try {
+    private suspend fun importRaw(format: String, data: JsAny, import: KeyImport): JsAny =
         importKey(f = format, d = data, a = import.algorithm, e = false, u = usages(import.usages)).settled()
+
+    private suspend fun importOf(format: String, data: JsAny, import: KeyImport): JsAny = try {
+        importRaw(format = format, data = data, import = import)
     } catch (refused: WebCryptoRejection) {
         throw UnsupportedAlgorithmException(import.name, refused)
     }

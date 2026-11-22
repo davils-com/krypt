@@ -103,7 +103,7 @@ class ValuesTest : FunSpec({
         ) { dotted ->
             ObjectIdentifier.parseOrNull(dotted) shouldBe null
         }
-        withData(listOf("80", "2a86", "ffffffffffffffffff7f")) { content ->
+        withData(listOf("80", "2a86", "ffffffffffffffffff7f", "2a8001", "802a")) { content ->
             ObjectIdentifier.decodeOrNull(hex(content)) shouldBe null
         }
         shouldThrow<IllegalArgumentException> { ObjectIdentifier.of("3") }

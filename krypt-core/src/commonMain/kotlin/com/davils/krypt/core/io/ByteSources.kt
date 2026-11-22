@@ -70,7 +70,7 @@ public suspend fun ByteSource.readFully(target: ByteArray, offset: Int = 0, leng
  */
 public suspend fun ByteSource.readAll(maximum: Int): ByteString {
     val sink = BufferSink(maximum)
-    val chunk = ByteArray(minOf(a = maximum + 1, b = DEFAULT_CHUNK))
+    val chunk = ByteArray(minOf(a = maximum, b = DEFAULT_CHUNK - 1) + 1)
     var count = read(target = chunk, offset = 0, length = chunk.size)
     while (count >= 0) {
         sink.append(source = chunk, offset = 0, length = count)

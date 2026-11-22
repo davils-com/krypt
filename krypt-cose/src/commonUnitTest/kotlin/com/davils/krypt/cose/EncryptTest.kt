@@ -77,7 +77,7 @@ private val DISTRIBUTIONS: Set<CoseAlgorithm> =
 private val EVERYTHING: Set<CoseAlgorithm> = CONTENTS + DISTRIBUTIONS
 private const val SECRET: String = "our-secret"
 
-private fun anonymous(encoded: String): CoseKey = CoseKey.of(secretKey = checkNotNull(key(encoded).secretKey))
+private suspend fun anonymous(encoded: String): CoseKey = CoseKey.of(secretKey = checkNotNull(key(encoded).secretKey))
 
 private suspend fun decrypts(encoded: String, keyHex: String) {
     decrypts(encoded = encoded, key = key(keyHex))

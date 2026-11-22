@@ -239,7 +239,7 @@ public final class com/davils/krypt/primitive/key/KeyPair {
 }
 
 public final class com/davils/krypt/primitive/key/Keys {
-	public final fun decodePrivate (Lcom/davils/krypt/core/SecretBytes;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun decodePrivate (Lcom/davils/krypt/core/SecretBytes;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public final fun decodePrivatePem (Ljava/lang/String;Lcom/davils/krypt/core/SecretText;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static synthetic fun decodePrivatePem$default (Lcom/davils/krypt/primitive/key/Keys;Ljava/lang/String;Lcom/davils/krypt/core/SecretText;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 	public final fun decodePublic (Lkotlinx/io/bytestring/ByteString;)Lcom/davils/kore/core/outcome/Outcome;

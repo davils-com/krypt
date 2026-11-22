@@ -29,6 +29,7 @@ private const val FIVE: Long = 5
 private const val TWO_ELEMENTS: Int = 2
 private const val SMALL_DEPTH: Int = 2
 private const val UNUSED_BITS: Int = 7
+private const val UNSORTED_SET: String = "3106 020102 020101"
 
 class DerReaderTest : FunSpec({
     test("a sequence of primitives is read in order") {
@@ -66,6 +67,23 @@ class DerReaderTest : FunSpec({
         refusal("3006 020101 020102") { readListOf(maximum = 1) { readInteger() } } shouldBe DerFailure.LimitExceeded
         decoded("3100") { readSet { isExhausted } } shouldBe true
         decoded("0101FF 0500") { readRemaining().size } shouldBe TWO_ELEMENTS
+    }
+
+    test("a SET OF must be sorted by the encodings of its elements unless it is read in any order") {
+        decoded("3106 020101 020102") { readSet { readRemaining().size } } shouldBe TWO_ELEMENTS
+        decoded("3106 020101 020101") { readSet { readRemaining().size } } shouldBe TWO_ELEMENTS
+        decoded("3107 020101 02020100") { readSet { readRemaining().size } } shouldBe TWO_ELEMENTS
+        refusal(UNSORTED_SET) { readSet { readRemaining() } } shouldBe DerFailure.NonCanonicalValue
+        refusal("3107 02020100 020101") { readSet { readRemaining() } } shouldBe DerFailure.NonCanonicalValue
+        refusal("3105 020101 0202") { readSet { readRemaining() } } shouldBe DerFailure.Truncated
+        decoded(UNSORTED_SET) { readSetInAnyOrder { readRemaining().size } } shouldBe TWO_ELEMENTS
+        refusal(UNSORTED_SET) { readListOf(maximum = TWO_ELEMENTS, tag = Tag.Set) { readInteger() } } shouldBe
+            DerFailure.NonCanonicalValue
+        decoded(UNSORTED_SET) { readListInAnyOrder(maximum = TWO_ELEMENTS) { readInteger() }.size } shouldBe
+            TWO_ELEMENTS
+        refusal(UNSORTED_SET) { readListInAnyOrder(maximum = 1) { readInteger() } } shouldBe DerFailure.LimitExceeded
+        decoded("3006 020102 020101") { readListOf(maximum = TWO_ELEMENTS) { readInteger() }.size } shouldBe
+            TWO_ELEMENTS
     }
 
     test("a bounded integer is read or refused") {

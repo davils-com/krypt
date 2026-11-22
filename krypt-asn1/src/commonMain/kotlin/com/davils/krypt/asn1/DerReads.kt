@@ -39,24 +39,63 @@ public fun DerReader.readInt(range: IntRange, tag: Tag = Tag.Integer): Int {
 /**
  * Reads the elements of a SEQUENCE OF or a SET OF with [element], one call per element.
  *
+ * A list tagged [Tag.Set] must be sorted by the encodings of its elements, as DER requires; see
+ * [readListInAnyOrder] for a SET OF that encoders are known to write unsorted.
+ *
  * @receiver the reader.
  * @param T the type of one element.
  * @param maximum the most elements the list may hold.
  * @param tag the tag of the list, [Tag.Sequence] by default or [Tag.Set] for a SET OF.
  * @param element reads one element.
  * @return the elements.
- * @throws DerException if the list is missing or malformed or holds more than [maximum] elements.
+ * @throws DerException if the list is missing or malformed, holds more than [maximum] elements or is a SET OF that
+ * is not sorted.
  * @since 1.0.0
  */
 public fun <T> DerReader.readListOf(maximum: Int, tag: Tag = Tag.Sequence, element: DerReader.() -> T): List<T> =
     readConstructed(tag) {
-        val items = mutableListOf<T>()
-        while (!isExhausted) {
-            if (items.size >= maximum) throw DerException(DerFailure.LimitExceeded, "at most $maximum list items")
-            items += element()
-        }
-        items
+        if (tag == Tag.Set) checkSorted()
+        readItems(maximum = maximum, element = element)
     }
+
+/**
+ * Reads the elements of a list with [element] without checking their order, for a SET OF that widespread encoders
+ * write unsorted against DER; everything else stays strict. Prefer [readListOf] wherever the format permits.
+ *
+ * @receiver the reader.
+ * @param T the type of one element.
+ * @param maximum the most elements the list may hold.
+ * @param tag the tag of the list, [Tag.Set] by default.
+ * @param element reads one element.
+ * @return the elements.
+ * @throws DerException if the list is missing or malformed or holds more than [maximum] elements.
+ * @since 1.0.0
+ */
+public fun <T> DerReader.readListInAnyOrder(maximum: Int, tag: Tag = Tag.Set, element: DerReader.() -> T): List<T> =
+    readConstructed(tag) { readItems(maximum = maximum, element = element) }
+
+private fun <T> DerReader.readItems(maximum: Int, element: DerReader.() -> T): List<T> {
+    val items = mutableListOf<T>()
+    while (!isExhausted) {
+        if (items.size >= maximum) throw DerException(DerFailure.LimitExceeded, "at most $maximum list items")
+        items += element()
+    }
+    return items
+}
+
+/**
+ * Reads a SET OF and its content with [block] without checking the order of its elements, for the few places
+ * where widespread encoders write a SET OF unsorted against DER, such as the certificate sets of CMS. Everything
+ * else about the elements stays strict. Prefer [DerReader.readSet] wherever the format permits.
+ *
+ * @receiver the reader.
+ * @param T the result of [block].
+ * @param block reads the content; it must read every element.
+ * @return what [block] returns.
+ * @throws DerException if the SET is missing, malformed or not fully read.
+ * @since 1.0.0
+ */
+public fun <T> DerReader.readSetInAnyOrder(block: DerReader.() -> T): T = readConstructed(Tag.Set, block)
 
 /**
  * Reads a string that must have [tag], such as an IA5String in a subject alternative name.

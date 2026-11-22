@@ -23,6 +23,7 @@ import com.davils.krypt.core.policy.AlgorithmUse
 import com.davils.krypt.primitive.Crypto
 import com.davils.krypt.primitive.Verification
 import com.davils.krypt.primitive.internal.EcdsaSignatures
+import com.davils.krypt.primitive.internal.requireSupported
 import com.davils.krypt.primitive.key.PrivateKey
 import com.davils.krypt.primitive.key.PublicKey
 import kotlinx.io.bytestring.ByteString
@@ -50,6 +51,9 @@ public class Signatures internal constructor(private val crypto: Crypto) {
      * @throws IllegalArgumentException if [algorithm] does not fit the key.
      * @throws IllegalStateException if the key was destroyed.
      * @throws com.davils.krypt.primitive.PolicyViolationException if the policy forbids the algorithm or the key.
+     * @throws com.davils.krypt.primitive.UnsupportedAlgorithmException if the platform lacks [algorithm].
+     * @throws com.davils.krypt.primitive.CryptoException if the platform refuses the key; the exception carries
+     *   nothing of the failure of the platform.
      * @since 1.0.0
      */
     public suspend fun sign(
@@ -61,6 +65,7 @@ public class Signatures internal constructor(private val crypto: Crypto) {
         require(algorithm.family == key.family) { "${algorithm.algorithmName} does not sign with a ${key.family} key" }
         crypto.permit(algorithm, AlgorithmUse.Protect)
         crypto.permitKey(key, AlgorithmUse.Protect)
+        crypto.requireSupported(algorithm)
         val signature = crypto.backend.sign(algorithm, key, data.toByteArray())
         val isDer = algorithm.family == KeyFamily.Ec && format == SignatureFormat.Der
         return ByteString(signature.takeUnless { isDer } ?: EcdsaSignatures.derOf(signature))
@@ -74,9 +79,11 @@ public class Signatures internal constructor(private val crypto: Crypto) {
      * @param signature the signature.
      * @param algorithm the scheme; [defaultFor] the key by default.
      * @param format how an ECDSA signature is encoded; [SignatureFormat.Der] by default.
-     * @return whether the signature is valid; a malformed signature is invalid.
+     * @return whether the signature is valid; a malformed signature, and a key the platform refuses although it was
+     *   read, such as an RSA key with an exponent the provider does not take, are invalid.
      * @throws IllegalArgumentException if [algorithm] does not fit the key.
      * @throws com.davils.krypt.primitive.PolicyViolationException if the policy forbids the algorithm or the key.
+     * @throws com.davils.krypt.primitive.UnsupportedAlgorithmException if the platform lacks [algorithm].
      * @since 1.0.0
      */
     public suspend fun verify(
@@ -91,6 +98,7 @@ public class Signatures internal constructor(private val crypto: Crypto) {
         ) { "${algorithm.algorithmName} does not verify with a ${key.family} key" }
         crypto.permit(algorithm, AlgorithmUse.Verify)
         crypto.permitKey(key, AlgorithmUse.Verify)
+        crypto.requireSupported(algorithm)
         val isDer = algorithm.family == KeyFamily.Ec && format == SignatureFormat.Der
         val fieldBytes = key.curve?.fieldBytes ?: 0
         val bytes = signature.toByteArray()

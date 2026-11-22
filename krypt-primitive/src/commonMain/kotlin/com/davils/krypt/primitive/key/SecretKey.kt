@@ -27,12 +27,12 @@ private const val BYTE_BITS: Int = 8
 /**
  * A symmetric key: the secret bytes of an AEAD, a MAC, a key wrap or a key derivation.
  *
- * The key owns its bytes and wipes them on [destroy]. A symmetric key is safe to use from several threads, but
- * [destroy] must not race with an operation.
+ * The key owns its bytes and wipes them on [destroy]. Every key has at least [MINIMUM_BYTES] bytes, however it is
+ * made. A symmetric key is safe to use from several threads, but [destroy] must not race with an operation.
  *
  * @since 1.0.0
  */
-public class SecretKey internal constructor(private val material: SecretBytes) {
+public class SecretKey private constructor(private val material: SecretBytes) {
     internal var handle: Any? = null
 
     /**
@@ -117,10 +117,18 @@ public class SecretKey internal constructor(private val material: SecretBytes) {
          * @since 1.0.0
          */
         public fun of(bytes: SecretBytes): SecretKey {
-            require(
-                bytes.size >= MINIMUM_BYTES,
-            ) { "A symmetric key has at least $MINIMUM_BYTES bytes, not ${bytes.size}" }
+            requireSized(bytes)
             return SecretKey(bytes.copy())
+        }
+
+        internal fun adopt(material: SecretBytes): SecretKey {
+            requireSized(material)
+            return SecretKey(material)
+        }
+
+        private fun requireSized(bytes: SecretBytes) {
+            val size = bytes.size
+            require(size >= MINIMUM_BYTES) { "A symmetric key has at least $MINIMUM_BYTES bytes, not $size" }
         }
     }
 }

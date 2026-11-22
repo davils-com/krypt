@@ -24,12 +24,24 @@ import com.davils.krypt.asn1.pem.Pem
 import com.davils.krypt.asn1.pem.PemBlock
 import com.davils.krypt.core.SecretBytes
 import com.davils.krypt.core.SecretText
+import com.davils.krypt.core.algorithm.AeadAlgorithm
+import com.davils.krypt.core.algorithm.Algorithm
+import com.davils.krypt.core.algorithm.AsymmetricEncryptionAlgorithm
 import com.davils.krypt.core.algorithm.DigestAlgorithm
+import com.davils.krypt.core.algorithm.KdfAlgorithm
+import com.davils.krypt.core.algorithm.KemAlgorithm
+import com.davils.krypt.core.algorithm.KeyAgreementAlgorithm
+import com.davils.krypt.core.algorithm.KeyFamily
 import com.davils.krypt.core.algorithm.KeyType
+import com.davils.krypt.core.algorithm.KeyWrapAlgorithm
+import com.davils.krypt.core.algorithm.MacAlgorithm
+import com.davils.krypt.core.algorithm.SignatureAlgorithm
 import com.davils.krypt.core.policy.AlgorithmUse
 import com.davils.krypt.primitive.Crypto
+import com.davils.krypt.primitive.PolicyViolationException
 import com.davils.krypt.primitive.UnsupportedAlgorithmException
 import com.davils.krypt.primitive.internal.KeyCodec
+import com.davils.krypt.primitive.internal.KeyConsistency
 import com.davils.krypt.primitive.internal.KeyProbes
 import com.davils.krypt.primitive.internal.KeyShape
 import com.davils.krypt.primitive.internal.Pbes2
@@ -54,12 +66,17 @@ public class Keys internal constructor(private val crypto: Crypto) {
      *
      * @param type the key type.
      * @return the key pair, whose private key is extractable.
-     * @throws com.davils.krypt.primitive.PolicyViolationException if the policy forbids the size or the curve.
+     * @throws com.davils.krypt.primitive.PolicyViolationException if the policy forbids the size or the curve, or
+     *   permits no algorithm that uses keys of [type] for something new, such as an X25519 key under
+     *   [com.davils.krypt.core.policy.CryptoPolicy.Fips].
      * @throws UnsupportedAlgorithmException if the platform cannot generate [type].
      * @since 1.0.0
      */
     public suspend fun generate(type: KeyType): KeyPair {
         crypto.permitKey(type, AlgorithmUse.Protect)
+        val protecting = crypto.environment.policy.protecting
+        val isUsed = protecting.any { algorithm -> familyOf(algorithm) == type.family }
+        if (!isUsed) throw PolicyViolationException("${type.name} keys, which no permitted algorithm uses")
         if (!crypto.capabilities.supports(type)) throw UnsupportedAlgorithmException(type.name)
         return crypto.backend.generate(type)
     }
@@ -74,7 +91,7 @@ public class Keys internal constructor(private val crypto: Crypto) {
      */
     public fun generateSecret(size: Int = DEFAULT_SECRET_BYTES): SecretKey {
         require(size >= SecretKey.MINIMUM_BYTES) { "A symmetric key has at least ${SecretKey.MINIMUM_BYTES} bytes" }
-        return SecretKey(SecretBytes.random(size = size, random = crypto.environment.random))
+        return SecretKey.adopt(SecretBytes.random(size = size, random = crypto.environment.random))
     }
 
     /**
@@ -82,7 +99,7 @@ public class Keys internal constructor(private val crypto: Crypto) {
      * for a signing key, by agreeing with a fresh ephemeral key for a key agreement key and by encapsulating to and
      * decapsulating with the pair for an ML-KEM key.
      *
-     * @param privateKey the private key, whose own public key may be unknown, as in a PKCS #8 file of X25519.
+     * @param privateKey the private key, whose own public key may be unknown, as in a SEC 1 file without one.
      * @param publicKey the public key that should belong to it.
      * @return the pair, whose private key now knows its public key, or null if the keys do not belong together.
      * @throws IllegalArgumentException if the keys are of different families or curves.
@@ -112,14 +129,28 @@ public class Keys internal constructor(private val crypto: Crypto) {
     /**
      * Reads a PKCS #8 PrivateKeyInfo or OneAsymmetricKey.
      *
+     * A public key the encoding carries, as the publicKey of a OneAsymmetricKey, the public key of SEC 1 or the modulus
+     * and exponent of RSA, must belong to the private key: the encodings are compared where they must agree, and the
+     * platform proves the pair with a probe signature, an agreement or an encapsulation, without asking the policy. A
+     * key whose public key does not belong to it is [KeyFailure.Malformed]. For X25519 and X448 the public key is
+     * derived from the private key, so a key without one, as OpenSSL writes it, still knows its public key. A platform
+     * that lacks the algorithm of the key cannot check it; the key then carries no public key.
+     *
      * @param encoded the DER encoding, which the key copies; the caller still owns it.
      * @return the key, or why it was refused.
+     * @throws com.davils.krypt.primitive.CryptoException if the policy demands a FIPS provider the environment does
+     *   not name.
      * @since 1.0.0
      */
-    public fun decodePrivate(encoded: SecretBytes): Outcome<PrivateKey, KeyFailure> =
-        KeyCodec.privateKeyOf(encoded).flatMap { key ->
+    public suspend fun decodePrivate(encoded: SecretBytes): Outcome<PrivateKey, KeyFailure> {
+        val decoded = KeyCodec.privateKeyOf(encoded).flatMap { key ->
             permitted(key = key, shape = KeyShape(family = key.family, bits = key.bits, curve = key.curve))
         }
+        return when (decoded) {
+            is Outcome.Success -> KeyConsistency.checked(crypto = crypto, key = decoded.value)
+            is Outcome.Failure -> decoded
+        }
+    }
 
     /**
      * Returns the PKCS #8 encoding of [key].
@@ -141,6 +172,7 @@ public class Keys internal constructor(private val crypto: Crypto) {
      * @param password the password.
      * @param iterations the PBKDF2 iterations; the minimum of the policy by default.
      * @return the DER encoding.
+     * @throws IllegalArgumentException if [password] holds an unpaired UTF-16 surrogate.
      * @throws IllegalStateException if the key is not extractable or was destroyed.
      * @throws com.davils.krypt.primitive.PolicyViolationException if the policy forbids the iterations.
      * @since 1.0.0
@@ -158,8 +190,8 @@ public class Keys internal constructor(private val crypto: Crypto) {
      *
      * @param encrypted the DER encoding.
      * @param password the password.
-     * @return the key, or why it was refused; a wrong password and a tampered file both give
-     *   [KeyFailure.WrongPassword].
+     * @return the key, or why it was refused; a wrong password, a password with an unpaired UTF-16 surrogate and a
+     *   tampered file all give [KeyFailure.WrongPassword].
      * @since 1.0.0
      */
     public suspend fun decrypt(encrypted: ByteString, password: SecretText): Outcome<PrivateKey, KeyFailure> =
@@ -231,6 +263,7 @@ public class Keys internal constructor(private val crypto: Crypto) {
      * @param password the password.
      * @param iterations the PBKDF2 iterations; the minimum of the policy by default.
      * @return the PEM text.
+     * @throws IllegalArgumentException if [password] holds an unpaired UTF-16 surrogate.
      * @throws IllegalStateException if the key is not extractable or was destroyed.
      * @since 1.0.0
      */
@@ -267,19 +300,31 @@ public class Keys internal constructor(private val crypto: Crypto) {
         return decrypt(encrypted = block.bytes, password = found)
     }
 
-    private fun decodePlain(block: PemBlock): Outcome<PrivateKey, KeyFailure> {
+    private suspend fun decodePlain(block: PemBlock): Outcome<PrivateKey, KeyFailure> {
         val converter = PKCS8_CONVERTERS[block.label] ?: { bytes -> bytes }
         val pkcs8 = converter(block.bytes) ?: return Outcome.Failure(KeyFailure.Malformed)
         return SecretBytes.copyOf(pkcs8).use { encoding -> decodePrivate(encoding) }
     }
 
-    private fun decodeDecrypted(encoding: SecretBytes): Outcome<PrivateKey, KeyFailure> = decodePrivate(
+    private suspend fun decodeDecrypted(encoding: SecretBytes): Outcome<PrivateKey, KeyFailure> = decodePrivate(
         encoding,
     ).mapFailure { failure ->
         listOf(
             failure,
             KeyFailure.WrongPassword,
         )[(failure == KeyFailure.Malformed).compareTo(false)]
+    }
+
+    private fun familyOf(algorithm: Algorithm): KeyFamily? = when (algorithm) {
+        is SignatureAlgorithm -> algorithm.family
+        is KeyAgreementAlgorithm -> algorithm.family
+        is KemAlgorithm -> algorithm.family
+        is AsymmetricEncryptionAlgorithm -> KeyFamily.Rsa
+        is DigestAlgorithm -> null
+        is MacAlgorithm -> null
+        is AeadAlgorithm -> null
+        is KeyWrapAlgorithm -> null
+        is KdfAlgorithm -> null
     }
 
     private fun spkiOf(block: PemBlock): ByteString? = SPKI_CONVERTERS[block.label]?.invoke(block.bytes)

@@ -14,8 +14,11 @@
  * limitations under the License.
  */
 
+@file:OptIn(DavilsInternal::class)
+
 package com.davils.krypt.primitive
 
+import com.davils.kore.core.annotation.DavilsInternal
 import com.davils.krypt.core.Environment
 import com.davils.krypt.core.algorithm.Algorithm
 import com.davils.krypt.core.algorithm.KeyFamily
@@ -51,18 +54,30 @@ import com.davils.krypt.primitive.signature.Signatures
  *
  * A crypto object holds no secrets and is thread safe; create one per environment and share it.
  *
+ * A policy that demands a FIPS validated provider ([com.davils.krypt.core.policy.CryptoPolicy.isFipsProviderRequired],
+ * as [com.davils.krypt.core.policy.CryptoPolicy.Fips] does) is enforced here: if the environment names no provider,
+ * every operation throws [CryptoException] before it does any work, rather than run on the default providers of the
+ * JVM. krypt cannot prove that the named provider is validated; that remains the duty of the caller. On WebAssembly no
+ * provider can be named, so such a policy refuses every operation there.
+ *
  * @property environment the environment.
  * @since 1.0.0
  */
 public class Crypto(public val environment: Environment = Environment.Default) {
-    internal val backend: Backend = platformBackend(environment)
+    private val platform: Backend = platformBackend(environment)
+
+    internal val backend: Backend
+        get() {
+            checkProvider()
+            return platform
+        }
 
     /**
      * What the platform can do.
      *
      * @since 1.0.0
      */
-    public val capabilities: Capabilities = Capabilities(backend)
+    public val capabilities: Capabilities = Capabilities(platform)
 
     /**
      * Generating, reading and writing keys.
@@ -178,6 +193,11 @@ public class Crypto(public val environment: Environment = Environment.Default) {
         return isRsaPermitted && isCurvePermitted
     }
 
+    private fun checkProvider() {
+        val isMissing = environment.policy.isFipsProviderRequired && environment.platformProvider == null
+        if (isMissing) throw CryptoException(MISSING_PROVIDER)
+    }
+
     private fun permitShape(shape: KeyShape, use: AlgorithmUse) {
         val isPermitted = isPermitted(shape, use)
         if (!isPermitted) throw PolicyViolationException("a ${shape.family} key of ${shape.bits} bits ($use)")
@@ -190,4 +210,9 @@ public class Crypto(public val environment: Environment = Environment.Default) {
      * @since 1.0.0
      */
     override fun toString(): String = "Crypto($environment)"
+
+    private companion object {
+        const val MISSING_PROVIDER: String = "The policy demands a FIPS validated provider, but the environment " +
+            "names none; set one with provider(...) on the environment"
+    }
 }

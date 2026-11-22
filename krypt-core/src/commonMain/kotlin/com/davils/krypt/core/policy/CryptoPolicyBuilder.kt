@@ -37,7 +37,6 @@ private const val MODERN_ITERATIONS: Int = 600_000
 private const val VERIFIED_ITERATIONS: Int = 1_000
 private const val DEFAULT_MAXIMUM_ITERATIONS: Int = 5_000_000
 private const val DEFAULT_MAXIMUM_RSA_BITS: Int = 8_192
-private const val CNSA_SECURITY_BITS: Int = 192
 
 /**
  * Builds a [CryptoPolicy] from the settings of a [CryptoProfile]; see [cryptoPolicy].
@@ -229,26 +228,43 @@ public class CryptoPolicyBuilder internal constructor(
             SignatureAlgorithm.RsaPkcs1Sha512,
         )
 
-        val CNSA: Set<Algorithm> = setOf(
+        val CNSA_PROTECTING: Set<Algorithm> = setOf(
             AeadAlgorithm.Aes256Gcm,
             KeyWrapAlgorithm.Aes256Kw,
+            DigestAlgorithm.Sha384,
+            DigestAlgorithm.Sha512,
+            MacAlgorithm.HmacSha384,
+            MacAlgorithm.HmacSha512,
+            KdfAlgorithm.HkdfSha384,
+            KdfAlgorithm.HkdfSha512,
+            KdfAlgorithm.Pbkdf2Sha512,
             KemAlgorithm.MlKem1024,
             KemAlgorithm.DhkemP384,
             SignatureAlgorithm.MlDsa87,
+            SignatureAlgorithm.EcdsaSha384,
             KeyAgreementAlgorithm.EcdhP384,
         )
+
+        val CNSA_RSA_SIGNATURES: Set<Algorithm> = setOf(
+            SignatureAlgorithm.RsaPssSha384,
+            SignatureAlgorithm.RsaPssSha512,
+            SignatureAlgorithm.RsaPkcs1Sha384,
+            SignatureAlgorithm.RsaPkcs1Sha512,
+        )
+
+        val CNSA_VERIFYING: Set<Algorithm> = CNSA_PROTECTING + CNSA_RSA_SIGNATURES
 
         fun protectingOf(profile: CryptoProfile): Set<Algorithm> = when (profile) {
             CryptoProfile.Modern -> CURRENT.toSet() - PKCS1_SIGNATURES
             CryptoProfile.Compatible -> CURRENT.toSet()
-            CryptoProfile.Cnsa2 -> CURRENT.filter { algorithm -> isCnsa(algorithm) }.toSet()
+            CryptoProfile.Cnsa2 -> CNSA_PROTECTING
             CryptoProfile.Fips -> CURRENT.filter { algorithm -> algorithm.isFipsApproved }.toSet()
         }
 
         fun verifyingOf(profile: CryptoProfile): Set<Algorithm> = when (profile) {
             CryptoProfile.Modern -> CURRENT.toSet()
             CryptoProfile.Compatible -> CURRENT.toSet()
-            CryptoProfile.Cnsa2 -> protectingOf(profile)
+            CryptoProfile.Cnsa2 -> CNSA_VERIFYING
             CryptoProfile.Fips -> protectingOf(profile)
         }
 
@@ -271,26 +287,6 @@ public class CryptoPolicyBuilder internal constructor(
             CryptoProfile.Modern -> COMPATIBLE_RSA_BITS
             CryptoProfile.Compatible -> COMPATIBLE_RSA_BITS
             CryptoProfile.Fips -> COMPATIBLE_RSA_BITS
-        }
-
-        fun isCnsa(algorithm: Algorithm): Boolean {
-            val isStrong = algorithm.securityBits >= CNSA_SECURITY_BITS
-            val isHashedSignature = algorithm is SignatureAlgorithm && algorithm.digest != null
-            val isClassical = isHashedSignature || isHashBased(algorithm)
-            val isPermitted = isStrong && isClassical && algorithm.isFipsApproved
-            return algorithm in CNSA || isPermitted
-        }
-
-        fun isHashBased(algorithm: Algorithm): Boolean = when (algorithm) {
-            is DigestAlgorithm -> true
-            is MacAlgorithm -> true
-            is KdfAlgorithm -> true
-            is AsymmetricEncryptionAlgorithm -> true
-            is AeadAlgorithm -> false
-            is KeyWrapAlgorithm -> false
-            is SignatureAlgorithm -> false
-            is KeyAgreementAlgorithm -> false
-            is KemAlgorithm -> false
         }
     }
 }
