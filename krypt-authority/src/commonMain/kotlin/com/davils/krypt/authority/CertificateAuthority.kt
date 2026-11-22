@@ -19,6 +19,7 @@
 package com.davils.krypt.authority
 
 import com.davils.kore.core.annotation.DavilsInternal
+import com.davils.kore.core.failure.attempted
 import com.davils.kore.core.outcome.Outcome
 import com.davils.krypt.asn1.DerInteger
 import com.davils.krypt.authority.internal.KeyIds
@@ -48,10 +49,13 @@ import com.davils.krypt.x509.request.CertificationRequests
 import kotlinx.io.bytestring.ByteString
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.days
+import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Instant
 
 private const val SERIAL_ATTEMPTS: Int = 3
 private const val DEFAULT_LIST_DAYS: Int = 7
+private const val DEFAULT_OVERLAP_MINUTES: Int = 5
+private const val REPOSITORY_FAILED: String = "The repository of the authority failed"
 
 private fun nowOf(crypto: Crypto): Instant {
     val now = crypto.environment.clock.now()
@@ -67,6 +71,12 @@ private fun nowOf(crypto: Crypto): Instant {
  * usages and the policy's revocation pointers, and is recorded before it is returned. Issuance and revocation are
  * recorded in the audit trail of the environment; when the audit is required and fails, the operation throws
  * [com.davils.krypt.core.audit.AuditRefusedException] after the repository changed.
+ *
+ * The [repository] is foreign code. Every call of it runs contained: a failure of it makes [issue], [enroll] and
+ * [revoke] answer [IssuanceFailure.RepositoryUnavailable] or [RevocationFailure.RepositoryUnavailable], and makes the
+ * revocation lists throw an [IllegalStateException]; only the cancellation of the calling coroutine passes through as
+ * it is. The [statusSource] lets a failure pass to the [com.davils.krypt.ocsp.OcspResponder], which answers it with
+ * an internal error.
  *
  * The authority holds no mutable state and is safe to share between coroutines, as far as the repository is.
  *
@@ -113,9 +123,9 @@ public class CertificateAuthority(
     /**
      * Issues a certificate.
      *
-     * The request is checked against its profile and the policy first: the key family, the names, the validity,
-     * which must end before the authority's, and the path length of the authority. The validity starts
-     * [IssuancePolicy.backdate] before now.
+     * The request is checked against its profile and the policy first: the key family, the alternative names and the
+     * subject as [IssuancePolicy] describes, the validity, which must end before the authority's, and the path length
+     * of the authority. The validity starts [IssuancePolicy.backdate] before now.
      *
      * @param request what the certificate shall say.
      * @return the certificate, recorded in the repository, or why it was refused.
@@ -128,16 +138,16 @@ public class CertificateAuthority(
         if (failure != null) return Outcome.Failure(failure)
         val ids = KeyIds(subject = certificates.keyIdentifier(request.publicKey), authority = authorityKeyId())
         val issued = (1..SERIAL_ATTEMPTS).firstNotNullOfOrNull { issueOnce(request = request, ids = ids, at = now) }
-        val success: Outcome<Certificate, IssuanceFailure>? = issued?.let { found -> Outcome.Success(found) }
-        return success ?: Outcome.Failure(IssuanceFailure.SerialConflict)
+        return issued ?: Outcome.Failure(IssuanceFailure.SerialConflict)
     }
 
     /**
      * Issues a certificate for a certification request (PKCS #10) of a subject.
      *
      * The signature of the request proves that the subject holds the key. The subject and the subject alternative
-     * names come from the request and are checked like those of [issue]; every other requested extension is
-     * ignored, the profile decides.
+     * names come from the request and are checked like those of [issue], by the names of the [policy] and the rules
+     * of the subject that [IssuancePolicy] describes; every other requested extension is ignored, the profile
+     * decides.
      *
      * @param request the certification request, possibly from an attacker.
      * @param profile what the certificate is for.
@@ -191,8 +201,7 @@ public class CertificateAuthority(
             invalidAt = invalidAt,
         )
         val failure = RevocationFailure.ReasonNotPermitted.takeIf { reason in HOLDS }
-            ?: RevocationFailure.UnknownCertificate.takeIf { issuedHere(serialNumber) == null }
-            ?: RevocationFailure.AlreadyRevoked.takeUnless { repository.revoke(revocation) }
+            ?: revocationFailureOf(revocation)
         if (failure != null) return Outcome.Failure(failure)
         return recorded(revocation)
     }
@@ -200,36 +209,58 @@ public class CertificateAuthority(
     /**
      * Writes a full revocation list with every revocation and the next number of the repository.
      *
+     * The time of the list is taken before the revocations are read, so a revocation the repository records later is
+     * dated no earlier than [DEFAULT_OVERLAP] before it and reaches the next delta list.
+     *
      * @param validity how long until the next list; seven days by default.
      * @return the list.
      * @throws IllegalArgumentException if [validity] is not positive.
-     * @throws IllegalStateException if the list holds more entries than the limits of krypt-x509 allow.
+     * @throws IllegalStateException if the list holds more entries than the limits of krypt-x509 allow, or the
+     *   repository failed.
      * @throws com.davils.krypt.core.audit.AuditRefusedException if the required audit failed.
      * @since 1.0.0
      */
-    public suspend fun revocationList(validity: Duration = DEFAULT_LIST_DAYS.days): RevocationList =
-        issueList(revocations = repository.revocations(), base = null, validity = validity)
+    public suspend fun revocationList(validity: Duration = DEFAULT_LIST_DAYS.days): RevocationList {
+        require(validity.isPositive()) { "A revocation list is valid for a positive time" }
+        val now = nowOf(crypto)
+        val revocations = stored { repository.revocations() }
+        return issueList(revocations = revocations, base = null, validity = validity, now = now)
+    }
 
     /**
      * Writes a delta revocation list with the revocations since [base], a full list of this authority.
      *
+     * The delta holds every revocation dated at or after the time of [base] minus [overlap]. A revocation is dated
+     * before the repository records it, so one dated shortly before [base] may be missing from it; the overlap covers
+     * it, and must be at least the longest time between taking the date of a revocation and the repository
+     * recording it. A revocation that is in [base] as well is listed again, which RFC 5280 allows.
+     *
      * @param base the full list the delta builds on.
      * @param validity how long until the next list; seven days by default.
+     * @param overlap how far before the time of [base] the delta reaches back; [DEFAULT_OVERLAP] by default.
      * @return the list.
-     * @throws IllegalArgumentException if [base] is no full list of this authority or [validity] is not positive.
+     * @throws IllegalArgumentException if [base] is no full list of this authority, [validity] is not positive or
+     *   [overlap] is negative.
+     * @throws IllegalStateException if the repository failed.
      * @throws com.davils.krypt.core.audit.AuditRefusedException if the required audit failed.
      * @since 1.0.0
      */
     public suspend fun deltaRevocationList(
         base: RevocationList,
         validity: Duration = DEFAULT_LIST_DAYS.days,
+        overlap: Duration = DEFAULT_OVERLAP,
     ): RevocationList {
         val baseNumber = base.number
         val baseAuthority = base.extensions.authorityKeyIdentifier?.keyIdentifier
         val isOwn = base.issuer == certificate.subject && baseAuthority == authorityKeyId()
         require(isOwn && !base.isDelta && baseNumber != null) { "A delta builds on a full list of this authority" }
-        val since = repository.revocations().filter { revocation -> revocation.revokedAt >= base.thisUpdate }
-        return issueList(revocations = since, base = baseNumber, validity = validity)
+        require(!overlap.isNegative()) { "The overlap of a delta is not negative" }
+        require(validity.isPositive()) { "A revocation list is valid for a positive time" }
+        val now = nowOf(crypto)
+        val start = base.thisUpdate - overlap
+        val revocations = stored { repository.revocations() }
+        val since = revocations.filter { revocation -> revocation.revokedAt >= start }
+        return issueList(revocations = since, base = baseNumber, validity = validity, now = now)
     }
 
     /**
@@ -240,7 +271,11 @@ public class CertificateAuthority(
      */
     override fun toString(): String = "CertificateAuthority(${certificate.subject})"
 
-    private suspend fun issueOnce(request: IssuanceRequest, ids: KeyIds, at: Instant): Certificate? {
+    private suspend fun issueOnce(
+        request: IssuanceRequest,
+        ids: KeyIds,
+        at: Instant,
+    ): Outcome<Certificate, IssuanceFailure>? {
         val notBefore = at - policy.backdate
         val issued = certificates.issue(signer) {
             serialNumber = Serials.next(crypto)
@@ -251,12 +286,33 @@ public class CertificateAuthority(
             notAfter = at + checks.validityOf(request)
             extensions { ProfileExtensions(request, policy).write(this, ids) }
         }
-        val isRecorded = repository.record(issued)
+        val recording = attempted { repository.record(issued) }
+        val isRecorded = recording.getOrNull() ?: return Outcome.Failure(IssuanceFailure.RepositoryUnavailable)
         if (isRecorded) {
             val attributes = mapOf(PROFILE to request.profile.name, SUBJECT to issued.subject.toString())
             trail.require(action = ISSUE, subject = issued.serialNumber.toString(), attributes = attributes)
         }
-        return issued.takeIf { isRecorded }
+        return Outcome.Success(issued).takeIf { isRecorded }
+    }
+
+    private suspend fun revocationFailureOf(revocation: Revocation): RevocationFailure? {
+        val found = attempted { issuedHere(revocation.serialNumber) }
+        val isIssued = found.getOrNull() != null
+        val isRevocable = found.isSuccess && isIssued
+        val revoking = attempted { revocation.takeIf { isRevocable }?.let { given -> repository.revoke(given) } }
+        val isRevoked = revoking.getOrNull()
+        val isAvailable = found.isSuccess && revoking.isSuccess
+        val failures = listOf(
+            RevocationFailure.RepositoryUnavailable.takeUnless { isAvailable },
+            RevocationFailure.UnknownCertificate.takeUnless { isIssued },
+            RevocationFailure.AlreadyRevoked.takeIf { isRevoked == false },
+        )
+        return failures.firstOrNull { failure -> failure != null }
+    }
+
+    private suspend fun <T> stored(block: suspend () -> T): T {
+        val result = attempted { block() }
+        return result.getOrElse { failure -> throw IllegalStateException(REPOSITORY_FAILED, failure) }
     }
 
     private suspend fun recorded(revocation: Revocation): Outcome<Revocation, RevocationFailure> {
@@ -270,10 +326,9 @@ public class CertificateAuthority(
         revocations: List<Revocation>,
         base: DerInteger?,
         validity: Duration,
+        now: Instant,
     ): RevocationList {
-        require(validity.isPositive()) { "A revocation list is valid for a positive time" }
-        val now = nowOf(crypto)
-        val number = DerInteger.of(repository.nextCrlNumber())
+        val number = DerInteger.of(stored { repository.nextCrlNumber() })
         val authorityId = authorityKeyId()
         val list = revocationLists.issue(signer) {
             issuer = certificate.subject
@@ -330,6 +385,13 @@ public class CertificateAuthority(
         private const val REASON: String = "reason"
         private const val ENTRIES: String = "entries"
         private const val NONE: String = "none"
+
+        /**
+         * How far a delta list reaches back before the time of its base by default: five minutes.
+         *
+         * @since 1.0.0
+         */
+        public val DEFAULT_OVERLAP: Duration = DEFAULT_OVERLAP_MINUTES.minutes
 
         /**
          * Creates the self-signed certificate of a root authority, valid from now.

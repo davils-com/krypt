@@ -43,4 +43,11 @@ public enum class RevocationFailure {
      * @since 1.0.0
      */
     ReasonNotPermitted,
+
+    /**
+     * The repository of the application failed; the revocation may not have been recorded.
+     *
+     * @since 1.0.0
+     */
+    RepositoryUnavailable,
 }

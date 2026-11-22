@@ -67,4 +67,11 @@ public enum class IssuanceFailure {
      * @since 1.0.0
      */
     SerialConflict,
+
+    /**
+     * The repository of the application failed; nothing was issued or the certificate was not recorded.
+     *
+     * @since 1.0.0
+     */
+    RepositoryUnavailable,
 }
