@@ -37,6 +37,9 @@ kreate {
             rfc(2104) {
                 note = "HMAC: the MACs of krypt-primitive and the base of HKDF, computed by JCA or WebCrypto."
             }
+            rfc(3161) {
+                note = "Time-stamp tokens: a signed manifest of krypt-stream carries them as opaque attachments."
+            }
             rfc(3394) {
                 note = "AES key wrap: the key wraps of krypt-primitive."
             }
@@ -52,6 +55,9 @@ kreate {
             }
             rfc(5869) {
                 note = "HKDF: implemented over HMAC in common code, so both targets derive alike."
+            }
+            rfc(6962) {
+                note = "The Merkle tree hashing of manifests and containers, with leaves and nodes hashed apart."
             }
             rfc(7468) {
                 note = "The textual encoding of PEM: strict reading and writing in krypt-asn1."

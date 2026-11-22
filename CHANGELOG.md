@@ -30,4 +30,18 @@ kollect 1.0.0. The code comes from the security library of an internal Davils pr
   PBKDF2; AES-GCM and ChaCha20-Poly1305 with sealed boxes, AES key wrap and RSA-OAEP; Ed25519, Ed448, ECDSA, RSA-PSS,
   RSA PKCS #1 and ML-DSA signatures in DER and raw form; X25519, X448 and ECDH key agreement, ML-KEM and DHKEM, HPKE of
   RFC 9180 in every mode; password hashing with PBKDF2 in the PHC format; and the capabilities of the platform.
+- **Key sets**: keys with ids, a primary key and the lifecycle enabled, disabled and destroyed; rotation, staged keys
+  and promotion; authenticated encryption, MACs, signatures and HPKE that name their key in every output; keys derived
+  per purpose with HKDF; envelope encryption; key management services over a master key, a key set or, on the JVM, a
+  key of a JCA provider such as an HSM; encrypted key sets bound to their name in a vault with optimistic concurrency;
+  every change audited and sent as an event.
+- **Bulk data**: the `KRYPT/1` container with segmented streaming encryption by the STREAM construction, AES-256-GCM
+  or ChaCha20-Poly1305, a fresh data key for several recipients (key sets, HPKE, key management services and
+  passwords), key commitment, a MAC over the header, random access to any segment, rewrapping for new recipients
+  without encrypting again, a Merkle tree of the encrypted segments, and signed manifests for containers and plain
+  data with several signers, countersignatures and time-stamp tokens.
+- **Encrypted storage**: a blob store over a store of the application with names blinded by a MAC, encrypted
+  metadata, objects bound to their name and version, rollback detection with a version ledger and rewrapping after a
+  rotation; field encryption bound to table, column and row; blind indexes per column; and one key set per subject
+  for shredding by crypto.
 - **Test support**: deterministic and replayed randomness, an audit log and test environments.

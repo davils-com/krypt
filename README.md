@@ -13,6 +13,9 @@ network, reports through events on [konfetti](https://github.com/davils-com/konf
 | `krypt-core` | `com.davils:krypt-core` | Secrets, constant-time comparison, strict hex and Base64, randomness, the algorithm catalogue, the crypto policy, byte streams and the audit trail |
 | `krypt-asn1` | `com.davils:krypt-asn1` | The strict DER reader and writer, object identifiers, times and PEM |
 | `krypt-primitive` | `com.davils:krypt-primitive` | Keys, digests, MACs, HKDF and PBKDF2, AEADs, key wraps, RSA-OAEP, signatures, key agreement, ML-KEM, HPKE and password hashing |
+| `krypt-keyset` | `com.davils:krypt-keyset` | Key sets with rotation and a lifecycle, envelope encryption, key management services and a vault of encrypted key sets |
+| `krypt-stream` | `com.davils:krypt-stream` | The `KRYPT/1` container for bulk data with random access, several recipients and key commitment, and signed manifests |
+| `krypt-storage` | `com.davils:krypt-storage` | The encrypted blob store, field encryption, blind indexes and per-subject keys for shredding by crypto |
 | `krypt-testing` | `com.davils:krypt-testing` | Deterministic and replayed randomness, audit logs and test environments |
 | `krypt-bom` | `com.davils:krypt-bom` | The bill of materials of every module |
 
@@ -71,6 +74,23 @@ val recipient = crypto.keys.generate(KeyType.X25519)
 val sealed = crypto.hpke.seal(HpkeSuite.X25519Aes256Gcm, recipient.publicKey, message)
 
 val stored = crypto.passwords.hash(SecretText.of(password))
+```
+
+Whole applications keep their data encrypted with the higher modules: a key set rotates without re-encrypting, a
+container of `KRYPT/1` holds data of any size for several recipients and is read at any offset, and an encrypted blob
+store keeps files in storage it does not trust:
+
+```kotlin
+val keysets = Keysets(crypto)
+val vault = KeysetVault(keysets, repository, kms)
+val dataKeys = vault.create("files", KeyPurpose.Aead()).getOrNull() ?: error("no data keys")
+val names = vault.create("file-names", KeyPurpose.Mac()).getOrNull() ?: error("no name keys")
+
+val blobs = EncryptedBlobStore(Containers(crypto), blobStore, keysets.aead(dataKeys), keysets.mac(names), ledger)
+blobs.put("invoices/2026/42.pdf", source, contentType = "application/pdf")
+val stored = blobs.open("invoices/2026/42.pdf").getOrNull() ?: error("unreadable")
+val page = stored.reader.read(offset = 4_096, length = 4_096)
+stored.close()
 ```
 
 Every operation is `suspend`, because WebCrypto answers asynchronously; on the JVM it runs on the caller's thread.

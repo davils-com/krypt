@@ -16,13 +16,17 @@ correctness first.
 | `krypt-core` | `com.davils:krypt-core` | `SecretBytes`, `SecretText`, constant-time comparison, strict hex and Base64, randomness, the algorithm catalogue, the crypto policy and its profiles, byte streams, the audit trail and the event and meter plumbing |
 | `krypt-asn1` | `com.davils:krypt-asn1` | The strict DER reader and writer, object identifiers, times and PEM |
 | `krypt-primitive` | `com.davils:krypt-primitive` | The `Crypto` facade: keys, digests, MACs, HKDF and PBKDF2, AEADs, key wraps, RSA-OAEP, signatures, key agreement, KEMs, HPKE and password hashing over JCA and WebCrypto |
+| `krypt-keyset` | `com.davils:krypt-keyset` | Key sets with ids, a primary key, rotation and a lifecycle; their primitives; envelope encryption; key management services; encrypted key sets in a vault |
+| `krypt-stream` | `com.davils:krypt-stream` | The `KRYPT/1` container for bulk data: segmented streaming encryption, random access, several recipients, key commitment, rewrapping, Merkle trees and signed manifests |
+| `krypt-storage` | `com.davils:krypt-storage` | The encrypted blob store with blinded names and rollback detection, field encryption, blind indexes and per-subject keys for shredding by crypto |
 | `krypt-testing` | `com.davils:krypt-testing` | Test support: deterministic and replayed randomness, audit logs and test environments |
 | `krypt-bom` | `com.davils:krypt-bom` | The bill of materials of every module |
 | `build-logic` | - | One convention plugin per concern, composed by `krypt.kotlin-library` for a library module, `krypt.bom` for the BOM and `krypt.root` for the root project; they hold nothing but `plugins { }` and `kreate { }` |
 
 `krypt-core` builds on `com.davils:kore-core`, `com.davils:konfetti-core`, `com.davils:kollect-core`,
-`kotlinx-coroutines-core` and `kotlinx-io-bytestring`; `krypt-asn1` builds on `krypt-core`, and `krypt-primitive` on
-both. The code is ported from the security library of an internal Davils project and hardened on the way.
+`kotlinx-coroutines-core` and `kotlinx-io-bytestring`; `krypt-asn1` builds on `krypt-core`, `krypt-primitive` on
+both, and `krypt-keyset`, `krypt-stream` and `krypt-storage` each on the one before. The code is ported from the
+security library of an internal Davils project and hardened on the way.
 
 The package of a module is `com.davils.krypt.<module>` without dashes, and its Java module has the same name. It is
 declared in `src/jvmMain/java/module-info.java` of the module, which exports only packages with public API, never an

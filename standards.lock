@@ -40,6 +40,28 @@
             }
         },
         {
+            "id": "rfc:3161",
+            "reviewedOn": "2026-11-22",
+            "note": "Time-stamp tokens: a signed manifest of krypt-stream carries them as opaque attachments.",
+            "snapshot": {
+                "title": "Internet X.509 Public Key Infrastructure Time-Stamp Protocol (TSP)",
+                "status": "PROPOSED STANDARD",
+                "published": "August 2001",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [
+                    "RFC5816"
+                ],
+                "errata": {
+                    "1879": "VERIFIED",
+                    "2931": "VERIFIED",
+                    "2932": "VERIFIED",
+                    "4042": "REJECTED",
+                    "844": "HELD"
+                }
+            }
+        },
+        {
             "id": "rfc:3394",
             "reviewedOn": "2026-11-22",
             "note": "AES key wrap: the key wraps of krypt-primitive.",
@@ -160,6 +182,26 @@
                 "updatedBy": [],
                 "errata": {
                     "5161": "REPORTED"
+                }
+            }
+        },
+        {
+            "id": "rfc:6962",
+            "reviewedOn": "2026-11-22",
+            "note": "The Merkle tree hashing of manifests and containers, with leaves and nodes hashed apart.",
+            "snapshot": {
+                "title": "Certificate Transparency",
+                "status": "EXPERIMENTAL",
+                "published": "June 2013",
+                "withdrawn": true,
+                "replacedBy": [
+                    "RFC9162"
+                ],
+                "updatedBy": [],
+                "errata": {
+                    "3686": "VERIFIED",
+                    "4204": "REPORTED",
+                    "4286": "REPORTED"
                 }
             }
         },
