@@ -17,6 +17,7 @@
 package com.davils.krypt.ocsp
 
 import com.davils.krypt.core.algorithm.SignatureAlgorithm
+import com.davils.krypt.ocsp.internal.BasicResponseParts
 import com.davils.krypt.x509.Certificate
 import kotlinx.io.bytestring.ByteString
 import kotlin.time.Instant
@@ -34,7 +35,7 @@ import kotlin.time.Instant
  * @property tbs the DER encoding of the signed part.
  * @since 1.0.0
  */
-public class BasicOcspResponse internal constructor(
+public class BasicOcspResponse private constructor(
     public val responderId: ResponderId,
     public val producedAt: Instant,
     public val responses: List<SingleResponse>,
@@ -44,6 +45,17 @@ public class BasicOcspResponse internal constructor(
     public val certificates: List<Certificate>,
     public val tbs: ByteString,
 ) {
+    internal constructor(parts: BasicResponseParts) : this(
+        responderId = parts.responderId,
+        producedAt = parts.producedAt,
+        responses = parts.responses,
+        nonce = parts.nonce,
+        signatureAlgorithm = parts.signatureAlgorithm,
+        signature = parts.signature,
+        certificates = parts.certificates,
+        tbs = parts.tbs,
+    )
+
     /**
      * Compares the signed part and the signature.
      *

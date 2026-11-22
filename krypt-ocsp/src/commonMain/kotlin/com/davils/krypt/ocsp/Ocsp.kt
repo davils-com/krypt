@@ -29,6 +29,7 @@ import com.davils.krypt.ocsp.internal.MAXIMUM_NONCE_BYTES
 import com.davils.krypt.ocsp.internal.MINIMUM_NONCE_BYTES
 import com.davils.krypt.ocsp.internal.RequestCodec
 import com.davils.krypt.ocsp.internal.RequestCodec.readRequest
+import com.davils.krypt.ocsp.internal.RequestParts
 import com.davils.krypt.ocsp.internal.ResponseCodec.readResponse
 import com.davils.krypt.ocsp.internal.ResponseVerifier
 import com.davils.krypt.primitive.Crypto
@@ -114,7 +115,8 @@ public class Ocsp(public val crypto: Crypto, public val limits: OcspLimits = Ocs
         }
         val random = crypto.environment.random
         val nonce = nonceBytes?.let { count -> ByteString(random.bytes(count)) }
-        return OcspRequest(certIds = certIds, nonce = nonce, encoded = RequestCodec.encode(certIds, nonce))
+        val parts = RequestParts(certIds = certIds, nonce = nonce, encoded = RequestCodec.encode(certIds, nonce))
+        return OcspRequest(parts)
     }
 
     /**

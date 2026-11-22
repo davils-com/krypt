@@ -92,7 +92,7 @@ internal object ResponseCodec {
             if (isSuccessful != (basic != null)) {
                 refuse(DerFailure.InvalidValue, "a signed answer exactly when successful")
             }
-            OcspResponse(status = status, basic = basic, encoded = encoded)
+            OcspResponse(ResponseParts(status = status, basic = basic, encoded = encoded))
         }
 
     fun encodeData(
@@ -152,7 +152,7 @@ internal object ResponseCodec {
             readListOf(limits.maximumCertificates) { certificateOf(readElement(Tag.Sequence).encoded, certificates) }
         }
         val data = tbs.reader().readData(limits)
-        BasicOcspResponse(
+        val parts = BasicResponseParts(
             responderId = data.responderId,
             producedAt = data.producedAt,
             responses = data.responses,
@@ -162,6 +162,7 @@ internal object ResponseCodec {
             certificates = chain.orEmpty(),
             tbs = tbs.encoded,
         )
+        BasicOcspResponse(parts)
     }
 
     private fun DerReader.certificateOf(encoded: ByteString, certificates: Certificates): Certificate {

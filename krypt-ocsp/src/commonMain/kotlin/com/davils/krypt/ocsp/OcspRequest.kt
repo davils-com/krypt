@@ -17,6 +17,7 @@
 package com.davils.krypt.ocsp
 
 import com.davils.krypt.core.encoding.Hex
+import com.davils.krypt.ocsp.internal.RequestParts
 import kotlinx.io.bytestring.ByteString
 
 /**
@@ -27,11 +28,13 @@ import kotlinx.io.bytestring.ByteString
  * @property encoded the DER encoding.
  * @since 1.0.0
  */
-public class OcspRequest internal constructor(
+public class OcspRequest private constructor(
     public val certIds: List<CertId>,
     public val nonce: ByteString?,
     public val encoded: ByteString,
 ) {
+    internal constructor(parts: RequestParts) : this(parts.certIds, parts.nonce, parts.encoded)
+
     /**
      * Compares the encodings.
      *

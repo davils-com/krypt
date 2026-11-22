@@ -28,7 +28,7 @@ import kotlin.time.Duration.Companion.days
 private const val BASIC_FIELDS: Int = 8
 private const val RESPONSE_FIELDS: Int = 3
 
-class AuditJavaReachTest : FunSpec({
+class JavaReachTest : FunSpec({
     test("Java cannot pair the signature of a revoked answer with a good status") {
         val crypto = Crypto()
         val certificates = Certificates(crypto)
@@ -88,5 +88,7 @@ class AuditJavaReachTest : FunSpec({
             ocsp.verify(response = response, certificate = leaf, issuer = issuer).getOrNull()?.status
         }
         status shouldBe null
+        val sealed = BasicOcspResponse::class.java.constructors.single()
+        sealed.parameterTypes.single().name shouldBe "com.davils.krypt.ocsp.internal.BasicResponseParts"
     }
 })

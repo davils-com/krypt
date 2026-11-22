@@ -16,6 +16,7 @@
 
 package com.davils.krypt.ocsp
 
+import com.davils.krypt.ocsp.internal.ResponseParts
 import kotlinx.io.bytestring.ByteString
 
 /**
@@ -26,11 +27,13 @@ import kotlinx.io.bytestring.ByteString
  * @property encoded the DER encoding.
  * @since 1.0.0
  */
-public class OcspResponse internal constructor(
+public class OcspResponse private constructor(
     public val status: OcspResponseStatus,
     public val basic: BasicOcspResponse?,
     public val encoded: ByteString,
 ) {
+    internal constructor(parts: ResponseParts) : this(parts.status, parts.basic, parts.encoded)
+
     /**
      * Compares the encodings.
      *
