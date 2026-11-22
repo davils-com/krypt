@@ -61,7 +61,7 @@
         {
             "id": "rfc:3161",
             "reviewedOn": "2026-11-22",
-            "note": "Time-stamp tokens: a signed manifest of krypt-stream carries them as opaque attachments.",
+            "note": "Reviewed for krypt-cms.",
             "snapshot": {
                 "title": "Internet X.509 Public Key Infrastructure Time-Stamp Protocol (TSP)",
                 "status": "PROPOSED STANDARD",
@@ -78,6 +78,23 @@
                     "4042": "REJECTED",
                     "844": "HELD"
                 }
+            }
+        },
+        {
+            "id": "rfc:3211",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-cms.",
+            "snapshot": {
+                "title": "Password-based Encryption for CMS",
+                "status": "PROPOSED STANDARD",
+                "published": "December 2001",
+                "withdrawn": true,
+                "replacedBy": [
+                    "RFC3369",
+                    "RFC3370"
+                ],
+                "updatedBy": [],
+                "errata": {}
             }
         },
         {
@@ -103,6 +120,20 @@
             }
         },
         {
+            "id": "rfc:3560",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-cms.",
+            "snapshot": {
+                "title": "Use of the RSAES-OAEP Key Transport Algorithm in Cryptographic Message Syntax (CMS)",
+                "status": "PROPOSED STANDARD",
+                "published": "July 2003",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
+            }
+        },
+        {
             "id": "rfc:4055",
             "reviewedOn": "2026-11-22",
             "note": "Reviewed for the PKI modules: krypt-x509, krypt-keystore and krypt-ct.",
@@ -122,6 +153,22 @@
                     "2724": "HELD",
                     "5199": "HELD",
                     "5325": "HELD"
+                }
+            }
+        },
+        {
+            "id": "rfc:4056",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-cms.",
+            "snapshot": {
+                "title": "Use of the RSASSA-PSS Signature Algorithm in Cryptographic Message Syntax (CMS)",
+                "status": "PROPOSED STANDARD",
+                "published": "June 2005",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "7280": "VERIFIED"
                 }
             }
         },
@@ -203,6 +250,61 @@
             }
         },
         {
+            "id": "rfc:5035",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-cms.",
+            "snapshot": {
+                "title": "Enhanced Security Services (ESS) Update: Adding CertID Algorithm Agility",
+                "status": "PROPOSED STANDARD",
+                "published": "August 2007",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "1007": "HELD",
+                    "1480": "REJECTED",
+                    "2364": "VERIFIED",
+                    "2365": "HELD",
+                    "2366": "HELD",
+                    "6566": "HELD",
+                    "6735": "REJECTED"
+                }
+            }
+        },
+        {
+            "id": "rfc:5083",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-cms.",
+            "snapshot": {
+                "title": "Cryptographic Message Syntax (CMS) Authenticated-Enveloped-Data Content Type",
+                "status": "PROPOSED STANDARD",
+                "published": "November 2007",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "8356": "VERIFIED"
+                }
+            }
+        },
+        {
+            "id": "rfc:5084",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-cms.",
+            "snapshot": {
+                "title": "Using AES-CCM and AES-GCM Authenticated Encryption in the Cryptographic Message Syntax (CMS)",
+                "status": "PROPOSED STANDARD",
+                "published": "November 2007",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "4727": "HELD",
+                    "4774": "REJECTED"
+                }
+            }
+        },
+        {
             "id": "rfc:5280",
             "reviewedOn": "2026-11-22",
             "note": "Reviewed for the PKI modules: krypt-x509, krypt-keystore and krypt-ct.",
@@ -252,6 +354,61 @@
             }
         },
         {
+            "id": "rfc:5652",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-cms.",
+            "snapshot": {
+                "title": "Cryptographic Message Syntax (CMS)",
+                "status": "INTERNET STANDARD",
+                "published": "September 2009",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [
+                    "RFC8933",
+                    "RFC9629"
+                ],
+                "errata": {
+                    "2026": "HELD",
+                    "3867": "HELD",
+                    "5331": "REJECTED",
+                    "6250": "VERIFIED",
+                    "6546": "VERIFIED",
+                    "7863": "HELD"
+                }
+            }
+        },
+        {
+            "id": "rfc:5753",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-cms.",
+            "snapshot": {
+                "title": "Use of Elliptic Curve Cryptography (ECC) Algorithms in Cryptographic Message Syntax (CMS)",
+                "status": "INFORMATIONAL",
+                "published": "January 2010",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "4777": "HELD",
+                    "8087": "VERIFIED"
+                }
+            }
+        },
+        {
+            "id": "rfc:5816",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-cms.",
+            "snapshot": {
+                "title": "ESSCertIDv2 Update for RFC 3161",
+                "status": "PROPOSED STANDARD",
+                "published": "April 2010",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
+            }
+        },
+        {
             "id": "rfc:5869",
             "reviewedOn": "2026-11-22",
             "note": "HKDF: implemented over HMAC in common code, so both targets derive alike.",
@@ -292,6 +449,20 @@
                     "6272": "HELD",
                     "8554": "HELD"
                 }
+            }
+        },
+        {
+            "id": "rfc:6070",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-cms.",
+            "snapshot": {
+                "title": "PKCS #5: Password-Based Key Derivation Function 2 (PBKDF2) Test Vectors",
+                "status": "INFORMATIONAL",
+                "published": "January 2011",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
             }
         },
         {
@@ -552,6 +723,36 @@
             }
         },
         {
+            "id": "rfc:8418",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-cms.",
+            "snapshot": {
+                "title": "Use of the Elliptic Curve Diffie-Hellman Key Agreement Algorithm with X25519 and X448 in the Cryptographic Message Syntax (CMS)",
+                "status": "PROPOSED STANDARD",
+                "published": "August 2018",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
+            }
+        },
+        {
+            "id": "rfc:8419",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-cms.",
+            "snapshot": {
+                "title": "Use of Edwards-Curve Digital Signature Algorithm (EdDSA) Signatures in the Cryptographic Message Syntax (CMS)",
+                "status": "PROPOSED STANDARD",
+                "published": "August 2018",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "5869": "VERIFIED"
+                }
+            }
+        },
+        {
             "id": "rfc:8439",
             "reviewedOn": "2026-11-22",
             "note": "ChaCha20-Poly1305: an AEAD of krypt-primitive where the platform has it.",
@@ -632,6 +833,20 @@
             }
         },
         {
+            "id": "rfc:9629",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-cms.",
+            "snapshot": {
+                "title": "Using Key Encapsulation Mechanism (KEM) Algorithms in the Cryptographic Message Syntax (CMS)",
+                "status": "PROPOSED STANDARD",
+                "published": "August 2024",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
+            }
+        },
+        {
             "id": "rfc:9654",
             "reviewedOn": "2026-11-22",
             "note": "Reviewed for krypt-ocsp: requests, responses, verification and the responder.",
@@ -646,6 +861,22 @@
             }
         },
         {
+            "id": "rfc:9882",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-cms.",
+            "snapshot": {
+                "title": "Use of the ML-DSA Signature Algorithm in the Cryptographic Message Syntax (CMS)",
+                "status": "PROPOSED STANDARD",
+                "published": "October 2025",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {
+                    "9170": "HELD"
+                }
+            }
+        },
+        {
             "id": "rfc:9919",
             "reviewedOn": "2026-11-22",
             "note": "Reviewed for krypt-ocsp: requests, responses, verification and the responder.",
@@ -653,6 +884,20 @@
                 "title": "The Lightweight Online Certificate Status Protocol (OCSP) Profile for High-Volume Environments",
                 "status": "PROPOSED STANDARD",
                 "published": "July 2026",
+                "withdrawn": false,
+                "replacedBy": [],
+                "updatedBy": [],
+                "errata": {}
+            }
+        },
+        {
+            "id": "rfc:9936",
+            "reviewedOn": "2026-11-22",
+            "note": "Reviewed for krypt-cms.",
+            "snapshot": {
+                "title": "Use of ML-KEM in the Cryptographic Message Syntax (CMS)",
+                "status": "PROPOSED STANDARD",
+                "published": "March 2026",
                 "withdrawn": false,
                 "replacedBy": [],
                 "updatedBy": [],
