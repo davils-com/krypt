@@ -212,6 +212,12 @@ final enum class com.davils.krypt.jose/JoseFailure : kotlin/Enum<com.davils.kryp
 sealed interface com.davils.krypt.jose/JoseKey { // com.davils.krypt.jose/JoseKey|null[0]
     abstract val keyId // com.davils.krypt.jose/JoseKey.keyId|{}keyId[0]
         abstract fun <get-keyId>(): kotlin/String? // com.davils.krypt.jose/JoseKey.keyId.<get-keyId>|<get-keyId>(){}[0]
+    open val algorithm // com.davils.krypt.jose/JoseKey.algorithm|{}algorithm[0]
+        open fun <get-algorithm>(): kotlin/String? // com.davils.krypt.jose/JoseKey.algorithm.<get-algorithm>|<get-algorithm>(){}[0]
+    open val operations // com.davils.krypt.jose/JoseKey.operations|{}operations[0]
+        open fun <get-operations>(): kotlin.collections/Set<com.davils.krypt.jose.jwk/KeyOperation> // com.davils.krypt.jose/JoseKey.operations.<get-operations>|<get-operations>(){}[0]
+    open val use // com.davils.krypt.jose/JoseKey.use|{}use[0]
+        open fun <get-use>(): com.davils.krypt.jose.jwk/KeyUse? // com.davils.krypt.jose/JoseKey.use.<get-use>|<get-use>(){}[0]
 
     final class Password : com.davils.krypt.jose/JoseKey { // com.davils.krypt.jose/JoseKey.Password|null[0]
         constructor <init>(com.davils.krypt.core/SecretText, kotlin/String? = ...) // com.davils.krypt.jose/JoseKey.Password.<init>|<init>(com.davils.krypt.core.SecretText;kotlin.String?){}[0]
@@ -227,12 +233,18 @@ sealed interface com.davils.krypt.jose/JoseKey { // com.davils.krypt.jose/JoseKe
     }
 
     final class Private : com.davils.krypt.jose/JoseKey { // com.davils.krypt.jose/JoseKey.Private|null[0]
-        constructor <init>(com.davils.krypt.primitive.key/PrivateKey, kotlin/String? = ...) // com.davils.krypt.jose/JoseKey.Private.<init>|<init>(com.davils.krypt.primitive.key.PrivateKey;kotlin.String?){}[0]
+        constructor <init>(com.davils.krypt.primitive.key/PrivateKey, kotlin/String? = ..., com.davils.krypt.jose.jwk/KeyUse? = ..., kotlin.collections/Set<com.davils.krypt.jose.jwk/KeyOperation> = ..., kotlin/String? = ...) // com.davils.krypt.jose/JoseKey.Private.<init>|<init>(com.davils.krypt.primitive.key.PrivateKey;kotlin.String?;com.davils.krypt.jose.jwk.KeyUse?;kotlin.collections.Set<com.davils.krypt.jose.jwk.KeyOperation>;kotlin.String?){}[0]
 
+        final val algorithm // com.davils.krypt.jose/JoseKey.Private.algorithm|{}algorithm[0]
+            final fun <get-algorithm>(): kotlin/String? // com.davils.krypt.jose/JoseKey.Private.algorithm.<get-algorithm>|<get-algorithm>(){}[0]
         final val key // com.davils.krypt.jose/JoseKey.Private.key|{}key[0]
             final fun <get-key>(): com.davils.krypt.primitive.key/PrivateKey // com.davils.krypt.jose/JoseKey.Private.key.<get-key>|<get-key>(){}[0]
         final val keyId // com.davils.krypt.jose/JoseKey.Private.keyId|{}keyId[0]
             final fun <get-keyId>(): kotlin/String? // com.davils.krypt.jose/JoseKey.Private.keyId.<get-keyId>|<get-keyId>(){}[0]
+        final val operations // com.davils.krypt.jose/JoseKey.Private.operations|{}operations[0]
+            final fun <get-operations>(): kotlin.collections/Set<com.davils.krypt.jose.jwk/KeyOperation> // com.davils.krypt.jose/JoseKey.Private.operations.<get-operations>|<get-operations>(){}[0]
+        final val use // com.davils.krypt.jose/JoseKey.Private.use|{}use[0]
+            final fun <get-use>(): com.davils.krypt.jose.jwk/KeyUse? // com.davils.krypt.jose/JoseKey.Private.use.<get-use>|<get-use>(){}[0]
 
         final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.jose/JoseKey.Private.equals|equals(kotlin.Any?){}[0]
         final fun hashCode(): kotlin/Int // com.davils.krypt.jose/JoseKey.Private.hashCode|hashCode(){}[0]
@@ -240,12 +252,18 @@ sealed interface com.davils.krypt.jose/JoseKey { // com.davils.krypt.jose/JoseKe
     }
 
     final class Public : com.davils.krypt.jose/JoseKey { // com.davils.krypt.jose/JoseKey.Public|null[0]
-        constructor <init>(com.davils.krypt.primitive.key/PublicKey, kotlin/String? = ...) // com.davils.krypt.jose/JoseKey.Public.<init>|<init>(com.davils.krypt.primitive.key.PublicKey;kotlin.String?){}[0]
+        constructor <init>(com.davils.krypt.primitive.key/PublicKey, kotlin/String? = ..., com.davils.krypt.jose.jwk/KeyUse? = ..., kotlin.collections/Set<com.davils.krypt.jose.jwk/KeyOperation> = ..., kotlin/String? = ...) // com.davils.krypt.jose/JoseKey.Public.<init>|<init>(com.davils.krypt.primitive.key.PublicKey;kotlin.String?;com.davils.krypt.jose.jwk.KeyUse?;kotlin.collections.Set<com.davils.krypt.jose.jwk.KeyOperation>;kotlin.String?){}[0]
 
+        final val algorithm // com.davils.krypt.jose/JoseKey.Public.algorithm|{}algorithm[0]
+            final fun <get-algorithm>(): kotlin/String? // com.davils.krypt.jose/JoseKey.Public.algorithm.<get-algorithm>|<get-algorithm>(){}[0]
         final val key // com.davils.krypt.jose/JoseKey.Public.key|{}key[0]
             final fun <get-key>(): com.davils.krypt.primitive.key/PublicKey // com.davils.krypt.jose/JoseKey.Public.key.<get-key>|<get-key>(){}[0]
         final val keyId // com.davils.krypt.jose/JoseKey.Public.keyId|{}keyId[0]
             final fun <get-keyId>(): kotlin/String? // com.davils.krypt.jose/JoseKey.Public.keyId.<get-keyId>|<get-keyId>(){}[0]
+        final val operations // com.davils.krypt.jose/JoseKey.Public.operations|{}operations[0]
+            final fun <get-operations>(): kotlin.collections/Set<com.davils.krypt.jose.jwk/KeyOperation> // com.davils.krypt.jose/JoseKey.Public.operations.<get-operations>|<get-operations>(){}[0]
+        final val use // com.davils.krypt.jose/JoseKey.Public.use|{}use[0]
+            final fun <get-use>(): com.davils.krypt.jose.jwk/KeyUse? // com.davils.krypt.jose/JoseKey.Public.use.<get-use>|<get-use>(){}[0]
 
         final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.jose/JoseKey.Public.equals|equals(kotlin.Any?){}[0]
         final fun hashCode(): kotlin/Int // com.davils.krypt.jose/JoseKey.Public.hashCode|hashCode(){}[0]
@@ -253,12 +271,18 @@ sealed interface com.davils.krypt.jose/JoseKey { // com.davils.krypt.jose/JoseKe
     }
 
     final class Secret : com.davils.krypt.jose/JoseKey { // com.davils.krypt.jose/JoseKey.Secret|null[0]
-        constructor <init>(com.davils.krypt.primitive.key/SecretKey, kotlin/String? = ...) // com.davils.krypt.jose/JoseKey.Secret.<init>|<init>(com.davils.krypt.primitive.key.SecretKey;kotlin.String?){}[0]
+        constructor <init>(com.davils.krypt.primitive.key/SecretKey, kotlin/String? = ..., com.davils.krypt.jose.jwk/KeyUse? = ..., kotlin.collections/Set<com.davils.krypt.jose.jwk/KeyOperation> = ..., kotlin/String? = ...) // com.davils.krypt.jose/JoseKey.Secret.<init>|<init>(com.davils.krypt.primitive.key.SecretKey;kotlin.String?;com.davils.krypt.jose.jwk.KeyUse?;kotlin.collections.Set<com.davils.krypt.jose.jwk.KeyOperation>;kotlin.String?){}[0]
 
+        final val algorithm // com.davils.krypt.jose/JoseKey.Secret.algorithm|{}algorithm[0]
+            final fun <get-algorithm>(): kotlin/String? // com.davils.krypt.jose/JoseKey.Secret.algorithm.<get-algorithm>|<get-algorithm>(){}[0]
         final val key // com.davils.krypt.jose/JoseKey.Secret.key|{}key[0]
             final fun <get-key>(): com.davils.krypt.primitive.key/SecretKey // com.davils.krypt.jose/JoseKey.Secret.key.<get-key>|<get-key>(){}[0]
         final val keyId // com.davils.krypt.jose/JoseKey.Secret.keyId|{}keyId[0]
             final fun <get-keyId>(): kotlin/String? // com.davils.krypt.jose/JoseKey.Secret.keyId.<get-keyId>|<get-keyId>(){}[0]
+        final val operations // com.davils.krypt.jose/JoseKey.Secret.operations|{}operations[0]
+            final fun <get-operations>(): kotlin.collections/Set<com.davils.krypt.jose.jwk/KeyOperation> // com.davils.krypt.jose/JoseKey.Secret.operations.<get-operations>|<get-operations>(){}[0]
+        final val use // com.davils.krypt.jose/JoseKey.Secret.use|{}use[0]
+            final fun <get-use>(): com.davils.krypt.jose.jwk/KeyUse? // com.davils.krypt.jose/JoseKey.Secret.use.<get-use>|<get-use>(){}[0]
 
         final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.jose/JoseKey.Secret.equals|equals(kotlin.Any?){}[0]
         final fun hashCode(): kotlin/Int // com.davils.krypt.jose/JoseKey.Secret.hashCode|hashCode(){}[0]

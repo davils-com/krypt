@@ -263,14 +263,15 @@ public class JsonWebKeys(public val crypto: Crypto, public val limits: JoseLimit
     }
 
     /**
-     * Returns [jwk] as a key of JOSE with its key id: a symmetric, a private or a public key.
+     * Returns [jwk] as a key of JOSE with its key id, `use`, `key_ops` and `alg`: a symmetric, a private or a public
+     * key, which JWS and JWE use only where these fit.
      *
      * @param jwk the JWK.
      * @return the key, or why it is unusable.
      * @since 1.0.0
      */
     public suspend fun key(jwk: Jwk): Outcome<JoseKey, JoseFailure> = when (jwk.type) {
-        JwkType.Oct -> secretKey(jwk).map { key -> JoseKey.Secret(key = key, keyId = jwk.keyId) }
+        JwkType.Oct -> secretKey(jwk).map { key -> secretOf(jwk = jwk, key = key) }
         JwkType.Ec -> asymmetricKey(jwk)
         JwkType.Okp -> asymmetricKey(jwk)
         JwkType.Rsa -> asymmetricKey(jwk)
@@ -312,9 +313,34 @@ public class JsonWebKeys(public val crypto: Crypto, public val limits: JoseLimit
 
     private fun objectOf(text: String): Outcome<JsonValue.Object, JoseFailure> = decoding { headers.objectOf(text) }
 
+    private fun secretOf(jwk: Jwk, key: SecretKey): JoseKey = JoseKey.Secret(
+        key = key,
+        keyId = jwk.keyId,
+        use = jwk.use,
+        operations = jwk.operations.toSet(),
+        algorithm = jwk.algorithm,
+    )
+
     private suspend fun asymmetricKey(jwk: Jwk): Outcome<JoseKey, JoseFailure> = when (jwk.isPrivate) {
-        true -> privateKey(jwk).map { key -> JoseKey.Private(key = key, keyId = jwk.keyId) }
-        false -> publicKey(jwk).map { key -> JoseKey.Public(key = key, keyId = jwk.keyId) }
+        true -> privateKey(jwk).map { key ->
+            JoseKey.Private(
+                key = key,
+                keyId = jwk.keyId,
+                use = jwk.use,
+                operations = jwk.operations.toSet(),
+                algorithm = jwk.algorithm,
+            )
+        }
+
+        false -> publicKey(jwk).map { key ->
+            JoseKey.Public(
+                key = key,
+                keyId = jwk.keyId,
+                use = jwk.use,
+                operations = jwk.operations.toSet(),
+                algorithm = jwk.algorithm,
+            )
+        }
     }
 
     private suspend fun paired(jwk: Jwk, key: PrivateKey): Outcome<PrivateKey, JoseFailure> {

@@ -145,7 +145,7 @@ class JwkTest : FunSpec({
         jwk.isPrivate shouldBe true
         jwk.toPublic() shouldBe null
         keys.secretKey(keys.decode(jwk.encode()).value()).value() shouldBe secret
-        keys.key(jwk).value() shouldBe JoseKey.Secret(secret, KEY_ID)
+        keys.key(jwk).value() shouldBe JoseKey.Secret(key = secret, keyId = KEY_ID, algorithm = "HS256")
     }
 
     test("refuses a private key whose parts do not belong together") {

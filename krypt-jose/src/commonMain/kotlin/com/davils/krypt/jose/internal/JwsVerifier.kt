@@ -86,7 +86,9 @@ internal class JwsVerifier(private val signatures: JwsCrypto) {
         val keyId = signature.header.keyId
         var isFitted = false
         var verified: JoseKey? = null
-        for (key in keys.filter { key -> key.keyId == null || keyId == null || key.keyId == keyId }) {
+        val names = setOf(algorithm.algorithmName)
+        val fitting = keys.filter { key -> key.keyId == null || keyId == null || key.keyId == keyId }
+        for (key in fitting.filter { key -> isUsable(key, VERIFYING, names) }) {
             if (verified == null) {
                 val isVerified = signatures.verify(
                     algorithm = algorithm,

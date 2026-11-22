@@ -27,6 +27,8 @@ import com.davils.krypt.jose.JsonValue
 import com.davils.krypt.jose.internal.Attempt
 import com.davils.krypt.jose.internal.Base64Url
 import com.davils.krypt.jose.internal.ContentCipher
+import com.davils.krypt.jose.internal.DECRYPTING
+import com.davils.krypt.jose.internal.ENCRYPTING
 import com.davils.krypt.jose.internal.HeaderNames
 import com.davils.krypt.jose.internal.HeaderRules
 import com.davils.krypt.jose.internal.JweCodec
@@ -35,6 +37,7 @@ import com.davils.krypt.jose.internal.RecipientParts
 import com.davils.krypt.jose.internal.Unwrapped
 import com.davils.krypt.jose.internal.decoding
 import com.davils.krypt.jose.internal.invariant
+import com.davils.krypt.jose.internal.isUsable
 import com.davils.krypt.jose.internal.merged
 import com.davils.krypt.jose.internal.requireDisjoint
 import com.davils.krypt.jose.internal.text
@@ -98,7 +101,7 @@ public class Jwe(
         encryption: JweEncryption,
         header: JsonValue.Object = JsonValue.Object.Empty,
     ): String {
-        checkRecipient(recipient)
+        checkRecipient(recipient, encryption)
         checkHeader(header)
         val callerHeader = JsonValue.Object(header.members + recipient.header.members)
         val cek = randomKey(encryption)
@@ -155,7 +158,7 @@ public class Jwe(
         require(recipients.size == 1 || recipients.none { recipient -> recipient.algorithm.isDirect }) {
             "dir and ECDH-ES allow only one recipient"
         }
-        recipients.forEach { recipient -> checkRecipient(recipient) }
+        recipients.forEach { recipient -> checkRecipient(recipient, encryption) }
         checkHeader(protectedHeader)
         checkHeader(sharedHeader)
         require(HeaderNames.CRITICAL !in sharedHeader) { "crit is protected" }
@@ -345,7 +348,8 @@ public class Jwe(
         val encryption = bound.encryption
         var isFitted = false
         var result: DecryptedJwe? = null
-        for (key in keys) {
+        val names = setOf(algorithm.algorithmName, encryption.algorithmName)
+        for (key in keys.filter { key -> isUsable(key, DECRYPTING, names) }) {
             if (result == null) {
                 val attempt = Attempt(
                     algorithm = algorithm,
@@ -446,7 +450,10 @@ public class Jwe(
         return listOfNotNull(keyId?.let { found -> HeaderNames.KEY_ID to text(found) })
     }
 
-    private fun checkRecipient(recipient: JweRecipient) {
+    private fun checkRecipient(recipient: JweRecipient, encryption: JweEncryption) {
+        val names = setOf(recipient.algorithm.algorithmName, encryption.algorithmName)
+        val isUsable = isUsable(key = recipient.key, operations = ENCRYPTING, algorithms = names)
+        require(isUsable) { "The key is not for ${recipient.algorithm.algorithmName}" }
         require(recipient.algorithm.kdf == null || isPasswordAllowed) { "PBES2 needs isPasswordAllowed" }
         checkHeader(recipient.header)
         require(HeaderNames.CRITICAL !in recipient.header) { "crit is protected" }

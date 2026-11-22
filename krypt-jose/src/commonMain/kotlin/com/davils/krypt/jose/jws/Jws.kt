@@ -29,6 +29,8 @@ import com.davils.krypt.jose.internal.HeaderRules
 import com.davils.krypt.jose.internal.JwsCodec
 import com.davils.krypt.jose.internal.JwsCrypto
 import com.davils.krypt.jose.internal.JwsVerifier
+import com.davils.krypt.jose.internal.SIGNING
+import com.davils.krypt.jose.internal.isUsable
 import com.davils.krypt.jose.internal.stringsOf
 import com.davils.krypt.jose.internal.text
 import com.davils.krypt.jose.internal.textOrNull
@@ -273,6 +275,8 @@ public class Jws(public val crypto: Crypto, public val limits: JoseLimits = Jose
     }
 
     private suspend fun signOne(signer: JwsSigner, payload: ByteString, isEncoded: Boolean): Pair<String, ByteString> {
+        val name = signer.algorithm.algorithmName
+        require(isUsable(signer.key, SIGNING, setOf(name))) { "The key is not for $name" }
         val header = protectedOf(signer = signer, isEncoded = isEncoded).encode()
         val protected = Base64Url.encode(header.encodeToByteArray())
         val payloadInput = when (isEncoded) {
