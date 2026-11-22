@@ -72,8 +72,9 @@ public class Cms(public val crypto: Crypto, public val limits: CmsLimits = CmsLi
      * @param block describes the signers and the message.
      * @return the signed data in its ContentInfo.
      * @throws IllegalArgumentException if there is no signer or more than [CmsLimits.maximumSigners], a certificate
-     *   does not match its signer, a key identifier is asked for but missing, Ed448 is asked to sign attributes, an
-     *   attribute is duplicated or a limit is broken.
+     *   does not match its signer, a key identifier is asked for but missing, Ed448 is asked to sign attributes, a
+     *   signer without signed attributes signs a content type other than id-data, an attribute is duplicated or a
+     *   limit is broken.
      * @throws com.davils.krypt.primitive.PolicyViolationException if the policy forbids an algorithm.
      * @since 1.0.0
      */
@@ -100,6 +101,10 @@ public class Cms(public val crypto: Crypto, public val limits: CmsLimits = CmsLi
 
     /**
      * Verifies every signer of [signedData], which must have at least one.
+     *
+     * A signer without signed attributes signs only the content, not its type, so RFC 5652 section 5.3 allows it only
+     * for content of type id-data: for any other type it gives [CmsFailure.AttributeMismatch]. With signed attributes
+     * the content-type attribute must name the type of the encapsulated content.
      *
      * @param signedData the signed data.
      * @param content the detached content, or null to verify the content in the message.

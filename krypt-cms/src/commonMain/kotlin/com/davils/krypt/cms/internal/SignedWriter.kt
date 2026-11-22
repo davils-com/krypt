@@ -134,6 +134,10 @@ internal class SignedWriter(private val crypto: Crypto, private val limits: CmsL
         require(digest != null || !options.isSignedAttributesUsed) {
             "Ed448 signs without signed attributes, since krypt has no SHAKE256"
         }
+        val isTyped = contentType != null && contentType != ContentTypes.Data
+        require(options.isSignedAttributesUsed || !isTyped) {
+            "A content type other than id-data is signed as a signed attribute (RFC 5652 section 5.3)"
+        }
         val reference = References.of(spec.certificate, options.isKeyIdentifierUsed)
         val signed = digest?.takeIf { options.isSignedAttributesUsed }?.let { found ->
             signedAttributes(spec = spec, data = data, digest = found, contentType = contentType)

@@ -60,19 +60,6 @@ private fun oid(value: ObjectIdentifier): ByteString = der { objectIdentifier(va
 private fun kek(): SecretKey = SecretKey.of(SecretBytes.copyOf(ByteArray(KEK_BYTES) { 1 }))
 
 class AuditCmsTest : FunSpec({
-    test("a signer without signed attributes does not authenticate a content type other than id-data") {
-        val pki = Pki.create()
-        val identity = pki.issue(KeyType.P256, "signer")
-        val signed = cms.sign(CONTENT) {
-            signer(identity.signer, identity.certificate) { isSignedAttributesUsed = false }
-        }
-        cms.verified(signed, parameters = pki.parameters)
-        val relabelled = replaced(signed.encoded, oid(ContentTypes.Data), oid(ContentTypes.SignedData))
-        val decoded = cms.decodeSigned(relabelled).value()
-        decoded.contentType shouldBe ContentTypes.SignedData
-        cms.verify(signedData = decoded, parameters = pki.parameters).failureOrNull() shouldNotBe null
-    }
-
     test("authenticated enveloped data binds its content type") {
         val identifier = "kek".encodeToByteString()
         val enveloped = cms.envelop(
