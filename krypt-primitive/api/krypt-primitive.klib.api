@@ -367,6 +367,11 @@ open class com.davils.krypt.primitive/CryptoException : kotlin/RuntimeException 
     constructor <init>(kotlin/String, kotlin/Throwable? = ...) // com.davils.krypt.primitive/CryptoException.<init>|<init>(kotlin.String;kotlin.Throwable?){}[0]
 }
 
+final object com.davils.krypt.primitive.cipher/BlockCiphers { // com.davils.krypt.primitive.cipher/BlockCiphers|null[0]
+    final suspend fun aesCbcDecrypt(com.davils.krypt.primitive/Crypto, com.davils.krypt.core/SecretBytes, kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString): kotlinx.io.bytestring/ByteString? // com.davils.krypt.primitive.cipher/BlockCiphers.aesCbcDecrypt|aesCbcDecrypt(com.davils.krypt.primitive.Crypto;com.davils.krypt.core.SecretBytes;kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString){}[0]
+    final suspend fun aesCbcEncrypt(com.davils.krypt.primitive/Crypto, com.davils.krypt.core/SecretBytes, kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString): kotlinx.io.bytestring/ByteString // com.davils.krypt.primitive.cipher/BlockCiphers.aesCbcEncrypt|aesCbcEncrypt(com.davils.krypt.primitive.Crypto;com.davils.krypt.core.SecretBytes;kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString){}[0]
+}
+
 final object com.davils.krypt.primitive.cipher/PasswordEncryption { // com.davils.krypt.primitive.cipher/PasswordEncryption|null[0]
     final suspend fun decrypt(com.davils.krypt.primitive/Crypto, kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString, com.davils.krypt.core/SecretText): com.davils.kore.core.outcome/Outcome<com.davils.krypt.core/SecretBytes, com.davils.krypt.primitive.key/KeyFailure> // com.davils.krypt.primitive.cipher/PasswordEncryption.decrypt|decrypt(com.davils.krypt.primitive.Crypto;kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString;com.davils.krypt.core.SecretText){}[0]
     final suspend fun encrypt(com.davils.krypt.primitive/Crypto, com.davils.krypt.core/SecretBytes, com.davils.krypt.core/SecretText, kotlin/Int): kotlin/Pair<kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString> // com.davils.krypt.primitive.cipher/PasswordEncryption.encrypt|encrypt(com.davils.krypt.primitive.Crypto;com.davils.krypt.core.SecretBytes;com.davils.krypt.core.SecretText;kotlin.Int){}[0]

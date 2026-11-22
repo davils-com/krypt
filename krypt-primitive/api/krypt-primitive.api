@@ -70,6 +70,12 @@ public final class com/davils/krypt/primitive/cipher/AsymmetricEncryptions {
 	public static synthetic fun encrypt$default (Lcom/davils/krypt/primitive/cipher/AsymmetricEncryptions;Lcom/davils/krypt/primitive/key/PublicKey;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/algorithm/AsymmetricEncryptionAlgorithm;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 }
 
+public final class com/davils/krypt/primitive/cipher/BlockCiphers {
+	public static final field INSTANCE Lcom/davils/krypt/primitive/cipher/BlockCiphers;
+	public final fun aesCbcDecrypt (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/core/SecretBytes;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun aesCbcEncrypt (Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/core/SecretBytes;Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
 public final class com/davils/krypt/primitive/cipher/KeyWraps {
 	public final fun unwrap (Lcom/davils/krypt/primitive/key/SecretKey;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/algorithm/KeyWrapAlgorithm;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static synthetic fun unwrap$default (Lcom/davils/krypt/primitive/cipher/KeyWraps;Lcom/davils/krypt/primitive/key/SecretKey;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/algorithm/KeyWrapAlgorithm;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
