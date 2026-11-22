@@ -112,3 +112,14 @@ kollect 1.0.0. The code comes from the security library of an internal Davils pr
   against limits, and test support gains an in-memory ACME server.
 - **Test support**: deterministic and replayed randomness, an audit log, test environments and an in-memory ACME
   server.
+
+### Security
+
+- **Message formats hardened after an audit**: CWT validation requires a signature, a MAC or an encryption under a
+  pre-shared key (`isAuthenticationRequired`) and `exp` (`isExpirationRequired`) by default, COSE reads `alg` only from
+  the protected bucket and HMAC keys must be as long as the hash; `Jwt.validate` accepts only the compact
+  serialization, a JWS needs `b64` in `crit` to use an unencoded payload, a JWK keeps `use`, `key_ops` and `alg` on its
+  `JoseKey`, and PBES2 and PWRI derive at most once per password and message; CMS requires signed attributes and
+  authenticated attributes for content other than id-data, binds the content type and tag length of
+  AuthEnvelopedData, verifies time stamps without throwing, and reads or writes AES-CBC only with
+  `isUnauthenticatedCbcAllowed`.
