@@ -96,6 +96,7 @@ kreate {
                 ":krypt-storage",
                 ":krypt-x509",
                 ":krypt-keystore",
+                ":krypt-ct",
                 ":krypt-testing",
             )
         }
