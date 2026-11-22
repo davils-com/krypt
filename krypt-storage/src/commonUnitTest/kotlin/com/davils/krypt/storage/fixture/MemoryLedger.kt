@@ -20,11 +20,16 @@ import com.davils.krypt.storage.blob.VersionLedger
 
 internal class MemoryLedger : VersionLedger {
     val versions: MutableMap<String, Long> = mutableMapOf()
+    var isFailing: Boolean = false
+    var isRefusing: Boolean = false
 
-    override suspend fun current(key: String): Long? = versions[key]
+    override suspend fun current(key: String): Long? {
+        check(!isFailing) { "the ledger is down" }
+        return versions[key]
+    }
 
     override suspend fun record(key: String, version: Long, expected: Long?): Boolean {
-        val isExpected = versions[key] == expected
+        val isExpected = versions[key] == expected && !isRefusing
         if (isExpected) versions[key] = version
         return isExpected
     }

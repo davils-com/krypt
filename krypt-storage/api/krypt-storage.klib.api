@@ -11,6 +11,7 @@ final enum class com.davils.krypt.storage/StorageFailure : kotlin/Enum<com.davil
     enum entry Malformed // com.davils.krypt.storage/StorageFailure.Malformed|null[0]
     enum entry Missing // com.davils.krypt.storage/StorageFailure.Missing|null[0]
     enum entry Rollback // com.davils.krypt.storage/StorageFailure.Rollback|null[0]
+    enum entry Unavailable // com.davils.krypt.storage/StorageFailure.Unavailable|null[0]
 
     final val entries // com.davils.krypt.storage/StorageFailure.entries|#static{}entries[0]
         final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.storage/StorageFailure> // com.davils.krypt.storage/StorageFailure.entries.<get-entries>|<get-entries>#static(){}[0]

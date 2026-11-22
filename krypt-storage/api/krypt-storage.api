@@ -3,6 +3,7 @@ public final class com/davils/krypt/storage/StorageFailure : java/lang/Enum {
 	public static final field Malformed Lcom/davils/krypt/storage/StorageFailure;
 	public static final field Missing Lcom/davils/krypt/storage/StorageFailure;
 	public static final field Rollback Lcom/davils/krypt/storage/StorageFailure;
+	public static final field Unavailable Lcom/davils/krypt/storage/StorageFailure;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/storage/StorageFailure;
 	public static fun values ()[Lcom/davils/krypt/storage/StorageFailure;

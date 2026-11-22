@@ -131,7 +131,7 @@ class EncryptedBlobStoreTest : FunSpec({
         }
         shouldThrow<IllegalStateException> { blobStoreWith(store, blobs, racing).put(NAME, bytes(1)) }
         blobs.delete(NAME) shouldBe true
-        ledger.versions shouldBe emptyMap()
+        ledger.versions shouldBe mapOf(key to FUTURE + 1)
     }
 
     test("changed and foreign bytes are refused") {

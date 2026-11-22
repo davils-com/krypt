@@ -31,7 +31,9 @@ private const val PREFIX: String = "subject/"
  *
  * Encrypt the data of a subject with [aead], directly, with a [com.davils.krypt.storage.record.RecordCipher] or as
  * the data keys of an [com.davils.krypt.storage.blob.EncryptedBlobStore]; [shred] then makes all of it unreadable,
- * also in backups, as long as the vault keeps no copy of the deleted key set.
+ * also in backups, as long as the vault keeps no copy of the deleted key set. Give the vault a
+ * [com.davils.krypt.keyset.store.RevisionLedger] for that: without one, the vault trusts its repository to delete for
+ * good, and a key set that a repository or a restored backup serves again brings the data back.
  *
  * @property vault where the key sets of the subjects are kept.
  * @constructor Keeps subject keys in [vault].

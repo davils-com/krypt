@@ -25,14 +25,23 @@ import kotlinx.io.bytestring.ByteString
 
 internal class MemoryBlobStore : BlobStore {
     val objects: MutableMap<String, ByteString> = mutableMapOf()
+    var isFailing: Boolean = false
 
     override suspend fun write(key: String, content: suspend (ByteSink) -> Unit) {
+        check(!isFailing) { MESSAGE }
         val sink = BufferSink(Int.MAX_VALUE)
         content(sink)
         objects[key] = sink.toByteString()
     }
 
-    override suspend fun open(key: String): RandomAccessSource? = objects[key]?.asRandomAccessSource()
+    override suspend fun open(key: String): RandomAccessSource? {
+        check(!isFailing) { MESSAGE }
+        return objects[key]?.asRandomAccessSource()
+    }
 
     override suspend fun delete(key: String): Boolean = objects.remove(key) != null
+
+    private companion object {
+        const val MESSAGE: String = "the store is down"
+    }
 }
