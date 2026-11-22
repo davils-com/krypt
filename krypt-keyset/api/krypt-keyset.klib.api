@@ -42,6 +42,8 @@ final enum class com.davils.krypt.keyset/KeysetFailure : kotlin/Enum<com.davils.
     enum entry Malformed // com.davils.krypt.keyset/KeysetFailure.Malformed|null[0]
     enum entry Missing // com.davils.krypt.keyset/KeysetFailure.Missing|null[0]
     enum entry Refused // com.davils.krypt.keyset/KeysetFailure.Refused|null[0]
+    enum entry Rollback // com.davils.krypt.keyset/KeysetFailure.Rollback|null[0]
+    enum entry Unavailable // com.davils.krypt.keyset/KeysetFailure.Unavailable|null[0]
     enum entry Unsupported // com.davils.krypt.keyset/KeysetFailure.Unsupported|null[0]
     enum entry WrongKeyManagementService // com.davils.krypt.keyset/KeysetFailure.WrongKeyManagementService|null[0]
 
@@ -64,6 +66,11 @@ abstract interface com.davils.krypt.keyset.store/KeysetRepository { // com.davil
     abstract suspend fun delete(kotlin/String): kotlin/Boolean // com.davils.krypt.keyset.store/KeysetRepository.delete|delete(kotlin.String){}[0]
     abstract suspend fun load(kotlin/String): com.davils.krypt.keyset.store/StoredKeyset? // com.davils.krypt.keyset.store/KeysetRepository.load|load(kotlin.String){}[0]
     abstract suspend fun store(kotlin/String, com.davils.krypt.keyset.store/StoredKeyset, kotlin/Long?): kotlin/Boolean // com.davils.krypt.keyset.store/KeysetRepository.store|store(kotlin.String;com.davils.krypt.keyset.store.StoredKeyset;kotlin.Long?){}[0]
+}
+
+abstract interface com.davils.krypt.keyset.store/RevisionLedger { // com.davils.krypt.keyset.store/RevisionLedger|null[0]
+    abstract suspend fun current(kotlin/String): kotlin/Long? // com.davils.krypt.keyset.store/RevisionLedger.current|current(kotlin.String){}[0]
+    abstract suspend fun record(kotlin/String, kotlin/Long, kotlin/Long?): kotlin/Boolean // com.davils.krypt.keyset.store/RevisionLedger.record|record(kotlin.String;kotlin.Long;kotlin.Long?){}[0]
 }
 
 final class com.davils.krypt.keyset.kms/Envelopes { // com.davils.krypt.keyset.kms/Envelopes|null[0]
@@ -102,7 +109,7 @@ final class com.davils.krypt.keyset.kms/LocalKms : com.davils.krypt.keyset.kms/K
 }
 
 final class com.davils.krypt.keyset.store/KeysetVault { // com.davils.krypt.keyset.store/KeysetVault|null[0]
-    constructor <init>(com.davils.krypt.keyset/Keysets, com.davils.krypt.keyset.store/KeysetRepository, com.davils.krypt.keyset.kms/KeyManagementService, kotlin/Int = ...) // com.davils.krypt.keyset.store/KeysetVault.<init>|<init>(com.davils.krypt.keyset.Keysets;com.davils.krypt.keyset.store.KeysetRepository;com.davils.krypt.keyset.kms.KeyManagementService;kotlin.Int){}[0]
+    constructor <init>(com.davils.krypt.keyset/Keysets, com.davils.krypt.keyset.store/KeysetRepository, com.davils.krypt.keyset.kms/KeyManagementService, kotlin/Int = ..., com.davils.krypt.keyset.store/RevisionLedger? = ...) // com.davils.krypt.keyset.store/KeysetVault.<init>|<init>(com.davils.krypt.keyset.Keysets;com.davils.krypt.keyset.store.KeysetRepository;com.davils.krypt.keyset.kms.KeyManagementService;kotlin.Int;com.davils.krypt.keyset.store.RevisionLedger?){}[0]
 
     final val attempts // com.davils.krypt.keyset.store/KeysetVault.attempts|{}attempts[0]
         final fun <get-attempts>(): kotlin/Int // com.davils.krypt.keyset.store/KeysetVault.attempts.<get-attempts>|<get-attempts>(){}[0]

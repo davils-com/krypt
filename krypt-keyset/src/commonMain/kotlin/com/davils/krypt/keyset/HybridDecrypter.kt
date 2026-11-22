@@ -40,6 +40,13 @@ public class HybridDecrypter internal constructor(
 ) {
     private val privateKeys: List<Pair<KeyId, PrivateKey>> = keyset.usable { key -> key.privateKey }
 
+    init {
+        val purpose = keyset.purpose
+        require(purpose is KeyPurpose.Hybrid && purpose.suite == suite && !keyset.isPublic) {
+            "A key set of $purpose does not decrypt with $suite"
+        }
+    }
+
     /**
      * Decrypts [ciphertext].
      *

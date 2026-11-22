@@ -20,8 +20,10 @@ package com.davils.krypt.storage.blob
  * A trusted record of the current version of every object, kept apart from the [BlobStore], such as in a database
  * with integrity guarantees; with it, an [EncryptedBlobStore] detects an old version that was put back.
  *
- * The ledger sees only blinded keys. A version is recorded before the object is written, so an object whose write
- * failed reads as a rollback until it is put again.
+ * The ledger sees only blinded keys; the version of a name is the highest version recorded under the blinded keys of
+ * all enabled keys of the names key set. A version is recorded under the blinded key of the primary key before the
+ * object is written, so an object whose write failed reads as a rollback until it is put again. A deletion records a
+ * version past the deleted one instead of forgetting it, so the versions of a name only grow.
  *
  * @since 1.0.0
  */
@@ -47,7 +49,8 @@ public interface VersionLedger {
     public suspend fun record(key: String, version: Long, expected: Long?): Boolean
 
     /**
-     * Forgets [key] when its object is deleted or moved.
+     * Forgets [key] once its object was moved to the blinded key of another key of the names key set, whose recorded
+     * version is at least as high.
      *
      * @param key the blinded key.
      * @since 1.0.0

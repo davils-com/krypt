@@ -30,7 +30,8 @@ public enum class StreamFailure {
     Malformed,
 
     /**
-     * The container names a version or a suite krypt does not know.
+     * The container names a version or a suite krypt does not know, or a suite the platform lacks, such as
+     * ChaCha20-Poly1305 on WebAssembly.
      *
      * @since 1.0.0
      */
@@ -44,7 +45,8 @@ public enum class StreamFailure {
     NotARecipient,
 
     /**
-     * The crypto policy forbids what a recipient needs, such as the iterations of a password.
+     * The crypto policy forbids the suite of the container or what a recipient needs, such as the iterations of a
+     * password.
      *
      * @since 1.0.0
      */

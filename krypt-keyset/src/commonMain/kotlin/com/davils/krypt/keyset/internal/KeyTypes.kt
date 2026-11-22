@@ -18,6 +18,7 @@ package com.davils.krypt.keyset.internal
 
 import com.davils.krypt.core.algorithm.KemAlgorithm
 import com.davils.krypt.core.algorithm.KeyType
+import com.davils.krypt.primitive.key.PublicKey
 
 internal object KeyTypes {
     val SIGNING: Set<KeyType> = setOf(
@@ -44,4 +45,14 @@ internal object KeyTypes {
     )
 
     fun ofKem(kem: KemAlgorithm): KeyType = KEMS.getValue(kem)
+
+    fun matches(type: KeyType, key: PublicKey): Boolean = matches(
+        type = type,
+        family = key.family,
+        bits = key.bits,
+        curve = key.curve,
+    )
+
+    fun matches(type: KeyType, family: Any, bits: Int, curve: Any?): Boolean =
+        listOf(type.family, type.bits, type.curve) == listOf(family, bits, curve)
 }

@@ -144,6 +144,8 @@ public final class com/davils/krypt/keyset/KeysetFailure : java/lang/Enum {
 	public static final field Malformed Lcom/davils/krypt/keyset/KeysetFailure;
 	public static final field Missing Lcom/davils/krypt/keyset/KeysetFailure;
 	public static final field Refused Lcom/davils/krypt/keyset/KeysetFailure;
+	public static final field Rollback Lcom/davils/krypt/keyset/KeysetFailure;
+	public static final field Unavailable Lcom/davils/krypt/keyset/KeysetFailure;
 	public static final field Unsupported Lcom/davils/krypt/keyset/KeysetFailure;
 	public static final field WrongKeyManagementService Lcom/davils/krypt/keyset/KeysetFailure;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
@@ -287,8 +289,8 @@ public abstract interface class com/davils/krypt/keyset/store/KeysetRepository {
 }
 
 public final class com/davils/krypt/keyset/store/KeysetVault {
-	public fun <init> (Lcom/davils/krypt/keyset/Keysets;Lcom/davils/krypt/keyset/store/KeysetRepository;Lcom/davils/krypt/keyset/kms/KeyManagementService;I)V
-	public synthetic fun <init> (Lcom/davils/krypt/keyset/Keysets;Lcom/davils/krypt/keyset/store/KeysetRepository;Lcom/davils/krypt/keyset/kms/KeyManagementService;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Lcom/davils/krypt/keyset/Keysets;Lcom/davils/krypt/keyset/store/KeysetRepository;Lcom/davils/krypt/keyset/kms/KeyManagementService;ILcom/davils/krypt/keyset/store/RevisionLedger;)V
+	public synthetic fun <init> (Lcom/davils/krypt/keyset/Keysets;Lcom/davils/krypt/keyset/store/KeysetRepository;Lcom/davils/krypt/keyset/kms/KeyManagementService;ILcom/davils/krypt/keyset/store/RevisionLedger;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun create (Ljava/lang/String;Lcom/davils/krypt/keyset/KeyPurpose;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public final fun delete (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public final fun getAttempts ()I
@@ -296,6 +298,11 @@ public final class com/davils/krypt/keyset/store/KeysetVault {
 	public final fun load (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public fun toString ()Ljava/lang/String;
 	public final fun update (Ljava/lang/String;Lkotlin/jvm/functions/Function2;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class com/davils/krypt/keyset/store/RevisionLedger {
+	public abstract fun current (Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun record (Ljava/lang/String;JLjava/lang/Long;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
 public final class com/davils/krypt/keyset/store/StoredKeyset {

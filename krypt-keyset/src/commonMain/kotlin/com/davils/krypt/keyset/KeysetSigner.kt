@@ -35,6 +35,10 @@ import kotlinx.io.bytestring.ByteString
 public class KeysetSigner internal constructor(private val crypto: Crypto, public val keyset: Keyset) {
     private val primary: PrivateKey = keyset.usable { key -> key.privateKey }.primaryOf(keyset.primaryId)
 
+    init {
+        require(keyset.purpose is KeyPurpose.Signing) { "Only a private signing key set signs" }
+    }
+
     /**
      * Signs [data] with the primary key.
      *

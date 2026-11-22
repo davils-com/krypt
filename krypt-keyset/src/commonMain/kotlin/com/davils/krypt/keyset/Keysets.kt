@@ -19,6 +19,7 @@
 package com.davils.krypt.keyset
 
 import com.davils.kore.core.annotation.DavilsInternal
+import com.davils.kore.core.failure.attempted
 import com.davils.kore.core.outcome.Outcome
 import com.davils.krypt.core.SecretBytes
 import com.davils.krypt.core.telemetry.AuditTrail
@@ -351,7 +352,8 @@ public class Keysets(public val crypto: Crypto, public val limits: KeysetLimits 
      * @param encrypted the encrypted key set.
      * @param kms the key management service.
      * @param associatedData the authenticated context it was encrypted with.
-     * @return the key set, or why it could not be read.
+     * @return the key set, or why it could not be read, [KeysetFailure.Unavailable] if [kms] threw; a cancellation
+     *   of the caller passes on.
      * @since 1.0.0
      */
     public suspend fun decrypt(
@@ -404,9 +406,16 @@ public class Keysets(public val crypto: Crypto, public val limits: KeysetLimits 
         ciphertext: ByteString,
         context: ByteString,
     ): Outcome<Keyset, KeysetFailure> {
-        val plaintext = kms.decrypt(ciphertext, context) ?: return Outcome.Failure(KeysetFailure.DecryptionFailed)
-        val bytes = plaintext.use { secret -> secret.reveal { owned -> ByteString(owned) } }
-        return KeysetCodec.decode(crypto = crypto, encoded = bytes, limits = limits, isPublic = false)
+        val opened = attempted { kms.decrypt(ciphertext, context) }
+        return opened.fold(
+            onSuccess = { plaintext ->
+                val bytes = plaintext?.use { secret -> secret.reveal { revealed -> ByteString(revealed) } }
+                bytes?.let { encoded ->
+                    KeysetCodec.decode(crypto = crypto, encoded = encoded, limits = limits, isPublic = false)
+                } ?: Outcome.Failure(KeysetFailure.DecryptionFailed)
+            },
+            onFailure = { _ -> Outcome.Failure(KeysetFailure.Unavailable) },
+        )
     }
 
     private suspend fun newKey(keyset: Keyset, action: KeysetAction): KeysetKey {

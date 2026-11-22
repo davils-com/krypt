@@ -50,6 +50,19 @@ public class KeysetKey internal constructor(
      */
     public val isUsable: Boolean get() = status == KeyStatus.Enabled
 
+    init {
+        val isSymmetric = secret != null && privateKey == null && publicKey == null
+        val isAsymmetric = secret == null && publicKey != null
+        val isEmpty = secret == null && privateKey == null && publicKey == null
+        val isConsistent = when (status) {
+            KeyStatus.Destroyed -> isEmpty
+            KeyStatus.Enabled, KeyStatus.Disabled -> isSymmetric || isAsymmetric
+        }
+        require(isConsistent) {
+            "A key holds a secret, or a public key with or without its private key, until it is destroyed"
+        }
+    }
+
     internal fun withStatus(changed: KeyStatus): KeysetKey = KeysetKey(
         id = id,
         status = changed,

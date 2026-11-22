@@ -16,6 +16,7 @@
 
 package com.davils.krypt.keyset
 
+import com.davils.krypt.core.algorithm.AeadAlgorithm
 import com.davils.krypt.keyset.fixture.keysets
 import com.davils.krypt.keyset.store.StoredKeyset
 import io.kotest.core.spec.style.FunSpec
@@ -68,14 +69,6 @@ class EqualityTest : FunSpec({
                 privateKey = null,
                 publicKey = key.publicKey,
             ),
-            KeysetKey(
-                id = key.id,
-                status = key.status,
-                createdAt = key.createdAt,
-                secret = keysets.crypto.keys.generateSecret(),
-                privateKey = null,
-                publicKey = key.publicKey,
-            ),
             key.publicOnly().let { public ->
                 KeysetKey(
                     id = public.id,
@@ -91,7 +84,19 @@ class EqualityTest : FunSpec({
         key.publicOnly() shouldBe key
         key.hashCode() shouldBe key.id.hashCode()
         Keyset(purpose = KeyPurpose.Signing(), keys = keyset.keys, primaryId = other.id) shouldNotBe keyset
-        Keyset(purpose = KeyPurpose.Hybrid(), keys = keyset.keys, primaryId = keyset.primaryId) shouldNotBe keyset
+        val aead = keysets.generate(KeyPurpose.Aead())
+        val chacha = KeyPurpose.Aead(AeadAlgorithm.ChaCha20Poly1305)
+        Keyset(purpose = chacha, keys = aead.keys, primaryId = aead.primaryId) shouldNotBe aead
+        val symmetric = aead.primary
+        val resecret = KeysetKey(
+            id = symmetric.id,
+            status = symmetric.status,
+            createdAt = symmetric.createdAt,
+            secret = keysets.crypto.keys.generateSecret(),
+            privateKey = null,
+            publicKey = null,
+        )
+        resecret shouldNotBe symmetric
         Keyset(purpose = keyset.purpose, keys = listOf(key), primaryId = keyset.primaryId) shouldNotBe keyset
         KeysetEvent(action = KeysetAction.Added, keyId = key.id) shouldNotBe
             KeysetEvent(action = KeysetAction.Added, keyId = other.id)

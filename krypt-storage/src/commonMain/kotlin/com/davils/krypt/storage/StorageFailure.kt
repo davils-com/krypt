@@ -37,7 +37,8 @@ public enum class StorageFailure {
     Malformed,
 
     /**
-     * The object is older than the version the ledger records: an old version was put back.
+     * The object is not the version the ledger records: an old or deleted version was put back, under any blinded
+     * key of its name, the ledger has no record of the name, or a write failed after its version was recorded.
      *
      * @since 1.0.0
      */
@@ -49,4 +50,12 @@ public enum class StorageFailure {
      * @since 1.0.0
      */
     DecryptionFailed,
+
+    /**
+     * The store or the ledger of the application failed, or another process changed the object at the same time;
+     * the failure itself is not passed on.
+     *
+     * @since 1.0.0
+     */
+    Unavailable,
 }

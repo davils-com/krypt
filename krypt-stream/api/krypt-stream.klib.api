@@ -277,6 +277,8 @@ final class com.davils.krypt.stream/StreamLimits { // com.davils.krypt.stream/St
             final fun <get-DEFAULT_MAXIMUM_RECIPIENTS>(): kotlin/Int // com.davils.krypt.stream/StreamLimits.Companion.DEFAULT_MAXIMUM_RECIPIENTS.<get-DEFAULT_MAXIMUM_RECIPIENTS>|<get-DEFAULT_MAXIMUM_RECIPIENTS>(){}[0]
         final const val DEFAULT_MAXIMUM_SIGNATURES // com.davils.krypt.stream/StreamLimits.Companion.DEFAULT_MAXIMUM_SIGNATURES|{}DEFAULT_MAXIMUM_SIGNATURES[0]
             final fun <get-DEFAULT_MAXIMUM_SIGNATURES>(): kotlin/Int // com.davils.krypt.stream/StreamLimits.Companion.DEFAULT_MAXIMUM_SIGNATURES.<get-DEFAULT_MAXIMUM_SIGNATURES>|<get-DEFAULT_MAXIMUM_SIGNATURES>(){}[0]
+        final const val HARD_MAXIMUM_ITERATIONS // com.davils.krypt.stream/StreamLimits.Companion.HARD_MAXIMUM_ITERATIONS|{}HARD_MAXIMUM_ITERATIONS[0]
+            final fun <get-HARD_MAXIMUM_ITERATIONS>(): kotlin/Int // com.davils.krypt.stream/StreamLimits.Companion.HARD_MAXIMUM_ITERATIONS.<get-HARD_MAXIMUM_ITERATIONS>|<get-HARD_MAXIMUM_ITERATIONS>(){}[0]
         final const val HARD_MAXIMUM_RECIPIENTS // com.davils.krypt.stream/StreamLimits.Companion.HARD_MAXIMUM_RECIPIENTS|{}HARD_MAXIMUM_RECIPIENTS[0]
             final fun <get-HARD_MAXIMUM_RECIPIENTS>(): kotlin/Int // com.davils.krypt.stream/StreamLimits.Companion.HARD_MAXIMUM_RECIPIENTS.<get-HARD_MAXIMUM_RECIPIENTS>|<get-HARD_MAXIMUM_RECIPIENTS>(){}[0]
         final const val HARD_MAXIMUM_SEGMENTS // com.davils.krypt.stream/StreamLimits.Companion.HARD_MAXIMUM_SEGMENTS|{}HARD_MAXIMUM_SEGMENTS[0]

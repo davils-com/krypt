@@ -48,6 +48,11 @@ class LimitsTest : FunSpec({
             )
         }
         shouldThrow<IllegalArgumentException> { StreamLimits(maximumIterations = 0) }
+        shouldThrow<IllegalArgumentException> {
+            StreamLimits(maximumIterations = StreamLimits.HARD_MAXIMUM_ITERATIONS + 1)
+        }
+        StreamLimits(maximumIterations = StreamLimits.HARD_MAXIMUM_ITERATIONS).maximumIterations shouldBe
+            StreamLimits.DEFAULT_MAXIMUM_ITERATIONS
         StreamSuite.Aes256Gcm.id shouldBe 1
     }
 })

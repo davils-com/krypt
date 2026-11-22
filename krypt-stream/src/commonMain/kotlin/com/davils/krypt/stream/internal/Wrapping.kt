@@ -16,6 +16,7 @@
 
 package com.davils.krypt.stream.internal
 
+import com.davils.kore.core.failure.attempted
 import com.davils.krypt.core.SecretBytes
 import com.davils.krypt.core.algorithm.AeadAlgorithm
 import com.davils.krypt.core.policy.AlgorithmUse
@@ -38,19 +39,18 @@ private const val ITERATION_BYTES: Int = 4
 private const val KEK_BYTES: Int = 32
 
 internal class Wrapping(private val crypto: Crypto, private val limits: StreamLimits) {
-    suspend fun wrap(recipient: Recipient, dataKey: SecretBytes, context: ByteString): RecipientEntry {
-        val plaintext = dataKey.reveal { bytes -> ByteString(bytes) }
-        return when (recipient) {
+    suspend fun wrap(recipient: Recipient, dataKey: SecretBytes, context: ByteString): RecipientEntry =
+        when (recipient) {
             is Recipient.Key -> RecipientEntry(
                 kind = KEY,
                 label = ByteString(),
-                wrapped = recipient.aead.encrypt(plaintext = plaintext, associatedData = context),
+                wrapped = recipient.aead.encrypt(plaintext = plaintextOf(dataKey), associatedData = context),
             )
 
             is Recipient.Hybrid -> RecipientEntry(
                 kind = HYBRID,
                 label = ByteString(),
-                wrapped = recipient.encrypter.encrypt(plaintext = plaintext, associatedData = context),
+                wrapped = recipient.encrypter.encrypt(plaintext = plaintextOf(dataKey), associatedData = context),
             )
 
             is Recipient.Service -> RecipientEntry(
@@ -59,41 +59,49 @@ internal class Wrapping(private val crypto: Crypto, private val limits: StreamLi
                 wrapped = recipient.kms.encrypt(plaintext = dataKey, associatedData = context),
             )
 
-            is Recipient.Password -> password(recipient = recipient, plaintext = plaintext, context = context)
+            is Recipient.Password -> password(
+                recipient = recipient,
+                plaintext = plaintextOf(dataKey),
+                context = context,
+            )
         }
+
+    fun passwords(entries: List<RecipientEntry>): Int = entries.count { entry -> entry.kind == PASSWORD }
+
+    fun candidates(credential: Credential, entries: List<RecipientEntry>): List<RecipientEntry> = when (credential) {
+        is Credential.Key -> entries.filter { entry -> entry.kind == KEY }
+        is Credential.Hybrid -> entries.filter { entry -> entry.kind == HYBRID }
+        is Credential.Service -> firstNaming(credential, entries)
+        is Credential.Password -> entries.filter { entry -> entry.kind == PASSWORD }
     }
 
     suspend fun unwrap(credential: Credential, entry: RecipientEntry, context: ByteString): SecretBytes? {
         val wrapped = entry.wrapped
         val opened = when (credential) {
-            is Credential.Key -> entry.takeIf { found -> found.kind == KEY }?.let {
-                credential.aead.decrypt(ciphertext = wrapped, associatedData = context)
-            }
-
-            is Credential.Hybrid -> entry.takeIf { found -> found.kind == HYBRID }?.let {
-                credential.decrypter.decrypt(ciphertext = wrapped, associatedData = context)
-            }
-
-            is Credential.Service -> serviceOf(credential, entry, context)
-
-            is Credential.Password -> entry.takeIf { found -> found.kind == PASSWORD }?.let { found ->
-                openPassword(password = credential, entry = found, context = context)
-            }
+            is Credential.Key -> credential.aead.decrypt(ciphertext = wrapped, associatedData = context)
+            is Credential.Hybrid -> credential.decrypter.decrypt(ciphertext = wrapped, associatedData = context)
+            is Credential.Service -> return serviceOf(credential = credential, wrapped = wrapped, context = context)
+            is Credential.Password -> openPassword(password = credential, entry = entry, context = context)
         }
         return opened?.let { bytes -> SecretBytes.copyOf(bytes) }
     }
 
+    private fun firstNaming(credential: Credential.Service, entries: List<RecipientEntry>): List<RecipientEntry> {
+        val label = Octets.utf8(credential.kms.keyUri)
+        val naming = entries.filter { entry -> entry.kind == SERVICE && entry.label == label }
+        return naming.take(1)
+    }
+
     private suspend fun serviceOf(
         credential: Credential.Service,
-        entry: RecipientEntry,
+        wrapped: ByteString,
         context: ByteString,
-    ): ByteString? {
-        val isMatching = entry.kind == SERVICE && entry.label == Octets.utf8(credential.kms.keyUri)
-        val opened = entry.takeIf { isMatching }?.let { found ->
-            credential.kms.decrypt(ciphertext = found.wrapped, associatedData = context)
-        }
-        return opened?.use { secret -> secret.reveal { bytes -> ByteString(bytes) } }
+    ): SecretBytes? {
+        val opened = attempted { credential.kms.decrypt(ciphertext = wrapped, associatedData = context) }
+        return opened.getOrNull()
     }
+
+    private fun plaintextOf(dataKey: SecretBytes): ByteString = dataKey.reveal { bytes -> ByteString(bytes) }
 
     private suspend fun password(
         recipient: Recipient.Password,

@@ -16,9 +16,13 @@
 
 package com.davils.krypt.stream
 
+import com.davils.kore.core.outcome.Outcome
 import com.davils.kore.core.outcome.getOrNull
+import com.davils.krypt.core.algorithm.AeadAlgorithm
+import com.davils.krypt.core.environment
 import com.davils.krypt.core.io.BufferSink
 import com.davils.krypt.core.io.asByteSource
+import com.davils.krypt.core.policy.cryptoPolicy
 import com.davils.krypt.keyset.KeyPurpose
 import com.davils.krypt.keyset.Keysets
 import com.davils.krypt.primitive.Crypto
@@ -49,5 +53,25 @@ class ChaChaTest : FunSpec({
             credentials = listOf(Credential.Key(keysets.aead(keyset))),
         )
         opened.getOrNull() shouldBe plaintext
+    }
+
+    test("a valid container of ChaCha20-Poly1305 sent to a service whose policy forbids it is refused, not thrown") {
+        val crypto = Crypto()
+        val keysets = Keysets(crypto)
+        val keyset = keysets.generate(KeyPurpose.Hybrid())
+        val sink = BufferSink(Int.MAX_VALUE)
+        Containers(crypto).encrypt(
+            source = ByteString(ByteArray(SIZE)).asByteSource(),
+            sink = sink,
+            recipients = listOf(Recipient.Hybrid(keysets.encrypter(keysets.publicKeyset(keyset)))),
+            suite = StreamSuite.ChaCha20Poly1305,
+            segmentSize = SEGMENT,
+        )
+        val strict = Crypto(environment { policy = cryptoPolicy { forbid(AeadAlgorithm.ChaCha20Poly1305) } })
+        val result = Containers(strict).decrypt(
+            container = sink.toByteString(),
+            credentials = listOf(Credential.Hybrid(keysets.decrypter(keyset))),
+        )
+        result shouldBe Outcome.Failure(StreamFailure.Refused)
     }
 })

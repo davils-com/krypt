@@ -16,6 +16,7 @@
 
 package com.davils.krypt.storage.blob
 
+import com.davils.kore.core.failure.attempted
 import com.davils.kore.core.outcome.Outcome
 import com.davils.krypt.core.io.BufferSink
 import com.davils.krypt.core.io.ByteSink
@@ -46,6 +47,7 @@ private const val MAXIMUM_NAME: Int = 1_024
 private const val MAXIMUM_METADATA: Long = 65_536L
 private const val PREFIX_BYTES: Int = 9
 private const val FORMAT: Byte = 1
+private const val CONCURRENT_PUT: String = "Another version of the object was put at the same time"
 private val MAGIC: ByteString = Texts.utf8("KBLB")
 
 /**
@@ -54,10 +56,27 @@ private val MAGIC: ByteString = Texts.utf8("KBLB")
  *
  * Every object is a container of `KRYPT/1` for the key set [dataKeys], preceded by its [ObjectMetadata] encrypted with
  * the same key set. The store sees neither names nor metadata: an object is kept under the base64url of a MAC of its
- * name with [names], and found again under every enabled key of that key set. The name is bound to the metadata and
- * the name and the version to the content, so an object moved to another name or swapped with another version is
- * refused. With a [ledger], a version that is older than the one the ledger records is refused as a rollback;
- * without one, an old version that was put back is accepted.
+ * name with the primary key of [names], and found again under every enabled key of that key set, the primary key
+ * first. The name is bound to the metadata and the name and the version to the content, so an object moved to another
+ * name or swapped with another version is refused.
+ *
+ * **Without a [ledger]** the store alone decides which version is current: whoever controls it can put back an old
+ * version of an object, or an object that was deleted, under any blinded key of its name, and it is read as current.
+ * Only objects of krypt under their own name are accepted, never forged or moved ones.
+ *
+ * **With a [ledger]** the ledger is the authority on versions. Every put records the next version before the object is
+ * written; a deletion records a version past the deleted one, so versions of a name keep growing and a deleted object
+ * that reappears is refused; a [rewrap] carries the version to the blinded key of the new primary key of [names]
+ * before the old object is removed. An object is read only if the highest version the ledger records under the
+ * blinded keys of its name is exactly its version; every other object, under whichever blinded key it is found, is
+ * refused as [StorageFailure.Rollback]. That includes an object whose name the ledger has no record of, such as one
+ * put before the ledger was used: put it again. An object whose write failed after its version was recorded also reads
+ * as a rollback until it is put again. The guarantee holds as long as every writer uses the same key sets and keeps
+ * the key of [names] an object is stored under enabled until the object is rewrapped.
+ *
+ * **Failures.** The store and the ledger are the code of the application: in [metadata], [read], [get], [open] and
+ * [rewrap] what they throw is contained and becomes [StorageFailure.Unavailable]; in [put] and [delete] it is passed
+ * on as it was thrown. A cancellation of the caller always passes on.
  *
  * The object holds no key of its own and is safe to share between threads; puts of the same name at once are ordered
  * by the store and the ledger.
@@ -84,6 +103,9 @@ public class EncryptedBlobStore(
     /**
      * Encrypts everything [source] holds as the next version of [name].
      *
+     * The next version follows the highest version the ledger records for [name]; without a ledger it follows the
+     * version of the object the store holds, and an object that cannot be read counts as none.
+     *
      * @param name the name: 1 to 1024 characters.
      * @param source the content.
      * @param contentType the media type; `application/octet-stream` by default.
@@ -91,6 +113,7 @@ public class EncryptedBlobStore(
      * @return the metadata of the new version.
      * @throws IllegalArgumentException if [name] or the metadata is invalid.
      * @throws IllegalStateException if the ledger records another version than was read, because of a concurrent put.
+     * @throws Exception what the store or the ledger threw, as it was thrown.
      * @since 1.0.0
      */
     public suspend fun put(
@@ -100,8 +123,9 @@ public class EncryptedBlobStore(
         attributes: Map<String, String> = emptyMap(),
     ): ObjectMetadata {
         checkName(name)
-        val key = keyOf(name)
-        val previous = ledger?.current(key) ?: currentVersion(name)
+        val keys = keysOf(name)
+        val key = keys.first()
+        val previous = highest(keys) ?: readableVersion(name, keys)
         val metadata = ObjectMetadata(
             name = name,
             version = (previous ?: 0L) + 1,
@@ -109,8 +133,7 @@ public class EncryptedBlobStore(
             createdAt = now(),
             attributes = attributes,
         )
-        val isRecorded = ledger?.record(key = key, version = metadata.version, expected = previous) != false
-        check(isRecorded) { "Another version of the object was put at the same time" }
+        check(recorded(key = key, version = metadata.version)) { CONCURRENT_PUT }
         val encryptedMetadata = dataKeys.encrypt(
             plaintext = MetadataCodec.encode(metadata),
             associatedData = metadataContext(name),
@@ -126,7 +149,7 @@ public class EncryptedBlobStore(
                 segmentSize = segmentSize,
             )
         }
-        removeStale(name = name, kept = key)
+        removeStale(keys = keys, kept = key)
         return metadata
     }
 
@@ -139,6 +162,8 @@ public class EncryptedBlobStore(
      * @param attributes further facts.
      * @return the metadata of the new version.
      * @throws IllegalArgumentException if [name] or the metadata is invalid.
+     * @throws IllegalStateException if the ledger records another version than was read, because of a concurrent put.
+     * @throws Exception what the store or the ledger threw, as it was thrown.
      * @since 1.0.0
      */
     public suspend fun put(
@@ -161,9 +186,9 @@ public class EncryptedBlobStore(
      * @throws IllegalArgumentException if [name] is invalid.
      * @since 1.0.0
      */
-    public suspend fun metadata(name: String): Outcome<ObjectMetadata, StorageFailure> = attempt {
+    public suspend fun metadata(name: String): Outcome<ObjectMetadata, StorageFailure> {
         checkName(name)
-        found(name).metadata
+        return attempt { verified(name, keysOf(name)).metadata }
     }
 
     /**
@@ -175,17 +200,19 @@ public class EncryptedBlobStore(
      * @throws IllegalArgumentException if [name] is invalid.
      * @since 1.0.0
      */
-    public suspend fun read(name: String, sink: ByteSink): Outcome<ObjectMetadata, StorageFailure> = attempt {
+    public suspend fun read(name: String, sink: ByteSink): Outcome<ObjectMetadata, StorageFailure> {
         checkName(name)
-        val located = found(name)
-        val decrypted = containers.decrypt(
-            source = SequentialSource(located.content),
-            sink = sink,
-            credentials = listOf(Credential.Key(dataKeys)),
-            associatedData = contentContext(located.metadata),
-        )
-        valueOf(decrypted)
-        located.metadata
+        return attempt {
+            val located = verified(name, keysOf(name))
+            val decrypted = containers.decrypt(
+                source = SequentialSource(located.content),
+                sink = sink,
+                credentials = listOf(Credential.Key(dataKeys)),
+                associatedData = contentContext(located.metadata),
+            )
+            valueOf(decrypted)
+            located.metadata
+        }
     }
 
     /**
@@ -215,66 +242,83 @@ public class EncryptedBlobStore(
      * @throws IllegalArgumentException if [name] is invalid.
      * @since 1.0.0
      */
-    public suspend fun open(name: String): Outcome<StoredObject, StorageFailure> = attempt {
+    public suspend fun open(name: String): Outcome<StoredObject, StorageFailure> {
         checkName(name)
-        val located = found(name)
-        val opened = containers.open(
-            source = located.content,
-            credentials = listOf(Credential.Key(dataKeys)),
-            associatedData = contentContext(located.metadata),
-        )
-        StoredObject(metadata = located.metadata, reader = valueOf(opened))
+        return attempt {
+            val located = verified(name, keysOf(name))
+            val opened = containers.open(
+                source = located.content,
+                credentials = listOf(Credential.Key(dataKeys)),
+                associatedData = contentContext(located.metadata),
+            )
+            StoredObject(metadata = located.metadata, reader = valueOf(opened))
+        }
     }
 
     /**
-     * Deletes every copy of [name] and forgets its version in the ledger.
+     * Deletes every copy of [name]. With a ledger, a version past the deleted one is recorded first, so that the
+     * deleted object is refused if it reappears and the next put continues after it.
      *
      * @param name the name.
      * @return true if something was deleted.
      * @throws IllegalArgumentException if [name] is invalid.
+     * @throws IllegalStateException if the ledger records another version than was read, because of a concurrent put;
+     *   nothing is deleted then.
+     * @throws Exception what the store or the ledger threw, as it was thrown; nothing is deleted if the ledger failed.
      * @since 1.0.0
      */
     public suspend fun delete(name: String): Boolean {
         checkName(name)
         val keys = keysOf(name)
-        val deleted = keys.map { key -> store.delete(key) }
-        keys.forEach { key -> ledger?.forget(key) }
+        val key = keys.first()
+        if (ledger != null) {
+            val previous = highest(keys) ?: readableVersion(name, keys) ?: 0L
+            check(recorded(key = key, version = previous + 1)) { CONCURRENT_PUT }
+        }
+        val deleted = keys.map { found -> store.delete(found) }
+        removeStale(keys = keys, kept = key)
         return deleted.any { isDeleted -> isDeleted }
     }
 
     /**
      * Moves [name] to the primary keys of [dataKeys] and [names] after a rotation, without encrypting its content
-     * again: its data key is wrapped anew and its metadata encrypted anew.
+     * again: its data key is wrapped anew and its metadata encrypted anew. With a ledger, the version is recorded
+     * under the new blinded key before the object under the old one is removed.
      *
      * @param name the name.
-     * @return the metadata, or why the object could not be read.
+     * @return the metadata, or why the object could not be read; [StorageFailure.Unavailable] also if another
+     *   version was put at the same time.
      * @throws IllegalArgumentException if [name] is invalid.
      * @since 1.0.0
      */
-    public suspend fun rewrap(name: String): Outcome<ObjectMetadata, StorageFailure> = attempt {
+    public suspend fun rewrap(name: String): Outcome<ObjectMetadata, StorageFailure> {
         checkName(name)
-        val located = found(name)
-        val metadata = located.metadata
-        val key = keyOf(name)
-        val encryptedMetadata = dataKeys.encrypt(
-            plaintext = MetadataCodec.encode(metadata),
-            associatedData = metadataContext(name),
-        )
-        store.write(key) { sink ->
-            sink.writeBytes(Texts.concat(MAGIC, ByteString(FORMAT), Texts.u32(encryptedMetadata.size.toLong())))
-            sink.writeBytes(encryptedMetadata)
-            val rewrapped = containers.rewrap(
-                source = SequentialSource(located.content),
-                sink = sink,
-                credentials = listOf(Credential.Key(dataKeys)),
-                recipients = listOf(Recipient.Key(dataKeys)),
-                associatedData = contentContext(metadata),
+        return attempt {
+            val keys = keysOf(name)
+            val located = verified(name, keys)
+            val metadata = located.metadata
+            val key = keys.first()
+            val isCarried = key == located.key || recorded(key = key, version = metadata.version)
+            if (!isCarried) refuse(StorageFailure.Unavailable)
+            val encryptedMetadata = dataKeys.encrypt(
+                plaintext = MetadataCodec.encode(metadata),
+                associatedData = metadataContext(name),
             )
-            valueOf(rewrapped)
+            store.write(key) { sink ->
+                sink.writeBytes(Texts.concat(MAGIC, ByteString(FORMAT), Texts.u32(encryptedMetadata.size.toLong())))
+                sink.writeBytes(encryptedMetadata)
+                val rewrapped = containers.rewrap(
+                    source = SequentialSource(located.content),
+                    sink = sink,
+                    credentials = listOf(Credential.Key(dataKeys)),
+                    recipients = listOf(Recipient.Key(dataKeys)),
+                    associatedData = contentContext(metadata),
+                )
+                valueOf(rewrapped)
+            }
+            removeStale(keys = keys, kept = key)
+            metadata
         }
-        if (key != located.key) ledger?.record(key = key, version = metadata.version, expected = null)
-        removeStale(name = name, kept = key)
-        metadata
     }
 
     /**
@@ -285,22 +329,36 @@ public class EncryptedBlobStore(
      */
     override fun toString(): String = "EncryptedBlobStore(dataKeys=${dataKeys.keyset}, names=${names.keyset})"
 
-    private suspend fun keyOf(name: String): String = Texts.base64Url(names.compute(Texts.utf8(name)))
-
     private suspend fun keysOf(name: String): List<String> =
         names.computeAll(Texts.utf8(name)).map { tag -> Texts.base64Url(tag) }
 
-    private suspend fun removeStale(name: String, kept: String) {
-        val stale = keysOf(name).filter { key -> key != kept }
+    private suspend fun highest(keys: List<String>): Long? {
+        val found = ledger ?: return null
+        val versions = keys.mapNotNull { key -> found.current(key) }
+        return versions.maxOrNull()
+    }
+
+    private suspend fun recorded(key: String, version: Long): Boolean {
+        val found = ledger ?: return true
+        return found.record(key = key, version = version, expected = found.current(key))
+    }
+
+    private suspend fun readableVersion(name: String, keys: List<String>): Long? {
+        val located = try {
+            locate(name, keys)
+        } catch (ignored: StorageRefusal) {
+            null
+        }
+        val metadata = located?.metadata
+        return metadata?.version
+    }
+
+    private suspend fun removeStale(keys: List<String>, kept: String) {
+        val stale = keys.filter { key -> key != kept }
         stale.forEach { key ->
             store.delete(key)
             ledger?.forget(key)
         }
-    }
-
-    private suspend fun currentVersion(name: String): Long? {
-        val located = locate(name) ?: return null
-        return located.metadata.version
     }
 
     private fun now(): Instant {
@@ -308,10 +366,15 @@ public class EncryptedBlobStore(
         return Instant.fromEpochMilliseconds(now.toEpochMilliseconds())
     }
 
-    private suspend fun found(name: String): Located = locate(name) ?: refuse(StorageFailure.Missing)
+    private suspend fun verified(name: String, keys: List<String>): Located {
+        val located = locate(name, keys) ?: refuse(StorageFailure.Missing)
+        val isCurrent = ledger == null || highest(keys) == located.metadata.version
+        if (!isCurrent) refuse(StorageFailure.Rollback)
+        return located
+    }
 
-    private suspend fun locate(name: String): Located? {
-        for (key in keysOf(name)) {
+    private suspend fun locate(name: String, keys: List<String>): Located? {
+        for (key in keys) {
             val source = store.open(key)
             if (source != null) return parse(key = key, name = name, source = source)
         }
@@ -335,8 +398,6 @@ public class EncryptedBlobStore(
             associatedData = metadataContext(name),
         ) ?: refuse(StorageFailure.DecryptionFailed)
         val metadata = MetadataCodec.decodeOrNull(plaintext) ?: refuse(StorageFailure.Malformed)
-        val recorded = ledger?.current(key)
-        if (recorded != null && recorded != metadata.version) refuse(StorageFailure.Rollback)
         return Located(key = key, metadata = metadata, content = OffsetSource(source, PREFIX_BYTES + length))
     }
 
@@ -358,10 +419,17 @@ public class EncryptedBlobStore(
         write(source = bytes.toByteArray(), offset = 0, length = bytes.size)
     }
 
-    private suspend fun <T> attempt(block: suspend () -> T): Outcome<T, StorageFailure> = try {
-        Outcome.Success(block())
-    } catch (refusal: StorageRefusal) {
-        Outcome.Failure(refusal.failure)
+    private suspend fun <T> attempt(block: suspend () -> T): Outcome<T, StorageFailure> {
+        val result = attempted { block() }
+        return result.fold(
+            onSuccess = { value -> Outcome.Success(value) },
+            onFailure = { failure -> Outcome.Failure(failureOf(failure)) },
+        )
+    }
+
+    private fun failureOf(failure: Throwable): StorageFailure {
+        val refusal = failure as? StorageRefusal ?: return StorageFailure.Unavailable
+        return refusal.failure
     }
 
     private companion object {

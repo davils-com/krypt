@@ -47,6 +47,13 @@ public class KeysetAead internal constructor(
     private val secrets: List<Pair<KeyId, SecretKey>> = keyset.usable { key -> key.secret }
     private val primary: SecretKey = secrets.primaryOf(keyset.primaryId)
 
+    init {
+        val purpose = keyset.purpose
+        require(purpose is KeyPurpose.Aead && purpose.algorithm == algorithm) {
+            "A key set of $purpose does not encrypt with $algorithm"
+        }
+    }
+
     /**
      * Encrypts [plaintext] with the primary key.
      *

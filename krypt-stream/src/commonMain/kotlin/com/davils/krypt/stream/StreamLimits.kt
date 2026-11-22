@@ -22,7 +22,8 @@ package com.davils.krypt.stream
  * @property maximumRecipients how many recipients a container has at most.
  * @property maximumSegments how many segments a container or a manifest covers at most.
  * @property maximumSignatures how many signatures a signed manifest holds at most.
- * @property maximumIterations the most PBKDF2 iterations a password recipient may ask for, on top of the policy.
+ * @property maximumIterations the most PBKDF2 iterations a password recipient may ask for, on top of the policy; at
+ *   most [HARD_MAXIMUM_ITERATIONS].
  * @constructor Checks the limits against their hard ceilings.
  * @throws IllegalArgumentException if a limit is not positive or exceeds its hard ceiling.
  * @since 1.0.0
@@ -41,7 +42,9 @@ public class StreamLimits(
         require(maximumSignatures in 1..HARD_MAXIMUM_SIGNATURES) {
             "A manifest holds 1 to $HARD_MAXIMUM_SIGNATURES signatures"
         }
-        require(maximumIterations >= 1) { "A password needs at least one iteration" }
+        require(maximumIterations in 1..HARD_MAXIMUM_ITERATIONS) {
+            "A password recipient asks for 1 to $HARD_MAXIMUM_ITERATIONS iterations"
+        }
     }
 
     /**
@@ -123,6 +126,14 @@ public class StreamLimits(
          * @since 1.0.0
          */
         public const val DEFAULT_MAXIMUM_ITERATIONS: Int = 10_000_000
+
+        /**
+         * The hard ceiling of the iterations of a password recipient, the same as the hard ceiling of the crypto
+         * policy.
+         *
+         * @since 1.0.0
+         */
+        public const val HARD_MAXIMUM_ITERATIONS: Int = 10_000_000
 
         /**
          * The default limits.

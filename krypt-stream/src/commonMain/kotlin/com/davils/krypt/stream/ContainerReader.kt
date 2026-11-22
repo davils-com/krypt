@@ -27,9 +27,13 @@ import kotlinx.io.bytestring.ByteString
  * segment moved, swapped or cut off is refused. The reader holds the keys of the container until it is [close]d; it
  * is not safe to use from several coroutines at once.
  *
+ * [segments] and [plaintextBytes] are computed from the size of the source, which is not authenticated: a container
+ * cut off at a segment boundary opens with fewer segments, and the cut is detected only when the last segment is read.
+ * Trust them only after the last segment was read successfully.
+ *
  * @property segmentSize the size of a segment of plaintext.
- * @property segments the number of segments.
- * @property plaintextBytes the size of the plaintext.
+ * @property segments the number of segments, from the size of the source.
+ * @property plaintextBytes the size of the plaintext, from the size of the source.
  * @since 1.0.0
  */
 public class ContainerReader internal constructor(

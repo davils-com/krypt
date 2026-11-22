@@ -43,6 +43,11 @@ private const val COUNTERSIGNATURE_LABEL: String = "KRYPT/1 countersignature "
  * A signature covers a label, the version and every property of the manifest; a countersignature also covers the
  * signature it countersigns. Signers and verifiers are key sets, so keys rotate without breaking old signatures.
  *
+ * Time-stamp tokens are carried as opaque bytes: krypt neither verifies them nor checks what they cover, and neither
+ * [verify] nor [decode] looks at them. A caller that relies on the time of a signature verifies the token itself, for
+ * example a time-stamp token of RFC 3161 with its time-stamping authority, and checks that its message imprint is the
+ * digest of the signature it belongs to.
+ *
  * The object holds no key and is safe to share between threads.
  *
  * @property crypto the primitives.
@@ -144,7 +149,7 @@ public class Manifests(public val crypto: Crypto, public val limits: StreamLimit
     }
 
     /**
-     * Attaches a time-stamp [token] to the signature [index].
+     * Attaches a time-stamp [token] to the signature [index]. The token is kept as it is and never verified.
      *
      * @param signed the signed manifest.
      * @param index the signature.
@@ -189,6 +194,9 @@ public class Manifests(public val crypto: Crypto, public val limits: StreamLimit
     /**
      * Verifies that every one of [verifiers] signed the manifest, as when several parties must agree.
      *
+     * Each verifier needs one signature it verifies, and one signature satisfies every verifier that holds its key:
+     * verifiers of key sets that share a key are not distinct parties, so give every party a key set of its own.
+     *
      * @param signed the signed manifest.
      * @param verifiers the key sets of the expected signers; at least one.
      * @return [Verification.Valid] if every verifier verifies a signature of the manifest.
@@ -203,6 +211,9 @@ public class Manifests(public val crypto: Crypto, public val limits: StreamLimit
 
     /**
      * Verifies that the signature [index] is a countersignature of [verifier] over the signature it names.
+     *
+     * Only the countersignature is checked, over the manifest and the bytes of the signature it names; whether that
+     * signature itself is valid is not, so verify it with [verify] and the key set of its signer as well.
      *
      * @param signed the signed manifest.
      * @param index the countersignature.
