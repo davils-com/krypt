@@ -1,0 +1,741 @@
+// Klib ABI Dump
+// Targets: [wasmJs]
+// Rendering settings:
+// - Signature version: 2
+// - Show manifest properties: true
+// - Show declarations: true
+
+// Library unique name: <com.davils:krypt-core>
+open annotation class com.davils.krypt.core/LegacyCryptography : kotlin/Annotation { // com.davils.krypt.core/LegacyCryptography|null[0]
+    constructor <init>() // com.davils.krypt.core/LegacyCryptography.<init>|<init>(){}[0]
+}
+
+final enum class com.davils.krypt.core.algorithm/AeadAlgorithm : com.davils.krypt.core.algorithm/Algorithm, kotlin/Enum<com.davils.krypt.core.algorithm/AeadAlgorithm> { // com.davils.krypt.core.algorithm/AeadAlgorithm|null[0]
+    enum entry Aes128Gcm // com.davils.krypt.core.algorithm/AeadAlgorithm.Aes128Gcm|null[0]
+    enum entry Aes256Gcm // com.davils.krypt.core.algorithm/AeadAlgorithm.Aes256Gcm|null[0]
+    enum entry ChaCha20Poly1305 // com.davils.krypt.core.algorithm/AeadAlgorithm.ChaCha20Poly1305|null[0]
+
+    final val algorithmName // com.davils.krypt.core.algorithm/AeadAlgorithm.algorithmName|{}algorithmName[0]
+        final fun <get-algorithmName>(): kotlin/String // com.davils.krypt.core.algorithm/AeadAlgorithm.algorithmName.<get-algorithmName>|<get-algorithmName>(){}[0]
+    final val entries // com.davils.krypt.core.algorithm/AeadAlgorithm.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.core.algorithm/AeadAlgorithm> // com.davils.krypt.core.algorithm/AeadAlgorithm.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val isFipsApproved // com.davils.krypt.core.algorithm/AeadAlgorithm.isFipsApproved|{}isFipsApproved[0]
+        final fun <get-isFipsApproved>(): kotlin/Boolean // com.davils.krypt.core.algorithm/AeadAlgorithm.isFipsApproved.<get-isFipsApproved>|<get-isFipsApproved>(){}[0]
+    final val isLegacy // com.davils.krypt.core.algorithm/AeadAlgorithm.isLegacy|{}isLegacy[0]
+        final fun <get-isLegacy>(): kotlin/Boolean // com.davils.krypt.core.algorithm/AeadAlgorithm.isLegacy.<get-isLegacy>|<get-isLegacy>(){}[0]
+    final val isPostQuantum // com.davils.krypt.core.algorithm/AeadAlgorithm.isPostQuantum|{}isPostQuantum[0]
+        final fun <get-isPostQuantum>(): kotlin/Boolean // com.davils.krypt.core.algorithm/AeadAlgorithm.isPostQuantum.<get-isPostQuantum>|<get-isPostQuantum>(){}[0]
+    final val keyBytes // com.davils.krypt.core.algorithm/AeadAlgorithm.keyBytes|{}keyBytes[0]
+        final fun <get-keyBytes>(): kotlin/Int // com.davils.krypt.core.algorithm/AeadAlgorithm.keyBytes.<get-keyBytes>|<get-keyBytes>(){}[0]
+    final val nonceBytes // com.davils.krypt.core.algorithm/AeadAlgorithm.nonceBytes|{}nonceBytes[0]
+        final fun <get-nonceBytes>(): kotlin/Int // com.davils.krypt.core.algorithm/AeadAlgorithm.nonceBytes.<get-nonceBytes>|<get-nonceBytes>(){}[0]
+    final val securityBits // com.davils.krypt.core.algorithm/AeadAlgorithm.securityBits|{}securityBits[0]
+        final fun <get-securityBits>(): kotlin/Int // com.davils.krypt.core.algorithm/AeadAlgorithm.securityBits.<get-securityBits>|<get-securityBits>(){}[0]
+    final val tagBytes // com.davils.krypt.core.algorithm/AeadAlgorithm.tagBytes|{}tagBytes[0]
+        final fun <get-tagBytes>(): kotlin/Int // com.davils.krypt.core.algorithm/AeadAlgorithm.tagBytes.<get-tagBytes>|<get-tagBytes>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.core.algorithm/AeadAlgorithm // com.davils.krypt.core.algorithm/AeadAlgorithm.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.core.algorithm/AeadAlgorithm> // com.davils.krypt.core.algorithm/AeadAlgorithm.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.core.algorithm/AsymmetricEncryptionAlgorithm : com.davils.krypt.core.algorithm/Algorithm, kotlin/Enum<com.davils.krypt.core.algorithm/AsymmetricEncryptionAlgorithm> { // com.davils.krypt.core.algorithm/AsymmetricEncryptionAlgorithm|null[0]
+    enum entry RsaOaepSha256 // com.davils.krypt.core.algorithm/AsymmetricEncryptionAlgorithm.RsaOaepSha256|null[0]
+    enum entry RsaOaepSha384 // com.davils.krypt.core.algorithm/AsymmetricEncryptionAlgorithm.RsaOaepSha384|null[0]
+    enum entry RsaOaepSha512 // com.davils.krypt.core.algorithm/AsymmetricEncryptionAlgorithm.RsaOaepSha512|null[0]
+    enum entry RsaPkcs1 // com.davils.krypt.core.algorithm/AsymmetricEncryptionAlgorithm.RsaPkcs1|null[0]
+
+    final val algorithmName // com.davils.krypt.core.algorithm/AsymmetricEncryptionAlgorithm.algorithmName|{}algorithmName[0]
+        final fun <get-algorithmName>(): kotlin/String // com.davils.krypt.core.algorithm/AsymmetricEncryptionAlgorithm.algorithmName.<get-algorithmName>|<get-algorithmName>(){}[0]
+    final val digest // com.davils.krypt.core.algorithm/AsymmetricEncryptionAlgorithm.digest|{}digest[0]
+        final fun <get-digest>(): com.davils.krypt.core.algorithm/DigestAlgorithm? // com.davils.krypt.core.algorithm/AsymmetricEncryptionAlgorithm.digest.<get-digest>|<get-digest>(){}[0]
+    final val entries // com.davils.krypt.core.algorithm/AsymmetricEncryptionAlgorithm.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.core.algorithm/AsymmetricEncryptionAlgorithm> // com.davils.krypt.core.algorithm/AsymmetricEncryptionAlgorithm.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val isFipsApproved // com.davils.krypt.core.algorithm/AsymmetricEncryptionAlgorithm.isFipsApproved|{}isFipsApproved[0]
+        final fun <get-isFipsApproved>(): kotlin/Boolean // com.davils.krypt.core.algorithm/AsymmetricEncryptionAlgorithm.isFipsApproved.<get-isFipsApproved>|<get-isFipsApproved>(){}[0]
+    final val isLegacy // com.davils.krypt.core.algorithm/AsymmetricEncryptionAlgorithm.isLegacy|{}isLegacy[0]
+        final fun <get-isLegacy>(): kotlin/Boolean // com.davils.krypt.core.algorithm/AsymmetricEncryptionAlgorithm.isLegacy.<get-isLegacy>|<get-isLegacy>(){}[0]
+    final val isPostQuantum // com.davils.krypt.core.algorithm/AsymmetricEncryptionAlgorithm.isPostQuantum|{}isPostQuantum[0]
+        final fun <get-isPostQuantum>(): kotlin/Boolean // com.davils.krypt.core.algorithm/AsymmetricEncryptionAlgorithm.isPostQuantum.<get-isPostQuantum>|<get-isPostQuantum>(){}[0]
+    final val securityBits // com.davils.krypt.core.algorithm/AsymmetricEncryptionAlgorithm.securityBits|{}securityBits[0]
+        final fun <get-securityBits>(): kotlin/Int // com.davils.krypt.core.algorithm/AsymmetricEncryptionAlgorithm.securityBits.<get-securityBits>|<get-securityBits>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.core.algorithm/AsymmetricEncryptionAlgorithm // com.davils.krypt.core.algorithm/AsymmetricEncryptionAlgorithm.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.core.algorithm/AsymmetricEncryptionAlgorithm> // com.davils.krypt.core.algorithm/AsymmetricEncryptionAlgorithm.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.core.algorithm/DigestAlgorithm : com.davils.krypt.core.algorithm/Algorithm, kotlin/Enum<com.davils.krypt.core.algorithm/DigestAlgorithm> { // com.davils.krypt.core.algorithm/DigestAlgorithm|null[0]
+    enum entry Md5 // com.davils.krypt.core.algorithm/DigestAlgorithm.Md5|null[0]
+    enum entry Sha1 // com.davils.krypt.core.algorithm/DigestAlgorithm.Sha1|null[0]
+    enum entry Sha256 // com.davils.krypt.core.algorithm/DigestAlgorithm.Sha256|null[0]
+    enum entry Sha3256 // com.davils.krypt.core.algorithm/DigestAlgorithm.Sha3256|null[0]
+    enum entry Sha3384 // com.davils.krypt.core.algorithm/DigestAlgorithm.Sha3384|null[0]
+    enum entry Sha3512 // com.davils.krypt.core.algorithm/DigestAlgorithm.Sha3512|null[0]
+    enum entry Sha384 // com.davils.krypt.core.algorithm/DigestAlgorithm.Sha384|null[0]
+    enum entry Sha512 // com.davils.krypt.core.algorithm/DigestAlgorithm.Sha512|null[0]
+
+    final val algorithmName // com.davils.krypt.core.algorithm/DigestAlgorithm.algorithmName|{}algorithmName[0]
+        final fun <get-algorithmName>(): kotlin/String // com.davils.krypt.core.algorithm/DigestAlgorithm.algorithmName.<get-algorithmName>|<get-algorithmName>(){}[0]
+    final val blockBytes // com.davils.krypt.core.algorithm/DigestAlgorithm.blockBytes|{}blockBytes[0]
+        final fun <get-blockBytes>(): kotlin/Int // com.davils.krypt.core.algorithm/DigestAlgorithm.blockBytes.<get-blockBytes>|<get-blockBytes>(){}[0]
+    final val entries // com.davils.krypt.core.algorithm/DigestAlgorithm.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.core.algorithm/DigestAlgorithm> // com.davils.krypt.core.algorithm/DigestAlgorithm.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val isFipsApproved // com.davils.krypt.core.algorithm/DigestAlgorithm.isFipsApproved|{}isFipsApproved[0]
+        final fun <get-isFipsApproved>(): kotlin/Boolean // com.davils.krypt.core.algorithm/DigestAlgorithm.isFipsApproved.<get-isFipsApproved>|<get-isFipsApproved>(){}[0]
+    final val isLegacy // com.davils.krypt.core.algorithm/DigestAlgorithm.isLegacy|{}isLegacy[0]
+        final fun <get-isLegacy>(): kotlin/Boolean // com.davils.krypt.core.algorithm/DigestAlgorithm.isLegacy.<get-isLegacy>|<get-isLegacy>(){}[0]
+    final val isPostQuantum // com.davils.krypt.core.algorithm/DigestAlgorithm.isPostQuantum|{}isPostQuantum[0]
+        final fun <get-isPostQuantum>(): kotlin/Boolean // com.davils.krypt.core.algorithm/DigestAlgorithm.isPostQuantum.<get-isPostQuantum>|<get-isPostQuantum>(){}[0]
+    final val outputBytes // com.davils.krypt.core.algorithm/DigestAlgorithm.outputBytes|{}outputBytes[0]
+        final fun <get-outputBytes>(): kotlin/Int // com.davils.krypt.core.algorithm/DigestAlgorithm.outputBytes.<get-outputBytes>|<get-outputBytes>(){}[0]
+    final val securityBits // com.davils.krypt.core.algorithm/DigestAlgorithm.securityBits|{}securityBits[0]
+        final fun <get-securityBits>(): kotlin/Int // com.davils.krypt.core.algorithm/DigestAlgorithm.securityBits.<get-securityBits>|<get-securityBits>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.core.algorithm/DigestAlgorithm // com.davils.krypt.core.algorithm/DigestAlgorithm.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.core.algorithm/DigestAlgorithm> // com.davils.krypt.core.algorithm/DigestAlgorithm.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.core.algorithm/EllipticCurve : kotlin/Enum<com.davils.krypt.core.algorithm/EllipticCurve> { // com.davils.krypt.core.algorithm/EllipticCurve|null[0]
+    enum entry P256 // com.davils.krypt.core.algorithm/EllipticCurve.P256|null[0]
+    enum entry P384 // com.davils.krypt.core.algorithm/EllipticCurve.P384|null[0]
+    enum entry P521 // com.davils.krypt.core.algorithm/EllipticCurve.P521|null[0]
+
+    final val bits // com.davils.krypt.core.algorithm/EllipticCurve.bits|{}bits[0]
+        final fun <get-bits>(): kotlin/Int // com.davils.krypt.core.algorithm/EllipticCurve.bits.<get-bits>|<get-bits>(){}[0]
+    final val curveName // com.davils.krypt.core.algorithm/EllipticCurve.curveName|{}curveName[0]
+        final fun <get-curveName>(): kotlin/String // com.davils.krypt.core.algorithm/EllipticCurve.curveName.<get-curveName>|<get-curveName>(){}[0]
+    final val entries // com.davils.krypt.core.algorithm/EllipticCurve.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.core.algorithm/EllipticCurve> // com.davils.krypt.core.algorithm/EllipticCurve.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val fieldBytes // com.davils.krypt.core.algorithm/EllipticCurve.fieldBytes|{}fieldBytes[0]
+        final fun <get-fieldBytes>(): kotlin/Int // com.davils.krypt.core.algorithm/EllipticCurve.fieldBytes.<get-fieldBytes>|<get-fieldBytes>(){}[0]
+    final val objectIdentifier // com.davils.krypt.core.algorithm/EllipticCurve.objectIdentifier|{}objectIdentifier[0]
+        final fun <get-objectIdentifier>(): kotlin/String // com.davils.krypt.core.algorithm/EllipticCurve.objectIdentifier.<get-objectIdentifier>|<get-objectIdentifier>(){}[0]
+    final val securityBits // com.davils.krypt.core.algorithm/EllipticCurve.securityBits|{}securityBits[0]
+        final fun <get-securityBits>(): kotlin/Int // com.davils.krypt.core.algorithm/EllipticCurve.securityBits.<get-securityBits>|<get-securityBits>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.core.algorithm/EllipticCurve // com.davils.krypt.core.algorithm/EllipticCurve.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.core.algorithm/EllipticCurve> // com.davils.krypt.core.algorithm/EllipticCurve.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.core.algorithm/KdfAlgorithm : com.davils.krypt.core.algorithm/Algorithm, kotlin/Enum<com.davils.krypt.core.algorithm/KdfAlgorithm> { // com.davils.krypt.core.algorithm/KdfAlgorithm|null[0]
+    enum entry HkdfSha256 // com.davils.krypt.core.algorithm/KdfAlgorithm.HkdfSha256|null[0]
+    enum entry HkdfSha384 // com.davils.krypt.core.algorithm/KdfAlgorithm.HkdfSha384|null[0]
+    enum entry HkdfSha512 // com.davils.krypt.core.algorithm/KdfAlgorithm.HkdfSha512|null[0]
+    enum entry Pbkdf2Sha256 // com.davils.krypt.core.algorithm/KdfAlgorithm.Pbkdf2Sha256|null[0]
+    enum entry Pbkdf2Sha512 // com.davils.krypt.core.algorithm/KdfAlgorithm.Pbkdf2Sha512|null[0]
+
+    final val algorithmName // com.davils.krypt.core.algorithm/KdfAlgorithm.algorithmName|{}algorithmName[0]
+        final fun <get-algorithmName>(): kotlin/String // com.davils.krypt.core.algorithm/KdfAlgorithm.algorithmName.<get-algorithmName>|<get-algorithmName>(){}[0]
+    final val digest // com.davils.krypt.core.algorithm/KdfAlgorithm.digest|{}digest[0]
+        final fun <get-digest>(): com.davils.krypt.core.algorithm/DigestAlgorithm // com.davils.krypt.core.algorithm/KdfAlgorithm.digest.<get-digest>|<get-digest>(){}[0]
+    final val entries // com.davils.krypt.core.algorithm/KdfAlgorithm.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.core.algorithm/KdfAlgorithm> // com.davils.krypt.core.algorithm/KdfAlgorithm.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val isFipsApproved // com.davils.krypt.core.algorithm/KdfAlgorithm.isFipsApproved|{}isFipsApproved[0]
+        final fun <get-isFipsApproved>(): kotlin/Boolean // com.davils.krypt.core.algorithm/KdfAlgorithm.isFipsApproved.<get-isFipsApproved>|<get-isFipsApproved>(){}[0]
+    final val isLegacy // com.davils.krypt.core.algorithm/KdfAlgorithm.isLegacy|{}isLegacy[0]
+        final fun <get-isLegacy>(): kotlin/Boolean // com.davils.krypt.core.algorithm/KdfAlgorithm.isLegacy.<get-isLegacy>|<get-isLegacy>(){}[0]
+    final val isPasswordBased // com.davils.krypt.core.algorithm/KdfAlgorithm.isPasswordBased|{}isPasswordBased[0]
+        final fun <get-isPasswordBased>(): kotlin/Boolean // com.davils.krypt.core.algorithm/KdfAlgorithm.isPasswordBased.<get-isPasswordBased>|<get-isPasswordBased>(){}[0]
+    final val isPostQuantum // com.davils.krypt.core.algorithm/KdfAlgorithm.isPostQuantum|{}isPostQuantum[0]
+        final fun <get-isPostQuantum>(): kotlin/Boolean // com.davils.krypt.core.algorithm/KdfAlgorithm.isPostQuantum.<get-isPostQuantum>|<get-isPostQuantum>(){}[0]
+    final val securityBits // com.davils.krypt.core.algorithm/KdfAlgorithm.securityBits|{}securityBits[0]
+        final fun <get-securityBits>(): kotlin/Int // com.davils.krypt.core.algorithm/KdfAlgorithm.securityBits.<get-securityBits>|<get-securityBits>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.core.algorithm/KdfAlgorithm // com.davils.krypt.core.algorithm/KdfAlgorithm.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.core.algorithm/KdfAlgorithm> // com.davils.krypt.core.algorithm/KdfAlgorithm.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.core.algorithm/KemAlgorithm : com.davils.krypt.core.algorithm/Algorithm, kotlin/Enum<com.davils.krypt.core.algorithm/KemAlgorithm> { // com.davils.krypt.core.algorithm/KemAlgorithm|null[0]
+    enum entry DhkemP256 // com.davils.krypt.core.algorithm/KemAlgorithm.DhkemP256|null[0]
+    enum entry DhkemP384 // com.davils.krypt.core.algorithm/KemAlgorithm.DhkemP384|null[0]
+    enum entry DhkemP521 // com.davils.krypt.core.algorithm/KemAlgorithm.DhkemP521|null[0]
+    enum entry DhkemX25519 // com.davils.krypt.core.algorithm/KemAlgorithm.DhkemX25519|null[0]
+    enum entry MlKem1024 // com.davils.krypt.core.algorithm/KemAlgorithm.MlKem1024|null[0]
+    enum entry MlKem768 // com.davils.krypt.core.algorithm/KemAlgorithm.MlKem768|null[0]
+
+    final val algorithmName // com.davils.krypt.core.algorithm/KemAlgorithm.algorithmName|{}algorithmName[0]
+        final fun <get-algorithmName>(): kotlin/String // com.davils.krypt.core.algorithm/KemAlgorithm.algorithmName.<get-algorithmName>|<get-algorithmName>(){}[0]
+    final val entries // com.davils.krypt.core.algorithm/KemAlgorithm.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.core.algorithm/KemAlgorithm> // com.davils.krypt.core.algorithm/KemAlgorithm.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val family // com.davils.krypt.core.algorithm/KemAlgorithm.family|{}family[0]
+        final fun <get-family>(): com.davils.krypt.core.algorithm/KeyFamily // com.davils.krypt.core.algorithm/KemAlgorithm.family.<get-family>|<get-family>(){}[0]
+    final val isFipsApproved // com.davils.krypt.core.algorithm/KemAlgorithm.isFipsApproved|{}isFipsApproved[0]
+        final fun <get-isFipsApproved>(): kotlin/Boolean // com.davils.krypt.core.algorithm/KemAlgorithm.isFipsApproved.<get-isFipsApproved>|<get-isFipsApproved>(){}[0]
+    final val isLegacy // com.davils.krypt.core.algorithm/KemAlgorithm.isLegacy|{}isLegacy[0]
+        final fun <get-isLegacy>(): kotlin/Boolean // com.davils.krypt.core.algorithm/KemAlgorithm.isLegacy.<get-isLegacy>|<get-isLegacy>(){}[0]
+    final val isPostQuantum // com.davils.krypt.core.algorithm/KemAlgorithm.isPostQuantum|{}isPostQuantum[0]
+        final fun <get-isPostQuantum>(): kotlin/Boolean // com.davils.krypt.core.algorithm/KemAlgorithm.isPostQuantum.<get-isPostQuantum>|<get-isPostQuantum>(){}[0]
+    final val secretBytes // com.davils.krypt.core.algorithm/KemAlgorithm.secretBytes|{}secretBytes[0]
+        final fun <get-secretBytes>(): kotlin/Int // com.davils.krypt.core.algorithm/KemAlgorithm.secretBytes.<get-secretBytes>|<get-secretBytes>(){}[0]
+    final val securityBits // com.davils.krypt.core.algorithm/KemAlgorithm.securityBits|{}securityBits[0]
+        final fun <get-securityBits>(): kotlin/Int // com.davils.krypt.core.algorithm/KemAlgorithm.securityBits.<get-securityBits>|<get-securityBits>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.core.algorithm/KemAlgorithm // com.davils.krypt.core.algorithm/KemAlgorithm.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.core.algorithm/KemAlgorithm> // com.davils.krypt.core.algorithm/KemAlgorithm.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.core.algorithm/KeyAgreementAlgorithm : com.davils.krypt.core.algorithm/Algorithm, kotlin/Enum<com.davils.krypt.core.algorithm/KeyAgreementAlgorithm> { // com.davils.krypt.core.algorithm/KeyAgreementAlgorithm|null[0]
+    enum entry EcdhP256 // com.davils.krypt.core.algorithm/KeyAgreementAlgorithm.EcdhP256|null[0]
+    enum entry EcdhP384 // com.davils.krypt.core.algorithm/KeyAgreementAlgorithm.EcdhP384|null[0]
+    enum entry EcdhP521 // com.davils.krypt.core.algorithm/KeyAgreementAlgorithm.EcdhP521|null[0]
+    enum entry X25519 // com.davils.krypt.core.algorithm/KeyAgreementAlgorithm.X25519|null[0]
+    enum entry X448 // com.davils.krypt.core.algorithm/KeyAgreementAlgorithm.X448|null[0]
+
+    final val algorithmName // com.davils.krypt.core.algorithm/KeyAgreementAlgorithm.algorithmName|{}algorithmName[0]
+        final fun <get-algorithmName>(): kotlin/String // com.davils.krypt.core.algorithm/KeyAgreementAlgorithm.algorithmName.<get-algorithmName>|<get-algorithmName>(){}[0]
+    final val curve // com.davils.krypt.core.algorithm/KeyAgreementAlgorithm.curve|{}curve[0]
+        final fun <get-curve>(): com.davils.krypt.core.algorithm/EllipticCurve? // com.davils.krypt.core.algorithm/KeyAgreementAlgorithm.curve.<get-curve>|<get-curve>(){}[0]
+    final val entries // com.davils.krypt.core.algorithm/KeyAgreementAlgorithm.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.core.algorithm/KeyAgreementAlgorithm> // com.davils.krypt.core.algorithm/KeyAgreementAlgorithm.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val family // com.davils.krypt.core.algorithm/KeyAgreementAlgorithm.family|{}family[0]
+        final fun <get-family>(): com.davils.krypt.core.algorithm/KeyFamily // com.davils.krypt.core.algorithm/KeyAgreementAlgorithm.family.<get-family>|<get-family>(){}[0]
+    final val isFipsApproved // com.davils.krypt.core.algorithm/KeyAgreementAlgorithm.isFipsApproved|{}isFipsApproved[0]
+        final fun <get-isFipsApproved>(): kotlin/Boolean // com.davils.krypt.core.algorithm/KeyAgreementAlgorithm.isFipsApproved.<get-isFipsApproved>|<get-isFipsApproved>(){}[0]
+    final val isLegacy // com.davils.krypt.core.algorithm/KeyAgreementAlgorithm.isLegacy|{}isLegacy[0]
+        final fun <get-isLegacy>(): kotlin/Boolean // com.davils.krypt.core.algorithm/KeyAgreementAlgorithm.isLegacy.<get-isLegacy>|<get-isLegacy>(){}[0]
+    final val isPostQuantum // com.davils.krypt.core.algorithm/KeyAgreementAlgorithm.isPostQuantum|{}isPostQuantum[0]
+        final fun <get-isPostQuantum>(): kotlin/Boolean // com.davils.krypt.core.algorithm/KeyAgreementAlgorithm.isPostQuantum.<get-isPostQuantum>|<get-isPostQuantum>(){}[0]
+    final val secretBytes // com.davils.krypt.core.algorithm/KeyAgreementAlgorithm.secretBytes|{}secretBytes[0]
+        final fun <get-secretBytes>(): kotlin/Int // com.davils.krypt.core.algorithm/KeyAgreementAlgorithm.secretBytes.<get-secretBytes>|<get-secretBytes>(){}[0]
+    final val securityBits // com.davils.krypt.core.algorithm/KeyAgreementAlgorithm.securityBits|{}securityBits[0]
+        final fun <get-securityBits>(): kotlin/Int // com.davils.krypt.core.algorithm/KeyAgreementAlgorithm.securityBits.<get-securityBits>|<get-securityBits>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.core.algorithm/KeyAgreementAlgorithm // com.davils.krypt.core.algorithm/KeyAgreementAlgorithm.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.core.algorithm/KeyAgreementAlgorithm> // com.davils.krypt.core.algorithm/KeyAgreementAlgorithm.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.core.algorithm/KeyFamily : kotlin/Enum<com.davils.krypt.core.algorithm/KeyFamily> { // com.davils.krypt.core.algorithm/KeyFamily|null[0]
+    enum entry Ec // com.davils.krypt.core.algorithm/KeyFamily.Ec|null[0]
+    enum entry Ed25519 // com.davils.krypt.core.algorithm/KeyFamily.Ed25519|null[0]
+    enum entry Ed448 // com.davils.krypt.core.algorithm/KeyFamily.Ed448|null[0]
+    enum entry MlDsa // com.davils.krypt.core.algorithm/KeyFamily.MlDsa|null[0]
+    enum entry MlKem // com.davils.krypt.core.algorithm/KeyFamily.MlKem|null[0]
+    enum entry Rsa // com.davils.krypt.core.algorithm/KeyFamily.Rsa|null[0]
+    enum entry X25519 // com.davils.krypt.core.algorithm/KeyFamily.X25519|null[0]
+    enum entry X448 // com.davils.krypt.core.algorithm/KeyFamily.X448|null[0]
+
+    final val entries // com.davils.krypt.core.algorithm/KeyFamily.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.core.algorithm/KeyFamily> // com.davils.krypt.core.algorithm/KeyFamily.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.core.algorithm/KeyFamily // com.davils.krypt.core.algorithm/KeyFamily.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.core.algorithm/KeyFamily> // com.davils.krypt.core.algorithm/KeyFamily.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.core.algorithm/KeyType : kotlin/Enum<com.davils.krypt.core.algorithm/KeyType> { // com.davils.krypt.core.algorithm/KeyType|null[0]
+    enum entry Ed25519 // com.davils.krypt.core.algorithm/KeyType.Ed25519|null[0]
+    enum entry Ed448 // com.davils.krypt.core.algorithm/KeyType.Ed448|null[0]
+    enum entry MlDsa44 // com.davils.krypt.core.algorithm/KeyType.MlDsa44|null[0]
+    enum entry MlDsa65 // com.davils.krypt.core.algorithm/KeyType.MlDsa65|null[0]
+    enum entry MlDsa87 // com.davils.krypt.core.algorithm/KeyType.MlDsa87|null[0]
+    enum entry MlKem1024 // com.davils.krypt.core.algorithm/KeyType.MlKem1024|null[0]
+    enum entry MlKem768 // com.davils.krypt.core.algorithm/KeyType.MlKem768|null[0]
+    enum entry P256 // com.davils.krypt.core.algorithm/KeyType.P256|null[0]
+    enum entry P384 // com.davils.krypt.core.algorithm/KeyType.P384|null[0]
+    enum entry P521 // com.davils.krypt.core.algorithm/KeyType.P521|null[0]
+    enum entry Rsa2048 // com.davils.krypt.core.algorithm/KeyType.Rsa2048|null[0]
+    enum entry Rsa3072 // com.davils.krypt.core.algorithm/KeyType.Rsa3072|null[0]
+    enum entry Rsa4096 // com.davils.krypt.core.algorithm/KeyType.Rsa4096|null[0]
+    enum entry X25519 // com.davils.krypt.core.algorithm/KeyType.X25519|null[0]
+    enum entry X448 // com.davils.krypt.core.algorithm/KeyType.X448|null[0]
+
+    final val bits // com.davils.krypt.core.algorithm/KeyType.bits|{}bits[0]
+        final fun <get-bits>(): kotlin/Int // com.davils.krypt.core.algorithm/KeyType.bits.<get-bits>|<get-bits>(){}[0]
+    final val curve // com.davils.krypt.core.algorithm/KeyType.curve|{}curve[0]
+        final fun <get-curve>(): com.davils.krypt.core.algorithm/EllipticCurve? // com.davils.krypt.core.algorithm/KeyType.curve.<get-curve>|<get-curve>(){}[0]
+    final val entries // com.davils.krypt.core.algorithm/KeyType.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.core.algorithm/KeyType> // com.davils.krypt.core.algorithm/KeyType.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val family // com.davils.krypt.core.algorithm/KeyType.family|{}family[0]
+        final fun <get-family>(): com.davils.krypt.core.algorithm/KeyFamily // com.davils.krypt.core.algorithm/KeyType.family.<get-family>|<get-family>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.core.algorithm/KeyType // com.davils.krypt.core.algorithm/KeyType.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.core.algorithm/KeyType> // com.davils.krypt.core.algorithm/KeyType.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.core.algorithm/KeyWrapAlgorithm : com.davils.krypt.core.algorithm/Algorithm, kotlin/Enum<com.davils.krypt.core.algorithm/KeyWrapAlgorithm> { // com.davils.krypt.core.algorithm/KeyWrapAlgorithm|null[0]
+    enum entry Aes128Kw // com.davils.krypt.core.algorithm/KeyWrapAlgorithm.Aes128Kw|null[0]
+    enum entry Aes256Kw // com.davils.krypt.core.algorithm/KeyWrapAlgorithm.Aes256Kw|null[0]
+
+    final val algorithmName // com.davils.krypt.core.algorithm/KeyWrapAlgorithm.algorithmName|{}algorithmName[0]
+        final fun <get-algorithmName>(): kotlin/String // com.davils.krypt.core.algorithm/KeyWrapAlgorithm.algorithmName.<get-algorithmName>|<get-algorithmName>(){}[0]
+    final val entries // com.davils.krypt.core.algorithm/KeyWrapAlgorithm.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.core.algorithm/KeyWrapAlgorithm> // com.davils.krypt.core.algorithm/KeyWrapAlgorithm.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val isFipsApproved // com.davils.krypt.core.algorithm/KeyWrapAlgorithm.isFipsApproved|{}isFipsApproved[0]
+        final fun <get-isFipsApproved>(): kotlin/Boolean // com.davils.krypt.core.algorithm/KeyWrapAlgorithm.isFipsApproved.<get-isFipsApproved>|<get-isFipsApproved>(){}[0]
+    final val isLegacy // com.davils.krypt.core.algorithm/KeyWrapAlgorithm.isLegacy|{}isLegacy[0]
+        final fun <get-isLegacy>(): kotlin/Boolean // com.davils.krypt.core.algorithm/KeyWrapAlgorithm.isLegacy.<get-isLegacy>|<get-isLegacy>(){}[0]
+    final val isPostQuantum // com.davils.krypt.core.algorithm/KeyWrapAlgorithm.isPostQuantum|{}isPostQuantum[0]
+        final fun <get-isPostQuantum>(): kotlin/Boolean // com.davils.krypt.core.algorithm/KeyWrapAlgorithm.isPostQuantum.<get-isPostQuantum>|<get-isPostQuantum>(){}[0]
+    final val keyBytes // com.davils.krypt.core.algorithm/KeyWrapAlgorithm.keyBytes|{}keyBytes[0]
+        final fun <get-keyBytes>(): kotlin/Int // com.davils.krypt.core.algorithm/KeyWrapAlgorithm.keyBytes.<get-keyBytes>|<get-keyBytes>(){}[0]
+    final val securityBits // com.davils.krypt.core.algorithm/KeyWrapAlgorithm.securityBits|{}securityBits[0]
+        final fun <get-securityBits>(): kotlin/Int // com.davils.krypt.core.algorithm/KeyWrapAlgorithm.securityBits.<get-securityBits>|<get-securityBits>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.core.algorithm/KeyWrapAlgorithm // com.davils.krypt.core.algorithm/KeyWrapAlgorithm.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.core.algorithm/KeyWrapAlgorithm> // com.davils.krypt.core.algorithm/KeyWrapAlgorithm.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.core.algorithm/MacAlgorithm : com.davils.krypt.core.algorithm/Algorithm, kotlin/Enum<com.davils.krypt.core.algorithm/MacAlgorithm> { // com.davils.krypt.core.algorithm/MacAlgorithm|null[0]
+    enum entry HmacSha256 // com.davils.krypt.core.algorithm/MacAlgorithm.HmacSha256|null[0]
+    enum entry HmacSha384 // com.davils.krypt.core.algorithm/MacAlgorithm.HmacSha384|null[0]
+    enum entry HmacSha512 // com.davils.krypt.core.algorithm/MacAlgorithm.HmacSha512|null[0]
+
+    final val algorithmName // com.davils.krypt.core.algorithm/MacAlgorithm.algorithmName|{}algorithmName[0]
+        final fun <get-algorithmName>(): kotlin/String // com.davils.krypt.core.algorithm/MacAlgorithm.algorithmName.<get-algorithmName>|<get-algorithmName>(){}[0]
+    final val digest // com.davils.krypt.core.algorithm/MacAlgorithm.digest|{}digest[0]
+        final fun <get-digest>(): com.davils.krypt.core.algorithm/DigestAlgorithm // com.davils.krypt.core.algorithm/MacAlgorithm.digest.<get-digest>|<get-digest>(){}[0]
+    final val entries // com.davils.krypt.core.algorithm/MacAlgorithm.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.core.algorithm/MacAlgorithm> // com.davils.krypt.core.algorithm/MacAlgorithm.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val isFipsApproved // com.davils.krypt.core.algorithm/MacAlgorithm.isFipsApproved|{}isFipsApproved[0]
+        final fun <get-isFipsApproved>(): kotlin/Boolean // com.davils.krypt.core.algorithm/MacAlgorithm.isFipsApproved.<get-isFipsApproved>|<get-isFipsApproved>(){}[0]
+    final val isLegacy // com.davils.krypt.core.algorithm/MacAlgorithm.isLegacy|{}isLegacy[0]
+        final fun <get-isLegacy>(): kotlin/Boolean // com.davils.krypt.core.algorithm/MacAlgorithm.isLegacy.<get-isLegacy>|<get-isLegacy>(){}[0]
+    final val isPostQuantum // com.davils.krypt.core.algorithm/MacAlgorithm.isPostQuantum|{}isPostQuantum[0]
+        final fun <get-isPostQuantum>(): kotlin/Boolean // com.davils.krypt.core.algorithm/MacAlgorithm.isPostQuantum.<get-isPostQuantum>|<get-isPostQuantum>(){}[0]
+    final val securityBits // com.davils.krypt.core.algorithm/MacAlgorithm.securityBits|{}securityBits[0]
+        final fun <get-securityBits>(): kotlin/Int // com.davils.krypt.core.algorithm/MacAlgorithm.securityBits.<get-securityBits>|<get-securityBits>(){}[0]
+    final val tagBytes // com.davils.krypt.core.algorithm/MacAlgorithm.tagBytes|{}tagBytes[0]
+        final fun <get-tagBytes>(): kotlin/Int // com.davils.krypt.core.algorithm/MacAlgorithm.tagBytes.<get-tagBytes>|<get-tagBytes>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.core.algorithm/MacAlgorithm // com.davils.krypt.core.algorithm/MacAlgorithm.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.core.algorithm/MacAlgorithm> // com.davils.krypt.core.algorithm/MacAlgorithm.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.core.algorithm/SignatureAlgorithm : com.davils.krypt.core.algorithm/Algorithm, kotlin/Enum<com.davils.krypt.core.algorithm/SignatureAlgorithm> { // com.davils.krypt.core.algorithm/SignatureAlgorithm|null[0]
+    enum entry EcdsaSha1 // com.davils.krypt.core.algorithm/SignatureAlgorithm.EcdsaSha1|null[0]
+    enum entry EcdsaSha256 // com.davils.krypt.core.algorithm/SignatureAlgorithm.EcdsaSha256|null[0]
+    enum entry EcdsaSha384 // com.davils.krypt.core.algorithm/SignatureAlgorithm.EcdsaSha384|null[0]
+    enum entry EcdsaSha512 // com.davils.krypt.core.algorithm/SignatureAlgorithm.EcdsaSha512|null[0]
+    enum entry Ed25519 // com.davils.krypt.core.algorithm/SignatureAlgorithm.Ed25519|null[0]
+    enum entry Ed448 // com.davils.krypt.core.algorithm/SignatureAlgorithm.Ed448|null[0]
+    enum entry MlDsa44 // com.davils.krypt.core.algorithm/SignatureAlgorithm.MlDsa44|null[0]
+    enum entry MlDsa65 // com.davils.krypt.core.algorithm/SignatureAlgorithm.MlDsa65|null[0]
+    enum entry MlDsa87 // com.davils.krypt.core.algorithm/SignatureAlgorithm.MlDsa87|null[0]
+    enum entry RsaPkcs1Sha1 // com.davils.krypt.core.algorithm/SignatureAlgorithm.RsaPkcs1Sha1|null[0]
+    enum entry RsaPkcs1Sha256 // com.davils.krypt.core.algorithm/SignatureAlgorithm.RsaPkcs1Sha256|null[0]
+    enum entry RsaPkcs1Sha384 // com.davils.krypt.core.algorithm/SignatureAlgorithm.RsaPkcs1Sha384|null[0]
+    enum entry RsaPkcs1Sha512 // com.davils.krypt.core.algorithm/SignatureAlgorithm.RsaPkcs1Sha512|null[0]
+    enum entry RsaPssSha256 // com.davils.krypt.core.algorithm/SignatureAlgorithm.RsaPssSha256|null[0]
+    enum entry RsaPssSha384 // com.davils.krypt.core.algorithm/SignatureAlgorithm.RsaPssSha384|null[0]
+    enum entry RsaPssSha512 // com.davils.krypt.core.algorithm/SignatureAlgorithm.RsaPssSha512|null[0]
+
+    final val algorithmName // com.davils.krypt.core.algorithm/SignatureAlgorithm.algorithmName|{}algorithmName[0]
+        final fun <get-algorithmName>(): kotlin/String // com.davils.krypt.core.algorithm/SignatureAlgorithm.algorithmName.<get-algorithmName>|<get-algorithmName>(){}[0]
+    final val digest // com.davils.krypt.core.algorithm/SignatureAlgorithm.digest|{}digest[0]
+        final fun <get-digest>(): com.davils.krypt.core.algorithm/DigestAlgorithm? // com.davils.krypt.core.algorithm/SignatureAlgorithm.digest.<get-digest>|<get-digest>(){}[0]
+    final val entries // com.davils.krypt.core.algorithm/SignatureAlgorithm.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.core.algorithm/SignatureAlgorithm> // com.davils.krypt.core.algorithm/SignatureAlgorithm.entries.<get-entries>|<get-entries>#static(){}[0]
+    final val family // com.davils.krypt.core.algorithm/SignatureAlgorithm.family|{}family[0]
+        final fun <get-family>(): com.davils.krypt.core.algorithm/KeyFamily // com.davils.krypt.core.algorithm/SignatureAlgorithm.family.<get-family>|<get-family>(){}[0]
+    final val isFipsApproved // com.davils.krypt.core.algorithm/SignatureAlgorithm.isFipsApproved|{}isFipsApproved[0]
+        final fun <get-isFipsApproved>(): kotlin/Boolean // com.davils.krypt.core.algorithm/SignatureAlgorithm.isFipsApproved.<get-isFipsApproved>|<get-isFipsApproved>(){}[0]
+    final val isLegacy // com.davils.krypt.core.algorithm/SignatureAlgorithm.isLegacy|{}isLegacy[0]
+        final fun <get-isLegacy>(): kotlin/Boolean // com.davils.krypt.core.algorithm/SignatureAlgorithm.isLegacy.<get-isLegacy>|<get-isLegacy>(){}[0]
+    final val isPostQuantum // com.davils.krypt.core.algorithm/SignatureAlgorithm.isPostQuantum|{}isPostQuantum[0]
+        final fun <get-isPostQuantum>(): kotlin/Boolean // com.davils.krypt.core.algorithm/SignatureAlgorithm.isPostQuantum.<get-isPostQuantum>|<get-isPostQuantum>(){}[0]
+    final val securityBits // com.davils.krypt.core.algorithm/SignatureAlgorithm.securityBits|{}securityBits[0]
+        final fun <get-securityBits>(): kotlin/Int // com.davils.krypt.core.algorithm/SignatureAlgorithm.securityBits.<get-securityBits>|<get-securityBits>(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.core.algorithm/SignatureAlgorithm // com.davils.krypt.core.algorithm/SignatureAlgorithm.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.core.algorithm/SignatureAlgorithm> // com.davils.krypt.core.algorithm/SignatureAlgorithm.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.core.audit/AuditOutcome : kotlin/Enum<com.davils.krypt.core.audit/AuditOutcome> { // com.davils.krypt.core.audit/AuditOutcome|null[0]
+    enum entry Failed // com.davils.krypt.core.audit/AuditOutcome.Failed|null[0]
+    enum entry Refused // com.davils.krypt.core.audit/AuditOutcome.Refused|null[0]
+    enum entry Succeeded // com.davils.krypt.core.audit/AuditOutcome.Succeeded|null[0]
+
+    final val entries // com.davils.krypt.core.audit/AuditOutcome.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.core.audit/AuditOutcome> // com.davils.krypt.core.audit/AuditOutcome.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.core.audit/AuditOutcome // com.davils.krypt.core.audit/AuditOutcome.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.core.audit/AuditOutcome> // com.davils.krypt.core.audit/AuditOutcome.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.core.encoding/Base64Alphabet : kotlin/Enum<com.davils.krypt.core.encoding/Base64Alphabet> { // com.davils.krypt.core.encoding/Base64Alphabet|null[0]
+    enum entry Standard // com.davils.krypt.core.encoding/Base64Alphabet.Standard|null[0]
+    enum entry Url // com.davils.krypt.core.encoding/Base64Alphabet.Url|null[0]
+
+    final val entries // com.davils.krypt.core.encoding/Base64Alphabet.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.core.encoding/Base64Alphabet> // com.davils.krypt.core.encoding/Base64Alphabet.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.core.encoding/Base64Alphabet // com.davils.krypt.core.encoding/Base64Alphabet.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.core.encoding/Base64Alphabet> // com.davils.krypt.core.encoding/Base64Alphabet.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.core.encoding/EncodingFailure : kotlin/Enum<com.davils.krypt.core.encoding/EncodingFailure> { // com.davils.krypt.core.encoding/EncodingFailure|null[0]
+    enum entry InvalidCharacter // com.davils.krypt.core.encoding/EncodingFailure.InvalidCharacter|null[0]
+    enum entry InvalidLength // com.davils.krypt.core.encoding/EncodingFailure.InvalidLength|null[0]
+    enum entry InvalidPadding // com.davils.krypt.core.encoding/EncodingFailure.InvalidPadding|null[0]
+    enum entry NonCanonical // com.davils.krypt.core.encoding/EncodingFailure.NonCanonical|null[0]
+    enum entry TooLong // com.davils.krypt.core.encoding/EncodingFailure.TooLong|null[0]
+
+    final val entries // com.davils.krypt.core.encoding/EncodingFailure.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.core.encoding/EncodingFailure> // com.davils.krypt.core.encoding/EncodingFailure.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.core.encoding/EncodingFailure // com.davils.krypt.core.encoding/EncodingFailure.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.core.encoding/EncodingFailure> // com.davils.krypt.core.encoding/EncodingFailure.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.core.policy/AlgorithmUse : kotlin/Enum<com.davils.krypt.core.policy/AlgorithmUse> { // com.davils.krypt.core.policy/AlgorithmUse|null[0]
+    enum entry Protect // com.davils.krypt.core.policy/AlgorithmUse.Protect|null[0]
+    enum entry Verify // com.davils.krypt.core.policy/AlgorithmUse.Verify|null[0]
+
+    final val entries // com.davils.krypt.core.policy/AlgorithmUse.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.core.policy/AlgorithmUse> // com.davils.krypt.core.policy/AlgorithmUse.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.core.policy/AlgorithmUse // com.davils.krypt.core.policy/AlgorithmUse.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.core.policy/AlgorithmUse> // com.davils.krypt.core.policy/AlgorithmUse.values|values#static(){}[0]
+}
+
+final enum class com.davils.krypt.core.policy/CryptoProfile : kotlin/Enum<com.davils.krypt.core.policy/CryptoProfile> { // com.davils.krypt.core.policy/CryptoProfile|null[0]
+    enum entry Cnsa2 // com.davils.krypt.core.policy/CryptoProfile.Cnsa2|null[0]
+    enum entry Compatible // com.davils.krypt.core.policy/CryptoProfile.Compatible|null[0]
+    enum entry Fips // com.davils.krypt.core.policy/CryptoProfile.Fips|null[0]
+    enum entry Modern // com.davils.krypt.core.policy/CryptoProfile.Modern|null[0]
+
+    final val entries // com.davils.krypt.core.policy/CryptoProfile.entries|#static{}entries[0]
+        final fun <get-entries>(): kotlin.enums/EnumEntries<com.davils.krypt.core.policy/CryptoProfile> // com.davils.krypt.core.policy/CryptoProfile.entries.<get-entries>|<get-entries>#static(){}[0]
+
+    final fun valueOf(kotlin/String): com.davils.krypt.core.policy/CryptoProfile // com.davils.krypt.core.policy/CryptoProfile.valueOf|valueOf#static(kotlin.String){}[0]
+    final fun values(): kotlin/Array<com.davils.krypt.core.policy/CryptoProfile> // com.davils.krypt.core.policy/CryptoProfile.values|values#static(){}[0]
+}
+
+abstract fun interface com.davils.krypt.core.audit/AuditSink { // com.davils.krypt.core.audit/AuditSink|null[0]
+    abstract suspend fun record(com.davils.krypt.core.audit/AuditEntry) // com.davils.krypt.core.audit/AuditSink.record|record(com.davils.krypt.core.audit.AuditEntry){}[0]
+}
+
+abstract fun interface com.davils.krypt.core.io/ByteSink { // com.davils.krypt.core.io/ByteSink|null[0]
+    abstract suspend fun write(kotlin/ByteArray, kotlin/Int, kotlin/Int) // com.davils.krypt.core.io/ByteSink.write|write(kotlin.ByteArray;kotlin.Int;kotlin.Int){}[0]
+}
+
+abstract fun interface com.davils.krypt.core.io/ByteSource { // com.davils.krypt.core.io/ByteSource|null[0]
+    abstract suspend fun read(kotlin/ByteArray, kotlin/Int, kotlin/Int): kotlin/Int // com.davils.krypt.core.io/ByteSource.read|read(kotlin.ByteArray;kotlin.Int;kotlin.Int){}[0]
+}
+
+abstract fun interface com.davils.krypt.core/RandomSource { // com.davils.krypt.core/RandomSource|null[0]
+    abstract fun fill(kotlin/ByteArray) // com.davils.krypt.core/RandomSource.fill|fill(kotlin.ByteArray){}[0]
+    open fun bytes(kotlin/Int): kotlin/ByteArray // com.davils.krypt.core/RandomSource.bytes|bytes(kotlin.Int){}[0]
+
+    final object Companion { // com.davils.krypt.core/RandomSource.Companion|null[0]
+        final val Secure // com.davils.krypt.core/RandomSource.Companion.Secure|{}Secure[0]
+            final fun <get-Secure>(): com.davils.krypt.core/RandomSource // com.davils.krypt.core/RandomSource.Companion.Secure.<get-Secure>|<get-Secure>(){}[0]
+    }
+}
+
+abstract interface com.davils.krypt.core/CryptoEvent : com.davils.konfetti.core/Event { // com.davils.krypt.core/CryptoEvent|null[0]
+    abstract val component // com.davils.krypt.core/CryptoEvent.component|{}component[0]
+        abstract fun <get-component>(): kotlin/String // com.davils.krypt.core/CryptoEvent.component.<get-component>|<get-component>(){}[0]
+}
+
+sealed interface com.davils.krypt.core.algorithm/Algorithm { // com.davils.krypt.core.algorithm/Algorithm|null[0]
+    abstract val algorithmName // com.davils.krypt.core.algorithm/Algorithm.algorithmName|{}algorithmName[0]
+        abstract fun <get-algorithmName>(): kotlin/String // com.davils.krypt.core.algorithm/Algorithm.algorithmName.<get-algorithmName>|<get-algorithmName>(){}[0]
+    abstract val isFipsApproved // com.davils.krypt.core.algorithm/Algorithm.isFipsApproved|{}isFipsApproved[0]
+        abstract fun <get-isFipsApproved>(): kotlin/Boolean // com.davils.krypt.core.algorithm/Algorithm.isFipsApproved.<get-isFipsApproved>|<get-isFipsApproved>(){}[0]
+    abstract val isLegacy // com.davils.krypt.core.algorithm/Algorithm.isLegacy|{}isLegacy[0]
+        abstract fun <get-isLegacy>(): kotlin/Boolean // com.davils.krypt.core.algorithm/Algorithm.isLegacy.<get-isLegacy>|<get-isLegacy>(){}[0]
+    abstract val isPostQuantum // com.davils.krypt.core.algorithm/Algorithm.isPostQuantum|{}isPostQuantum[0]
+        abstract fun <get-isPostQuantum>(): kotlin/Boolean // com.davils.krypt.core.algorithm/Algorithm.isPostQuantum.<get-isPostQuantum>|<get-isPostQuantum>(){}[0]
+    abstract val securityBits // com.davils.krypt.core.algorithm/Algorithm.securityBits|{}securityBits[0]
+        abstract fun <get-securityBits>(): kotlin/Int // com.davils.krypt.core.algorithm/Algorithm.securityBits.<get-securityBits>|<get-securityBits>(){}[0]
+}
+
+final class <#A: com.davils.krypt.core/CryptoEvent> com.davils.krypt.core.telemetry/EventSink { // com.davils.krypt.core.telemetry/EventSink|null[0]
+    constructor <init>(com.davils.krypt.core/Environment, com.davils.konfetti.core/TopicKey<#A>) // com.davils.krypt.core.telemetry/EventSink.<init>|<init>(com.davils.krypt.core.Environment;com.davils.konfetti.core.TopicKey<1:0>){}[0]
+
+    final val events // com.davils.krypt.core.telemetry/EventSink.events|{}events[0]
+        final fun <get-events>(): kotlinx.coroutines.flow/Flow<#A> // com.davils.krypt.core.telemetry/EventSink.events.<get-events>|<get-events>(){}[0]
+    final val isListened // com.davils.krypt.core.telemetry/EventSink.isListened|{}isListened[0]
+        final fun <get-isListened>(): kotlin/Boolean // com.davils.krypt.core.telemetry/EventSink.isListened.<get-isListened>|<get-isListened>(){}[0]
+    final val rejected // com.davils.krypt.core.telemetry/EventSink.rejected|{}rejected[0]
+        final fun <get-rejected>(): kotlin/Long // com.davils.krypt.core.telemetry/EventSink.rejected.<get-rejected>|<get-rejected>(){}[0]
+
+    final fun send(#A) // com.davils.krypt.core.telemetry/EventSink.send|send(1:0){}[0]
+    final inline fun emit(kotlin/Function0<#A>) // com.davils.krypt.core.telemetry/EventSink.emit|emit(kotlin.Function0<1:0>){}[0]
+}
+
+final class com.davils.krypt.core.audit/AuditAction : kotlin/Comparable<com.davils.krypt.core.audit/AuditAction> { // com.davils.krypt.core.audit/AuditAction|null[0]
+    constructor <init>(kotlin/String) // com.davils.krypt.core.audit/AuditAction.<init>|<init>(kotlin.String){}[0]
+
+    final val value // com.davils.krypt.core.audit/AuditAction.value|{}value[0]
+        final fun <get-value>(): kotlin/String // com.davils.krypt.core.audit/AuditAction.value.<get-value>|<get-value>(){}[0]
+
+    final fun compareTo(com.davils.krypt.core.audit/AuditAction): kotlin/Int // com.davils.krypt.core.audit/AuditAction.compareTo|compareTo(com.davils.krypt.core.audit.AuditAction){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.core.audit/AuditAction.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.core.audit/AuditAction.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.core.audit/AuditAction.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.core.audit/AuditEntry { // com.davils.krypt.core.audit/AuditEntry|null[0]
+    constructor <init>(com.davils.krypt.core.audit/AuditAction, kotlin/String, com.davils.krypt.core.audit/AuditOutcome, kotlin.time/Instant, kotlin.collections/Map<kotlin/String, kotlin/String> = ...) // com.davils.krypt.core.audit/AuditEntry.<init>|<init>(com.davils.krypt.core.audit.AuditAction;kotlin.String;com.davils.krypt.core.audit.AuditOutcome;kotlin.time.Instant;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+
+    final val action // com.davils.krypt.core.audit/AuditEntry.action|{}action[0]
+        final fun <get-action>(): com.davils.krypt.core.audit/AuditAction // com.davils.krypt.core.audit/AuditEntry.action.<get-action>|<get-action>(){}[0]
+    final val at // com.davils.krypt.core.audit/AuditEntry.at|{}at[0]
+        final fun <get-at>(): kotlin.time/Instant // com.davils.krypt.core.audit/AuditEntry.at.<get-at>|<get-at>(){}[0]
+    final val attributes // com.davils.krypt.core.audit/AuditEntry.attributes|{}attributes[0]
+        final fun <get-attributes>(): kotlin.collections/Map<kotlin/String, kotlin/String> // com.davils.krypt.core.audit/AuditEntry.attributes.<get-attributes>|<get-attributes>(){}[0]
+    final val outcome // com.davils.krypt.core.audit/AuditEntry.outcome|{}outcome[0]
+        final fun <get-outcome>(): com.davils.krypt.core.audit/AuditOutcome // com.davils.krypt.core.audit/AuditEntry.outcome.<get-outcome>|<get-outcome>(){}[0]
+    final val subject // com.davils.krypt.core.audit/AuditEntry.subject|{}subject[0]
+        final fun <get-subject>(): kotlin/String // com.davils.krypt.core.audit/AuditEntry.subject.<get-subject>|<get-subject>(){}[0]
+
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.core.audit/AuditEntry.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.core.audit/AuditEntry.hashCode|hashCode(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.core.audit/AuditEntry.toString|toString(){}[0]
+}
+
+final class com.davils.krypt.core.io/BufferSink : com.davils.krypt.core.io/ByteSink { // com.davils.krypt.core.io/BufferSink|null[0]
+    constructor <init>(kotlin/Int) // com.davils.krypt.core.io/BufferSink.<init>|<init>(kotlin.Int){}[0]
+
+    final val maximum // com.davils.krypt.core.io/BufferSink.maximum|{}maximum[0]
+        final fun <get-maximum>(): kotlin/Int // com.davils.krypt.core.io/BufferSink.maximum.<get-maximum>|<get-maximum>(){}[0]
+
+    final var size // com.davils.krypt.core.io/BufferSink.size|{}size[0]
+        final fun <get-size>(): kotlin/Int // com.davils.krypt.core.io/BufferSink.size.<get-size>|<get-size>(){}[0]
+
+    final fun append(kotlin/ByteArray, kotlin/Int = ..., kotlin/Int = ...) // com.davils.krypt.core.io/BufferSink.append|append(kotlin.ByteArray;kotlin.Int;kotlin.Int){}[0]
+    final fun toByteString(): kotlinx.io.bytestring/ByteString // com.davils.krypt.core.io/BufferSink.toByteString|toByteString(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.core.io/BufferSink.toString|toString(){}[0]
+    final fun wipe() // com.davils.krypt.core.io/BufferSink.wipe|wipe(){}[0]
+    final suspend fun write(kotlin/ByteArray, kotlin/Int, kotlin/Int) // com.davils.krypt.core.io/BufferSink.write|write(kotlin.ByteArray;kotlin.Int;kotlin.Int){}[0]
+}
+
+final class com.davils.krypt.core.io/ByteLimitException : kotlin/IllegalStateException { // com.davils.krypt.core.io/ByteLimitException|null[0]
+    constructor <init>(kotlin/Long) // com.davils.krypt.core.io/ByteLimitException.<init>|<init>(kotlin.Long){}[0]
+
+    final val maximum // com.davils.krypt.core.io/ByteLimitException.maximum|{}maximum[0]
+        final fun <get-maximum>(): kotlin/Long // com.davils.krypt.core.io/ByteLimitException.maximum.<get-maximum>|<get-maximum>(){}[0]
+}
+
+final class com.davils.krypt.core.policy/CryptoPolicy : com.davils.kore.core.validation/Validatable { // com.davils.krypt.core.policy/CryptoPolicy|null[0]
+    final val curves // com.davils.krypt.core.policy/CryptoPolicy.curves|{}curves[0]
+        final fun <get-curves>(): kotlin.collections/Set<com.davils.krypt.core.algorithm/EllipticCurve> // com.davils.krypt.core.policy/CryptoPolicy.curves.<get-curves>|<get-curves>(){}[0]
+    final val isFipsProviderRequired // com.davils.krypt.core.policy/CryptoPolicy.isFipsProviderRequired|{}isFipsProviderRequired[0]
+        final fun <get-isFipsProviderRequired>(): kotlin/Boolean // com.davils.krypt.core.policy/CryptoPolicy.isFipsProviderRequired.<get-isFipsProviderRequired>|<get-isFipsProviderRequired>(){}[0]
+    final val maximumIterations // com.davils.krypt.core.policy/CryptoPolicy.maximumIterations|{}maximumIterations[0]
+        final fun <get-maximumIterations>(): kotlin/Int // com.davils.krypt.core.policy/CryptoPolicy.maximumIterations.<get-maximumIterations>|<get-maximumIterations>(){}[0]
+    final val maximumRsaBits // com.davils.krypt.core.policy/CryptoPolicy.maximumRsaBits|{}maximumRsaBits[0]
+        final fun <get-maximumRsaBits>(): kotlin/Int // com.davils.krypt.core.policy/CryptoPolicy.maximumRsaBits.<get-maximumRsaBits>|<get-maximumRsaBits>(){}[0]
+    final val minimumIterations // com.davils.krypt.core.policy/CryptoPolicy.minimumIterations|{}minimumIterations[0]
+        final fun <get-minimumIterations>(): kotlin/Int // com.davils.krypt.core.policy/CryptoPolicy.minimumIterations.<get-minimumIterations>|<get-minimumIterations>(){}[0]
+    final val minimumRsaBits // com.davils.krypt.core.policy/CryptoPolicy.minimumRsaBits|{}minimumRsaBits[0]
+        final fun <get-minimumRsaBits>(): kotlin/Int // com.davils.krypt.core.policy/CryptoPolicy.minimumRsaBits.<get-minimumRsaBits>|<get-minimumRsaBits>(){}[0]
+    final val minimumVerifiedIterations // com.davils.krypt.core.policy/CryptoPolicy.minimumVerifiedIterations|{}minimumVerifiedIterations[0]
+        final fun <get-minimumVerifiedIterations>(): kotlin/Int // com.davils.krypt.core.policy/CryptoPolicy.minimumVerifiedIterations.<get-minimumVerifiedIterations>|<get-minimumVerifiedIterations>(){}[0]
+    final val minimumVerifiedRsaBits // com.davils.krypt.core.policy/CryptoPolicy.minimumVerifiedRsaBits|{}minimumVerifiedRsaBits[0]
+        final fun <get-minimumVerifiedRsaBits>(): kotlin/Int // com.davils.krypt.core.policy/CryptoPolicy.minimumVerifiedRsaBits.<get-minimumVerifiedRsaBits>|<get-minimumVerifiedRsaBits>(){}[0]
+    final val profile // com.davils.krypt.core.policy/CryptoPolicy.profile|{}profile[0]
+        final fun <get-profile>(): com.davils.krypt.core.policy/CryptoProfile // com.davils.krypt.core.policy/CryptoPolicy.profile.<get-profile>|<get-profile>(){}[0]
+    final val protecting // com.davils.krypt.core.policy/CryptoPolicy.protecting|{}protecting[0]
+        final fun <get-protecting>(): kotlin.collections/Set<com.davils.krypt.core.algorithm/Algorithm> // com.davils.krypt.core.policy/CryptoPolicy.protecting.<get-protecting>|<get-protecting>(){}[0]
+    final val verifying // com.davils.krypt.core.policy/CryptoPolicy.verifying|{}verifying[0]
+        final fun <get-verifying>(): kotlin.collections/Set<com.davils.krypt.core.algorithm/Algorithm> // com.davils.krypt.core.policy/CryptoPolicy.verifying.<get-verifying>|<get-verifying>(){}[0]
+
+    final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.krypt.core.policy/CryptoPolicy.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+    final fun permits(com.davils.krypt.core.algorithm/Algorithm, com.davils.krypt.core.policy/AlgorithmUse): kotlin/Boolean // com.davils.krypt.core.policy/CryptoPolicy.permits|permits(com.davils.krypt.core.algorithm.Algorithm;com.davils.krypt.core.policy.AlgorithmUse){}[0]
+    final fun permitsCurve(com.davils.krypt.core.algorithm/EllipticCurve): kotlin/Boolean // com.davils.krypt.core.policy/CryptoPolicy.permitsCurve|permitsCurve(com.davils.krypt.core.algorithm.EllipticCurve){}[0]
+    final fun permitsIterations(kotlin/Int, com.davils.krypt.core.policy/AlgorithmUse): kotlin/Boolean // com.davils.krypt.core.policy/CryptoPolicy.permitsIterations|permitsIterations(kotlin.Int;com.davils.krypt.core.policy.AlgorithmUse){}[0]
+    final fun permitsRsa(kotlin/Int, com.davils.krypt.core.policy/AlgorithmUse): kotlin/Boolean // com.davils.krypt.core.policy/CryptoPolicy.permitsRsa|permitsRsa(kotlin.Int;com.davils.krypt.core.policy.AlgorithmUse){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.core.policy/CryptoPolicy.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.core.policy/CryptoPolicy.Companion|null[0]
+        final const val HARD_MAXIMUM_ITERATIONS // com.davils.krypt.core.policy/CryptoPolicy.Companion.HARD_MAXIMUM_ITERATIONS|{}HARD_MAXIMUM_ITERATIONS[0]
+            final fun <get-HARD_MAXIMUM_ITERATIONS>(): kotlin/Int // com.davils.krypt.core.policy/CryptoPolicy.Companion.HARD_MAXIMUM_ITERATIONS.<get-HARD_MAXIMUM_ITERATIONS>|<get-HARD_MAXIMUM_ITERATIONS>(){}[0]
+        final const val HARD_MAXIMUM_RSA_BITS // com.davils.krypt.core.policy/CryptoPolicy.Companion.HARD_MAXIMUM_RSA_BITS|{}HARD_MAXIMUM_RSA_BITS[0]
+            final fun <get-HARD_MAXIMUM_RSA_BITS>(): kotlin/Int // com.davils.krypt.core.policy/CryptoPolicy.Companion.HARD_MAXIMUM_RSA_BITS.<get-HARD_MAXIMUM_RSA_BITS>|<get-HARD_MAXIMUM_RSA_BITS>(){}[0]
+        final const val HARD_MINIMUM_RSA_BITS // com.davils.krypt.core.policy/CryptoPolicy.Companion.HARD_MINIMUM_RSA_BITS|{}HARD_MINIMUM_RSA_BITS[0]
+            final fun <get-HARD_MINIMUM_RSA_BITS>(): kotlin/Int // com.davils.krypt.core.policy/CryptoPolicy.Companion.HARD_MINIMUM_RSA_BITS.<get-HARD_MINIMUM_RSA_BITS>|<get-HARD_MINIMUM_RSA_BITS>(){}[0]
+
+        final val Cnsa2 // com.davils.krypt.core.policy/CryptoPolicy.Companion.Cnsa2|{}Cnsa2[0]
+            final fun <get-Cnsa2>(): com.davils.krypt.core.policy/CryptoPolicy // com.davils.krypt.core.policy/CryptoPolicy.Companion.Cnsa2.<get-Cnsa2>|<get-Cnsa2>(){}[0]
+        final val Compatible // com.davils.krypt.core.policy/CryptoPolicy.Companion.Compatible|{}Compatible[0]
+            final fun <get-Compatible>(): com.davils.krypt.core.policy/CryptoPolicy // com.davils.krypt.core.policy/CryptoPolicy.Companion.Compatible.<get-Compatible>|<get-Compatible>(){}[0]
+        final val Fips // com.davils.krypt.core.policy/CryptoPolicy.Companion.Fips|{}Fips[0]
+            final fun <get-Fips>(): com.davils.krypt.core.policy/CryptoPolicy // com.davils.krypt.core.policy/CryptoPolicy.Companion.Fips.<get-Fips>|<get-Fips>(){}[0]
+        final val Modern // com.davils.krypt.core.policy/CryptoPolicy.Companion.Modern|{}Modern[0]
+            final fun <get-Modern>(): com.davils.krypt.core.policy/CryptoPolicy // com.davils.krypt.core.policy/CryptoPolicy.Companion.Modern.<get-Modern>|<get-Modern>(){}[0]
+    }
+}
+
+final class com.davils.krypt.core.policy/CryptoPolicyBuilder : com.davils.kore.core.dsl/ValidatingBuilder<com.davils.krypt.core.policy/CryptoPolicy> { // com.davils.krypt.core.policy/CryptoPolicyBuilder|null[0]
+    final val profile // com.davils.krypt.core.policy/CryptoPolicyBuilder.profile|{}profile[0]
+        final fun <get-profile>(): com.davils.krypt.core.policy/CryptoProfile // com.davils.krypt.core.policy/CryptoPolicyBuilder.profile.<get-profile>|<get-profile>(){}[0]
+
+    final var isFipsProviderRequired // com.davils.krypt.core.policy/CryptoPolicyBuilder.isFipsProviderRequired|{}isFipsProviderRequired[0]
+        final fun <get-isFipsProviderRequired>(): kotlin/Boolean // com.davils.krypt.core.policy/CryptoPolicyBuilder.isFipsProviderRequired.<get-isFipsProviderRequired>|<get-isFipsProviderRequired>(){}[0]
+        final fun <set-isFipsProviderRequired>(kotlin/Boolean) // com.davils.krypt.core.policy/CryptoPolicyBuilder.isFipsProviderRequired.<set-isFipsProviderRequired>|<set-isFipsProviderRequired>(kotlin.Boolean){}[0]
+    final var maximumIterations // com.davils.krypt.core.policy/CryptoPolicyBuilder.maximumIterations|{}maximumIterations[0]
+        final fun <get-maximumIterations>(): kotlin/Int // com.davils.krypt.core.policy/CryptoPolicyBuilder.maximumIterations.<get-maximumIterations>|<get-maximumIterations>(){}[0]
+        final fun <set-maximumIterations>(kotlin/Int) // com.davils.krypt.core.policy/CryptoPolicyBuilder.maximumIterations.<set-maximumIterations>|<set-maximumIterations>(kotlin.Int){}[0]
+    final var maximumRsaBits // com.davils.krypt.core.policy/CryptoPolicyBuilder.maximumRsaBits|{}maximumRsaBits[0]
+        final fun <get-maximumRsaBits>(): kotlin/Int // com.davils.krypt.core.policy/CryptoPolicyBuilder.maximumRsaBits.<get-maximumRsaBits>|<get-maximumRsaBits>(){}[0]
+        final fun <set-maximumRsaBits>(kotlin/Int) // com.davils.krypt.core.policy/CryptoPolicyBuilder.maximumRsaBits.<set-maximumRsaBits>|<set-maximumRsaBits>(kotlin.Int){}[0]
+    final var minimumIterations // com.davils.krypt.core.policy/CryptoPolicyBuilder.minimumIterations|{}minimumIterations[0]
+        final fun <get-minimumIterations>(): kotlin/Int // com.davils.krypt.core.policy/CryptoPolicyBuilder.minimumIterations.<get-minimumIterations>|<get-minimumIterations>(){}[0]
+        final fun <set-minimumIterations>(kotlin/Int) // com.davils.krypt.core.policy/CryptoPolicyBuilder.minimumIterations.<set-minimumIterations>|<set-minimumIterations>(kotlin.Int){}[0]
+    final var minimumRsaBits // com.davils.krypt.core.policy/CryptoPolicyBuilder.minimumRsaBits|{}minimumRsaBits[0]
+        final fun <get-minimumRsaBits>(): kotlin/Int // com.davils.krypt.core.policy/CryptoPolicyBuilder.minimumRsaBits.<get-minimumRsaBits>|<get-minimumRsaBits>(){}[0]
+        final fun <set-minimumRsaBits>(kotlin/Int) // com.davils.krypt.core.policy/CryptoPolicyBuilder.minimumRsaBits.<set-minimumRsaBits>|<set-minimumRsaBits>(kotlin.Int){}[0]
+    final var minimumVerifiedIterations // com.davils.krypt.core.policy/CryptoPolicyBuilder.minimumVerifiedIterations|{}minimumVerifiedIterations[0]
+        final fun <get-minimumVerifiedIterations>(): kotlin/Int // com.davils.krypt.core.policy/CryptoPolicyBuilder.minimumVerifiedIterations.<get-minimumVerifiedIterations>|<get-minimumVerifiedIterations>(){}[0]
+        final fun <set-minimumVerifiedIterations>(kotlin/Int) // com.davils.krypt.core.policy/CryptoPolicyBuilder.minimumVerifiedIterations.<set-minimumVerifiedIterations>|<set-minimumVerifiedIterations>(kotlin.Int){}[0]
+    final var minimumVerifiedRsaBits // com.davils.krypt.core.policy/CryptoPolicyBuilder.minimumVerifiedRsaBits|{}minimumVerifiedRsaBits[0]
+        final fun <get-minimumVerifiedRsaBits>(): kotlin/Int // com.davils.krypt.core.policy/CryptoPolicyBuilder.minimumVerifiedRsaBits.<get-minimumVerifiedRsaBits>|<get-minimumVerifiedRsaBits>(){}[0]
+        final fun <set-minimumVerifiedRsaBits>(kotlin/Int) // com.davils.krypt.core.policy/CryptoPolicyBuilder.minimumVerifiedRsaBits.<set-minimumVerifiedRsaBits>|<set-minimumVerifiedRsaBits>(kotlin.Int){}[0]
+
+    final fun accept(kotlin/Array<out com.davils.krypt.core.algorithm/Algorithm>...) // com.davils.krypt.core.policy/CryptoPolicyBuilder.accept|accept(kotlin.Array<out|com.davils.krypt.core.algorithm.Algorithm>...){}[0]
+    final fun acceptLegacy(kotlin/Array<out com.davils.krypt.core.algorithm/Algorithm>...) // com.davils.krypt.core.policy/CryptoPolicyBuilder.acceptLegacy|acceptLegacy(kotlin.Array<out|com.davils.krypt.core.algorithm.Algorithm>...){}[0]
+    final fun curves(kotlin/Array<out com.davils.krypt.core.algorithm/EllipticCurve>...) // com.davils.krypt.core.policy/CryptoPolicyBuilder.curves|curves(kotlin.Array<out|com.davils.krypt.core.algorithm.EllipticCurve>...){}[0]
+    final fun forbid(kotlin/Array<out com.davils.krypt.core.algorithm/Algorithm>...) // com.davils.krypt.core.policy/CryptoPolicyBuilder.forbid|forbid(kotlin.Array<out|com.davils.krypt.core.algorithm.Algorithm>...){}[0]
+    final fun permit(kotlin/Array<out com.davils.krypt.core.algorithm/Algorithm>...) // com.davils.krypt.core.policy/CryptoPolicyBuilder.permit|permit(kotlin.Array<out|com.davils.krypt.core.algorithm.Algorithm>...){}[0]
+}
+
+final class com.davils.krypt.core.telemetry/AuditTrail { // com.davils.krypt.core.telemetry/AuditTrail|null[0]
+    constructor <init>(com.davils.krypt.core/Environment) // com.davils.krypt.core.telemetry/AuditTrail.<init>|<init>(com.davils.krypt.core.Environment){}[0]
+
+    final val failures // com.davils.krypt.core.telemetry/AuditTrail.failures|{}failures[0]
+        final fun <get-failures>(): kotlin/Long // com.davils.krypt.core.telemetry/AuditTrail.failures.<get-failures>|<get-failures>(){}[0]
+
+    final suspend fun record(com.davils.krypt.core.audit/AuditAction, kotlin/String, com.davils.krypt.core.audit/AuditOutcome, kotlin.collections/Map<kotlin/String, kotlin/String> = ...): kotlin/Boolean // com.davils.krypt.core.telemetry/AuditTrail.record|record(com.davils.krypt.core.audit.AuditAction;kotlin.String;com.davils.krypt.core.audit.AuditOutcome;kotlin.collections.Map<kotlin.String,kotlin.String>){}[0]
+}
+
+final class com.davils.krypt.core/Environment : com.davils.kore.core.validation/Validatable { // com.davils.krypt.core/Environment|null[0]
+    final val audit // com.davils.krypt.core/Environment.audit|{}audit[0]
+        final fun <get-audit>(): com.davils.krypt.core.audit/AuditSink? // com.davils.krypt.core/Environment.audit.<get-audit>|<get-audit>(){}[0]
+    final val clock // com.davils.krypt.core/Environment.clock|{}clock[0]
+        final fun <get-clock>(): kotlin.time/Clock // com.davils.krypt.core/Environment.clock.<get-clock>|<get-clock>(){}[0]
+    final val eventCapacity // com.davils.krypt.core/Environment.eventCapacity|{}eventCapacity[0]
+        final fun <get-eventCapacity>(): kotlin/Int // com.davils.krypt.core/Environment.eventCapacity.<get-eventCapacity>|<get-eventCapacity>(){}[0]
+    final val events // com.davils.krypt.core/Environment.events|{}events[0]
+        final fun <get-events>(): com.davils.konfetti.core/EventBus? // com.davils.krypt.core/Environment.events.<get-events>|<get-events>(){}[0]
+    final val isAuditRequired // com.davils.krypt.core/Environment.isAuditRequired|{}isAuditRequired[0]
+        final fun <get-isAuditRequired>(): kotlin/Boolean // com.davils.krypt.core/Environment.isAuditRequired.<get-isAuditRequired>|<get-isAuditRequired>(){}[0]
+    final val meters // com.davils.krypt.core/Environment.meters|{}meters[0]
+        final fun <get-meters>(): com.davils.kollect.core/MeterRegistry? // com.davils.krypt.core/Environment.meters.<get-meters>|<get-meters>(){}[0]
+    final val platformProvider // com.davils.krypt.core/Environment.platformProvider|{}platformProvider[0]
+        final fun <get-platformProvider>(): kotlin/Any? // com.davils.krypt.core/Environment.platformProvider.<get-platformProvider>|<get-platformProvider>(){}[0]
+    final val policy // com.davils.krypt.core/Environment.policy|{}policy[0]
+        final fun <get-policy>(): com.davils.krypt.core.policy/CryptoPolicy // com.davils.krypt.core/Environment.policy.<get-policy>|<get-policy>(){}[0]
+    final val random // com.davils.krypt.core/Environment.random|{}random[0]
+        final fun <get-random>(): com.davils.krypt.core/RandomSource // com.davils.krypt.core/Environment.random.<get-random>|<get-random>(){}[0]
+    final val tracer // com.davils.krypt.core/Environment.tracer|{}tracer[0]
+        final fun <get-tracer>(): com.davils.kollect.core.trace/Tracer // com.davils.krypt.core/Environment.tracer.<get-tracer>|<get-tracer>(){}[0]
+
+    final fun (com.davils.kore.core.validation/ValidationScope).validate() // com.davils.krypt.core/Environment.validate|validate@com.davils.kore.core.validation.ValidationScope(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.core/Environment.toString|toString(){}[0]
+
+    final object Companion { // com.davils.krypt.core/Environment.Companion|null[0]
+        final const val HARD_EVENT_CAPACITY // com.davils.krypt.core/Environment.Companion.HARD_EVENT_CAPACITY|{}HARD_EVENT_CAPACITY[0]
+            final fun <get-HARD_EVENT_CAPACITY>(): kotlin/Int // com.davils.krypt.core/Environment.Companion.HARD_EVENT_CAPACITY.<get-HARD_EVENT_CAPACITY>|<get-HARD_EVENT_CAPACITY>(){}[0]
+
+        final val Default // com.davils.krypt.core/Environment.Companion.Default|{}Default[0]
+            final fun <get-Default>(): com.davils.krypt.core/Environment // com.davils.krypt.core/Environment.Companion.Default.<get-Default>|<get-Default>(){}[0]
+    }
+}
+
+final class com.davils.krypt.core/EnvironmentBuilder : com.davils.kore.core.dsl/ValidatingBuilder<com.davils.krypt.core/Environment> { // com.davils.krypt.core/EnvironmentBuilder|null[0]
+    final var clock // com.davils.krypt.core/EnvironmentBuilder.clock|{}clock[0]
+        final fun <get-clock>(): kotlin.time/Clock // com.davils.krypt.core/EnvironmentBuilder.clock.<get-clock>|<get-clock>(){}[0]
+        final fun <set-clock>(kotlin.time/Clock) // com.davils.krypt.core/EnvironmentBuilder.clock.<set-clock>|<set-clock>(kotlin.time.Clock){}[0]
+    final var eventCapacity // com.davils.krypt.core/EnvironmentBuilder.eventCapacity|{}eventCapacity[0]
+        final fun <get-eventCapacity>(): kotlin/Int // com.davils.krypt.core/EnvironmentBuilder.eventCapacity.<get-eventCapacity>|<get-eventCapacity>(){}[0]
+        final fun <set-eventCapacity>(kotlin/Int) // com.davils.krypt.core/EnvironmentBuilder.eventCapacity.<set-eventCapacity>|<set-eventCapacity>(kotlin.Int){}[0]
+    final var isAuditRequired // com.davils.krypt.core/EnvironmentBuilder.isAuditRequired|{}isAuditRequired[0]
+        final fun <get-isAuditRequired>(): kotlin/Boolean // com.davils.krypt.core/EnvironmentBuilder.isAuditRequired.<get-isAuditRequired>|<get-isAuditRequired>(){}[0]
+        final fun <set-isAuditRequired>(kotlin/Boolean) // com.davils.krypt.core/EnvironmentBuilder.isAuditRequired.<set-isAuditRequired>|<set-isAuditRequired>(kotlin.Boolean){}[0]
+    final var policy // com.davils.krypt.core/EnvironmentBuilder.policy|{}policy[0]
+        final fun <get-policy>(): com.davils.krypt.core.policy/CryptoPolicy // com.davils.krypt.core/EnvironmentBuilder.policy.<get-policy>|<get-policy>(){}[0]
+        final fun <set-policy>(com.davils.krypt.core.policy/CryptoPolicy) // com.davils.krypt.core/EnvironmentBuilder.policy.<set-policy>|<set-policy>(com.davils.krypt.core.policy.CryptoPolicy){}[0]
+    final var random // com.davils.krypt.core/EnvironmentBuilder.random|{}random[0]
+        final fun <get-random>(): com.davils.krypt.core/RandomSource // com.davils.krypt.core/EnvironmentBuilder.random.<get-random>|<get-random>(){}[0]
+        final fun <set-random>(com.davils.krypt.core/RandomSource) // com.davils.krypt.core/EnvironmentBuilder.random.<set-random>|<set-random>(com.davils.krypt.core.RandomSource){}[0]
+    final var tracer // com.davils.krypt.core/EnvironmentBuilder.tracer|{}tracer[0]
+        final fun <get-tracer>(): com.davils.kollect.core.trace/Tracer // com.davils.krypt.core/EnvironmentBuilder.tracer.<get-tracer>|<get-tracer>(){}[0]
+        final fun <set-tracer>(com.davils.kollect.core.trace/Tracer) // com.davils.krypt.core/EnvironmentBuilder.tracer.<set-tracer>|<set-tracer>(com.davils.kollect.core.trace.Tracer){}[0]
+
+    final fun audit(com.davils.krypt.core.audit/AuditSink, kotlin/Boolean = ...) // com.davils.krypt.core/EnvironmentBuilder.audit|audit(com.davils.krypt.core.audit.AuditSink;kotlin.Boolean){}[0]
+    final fun events(com.davils.konfetti.core/EventBus) // com.davils.krypt.core/EnvironmentBuilder.events|events(com.davils.konfetti.core.EventBus){}[0]
+    final fun meters(com.davils.kollect.core/MeterRegistry) // com.davils.krypt.core/EnvironmentBuilder.meters|meters(com.davils.kollect.core.MeterRegistry){}[0]
+    final fun platformProvider(kotlin/Any) // com.davils.krypt.core/EnvironmentBuilder.platformProvider|platformProvider(kotlin.Any){}[0]
+}
+
+final class com.davils.krypt.core/SecretBytes { // com.davils.krypt.core/SecretBytes|null[0]
+    final val isDestroyed // com.davils.krypt.core/SecretBytes.isDestroyed|{}isDestroyed[0]
+        final fun <get-isDestroyed>(): kotlin/Boolean // com.davils.krypt.core/SecretBytes.isDestroyed.<get-isDestroyed>|<get-isDestroyed>(){}[0]
+    final val size // com.davils.krypt.core/SecretBytes.size|{}size[0]
+        final fun <get-size>(): kotlin/Int // com.davils.krypt.core/SecretBytes.size.<get-size>|<get-size>(){}[0]
+
+    final fun copy(): com.davils.krypt.core/SecretBytes // com.davils.krypt.core/SecretBytes.copy|copy(){}[0]
+    final fun destroy() // com.davils.krypt.core/SecretBytes.destroy|destroy(){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.core/SecretBytes.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.core/SecretBytes.hashCode|hashCode(){}[0]
+    final fun prefix(kotlin/Int): com.davils.krypt.core/SecretBytes // com.davils.krypt.core/SecretBytes.prefix|prefix(kotlin.Int){}[0]
+    final fun revealed(): kotlin/ByteArray // com.davils.krypt.core/SecretBytes.revealed|revealed(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.core/SecretBytes.toString|toString(){}[0]
+    final inline fun <#A1: kotlin/Any?> reveal(kotlin/Function1<kotlin/ByteArray, #A1>): #A1 // com.davils.krypt.core/SecretBytes.reveal|reveal(kotlin.Function1<kotlin.ByteArray,0:0>){0§<kotlin.Any?>}[0]
+    final inline fun <#A1: kotlin/Any?> use(kotlin/Function1<com.davils.krypt.core/SecretBytes, #A1>): #A1 // com.davils.krypt.core/SecretBytes.use|use(kotlin.Function1<com.davils.krypt.core.SecretBytes,0:0>){0§<kotlin.Any?>}[0]
+
+    final object Companion { // com.davils.krypt.core/SecretBytes.Companion|null[0]
+        final fun adopt(kotlin/ByteArray): com.davils.krypt.core/SecretBytes // com.davils.krypt.core/SecretBytes.Companion.adopt|adopt(kotlin.ByteArray){}[0]
+        final fun copyOf(kotlin/ByteArray): com.davils.krypt.core/SecretBytes // com.davils.krypt.core/SecretBytes.Companion.copyOf|copyOf(kotlin.ByteArray){}[0]
+        final fun copyOf(kotlinx.io.bytestring/ByteString): com.davils.krypt.core/SecretBytes // com.davils.krypt.core/SecretBytes.Companion.copyOf|copyOf(kotlinx.io.bytestring.ByteString){}[0]
+        final fun random(kotlin/Int, com.davils.krypt.core/RandomSource): com.davils.krypt.core/SecretBytes // com.davils.krypt.core/SecretBytes.Companion.random|random(kotlin.Int;com.davils.krypt.core.RandomSource){}[0]
+    }
+}
+
+final class com.davils.krypt.core/SecretText { // com.davils.krypt.core/SecretText|null[0]
+    final val isDestroyed // com.davils.krypt.core/SecretText.isDestroyed|{}isDestroyed[0]
+        final fun <get-isDestroyed>(): kotlin/Boolean // com.davils.krypt.core/SecretText.isDestroyed.<get-isDestroyed>|<get-isDestroyed>(){}[0]
+    final val length // com.davils.krypt.core/SecretText.length|{}length[0]
+        final fun <get-length>(): kotlin/Int // com.davils.krypt.core/SecretText.length.<get-length>|<get-length>(){}[0]
+
+    final fun destroy() // com.davils.krypt.core/SecretText.destroy|destroy(){}[0]
+    final fun equals(kotlin/Any?): kotlin/Boolean // com.davils.krypt.core/SecretText.equals|equals(kotlin.Any?){}[0]
+    final fun hashCode(): kotlin/Int // com.davils.krypt.core/SecretText.hashCode|hashCode(){}[0]
+    final fun revealed(): kotlin/CharArray // com.davils.krypt.core/SecretText.revealed|revealed(){}[0]
+    final fun toString(): kotlin/String // com.davils.krypt.core/SecretText.toString|toString(){}[0]
+    final fun utf8(): com.davils.krypt.core/SecretBytes // com.davils.krypt.core/SecretText.utf8|utf8(){}[0]
+    final inline fun <#A1: kotlin/Any?> reveal(kotlin/Function1<kotlin/CharArray, #A1>): #A1 // com.davils.krypt.core/SecretText.reveal|reveal(kotlin.Function1<kotlin.CharArray,0:0>){0§<kotlin.Any?>}[0]
+    final inline fun <#A1: kotlin/Any?> use(kotlin/Function1<com.davils.krypt.core/SecretText, #A1>): #A1 // com.davils.krypt.core/SecretText.use|use(kotlin.Function1<com.davils.krypt.core.SecretText,0:0>){0§<kotlin.Any?>}[0]
+
+    final object Companion { // com.davils.krypt.core/SecretText.Companion|null[0]
+        final fun adopt(kotlin/CharArray): com.davils.krypt.core/SecretText // com.davils.krypt.core/SecretText.Companion.adopt|adopt(kotlin.CharArray){}[0]
+        final fun copyOf(kotlin/CharArray): com.davils.krypt.core/SecretText // com.davils.krypt.core/SecretText.Companion.copyOf|copyOf(kotlin.CharArray){}[0]
+        final fun of(kotlin/CharSequence): com.davils.krypt.core/SecretText // com.davils.krypt.core/SecretText.Companion.of|of(kotlin.CharSequence){}[0]
+    }
+}
+
+final object com.davils.krypt.core.encoding/Base64 { // com.davils.krypt.core.encoding/Base64|null[0]
+    final const val MAXIMUM_TEXT_LENGTH // com.davils.krypt.core.encoding/Base64.MAXIMUM_TEXT_LENGTH|{}MAXIMUM_TEXT_LENGTH[0]
+        final fun <get-MAXIMUM_TEXT_LENGTH>(): kotlin/Int // com.davils.krypt.core.encoding/Base64.MAXIMUM_TEXT_LENGTH.<get-MAXIMUM_TEXT_LENGTH>|<get-MAXIMUM_TEXT_LENGTH>(){}[0]
+
+    final fun decode(kotlin/CharSequence, com.davils.krypt.core.encoding/Base64Alphabet = ..., kotlin/Boolean = ...): com.davils.kore.core.outcome/Outcome<kotlinx.io.bytestring/ByteString, com.davils.krypt.core.encoding/EncodingFailure> // com.davils.krypt.core.encoding/Base64.decode|decode(kotlin.CharSequence;com.davils.krypt.core.encoding.Base64Alphabet;kotlin.Boolean){}[0]
+    final fun encode(kotlin/ByteArray, com.davils.krypt.core.encoding/Base64Alphabet = ..., kotlin/Boolean = ...): kotlin/String // com.davils.krypt.core.encoding/Base64.encode|encode(kotlin.ByteArray;com.davils.krypt.core.encoding.Base64Alphabet;kotlin.Boolean){}[0]
+    final fun encode(kotlinx.io.bytestring/ByteString, com.davils.krypt.core.encoding/Base64Alphabet = ..., kotlin/Boolean = ...): kotlin/String // com.davils.krypt.core.encoding/Base64.encode|encode(kotlinx.io.bytestring.ByteString;com.davils.krypt.core.encoding.Base64Alphabet;kotlin.Boolean){}[0]
+}
+
+final object com.davils.krypt.core.encoding/Hex { // com.davils.krypt.core.encoding/Hex|null[0]
+    final const val MAXIMUM_TEXT_LENGTH // com.davils.krypt.core.encoding/Hex.MAXIMUM_TEXT_LENGTH|{}MAXIMUM_TEXT_LENGTH[0]
+        final fun <get-MAXIMUM_TEXT_LENGTH>(): kotlin/Int // com.davils.krypt.core.encoding/Hex.MAXIMUM_TEXT_LENGTH.<get-MAXIMUM_TEXT_LENGTH>|<get-MAXIMUM_TEXT_LENGTH>(){}[0]
+
+    final fun decode(kotlin/CharSequence, kotlin/Char? = ...): com.davils.kore.core.outcome/Outcome<kotlinx.io.bytestring/ByteString, com.davils.krypt.core.encoding/EncodingFailure> // com.davils.krypt.core.encoding/Hex.decode|decode(kotlin.CharSequence;kotlin.Char?){}[0]
+    final fun encode(kotlin/ByteArray, kotlin/Char? = ...): kotlin/String // com.davils.krypt.core.encoding/Hex.encode|encode(kotlin.ByteArray;kotlin.Char?){}[0]
+    final fun encode(kotlinx.io.bytestring/ByteString, kotlin/Char? = ...): kotlin/String // com.davils.krypt.core.encoding/Hex.encode|encode(kotlinx.io.bytestring.ByteString;kotlin.Char?){}[0]
+}
+
+final object com.davils.krypt.core/ConstantTime { // com.davils.krypt.core/ConstantTime|null[0]
+    final fun equals(kotlin/ByteArray, kotlin/ByteArray): kotlin/Boolean // com.davils.krypt.core/ConstantTime.equals|equals(kotlin.ByteArray;kotlin.ByteArray){}[0]
+    final fun equals(kotlinx.io.bytestring/ByteString, kotlinx.io.bytestring/ByteString): kotlin/Boolean // com.davils.krypt.core/ConstantTime.equals|equals(kotlinx.io.bytestring.ByteString;kotlinx.io.bytestring.ByteString){}[0]
+    final fun select(kotlin/Boolean, kotlin/Int, kotlin/Int): kotlin/Int // com.davils.krypt.core/ConstantTime.select|select(kotlin.Boolean;kotlin.Int;kotlin.Int){}[0]
+}
+
+final const val com.davils.krypt.core.io/DEFAULT_CHUNK // com.davils.krypt.core.io/DEFAULT_CHUNK|{}DEFAULT_CHUNK[0]
+    final fun <get-DEFAULT_CHUNK>(): kotlin/Int // com.davils.krypt.core.io/DEFAULT_CHUNK.<get-DEFAULT_CHUNK>|<get-DEFAULT_CHUNK>(){}[0]
+
+final fun (com.davils.krypt.core.io/ByteSource).com.davils.krypt.core.io/asFlow(kotlin/Int = ...): kotlinx.coroutines.flow/Flow<kotlinx.io.bytestring/ByteString> // com.davils.krypt.core.io/asFlow|asFlow@com.davils.krypt.core.io.ByteSource(kotlin.Int){}[0]
+final fun (kotlin/ByteArray).com.davils.krypt.core.io/asByteSource(): com.davils.krypt.core.io/ByteSource // com.davils.krypt.core.io/asByteSource|asByteSource@kotlin.ByteArray(){}[0]
+final fun (kotlinx.io.bytestring/ByteString).com.davils.krypt.core.io/asByteSource(): com.davils.krypt.core.io/ByteSource // com.davils.krypt.core.io/asByteSource|asByteSource@kotlinx.io.bytestring.ByteString(){}[0]
+final fun com.davils.krypt.core.policy/cryptoPolicy(com.davils.krypt.core.policy/CryptoProfile = ..., kotlin/Function1<com.davils.krypt.core.policy/CryptoPolicyBuilder, kotlin/Unit>): com.davils.krypt.core.policy/CryptoPolicy // com.davils.krypt.core.policy/cryptoPolicy|cryptoPolicy(com.davils.krypt.core.policy.CryptoProfile;kotlin.Function1<com.davils.krypt.core.policy.CryptoPolicyBuilder,kotlin.Unit>){}[0]
+final fun com.davils.krypt.core/environment(com.davils.krypt.core/Environment = ..., kotlin/Function1<com.davils.krypt.core/EnvironmentBuilder, kotlin/Unit>): com.davils.krypt.core/Environment // com.davils.krypt.core/environment|environment(com.davils.krypt.core.Environment;kotlin.Function1<com.davils.krypt.core.EnvironmentBuilder,kotlin.Unit>){}[0]
+final suspend fun (com.davils.krypt.core.io/ByteSource).com.davils.krypt.core.io/readAll(kotlin/Int): kotlinx.io.bytestring/ByteString // com.davils.krypt.core.io/readAll|readAll@com.davils.krypt.core.io.ByteSource(kotlin.Int){}[0]
+final suspend fun (com.davils.krypt.core.io/ByteSource).com.davils.krypt.core.io/readFully(kotlin/ByteArray, kotlin/Int = ..., kotlin/Int = ...): kotlin/Int // com.davils.krypt.core.io/readFully|readFully@com.davils.krypt.core.io.ByteSource(kotlin.ByteArray;kotlin.Int;kotlin.Int){}[0]

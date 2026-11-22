@@ -1,0 +1,554 @@
+public final class com/davils/krypt/core/ConstantTime {
+	public static final field INSTANCE Lcom/davils/krypt/core/ConstantTime;
+	public final fun equals (Lkotlinx/io/bytestring/ByteString;Lkotlinx/io/bytestring/ByteString;)Z
+	public final fun equals ([B[B)Z
+	public final fun select (ZII)I
+}
+
+public abstract interface class com/davils/krypt/core/CryptoEvent : com/davils/konfetti/core/Event {
+	public abstract fun getComponent ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/core/Environment : com/davils/kore/core/validation/Validatable {
+	public static final field Companion Lcom/davils/krypt/core/Environment$Companion;
+	public static final field HARD_EVENT_CAPACITY I
+	public final fun getAudit ()Lcom/davils/krypt/core/audit/AuditSink;
+	public final fun getClock ()Lkotlin/time/Clock;
+	public final fun getEventCapacity ()I
+	public final fun getEvents ()Lcom/davils/konfetti/core/EventBus;
+	public final fun getMeters ()Lcom/davils/kollect/core/MeterRegistry;
+	public final fun getPlatformProvider ()Ljava/lang/Object;
+	public final fun getPolicy ()Lcom/davils/krypt/core/policy/CryptoPolicy;
+	public final fun getRandom ()Lcom/davils/krypt/core/RandomSource;
+	public final fun getTracer ()Lcom/davils/kollect/core/trace/Tracer;
+	public final fun isAuditRequired ()Z
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public final class com/davils/krypt/core/Environment$Companion {
+	public final fun getDefault ()Lcom/davils/krypt/core/Environment;
+}
+
+public final class com/davils/krypt/core/EnvironmentBuilder : com/davils/kore/core/dsl/ValidatingBuilder {
+	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+	public final fun audit (Lcom/davils/krypt/core/audit/AuditSink;Z)V
+	public static synthetic fun audit$default (Lcom/davils/krypt/core/EnvironmentBuilder;Lcom/davils/krypt/core/audit/AuditSink;ZILjava/lang/Object;)V
+	public final fun events (Lcom/davils/konfetti/core/EventBus;)V
+	public final fun getClock ()Lkotlin/time/Clock;
+	public final fun getEventCapacity ()I
+	public final fun getPolicy ()Lcom/davils/krypt/core/policy/CryptoPolicy;
+	public final fun getRandom ()Lcom/davils/krypt/core/RandomSource;
+	public final fun getTracer ()Lcom/davils/kollect/core/trace/Tracer;
+	public final fun isAuditRequired ()Z
+	public final fun meters (Lcom/davils/kollect/core/MeterRegistry;)V
+	public final fun platformProvider (Ljava/lang/Object;)V
+	public final fun setAuditRequired (Z)V
+	public final fun setClock (Lkotlin/time/Clock;)V
+	public final fun setEventCapacity (I)V
+	public final fun setPolicy (Lcom/davils/krypt/core/policy/CryptoPolicy;)V
+	public final fun setRandom (Lcom/davils/krypt/core/RandomSource;)V
+	public final fun setTracer (Lcom/davils/kollect/core/trace/Tracer;)V
+}
+
+public final class com/davils/krypt/core/EnvironmentsKt {
+	public static final fun environment (Lcom/davils/krypt/core/Environment;Lkotlin/jvm/functions/Function1;)Lcom/davils/krypt/core/Environment;
+	public static synthetic fun environment$default (Lcom/davils/krypt/core/Environment;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/krypt/core/Environment;
+}
+
+public abstract interface annotation class com/davils/krypt/core/LegacyCryptography : java/lang/annotation/Annotation {
+}
+
+public final class com/davils/krypt/core/Providers {
+	public static final fun getProvider (Lcom/davils/krypt/core/Environment;)Ljava/security/Provider;
+	public static final fun provider (Lcom/davils/krypt/core/EnvironmentBuilder;Ljava/security/Provider;)V
+}
+
+public abstract interface class com/davils/krypt/core/RandomSource {
+	public static final field Companion Lcom/davils/krypt/core/RandomSource$Companion;
+	public fun bytes (I)[B
+	public abstract fun fill ([B)V
+}
+
+public final class com/davils/krypt/core/RandomSource$Companion {
+	public final fun getSecure ()Lcom/davils/krypt/core/RandomSource;
+}
+
+public final class com/davils/krypt/core/SecretBytes {
+	public static final field Companion Lcom/davils/krypt/core/SecretBytes$Companion;
+	public final fun copy ()Lcom/davils/krypt/core/SecretBytes;
+	public final fun destroy ()V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getSize ()I
+	public fun hashCode ()I
+	public final fun isDestroyed ()Z
+	public final fun prefix (I)Lcom/davils/krypt/core/SecretBytes;
+	public final fun reveal (Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public final fun revealed ()[B
+	public fun toString ()Ljava/lang/String;
+	public final fun use (Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/core/SecretBytes$Companion {
+	public final fun adopt ([B)Lcom/davils/krypt/core/SecretBytes;
+	public final fun copyOf (Lkotlinx/io/bytestring/ByteString;)Lcom/davils/krypt/core/SecretBytes;
+	public final fun copyOf ([B)Lcom/davils/krypt/core/SecretBytes;
+	public final fun random (ILcom/davils/krypt/core/RandomSource;)Lcom/davils/krypt/core/SecretBytes;
+}
+
+public final class com/davils/krypt/core/SecretText {
+	public static final field Companion Lcom/davils/krypt/core/SecretText$Companion;
+	public final fun destroy ()V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getLength ()I
+	public fun hashCode ()I
+	public final fun isDestroyed ()Z
+	public final fun reveal (Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public final fun revealed ()[C
+	public fun toString ()Ljava/lang/String;
+	public final fun use (Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+	public final fun utf8 ()Lcom/davils/krypt/core/SecretBytes;
+}
+
+public final class com/davils/krypt/core/SecretText$Companion {
+	public final fun adopt ([C)Lcom/davils/krypt/core/SecretText;
+	public final fun copyOf ([C)Lcom/davils/krypt/core/SecretText;
+	public final fun of (Ljava/lang/CharSequence;)Lcom/davils/krypt/core/SecretText;
+}
+
+public final class com/davils/krypt/core/algorithm/AeadAlgorithm : java/lang/Enum, com/davils/krypt/core/algorithm/Algorithm {
+	public static final field Aes128Gcm Lcom/davils/krypt/core/algorithm/AeadAlgorithm;
+	public static final field Aes256Gcm Lcom/davils/krypt/core/algorithm/AeadAlgorithm;
+	public static final field ChaCha20Poly1305 Lcom/davils/krypt/core/algorithm/AeadAlgorithm;
+	public fun getAlgorithmName ()Ljava/lang/String;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getKeyBytes ()I
+	public final fun getNonceBytes ()I
+	public fun getSecurityBits ()I
+	public final fun getTagBytes ()I
+	public fun isFipsApproved ()Z
+	public fun isLegacy ()Z
+	public fun isPostQuantum ()Z
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/core/algorithm/AeadAlgorithm;
+	public static fun values ()[Lcom/davils/krypt/core/algorithm/AeadAlgorithm;
+}
+
+public abstract interface class com/davils/krypt/core/algorithm/Algorithm {
+	public abstract fun getAlgorithmName ()Ljava/lang/String;
+	public abstract fun getSecurityBits ()I
+	public abstract fun isFipsApproved ()Z
+	public abstract fun isLegacy ()Z
+	public abstract fun isPostQuantum ()Z
+}
+
+public final class com/davils/krypt/core/algorithm/AsymmetricEncryptionAlgorithm : java/lang/Enum, com/davils/krypt/core/algorithm/Algorithm {
+	public static final field RsaOaepSha256 Lcom/davils/krypt/core/algorithm/AsymmetricEncryptionAlgorithm;
+	public static final field RsaOaepSha384 Lcom/davils/krypt/core/algorithm/AsymmetricEncryptionAlgorithm;
+	public static final field RsaOaepSha512 Lcom/davils/krypt/core/algorithm/AsymmetricEncryptionAlgorithm;
+	public static final field RsaPkcs1 Lcom/davils/krypt/core/algorithm/AsymmetricEncryptionAlgorithm;
+	public fun getAlgorithmName ()Ljava/lang/String;
+	public final fun getDigest ()Lcom/davils/krypt/core/algorithm/DigestAlgorithm;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public fun getSecurityBits ()I
+	public fun isFipsApproved ()Z
+	public fun isLegacy ()Z
+	public fun isPostQuantum ()Z
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/core/algorithm/AsymmetricEncryptionAlgorithm;
+	public static fun values ()[Lcom/davils/krypt/core/algorithm/AsymmetricEncryptionAlgorithm;
+}
+
+public final class com/davils/krypt/core/algorithm/DigestAlgorithm : java/lang/Enum, com/davils/krypt/core/algorithm/Algorithm {
+	public static final field Md5 Lcom/davils/krypt/core/algorithm/DigestAlgorithm;
+	public static final field Sha1 Lcom/davils/krypt/core/algorithm/DigestAlgorithm;
+	public static final field Sha256 Lcom/davils/krypt/core/algorithm/DigestAlgorithm;
+	public static final field Sha3256 Lcom/davils/krypt/core/algorithm/DigestAlgorithm;
+	public static final field Sha3384 Lcom/davils/krypt/core/algorithm/DigestAlgorithm;
+	public static final field Sha3512 Lcom/davils/krypt/core/algorithm/DigestAlgorithm;
+	public static final field Sha384 Lcom/davils/krypt/core/algorithm/DigestAlgorithm;
+	public static final field Sha512 Lcom/davils/krypt/core/algorithm/DigestAlgorithm;
+	public fun getAlgorithmName ()Ljava/lang/String;
+	public final fun getBlockBytes ()I
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getOutputBytes ()I
+	public fun getSecurityBits ()I
+	public fun isFipsApproved ()Z
+	public fun isLegacy ()Z
+	public fun isPostQuantum ()Z
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/core/algorithm/DigestAlgorithm;
+	public static fun values ()[Lcom/davils/krypt/core/algorithm/DigestAlgorithm;
+}
+
+public final class com/davils/krypt/core/algorithm/EllipticCurve : java/lang/Enum {
+	public static final field P256 Lcom/davils/krypt/core/algorithm/EllipticCurve;
+	public static final field P384 Lcom/davils/krypt/core/algorithm/EllipticCurve;
+	public static final field P521 Lcom/davils/krypt/core/algorithm/EllipticCurve;
+	public final fun getBits ()I
+	public final fun getCurveName ()Ljava/lang/String;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getFieldBytes ()I
+	public final fun getObjectIdentifier ()Ljava/lang/String;
+	public final fun getSecurityBits ()I
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/core/algorithm/EllipticCurve;
+	public static fun values ()[Lcom/davils/krypt/core/algorithm/EllipticCurve;
+}
+
+public final class com/davils/krypt/core/algorithm/KdfAlgorithm : java/lang/Enum, com/davils/krypt/core/algorithm/Algorithm {
+	public static final field HkdfSha256 Lcom/davils/krypt/core/algorithm/KdfAlgorithm;
+	public static final field HkdfSha384 Lcom/davils/krypt/core/algorithm/KdfAlgorithm;
+	public static final field HkdfSha512 Lcom/davils/krypt/core/algorithm/KdfAlgorithm;
+	public static final field Pbkdf2Sha256 Lcom/davils/krypt/core/algorithm/KdfAlgorithm;
+	public static final field Pbkdf2Sha512 Lcom/davils/krypt/core/algorithm/KdfAlgorithm;
+	public fun getAlgorithmName ()Ljava/lang/String;
+	public final fun getDigest ()Lcom/davils/krypt/core/algorithm/DigestAlgorithm;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public fun getSecurityBits ()I
+	public fun isFipsApproved ()Z
+	public fun isLegacy ()Z
+	public final fun isPasswordBased ()Z
+	public fun isPostQuantum ()Z
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/core/algorithm/KdfAlgorithm;
+	public static fun values ()[Lcom/davils/krypt/core/algorithm/KdfAlgorithm;
+}
+
+public final class com/davils/krypt/core/algorithm/KemAlgorithm : java/lang/Enum, com/davils/krypt/core/algorithm/Algorithm {
+	public static final field DhkemP256 Lcom/davils/krypt/core/algorithm/KemAlgorithm;
+	public static final field DhkemP384 Lcom/davils/krypt/core/algorithm/KemAlgorithm;
+	public static final field DhkemP521 Lcom/davils/krypt/core/algorithm/KemAlgorithm;
+	public static final field DhkemX25519 Lcom/davils/krypt/core/algorithm/KemAlgorithm;
+	public static final field MlKem1024 Lcom/davils/krypt/core/algorithm/KemAlgorithm;
+	public static final field MlKem768 Lcom/davils/krypt/core/algorithm/KemAlgorithm;
+	public fun getAlgorithmName ()Ljava/lang/String;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getFamily ()Lcom/davils/krypt/core/algorithm/KeyFamily;
+	public final fun getSecretBytes ()I
+	public fun getSecurityBits ()I
+	public fun isFipsApproved ()Z
+	public fun isLegacy ()Z
+	public fun isPostQuantum ()Z
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/core/algorithm/KemAlgorithm;
+	public static fun values ()[Lcom/davils/krypt/core/algorithm/KemAlgorithm;
+}
+
+public final class com/davils/krypt/core/algorithm/KeyAgreementAlgorithm : java/lang/Enum, com/davils/krypt/core/algorithm/Algorithm {
+	public static final field EcdhP256 Lcom/davils/krypt/core/algorithm/KeyAgreementAlgorithm;
+	public static final field EcdhP384 Lcom/davils/krypt/core/algorithm/KeyAgreementAlgorithm;
+	public static final field EcdhP521 Lcom/davils/krypt/core/algorithm/KeyAgreementAlgorithm;
+	public static final field X25519 Lcom/davils/krypt/core/algorithm/KeyAgreementAlgorithm;
+	public static final field X448 Lcom/davils/krypt/core/algorithm/KeyAgreementAlgorithm;
+	public fun getAlgorithmName ()Ljava/lang/String;
+	public final fun getCurve ()Lcom/davils/krypt/core/algorithm/EllipticCurve;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getFamily ()Lcom/davils/krypt/core/algorithm/KeyFamily;
+	public final fun getSecretBytes ()I
+	public fun getSecurityBits ()I
+	public fun isFipsApproved ()Z
+	public fun isLegacy ()Z
+	public fun isPostQuantum ()Z
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/core/algorithm/KeyAgreementAlgorithm;
+	public static fun values ()[Lcom/davils/krypt/core/algorithm/KeyAgreementAlgorithm;
+}
+
+public final class com/davils/krypt/core/algorithm/KeyFamily : java/lang/Enum {
+	public static final field Ec Lcom/davils/krypt/core/algorithm/KeyFamily;
+	public static final field Ed25519 Lcom/davils/krypt/core/algorithm/KeyFamily;
+	public static final field Ed448 Lcom/davils/krypt/core/algorithm/KeyFamily;
+	public static final field MlDsa Lcom/davils/krypt/core/algorithm/KeyFamily;
+	public static final field MlKem Lcom/davils/krypt/core/algorithm/KeyFamily;
+	public static final field Rsa Lcom/davils/krypt/core/algorithm/KeyFamily;
+	public static final field X25519 Lcom/davils/krypt/core/algorithm/KeyFamily;
+	public static final field X448 Lcom/davils/krypt/core/algorithm/KeyFamily;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/core/algorithm/KeyFamily;
+	public static fun values ()[Lcom/davils/krypt/core/algorithm/KeyFamily;
+}
+
+public final class com/davils/krypt/core/algorithm/KeyType : java/lang/Enum {
+	public static final field Ed25519 Lcom/davils/krypt/core/algorithm/KeyType;
+	public static final field Ed448 Lcom/davils/krypt/core/algorithm/KeyType;
+	public static final field MlDsa44 Lcom/davils/krypt/core/algorithm/KeyType;
+	public static final field MlDsa65 Lcom/davils/krypt/core/algorithm/KeyType;
+	public static final field MlDsa87 Lcom/davils/krypt/core/algorithm/KeyType;
+	public static final field MlKem1024 Lcom/davils/krypt/core/algorithm/KeyType;
+	public static final field MlKem768 Lcom/davils/krypt/core/algorithm/KeyType;
+	public static final field P256 Lcom/davils/krypt/core/algorithm/KeyType;
+	public static final field P384 Lcom/davils/krypt/core/algorithm/KeyType;
+	public static final field P521 Lcom/davils/krypt/core/algorithm/KeyType;
+	public static final field Rsa2048 Lcom/davils/krypt/core/algorithm/KeyType;
+	public static final field Rsa3072 Lcom/davils/krypt/core/algorithm/KeyType;
+	public static final field Rsa4096 Lcom/davils/krypt/core/algorithm/KeyType;
+	public static final field X25519 Lcom/davils/krypt/core/algorithm/KeyType;
+	public static final field X448 Lcom/davils/krypt/core/algorithm/KeyType;
+	public final fun getBits ()I
+	public final fun getCurve ()Lcom/davils/krypt/core/algorithm/EllipticCurve;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getFamily ()Lcom/davils/krypt/core/algorithm/KeyFamily;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/core/algorithm/KeyType;
+	public static fun values ()[Lcom/davils/krypt/core/algorithm/KeyType;
+}
+
+public final class com/davils/krypt/core/algorithm/KeyWrapAlgorithm : java/lang/Enum, com/davils/krypt/core/algorithm/Algorithm {
+	public static final field Aes128Kw Lcom/davils/krypt/core/algorithm/KeyWrapAlgorithm;
+	public static final field Aes256Kw Lcom/davils/krypt/core/algorithm/KeyWrapAlgorithm;
+	public fun getAlgorithmName ()Ljava/lang/String;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getKeyBytes ()I
+	public fun getSecurityBits ()I
+	public fun isFipsApproved ()Z
+	public fun isLegacy ()Z
+	public fun isPostQuantum ()Z
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/core/algorithm/KeyWrapAlgorithm;
+	public static fun values ()[Lcom/davils/krypt/core/algorithm/KeyWrapAlgorithm;
+}
+
+public final class com/davils/krypt/core/algorithm/MacAlgorithm : java/lang/Enum, com/davils/krypt/core/algorithm/Algorithm {
+	public static final field HmacSha256 Lcom/davils/krypt/core/algorithm/MacAlgorithm;
+	public static final field HmacSha384 Lcom/davils/krypt/core/algorithm/MacAlgorithm;
+	public static final field HmacSha512 Lcom/davils/krypt/core/algorithm/MacAlgorithm;
+	public fun getAlgorithmName ()Ljava/lang/String;
+	public final fun getDigest ()Lcom/davils/krypt/core/algorithm/DigestAlgorithm;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public fun getSecurityBits ()I
+	public final fun getTagBytes ()I
+	public fun isFipsApproved ()Z
+	public fun isLegacy ()Z
+	public fun isPostQuantum ()Z
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/core/algorithm/MacAlgorithm;
+	public static fun values ()[Lcom/davils/krypt/core/algorithm/MacAlgorithm;
+}
+
+public final class com/davils/krypt/core/algorithm/SignatureAlgorithm : java/lang/Enum, com/davils/krypt/core/algorithm/Algorithm {
+	public static final field EcdsaSha1 Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;
+	public static final field EcdsaSha256 Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;
+	public static final field EcdsaSha384 Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;
+	public static final field EcdsaSha512 Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;
+	public static final field Ed25519 Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;
+	public static final field Ed448 Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;
+	public static final field MlDsa44 Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;
+	public static final field MlDsa65 Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;
+	public static final field MlDsa87 Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;
+	public static final field RsaPkcs1Sha1 Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;
+	public static final field RsaPkcs1Sha256 Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;
+	public static final field RsaPkcs1Sha384 Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;
+	public static final field RsaPkcs1Sha512 Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;
+	public static final field RsaPssSha256 Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;
+	public static final field RsaPssSha384 Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;
+	public static final field RsaPssSha512 Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;
+	public fun getAlgorithmName ()Ljava/lang/String;
+	public final fun getDigest ()Lcom/davils/krypt/core/algorithm/DigestAlgorithm;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getFamily ()Lcom/davils/krypt/core/algorithm/KeyFamily;
+	public fun getSecurityBits ()I
+	public fun isFipsApproved ()Z
+	public fun isLegacy ()Z
+	public fun isPostQuantum ()Z
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;
+	public static fun values ()[Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;
+}
+
+public final class com/davils/krypt/core/audit/AuditAction : java/lang/Comparable {
+	public fun <init> (Ljava/lang/String;)V
+	public fun compareTo (Lcom/davils/krypt/core/audit/AuditAction;)I
+	public synthetic fun compareTo (Ljava/lang/Object;)I
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/core/audit/AuditEntry {
+	public fun <init> (Lcom/davils/krypt/core/audit/AuditAction;Ljava/lang/String;Lcom/davils/krypt/core/audit/AuditOutcome;Lkotlin/time/Instant;Ljava/util/Map;)V
+	public synthetic fun <init> (Lcom/davils/krypt/core/audit/AuditAction;Ljava/lang/String;Lcom/davils/krypt/core/audit/AuditOutcome;Lkotlin/time/Instant;Ljava/util/Map;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAction ()Lcom/davils/krypt/core/audit/AuditAction;
+	public final fun getAt ()Lkotlin/time/Instant;
+	public final fun getAttributes ()Ljava/util/Map;
+	public final fun getOutcome ()Lcom/davils/krypt/core/audit/AuditOutcome;
+	public final fun getSubject ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/core/audit/AuditOutcome : java/lang/Enum {
+	public static final field Failed Lcom/davils/krypt/core/audit/AuditOutcome;
+	public static final field Refused Lcom/davils/krypt/core/audit/AuditOutcome;
+	public static final field Succeeded Lcom/davils/krypt/core/audit/AuditOutcome;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/core/audit/AuditOutcome;
+	public static fun values ()[Lcom/davils/krypt/core/audit/AuditOutcome;
+}
+
+public abstract interface class com/davils/krypt/core/audit/AuditSink {
+	public abstract fun record (Lcom/davils/krypt/core/audit/AuditEntry;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/core/encoding/Base64 {
+	public static final field INSTANCE Lcom/davils/krypt/core/encoding/Base64;
+	public static final field MAXIMUM_TEXT_LENGTH I
+	public final fun decode (Ljava/lang/CharSequence;Lcom/davils/krypt/core/encoding/Base64Alphabet;Z)Lcom/davils/kore/core/outcome/Outcome;
+	public static synthetic fun decode$default (Lcom/davils/krypt/core/encoding/Base64;Ljava/lang/CharSequence;Lcom/davils/krypt/core/encoding/Base64Alphabet;ZILjava/lang/Object;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun encode (Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/encoding/Base64Alphabet;Z)Ljava/lang/String;
+	public final fun encode ([BLcom/davils/krypt/core/encoding/Base64Alphabet;Z)Ljava/lang/String;
+	public static synthetic fun encode$default (Lcom/davils/krypt/core/encoding/Base64;Lkotlinx/io/bytestring/ByteString;Lcom/davils/krypt/core/encoding/Base64Alphabet;ZILjava/lang/Object;)Ljava/lang/String;
+	public static synthetic fun encode$default (Lcom/davils/krypt/core/encoding/Base64;[BLcom/davils/krypt/core/encoding/Base64Alphabet;ZILjava/lang/Object;)Ljava/lang/String;
+}
+
+public final class com/davils/krypt/core/encoding/Base64Alphabet : java/lang/Enum {
+	public static final field Standard Lcom/davils/krypt/core/encoding/Base64Alphabet;
+	public static final field Url Lcom/davils/krypt/core/encoding/Base64Alphabet;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/core/encoding/Base64Alphabet;
+	public static fun values ()[Lcom/davils/krypt/core/encoding/Base64Alphabet;
+}
+
+public final class com/davils/krypt/core/encoding/EncodingFailure : java/lang/Enum {
+	public static final field InvalidCharacter Lcom/davils/krypt/core/encoding/EncodingFailure;
+	public static final field InvalidLength Lcom/davils/krypt/core/encoding/EncodingFailure;
+	public static final field InvalidPadding Lcom/davils/krypt/core/encoding/EncodingFailure;
+	public static final field NonCanonical Lcom/davils/krypt/core/encoding/EncodingFailure;
+	public static final field TooLong Lcom/davils/krypt/core/encoding/EncodingFailure;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/core/encoding/EncodingFailure;
+	public static fun values ()[Lcom/davils/krypt/core/encoding/EncodingFailure;
+}
+
+public final class com/davils/krypt/core/encoding/Hex {
+	public static final field INSTANCE Lcom/davils/krypt/core/encoding/Hex;
+	public static final field MAXIMUM_TEXT_LENGTH I
+	public final fun decode (Ljava/lang/CharSequence;Ljava/lang/Character;)Lcom/davils/kore/core/outcome/Outcome;
+	public static synthetic fun decode$default (Lcom/davils/krypt/core/encoding/Hex;Ljava/lang/CharSequence;Ljava/lang/Character;ILjava/lang/Object;)Lcom/davils/kore/core/outcome/Outcome;
+	public final fun encode (Lkotlinx/io/bytestring/ByteString;Ljava/lang/Character;)Ljava/lang/String;
+	public final fun encode ([BLjava/lang/Character;)Ljava/lang/String;
+	public static synthetic fun encode$default (Lcom/davils/krypt/core/encoding/Hex;Lkotlinx/io/bytestring/ByteString;Ljava/lang/Character;ILjava/lang/Object;)Ljava/lang/String;
+	public static synthetic fun encode$default (Lcom/davils/krypt/core/encoding/Hex;[BLjava/lang/Character;ILjava/lang/Object;)Ljava/lang/String;
+}
+
+public final class com/davils/krypt/core/io/BufferSink : com/davils/krypt/core/io/ByteSink {
+	public fun <init> (I)V
+	public final fun append ([BII)V
+	public static synthetic fun append$default (Lcom/davils/krypt/core/io/BufferSink;[BIIILjava/lang/Object;)V
+	public final fun getMaximum ()I
+	public final fun getSize ()I
+	public final fun toByteString ()Lkotlinx/io/bytestring/ByteString;
+	public fun toString ()Ljava/lang/String;
+	public final fun wipe ()V
+	public fun write ([BIILkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/core/io/ByteLimitException : java/lang/IllegalStateException {
+	public fun <init> (J)V
+	public final fun getMaximum ()J
+}
+
+public abstract interface class com/davils/krypt/core/io/ByteSink {
+	public abstract fun write ([BIILkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class com/davils/krypt/core/io/ByteSource {
+	public abstract fun read ([BIILkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/core/io/ByteSourcesKt {
+	public static final field DEFAULT_CHUNK I
+	public static final fun asByteSource (Lkotlinx/io/bytestring/ByteString;)Lcom/davils/krypt/core/io/ByteSource;
+	public static final fun asByteSource ([B)Lcom/davils/krypt/core/io/ByteSource;
+	public static final fun asFlow (Lcom/davils/krypt/core/io/ByteSource;I)Lkotlinx/coroutines/flow/Flow;
+	public static synthetic fun asFlow$default (Lcom/davils/krypt/core/io/ByteSource;IILjava/lang/Object;)Lkotlinx/coroutines/flow/Flow;
+	public static final fun readAll (Lcom/davils/krypt/core/io/ByteSource;ILkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static final fun readFully (Lcom/davils/krypt/core/io/ByteSource;[BIILkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun readFully$default (Lcom/davils/krypt/core/io/ByteSource;[BIILkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/core/policy/AlgorithmUse : java/lang/Enum {
+	public static final field Protect Lcom/davils/krypt/core/policy/AlgorithmUse;
+	public static final field Verify Lcom/davils/krypt/core/policy/AlgorithmUse;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/core/policy/AlgorithmUse;
+	public static fun values ()[Lcom/davils/krypt/core/policy/AlgorithmUse;
+}
+
+public final class com/davils/krypt/core/policy/CryptoPolicy : com/davils/kore/core/validation/Validatable {
+	public static final field Companion Lcom/davils/krypt/core/policy/CryptoPolicy$Companion;
+	public static final field HARD_MAXIMUM_ITERATIONS I
+	public static final field HARD_MAXIMUM_RSA_BITS I
+	public static final field HARD_MINIMUM_RSA_BITS I
+	public final fun getCurves ()Ljava/util/Set;
+	public final fun getMaximumIterations ()I
+	public final fun getMaximumRsaBits ()I
+	public final fun getMinimumIterations ()I
+	public final fun getMinimumRsaBits ()I
+	public final fun getMinimumVerifiedIterations ()I
+	public final fun getMinimumVerifiedRsaBits ()I
+	public final fun getProfile ()Lcom/davils/krypt/core/policy/CryptoProfile;
+	public final fun getProtecting ()Ljava/util/Set;
+	public final fun getVerifying ()Ljava/util/Set;
+	public final fun isFipsProviderRequired ()Z
+	public final fun permits (Lcom/davils/krypt/core/algorithm/Algorithm;Lcom/davils/krypt/core/policy/AlgorithmUse;)Z
+	public final fun permitsCurve (Lcom/davils/krypt/core/algorithm/EllipticCurve;)Z
+	public final fun permitsIterations (ILcom/davils/krypt/core/policy/AlgorithmUse;)Z
+	public final fun permitsRsa (ILcom/davils/krypt/core/policy/AlgorithmUse;)Z
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public final class com/davils/krypt/core/policy/CryptoPolicy$Companion {
+	public final fun getCnsa2 ()Lcom/davils/krypt/core/policy/CryptoPolicy;
+	public final fun getCompatible ()Lcom/davils/krypt/core/policy/CryptoPolicy;
+	public final fun getFips ()Lcom/davils/krypt/core/policy/CryptoPolicy;
+	public final fun getModern ()Lcom/davils/krypt/core/policy/CryptoPolicy;
+}
+
+public final class com/davils/krypt/core/policy/CryptoPolicyBuilder : com/davils/kore/core/dsl/ValidatingBuilder {
+	public final fun accept ([Lcom/davils/krypt/core/algorithm/Algorithm;)V
+	public final fun acceptLegacy ([Lcom/davils/krypt/core/algorithm/Algorithm;)V
+	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+	public final fun curves ([Lcom/davils/krypt/core/algorithm/EllipticCurve;)V
+	public final fun forbid ([Lcom/davils/krypt/core/algorithm/Algorithm;)V
+	public final fun getMaximumIterations ()I
+	public final fun getMaximumRsaBits ()I
+	public final fun getMinimumIterations ()I
+	public final fun getMinimumRsaBits ()I
+	public final fun getMinimumVerifiedIterations ()I
+	public final fun getMinimumVerifiedRsaBits ()I
+	public final fun getProfile ()Lcom/davils/krypt/core/policy/CryptoProfile;
+	public final fun isFipsProviderRequired ()Z
+	public final fun permit ([Lcom/davils/krypt/core/algorithm/Algorithm;)V
+	public final fun setFipsProviderRequired (Z)V
+	public final fun setMaximumIterations (I)V
+	public final fun setMaximumRsaBits (I)V
+	public final fun setMinimumIterations (I)V
+	public final fun setMinimumRsaBits (I)V
+	public final fun setMinimumVerifiedIterations (I)V
+	public final fun setMinimumVerifiedRsaBits (I)V
+}
+
+public final class com/davils/krypt/core/policy/CryptoProfile : java/lang/Enum {
+	public static final field Cnsa2 Lcom/davils/krypt/core/policy/CryptoProfile;
+	public static final field Compatible Lcom/davils/krypt/core/policy/CryptoProfile;
+	public static final field Fips Lcom/davils/krypt/core/policy/CryptoProfile;
+	public static final field Modern Lcom/davils/krypt/core/policy/CryptoProfile;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/core/policy/CryptoProfile;
+	public static fun values ()[Lcom/davils/krypt/core/policy/CryptoProfile;
+}
+
+public final class com/davils/krypt/core/policy/PoliciesKt {
+	public static final fun cryptoPolicy (Lcom/davils/krypt/core/policy/CryptoProfile;Lkotlin/jvm/functions/Function1;)Lcom/davils/krypt/core/policy/CryptoPolicy;
+	public static synthetic fun cryptoPolicy$default (Lcom/davils/krypt/core/policy/CryptoProfile;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/davils/krypt/core/policy/CryptoPolicy;
+}
+
+public final class com/davils/krypt/core/telemetry/AuditTrail {
+	public fun <init> (Lcom/davils/krypt/core/Environment;)V
+	public final fun getFailures ()J
+	public final fun record (Lcom/davils/krypt/core/audit/AuditAction;Ljava/lang/String;Lcom/davils/krypt/core/audit/AuditOutcome;Ljava/util/Map;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun record$default (Lcom/davils/krypt/core/telemetry/AuditTrail;Lcom/davils/krypt/core/audit/AuditAction;Ljava/lang/String;Lcom/davils/krypt/core/audit/AuditOutcome;Ljava/util/Map;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/core/telemetry/EventSink {
+	public fun <init> (Lcom/davils/krypt/core/Environment;Lcom/davils/konfetti/core/TopicKey;)V
+	public final fun emit (Lkotlin/jvm/functions/Function0;)V
+	public final fun getEvents ()Lkotlinx/coroutines/flow/Flow;
+	public final fun getRejected ()J
+	public final fun isListened ()Z
+	public final fun send (Lcom/davils/krypt/core/CryptoEvent;)V
+}
+
