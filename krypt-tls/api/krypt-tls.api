@@ -1,0 +1,484 @@
+public final class com/davils/krypt/tls/CipherSuite : java/lang/Enum {
+	public static final field Aes128GcmSha256 Lcom/davils/krypt/tls/CipherSuite;
+	public static final field Aes256GcmSha384 Lcom/davils/krypt/tls/CipherSuite;
+	public static final field ChaCha20Poly1305Sha256 Lcom/davils/krypt/tls/CipherSuite;
+	public static final field EcdheEcdsaAes128GcmSha256 Lcom/davils/krypt/tls/CipherSuite;
+	public static final field EcdheEcdsaAes256GcmSha384 Lcom/davils/krypt/tls/CipherSuite;
+	public static final field EcdheEcdsaChaCha20Poly1305Sha256 Lcom/davils/krypt/tls/CipherSuite;
+	public static final field EcdheRsaAes128GcmSha256 Lcom/davils/krypt/tls/CipherSuite;
+	public static final field EcdheRsaAes256GcmSha384 Lcom/davils/krypt/tls/CipherSuite;
+	public static final field EcdheRsaChaCha20Poly1305Sha256 Lcom/davils/krypt/tls/CipherSuite;
+	public final fun getAead ()Lcom/davils/krypt/core/algorithm/AeadAlgorithm;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getSuiteName ()Ljava/lang/String;
+	public final fun getVersion ()Lcom/davils/krypt/tls/TlsVersion;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/tls/CipherSuite;
+	public static fun values ()[Lcom/davils/krypt/tls/CipherSuite;
+}
+
+public final class com/davils/krypt/tls/ClientAuthentication : java/lang/Enum {
+	public static final field None Lcom/davils/krypt/tls/ClientAuthentication;
+	public static final field Requested Lcom/davils/krypt/tls/ClientAuthentication;
+	public static final field Required Lcom/davils/krypt/tls/ClientAuthentication;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/tls/ClientAuthentication;
+	public static fun values ()[Lcom/davils/krypt/tls/ClientAuthentication;
+}
+
+public final class com/davils/krypt/tls/ConfigurationsKt {
+	public static final fun tls (Lcom/davils/krypt/tls/TlsRole;Lcom/davils/krypt/primitive/Crypto;Lkotlin/jvm/functions/Function1;)Lcom/davils/krypt/tls/TlsConfiguration;
+}
+
+public final class com/davils/krypt/tls/NamedGroup : java/lang/Enum {
+	public static final field Secp256r1 Lcom/davils/krypt/tls/NamedGroup;
+	public static final field Secp384r1 Lcom/davils/krypt/tls/NamedGroup;
+	public static final field Secp521r1 Lcom/davils/krypt/tls/NamedGroup;
+	public static final field X25519 Lcom/davils/krypt/tls/NamedGroup;
+	public static final field X25519MlKem768 Lcom/davils/krypt/tls/NamedGroup;
+	public static final field X448 Lcom/davils/krypt/tls/NamedGroup;
+	public final fun getAlgorithm ()Lcom/davils/krypt/core/algorithm/Algorithm;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getGroupName ()Ljava/lang/String;
+	public final fun isPostQuantum ()Z
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/tls/NamedGroup;
+	public static fun values ()[Lcom/davils/krypt/tls/NamedGroup;
+}
+
+public final class com/davils/krypt/tls/RotatingKeyManager : javax/net/ssl/X509ExtendedKeyManager {
+	public fun chooseClientAlias ([Ljava/lang/String;[Ljava/security/Principal;Ljava/net/Socket;)Ljava/lang/String;
+	public fun chooseEngineClientAlias ([Ljava/lang/String;[Ljava/security/Principal;Ljavax/net/ssl/SSLEngine;)Ljava/lang/String;
+	public fun chooseEngineServerAlias (Ljava/lang/String;[Ljava/security/Principal;Ljavax/net/ssl/SSLEngine;)Ljava/lang/String;
+	public fun chooseServerAlias (Ljava/lang/String;[Ljava/security/Principal;Ljava/net/Socket;)Ljava/lang/String;
+	public fun getCertificateChain (Ljava/lang/String;)[Ljava/security/cert/X509Certificate;
+	public fun getClientAliases (Ljava/lang/String;[Ljava/security/Principal;)[Ljava/lang/String;
+	public final fun getIdentities ()Ljava/util/List;
+	public fun getPrivateKey (Ljava/lang/String;)Ljava/security/PrivateKey;
+	public fun getServerAliases (Ljava/lang/String;[Ljava/security/Principal;)[Ljava/lang/String;
+	public final fun rotate (Ljava/util/List;)V
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/tls/SignatureScheme : java/lang/Enum {
+	public static final field EcdsaSecp256r1Sha256 Lcom/davils/krypt/tls/SignatureScheme;
+	public static final field EcdsaSecp384r1Sha384 Lcom/davils/krypt/tls/SignatureScheme;
+	public static final field EcdsaSecp521r1Sha512 Lcom/davils/krypt/tls/SignatureScheme;
+	public static final field Ed25519 Lcom/davils/krypt/tls/SignatureScheme;
+	public static final field Ed448 Lcom/davils/krypt/tls/SignatureScheme;
+	public static final field RsaPkcs1Sha256 Lcom/davils/krypt/tls/SignatureScheme;
+	public static final field RsaPkcs1Sha384 Lcom/davils/krypt/tls/SignatureScheme;
+	public static final field RsaPkcs1Sha512 Lcom/davils/krypt/tls/SignatureScheme;
+	public static final field RsaPssRsaeSha256 Lcom/davils/krypt/tls/SignatureScheme;
+	public static final field RsaPssRsaeSha384 Lcom/davils/krypt/tls/SignatureScheme;
+	public static final field RsaPssRsaeSha512 Lcom/davils/krypt/tls/SignatureScheme;
+	public final fun getAlgorithm ()Lcom/davils/krypt/core/algorithm/SignatureAlgorithm;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getSchemeName ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/tls/SignatureScheme;
+	public static fun values ()[Lcom/davils/krypt/tls/SignatureScheme;
+}
+
+public final class com/davils/krypt/tls/TlsCapabilities {
+	public static final field Companion Lcom/davils/krypt/tls/TlsCapabilities$Companion;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCipherSuites ()Ljava/util/List;
+	public final fun getNamedGroups ()Ljava/util/List;
+	public final fun getVersions ()Ljava/util/List;
+	public fun hashCode ()I
+	public final fun isHybridKeyExchangeAvailable ()Z
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/tls/TlsCapabilities$Companion {
+	public final fun of (Ljava/security/Provider;)Lcom/davils/krypt/tls/TlsCapabilities;
+	public static synthetic fun of$default (Lcom/davils/krypt/tls/TlsCapabilities$Companion;Ljava/security/Provider;ILjava/lang/Object;)Lcom/davils/krypt/tls/TlsCapabilities;
+}
+
+public final class com/davils/krypt/tls/TlsConfiguration : com/davils/kore/core/validation/Validatable {
+	public static final field Companion Lcom/davils/krypt/tls/TlsConfiguration$Companion;
+	public static final field HARD_MAXIMUM_IDENTITIES I
+	public static final field HARD_MAXIMUM_PROTOCOLS I
+	public static final field HARD_MAXIMUM_SESSIONS I
+	public final fun getApplicationProtocols ()Ljava/util/List;
+	public final fun getAuthorizer ()Lcom/davils/krypt/tls/peer/PeerAuthorizer;
+	public final fun getCipherSuites ()Ljava/util/List;
+	public final fun getClientAuthentication ()Lcom/davils/krypt/tls/ClientAuthentication;
+	public final fun getCrypto ()Lcom/davils/krypt/primitive/Crypto;
+	public final fun getIdentities ()Ljava/util/List;
+	public final fun getNamedGroups ()Ljava/util/List;
+	public final fun getProvider ()Ljava/security/Provider;
+	public final fun getRole ()Lcom/davils/krypt/tls/TlsRole;
+	public final fun getServerName ()Ljava/lang/String;
+	public final fun getSessionCacheSize ()I
+	public final fun getSessionTimeout-UwyO8pc ()J
+	public final fun getSignatureSchemes ()Ljava/util/List;
+	public final fun getTrust ()Lcom/davils/krypt/tls/trust/TrustSettings;
+	public final fun getVersions ()Ljava/util/List;
+	public final fun isHostnameVerified ()Z
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public final class com/davils/krypt/tls/TlsConfiguration$Companion {
+	public final fun getHARD_MAXIMUM_SESSION_TIMEOUT-UwyO8pc ()J
+}
+
+public final class com/davils/krypt/tls/TlsConfigurationBuilder : com/davils/kore/core/dsl/ValidatingBuilder {
+	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+	protected fun assemble ()Lcom/davils/krypt/tls/TlsConfiguration;
+	public final fun getApplicationProtocols ()Ljava/util/List;
+	public final fun getAuthorizer ()Lcom/davils/krypt/tls/peer/PeerAuthorizer;
+	public final fun getCipherSuites ()Ljava/util/List;
+	public final fun getClientAuthentication ()Lcom/davils/krypt/tls/ClientAuthentication;
+	public final fun getCrypto ()Lcom/davils/krypt/primitive/Crypto;
+	public final fun getIdentities ()Ljava/util/List;
+	public final fun getNamedGroups ()Ljava/util/List;
+	public final fun getProvider ()Ljava/security/Provider;
+	public final fun getRole ()Lcom/davils/krypt/tls/TlsRole;
+	public final fun getServerName ()Ljava/lang/String;
+	public final fun getSessionCacheSize ()I
+	public final fun getSessionTimeout-UwyO8pc ()J
+	public final fun getSignatureSchemes ()Ljava/util/List;
+	protected fun getSubject ()Ljava/lang/String;
+	public final fun isHostnameVerified ()Z
+	public final fun isTls12Enabled ()Z
+	public final fun setApplicationProtocols (Ljava/util/List;)V
+	public final fun setAuthorizer (Lcom/davils/krypt/tls/peer/PeerAuthorizer;)V
+	public final fun setCipherSuites (Ljava/util/List;)V
+	public final fun setClientAuthentication (Lcom/davils/krypt/tls/ClientAuthentication;)V
+	public final fun setHostnameVerified (Z)V
+	public final fun setIdentities (Ljava/util/List;)V
+	public final fun setNamedGroups (Ljava/util/List;)V
+	public final fun setProvider (Ljava/security/Provider;)V
+	public final fun setServerName (Ljava/lang/String;)V
+	public final fun setSessionCacheSize (I)V
+	public final fun setSessionTimeout-LRDsOJo (J)V
+	public final fun setSignatureSchemes (Ljava/util/List;)V
+	public final fun setTls12Enabled (Z)V
+	public final fun trust (Lkotlin/jvm/functions/Function1;)V
+}
+
+public final class com/davils/krypt/tls/TlsContext {
+	public fun <init> (Lcom/davils/krypt/tls/TlsConfiguration;)V
+	public final fun createEngine (Ljava/lang/String;I)Ljavax/net/ssl/SSLEngine;
+	public static synthetic fun createEngine$default (Lcom/davils/krypt/tls/TlsContext;Ljava/lang/String;IILjava/lang/Object;)Ljavax/net/ssl/SSLEngine;
+	public final fun getCapabilities ()Lcom/davils/krypt/tls/TlsCapabilities;
+	public final fun getConfiguration ()Lcom/davils/krypt/tls/TlsConfiguration;
+	public final fun getKeyManager ()Lcom/davils/krypt/tls/RotatingKeyManager;
+	public final fun getSslContext ()Ljavax/net/ssl/SSLContext;
+	public final fun getTrustManager ()Lcom/davils/krypt/tls/trust/RotatingTrustManager;
+	public final fun parameters (Ljava/lang/String;)Ljavax/net/ssl/SSLParameters;
+	public static synthetic fun parameters$default (Lcom/davils/krypt/tls/TlsContext;Ljava/lang/String;ILjava/lang/Object;)Ljavax/net/ssl/SSLParameters;
+	public final fun rotate (Ljava/util/List;Ljava/util/List;)V
+	public static synthetic fun rotate$default (Lcom/davils/krypt/tls/TlsContext;Ljava/util/List;Ljava/util/List;ILjava/lang/Object;)V
+	public final fun serverSocketFactory ()Ljavax/net/ssl/SSLServerSocketFactory;
+	public final fun socketFactory ()Ljavax/net/ssl/SSLSocketFactory;
+	public final fun startTlsClient (Ljava/net/Socket;Ljava/lang/String;IZ)Ljavax/net/ssl/SSLSocket;
+	public static synthetic fun startTlsClient$default (Lcom/davils/krypt/tls/TlsContext;Ljava/net/Socket;Ljava/lang/String;IZILjava/lang/Object;)Ljavax/net/ssl/SSLSocket;
+	public final fun startTlsServer (Ljava/net/Socket;Ljava/io/InputStream;Z)Ljavax/net/ssl/SSLSocket;
+	public static synthetic fun startTlsServer$default (Lcom/davils/krypt/tls/TlsContext;Ljava/net/Socket;Ljava/io/InputStream;ZILjava/lang/Object;)Ljavax/net/ssl/SSLSocket;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/tls/TlsRole : java/lang/Enum {
+	public static final field Client Lcom/davils/krypt/tls/TlsRole;
+	public static final field Server Lcom/davils/krypt/tls/TlsRole;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/tls/TlsRole;
+	public static fun values ()[Lcom/davils/krypt/tls/TlsRole;
+}
+
+public final class com/davils/krypt/tls/TlsVersion : java/lang/Enum {
+	public static final field Tls12 Lcom/davils/krypt/tls/TlsVersion;
+	public static final field Tls13 Lcom/davils/krypt/tls/TlsVersion;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getProtocolName ()Ljava/lang/String;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/tls/TlsVersion;
+	public static fun values ()[Lcom/davils/krypt/tls/TlsVersion;
+}
+
+public final class com/davils/krypt/tls/peer/Authorization : java/lang/Enum {
+	public static final field Denied Lcom/davils/krypt/tls/peer/Authorization;
+	public static final field Granted Lcom/davils/krypt/tls/peer/Authorization;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/tls/peer/Authorization;
+	public static fun values ()[Lcom/davils/krypt/tls/peer/Authorization;
+}
+
+public abstract interface com/davils/krypt/tls/peer/PeerAuthorizer {
+	public abstract fun authorize (Lcom/davils/krypt/tls/peer/PeerIdentity;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/davils/krypt/tls/peer/PeerIdentity {
+	public static final field Companion Lcom/davils/krypt/tls/peer/PeerIdentity$Companion;
+	public static final field SESSION_KEY Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAnchor ()Lcom/davils/krypt/x509/path/TrustAnchor;
+	public final fun getCertificate ()Lcom/davils/krypt/x509/Certificate;
+	public final fun getChain ()Ljava/util/List;
+	public final fun getNames ()Ljava/util/List;
+	public final fun getPath ()Ljava/util/List;
+	public final fun getPurposes ()Ljava/util/List;
+	public final fun getUris ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/tls/peer/PeerIdentity$Companion {
+	public final fun of (Ljavax/net/ssl/SSLSession;)Lcom/davils/krypt/tls/peer/PeerIdentity;
+}
+
+public final class com/davils/krypt/tls/peer/PeerPoliciesKt {
+	public static final fun peerPolicy (Lkotlin/jvm/functions/Function1;)Lcom/davils/krypt/tls/peer/PeerPolicy;
+}
+
+public final class com/davils/krypt/tls/peer/PeerPolicy : com/davils/krypt/tls/peer/PeerAuthorizer, com/davils/kore/core/validation/Validatable {
+	public static final field Companion Lcom/davils/krypt/tls/peer/PeerPolicy$Companion;
+	public static final field HARD_MAXIMUM_LENGTH I
+	public static final field HARD_MAXIMUM_RULES I
+	public fun authorize (Lcom/davils/krypt/tls/peer/PeerIdentity;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun getDnsDomains ()Ljava/util/List;
+	public final fun getDnsNames ()Ljava/util/List;
+	public final fun getEmailDomains ()Ljava/util/List;
+	public final fun getEmails ()Ljava/util/List;
+	public final fun getPurposes ()Ljava/util/List;
+	public final fun getUriPrefixes ()Ljava/util/List;
+	public final fun getUris ()Ljava/util/List;
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public final class com/davils/krypt/tls/peer/PeerPolicy$Companion {
+}
+
+public final class com/davils/krypt/tls/peer/PeerPolicyBuilder : com/davils/kore/core/dsl/ValidatingBuilder {
+	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+	protected fun assemble ()Lcom/davils/krypt/tls/peer/PeerPolicy;
+	public final fun dns (Ljava/lang/String;)V
+	public final fun dnsDomain (Ljava/lang/String;)V
+	public final fun email (Ljava/lang/String;)V
+	public final fun emailDomain (Ljava/lang/String;)V
+	protected fun getSubject ()Ljava/lang/String;
+	public final fun purpose (Lcom/davils/krypt/asn1/ObjectIdentifier;)V
+	public final fun require (Lkotlin/jvm/functions/Function2;)V
+	public final fun uri (Ljava/lang/String;)V
+	public final fun uriPrefix (Ljava/lang/String;)V
+}
+
+public final class com/davils/krypt/tls/reload/CertificateExpiry {
+	public static final field Companion Lcom/davils/krypt/tls/reload/CertificateExpiry$Companion;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getCertificate ()Lcom/davils/krypt/x509/Certificate;
+	public final fun getRemaining-UwyO8pc ()J
+	public final fun getState ()Lcom/davils/krypt/tls/reload/ExpiryState;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/tls/reload/ExpiryState : java/lang/Enum {
+	public static final field Expired Lcom/davils/krypt/tls/reload/ExpiryState;
+	public static final field Expiring Lcom/davils/krypt/tls/reload/ExpiryState;
+	public static final field NotYetValid Lcom/davils/krypt/tls/reload/ExpiryState;
+	public static final field Valid Lcom/davils/krypt/tls/reload/ExpiryState;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/tls/reload/ExpiryState;
+	public static fun values ()[Lcom/davils/krypt/tls/reload/ExpiryState;
+}
+
+public final class com/davils/krypt/tls/reload/MaterialReloader {
+	public fun <init> (Lcom/davils/krypt/tls/TlsContext;Lcom/davils/krypt/keystore/material/MaterialLoader;Ljava/util/List;Ljava/util/List;Lcom/davils/krypt/tls/reload/ReloadSettings;)V
+	public synthetic fun <init> (Lcom/davils/krypt/tls/TlsContext;Lcom/davils/krypt/keystore/material/MaterialLoader;Ljava/util/List;Ljava/util/List;Lcom/davils/krypt/tls/reload/ReloadSettings;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun expiry ()Ljava/util/List;
+	public final fun getAnchors ()Ljava/util/List;
+	public final fun getContext ()Lcom/davils/krypt/tls/TlsContext;
+	public final fun getEvents ()Lkotlinx/coroutines/flow/Flow;
+	public final fun getGeneration ()J
+	public final fun getIdentities ()Ljava/util/List;
+	public final fun getLoader ()Lcom/davils/krypt/keystore/material/MaterialLoader;
+	public final fun getSettings ()Lcom/davils/krypt/tls/reload/ReloadSettings;
+	public final fun reload (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun toString ()Ljava/lang/String;
+	public final fun watch (Lkotlinx/coroutines/CoroutineScope;Lkotlinx/coroutines/flow/Flow;)Lkotlinx/coroutines/Job;
+}
+
+public final class com/davils/krypt/tls/reload/ReloadAction : java/lang/Enum {
+	public static final field Failed Lcom/davils/krypt/tls/reload/ReloadAction;
+	public static final field Reloaded Lcom/davils/krypt/tls/reload/ReloadAction;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/tls/reload/ReloadAction;
+	public static fun values ()[Lcom/davils/krypt/tls/reload/ReloadAction;
+}
+
+public final class com/davils/krypt/tls/reload/ReloadEvent : com/davils/krypt/core/CryptoEvent {
+	public static final field Companion Lcom/davils/krypt/tls/reload/ReloadEvent$Companion;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAction ()Lcom/davils/krypt/tls/reload/ReloadAction;
+	public fun getComponent ()Ljava/lang/String;
+	public final fun getFailure ()Lcom/davils/krypt/keystore/material/MaterialFailure;
+	public final fun getGeneration ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/tls/reload/ReloadEvent$Companion {
+	public final fun getTOPIC ()Lcom/davils/konfetti/core/TopicKey;
+}
+
+public final class com/davils/krypt/tls/reload/ReloadSettings {
+	public static final field Companion Lcom/davils/krypt/tls/reload/ReloadSettings$Companion;
+	public fun <init> ()V
+	public synthetic fun <init> (JJJILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (JJJLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDebounce-UwyO8pc ()J
+	public final fun getExpiryWarning-UwyO8pc ()J
+	public final fun getHoldDown-UwyO8pc ()J
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/tls/reload/ReloadSettings$Companion {
+	public final fun getHARD_MAXIMUM_DELAY-UwyO8pc ()J
+	public final fun getHARD_MAXIMUM_WARNING-UwyO8pc ()J
+}
+
+public final class com/davils/krypt/tls/trust/RevocationCache {
+	public static final field Companion Lcom/davils/krypt/tls/trust/RevocationCache$Companion;
+	public static final field DEFAULT_CAPACITY I
+	public static final field HARD_MAXIMUM_CAPACITY I
+	public fun <init> ()V
+	public synthetic fun <init> (IJILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (IJLkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun clear ()V
+	public final fun getCapacity ()I
+	public final fun getLifetime-UwyO8pc ()J
+	public final fun getSize ()I
+	public final fun prune (Lkotlin/time/Instant;)I
+	public final fun put (Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/x509/path/RevocationStatus;Lkotlin/time/Instant;)V
+	public final fun status (Lcom/davils/krypt/x509/Certificate;Lkotlin/time/Instant;)Lcom/davils/krypt/x509/path/RevocationStatus;
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/tls/trust/RevocationCache$Companion {
+	public final fun getDEFAULT_LIFETIME-UwyO8pc ()J
+	public final fun getHARD_MAXIMUM_LIFETIME-UwyO8pc ()J
+}
+
+public final class com/davils/krypt/tls/trust/RevocationMode : java/lang/Enum {
+	public static final field HardFail Lcom/davils/krypt/tls/trust/RevocationMode;
+	public static final field Off Lcom/davils/krypt/tls/trust/RevocationMode;
+	public static final field SoftFail Lcom/davils/krypt/tls/trust/RevocationMode;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/tls/trust/RevocationMode;
+	public static fun values ()[Lcom/davils/krypt/tls/trust/RevocationMode;
+}
+
+public final class com/davils/krypt/tls/trust/RotatingTrustManager : javax/net/ssl/X509ExtendedTrustManager {
+	public fun checkClientTrusted ([Ljava/security/cert/X509Certificate;Ljava/lang/String;)V
+	public fun checkClientTrusted ([Ljava/security/cert/X509Certificate;Ljava/lang/String;Ljava/net/Socket;)V
+	public fun checkClientTrusted ([Ljava/security/cert/X509Certificate;Ljava/lang/String;Ljavax/net/ssl/SSLEngine;)V
+	public fun checkServerTrusted ([Ljava/security/cert/X509Certificate;Ljava/lang/String;)V
+	public fun checkServerTrusted ([Ljava/security/cert/X509Certificate;Ljava/lang/String;Ljava/net/Socket;)V
+	public fun checkServerTrusted ([Ljava/security/cert/X509Certificate;Ljava/lang/String;Ljavax/net/ssl/SSLEngine;)V
+	public fun getAcceptedIssuers ()[Ljava/security/cert/X509Certificate;
+	public final fun getAnchors ()Ljava/util/List;
+	public final fun getPeer ()Lcom/davils/krypt/tls/TlsRole;
+	public final fun getSettings ()Lcom/davils/krypt/tls/trust/TrustSettings;
+	public final fun rotate (Ljava/util/List;)V
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/tls/trust/TransparencyRequirement {
+	public fun <init> (Lcom/davils/krypt/ct/LogList;Lcom/davils/krypt/ct/CtPolicy;)V
+	public synthetic fun <init> (Lcom/davils/krypt/ct/LogList;Lcom/davils/krypt/ct/CtPolicy;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getLogs ()Lcom/davils/krypt/ct/LogList;
+	public final fun getPolicy ()Lcom/davils/krypt/ct/CtPolicy;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/tls/trust/TrustFailure : java/lang/Enum {
+	public static final field AlgorithmNotPermitted Lcom/davils/krypt/tls/trust/TrustFailure;
+	public static final field BadSignature Lcom/davils/krypt/tls/trust/TrustFailure;
+	public static final field Companion Lcom/davils/krypt/tls/trust/TrustFailure$Companion;
+	public static final field Expired Lcom/davils/krypt/tls/trust/TrustFailure;
+	public static final field HostMismatch Lcom/davils/krypt/tls/trust/TrustFailure;
+	public static final field KeyUsage Lcom/davils/krypt/tls/trust/TrustFailure;
+	public static final field Malformed Lcom/davils/krypt/tls/trust/TrustFailure;
+	public static final field MustStapleMissing Lcom/davils/krypt/tls/trust/TrustFailure;
+	public static final field NameConstraints Lcom/davils/krypt/tls/trust/TrustFailure;
+	public static final field NoTrustedPath Lcom/davils/krypt/tls/trust/TrustFailure;
+	public static final field NotAnAuthority Lcom/davils/krypt/tls/trust/TrustFailure;
+	public static final field PathTooLong Lcom/davils/krypt/tls/trust/TrustFailure;
+	public static final field PinMismatch Lcom/davils/krypt/tls/trust/TrustFailure;
+	public static final field Policy Lcom/davils/krypt/tls/trust/TrustFailure;
+	public static final field Purpose Lcom/davils/krypt/tls/trust/TrustFailure;
+	public static final field RevocationUnknown Lcom/davils/krypt/tls/trust/TrustFailure;
+	public static final field Revoked Lcom/davils/krypt/tls/trust/TrustFailure;
+	public static final field TransparencyNotCompliant Lcom/davils/krypt/tls/trust/TrustFailure;
+	public static final field Unauthorized Lcom/davils/krypt/tls/trust/TrustFailure;
+	public static final field UnknownCriticalExtension Lcom/davils/krypt/tls/trust/TrustFailure;
+	public static final field WrongSide Lcom/davils/krypt/tls/trust/TrustFailure;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/davils/krypt/tls/trust/TrustFailure;
+	public static fun values ()[Lcom/davils/krypt/tls/trust/TrustFailure;
+}
+
+public final class com/davils/krypt/tls/trust/TrustFailure$Companion {
+	public final fun of (Lcom/davils/krypt/x509/path/PathFailure;)Lcom/davils/krypt/tls/trust/TrustFailure;
+	public final fun of (Ljava/lang/Throwable;)Lcom/davils/krypt/tls/trust/TrustFailure;
+}
+
+public final class com/davils/krypt/tls/trust/TrustRefusedException : java/security/cert/CertificateException {
+	public fun <init> (Lcom/davils/krypt/tls/trust/TrustFailure;)V
+	public final fun getFailure ()Lcom/davils/krypt/tls/trust/TrustFailure;
+}
+
+public final class com/davils/krypt/tls/trust/TrustSettings : com/davils/kore/core/validation/Validatable {
+	public static final field Companion Lcom/davils/krypt/tls/trust/TrustSettings$Companion;
+	public static final field HARD_MAXIMUM_ANCHORS I
+	public final fun getAnchors ()Ljava/util/List;
+	public final fun getCache ()Lcom/davils/krypt/tls/trust/RevocationCache;
+	public final fun getLimits ()Lcom/davils/krypt/x509/X509Limits;
+	public final fun getOcspSource ()Lcom/davils/krypt/ocsp/OcspResponseSource;
+	public final fun getPins ()Lcom/davils/krypt/x509/path/PinSet;
+	public final fun getRevocation ()Lcom/davils/krypt/tls/trust/RevocationMode;
+	public final fun getRevocationListSource ()Lcom/davils/krypt/x509/path/RevocationListSource;
+	public final fun getTransparency ()Lcom/davils/krypt/tls/trust/TransparencyRequirement;
+	public final fun isMustStapleEnforced ()Z
+	public final fun isSystemIncluded ()Z
+	public fun toString ()Ljava/lang/String;
+	public fun validate (Lcom/davils/kore/core/validation/ValidationScope;)V
+}
+
+public final class com/davils/krypt/tls/trust/TrustSettings$Companion {
+}
+
+public final class com/davils/krypt/tls/trust/TrustSettingsBuilder : com/davils/kore/core/dsl/ValidatingBuilder {
+	public synthetic fun assemble ()Lcom/davils/kore/core/validation/Validatable;
+	protected fun assemble ()Lcom/davils/krypt/tls/trust/TrustSettings;
+	public final fun getAnchors ()Ljava/util/List;
+	public final fun getCache ()Lcom/davils/krypt/tls/trust/RevocationCache;
+	public final fun getLimits ()Lcom/davils/krypt/x509/X509Limits;
+	public final fun getOcspSource ()Lcom/davils/krypt/ocsp/OcspResponseSource;
+	public final fun getPins ()Lcom/davils/krypt/x509/path/PinSet;
+	public final fun getRevocation ()Lcom/davils/krypt/tls/trust/RevocationMode;
+	public final fun getRevocationListSource ()Lcom/davils/krypt/x509/path/RevocationListSource;
+	protected fun getSubject ()Ljava/lang/String;
+	public final fun getTransparency ()Lcom/davils/krypt/tls/trust/TransparencyRequirement;
+	public final fun isMustStapleEnforced ()Z
+	public final fun isSystemIncluded ()Z
+	public final fun setAnchors (Ljava/util/List;)V
+	public final fun setCache (Lcom/davils/krypt/tls/trust/RevocationCache;)V
+	public final fun setLimits (Lcom/davils/krypt/x509/X509Limits;)V
+	public final fun setMustStapleEnforced (Z)V
+	public final fun setOcspSource (Lcom/davils/krypt/ocsp/OcspResponseSource;)V
+	public final fun setPins (Lcom/davils/krypt/x509/path/PinSet;)V
+	public final fun setRevocation (Lcom/davils/krypt/tls/trust/RevocationMode;)V
+	public final fun setRevocationListSource (Lcom/davils/krypt/x509/path/RevocationListSource;)V
+	public final fun setSystemIncluded (Z)V
+	public final fun setTransparency (Lcom/davils/krypt/tls/trust/TransparencyRequirement;)V
+	public final fun transparency (Lcom/davils/krypt/ct/LogList;Lcom/davils/krypt/ct/CtPolicy;)V
+	public static synthetic fun transparency$default (Lcom/davils/krypt/tls/trust/TrustSettingsBuilder;Lcom/davils/krypt/ct/LogList;Lcom/davils/krypt/ct/CtPolicy;ILjava/lang/Object;)V
+}
+
