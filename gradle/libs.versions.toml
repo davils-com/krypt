@@ -5,7 +5,7 @@ kore = "2.3.2"
 konfetti = "1.0.0"
 kollect = "1.0.0"
 coroutines = "1.11.0"
-kotlinx-io = "0.9.2"
+kotlinx-io = "0.9.3"
 serialization = "1.13.0"
 # The benchmark runtime is released together with the kotlinx-benchmark plugin that Kreate brings along.
 kotlinx-benchmark = "0.5.0"
