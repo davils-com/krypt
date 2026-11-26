@@ -55,7 +55,7 @@ dependencyResolutionManagement {
 ```kotlin
 // build.gradle.kts
 dependencies {
-    implementation(platform("com.davils:krypt-bom:1.0.0"))
+    implementation(platform("com.davils:krypt-bom:1.1.0"))
     implementation("com.davils:krypt-primitive")
     testImplementation("com.davils:krypt-testing")
 }

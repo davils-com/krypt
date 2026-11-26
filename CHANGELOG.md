@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.1.0 - 2026-11-26
+
+### Added
+
+- **A `MaterialReloader` is a health indicator of kollect.** It is Down while a certificate in use has expired or is
+  not valid yet, Degraded while one expires within the warning time, and Up otherwise.
+
+### Changed
+
+- **The OCSP response cache keeps its entries in a cache of kontinuity.** Every operation takes constant time however
+  full the cache is, instead of searching three lists, and the entry used least recently makes room when it is full.
+- **IP addresses in names, name constraints, service identities and ACME identifiers are read by Konnect 1.1.0.** The
+  canonical text of an IPv4-mapped IPv6 address ends in its IPv4 address, such as `IP:::ffff:192.0.2.1`.
+- **Secure randomness comes from `SecureEntropy` of Kore 2.5.0** behind the unchanged `RandomSource`, instead of a copy
+  of the platform code of the JVM and of WebCrypto.
+- **Events reach the bus through the `Emitter` of konfetti 1.1.0.** A bus that declares the topic of a component for
+  another event type no longer fails the component; its events then reach the flow only.
+- **Built with Kreate 5.5.2 and Gradle 9.9.2 on Kore 2.5.0, konfetti 1.1.0, kollect 1.1.0, kontinuity 1.1.0 and
+  Konnect 1.1.0**, with kotlinx-io 0.9.3 and the version floors of the build tools raised.
+
 ## 1.0.0 - 2026-11-23
 
 The first version of krypt: the cryptography and security library of Davils as an open source library under the
