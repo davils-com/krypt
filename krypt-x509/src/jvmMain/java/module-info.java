@@ -17,10 +17,11 @@
 /**
  * X.509 of krypt: certificates, names, extensions, requests, revocation lists and path validation.
  */
-@SuppressWarnings("module")
+@SuppressWarnings({"module", "requires-automatic"})
 module com.davils.krypt.x509 {
     requires transitive kotlin.stdlib;
     requires transitive com.davils.krypt.primitive;
+    requires com.davils.konnect.internetprotocol;
 
     exports com.davils.krypt.x509;
     exports com.davils.krypt.x509.extension;

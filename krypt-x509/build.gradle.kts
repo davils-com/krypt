@@ -28,4 +28,5 @@ kreate {
 
 dependencies {
     commonMainApi(project(":krypt-primitive"))
+    commonMainImplementation(libs.konnect.internet.protocol)
 }
