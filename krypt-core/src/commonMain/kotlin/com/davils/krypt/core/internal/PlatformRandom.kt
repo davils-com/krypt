@@ -16,4 +16,16 @@
 
 package com.davils.krypt.core.internal
 
-internal expect fun fillSecurely(target: ByteArray)
+import com.davils.kore.core.Limits
+import com.davils.kore.core.random.SecureEntropy
+
+internal fun fillSecurely(target: ByteArray) {
+    var offset = 0
+    while (offset < target.size) {
+        val count = minOf(a = Limits.MAX_ENTROPY_BYTES, b = target.size - offset)
+        val drawn = SecureEntropy.nextBytes(count)
+        drawn.copyInto(destination = target, destinationOffset = offset)
+        drawn.fill(0)
+        offset += count
+    }
+}

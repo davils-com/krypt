@@ -14,24 +14,17 @@
  * limitations under the License.
  */
 
-@file:OptIn(ExperimentalAtomicApi::class)
-
 package com.davils.krypt.core.telemetry
 
-import com.davils.konfetti.core.EventBus
-import com.davils.konfetti.core.Topic
 import com.davils.konfetti.core.TopicKey
-import com.davils.konfetti.core.publish.PublishResult
+import com.davils.konfetti.core.publish.Emitter
 import com.davils.kore.core.annotation.DavilsInternal
-import com.davils.kore.core.failure.contained
 import com.davils.krypt.core.CryptoEvent
 import com.davils.krypt.core.Environment
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
-import kotlin.concurrent.atomics.AtomicLong
-import kotlin.concurrent.atomics.ExperimentalAtomicApi
 
 /**
  * Where a component sends its events: a `Flow` of its own and, when the environment names an event bus, the topic
@@ -42,8 +35,8 @@ import kotlin.concurrent.atomics.ExperimentalAtomicApi
  *
  * @param E the type of the events.
  * @param environment the environment of the component.
- * @param key the topic of the component; it is declared on the bus if it is missing.
- * @throws com.davils.konfetti.core.topic.TopicTypeMismatchException if the bus declares [key] for another type.
+ * @param key the topic of the component; it is declared on the bus if it is missing. Since 1.1.0 a bus that declares
+ * [key] for another event type no longer fails the component: its events then reach the flow only.
  * @since 1.0.0
  */
 @DavilsInternal
@@ -52,8 +45,7 @@ public class EventSink<E : CryptoEvent>(environment: Environment, key: TopicKey<
         extraBufferCapacity = environment.eventCapacity,
         onBufferOverflow = BufferOverflow.DROP_OLDEST,
     )
-    private val topic: Topic<E>? = environment.events?.let { bus -> topicOf(bus, key) }
-    private val rejectedCount = AtomicLong(0L)
+    private val emitter: Emitter<E>? = environment.events?.let { bus -> Emitter(bus, key) }
 
     /**
      * The events, hot and without replay: a collector sees the events emitted while it collects.
@@ -67,14 +59,14 @@ public class EventSink<E : CryptoEvent>(environment: Environment, key: TopicKey<
      *
      * @since 1.0.0
      */
-    public val rejected: Long get() = rejectedCount.load()
+    public val rejected: Long get() = emitter?.rejected ?: 0L
 
     /**
      * Tells whether a collector of [events] or a consumer of the topic would see an event now.
      *
      * @since 1.0.0
      */
-    public val isListened: Boolean get() = local.subscriptionCount.value > 0 || topic?.hasConsumers == true
+    public val isListened: Boolean get() = local.subscriptionCount.value > 0 || emitter?.hasConsumers == true
 
     /**
      * Builds an event with [event] and sends it, but only when someone listens.
@@ -94,15 +86,6 @@ public class EventSink<E : CryptoEvent>(environment: Environment, key: TopicKey<
      */
     public fun send(event: E) {
         local.tryEmit(event)
-        val target = topic ?: return
-        val result = contained { target.offer(event) }.getOrNull()
-        if (result !is PublishResult.Published) rejectedCount.addAndFetch(1L)
-    }
-
-    private companion object {
-        fun <E : CryptoEvent> topicOf(bus: EventBus, key: TopicKey<E>): Topic<E> {
-            if (key !in bus) bus.declare(key)
-            return bus[key]
-        }
+        emitter?.send(event)
     }
 }
