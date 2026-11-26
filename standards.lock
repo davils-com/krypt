@@ -740,8 +740,8 @@
         },
         {
             "id": "rfc:7515",
-            "reviewedOn": "2026-11-22",
-            "note": "Reviewed for krypt-jose.",
+            "reviewedOn": "2026-11-26",
+            "note": "Erratum 9334 (reported) only rewrites the C# example of Appendix C into idiomatic code; base64url without padding is unchanged and krypt keeps its strict codec.",
             "snapshot": {
                 "title": "JSON Web Signature (JWS)",
                 "status": "PROPOSED STANDARD",
@@ -753,7 +753,8 @@
                     "6118": "REJECTED",
                     "7767": "REPORTED",
                     "8430": "REJECTED",
-                    "8508": "REJECTED"
+                    "8508": "REJECTED",
+                    "9334": "REPORTED"
                 }
             }
         },
