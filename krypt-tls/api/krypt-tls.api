@@ -299,9 +299,10 @@ public final class com/davils/krypt/tls/reload/ExpiryState : java/lang/Enum {
 	public static fun values ()[Lcom/davils/krypt/tls/reload/ExpiryState;
 }
 
-public final class com/davils/krypt/tls/reload/MaterialReloader {
+public final class com/davils/krypt/tls/reload/MaterialReloader : com/davils/kollect/core/health/HealthIndicator {
 	public fun <init> (Lcom/davils/krypt/tls/TlsContext;Lcom/davils/krypt/keystore/material/MaterialLoader;Ljava/util/List;Ljava/util/List;Lcom/davils/krypt/tls/reload/ReloadSettings;)V
 	public synthetic fun <init> (Lcom/davils/krypt/tls/TlsContext;Lcom/davils/krypt/keystore/material/MaterialLoader;Ljava/util/List;Ljava/util/List;Lcom/davils/krypt/tls/reload/ReloadSettings;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun check (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public final fun expiry ()Ljava/util/List;
 	public final fun getAnchors ()Ljava/util/List;
 	public final fun getContext ()Lcom/davils/krypt/tls/TlsContext;

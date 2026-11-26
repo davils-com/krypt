@@ -18,6 +18,9 @@
 
 package com.davils.krypt.tls.reload
 
+import com.davils.kollect.core.health.Health
+import com.davils.kollect.core.health.HealthIndicator
+import com.davils.kollect.core.health.ReasonCode
 import com.davils.kore.core.annotation.DavilsInternal
 import com.davils.kore.core.failure.attempted
 import com.davils.kore.core.outcome.Outcome
@@ -58,6 +61,10 @@ import kotlin.time.Instant
  * The reloader starts no thread and no timer: [watch] runs on the scope of the application, and its debounce and
  * hold-down wait on that scope's dispatcher, measured against the clock of the environment.
  *
+ * Since 1.1.0 a reloader is a [HealthIndicator] of kollect over [expiry]: Down while a certificate in use has expired
+ * or is not valid yet, Degraded while one expires within [ReloadSettings.expiryWarning], and Up otherwise, so a health
+ * registry of the application sees an expiring identity before the handshakes fail.
+ *
  * Safe to share between threads.
  *
  * @property context the context whose material is reloaded.
@@ -76,7 +83,7 @@ public class MaterialReloader(
     identities: List<IdentitySpec>,
     anchors: List<MaterialRef>,
     public val settings: ReloadSettings = ReloadSettings(),
-) {
+) : HealthIndicator {
     /**
      * The identities to load.
      *
@@ -172,6 +179,21 @@ public class MaterialReloader(
     }
 
     /**
+     * Judges the certificates of the identities in use by [expiry]: Down with [ReasonCode.StateMatched] if one has
+     * expired or is not valid yet, Degraded with [ReasonCode.ThresholdCrossed] if one expires within the warning time,
+     * Degraded with [ReasonCode.NoData] without identities, and Up otherwise. It never loads material.
+     *
+     * @return the health.
+     * @since 1.1.0
+     */
+    override suspend fun check(): Health {
+        val expiries = expiry()
+        val states = expiries.mapTo(mutableSetOf()) { found -> found.state }
+        if (states.isEmpty()) return Health.degraded(ReasonCode.NoData)
+        return healthOf(states)
+    }
+
+    /**
      * Shows what is loaded and the generation.
      *
      * @return the reloader as text.
@@ -216,4 +238,15 @@ public class MaterialReloader(
     }
 
     private data class Material(val identities: List<Identity>?, val anchors: List<TrustAnchor>?)
+}
+
+private fun healthOf(states: Set<ExpiryState>): Health {
+    val isUnusable = ExpiryState.Expired in states || ExpiryState.NotYetValid in states
+    if (isUnusable) return Health.down(ReasonCode.StateMatched)
+    return expiringHealthOf(isExpiring = ExpiryState.Expiring in states)
+}
+
+private fun expiringHealthOf(isExpiring: Boolean): Health = when (isExpiring) {
+    true -> Health.degraded(ReasonCode.ThresholdCrossed)
+    false -> Health.Up
 }

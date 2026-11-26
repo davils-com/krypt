@@ -18,6 +18,8 @@
 
 package com.davils.krypt.tls.reload
 
+import com.davils.kollect.core.health.Health
+import com.davils.kollect.core.health.ReasonCode
 import com.davils.kore.core.outcome.Outcome
 import com.davils.krypt.authority.profile.CertificateProfile
 import com.davils.krypt.core.environment
@@ -187,6 +189,7 @@ class ReloadTest : FunSpec({
             testScheduler.advanceTimeBy(9.seconds)
             reloader.generation shouldBe 2L
             reloader.expiry().map { expiry -> expiry.state } shouldBe listOf(ExpiryState.NotYetValid)
+            reloader.check() shouldBe Health.down(ReasonCode.StateMatched)
             watch.cancel()
         }
     }
@@ -204,6 +207,7 @@ class ReloadTest : FunSpec({
             settings = ReloadSettings(expiryWarning = 1.days),
         )
         relaxed.expiry().single().state shouldBe ExpiryState.Valid
+        relaxed.check() shouldBe Health.Up
         val wary = MaterialReloader(
             context = context,
             loader = loader,
@@ -214,5 +218,6 @@ class ReloadTest : FunSpec({
         val expiry = wary.expiry().single()
         expiry.state shouldBe ExpiryState.Expiring
         expiry.certificate shouldBe identity.certificate
+        wary.check() shouldBe Health.degraded(ReasonCode.ThresholdCrossed)
     }
 })
