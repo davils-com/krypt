@@ -14,19 +14,25 @@
  * limitations under the License.
  */
 
+@file:Suppress("RedundantSuspendModifier")
+
 package com.davils.krypt.ocsp
 
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
+import com.davils.kontinuity.cache.Cache
+import com.davils.kontinuity.cache.Eviction
+import com.davils.kontinuity.cache.cache
 import kotlinx.io.bytestring.ByteString
 import kotlin.time.Instant
+
+private const val CACHE_NAME: String = "krypt.ocsp.responses"
 
 /**
  * A bounded cache of signed responses about one certificate each, as RFC 9919 responders keep them.
  *
  * The caller drives it: krypt starts no timer. An entry expires at the next update of its response and is dropped
- * when it is read after that. When the cache is full, the entry that expires first makes room. The cache is safe to
- * share between coroutines.
+ * when it is read after that. The entries live in a cache of kontinuity: every operation takes constant time however
+ * full the cache is, and since 1.1.0 the entry used least recently makes room when it is full, instead of the entry
+ * that expires first. The cache is safe to share between coroutines.
  *
  * @property capacity the most responses the cache holds.
  * @constructor Creates an empty cache.
@@ -34,10 +40,10 @@ import kotlin.time.Instant
  * @since 1.0.0
  */
 public class OcspResponseCache(public val capacity: Int = DEFAULT_CAPACITY) {
-    private val lock = Mutex()
-    private val certIds = mutableListOf<CertId>()
-    private val responses = mutableListOf<ByteString>()
-    private val expiries = mutableListOf<Instant>()
+    private val entries: Cache<CertId, CachedResponse> = cache(name = CACHE_NAME) {
+        maximumSize = capacity.coerceIn(minimumValue = 1, maximumValue = HARD_MAXIMUM_CAPACITY)
+        eviction = Eviction.Lru
+    }
 
     init {
         require(capacity in 1..HARD_MAXIMUM_CAPACITY) { "A cache holds 1 to $HARD_MAXIMUM_CAPACITY responses" }
@@ -52,14 +58,7 @@ public class OcspResponseCache(public val capacity: Int = DEFAULT_CAPACITY) {
      * @since 1.0.0
      */
     public suspend fun put(certId: CertId, response: ByteString, nextUpdate: Instant) {
-        lock.withLock {
-            removeAt(certIds.indexOf(certId))
-            val isFull = certIds.size >= capacity
-            if (isFull) removeAt(expiries.indexOf(expiries.min()))
-            certIds += certId
-            responses += response
-            expiries += nextUpdate
-        }
+        entries.put(certId, CachedResponse(response = response, nextUpdate = nextUpdate))
     }
 
     /**
@@ -70,11 +69,11 @@ public class OcspResponseCache(public val capacity: Int = DEFAULT_CAPACITY) {
      * @return the DER encoding of the response, or null.
      * @since 1.0.0
      */
-    public suspend fun get(certId: CertId, at: Instant): ByteString? = lock.withLock {
-        val index = certIds.indexOf(certId)
-        val isExpired = index >= 0 && expiries[index] <= at
-        if (isExpired) removeAt(index)
-        responses.getOrNull(certIds.indexOf(certId))
+    public suspend fun get(certId: CertId, at: Instant): ByteString? {
+        val cached = entries[certId] ?: return null
+        val isFresh = cached.nextUpdate > at
+        if (!isFresh) entries.remove(certId)
+        return cached.response.takeIf { isFresh }
     }
 
     /**
@@ -83,7 +82,7 @@ public class OcspResponseCache(public val capacity: Int = DEFAULT_CAPACITY) {
      * @return the number of responses.
      * @since 1.0.0
      */
-    public suspend fun size(): Int = lock.withLock { certIds.size }
+    public suspend fun size(): Int = entries.snapshot().size
 
     /**
      * Drops every response, such as after the issuer revoked many certificates at once.
@@ -91,11 +90,7 @@ public class OcspResponseCache(public val capacity: Int = DEFAULT_CAPACITY) {
      * @since 1.0.0
      */
     public suspend fun clear() {
-        lock.withLock {
-            certIds.clear()
-            responses.clear()
-            expiries.clear()
-        }
+        entries.clear()
     }
 
     /**
@@ -105,13 +100,6 @@ public class OcspResponseCache(public val capacity: Int = DEFAULT_CAPACITY) {
      * @since 1.0.0
      */
     override fun toString(): String = "OcspResponseCache(capacity=$capacity)"
-
-    private fun removeAt(index: Int) {
-        if (index < 0) return
-        certIds.removeAt(index)
-        responses.removeAt(index)
-        expiries.removeAt(index)
-    }
 
     /**
      * The capacities.
@@ -133,4 +121,6 @@ public class OcspResponseCache(public val capacity: Int = DEFAULT_CAPACITY) {
          */
         public const val HARD_MAXIMUM_CAPACITY: Int = 65_536
     }
+
+    private data class CachedResponse(val response: ByteString, val nextUpdate: Instant)
 }

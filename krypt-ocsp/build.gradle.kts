@@ -28,4 +28,5 @@ kreate {
 
 dependencies {
     commonMainApi(project(":krypt-x509"))
+    commonMainImplementation(libs.kontinuity.cache)
 }

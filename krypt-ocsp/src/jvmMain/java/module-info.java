@@ -21,6 +21,7 @@
 module com.davils.krypt.ocsp {
     requires transitive kotlin.stdlib;
     requires transitive com.davils.krypt.x509;
+    requires com.davils.kontinuity.cache;
 
     exports com.davils.krypt.ocsp;
 }
