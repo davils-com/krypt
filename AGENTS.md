@@ -38,9 +38,9 @@ correctness first.
 `krypt-core` builds on `com.davils:kore-core`, `com.davils:konfetti-core`, `com.davils:kollect-core`,
 `kotlinx-coroutines-core` and `kotlinx-io-bytestring`; `krypt-asn1` builds on `krypt-core`, `krypt-primitive` on
 both, and `krypt-keyset`, `krypt-stream` and `krypt-storage` each on the one before. `krypt-x509` builds on
-`krypt-primitive`; `krypt-keystore`, `krypt-ocsp`, `krypt-ct`, `krypt-jose`, `krypt-cose` and `krypt-cms` on
+`krypt-primitive` and `konnect-internet-protocol`; `krypt-keystore`, `krypt-ocsp`, `krypt-ct`, `krypt-jose`, `krypt-cose` and `krypt-cms` on
 `krypt-x509`; `krypt-spiffe` and `krypt-acme` on `krypt-jose`; `krypt-authority` on `krypt-ocsp` and
-`krypt-keystore`; and `krypt-tls` on `krypt-keystore`, `krypt-ocsp`, `krypt-ct` and `krypt-spiffe`. The code is
+`krypt-keystore`; `krypt-ocsp` also on `kontinuity-cache`; and `krypt-tls` on `krypt-keystore`, `krypt-ocsp`, `krypt-ct` and `krypt-spiffe`. The code is
 ported from the security library of an internal Davils project and hardened on the way.
 
 The package of a module is `com.davils.krypt.<module>` without dashes, and its Java module has the same name. It is
@@ -194,8 +194,10 @@ passwords, names and every field of every protocol message.
   | `krypt.bom` | The Java platform of the BOM and its publication |
   | `krypt.benchmark` | The unpublished benchmark module on Kotlin/JVM: JMH through Kreate, the `main` and `smoke` profiles and the regression gate |
 
-- Dependencies are declared in `gradle/libs.versions.toml`. Libraries of JetBrains, Kore, konfetti and kollect may be
-  added when they are needed; every other dependency needs the approval of a maintainer. krypt depends on no
+- Dependencies are declared in `gradle/libs.versions.toml`. Libraries of JetBrains, Kore, konfetti, kollect,
+  kontinuity and Konnect may be added when they are needed; every other dependency needs the approval of a maintainer.
+  Resilience comes from kontinuity as a direct dependency of the module that needs it, such as the response cache of
+  `krypt-ocsp`; IP addresses are read by `konnect-internet-protocol`. krypt depends on no
   cryptography library: a provider such as BouncyCastle is the caller's choice.
 - Only `repo.davils.com` serves `com.davils`, through `exclusiveContent`; nothing is resolved from `mavenLocal()`.
 - After a dependency changes, refresh the locks and the verification metadata in one run and review what changed:
@@ -204,7 +206,7 @@ passwords, names and every field of every protocol message.
   ./gradlew kreateResolveAndLockAll :build-logic:dependencies --write-locks --write-verification-metadata pgp,sha256 --export-keys --no-configuration-cache
   ```
 
-- krypt builds only with released versions of Kreate, Kore, konfetti and kollect, trusted by the Davils release key
+- krypt builds only with released versions of Kreate and the Davils libraries it uses, trusted by the Davils release key
   `36F578E8AD2D4391E0FA6C18154C625FAD370063`; no trust rule for unsigned snapshots is ever added.
 - An `ignore` rule of the assurance gate has a reason, the exact module and an expiry no more than six months ahead.
   CRITICAL and HIGH findings can never be ignored.
