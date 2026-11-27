@@ -40,7 +40,8 @@ correctness first.
 both, and `krypt-keyset`, `krypt-stream` and `krypt-storage` each on the one before. `krypt-x509` builds on
 `krypt-primitive` and `konnect-internet-protocol`; `krypt-keystore`, `krypt-ocsp`, `krypt-ct`, `krypt-jose`, `krypt-cose` and `krypt-cms` on
 `krypt-x509`; `krypt-spiffe` and `krypt-acme` on `krypt-jose`; `krypt-authority` on `krypt-ocsp` and
-`krypt-keystore`; `krypt-ocsp` also on `kontinuity-cache`; and `krypt-tls` on `krypt-keystore`, `krypt-ocsp`, `krypt-ct` and `krypt-spiffe`. The code is
+`krypt-keystore`; `krypt-core` also on `kontinuity-core`, `krypt-ocsp` on `kontinuity-cache`, and `krypt-acme`,
+`krypt-keyset` and `krypt-tls` on `kontinuity-retry`; and `krypt-tls` on `krypt-keystore`, `krypt-ocsp`, `krypt-ct` and `krypt-spiffe`. The code is
 ported from the security library of an internal Davils project and hardened on the way.
 
 The package of a module is `com.davils.krypt.<module>` without dashes, and its Java module has the same name. It is
@@ -196,8 +197,9 @@ passwords, names and every field of every protocol message.
 
 - Dependencies are declared in `gradle/libs.versions.toml`. Libraries of JetBrains, Kore, konfetti, kollect,
   kontinuity and Konnect may be added when they are needed; every other dependency needs the approval of a maintainer.
-  Resilience comes from kontinuity as a direct dependency of the module that needs it, such as the response cache of
-  `krypt-ocsp`; IP addresses are read by `konnect-internet-protocol`. krypt depends on no
+  Resilience comes from kontinuity as a direct dependency of the module that needs it, with safe defaults active, such
+  as the response cache of `krypt-ocsp`, the transport retry of `krypt-acme`, the conflict retry of `krypt-keyset` and
+  the reload retry of `krypt-tls`; IP addresses are read by `konnect-internet-protocol`. krypt depends on no
   cryptography library: a provider such as BouncyCastle is the caller's choice.
 - Only `repo.davils.com` serves `com.davils`, through `exclusiveContent`; nothing is resolved from `mavenLocal()`.
 - After a dependency changes, refresh the locks and the verification metadata in one run and review what changed:
