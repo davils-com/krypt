@@ -21,6 +21,7 @@
 module com.davils.krypt.keyset {
     requires transitive kotlin.stdlib;
     requires transitive com.davils.krypt.primitive;
+    requires com.davils.kontinuity.retry;
 
     exports com.davils.krypt.keyset;
     exports com.davils.krypt.keyset.kms;

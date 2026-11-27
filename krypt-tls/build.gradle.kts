@@ -32,6 +32,7 @@ dependencies {
     api(project(":krypt-ocsp"))
     api(project(":krypt-ct"))
     api(project(":krypt-spiffe"))
+    implementation(libs.kontinuity.retry)
 }
 
 configurations.matching { configuration -> configuration.name == "unitTestImplementation" }.configureEach {

@@ -3,8 +3,8 @@ kotlin = "2.4.21"
 kreate = "5.5.2"
 kore = "2.5.0"
 konfetti = "1.1.0"
-kontinuity = "1.1.0"
-konnect = "1.1.0"
+kontinuity = "1.2.0"
+konnect = "1.2.0"
 kollect = "1.1.0"
 coroutines = "1.11.0"
 kotlinx-io = "0.9.3"
@@ -24,7 +24,9 @@ kore-testing = { module = "com.davils:kore-testing", version.ref = "kore" }
 konfetti-core = { module = "com.davils:konfetti-core", version.ref = "konfetti" }
 konfetti-testing = { module = "com.davils:konfetti-testing", version.ref = "konfetti" }
 kollect-core = { module = "com.davils:kollect-core", version.ref = "kollect" }
+kontinuity-core = { module = "com.davils:kontinuity-core", version.ref = "kontinuity" }
 kontinuity-cache = { module = "com.davils:kontinuity-cache", version.ref = "kontinuity" }
+kontinuity-retry = { module = "com.davils:kontinuity-retry", version.ref = "kontinuity" }
 konnect-internet-protocol = { module = "com.davils:konnect-internet-protocol", version.ref = "konnect" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines" }
 kotlinx-io-bytestring = { module = "org.jetbrains.kotlinx:kotlinx-io-bytestring", version.ref = "kotlinx-io" }

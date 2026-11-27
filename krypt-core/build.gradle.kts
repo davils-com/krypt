@@ -31,6 +31,7 @@ dependencies {
     commonMainApi(libs.kore.core)
     commonMainApi(libs.konfetti.core)
     commonMainApi(libs.kollect.core)
+    commonMainApi(libs.kontinuity.core)
     commonMainApi(libs.kotlinx.coroutines.core)
     commonMainApi(libs.kotlinx.io.bytestring)
 }

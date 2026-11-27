@@ -25,6 +25,7 @@ module com.davils.krypt.tls {
     requires transitive com.davils.krypt.ocsp;
     requires transitive com.davils.krypt.ct;
     requires transitive com.davils.krypt.spiffe;
+    requires com.davils.kontinuity.retry;
 
     exports com.davils.krypt.tls;
     exports com.davils.krypt.tls.peer;

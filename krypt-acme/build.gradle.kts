@@ -28,6 +28,7 @@ kreate {
 
 dependencies {
     commonMainApi(project(":krypt-jose"))
+    commonMainApi(libs.kontinuity.retry)
 }
 
 val testConfigurations: Set<String> = setOf("commonUnitTestImplementation", "wasmJsTestImplementation")

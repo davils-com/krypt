@@ -19,6 +19,7 @@ module com.davils.krypt.core {
     requires transitive com.davils.kore.core;
     requires transitive com.davils.konfetti.core;
     requires transitive com.davils.kollect.core;
+    requires transitive com.davils.kontinuity.core;
     requires transitive kotlinx.coroutines.core;
     requires transitive kotlinx.io.bytestring;
 

@@ -21,6 +21,7 @@
 module com.davils.krypt.acme {
     requires transitive kotlin.stdlib;
     requires transitive com.davils.krypt.jose;
+    requires transitive com.davils.kontinuity.retry;
 
     exports com.davils.krypt.acme;
     exports com.davils.krypt.acme.account;
