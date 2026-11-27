@@ -21,12 +21,18 @@ package com.davils.krypt.tls.reload
 import com.davils.kollect.core.health.Health
 import com.davils.kollect.core.health.HealthIndicator
 import com.davils.kollect.core.health.ReasonCode
+import com.davils.kontinuity.core.backoff.exponential
+import com.davils.kontinuity.core.backoff.jittered
+import com.davils.kontinuity.core.backoff.proportional
+import com.davils.kontinuity.retry.Retry
+import com.davils.kontinuity.retry.retry
 import com.davils.kore.core.annotation.DavilsInternal
 import com.davils.kore.core.failure.attempted
 import com.davils.kore.core.outcome.Outcome
 import com.davils.kore.core.outcome.failureOrNull
 import com.davils.kore.core.outcome.getOrNull
 import com.davils.krypt.core.telemetry.EventSink
+import com.davils.krypt.core.telemetry.resilience
 import com.davils.krypt.keystore.Identity
 import com.davils.krypt.keystore.material.IdentitySpec
 import com.davils.krypt.keystore.material.MaterialFailure
@@ -47,7 +53,14 @@ import kotlinx.coroutines.sync.withLock
 import kotlin.concurrent.atomics.AtomicLong
 import kotlin.concurrent.atomics.AtomicReference
 import kotlin.concurrent.atomics.ExperimentalAtomicApi
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
 import kotlin.time.Instant
+
+private const val RETRY_NAME: String = "krypt-tls-reload"
+private const val WATCH_ATTEMPTS: Int = 3
+private val FIRST_RETRY_DELAY: Duration = 1.seconds
+private val LONGEST_RETRY_DELAY: Duration = 30.seconds
 
 /**
  * Reloads the identities and anchors of a [TlsContext] through a [MaterialLoader] of krypt-keystore, when the
@@ -108,6 +121,14 @@ public class MaterialReloader(
 
     private val lastReload = AtomicReference<Instant?>(null)
 
+    private val retried: Retry = retry(name = RETRY_NAME, environment = environment.resilience()) {
+        maxAttempts = WATCH_ATTEMPTS
+        val growing = exponential(initial = FIRST_RETRY_DELAY, maximum = LONGEST_RETRY_DELAY)
+        backoff = growing.jittered(proportional())
+        failures { ignore<Throwable>() }
+        results { failIf<Outcome<*, *>> { result -> result.isTransient() } }
+    }
+
     /**
      * The events of every reload, hot and without replay.
      *
@@ -149,7 +170,10 @@ public class MaterialReloader(
     /**
      * Reloads on every change [changes] emits, once the changes have been quiet for [ReloadSettings.debounce] and at
      * least [ReloadSettings.holdDown] after the last reload. A change that arrives while a reload waits restarts the
-     * wait.
+     * wait. Since 1.2.0 a reload that finds its material missing or unavailable, as while a file is being replaced, is
+     * tried again up to three times by a retry of kontinuity, with a jittered backoff from one to thirty seconds;
+     * every attempt sends its [ReloadEvent] and a failure that cannot pass, such as a malformed file, is not tried
+     * again.
      *
      * @param scope the scope of the application, which runs and cancels the watch.
      * @param changes the change signals of the application, such as from a watch of its files.
@@ -160,7 +184,7 @@ public class MaterialReloader(
         changes.collectLatest {
             delay(settings.debounce)
             holdDown()
-            reload()
+            retried.execute<Outcome<Long, MaterialFailure>> { reload() }
         }
     }
 
@@ -235,6 +259,11 @@ public class MaterialReloader(
         val last = lastReload.load() ?: return
         val wait = last + settings.holdDown - environment.clock.now()
         delay(wait)
+    }
+
+    private fun Outcome<*, *>.isTransient(): Boolean {
+        val failure = (this as? Outcome.Failure<*>)?.failure
+        return failure == MaterialFailure.Missing || failure == MaterialFailure.Unavailable
     }
 
     private data class Material(val identities: List<Identity>?, val anchors: List<TrustAnchor>?)

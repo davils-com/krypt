@@ -50,6 +50,7 @@ import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.test.runTest
 import kotlin.time.Clock
+import kotlin.time.Duration
 import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
@@ -190,6 +191,34 @@ class ReloadTest : FunSpec({
             reloader.generation shouldBe 2L
             reloader.expiry().map { expiry -> expiry.state } shouldBe listOf(ExpiryState.NotYetValid)
             reloader.check() shouldBe Health.down(ReasonCode.StateMatched)
+            watch.cancel()
+        }
+    }
+
+    test("a watch tries a reload whose material is missing again until it loads") {
+        val pki = Pki.create()
+        val first = pki.identity(CertificateProfile.TlsServer, SERVER_NAME)
+        val second = pki.identity(CertificateProfile.TlsServer, SERVER_NAME)
+        runTest {
+            val context = TlsContext(serverConfiguration(pki, listOf(first)))
+            val source = MemorySource()
+            val reloader = MaterialReloader(
+                context = context,
+                loader = MaterialLoader(crypto, source),
+                identities = listOf(IDENTITY_SPEC),
+                anchors = emptyList(),
+                settings = ReloadSettings(debounce = Duration.ZERO, holdDown = Duration.ZERO),
+            )
+            val changes = MutableSharedFlow<Unit>()
+            val watch = reloader.watch(backgroundScope, changes)
+            testScheduler.runCurrent()
+            changes.emit(Unit)
+            testScheduler.runCurrent()
+            reloader.generation shouldBe 0L
+            source.put(second)
+            testScheduler.advanceTimeBy(5.seconds)
+            reloader.generation shouldBe 1L
+            context.keyManager.identities shouldBe listOf(second)
             watch.cancel()
         }
     }
