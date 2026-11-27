@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.2.0 - 2026-11-27
+
+### Added
+
+- **A converter for secrets.** `Converters.secretText` reads a `SecretText` for the options of Kore, the environment
+  reads of Knot and the properties of Kontext, with a constant reason that never repeats the text it refused.
+- **An ACME client retries a failed transport.** `AcmeClient` takes `transportRetry`, a retry of kontinuity, and
+  defaults to `AcmeClient.DEFAULT_TRANSPORT_RETRY`: 3 attempts with an exponential backoff from 200 milliseconds to 2
+  seconds and a proportional jitter. A request sent again carries its nonce, so the server refuses a repeat it saw
+  already with `badNonce` and nothing acts twice; `null` tries each request once.
+
+### Changed
+
+- **The conflicts of a key set vault wait before they try again.** `KeysetVault.update` spreads its attempts by a
+  jittered exponential backoff of kontinuity from 10 to 500 milliseconds, so processes that collide do not collide
+  again at once.
+- **A watch of a `MaterialReloader` tries a reload again** whose material is missing or unavailable, as while a file
+  is being replaced, up to three times with a jittered backoff from one to thirty seconds.
+- **krypt-core builds on kontinuity-core**, so every module reports its retries through the tracer, meters and event
+  bus of its environment.
+
 ## 1.1.0 - 2026-11-26
 
 ### Added
