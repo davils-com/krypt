@@ -18,6 +18,7 @@
 
 package com.davils.krypt.acme
 
+import com.davils.kontinuity.retry.RetryConfig
 import com.davils.kore.core.annotation.DavilsInternal
 import com.davils.kore.core.outcome.Outcome
 import com.davils.kore.core.outcome.flatMap
@@ -30,6 +31,7 @@ import com.davils.krypt.acme.internal.CheckedSession
 import com.davils.krypt.acme.internal.Exchange
 import com.davils.krypt.acme.internal.Signing
 import com.davils.krypt.acme.internal.Tokens
+import com.davils.krypt.acme.internal.TransportRetries
 import com.davils.krypt.acme.internal.Urls
 import com.davils.krypt.acme.internal.base64Url
 import com.davils.krypt.acme.internal.bytesOf
@@ -52,7 +54,10 @@ import com.davils.krypt.x509.RevocationReason
  *
  * The client reads the directory once and keeps it, keeps a bounded pool of the nonces of every response, signs each
  * request as a flattened JWS with the `url` and `nonce` headers and repeats a request the server refused with
- * `badNonce` up to [AcmeLimits.maximumNonceRetries] times. Every answer of the server is checked against [limits];
+ * `badNonce` up to [AcmeLimits.maximumNonceRetries] times. A transport that throws, such as a dropped connection, is
+ * tried again by the retry of kontinuity [transportRetry], [DEFAULT_TRANSPORT_RETRY] unless another is given; a signed
+ * request sent again carries the nonce it carried before, which the server refuses with `badNonce` if it saw it
+ * already, so a repeated request never acts twice. Every answer of the server is checked against [limits];
  * every URL it names must be absolute `https`, or `http` where the transport allows it. A refusal of the server
  * becomes an [AcmeProblem], a refusal of the client an [AcmeError]: no operation throws for what the server sends.
  *
@@ -63,6 +68,8 @@ import com.davils.krypt.x509.RevocationReason
  * @property directoryUrl the URL of the directory of the server.
  * @property crypto the primitives, for signatures, thumbprints and certificates.
  * @property limits the limits on what the server sends.
+ * @property transportRetry how a request whose transport threw is tried again, with its attempts, backoff and jitter,
+ *   or `null` to try each request once; its events and meters reach the environment of [crypto].
  * @constructor Prepares a client; it sends nothing yet.
  * @throws IllegalArgumentException if [directoryUrl] is not absolute `https`, or `http` where the transport allows
  *   it.
@@ -72,7 +79,8 @@ public class AcmeClient(
     transport: AcmeTransport,
     public val directoryUrl: String,
     public val crypto: Crypto,
-    public val limits: AcmeLimits = AcmeLimits.Default,
+    public val limits: AcmeLimits,
+    public val transportRetry: RetryConfig?,
 ) {
     internal val exchange: Exchange = Exchange(
         transport = transport,
@@ -83,6 +91,7 @@ public class AcmeClient(
         ),
         crypto = crypto,
         limits = limits,
+        retry = transportRetry?.let { config -> TransportRetries.of(config = config, crypto = crypto) },
     )
 
     /**
@@ -91,6 +100,30 @@ public class AcmeClient(
      * @since 1.0.0
      */
     public val challenges: Challenges = Challenges(crypto)
+
+    /**
+     * Prepares a client that tries a request whose transport threw again by [DEFAULT_TRANSPORT_RETRY].
+     *
+     * @param transport the HTTP client of the application.
+     * @param directoryUrl the URL of the directory of the server.
+     * @param crypto the primitives, for signatures, thumbprints and certificates.
+     * @param limits the limits on what the server sends.
+     * @throws IllegalArgumentException if [directoryUrl] is not absolute `https`, or `http` where the transport allows
+     *   it.
+     * @since 1.0.0
+     */
+    public constructor(
+        transport: AcmeTransport,
+        directoryUrl: String,
+        crypto: Crypto,
+        limits: AcmeLimits = AcmeLimits.Default,
+    ) : this(
+        transport = transport,
+        directoryUrl = directoryUrl,
+        crypto = crypto,
+        limits = limits,
+        transportRetry = DEFAULT_TRANSPORT_RETRY,
+    )
 
     /**
      * Returns the directory, read once and then kept.
@@ -257,13 +290,26 @@ public class AcmeClient(
      */
     override fun toString(): String = "AcmeClient(${SafeText.text(directoryUrl)})"
 
-    private companion object {
-        const val TERMS: String = "termsOfServiceAgreed"
-        const val CONTACT: String = "contact"
-        const val EXTERNAL_BINDING: String = "externalAccountBinding"
-        const val ONLY_RETURN_EXISTING: String = "onlyReturnExisting"
-        const val CERTIFICATE: String = "certificate"
-        const val REASON: String = "reason"
-        const val KEY_ID: String = "kid"
+    /**
+     * The defaults of a client.
+     *
+     * @since 1.2.0
+     */
+    public companion object {
+        /**
+         * How a request whose transport threw is tried again unless another retry is given: 3 attempts with an
+         * exponential backoff from 200 milliseconds to 2 seconds, spread by a proportional jitter.
+         *
+         * @since 1.2.0
+         */
+        public val DEFAULT_TRANSPORT_RETRY: RetryConfig = TransportRetries.DEFAULT
+
+        private const val TERMS: String = "termsOfServiceAgreed"
+        private const val CONTACT: String = "contact"
+        private const val EXTERNAL_BINDING: String = "externalAccountBinding"
+        private const val ONLY_RETURN_EXISTING: String = "onlyReturnExisting"
+        private const val CERTIFICATE: String = "certificate"
+        private const val REASON: String = "reason"
+        private const val KEY_ID: String = "kid"
     }
 }

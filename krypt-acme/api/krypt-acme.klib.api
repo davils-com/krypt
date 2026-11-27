@@ -334,6 +334,7 @@ final class com.davils.krypt.acme.renewal/RenewalInfo { // com.davils.krypt.acme
 
 final class com.davils.krypt.acme/AcmeClient { // com.davils.krypt.acme/AcmeClient|null[0]
     constructor <init>(com.davils.krypt.acme/AcmeTransport, kotlin/String, com.davils.krypt.primitive/Crypto, com.davils.krypt.acme/AcmeLimits = ...) // com.davils.krypt.acme/AcmeClient.<init>|<init>(com.davils.krypt.acme.AcmeTransport;kotlin.String;com.davils.krypt.primitive.Crypto;com.davils.krypt.acme.AcmeLimits){}[0]
+    constructor <init>(com.davils.krypt.acme/AcmeTransport, kotlin/String, com.davils.krypt.primitive/Crypto, com.davils.krypt.acme/AcmeLimits, com.davils.kontinuity.retry/RetryConfig?) // com.davils.krypt.acme/AcmeClient.<init>|<init>(com.davils.krypt.acme.AcmeTransport;kotlin.String;com.davils.krypt.primitive.Crypto;com.davils.krypt.acme.AcmeLimits;com.davils.kontinuity.retry.RetryConfig?){}[0]
 
     final val challenges // com.davils.krypt.acme/AcmeClient.challenges|{}challenges[0]
         final fun <get-challenges>(): com.davils.krypt.acme.order/Challenges // com.davils.krypt.acme/AcmeClient.challenges.<get-challenges>|<get-challenges>(){}[0]
@@ -343,6 +344,8 @@ final class com.davils.krypt.acme/AcmeClient { // com.davils.krypt.acme/AcmeClie
         final fun <get-directoryUrl>(): kotlin/String // com.davils.krypt.acme/AcmeClient.directoryUrl.<get-directoryUrl>|<get-directoryUrl>(){}[0]
     final val limits // com.davils.krypt.acme/AcmeClient.limits|{}limits[0]
         final fun <get-limits>(): com.davils.krypt.acme/AcmeLimits // com.davils.krypt.acme/AcmeClient.limits.<get-limits>|<get-limits>(){}[0]
+    final val transportRetry // com.davils.krypt.acme/AcmeClient.transportRetry|{}transportRetry[0]
+        final fun <get-transportRetry>(): com.davils.kontinuity.retry/RetryConfig? // com.davils.krypt.acme/AcmeClient.transportRetry.<get-transportRetry>|<get-transportRetry>(){}[0]
 
     final fun session(com.davils.krypt.acme.account/AccountKey, kotlin/String): com.davils.krypt.acme/AcmeSession // com.davils.krypt.acme/AcmeClient.session|session(com.davils.krypt.acme.account.AccountKey;kotlin.String){}[0]
     final fun toString(): kotlin/String // com.davils.krypt.acme/AcmeClient.toString|toString(){}[0]
@@ -352,6 +355,11 @@ final class com.davils.krypt.acme/AcmeClient { // com.davils.krypt.acme/AcmeClie
     final suspend fun renewalInfo(com.davils.krypt.x509/Certificate): com.davils.kore.core.outcome/Outcome<com.davils.krypt.acme.renewal/RenewalInfo, com.davils.krypt.acme/AcmeFailure> // com.davils.krypt.acme/AcmeClient.renewalInfo|renewalInfo(com.davils.krypt.x509.Certificate){}[0]
     final suspend fun renewalInfo(kotlin/String): com.davils.kore.core.outcome/Outcome<com.davils.krypt.acme.renewal/RenewalInfo, com.davils.krypt.acme/AcmeFailure> // com.davils.krypt.acme/AcmeClient.renewalInfo|renewalInfo(kotlin.String){}[0]
     final suspend fun revoke(com.davils.krypt.x509/Certificate, com.davils.krypt.acme.account/AccountKey, com.davils.krypt.x509/RevocationReason? = ...): com.davils.kore.core.outcome/Outcome<kotlin/Unit, com.davils.krypt.acme/AcmeFailure> // com.davils.krypt.acme/AcmeClient.revoke|revoke(com.davils.krypt.x509.Certificate;com.davils.krypt.acme.account.AccountKey;com.davils.krypt.x509.RevocationReason?){}[0]
+
+    final object Companion { // com.davils.krypt.acme/AcmeClient.Companion|null[0]
+        final val DEFAULT_TRANSPORT_RETRY // com.davils.krypt.acme/AcmeClient.Companion.DEFAULT_TRANSPORT_RETRY|{}DEFAULT_TRANSPORT_RETRY[0]
+            final fun <get-DEFAULT_TRANSPORT_RETRY>(): com.davils.kontinuity.retry/RetryConfig // com.davils.krypt.acme/AcmeClient.Companion.DEFAULT_TRANSPORT_RETRY.<get-DEFAULT_TRANSPORT_RETRY>|<get-DEFAULT_TRANSPORT_RETRY>(){}[0]
+    }
 }
 
 final class com.davils.krypt.acme/AcmeDirectory { // com.davils.krypt.acme/AcmeDirectory|null[0]

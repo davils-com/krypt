@@ -1,12 +1,15 @@
 public final class com/davils/krypt/acme/AcmeClient {
+	public static final field Companion Lcom/davils/krypt/acme/AcmeClient$Companion;
 	public fun <init> (Lcom/davils/krypt/acme/AcmeTransport;Ljava/lang/String;Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/acme/AcmeLimits;)V
 	public synthetic fun <init> (Lcom/davils/krypt/acme/AcmeTransport;Ljava/lang/String;Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/acme/AcmeLimits;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Lcom/davils/krypt/acme/AcmeTransport;Ljava/lang/String;Lcom/davils/krypt/primitive/Crypto;Lcom/davils/krypt/acme/AcmeLimits;Lcom/davils/kontinuity/retry/RetryConfig;)V
 	public final fun directory (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public final fun findAccount (Lcom/davils/krypt/acme/account/AccountKey;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public final fun getChallenges ()Lcom/davils/krypt/acme/order/Challenges;
 	public final fun getCrypto ()Lcom/davils/krypt/primitive/Crypto;
 	public final fun getDirectoryUrl ()Ljava/lang/String;
 	public final fun getLimits ()Lcom/davils/krypt/acme/AcmeLimits;
+	public final fun getTransportRetry ()Lcom/davils/kontinuity/retry/RetryConfig;
 	public final fun newAccount (Lcom/davils/krypt/acme/account/AccountKey;Ljava/util/List;ZLcom/davils/krypt/acme/account/ExternalAccountBinding;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public static synthetic fun newAccount$default (Lcom/davils/krypt/acme/AcmeClient;Lcom/davils/krypt/acme/account/AccountKey;Ljava/util/List;ZLcom/davils/krypt/acme/account/ExternalAccountBinding;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 	public final fun renewalInfo (Lcom/davils/krypt/x509/Certificate;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
@@ -15,6 +18,10 @@ public final class com/davils/krypt/acme/AcmeClient {
 	public static synthetic fun revoke$default (Lcom/davils/krypt/acme/AcmeClient;Lcom/davils/krypt/x509/Certificate;Lcom/davils/krypt/acme/account/AccountKey;Lcom/davils/krypt/x509/RevocationReason;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 	public final fun session (Lcom/davils/krypt/acme/account/AccountKey;Ljava/lang/String;)Lcom/davils/krypt/acme/AcmeSession;
 	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/davils/krypt/acme/AcmeClient$Companion {
+	public final fun getDEFAULT_TRANSPORT_RETRY ()Lcom/davils/kontinuity/retry/RetryConfig;
 }
 
 public final class com/davils/krypt/acme/AcmeDirectory {

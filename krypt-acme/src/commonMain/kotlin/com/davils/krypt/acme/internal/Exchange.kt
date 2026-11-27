@@ -18,6 +18,7 @@
 
 package com.davils.krypt.acme.internal
 
+import com.davils.kontinuity.retry.Retry
 import com.davils.kore.core.annotation.DavilsInternal
 import com.davils.kore.core.failure.attempted
 import com.davils.kore.core.outcome.Outcome
@@ -56,6 +57,7 @@ internal class Exchange(
     private val directoryUrl: String,
     val crypto: Crypto,
     val limits: AcmeLimits,
+    private val retry: Retry?,
 ) {
     val keys: JsonWebKeys = JsonWebKeys(crypto)
     val readers: Readers = Readers(
@@ -133,9 +135,14 @@ internal class Exchange(
     }
 
     suspend fun send(request: AcmeRequest, isPooled: Boolean = true): Outcome<Reply, AcmeFailure> {
-        val exchanged = attempted { transport.exchange(request) }
+        val exchanged = attempted { exchanged(request) }
         val response = exchanged.getOrNull() ?: return Outcome.Failure(AcmeError.Transport)
         return reading { checked(response = response, isPooled = isPooled) }
+    }
+
+    private suspend fun exchanged(request: AcmeRequest): AcmeResponse {
+        val active = retry ?: return transport.exchange(request)
+        return active.execute { transport.exchange(request) }
     }
 
     private suspend fun attempt(
