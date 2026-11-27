@@ -28,6 +28,7 @@ import com.davils.krypt.keyset.Keyset
 import com.davils.krypt.keyset.KeysetFailure
 import com.davils.krypt.keyset.Keysets
 import com.davils.krypt.keyset.internal.Bytes
+import com.davils.krypt.keyset.internal.ConflictRetries
 import com.davils.krypt.keyset.internal.Refusal
 import com.davils.krypt.keyset.internal.Refusal.Companion.ensure
 import com.davils.krypt.keyset.internal.Refusal.Companion.refuse
@@ -75,6 +76,8 @@ private val DELETE: AuditAction = AuditAction("keyset.delete")
  * @param repository where the encrypted key sets are kept.
  * @param kms the service that encrypts them.
  * @property attempts how often [update] tries when another process changes the same key set; 1 to 16, 3 by default.
+ *   The attempts are spread by a jittered exponential backoff of kontinuity from 10 to 500 milliseconds, so processes
+ *   that collide do not collide again at once.
  * @param ledger the trusted record of the latest revisions, or null.
  * @constructor Keeps key sets in [repository].
  * @throws IllegalArgumentException if [attempts] is out of range.
@@ -92,6 +95,8 @@ public class KeysetVault(
     init {
         require(attempts in 1..MAXIMUM_ATTEMPTS) { "A vault tries 1 to $MAXIMUM_ATTEMPTS times" }
     }
+
+    private val conflicts = ConflictRetries.of(attempts = attempts, source = keysets.crypto.environment)
 
     /**
      * Generates a key set of [purpose] and stores it under [name].
@@ -146,13 +151,7 @@ public class KeysetVault(
      */
     public suspend fun update(name: String, change: suspend (Keyset) -> Keyset): Outcome<Keyset, KeysetFailure> {
         checkName(name)
-        var result: Outcome<Keyset, KeysetFailure> = Outcome.Failure(KeysetFailure.Conflict)
-        var attempt = 0
-        while (attempt < attempts && result == Outcome.Failure(KeysetFailure.Conflict)) {
-            result = guarded { changed(name, change) }
-            attempt++
-        }
-        return result
+        return conflicts.execute { guarded { changed(name, change) } }
     }
 
     /**
