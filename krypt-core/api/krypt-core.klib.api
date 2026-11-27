@@ -742,7 +742,11 @@ final object com.davils.krypt.core/ConstantTime { // com.davils.krypt.core/Const
 final const val com.davils.krypt.core.io/DEFAULT_CHUNK // com.davils.krypt.core.io/DEFAULT_CHUNK|{}DEFAULT_CHUNK[0]
     final fun <get-DEFAULT_CHUNK>(): kotlin/Int // com.davils.krypt.core.io/DEFAULT_CHUNK.<get-DEFAULT_CHUNK>|<get-DEFAULT_CHUNK>(){}[0]
 
+final val com.davils.krypt.core/secretText // com.davils.krypt.core/secretText|@com.davils.kore.core.arguments.conversion.Converters{}secretText[0]
+    final fun (com.davils.kore.core.arguments.conversion/Converters).<get-secretText>(): com.davils.kore.core.arguments.conversion/Converter<com.davils.krypt.core/SecretText> // com.davils.krypt.core/secretText.<get-secretText>|<get-secretText>@com.davils.kore.core.arguments.conversion.Converters(){}[0]
+
 final fun (com.davils.krypt.core.io/ByteSource).com.davils.krypt.core.io/asFlow(kotlin/Int = ...): kotlinx.coroutines.flow/Flow<kotlinx.io.bytestring/ByteString> // com.davils.krypt.core.io/asFlow|asFlow@com.davils.krypt.core.io.ByteSource(kotlin.Int){}[0]
+final fun (com.davils.krypt.core/Environment).com.davils.krypt.core.telemetry/resilience(): com.davils.kontinuity.core/Environment // com.davils.krypt.core.telemetry/resilience|resilience@com.davils.krypt.core.Environment(){}[0]
 final fun (kotlin/ByteArray).com.davils.krypt.core.io/asByteSource(): com.davils.krypt.core.io/ByteSource // com.davils.krypt.core.io/asByteSource|asByteSource@kotlin.ByteArray(){}[0]
 final fun (kotlinx.io.bytestring/ByteString).com.davils.krypt.core.io/asByteSource(): com.davils.krypt.core.io/ByteSource // com.davils.krypt.core.io/asByteSource|asByteSource@kotlinx.io.bytestring.ByteString(){}[0]
 final fun com.davils.krypt.core.policy/cryptoPolicy(com.davils.krypt.core.policy/CryptoProfile = ..., kotlin/Function1<com.davils.krypt.core.policy/CryptoPolicyBuilder, kotlin/Unit>): com.davils.krypt.core.policy/CryptoPolicy // com.davils.krypt.core.policy/cryptoPolicy|cryptoPolicy(com.davils.krypt.core.policy.CryptoProfile;kotlin.Function1<com.davils.krypt.core.policy.CryptoPolicyBuilder,kotlin.Unit>){}[0]

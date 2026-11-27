@@ -96,6 +96,10 @@ public final class com/davils/krypt/core/SecretBytes$Companion {
 	public final fun random (ILcom/davils/krypt/core/RandomSource;)Lcom/davils/krypt/core/SecretBytes;
 }
 
+public final class com/davils/krypt/core/SecretConvertersKt {
+	public static final fun getSecretText (Lcom/davils/kore/core/arguments/conversion/Converters;)Lcom/davils/kore/core/arguments/conversion/Converter;
+}
+
 public final class com/davils/krypt/core/SecretText {
 	public static final field Companion Lcom/davils/krypt/core/SecretText$Companion;
 	public final fun destroy ()V
@@ -560,5 +564,9 @@ public final class com/davils/krypt/core/telemetry/EventSink {
 	public final fun getRejected ()J
 	public final fun isListened ()Z
 	public final fun send (Lcom/davils/krypt/core/CryptoEvent;)V
+}
+
+public final class com/davils/krypt/core/telemetry/ResilienceKt {
+	public static final fun resilience (Lcom/davils/krypt/core/Environment;)Lcom/davils/kontinuity/core/Environment;
 }
 
